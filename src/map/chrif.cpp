@@ -311,6 +311,12 @@ int chrif_save(struct map_session_data *sd, int flag) {
 
 	chrif_bsdata_save(sd, ((flag&CSAVE_QUITTING) && !(flag&CSAVE_AUTOTRADE)));
 
+	//killcounter
+	for (int i=0;i<MAX_KILLCOUNTER;i++){
+		pc_setreg2(sd,"#mobcountid"+i, sd->mobcountid[i]);
+		pc_setreg2(sd,"#mobcount"+i, sd->mobcount[i]);
+	}
+
 	if (sd->storage.dirty)
 		storage_storagesave(sd);
 	if (flag&CSAVE_INVENTORY)

@@ -1127,8 +1127,16 @@ void party_exp_share(struct party_data* p, struct block_list* src, t_exp base_ex
 			}
 		}
 		pc_gainexp(sd[i], src, base_gained, job_gained, 0);
+		if(sd[i]->state.expcounter) {
+			sd[i]->bxpcount += base_gained;
+			sd[i]->jxpcount += job_gained;
+		}
 #else
 		pc_gainexp(sd[i], src, base_exp, job_exp, 0);
+		if(sd[i]->state.expcounter) {
+			sd[i]->bxpcount += base_exp;
+			sd[i]->jxpcount += job_exp;
+		}
 #endif
 
 		if (zeny) // zeny from mobs [Valaris]
@@ -1414,4 +1422,51 @@ bool party_booking_delete(struct map_session_data *sd)
 	}
 
 	return true;
+}
+
+/*==========================================
+ * Adventurer's Agency [Shakto]
+ *------------------------------------------*/
+void party_agency_join(struct map_session_data *sd, struct map_session_data *t_sd, int flag){
+	struct party_data *party = NULL;
+	struct party_member member;
+	int i;
+
+	if(!flag){
+		clif_displaymessage(t_sd->fd, "Request for party join has been rejected.");
+		return;
+	}
+
+	if(t_sd->status.party_id > 0){
+		clif_party_invite_reply(sd,t_sd->status.name,PARTY_REPLY_JOIN_OTHER_PARTY);
+		return;
+	}
+
+	if(!sd->status.party_id){
+		clif_displaymessage(t_sd->fd, "The requested party no longer exist, please refresh the agency list.");
+		return; // Shouldn't happen
+	}
+	party = party_search(sd->status.party_id);
+
+	if (battle_config.block_account_in_same_party) {
+		ARR_FIND(0, MAX_PARTY, i, party->party.member[i].account_id == t_sd->status.account_id);
+		if (i < MAX_PARTY) {
+			clif_party_invite_reply(sd, t_sd->status.name, PARTY_REPLY_DUAL);
+			return;
+		}
+	}
+
+	ARR_FIND(0, MAX_PARTY, i, party->party.member[i].account_id == 0);
+	if( i == MAX_PARTY ) {
+		clif_party_invite_reply(sd, t_sd->status.name, PARTY_REPLY_FULL);
+		return;
+	}
+
+	clif_party_invite_reply(t_sd,sd->status.name,PARTY_REPLY_ACCEPTED);
+
+	t_sd->party_invite = sd->status.party_id;
+	party_add_member(sd->status.party_id,t_sd);
+	party_request_info(sd->status.party_id,t_sd->status.char_id);
+
+	return;
 }

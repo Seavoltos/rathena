@@ -2358,6 +2358,12 @@
 
 // 2018-01-03aRagexeRE or 2018-01-03bRagexeRE
 #if PACKETVER >= 20180103
+	parseable_packet( HEADER_CZ_PARTY_AGENCY_JOIN, sizeof( PACKET_CZ_PARTY_AGENCY_JOIN ), clif_parse_party_agency_join, 0 );
+	parseable_packet( HEADER_CZ_PARTY_AGENCY_ANSWER, sizeof( PACKET_CZ_PARTY_AGENCY_ANSWER ), clif_parse_party_agency_answer, 0 );
+#endif
+
+// 2018-01-03aRagexeRE or 2018-01-03bRagexeRE
+#if PACKETVER >= 20180103
 	parseable_packet(0x0ae8,2,clif_parse_changedress,0);
 #endif
 

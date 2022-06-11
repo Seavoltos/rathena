@@ -2430,6 +2430,79 @@ ACMD_FUNC(refine)
 }
 
 /*==========================================
+ * @session on / off
+ * @session reset
+ * sd->expcounter = on / off
+ * sd->bxpcount = base exp counter
+ * sd->jxpcount = job exp counter
+ * sd->exptimer = timer since beginning
+ *------------------------------------------*/
+ACMD_FUNC(session)
+{
+	char cmdsnd[7];
+	int minutetimer = 0;
+
+	nullpo_retr(-1, sd);
+
+	memset(cmdsnd, '\0', sizeof(cmdsnd));
+	memset(atcmd_output, '\0', sizeof(atcmd_output));
+
+	if (!message || !*message) {
+		//session activated
+		if(sd->exptimer >0){
+			if(sd->state.expcounter)
+				minutetimer = ((int)time(NULL) - sd->exptimer)/60;
+			else
+				minutetimer = sd->exptimertemp/60;
+
+			if(sd->state.expcounter)
+				snprintf(atcmd_output, sizeof atcmd_output, "Session : Enabled. You got [%d] base exp and [%d] job xp for %d mins.", sd->bxpcount, sd->jxpcount, minutetimer);
+			else
+				snprintf(atcmd_output, sizeof atcmd_output, "Session : Disabled. You got [%d] base exp and [%d] job xp for %d mins.", sd->bxpcount, sd->jxpcount, minutetimer);
+			clif_displaymessage(fd, atcmd_output);
+
+			snprintf(atcmd_output, sizeof atcmd_output, "That means you did %d base exp / min and %d job exp per min.", minutetimer?sd->bxpcount/minutetimer:sd->bxpcount, minutetimer?sd->jxpcount/minutetimer:sd->jxpcount);
+			clif_displaymessage(fd, atcmd_output);
+		}
+		else {
+			clif_displaymessage(fd, "@session : Give the status, total exp, xp per min in the current session");
+			clif_displaymessage(fd, "@session reset : Reset the counter");
+			clif_displaymessage(fd, "@session on :  Turn on the counter for the current session");
+			clif_displaymessage(fd, "@session off :  Turn off the counter for the current session");
+			clif_displaymessage(fd, "@session help :  Give you the list of argument related to the session command");
+		}
+	} else {
+		if(strcmp(message,"on") == 0){
+			sd->state.expcounter = 1;
+			if(sd->exptimertemp)
+				sd->exptimer = (int)time(NULL) - sd->exptimertemp;
+			else
+				sd->exptimer = (int)time(NULL);
+			clif_displaymessage(fd, "Exp gaining for the current session is now counted.");
+		} else if(strcmp(message,"off") == 0){
+			sd->state.expcounter = 0;
+			sd->exptimertemp = (int)time(NULL) - sd->exptimer;
+			clif_displaymessage(fd, "Exp gaining for the current session will not being count anymore.");
+		} else if(strcmp(message,"reset") == 0){
+			sd->bxpcount = 0;
+			sd->jxpcount = 0;
+			sd->exptimer = (int)time(NULL);
+			clif_displaymessage(fd, "Reset of counter done.");
+			sd->state.expcounter = 1;
+			clif_displaymessage(fd, "Exp gaining for the current session is now counted.");
+		} else if(strcmp(message,"help") == 0){
+			clif_displaymessage(fd, "@session : Give the status, total exp, xp per min in the current session");
+			clif_displaymessage(fd, "@session reset : Reset the counter");
+			clif_displaymessage(fd, "@session on :  Turn on the counter for the current session");
+			clif_displaymessage(fd, "@session off :  Turn off the counter for the current session");
+			clif_displaymessage(fd, "@session help :  Give you the list of argument related to the session command");
+		}
+	}
+
+	return 0;
+}
+
+/*==========================================
  *
  *------------------------------------------*/
 ACMD_FUNC(produce)
@@ -3936,6 +4009,101 @@ ACMD_FUNC(idsearch)
 		clif_displaymessage(fd, atcmd_output);
 	}
 	sprintf(atcmd_output, msg_txt(sd,79), match); // It is %d affair above.
+	clif_displaymessage(fd, atcmd_output);
+
+	return 0;
+}
+
+/*==========================================
+ * name/id amount
+ * message = defaut input then sscanf for forward into var
+ * @killcounter id/name pos
+ * @killcounter reset (pos)
+ * @killcounter status
+ *	(sd) int mobcount[MAX_KILLCOUNTER];
+ *	(sd) int mobcountid[MAX_KILLCOUNTER];
+ *------------------------------------------*/
+ACMD_FUNC(killcounter)
+{
+	char cmdsnd[7], monster[NAME_LENGTH];
+	int mob_id, i, pos;
+
+	nullpo_retr(-1, sd);
+
+	memset(cmdsnd, '\0', sizeof(cmdsnd));
+	memset(monster, '\0', sizeof(monster));
+	memset(atcmd_output, '\0', sizeof(atcmd_output));
+
+	if (!message || !*message) {
+		if (sd->state.killcounter) {
+			sd->state.killcounter = 0;
+			clif_displaymessage(fd, "[OFF] - Monster kill will not being count anymore.");
+		} else {
+			sd->state.killcounter = 1;
+			clif_displaymessage(fd, "[ON] - Monster kill is now counted.");
+		}
+		return 0;
+	}
+
+	if (sscanf(message, "%23s %d", monster, &pos) > 1){
+		if(pos < 1 || pos > MAX_KILLCOUNTER){
+			sprintf(atcmd_output, "You can only choose a number between 1 and %d",MAX_KILLCOUNTER);
+			clif_displaymessage(fd, atcmd_output);
+			return -1;
+		}
+	} else {
+		if(strcmp(message,"reset") == 0){
+			for(i=0;i<MAX_KILLCOUNTER;i++){
+				sd->mobcount[i] = 0;
+			}
+			clif_displaymessage(fd, "Reset of all counters done.");
+		} else if(strcmp(message,"status") == 0){
+			clif_displaymessage(fd, sd->state.killcounter?"[ON] - Kill counter":"[OFF] - Kill counter");
+			for(i=0;i<MAX_KILLCOUNTER;i++){
+				if(sd->mobcountid[i] == 0)
+					sprintf(atcmd_output, "[%d] - No monster has been defined on this positions.", i+1);
+				else {
+					std::shared_ptr<s_mob_db> mob = mob_db.find(sd->mobcountid[i]);
+					if (mob == nullptr)
+						continue;
+					sprintf(atcmd_output, "[%d] [%d] %s - %d monster(s) has been killed.", i+1, sd->mobcountid[i], mob->name.c_str(), sd->mobcount[i]);
+				}
+				clif_displaymessage(fd, atcmd_output);
+			}
+		} else {
+			clif_displaymessage(fd, "@killcounter : activate / disactivate the count");
+			clif_displaymessage(fd, "@killcounter reset : reset all counter");
+			clif_displaymessage(fd, "@killcounter reset <position> : reset the counter on the position");
+			clif_displaymessage(fd, "@killcounter <mobID / mobname> <position> : start to count kill on the chosen position");
+			clif_displaymessage(fd, "@killcounter status :  show the number of monsters killed in all your position");
+		}
+		return 0;
+	}
+	
+	if(strcmp(monster,"reset") == 0){
+		sd->mobcount[pos-1] = 0;
+		clif_displaymessage(fd, "Reset of selected counter done.");
+		return 0;
+	}
+
+	if (!sd->state.killcounter) {
+		sd->state.killcounter = 1;
+		clif_displaymessage(fd, "[ON] - Monster kill is now counted.");
+	}
+
+	if ((mob_id = mobdb_searchname(monster)) == 0) // check name first (to avoid possible name begining by a number)
+		mob_id = mobdb_checkid(atoi(monster));
+	if (mob_id == 0) {
+		clif_displaymessage(fd, msg_txt(sd,40)); // Invalid monster ID or name.
+		return -1;
+	}
+
+	sd->mobcountid[pos-1] = mob_id;
+	sd->mobcount[pos-1] = 0;
+
+	std::shared_ptr<s_mob_db> mob = mob_db.find(sd->mobcountid[pos-1]);
+
+	sprintf(atcmd_output, "[%d] [%d] %s - %d monsters has been killed.", pos, sd->mobcountid[pos-1], mob->name.c_str(), sd->mobcount[pos-1]); // 
 	clif_displaymessage(fd, atcmd_output);
 
 	return 0;
@@ -10780,6 +10948,7 @@ void atcommand_basecommands(void) {
 		ACMD_DEF2("monsterbig", monster),
 		ACMD_DEF(killmonster),
 		ACMD_DEF2("killmonster2", killmonster),
+		ACMD_DEF(session),
 		ACMD_DEF(refine),
 		ACMD_DEF(produce),
 		ACMD_DEF(memo),
@@ -10830,6 +10999,7 @@ void atcommand_basecommands(void) {
 		ACMD_DEF(idsearch),
 		ACMD_DEF(broadcast), // + /b and /nb
 		ACMD_DEF(localbroadcast), // + /lb and /nlb
+		ACMD_DEF(killcounter),
 		ACMD_DEF(recallall),
 		ACMD_DEFR(reload,ATCMD_NOSCRIPT),
 		ACMD_DEF2("reloaditemdb", reload),

@@ -31,6 +31,8 @@
 #include "userconfig_controller.hpp"
 #include "merchantstore_controller.hpp"
 
+#include "party_controller.hpp"
+
 
 using namespace rathena;
 
@@ -70,6 +72,7 @@ char guild_emblems_table[32] = "guild_emblems";
 char user_configs_table[32] = "user_configs";
 char char_configs_table[32] = "char_configs";
 char merchant_configs_table[32] = "merchant_configs";
+char party_agency_table[32] = "party_agency";
 char guild_db_table[32] = "guild";
 char char_db_table[32] = "char";
 
@@ -219,6 +222,8 @@ int inter_config_read(const char* cfgName)
 			safestrncpy(guild_db_table, w2, sizeof(guild_db_table));
 		else if (!strcmpi(w1, "char_db"))
 			safestrncpy(char_db_table, w2, sizeof(char_db_table));
+		else if (!strcmpi(w1, "party_agency"))
+			safestrncpy(party_agency_table, w2, sizeof(party_agency_table));
 		else if(!strcmpi(w1,"import"))
 			inter_config_read(w2);
 	}
@@ -297,7 +302,7 @@ int web_sql_init(void) {
 			Sql_ShowDebug(web_handle);
 	}
 
-
+	do_init_party();
 	return 0;
 }
 
@@ -429,6 +434,11 @@ int do_init(int argc, char** argv) {
 	http_server->Post("/charconfig/save", charconfig_save);
 	http_server->Post("/MerchantStore/load", merchantstore_load);
 	http_server->Post("/MerchantStore/save", merchantstore_save);
+	http_server->Post("/party/add", party_add);
+	http_server->Post("/party/del", party_del);
+	http_server->Post("/party/get", party_get);
+	http_server->Post("/party/list", party_list);
+	http_server->Post("/party/search", party_search);
 
 	// set up logger
 	http_server->set_logger(logger);

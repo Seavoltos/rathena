@@ -45,6 +45,7 @@ enum sc_type : int16;
 #define MAX_SERVANTBALL 5 /// Max servant weapons
 #define MAX_SERVANT_SIGN 5 /// Max servant signs
 #define MAX_ABYSSBALL 5 /// Max abyss spheres
+#define MAX_KILLCOUNTER 5 /// Max killcounter save
 
 #define LANGTYPE_VAR "#langtype"
 #define CASHPOINT_VAR "#CASHPOINTS"
@@ -345,6 +346,7 @@ struct map_session_data {
 		unsigned int showdelay :1;
 		unsigned int showexp :1;
 		unsigned int showzeny :1;
+		unsigned int killcounter :1; // killcounter [Shakto]
 		unsigned int noask :1; // [LuzZza]
 		unsigned int trading :1; //[Skotlex] is 1 only after a trade has started.
 		unsigned int deal_locked :2; //1: Clicked on OK. 2: Clicked on TRADE
@@ -364,6 +366,7 @@ struct map_session_data {
 		unsigned int changemap : 1;
 		unsigned int callshop : 1; // flag to indicate that a script used callshop; on a shop
 		short pmap; // Previous map on Map Change
+		unsigned short expcounter :1;
 		unsigned short autoloot;
 		t_itemid autolootid[AUTOLOOTITEM_SIZE]; // [Zephyrus]
 		unsigned short autoloottype;
@@ -416,6 +419,15 @@ struct map_session_data {
 	std::shared_ptr<s_player_group> group;
 	std::bitset<PC_PERM_MAX> permissions; // group permissions have to be copied, because they might be adjusted by atcommand addperm
 	int count_rewarp; //count how many time we being rewarped
+
+	//killcounter
+	int mobcount[MAX_KILLCOUNTER] = { 0 };
+	int mobcountid[MAX_KILLCOUNTER] = { 0 };
+
+	int bxpcount = 0;
+	int jxpcount = 0;
+	int exptimer;
+	int exptimertemp;
 
 	int langtype;
 	struct mmo_charstatus status;

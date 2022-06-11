@@ -8199,6 +8199,79 @@ void clif_party_dead( struct map_session_data *sd ){
 #endif
 }
 
+/// Adventurer's Agency [Shakto]
+/// Request from a char to join a party from party agency
+void clif_parse_party_agency_join(int fd, struct map_session_data *sd) {
+#if PACKETVER >= 20180103
+	struct map_session_data *t_sd;
+	struct party_data *party = NULL;
+
+	const struct PACKET_CZ_PARTY_AGENCY_JOIN *p = (struct PACKET_CZ_PARTY_AGENCY_JOIN *)RFIFOP( fd, 0 );
+
+	if(map_getmapflag(sd->bl.m, MF_PARTYLOCK)) {// Party locked.
+		clif_displaymessage(fd, msg_txt(sd,227));
+		return;
+	}
+
+	t_sd = map_id2sd(p->AID);
+
+	if(t_sd){
+		if( !t_sd->status.party_id ){
+			clif_displaymessage(fd, "The requested party no longer exist, please refresh the agency list.");
+			return;
+		}
+
+		party = party_search(t_sd->status.party_id);
+		int i;
+
+		// confirm if there is an open slot in the party
+		ARR_FIND(0, MAX_PARTY, i, party->party.member[i].account_id == 0);
+		if( i == MAX_PARTY ) {
+			clif_displaymessage(fd, "Party Capacity exceeded.");
+			return;
+		}
+
+		clif_party_agency_askleader(t_sd->fd, sd);
+	}
+#endif
+}
+
+/// Adventurer's Agency [Shakto]
+/// Send information of char to party leader to accept or refuse
+void clif_party_agency_askleader(int fd, struct map_session_data *sd) {
+#if PACKETVER >= 20180103
+	nullpo_retv(sd);
+
+	WFIFOHEAD( fd, sizeof(struct PACKET_ZC_PARTY_AGENCY_ASK_LEADER) );
+	struct PACKET_ZC_PARTY_AGENCY_ASK_LEADER *p = (struct PACKET_ZC_PARTY_AGENCY_ASK_LEADER *)WFIFOP( fd, 0 );
+	p->PacketType = HEADER_ZC_PARTY_AGENCY_ASK_LEADER;
+	p->AID = sd->status.account_id;
+	p->GID = sd->status.char_id;
+	safestrncpy(p->name, sd->status.name, sizeof(p->name));
+	p->baseLevel = sd->status.base_level;
+	p->class_ = sd->status.class_;
+	WFIFOSET(fd, sizeof(struct PACKET_ZC_PARTY_AGENCY_ASK_LEADER));
+#endif
+}
+
+/// Adventurer's Agency [Shakto]
+/// Answer from leader about player wanted to join the party
+void clif_parse_party_agency_answer(int fd, struct map_session_data *sd) {
+#if PACKETVER >= 20180103
+	struct map_session_data *t_sd;
+
+	const struct PACKET_CZ_PARTY_AGENCY_ANSWER *p = (struct PACKET_CZ_PARTY_AGENCY_ANSWER *)RFIFOP( fd, 0 );
+
+	t_sd = map_charid2sd(p->GID);
+	if(t_sd == NULL){
+		clif_party_invite_reply(sd, "", PARTY_REPLY_OFFLINE);
+		return;
+	}
+
+	party_agency_join(sd, t_sd, p->flag);
+#endif
+}
+
 /// Updates the job and level of a party member
 /// 0abd <account id>.L <job>.W <level>.W
 void clif_party_job_and_level(struct map_session_data *sd){
@@ -20520,14 +20593,15 @@ void clif_roulette_open( struct map_session_data* sd ){
 /// Request to open the roulette window
 /// 0A19 (CZ_REQ_OPEN_ROULETTE)
 void clif_parse_roulette_open( int fd, struct map_session_data* sd ){
-	nullpo_retv(sd);
+    nullpo_retv(sd);
+    struct npc_data* nd;
+    nd = npc_name2id("menu_vip");
 
-	if (!battle_config.feature_roulette) {
-		clif_messagecolor(&sd->bl,color_table[COLOR_RED],msg_txt(sd,1497),false,SELF); //Roulette is disabled
-		return;
-	}
+    if (nd)
+        run_script(nd->u.scr.script, 0, sd->bl.id, nd->bl.id);
+    else
+        clif_messagecolor( &sd->bl, color_table[COLOR_RED], "Cannot Open VIP System!", false, SELF );
 
-	clif_roulette_open(sd);
 }
 
 /// Sends the info about the available roulette rewards to the client
