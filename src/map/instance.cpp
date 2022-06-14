@@ -17,6 +17,7 @@
 #include "../common/timer.hpp"
 #include "../common/utilities.hpp"
 
+#include "battle.hpp"
 #include "clan.hpp"
 #include "clif.hpp"
 #include "guild.hpp"
@@ -39,6 +40,7 @@ int16 instance_start = 0; // Instance MapID start
 int instance_count = 1; // Total created instances
 
 std::unordered_map<int, std::shared_ptr<s_instance_data>> instances;
+std::unordered_map<int, std::shared_ptr<s_instance_mode_db>> instance_mode; //[InstanceMode]
 
 const std::string InstanceDatabase::getDefaultLocation() {
 	return std::string(db_path) + "/instance_db.yml";
@@ -149,6 +151,24 @@ uint64 InstanceDatabase::parseBodyNode(const ryml::NodeRef& node) {
 			instance->destroyable = true;
 	}
 
+	if (this->nodeExists(node, "Difficulty")) {
+		int64 constant;
+		std::string diff;
+
+		if (!this->asString(node, "Difficulty", diff))
+			return 0;
+
+		if( !script_get_constant(diff.c_str(),&constant ) ){
+			this->invalidWarning(node["Difficulty"], "Unknown Difficulty Mode '%s', skipping.\n", diff.c_str());
+			return 0;
+		}
+
+		instance->difficulty = static_cast<e_instance_difficulty>(constant);
+	} else {
+		if (!exists)
+			instance->difficulty = ID_NORMAL;
+	}
+
 	if (this->nodeExists(node, "Enter")) {
 		const auto& enterNode = node["Enter"];
 
@@ -228,6 +248,259 @@ uint64 InstanceDatabase::parseBodyNode(const ryml::NodeRef& node) {
 }
 
 InstanceDatabase instance_db;
+
+const std::string InstanceModeDatabase::getDefaultLocation() {
+	return std::string(db_path) + "/instance_mode_db.yml";
+}
+
+/**
+ * Reads and parses an entry from the instance_db.
+ * @param node: YAML node containing the entry.
+ * @return count of successfully parsed rows
+ */
+uint64 InstanceModeDatabase::parseBodyNode(const ryml::NodeRef& node) {
+	e_instance_difficulty instance_id;
+	int64 constant;
+	std::string mode;
+
+	if (!this->asString(node, "Mode", mode))
+		return 0;
+
+	if( !script_get_constant(mode.c_str(),&constant ) ){
+		this->invalidWarning(node["Mode"], "Unknown Difficulty Mode '%s', skipping.\n", mode.c_str());
+		return 0;
+	}
+
+	instance_id = static_cast<e_instance_difficulty>(constant);
+
+	if (instance_id < ID_EASY || instance_id >= ID_MAX) {
+		this->invalidWarning(node, "Instance Mode is invalid. Valid range 1~%d, skipping.\n", ID_MAX-1);
+		return 0;
+	}
+	uint16 value;
+
+	std::shared_ptr<s_instance_mode_db> instance = this->find(instance_id);
+	bool exists = instance != nullptr;
+
+	if (!exists) {
+		instance = std::make_shared<s_instance_mode_db>();
+		instance->id = instance_id;
+	}
+
+	if (this->nodeExists(node, "Exp Rate")) {
+		if (!this->asUInt16(node, "Exp Rate", value))
+			return 0;
+		instance->exp_rate = value;
+	} else {
+		if (!exists)
+			instance->exp_rate = 100;
+	}
+
+	if (this->nodeExists(node, "Drop Rate")) {
+		if (!this->asUInt16(node, "Drop Rate", value))
+			return 0;
+		instance->drop_rate = value;
+	} else {
+		if (!exists)
+			instance->drop_rate = 100;
+	}
+
+	if (this->nodeExists(node, "HP")) {
+		if (!this->asUInt16(node, "HP", value))
+			return 0;
+		instance->hp = value;
+	} else {
+		if (!exists)
+			instance->hp = 100;
+	}
+
+	if (this->nodeExists(node, "Speed")) {
+		if (!this->asUInt16(node, "Speed", value))
+			return 0;
+		instance->speed = value;
+	} else {
+		if (!exists)
+			instance->speed = 100;
+	}
+
+	if (this->nodeExists(node, "STR")) {
+		if (!this->asUInt16(node, "STR", value))
+			return 0;
+		instance->str = value;
+	} else {
+		if (!exists)
+			instance->str = 100;
+	}
+
+	if (this->nodeExists(node, "AGI")) {
+		if (!this->asUInt16(node, "AGI", value))
+			return 0;
+		instance->agi = value;
+	} else {
+		if (!exists)
+			instance->agi = 100;
+	}
+
+	if (this->nodeExists(node, "VIT")) {
+		if (!this->asUInt16(node, "VIT", value))
+			return 0;
+		instance->vit = value;
+	} else {
+		if (!exists)
+			instance->vit = 100;
+	}
+
+	if (this->nodeExists(node, "INT")) {
+		if (!this->asUInt16(node, "INT", value))
+			return 0;
+		instance->int_ = value;
+	} else {
+		if (!exists)
+			instance->int_ = 100;
+	}
+
+	if (this->nodeExists(node, "DEX")) {
+		if (!this->asUInt16(node, "DEX", value))
+			return 0;
+		instance->dex = value;
+	} else {
+		if (!exists)
+			instance->dex = 100;
+	}
+
+	if (this->nodeExists(node, "LUK")) {
+		if (!this->asUInt16(node, "LUK", value))
+			return 0;
+		instance->luk = value;
+	} else {
+		if (!exists)
+			instance->luk = 100;
+	}
+
+	if (this->nodeExists(node, "ATK")) {
+		if (!this->asUInt16(node, "ATK", value))
+			return 0;
+		instance->atk = value;
+	} else {
+		if (!exists)
+			instance->atk = 100;
+	}
+
+	if (this->nodeExists(node, "ATK2")) {
+		if (!this->asUInt16(node, "ATK2", value))
+			return 0;
+		instance->atk2 = value;
+	} else {
+		if (!exists)
+			instance->atk2 = 100;
+	}
+
+	if (this->nodeExists(node, "MATK")) {
+		if (!this->asUInt16(node, "MATK", value))
+			return 0;
+		instance->matk_min = value;
+	} else {
+		if (!exists)
+			instance->matk_min = 100;
+	}
+
+	if (this->nodeExists(node, "MATK2")) {
+		if (!this->asUInt16(node, "MATK2", value))
+			return 0;
+		instance->matk_max = value;
+	} else {
+		if (!exists)
+			instance->matk_max = 100;
+	}
+
+	if (this->nodeExists(node, "DEF")) {
+		if (!this->asUInt16(node, "DEF", value))
+			return 0;
+		instance->def = value;
+	} else {
+		if (!exists)
+			instance->def = 100;
+	}
+
+	if (this->nodeExists(node, "MDEF")) {
+		if (!this->asUInt16(node, "MDEF", value))
+			return 0;
+		instance->mdef = value;
+	} else {
+		if (!exists)
+			instance->mdef = 100;
+	}
+
+	if (this->nodeExists(node, "HIT")) {
+		if (!this->asUInt16(node, "HIT", value))
+			return 0;
+		instance->hit = value;
+	} else {
+		if (!exists)
+			instance->hit = 100;
+	}
+
+	if (this->nodeExists(node, "FLEE")) {
+		if (!this->asUInt16(node, "FLEE", value))
+			return 0;
+		instance->flee = value;
+	} else {
+		if (!exists)
+			instance->flee = 100;
+	}
+
+	if (this->nodeExists(node, "FLEE2")) {
+		if (!this->asUInt16(node, "FLEE2", value))
+			return 0;
+		instance->flee2 = value;
+	} else {
+		if (!exists)
+			instance->flee2 = 100;
+	}
+
+	if (this->nodeExists(node, "CRI")) {
+		if (!this->asUInt16(node, "CRI", value))
+			return 0;
+		instance->cri = value;
+	} else {
+		if (!exists)
+			instance->cri = 100;
+	}
+
+	if (this->nodeExists(node, "AMOTION")) {
+		if (!this->asUInt16(node, "AMOTION", value))
+			return 0;
+		instance->amotion = value;
+	} else {
+		if (!exists)
+			instance->amotion = 100;
+	}
+
+	if (this->nodeExists(node, "ADELAY")) {
+		if (!this->asUInt16(node, "ADELAY", value))
+			return 0;
+		instance->adelay = value;
+	} else {
+		if (!exists)
+			instance->adelay = 100;
+	}
+
+	if (this->nodeExists(node, "DMOTION")) {
+		if (!this->asUInt16(node, "DMOTION", value))
+			return 0;
+		instance->dmotion = value;
+	} else {
+		if (!exists)
+			instance->dmotion = 100;
+	}
+
+	if (!exists)
+		this->put(instance_id, instance);
+
+	return 1;
+}
+
+InstanceModeDatabase instance_mode_db;
 
 /**
  * Searches for an instance name in the database
@@ -553,7 +826,7 @@ void instance_addnpc(std::shared_ptr<s_instance_data> idata)
  * @param mode: Instance mode
  * @return -4 = no free instances | -3 = already exists | -2 = character/party/guild not found | -1 = invalid type | On success return instance_id
  */
-int instance_create(int owner_id, const char *name, e_instance_mode mode) {
+int instance_create(int owner_id, const char *name, e_instance_mode mode, e_instance_difficulty difficulty) {
 	std::shared_ptr<s_instance_db> db = instance_search_db_name(name);
 
 	if (!db) {
@@ -615,6 +888,10 @@ int instance_create(int owner_id, const char *name, e_instance_mode mode) {
 	entry->id = db->id;
 	entry->owner_id = owner_id;
 	entry->mode = mode;
+	if (difficulty) //[InstanceMode]
+		entry->difficulty = difficulty;
+	else
+		entry->difficulty = db->difficulty;
 	entry->regs.vars = i64db_alloc(DB_OPT_RELEASE_DATA);
 	entry->regs.arrays = nullptr;
 	instances.insert({ instance_id, entry });
@@ -794,6 +1071,110 @@ int16 instance_mapid(int16 m, int instance_id)
 	}
 
 	return m;
+}
+
+/**
+ * Returns an instance map ID
+ * @param m: Source map ID
+ * @param instance_id: Instance to search
+ * @return Map ID in this instance or -1 on failure
+ */
+void instance_setpenalty(struct map_session_data *sd)
+{
+	if (!sd)
+		return;
+
+	char output[CHAT_SIZE_MAX];
+	std::shared_ptr<s_instance_data> idata = util::umap_find(instances, map_getmapdata(sd->bl.m)->instance_id);
+
+	if (!idata)
+		return;
+
+	if (!idata->sc_penalties.size())
+		return;
+
+	for (const auto& it: idata->sc_penalties) {
+		sc_start(NULL, &sd->bl, it.first, 10000, it.second, INFINITE_TICK);
+		if (battle_config.instance_penalty_show) {
+			switch(it.first) {
+				case SC_ID_CAST:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2020),it.second); break;
+				case SC_ID_ASPD:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2021),it.second); break;
+				case SC_ID_MAXHP:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2022),it.second); break;
+				case SC_ID_MAXSP:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2023),it.second); break;
+				case SC_ID_ALLSTATS:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2024),it.second); break;
+				case SC_ID_SPEED:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2025),it.second); break;
+				case SC_ID_ATK:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2026),it.second); break;
+				case SC_ID_MATK:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2027),it.second); break;
+				default:
+					memset(output, 0, sizeof(output));
+					break;
+			}
+			if (strlen(output))
+				clif_messagecolor(&sd->bl, color_table[COLOR_RED], output, false, SELF);
+		}
+	}
+
+	return;
+}
+
+/**
+ * Returns an instance map ID
+ * @param m: Source map ID
+ * @param instance_id: Instance to search
+ * @return Map ID in this instance or -1 on failure
+ */
+void instance_setbuff(struct map_session_data *sd)
+{
+	if (!sd)
+		return;
+
+	char output[CHAT_SIZE_MAX];
+	std::shared_ptr<s_instance_data> idata = util::umap_find(instances, map_getmapdata(sd->bl.m)->instance_id);
+
+	if (!idata)
+		return;
+
+	if (!idata->sc_buff.size())
+		return;
+
+	for (const auto& it: idata->sc_buff) {
+		sc_start(NULL, &sd->bl, it.first, 10000, it.second, INFINITE_TICK);
+		if (battle_config.instance_buff_show) {
+			switch(it.first) {
+				case SC_II_CAST:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2028),it.second); break;
+				case SC_II_ASPD:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2029),it.second); break;
+				case SC_II_MAXHP:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2030),it.second); break;
+				case SC_II_MAXSP:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2031),it.second); break;
+				case SC_II_ALLSTATS:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2032),it.second); break;
+				case SC_II_SPEED:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2033),it.second); break;
+				case SC_II_ATK:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2034),it.second); break;
+				case SC_II_MATK:
+					safesnprintf(output,sizeof(output),msg_txt(sd,2035),it.second); break;
+				default:
+					memset(output, 0, sizeof(output));
+					break;
+			}
+			if (strlen(output))
+				clif_messagecolor(&sd->bl, color_table[COLOR_DEFAULT], output, false, SELF);
+		}
+	}
+	
+	return;
 }
 
 /**
@@ -1173,6 +1554,21 @@ bool instance_delusers(int instance_id)
 }
 
 /**
+ * Search for a instance based on the given name
+ * @param name: instance name
+ * @return instance on success or nullptr on failure
+ */
+std::shared_ptr<s_instance_mode_db> instance_mode_search(e_instance_difficulty mode)
+{
+	for (const auto &it : instance_mode_db) {
+		if (it.second->id == mode)
+			return it.second;
+	}
+
+	return nullptr;
+}
+
+/**
  * Reloads the instance in runtime (reloadscript)
  */
 void do_reload_instance(void)
@@ -1253,6 +1649,7 @@ void do_reload_instance(void)
 void do_init_instance(void) {
 	instance_start = map_num;
 	instance_db.load();
+	instance_mode_db.load();
 	instance_wait.timer = INVALID_TIMER;
 
 	add_timer_func_list(instance_delete_timer,"instance_delete_timer");

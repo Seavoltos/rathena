@@ -9,3 +9,8 @@
  **/
 
 //BUILDIN_DEF(example,""),
+
+BUILDIN_DEF(instance_setdifficulty,"ii"),
+BUILDIN_DEF(instance_getdifficulty,"i"),
+BUILDIN_DEF(instance_setpenalty,"iii"),
+BUILDIN_DEF(instance_setbuff,"iii"),

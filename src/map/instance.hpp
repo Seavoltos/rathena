@@ -15,6 +15,7 @@
 #include "../common/mmo.hpp"
 
 #include "script.hpp"
+#include "status.hpp"
 
 enum send_target : uint8;
 struct block_list;
@@ -53,6 +54,14 @@ enum e_instance_notify : uint8 {
 	IN_CREATE_FAIL,
 };
 
+enum e_instance_difficulty : uint8 {
+	ID_EASY = 1,
+	ID_NORMAL,
+	ID_HARD,
+	ID_INSANE,
+	ID_MAX,
+};
+
 struct s_instance_map {
 	int16 m, src_m;
 };
@@ -62,6 +71,7 @@ struct s_instance_data {
 	int id; ///< Instance DB ID
 	e_instance_state state; ///< State of instance
 	e_instance_mode mode; ///< Mode of instance
+	e_instance_difficulty difficulty; ///< Mode of instance
 	int owner_id; ///< Owner ID of instance
 	unsigned int keep_limit; ///< Life time of instance
 	int keep_timer; ///< Life time ID
@@ -71,6 +81,8 @@ struct s_instance_data {
 	bool nomapflag;
 	struct reg_db regs; ///< Instance variables for scripts
 	std::vector<s_instance_map> map; ///< Array of maps in instance
+	std::unordered_map<enum sc_type, int> sc_penalties;
+	std::unordered_map<enum sc_type, int> sc_buff;
 
 	s_instance_data() :
 		id(0),
@@ -94,6 +106,7 @@ struct s_instance_db {
 	bool nonpc;
 	bool nomapflag;
 	bool destroyable; ///< Destroyable flag
+	e_instance_difficulty difficulty;
 	struct point enter; ///< Instance entry point
 	std::vector<int16> maplist; ///< Maps in instance
 };
@@ -112,10 +125,52 @@ extern InstanceDatabase instance_db;
 
 extern std::unordered_map<int, std::shared_ptr<s_instance_data>> instances;
 
+/// Instance Difficulty DB entry [InstanceMode]
+struct s_instance_mode_db {
+	e_instance_difficulty id; ///< Instance Mode DB ID
+	int exp_rate;
+	int drop_rate;
+	int hp;
+	int speed;
+	int str;
+	int agi;
+	int vit;
+	int int_;
+	int dex;
+	int luk;
+	int atk;
+	int atk2;
+	int matk_min;
+	int matk_max;
+	int def;
+	int mdef;
+	int hit;
+	int flee;
+	int flee2;
+	int cri;
+	int amotion;
+	int adelay;
+	int dmotion;
+};
+
+class InstanceModeDatabase : public TypesafeYamlDatabase<int32, s_instance_mode_db> {
+public:
+	InstanceModeDatabase() : TypesafeYamlDatabase("INSTANCE_MODE_DB", 1) {
+
+	}
+
+	const std::string getDefaultLocation();
+	uint64 parseBodyNode(const ryml::NodeRef& node) override;
+};
+
+extern InstanceModeDatabase instance_mode_db;
+
+extern std::unordered_map<int, std::shared_ptr<s_instance_mode_db>> instance_mode;
+
 std::shared_ptr<s_instance_db> instance_search_db_name(const char* name);
 void instance_getsd(int instance_id, struct map_session_data *&sd, enum send_target *target);
 
-int instance_create(int owner_id, const char *name, e_instance_mode mode);
+int instance_create(int owner_id, const char *name, e_instance_mode mode, e_instance_difficulty difficulty);
 bool instance_destroy(int instance_id);
 void instance_destroy_command(map_session_data *sd);
 e_instance_enter instance_enter(struct map_session_data *sd, int instance_id, const char *name, short x, short y);
@@ -127,6 +182,10 @@ int16 instance_mapid(int16 m, int instance_id);
 int instance_addmap(int instance_id);
 
 void instance_addnpc(std::shared_ptr<s_instance_data> idata);
+
+std::shared_ptr<s_instance_mode_db> instance_mode_search(e_instance_difficulty mode);
+void instance_setpenalty(struct map_session_data *sd);
+void instance_setbuff(struct map_session_data *sd);
 
 void do_reload_instance(void);
 void do_init_instance(void);

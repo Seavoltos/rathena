@@ -12,3 +12,6 @@
  *	 <datatype> name;
  **/
 
+
+	int instance_penalty_show;
+	int instance_buff_show;

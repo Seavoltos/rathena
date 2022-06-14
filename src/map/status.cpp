@@ -25,6 +25,7 @@
 #include "elemental.hpp"
 #include "guild.hpp"
 #include "homunculus.hpp"
+#include "instance.hpp"
 #include "itemdb.hpp"
 #include "map.hpp"
 #include "mercenary.hpp"
@@ -2550,6 +2551,80 @@ void status_calc_misc(struct block_list *bl, struct status_data *status, int lev
 		status_calc_regen(bl, status, status_get_regen_data(bl));
 }
 
+void status_calc_mob_instance(struct mob_data* md)
+{
+	if (!md)
+		return;
+
+	std::shared_ptr<s_instance_data> idata = util::umap_find(instances, map_getmapdata(md->bl.m)->instance_id);
+	if (!idata)
+		return;
+
+	std::shared_ptr<s_instance_mode_db> im = instance_mode_search(idata->difficulty);
+
+	if (!im)
+		return;
+
+	if (!md->base_status) {
+		md->base_status = (struct status_data*)aCalloc(1, sizeof(struct status_data));
+		memcpy(md->base_status, &md->db->status, sizeof(struct status_data));
+	}
+
+	if (im->hp != 100) {
+		md->base_status->hp = md->base_status->hp * im->hp / 100;
+		md->base_status->max_hp = md->base_status->max_hp * im->hp / 100;
+		status_set_maxhp(&md->bl, md->base_status->max_hp, 0);
+		clif_name_area(&md->bl);
+	}
+	if (im->speed != 100)
+		md->base_status->speed = md->base_status->speed * im->speed / 100;
+	if (im->str != 100)
+		md->base_status->str = md->base_status->str * im->str / 100;
+	if (im->agi != 100)
+		md->base_status->agi = md->base_status->agi * im->agi / 100;
+	if (im->vit != 100)
+		md->base_status->vit = md->base_status->vit * im->vit / 100;
+	if (im->int_ != 100)
+		md->base_status->int_ = md->base_status->int_ * im->int_ / 100;
+	if (im->dex != 100)
+		md->base_status->dex = md->base_status->dex * im->dex / 100;
+	if (im->luk != 100)
+		md->base_status->luk = md->base_status->luk * im->luk / 100;
+	if (im->atk != 100) {
+#ifdef RENEWAL
+		md->base_status->batk = md->base_status->batk * im->atk / 100;
+#endif
+		md->base_status->rhw.atk = md->base_status->rhw.atk * im->atk / 100;
+	}
+	if (im->atk2 != 100)
+		md->base_status->rhw.atk2 = md->base_status->rhw.atk2 * im->atk2 / 100;
+	if (im->matk_min != 100)
+		md->base_status->matk_min = md->base_status->matk_min * im->matk_min / 100;
+	if (im->matk_max != 100)
+		md->base_status->matk_max = md->base_status->matk_max * im->matk_max / 100;
+	if (im->def != 100)
+		md->base_status->def = md->base_status->def * im->def / 100;
+	if (im->mdef != 100)
+		md->base_status->mdef = md->base_status->mdef * im->mdef / 100;
+	if (im->hit != 100)
+		md->base_status->hit = md->base_status->hit * im->hit / 100;
+	if (im->flee != 100)
+		md->base_status->flee = md->base_status->flee * im->flee / 100;
+	if (im->flee2 != 100)
+		md->base_status->flee2 = md->base_status->flee2 * im->flee2 / 100;
+	if (im->cri != 100)
+		md->base_status->cri = md->base_status->cri * im->cri / 100;
+	if (im->amotion != 100)
+		md->base_status->amotion = md->base_status->amotion * im->amotion / 100;
+	if (im->adelay != 100)
+		md->base_status->adelay = md->base_status->adelay * im->adelay / 100;
+	if (im->dmotion != 100)
+		md->base_status->dmotion = md->base_status->dmotion * im->dmotion / 100;
+	
+	status_calc_misc(&md->bl, &md->status, md->level);
+	status_calc_bl_(&md->bl, status_db.getSCB_BATTLE());
+}
+
 /**
  * Calculates the initial status for the given mob
  * @param md: Mob object
@@ -3024,6 +3099,8 @@ static int status_get_hpbonus(struct block_list *bl, enum e_status_bonus type) {
 				bonus += sc->data[SC_MTF_MHP]->val1;
 			if (sc->data[SC_FIRM_FAITH])
 				bonus += sc->data[SC_FIRM_FAITH]->val2;
+			if(sc->data[SC_II_MAXHP])
+				bonus += sc->data[SC_II_MAXHP]->val1;
 
 			//Decreasing
 			if (sc->data[SC_VENOMBLEED] && sc->data[SC_VENOMBLEED]->val3 == 1)
@@ -3036,6 +3113,8 @@ static int status_get_hpbonus(struct block_list *bl, enum e_status_bonus type) {
 				bonus -= sc->data[SC_EQC]->val3;
 			if(sc->data[SC_PACKING_ENVELOPE3])
 				bonus += sc->data[SC_PACKING_ENVELOPE3]->val1;
+			if(sc->data[SC_ID_MAXHP]) //[InstanceMode]
+				bonus -= sc->data[SC_ID_MAXHP]->val1;
 		}
 		// Max rate reduce is -100%
 		bonus = cap_value(bonus,-100,INT_MAX);
@@ -3170,10 +3249,14 @@ static int status_get_spbonus(struct block_list *bl, enum e_status_bonus type) {
 				bonus += sc->data[SC_MTF_MSP]->val1;
 			if(sc->data[SC_PACKING_ENVELOPE4])
 				bonus += sc->data[SC_PACKING_ENVELOPE4]->val1;
+			if (sc->data[SC_II_MAXSP])
+				bonus += sc->data[SC_II_MAXSP]->val1;
 
 			//Decreasing
 			if (sc->data[SC_MELODYOFSINK])
 				bonus -= sc->data[SC_MELODYOFSINK]->val3;
+			if (sc->data[SC_ID_MAXSP]) //[InstanceMode]
+				bonus -= sc->data[SC_ID_MAXSP]->val1;
 		}
 		// Max rate reduce is -100%
 		bonus = cap_value(bonus,-100,INT_MAX);
@@ -6196,6 +6279,10 @@ static unsigned short status_calc_str(struct block_list *bl, struct status_chang
 		str += sc->data[SC_2011RWC_SCROLL]->val1;
 	if(sc->data[SC_STOMACHACHE])
 		str -= sc->data[SC_STOMACHACHE]->val1;
+	if(sc->data[SC_ID_ALLSTATS]) //[InstanceMode]
+		str -= sc->data[SC_ID_ALLSTATS]->val1;
+	if(sc->data[SC_II_ALLSTATS])
+		str += sc->data[SC_II_ALLSTATS]->val1;
 	if(sc->data[SC_KYOUGAKU])
 		str -= sc->data[SC_KYOUGAKU]->val2;
 	if(sc->data[SC_SWORDCLAN])
@@ -6276,6 +6363,10 @@ static unsigned short status_calc_agi(struct block_list *bl, struct status_chang
 		agi += sc->data[SC_INSPIRATION]->val3;
 	if(sc->data[SC_STOMACHACHE])
 		agi -= sc->data[SC_STOMACHACHE]->val1;
+	if(sc->data[SC_ID_ALLSTATS]) //[InstanceMode]
+		agi -= sc->data[SC_ID_ALLSTATS]->val1;
+	if(sc->data[SC_II_ALLSTATS])
+		agi += sc->data[SC_II_ALLSTATS]->val1;
 	if(sc->data[SC_KYOUGAKU])
 		agi -= sc->data[SC_KYOUGAKU]->val2;
 	if(sc->data[SC_CROSSBOWCLAN])
@@ -6344,6 +6435,10 @@ static unsigned short status_calc_vit(struct block_list *bl, struct status_chang
 		vit += sc->data[SC_2011RWC_SCROLL]->val1;
 	if(sc->data[SC_STOMACHACHE])
 		vit -= sc->data[SC_STOMACHACHE]->val1;
+	if(sc->data[SC_ID_ALLSTATS]) //[InstanceMode]
+		vit -= sc->data[SC_ID_ALLSTATS]->val1;
+	if(sc->data[SC_II_ALLSTATS])
+		vit += sc->data[SC_II_ALLSTATS]->val1;
 	if(sc->data[SC_KYOUGAKU])
 		vit -= sc->data[SC_KYOUGAKU]->val2;
 	if(sc->data[SC_SWORDCLAN])
@@ -6428,6 +6523,10 @@ static unsigned short status_calc_int(struct block_list *bl, struct status_chang
 		int_ += sc->data[SC_COCKTAIL_WARG_BLOOD]->val1;
 	if(sc->data[SC_STOMACHACHE])
 		int_ -= sc->data[SC_STOMACHACHE]->val1;
+	if(sc->data[SC_ID_ALLSTATS]) //[InstanceMode]
+		int_ -= sc->data[SC_ID_ALLSTATS]->val1;
+	if(sc->data[SC_II_ALLSTATS])
+		int_ += sc->data[SC_II_ALLSTATS]->val1;
 	if(sc->data[SC_KYOUGAKU])
 		int_ -= sc->data[SC_KYOUGAKU]->val2;
 	if(sc->data[SC_ARCWANDCLAN])
@@ -6515,6 +6614,10 @@ static unsigned short status_calc_dex(struct block_list *bl, struct status_chang
 		dex += sc->data[SC_INSPIRATION]->val3;
 	if(sc->data[SC_STOMACHACHE])
 		dex -= sc->data[SC_STOMACHACHE]->val1;
+	if(sc->data[SC_ID_ALLSTATS]) //[InstanceMode]
+		dex -= sc->data[SC_ID_ALLSTATS]->val1;
+	if(sc->data[SC_II_ALLSTATS])
+		dex += sc->data[SC_II_ALLSTATS]->val1;
 	if(sc->data[SC_KYOUGAKU])
 		dex -= sc->data[SC_KYOUGAKU]->val2;
 	if(sc->data[SC_ARCWANDCLAN])
@@ -6585,6 +6688,10 @@ static unsigned short status_calc_luk(struct block_list *bl, struct status_chang
 		luk += sc->data[SC_INSPIRATION]->val3;
 	if(sc->data[SC_STOMACHACHE])
 		luk -= sc->data[SC_STOMACHACHE]->val1;
+	if(sc->data[SC_ID_ALLSTATS]) //[InstanceMode]
+		luk -= sc->data[SC_ID_ALLSTATS]->val1;
+	if(sc->data[SC_II_ALLSTATS])
+		luk += sc->data[SC_II_ALLSTATS]->val1;
 	if(sc->data[SC_KYOUGAKU])
 		luk -= sc->data[SC_KYOUGAKU]->val2;
 	if(sc->data[SC_2011RWC_SCROLL])
@@ -6794,6 +6901,10 @@ static unsigned short status_calc_batk(struct block_list *bl, struct status_chan
 #endif
 	if (sc->data[SC_SUNSTANCE])
 		batk += batk * sc->data[SC_SUNSTANCE]->val2 / 100;
+	if(sc->data[SC_ID_ATK]) //[InstanceMode]
+		batk -= batk * sc->data[SC_ID_ATK]->val1/100;
+	if(sc->data[SC_II_ATK])
+		batk += batk * sc->data[SC_II_ATK]->val1/100;
 
 	return (unsigned short)cap_value(batk,0,USHRT_MAX);
 }
@@ -6969,6 +7080,10 @@ static unsigned short status_calc_ematk(struct block_list *bl, struct status_cha
 		matk += sc->data[SC_INSPIRATION]->val2;
 	if (sc->data[SC_PACKING_ENVELOPE2])
 		matk += sc->data[SC_PACKING_ENVELOPE2]->val1;
+	if (sc->data[SC_ID_MATK]) //[InstanceMode]
+		matk -= matk * sc->data[SC_ID_MATK]->val1 / 100;
+	if (sc->data[SC_II_MATK])
+		matk += matk * sc->data[SC_II_MATK]->val1 / 100;
 
 	return (unsigned short)cap_value(matk,0,USHRT_MAX);
 }
@@ -7660,6 +7775,8 @@ static unsigned short status_calc_speed(struct block_list *bl, struct status_cha
 
 			if( sc->data[SC_DECREASEAGI] )
 				val = max( val, 25 );
+			if( sc->data[SC_ID_SPEED] ) //[InstanceMode]
+				val = max( val, sc->data[SC_ID_SPEED]->val1 );
 			if( sc->data[SC_QUAGMIRE] || sc->data[SC_HALLUCINATIONWALK_POSTDELAY] || (sc->data[SC_GLOOMYDAY] && sc->data[SC_GLOOMYDAY]->val4) )
 				val = max( val, 50 );
 			if( sc->data[SC_DONTFORGETME] )
@@ -7727,6 +7844,8 @@ static unsigned short status_calc_speed(struct block_list *bl, struct status_cha
 			val = max( val, sc->data[SC_SPEEDUP1]->val1 );
 		if( sc->data[SC_INCREASEAGI] )
 			val = max( val, 25 );
+		if( sc->data[SC_II_SPEED] ) //[InstanceMode]
+			val = max( val, sc->data[SC_II_SPEED]->val1 );
 		if( sc->data[SC_WINDWALK] )
 			val = max( val, 2 * sc->data[SC_WINDWALK]->val1 );
 		if( sc->data[SC_CARTBOOST] )
@@ -7930,6 +8049,10 @@ static short status_calc_aspd(struct block_list *bl, struct status_change *sc, b
 			bonus += 20;
 		if (sc->data[SC_STARSTANCE])
 			bonus += sc->data[SC_STARSTANCE]->val2;
+		if (sc->data[SC_ID_ASPD]) //[InstanceMode]
+			bonus -= sc->data[SC_ID_ASPD]->val1;
+		if (sc->data[SC_II_ASPD])
+			bonus += sc->data[SC_II_ASPD]->val1;
 
 		struct map_session_data* sd = BL_CAST(BL_PC, bl);
 		uint8 skill_lv;
@@ -10208,6 +10331,23 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 		case SC_CLAN_INFO:
 		case SC_DAILYSENDMAILCNT:
 		case SC_SOULATTACK:
+		//Instance Penalties [InstanceMode]
+		case SC_ID_CAST:
+		case SC_ID_ASPD:
+		case SC_ID_MAXHP:
+		case SC_ID_MAXSP:
+		case SC_ID_ALLSTATS:
+		case SC_ID_SPEED:
+		case SC_ID_ATK:
+		case SC_ID_MATK:
+		case SC_II_CAST:
+		case SC_II_ASPD:
+		case SC_II_MAXHP:
+		case SC_II_MAXSP:
+		case SC_II_ALLSTATS:
+		case SC_II_SPEED:
+		case SC_II_ATK:
+		case SC_II_MATK:
 			tick = INFINITE_TICK;
 			break;
 

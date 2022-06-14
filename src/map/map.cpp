@@ -124,7 +124,7 @@ static struct block_list *bl_list[BL_LIST_MAX];
 static int bl_list_count = 0;
 
 #ifndef MAP_MAX_MSG
-	#define MAP_MAX_MSG 1550
+	#define MAP_MAX_MSG 5000
 #endif
 
 struct map_data map[MAX_MAP_PER_SERVER];
@@ -5194,11 +5194,11 @@ int do_init(int argc, char *argv[])
 	do_init_path();
 	do_init_atcommand();
 	do_init_battle();
-	do_init_instance();
 	do_init_chrif();
 	do_init_clan();
 	do_init_clif();
 	do_init_script();
+	do_init_instance();
 	do_init_itemdb();
 	do_init_channel();
 	do_init_cashshop();

@@ -9375,7 +9375,7 @@ with the given character id.
 ========================
 ---------------------------------------
 
-*instance_create("<instance name>"{,<instance mode>{,<owner id>}});
+*instance_create("<instance name>"{,<instance mode>{,<owner id>{,<difficulty>}}});
 
 Creates an instance for the <owner id> of <mode>. The instance name, along with
 all other instance data, is read from 'db/(pre-)re/instance_db.yml'. Upon success,
@@ -9629,6 +9629,78 @@ Examples:
 	// This will set the 'var variable of the specific instance ID to 9.
 	setinstancevar('var, 9, instance_id(IM_GUILD));
 
+---------------------------------------
+
+*instance_setdifficulty(<instance id>,<difficulty>);
+
+Set the difficulty of an Instance.
+Returns 1 if the difficulty is changed and returns 0 if there's no changes.
+If returns 1 all the mobs stats will be reloaded.
+
+Examples:
+	// This will set the Instance Difficulty to Insane and will send an announce
+	if (instance_setdifficulty(instance_id(IM_PARTY),ID_INSANE))
+		mapannounce(instance_mapname("1@tower"), "Notice : Difficulty has been set to Insane.",bc_map,"0xff0000");
+
+---------------------------------------
+
+*instance_getdifficulty(<instance id>);
+
+Get the difficulty of an Instance.
+Returns the difficulty ID.
+
+Examples:
+	if (instance_getdifficulty(instance_id(IM_PARTY) == ID_EASY))
+		dispbottom("Ha ha ha! Playing in Easy Mode?");
+
+---------------------------------------
+
+*instance_setpenalty(<instance id>,<sc_type>,<value>);
+
+Set a penalty debuff to an Instance.
+
+Valid sc_type:
+	SC_ID_CAST: Increases cast time by <value>%.
+	SC_ID_ASPD: Decreases ASPD by <value>%.
+	SC_ID_MAXHP: Decreases MaxHP by <value>%.
+	SC_ID_MAXSP: Decreases MaxSP by <value>%.
+	SC_ID_ALLSTATS: Reduces All Stats by <value>.
+	SC_ID_SPEED: Decreases Movement Speed by <value>%.
+	SC_ID_ATK: Decreases BaseATK by <value>%.
+	SC_ID_MATK: Decreases MATK by <value>%.
+
+The penalty is set to the <instance id> and whenever a player enters to a map
+that belongs to this instance will receive the debuff.
+The debuff is automatically removed when leaving the instance.
+
+Examples:
+	//Reduce BaseATK by 100%
+	instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,100);
+
+---------------------------------------
+
+*instance_setbuff(<instance id>,<sc_type>,<value>);
+
+Set a buff to an Instance.
+
+Valid sc_type:
+	SC_II_CAST: Decreases cast time by <value>%.
+	SC_II_ASPD: Increases ASPD by <value>%.
+	SC_II_MAXHP: Increases MaxHP by <value>%.
+	SC_II_MAXSP: Increases MaxSP by <value>%.
+	SC_II_ALLSTATS: Increases All Stats by <value>.
+	SC_II_SPEED: Increases Movement Speed by <value>%.
+	SC_II_ATK: Increases BaseATK by <value>%.
+	SC_II_MATK: Increases MATK by <value>%.
+
+The buff is set to the <instance id> and whenever a player enters to a map
+that belongs to this instance will receive the buff.
+The buff is automatically removed when leaving the instance.
+
+Examples:
+	//Increase BaseATK by 100%
+	instance_setbuff(instance_id(IM_PARTY),SC_II_ATK,100);
+	
 ---------------------------------------
 
 =========================

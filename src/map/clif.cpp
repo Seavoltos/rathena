@@ -11231,6 +11231,33 @@ void clif_parse_LoadEndAck(int fd,struct map_session_data *sd)
 		if( channel_config.map_tmpl.name[0] && (channel_config.map_tmpl.opt&CHAN_OPT_AUTOJOIN) && !mapdata->instance_id && !mapdata->flag[MF_NOMAPCHANNELAUTOJOIN] )
 			channel_mjoin(sd); //join new map
 
+		//InstanceMode
+		if (map_getmapdata(sd->bl.m)->instance_id)
+		{
+			instance_setpenalty(sd);
+			instance_setbuff(sd);
+		}
+		else if (sd->sc.count) {
+			// Delete penalties
+			status_change_end(&sd->bl, SC_ID_CAST, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_ID_ASPD, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_ID_MAXHP, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_ID_MAXSP, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_ID_ALLSTATS, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_ID_SPEED, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_ID_ATK, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_ID_MATK, INVALID_TIMER);
+			// Delete buff
+			status_change_end(&sd->bl, SC_II_CAST, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_II_ASPD, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_II_MAXHP, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_II_MAXSP, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_II_ALLSTATS, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_II_SPEED, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_II_ATK, INVALID_TIMER);
+			status_change_end(&sd->bl, SC_II_MATK, INVALID_TIMER);
+		}
+
 		clif_pk_mode_message(sd);
 	}
 	

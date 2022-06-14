@@ -11,3 +11,5 @@
  *	 { "name", &battle_config.<variable name>, <default value>, <minimum value>, <maximum value> },
  **/
 
+	{ "instance_penalty_show",			&battle_config.instance_penalty_show,		1,	0,	1,	},
+	{ "instance_buff_show",             &battle_config.instance_buff_show,          1,  0,  1,  },

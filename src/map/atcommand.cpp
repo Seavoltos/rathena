@@ -4405,6 +4405,8 @@ ACMD_FUNC(reload) {
 	} else if (strstr(command, "instancedb") || strncmp(message, "instancedb", 4) == 0) {
 		if (instance_db.reload())
 			clif_displaymessage(fd, msg_txt(sd,516)); // Instance database has been reloaded.
+		if (instance_mode_db.reload())
+			clif_displaymessage(fd, "Instance Mode Database has been reloaded");
 	} else if (strstr(command, "achievementdb") || strncmp(message, "achievementdb", 4) == 0) {
 		achievement_db_reload();
 		clif_displaymessage(fd, msg_txt(sd,771)); // Achievement database has been reloaded.

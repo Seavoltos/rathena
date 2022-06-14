@@ -7708,6 +7708,16 @@ static void pc_calcexp(struct map_session_data *sd, t_exp *base_exp, t_exp *job_
 		}
 	}
 
+	// Exp Rate by Instance Mode [InstanceMode]
+	if (map_getmapdata(sd->bl.m)->instance_id) {
+		std::shared_ptr<s_instance_data> idata = util::umap_find(instances, map_getmapdata(sd->bl.m)->instance_id);
+		if (idata) {
+			std::shared_ptr<s_instance_mode_db> im = instance_mode_search(idata->difficulty);
+			if (im && im->exp_rate != 100)
+				bonus = bonus + im->exp_rate - 100;
+		}
+	}
+
 	// Give EXPBOOST for quests even if src is NULL.
 	if (sd->sc.data[SC_EXPBOOST]) {
 		bonus += sd->sc.data[SC_EXPBOOST]->val1;

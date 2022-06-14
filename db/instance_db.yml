@@ -29,6 +29,7 @@
 #   NoNpc             Prevent copying NPCs from the source map. (Default: false)
 #   NoMapFlag         Prevent copying Mapflags from the source map. (Default: false)
 #   Destroyable       Toggles the ability to destroy the instance using instance 'Destroy' button. (Default: true)
+#   Difficulty        Instance Difficulty. Modes: (Easy,Normal,Hard,Insane).  (Default: Normal)
 #                     Note: the button is displayed based on parties. For any mode, it requires the party leader to be the instance owner to destroy it.
 #   Enter:            Instance entrance coordinates.
 #     Map             Map Name where players start.

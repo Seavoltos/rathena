@@ -29,6 +29,7 @@
 #include "elemental.hpp"
 #include "guild.hpp"
 #include "homunculus.hpp"
+#include "instance.hpp"
 #include "intif.hpp"
 #include "itemdb.hpp"
 #include "log.hpp"
@@ -1138,6 +1139,8 @@ int mob_spawn (struct mob_data *md)
 
 	memset(&md->state, 0, sizeof(md->state));
 	status_calc_mob(md, SCO_FIRST);
+	if (map_getmapdata(md->bl.m)->instance_id)
+		status_calc_mob_instance(md);
 	md->attacked_id = 0;
 	md->norm_attacked_id = 0;
 	md->target_id = 0;
@@ -2492,6 +2495,16 @@ int mob_getdroprate(struct block_list *src, std::shared_ptr<s_mob_db> mob, int b
 
 			if (sd->sc.data[SC_ITEMBOOST])
 				drop_rate_bonus += sd->sc.data[SC_ITEMBOOST]->val1;
+
+			// Drop Rate by Instance Mode [InstanceMode]
+			if (map_getmapdata(sd->bl.m)->instance_id) {
+				std::shared_ptr<s_instance_data> idata = util::umap_find(instances, map_getmapdata(src->m)->instance_id);
+				if (idata) {
+					std::shared_ptr<s_instance_mode_db> im = instance_mode_search(idata->difficulty);
+					if (im && im->drop_rate != 100)
+						drop_rate_bonus += im->drop_rate - 100;
+				}
+			}
 
 			int cap;
 

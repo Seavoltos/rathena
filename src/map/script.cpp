@@ -21023,6 +21023,7 @@ int script_instancegetid(struct script_state* st, e_instance_mode mode)
 BUILDIN_FUNC(instance_create)
 {
 	e_instance_mode mode = IM_PARTY;
+	e_instance_difficulty id_mode = ID_NORMAL;
 	int owner_id = 0;
 
 	if (script_hasdata(st, 3)) {
@@ -21064,8 +21065,11 @@ BUILDIN_FUNC(instance_create)
 				return SCRIPT_CMD_FAILURE;
 		}
 	}
+	//Instance Difficulty [InstanceMode]
+	if (script_hasdata(st, 5))
+		id_mode = static_cast<e_instance_difficulty>(script_getnum(st, 5));
 
-	script_pushint(st, instance_create(owner_id, script_getstr(st, 2), mode));
+	script_pushint(st, instance_create(owner_id, script_getstr(st, 2), mode, id_mode));
 	return SCRIPT_CMD_SUCCESS;
 }
 
@@ -26572,7 +26576,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(bg_info,"si"),
 
 	// Instancing
-	BUILDIN_DEF(instance_create,"s??"),
+	BUILDIN_DEF(instance_create,"s???"),
 	BUILDIN_DEF(instance_destroy,"?"),
 	BUILDIN_DEF(instance_id,"?"),
 	BUILDIN_DEF(instance_enter,"s????"),

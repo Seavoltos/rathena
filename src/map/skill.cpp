@@ -1,6 +1,5 @@
 // Copyright (c) rAthena Dev Teams - Licensed under GNU GPL
 // For more information, see LICENCE in the main folder
-//#TEST KAIYOU
 
 #include "skill.hpp"
 
@@ -2044,8 +2043,25 @@ int skill_additional_effect(struct block_list* src, struct block_list *bl, uint1
 				
 				if (it.second->flag[SCF_NOBANISHINGBUSTER])
 					continue;
-
 				switch (status) {
+					// Instance Penalties [InstanceMode]
+					case SC_ID_CAST:
+					case SC_ID_ASPD:
+					case SC_ID_MAXHP:
+					case SC_ID_MAXSP:
+					case SC_ID_ALLSTATS:
+					case SC_ID_SPEED:
+					case SC_ID_ATK:
+					case SC_ID_MATK:
+					case SC_II_CAST:
+					case SC_II_ASPD:
+					case SC_II_MAXHP:
+					case SC_II_MAXSP:
+					case SC_II_ALLSTATS:
+					case SC_II_SPEED:
+					case SC_II_ATK:
+					case SC_II_MATK:
+						continue;
 					case SC_WHISTLE:		case SC_ASSNCROS:		case SC_POEMBRAGI:
 					case SC_APPLEIDUN:		case SC_HUMMING:		case SC_DONTFORGETME:
 					case SC_FORTUNE:		case SC_SERVICE4U:
@@ -8832,6 +8848,29 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 
 		clif_skill_nodamage(src, bl, skill_id, skill_lv, 1);
 		clif_skill_estimation(sd, bl);
+		if (dstmd) {
+			char output[CHAT_SIZE_MAX];
+			safesnprintf(output,sizeof(output),"Speed: %d",dstmd->base_status->speed); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"STR: %d",dstmd->base_status->str); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"AGI: %d",dstmd->base_status->agi); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"VIT: %d",dstmd->base_status->vit); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"INT: %d",dstmd->base_status->int_); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"DEX: %d",dstmd->base_status->dex); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"LUK: %d",dstmd->base_status->luk); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"ATK: %d",dstmd->base_status->rhw.atk); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"ATK2: %d",dstmd->base_status->rhw.atk2); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"MATK: %d",dstmd->base_status->matk_min); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"MATK2: %d",dstmd->base_status->matk_max); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"DEF: %d",dstmd->base_status->def); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"MDEF: %d",dstmd->base_status->mdef); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"HIT: %d",dstmd->base_status->hit); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"FLEE: %d",dstmd->base_status->flee); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"FLEE2: %d",dstmd->base_status->flee2); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"CRI: %d",dstmd->base_status->cri); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"AMOTION: %d",dstmd->base_status->amotion); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"ADELAY: %d",dstmd->base_status->adelay); clif_displaymessage(sd->fd,output);
+			safesnprintf(output,sizeof(output),"DMOTION: %d",dstmd->base_status->dmotion); clif_displaymessage(sd->fd,output);
+		}
 		if( skill_id == MER_ESTIMATION )
 			sd = NULL;
 		break;
@@ -9213,7 +9252,26 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 
 				if (it.second->flag[SCF_NODISPELL])
 					continue;
+
 				switch (status) {
+					// Instance Penalties & Buff [InstanceMode]
+					case SC_ID_CAST:
+					case SC_ID_ASPD:
+					case SC_ID_MAXHP:
+					case SC_ID_MAXSP:
+					case SC_ID_ALLSTATS:
+					case SC_ID_SPEED:
+					case SC_ID_ATK:
+					case SC_ID_MATK:
+					case SC_II_CAST:
+					case SC_II_ASPD:
+					case SC_II_MAXHP:
+					case SC_II_MAXSP:
+					case SC_II_ALLSTATS:
+					case SC_II_SPEED:
+					case SC_II_ATK:
+					case SC_II_MATK:
+						continue;
 					// bugreport:4888 these songs may only be dispelled if you're not in their song area anymore
 					case SC_WHISTLE:		case SC_ASSNCROS:		case SC_POEMBRAGI:
 					case SC_APPLEIDUN:		case SC_HUMMING:		case SC_DONTFORGETME:
@@ -10674,6 +10732,24 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 					continue;
 
 				switch (status) {
+					// Instance Penalties & Buff
+					case SC_ID_CAST:
+					case SC_ID_ASPD:
+					case SC_ID_MAXHP:
+					case SC_ID_MAXSP:
+					case SC_ID_ALLSTATS:
+					case SC_ID_SPEED:
+					case SC_ID_ATK:
+					case SC_ID_MATK:
+					case SC_II_CAST:
+					case SC_II_ASPD:
+					case SC_II_MAXHP:
+					case SC_II_MAXSP:
+					case SC_II_ALLSTATS:
+					case SC_II_SPEED:
+					case SC_II_ATK:
+					case SC_II_MATK:
+						continue;
 					case SC_WHISTLE:		case SC_ASSNCROS:		case SC_POEMBRAGI:
 					case SC_APPLEIDUN:		case SC_HUMMING:		case SC_DONTFORGETME:
 					case SC_FORTUNE:		case SC_SERVICE4U:
@@ -18481,6 +18557,10 @@ int skill_castfix_sc(struct block_list *bl, double time, uint8 flag)
 		if (!(flag&2)) {
 			if (sc->data[SC_SLOWCAST])
 				time += time * sc->data[SC_SLOWCAST]->val2 / 100;
+			if (sc->data[SC_ID_CAST]) //[InstanceMode]
+				time += time * sc->data[SC_ID_CAST]->val1 / 100;
+			if (sc->data[SC_II_CAST])
+				time -= time * sc->data[SC_II_CAST]->val1 / 100;
 			if (sc->data[SC_PARALYSIS])
 				time += sc->data[SC_PARALYSIS]->val3;
 			if (sc->data[SC_IZAYOI])
@@ -18581,6 +18661,10 @@ int skill_vfcastfix(struct block_list *bl, double time, uint16 skill_id, uint16 
 			VARCAST_REDUCTION(-sc->data[SC_SLOWCAST]->val2);
 		if (sc->data[SC__LAZINESS])
 			VARCAST_REDUCTION(-sc->data[SC__LAZINESS]->val2);
+		if (sc->data[SC_ID_CAST]) //[InstanceMode]
+			VARCAST_REDUCTION(-sc->data[SC_ID_CAST]->val1);
+		if (sc->data[SC_II_CAST])
+			VARCAST_REDUCTION(sc->data[SC_II_CAST]->val1);
 		if (sc->data[SC_SUFFRAGIUM]) {
 			VARCAST_REDUCTION(sc->data[SC_SUFFRAGIUM]->val2);
 #ifndef RENEWAL
