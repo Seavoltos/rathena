@@ -1,0 +1,366 @@
+//===== rAthena Script =======================================================
+//= MvP ladder ( SQL only )
+//===== By: ==================================================================
+//= ~Seavoltos~
+//===== Current Version: =====================================================
+//= 2.0
+//===== Compatible With: =====================================================
+//= eAthena SQL 14279, with MySQL 5.1
+//=	rAthena
+//===== Description: =========================================================
+//= MvP ladder store in SQL table
+//= MvP Guild ladder store in SQL table
+//===== Topic ================================================================
+//= 
+//===== Additional Comments: =================================================
+//= 
+//============================================================================
+
+-	script	MvP_Respawn	-1,{
+
+OnInit:
+	setarray $@MvP_ID[0],	1511,1647,1785,1630,1039,1874,2068,1272,1719,1046,1389,1112,1115,1418,1871,1252,1768,1086,1885,1649,1651,1832,1492,1734,1251,1779,
+							1688,1646,1373,1147,1059,1150,2022,1087,1190,1038,1157,1159,1623,1650,1583,1708,1312,1751,1685,1648,1917,1658,
+							1096,1388,1307,1283,1302,1582,1120,1259,1990,1720,1289,1991,1765,
+							1929,1956;
+	setarray $@MvP_POINT[0],   6,  15,   7,   6,   7,  15,  10,   5,  10,   7,   5,   6,   6,  10,  15,   7,  10,   5,   6,  15,  15,  12,   6,   9,   5,  10,
+							   7,  15,   6,   7,   8,   5,  10,   5,   7,   5,   5,   5,   7,  15,   7,  10,   5,  15,   7,  15,  15,   7,
+							   1,   3,   1,   1,   2,   1,   1,   1,   4,   1,   2,   4,   2,
+							  15,  30; 
+	end;
+
+
+
+OnMvpRank:
+	if(killedrid == 0) end;
+	
+	for( set .@i, 0; .@i < getarraysize($@MvP_ID); set .@i, .@i +1 ) {
+		if( killedrid == $@MvP_ID[.@i] ) {
+			//Guild Rank
+			if( gettime(DT_DAYOFMONTH) < 29 && getcharid(2) != 0 ) {
+				set .@puntos[0],0;
+				set .@Query$, "SELECT `puntos` FROM `mvpladderguild` WHERE `guild_id` = '" + getcharid(2) + "'";
+				query_sql "select puntos from mvpladderguild where guild_id = "+ getcharid(2), .@puntos;
+				set .@puntos[0], .@puntos[0] + $@MvP_POINT[.@i];
+				query_sql "replace into mvpladderguild values ( "+ getcharid(2) +", "+.@puntos[0] +")";
+			}
+			//Ranking Personal Acumulativo
+			if( $@MvP_POINT[.@i] > 4 )
+			{
+				set #MVPRank, #MVPRank +1;
+				//Llave bronce
+				if(rand(1,100) < 30 )
+				{
+					getitem 41030,1;
+				}
+			//Ranking Mensual personal
+				if( gettime(DT_DAYOFMONTH) < 29 ) {
+					set .@mvp[0], 0;
+					set @Query$, "SELECT `mvp` FROM `mvpladder` WHERE `char_id` = '" + getcharid(0) + "'";
+					query_sql "select mvp from mvpladder where char_id = "+ getcharid(0), .@mvp;
+					set .@mvp[0],.@mvp[0]+1;
+					query_sql "replace into mvpladder values ( "+ getcharid(0) +", '"+ escape_sql(strcharinfo(0)) +"', "+ .@mvp[0] +", "+ Class +")";
+				}
+			}
+			break;
+		}
+	}
+	end;
+}
+
+
+-	script	EstatuaMvP	FAKE_NPC,{
+	if ($ESTATUAMVP)
+	{
+		mes "[^0000ffJugador MvP^000000]";
+		mes "El jugador MvP del mes es "+$JobStatue_MvP_Name$+",";
+		mes "Quien ha logrado cazar "+$mvpladder_fame+" MvP.";
+		close;
+	}
+	end;
+OnInit:
+	if( $ESTATUAMVP == 1 )
+	{
+		setunitdata getnpcid(0,"MvP#1"), UNPC_CLASS, $JobStatue_MvP_Class;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_SEX, $JobStatue_MvP_Sex;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HAIRSTYLE, $JobStatue_MvP_Hair;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HAIRCOLOR, $JobStatue_MvP_HColor;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_CLOTHCOLOR, $JobStatue_MvP_CColor;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_BODY2, $JobStatue_MvP_Body;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HEADTOP, $JobStatue_MvP_Top;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HEADMIDDLE, $JobStatue_MvP_Mid;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HEADBOTTOM, $JobStatue_MvP_Bot;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_ROBE, $JobStatue_MvP_Robe;
+
+		setnpcdisplay "MvP#1", $JobStatue_MvP_Name$;
+	}
+	end;
+
+OnPCLoginEvent:
+	if( $ESTATUAMVP == 1 && $mvpladder_id[0] == getcharid(0) )
+	{
+		set .@nb, query_sql("SELECT `char`.`char_id`, `char`.`name`, `char`.`class`, `char`.`sex`, `char`.`hair`, `char`.`hair_color`, `char`.`clothes_color`, `char`.`body`, `char`.`head_top`, `char`.`head_mid`, `char`.`head_bottom`, `char`.`robe` FROM `char` WHERE `char`.`char_id` = "+$mvpladder_id[0], .@cid, .@name$, .@class, .@sex$, .@hair, .@hair_color, .@clothes_color, .@body, .@head_top, .@head_mid, .@head_bottom, .@robe);
+		if ( .@nb == 0 ) end;
+		
+		set $JobStatue_MvP_Class,.@class;
+		set $JobStatue_MvP_Sex,(.@sex$ == "F")? SEX_FEMALE:SEX_MALE;
+		set $JobStatue_MvP_Hair,.@hair;
+		set $JobStatue_MvP_HColor,.@hair_color[0];
+		set $JobStatue_MvP_CColor,.@clothes_color[0];
+		set $JobStatue_MvP_Body,.@body[0];
+		set $JobStatue_MvP_Top,.@head_top[0];
+		set $JobStatue_MvP_Mid,.@head_mid[0];
+		set $JobStatue_MvP_Bot,.@head_bottom[0];
+		set $JobStatue_MvP_Robe,.@robe[0];
+		set $JobStatue_MvP_Name$,.@name$;
+		
+		setunitdata getnpcid(0,"MvP#1"), UNPC_CLASS, $JobStatue_MvP_Class;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_SEX, $JobStatue_MvP_Sex;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HAIRSTYLE, $JobStatue_MvP_Hair;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HAIRCOLOR, $JobStatue_MvP_HColor;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_CLOTHCOLOR, $JobStatue_MvP_CColor;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_BODY2, $JobStatue_MvP_Body;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HEADTOP, $JobStatue_MvP_Top;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HEADMIDDLE, $JobStatue_MvP_Mid;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HEADBOTTOM, $JobStatue_MvP_Bot;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_ROBE, $JobStatue_MvP_Robe;
+	}
+	end;
+}
+
+batt_off,119,50,4	duplicate(EstatuaMvP)	MvP#1	844
+
+batt_off,116,46,5	script	MvP Ranking	10148,{
+	set .@npcname$, "^000091"+strnpcinfo(0)+"^000000";
+	while (1) {
+		mes "["+ .@npcname$ +"]";
+		mes "Hola "+ strcharinfo(0) +"...";
+		mes "Si lo deseas puedo mostrarte el ranking de MvP por Guild o Personal.";
+		next;
+		switch ( select ("Mostrar Ranking de Guild", "Mostrar Ranking Personal" ) ) {
+			case 1:
+				switch ( select ( "Mostrar Ranking","Información" ) ) {
+					case 1:
+						query_sql("delete from mvpladderguild where guild_id < 1");
+						set .@nb, query_sql("select guild_id, puntos from mvpladderguild where puntos >= 0 order by puntos desc limit 10",.@guild_id, .@puntos);
+						if ( .@nb == 0 ) {
+							mes "["+ .@npcname$ +"]";
+							mes "El actual ranking se encuentra vacío.";
+							next;
+						}
+						for ( set .@j,0; .@j < .@nb; set .@j, .@j + 10 ) {
+							mes "["+ .@npcname$ +"]";
+							for ( set .@i, .@j; .@i < (10 + .@j) && .@i < .@nb; set .@i, .@i + 1 ) {
+								if( getguildname(.@guild_id[.@i]) == "null" )
+								{
+									set .@nb2, query_sql("select name from guild where guild_id = "+.@guild_id[.@i]+" limit 1",.@guild_name$);
+									mes ""+ (.@i+1) +": "+ .@guild_name$ +" ["+ .@puntos[.@i] +"]^000000";
+								}
+								else if(.@i == 0) mes "^EFB810"+ (.@i+1) +": "+ getguildname(.@guild_id[.@i]) +" ["+ .@puntos[.@i] +"]^000000";
+								else if(.@i == 1) mes "^555555"+ (.@i+1) +": "+ getguildname(.@guild_id[.@i]) +" ["+ .@puntos[.@i] +"]^000000";
+								else if(.@i == 2) mes "^813e24"+ (.@i+1) +": "+ getguildname(.@guild_id[.@i]) +" ["+ .@puntos[.@i] +"]^000000";
+								else mes ""+ (.@i+1) +": "+ getguildname(.@guild_id[.@i]) +" ["+ .@puntos[.@i] +"]";
+							}
+							next;
+						}
+						break;
+					case 2:
+						mes "["+ .@npcname$ +"]";
+						mes "El ranking mensual de MvP, es un ranking especial que premia a las Guild con más habiles cazando MvP o Miniboss.";
+						next;
+						mes "["+ .@npcname$ +"]";
+						mes "Aunque sólo son válidos los MvP o Miniboss que aparecen en su respawn natural, no sirve por invocación.";
+						next;
+						mes "["+ .@npcname$ +"]";
+						mes "Cada MvP o Miniboss da diferentes puntos, dependiendo de su dificultad, cantidad y tiempo de respawn.";
+						next;
+						mes "["+ .@npcname$ +"]";
+						mes "Este ranking se reinicia todos los 28 de cada mes a las 23:59 hrs";
+						next;
+						break;
+				}
+				break;
+			case 2:
+				mes "["+ .@npcname$ +"]";
+				mes "Que deseas saber sobre el ranking Personal";
+				next;
+				switch ( select ( "Mostrar Ranking","Información" ) ) {
+					case 1:
+						set .@nb, query_sql("select char_id, name, mvp, class from mvpladder where mvp >= 0 order by mvp desc limit 10",.@char_id, .@name$, .@mvp, .@class);
+						if ( .@nb == 0 ) {
+							mes "["+ .@npcname$ +"]";
+							mes "El actual ranking se encuentra vacío.";
+							next;
+						}
+						for ( set .@j,0; .@j < .@nb; set .@j, .@j + 10 ) {
+							mes "["+ .@npcname$ +"]";
+							for ( set .@i, .@j; .@i < (10 + .@j) && .@i < .@nb; set .@i, .@i + 1 ) {
+								if(.@i == 0) mes "^EFB810"+ (.@i+1) +": "+ .@name$[.@i] +" - ("+jobname(.@class[.@i])+") ["+ .@mvp[.@i] +"]^000000";
+								else if(.@i == 1) mes "^555555"+ (.@i+1) +": "+ .@name$[.@i] +" - ("+jobname(.@class[.@i])+") ["+ .@mvp[.@i] +"]^000000";
+								else if(.@i == 2) mes "^813e24"+ (.@i+1) +": "+ .@name$[.@i] +" - ("+jobname(.@class[.@i])+") ["+ .@mvp[.@i] +"]^000000";
+								else mes ""+ (.@i+1) +": "+ .@name$[.@i] +" - ("+jobname(.@class[.@i])+") ["+ .@mvp[.@i] +"]";
+							}
+							next;
+						}
+						break;
+					case 2:
+						mes "["+ .@npcname$ +"]";
+						mes "El ranking personal MvP, selecciona a los jugadores más habiles cazando MvP.";
+						next;
+						mes "["+ .@npcname$ +"]";
+						mes "Aunque sólo son válidos los MvP que aparecen en su respawn natural, no sirve por invocación.";
+						next;
+						mes "["+ .@npcname$ +"]";
+						mes "Este ranking se reinicia todos los 28 de cada mes a las 23:59 hrs";
+						next;
+						mes "["+ .@npcname$ +"]";
+						mes "Ya sabes, ahora sólo queda participar!";
+						next;
+						break;
+				}
+		}
+	}
+	close;
+	end;
+
+OnWhisperGlobal:
+	if ( getgmlevel() < 99) end;
+	set .@npcname$, "^000091"+strnpcinfo(0)+"^000000";
+	mes "["+ .@npcname$ +"]";
+	mes "Mmm...";
+	mes "Estás seguro que deseas repartir el Ranking MvP de este mes?";
+	next;
+	if(select("No:Si")==1){
+		mes "["+ .@npcname$ +"]";
+		mes "Si deseas borrarlo avisame";
+		close;
+	}
+	set .@aux,1;
+	
+OnClock2359:
+	//Inicio de Guild
+	if(gettime(DT_DAYOFMONTH)==28 || .@aux == 1) {
+		//Ranking Personal
+		//Borrar ganadores semana anterior
+		disablenpc "MvP#1";
+		set $ESTATUAMVP, 0;
+		deletearray $mvpladder_reward[0],$mvpladder_count;
+		deletearray $mvpladder_id[0],$mvpladder_count;
+		deletearray $mvpladder_name$[0],$mvpladder_count;
+		deletearray $mvpladder_fame[0],$mvpladder_count;
+		//Asignar los ganadores de la semana
+		set .@nb, query_sql("select char_id, name, mvp, class from mvpladder where mvp >= 0 order by mvp desc limit "+$mvpladder_count+"",.@char_id, .@name$, .@mvp, .@class);
+		if ( .@nb == 0 ) end;
+		
+		for ( set .@j,0; .@j < .@nb; set .@j, .@j + 10 ) {
+			for ( set .@i, .@j; .@i < (10 + .@j) && .@i < .@nb; set .@i, .@i + 1 ) {
+				set $mvpladder_id[.@i], .@char_id[.@i];
+				set $mvpladder_name$[.@i], .@name$[.@i];
+				set $mvpladder_fame[.@i], .@mvp[.@i];
+			}
+		}
+		//Borrar SQL
+		query_sql("delete from mvpladder where char_id>0");
+		
+		enablenpc "MvP#1";
+		//Estatua
+		set .@nb, query_sql("SELECT `char`.`char_id`, `char`.`name`, `char`.`class`, `char`.`sex`, `char`.`hair`, `char`.`hair_color`, `char`.`clothes_color`, `char`.`body`, `char`.`head_top`, `char`.`head_mid`, `char`.`head_bottom`, `char`.`robe` FROM `char` WHERE `char`.`char_id` = "+$mvpladder_id[0], .@cid, .@name$, .@class, .@sex$, .@hair, .@hair_color, .@clothes_color, .@body, .@head_top, .@head_mid, .@head_bottom, .@robe);
+		if ( .@nb == 0 ) end;
+		
+		set $JobStatue_MvP_Class,.@class;
+		set $JobStatue_MvP_Sex,(.@sex$ == "F")? SEX_FEMALE:SEX_MALE;
+		set $JobStatue_MvP_Hair,.@hair;
+		set $JobStatue_MvP_HColor,.@hair_color[0];
+		set $JobStatue_MvP_CColor,.@clothes_color[0];
+		set $JobStatue_MvP_Body,.@body[0];
+		set $JobStatue_MvP_Top,.@head_top[0];
+		set $JobStatue_MvP_Mid,.@head_mid[0];
+		set $JobStatue_MvP_Bot,.@head_bottom[0];
+		set $JobStatue_MvP_Robe,.@robe[0];
+		set $JobStatue_MvP_Name$,.@name$;
+		
+		set $ESTATUAMVP, 1;
+
+		setunitdata getnpcid(0,"MvP#1"), UNPC_CLASS, $JobStatue_MvP_Class;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_SEX, $JobStatue_MvP_Sex;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HAIRSTYLE, $JobStatue_MvP_Hair;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HAIRCOLOR, $JobStatue_MvP_HColor;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_CLOTHCOLOR, $JobStatue_MvP_CColor;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_BODY2, $JobStatue_MvP_Body;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HEADTOP, $JobStatue_MvP_Top;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HEADMIDDLE, $JobStatue_MvP_Mid;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_HEADBOTTOM, $JobStatue_MvP_Bot;
+		setunitdata getnpcid(0,"MvP#1"), UNPC_ROBE, $JobStatue_MvP_Robe;
+
+		setnpcdisplay "MvP#1", $JobStatue_MvP_Name$+"#RANKMVP";
+		
+		
+		//Ranking de Guild
+		set .@nb, query_sql("select guild_id, puntos from mvpladderguild where puntos >= 0 order by puntos desc limit "+$mvpladderguild_count+"",.@guild_id, .@puntos);
+		if ( .@nb == 0 ) end; //Ranking vacio.
+		
+		//Asignar los ganadores de la semana
+		for ( set .@j,0; .@j < .@nb; set .@j, .@j + 10 ) {
+			for ( set .@i, .@j; .@i < (10 + .@j) && .@i < .@nb; set .@i, .@i + 1 ) {
+				set $mvpladderguild_id[.@i], .@guild_id[.@i];
+				set $mvpladderguild_fame[.@i], .@puntos[.@i];
+			}
+		}
+		
+		SetCastleData "batt_off",CD_GUILD_ID, $mvpladderguild_id[0];
+		
+		donpcevent "Lider Guild MvP::OnRecvRankMvP";
+		//Borrar SQL
+		query_sql("delete from mvpladderguild where guild_id>0");
+		
+		//Avisar
+		announce "[KaiyouRO] Ya pueden ver a la guild ganadora y al Jugador MvP del mes.",bc_all;
+	}
+	end;
+OnInit:
+	set $mvpladder_count,3;
+	set $mvpladderguild_count,1;
+	end;
+}
+
+-	script	MvP Ranking#batt_off	FAKE_NPC,{
+	end;
+
+OnGuildBreak:
+	SetCastleData strnpcinfo(2),CD_GUILD_ID,0;
+	// Wait before refreshing guild information.
+	sleep 7000;
+	Announce "La guild lider del [" + GetCastleName(strnpcinfo(2)) + "] ha abandonado su lugar.",0;
+	donpcevent "Lider Guild MvP::OnRecvRankMvP";
+	end;
+
+}
+
+batt_off,118,52,4	script	Lider Guild MvP	722,{
+
+	set .@GID, GetCastleData("batt_off",1);
+	
+	if (.@GID == 0) end;
+	mes "[^0000ffLider Guild MvP^000000]";
+	mes "Estandarte para honrar a la guild ^ff0000"+GetGuildName($mvpladderguild_id[0])+"^000000,";
+	mes "Por obtener el primer lugar en el Ranking MvP con "+$mvpladderguild_fame[0]+" puntos.";
+	close;
+	end;
+
+OnRecvRankMvP:
+	FlagEmblem GetCastleData("batt_off",1);
+	end;
+}
+/*
+-	script	RespawnMVP	FAKE_NPC,{
+	end;
+OnInit:
+	initnpctimer;
+	end;
+
+OnTimer7200000:
+//OnTimer2000:
+	charcommand "@loadnpc npc/ocean/RespawnMvP.txt";
+	end;
+}
+*/

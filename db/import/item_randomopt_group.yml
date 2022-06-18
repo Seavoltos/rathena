@@ -44,3 +44,245 @@
 Header:
   Type: RANDOM_OPTION_GROUP
   Version: 1
+
+Body:
+  - Id: 1
+    Group: OPT_Airship_Boots
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_AGIAMOUNT
+            MinValue: 1
+            MaxValue: 2
+            Chance: 5000
+    MaxRandom: 2
+    Random:
+      - Option: VAR_PLUSASPDPERCENT
+        MinValue: 1
+        MaxValue: 10
+        Chance: 5000
+  - Id: 2
+    Group: OPT_Airship_Cape
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_AVOIDSUCCESSVALUE
+            MinValue: 1
+            MaxValue: 10
+            Chance: 5000
+    MaxRandom: 2
+    Random:
+      - Option: ATTR_TOLERACE_NOTHING
+        MinValue: 1
+        MaxValue: 10
+        Chance: 1000
+  - Id: 3
+    Group: OPT_Airship_Armor
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_STRAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Chance: 5000
+          - Option: VAR_AGIAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Chance: 5000
+          - Option: VAR_VITAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Chance: 5000
+          - Option: VAR_INTAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Chance: 5000
+          - Option: VAR_DEXAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Chance: 5000
+          - Option: VAR_LUKAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Chance: 5000
+      - Slot: 2
+        Options:
+          - Option: VAR_MAXHPAMOUNT
+            MinValue: 1
+            MaxValue: 1000
+            Chance: 5000
+          - Option: VAR_MAXSPAMOUNT
+            MinValue: 1
+            MaxValue: 100
+            Chance: 5000
+    MaxRandom: 3
+    Random:
+      - Option: VAR_MDEFPOWER
+        MinValue: 1
+        MaxValue: 5
+        Chance: 5000
+  - Id: 4
+    Group: OPT_Airship_Hat
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_DEXAMOUNT
+            MinValue: 1
+            MaxValue: 2
+            Chance: 5000
+      - Slot: 2
+        Options:
+          - Option: VAR_MAXHPAMOUNT
+            MinValue: 1
+            MaxValue: 150
+            Chance: 5000
+      - Slot: 3
+        Options:
+          - Option: RANGE_ATTACK_DAMAGE_TARGET
+            MinValue: 1
+            MaxValue: 10
+            Chance: 5000
+  - Id: 5
+    Group: OPT_Goibne_Arms
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_VITAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Chance: 5000
+      - Slot: 2
+        Options:
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 2
+            Chance: 5000
+      - Slot: 3
+        Options:
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 1
+            MaxValue: 12
+            Chance: 5000
+  - Id: 6
+    Group: OPT_Goibne_Arms_Normal
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_VITAMOUNT
+            MinValue: 1
+            MaxValue: 1
+            Chance: 5000
+      - Slot: 2
+        Options:
+          - Option: VAR_MDEFPOWER
+            MinValue: 2
+            MaxValue: 2
+            Chance: 5000
+      - Slot: 3
+        Options:
+          - Option: RANGE_ATTACK_DAMAGE_USER
+            MinValue: 10
+            MaxValue: 10
+            Chance: 5000
+  - Id: 7
+    Group: OPT_Goibne_Helmet
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_VITAMOUNT
+            MinValue: 1
+            MaxValue: 4
+            Chance: 5000
+      - Slot: 2
+        Options:
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 4
+            Chance: 5000
+  - Id: 8
+    Group: OPT_Goibne_Helmet_Normal
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_VITAMOUNT
+            MinValue: 3
+            MaxValue: 3
+            Chance: 5000
+      - Slot: 2
+        Options:
+          - Option: VAR_MDEFPOWER
+            MinValue: 3
+            MaxValue: 3
+            Chance: 5000
+  - Id: 9
+    Group: OPT_Goibne_Armor
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_VITAMOUNT
+            MinValue: 1
+            MaxValue: 3
+            Chance: 5000
+      - Slot: 2
+        Options:
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 12
+            Chance: 5000
+  - Id: 10
+    Group: OPT_Goibne_Armor_Normal
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_VITAMOUNT
+            MinValue: 2
+            MaxValue: 2
+            Chance: 5000
+      - Slot: 2
+        Options:
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 10
+            MaxValue: 10
+            Chance: 5000
+  - Id: 11
+    Group: OPT_Goibne_Boots
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_MDEFPOWER
+            MinValue: 1
+            MaxValue: 4
+            Chance: 5000
+      - Slot: 2
+        Options:
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 1
+            MaxValue: 7
+            Chance: 5000
+      - Slot: 3
+        Options:
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 1
+            MaxValue: 7
+            Chance: 5000
+  - Id: 12
+    Group: OPT_Goibne_Boots_Normal
+    Slots:
+      - Slot: 1
+        Options:
+          - Option: VAR_MDEFPOWER
+            MinValue: 3
+            MaxValue: 3
+            Chance: 5000
+      - Slot: 2
+        Options:
+          - Option: VAR_MAXHPPERCENT
+            MinValue: 5
+            MaxValue: 5
+            Chance: 5000
+      - Slot: 3
+        Options:
+          - Option: VAR_MAXSPPERCENT
+            MinValue: 5
+            MaxValue: 5
+            Chance: 5000

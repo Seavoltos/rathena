@@ -5467,7 +5467,7 @@ mosk_in,221,43,0	script	#bowl	HIDDEN_NPC,{
 //----------------------------------------------------------------------------
 // Center of Town
 //----------------------------------------------------------------------------
-moscovia,224,190,0	script	#nowinterplz	CLEAR_NPC,{
+moscovia,217,119,0	script	#nowinterplz	CLEAR_NPC,{
 	if (mos_nowinter != 19) end;
 	if (countitem(7765)) {// Yaga_Secret_Medicine
 		mes "["+strcharinfo(0)+"]";

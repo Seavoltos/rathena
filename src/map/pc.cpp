@@ -11390,6 +11390,16 @@ bool pc_equipitem(struct map_session_data *sd,short n,int req_pos,bool equipswit
 		return false;
 	}
 
+	if (pc_get_group_level(sd) < map_getmapflag(sd->bl.m, MF_NOEQUIP)) {
+		if (equipswitch) {
+			clif_equipswitch_add(sd, n, req_pos, true);
+		}
+		else {
+			clif_equipitemack(sd, n, 0, ITEM_EQUIP_ACK_FAIL); //Fail
+		}
+		return false;
+	}
+
 	equip_index = equipswitch ? sd->equip_switch_index : sd->equip_index;
 
 	if ( !equipswitch && id->flag.bindOnEquip && !sd->inventory.u.items_inventory[n].bound) {

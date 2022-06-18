@@ -17734,9 +17734,6 @@ Body:
     ArmorLevel: 1
     EquipLevelMin: 54
     Refineable: true
-    Script: |
-      bonus bVit,2;
-      bonus bMaxHPrate,10;
   - Id: 2355
     AegisName: Angel's_Protection
     Name: Angelic Protection
@@ -19069,10 +19066,6 @@ Body:
     ArmorLevel: 1
     EquipLevelMin: 54
     Refineable: true
-    Script: |
-      bonus bMdef,3;
-      bonus bMaxHPrate,5;
-      bonus bMaxSPrate,5;
   - Id: 2420
     AegisName: Angel's_Arrival
     Name: Angel's Reincarnation
@@ -20132,10 +20125,6 @@ Body:
     ArmorLevel: 1
     EquipLevelMin: 54
     Refineable: true
-    Script: |
-      bonus bLongAtkDef,10;
-      bonus bMdef,2;
-      bonus bVit,1;
   - Id: 2521
     AegisName: Angel's_Warmth
     Name: Angelic Cardigan
@@ -26834,9 +26823,6 @@ Body:
     EquipLevelMin: 54
     Refineable: true
     View: 258
-    Script: |
-      bonus bVit,3;
-      bonus bMdef,3;
   - Id: 5129
     AegisName: Bird_Nest
     Name: Bird Nest

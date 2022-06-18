@@ -1,0 +1,107 @@
+-	script	Job	FAKE_NPC,{
+	end;
+	
+OnPCBaseLvUpEvent:
+OnPCJobLvUpEvent:
+	if( BaseLevel != 99 ) end;
+	if( JobLevel != 70 && Class != 23 && Class != 4047 && Class != 4049 ) end;
+	if( Class == 23 )
+		if( JobLevel != 99) end;
+	if( Class == 4047 || Class == 4049 )
+		if( JobLevel != 50) end;
+	
+	if( getd("$ESTATUA_" + Class) == 0 ){
+		set .@nb, query_sql("SELECT `char`.`char_id`, `char`.`name`, `char`.`class`, `char`.`sex`, `char`.`hair`, `char`.`hair_color`, `char`.`clothes_color`, `char`.`body`, `char`.`head_top`, `char`.`head_mid`, `char`.`head_bottom`, `char`.`robe` FROM `char` WHERE `char`.`char_id` = "+getcharid(0), .@cid, .@name$, .@class, .@sex$, .@hair, .@hair_color, .@clothes_color, .@body, .@head_top, .@head_mid, .@head_bottom, .@robe);
+		if ( .@nb == 0 ) end;
+
+		setd "$JobStatue_" + .@class + "_Class",Class;
+		setd "$JobStatue_" + .@class + "_Sex",(.@sex$ == "F")? SEX_FEMALE:SEX_MALE;
+		setd "$JobStatue_" + .@class + "_Hair",.@hair;
+		setd "$JobStatue_" + .@class + "_HColor",.@hair_color[.@i];
+		setd "$JobStatue_" + .@class + "_CColor",.@clothes_color[.@i];
+		setd "$JobStatue_" + .@class + "_Body",.@body[.@i];
+		setd "$JobStatue_" + .@class + "_Top",.@head_top[.@i];
+		setd "$JobStatue_" + .@class + "_Mid",.@head_mid[.@i];
+		setd "$JobStatue_" + .@class + "_Bot",.@head_bottom[.@i];
+		setd "$JobStatue_" + .@class + "_Robe",.@robe[.@i];
+		setd "$JobStatue_" + .@class + "_Name$",.@name$;
+		setd "$JobStatue_" + .@class + "_Time$",gettimestr("%Y-%m/%d %H:%M:%S",21);
+		setd "$ESTATUA_" + Class, 1;
+
+		set .@class,Class;
+
+		setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_CLASS, getd("$JobStatue_" + .@class + "_Class");
+		setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_SEX, getd("$JobStatue_" + .@class + "_Sex");
+		setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_HAIRSTYLE, getd("$JobStatue_" + .@class + "_Hair");
+		setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_HAIRCOLOR, getd("$JobStatue_" + .@class + "_HColor");
+		setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_CLOTHCOLOR, getd("$JobStatue_" + .@class + "_CColor");
+		setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_BODY2, getd("$JobStatue_" + .@class + "_Body");
+		setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_HEADTOP, getd("$JobStatue_" + .@class + "_Top");
+		setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_HEADMIDDLE, getd("$JobStatue_" + .@class + "_Mid");
+		setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_HEADBOTTOM, getd("$JobStatue_" + .@class + "_Bot");
+		setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_ROBE, getd("$JobStatue_" + .@class + "_Robe");
+
+		setnpcdisplay "Job#"+(.@class), getd("$JobStatue_" + .@class + "_Name$")+"#"+.@class;
+	}
+	end;
+
+OnInit:
+	deletearray .@Estatuas[0],128;
+	setarray .@Estatuas[0],23,24,25,4008,4009,4010,4011,4012,4013,4015,4017,4016,4018,4019,4020,4021,4047,4049;
+	for ( set .@i , 0 ; .@i < getarraysize(.@Estatuas) ; set .@i , .@i + 1 )
+	{
+		set .@class, .@Estatuas[.@i];
+		//setd "$ESTATUA_" + .@class, 0;
+		if( getd("$ESTATUA_" + .@class) == 1 )
+		{
+			setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_CLASS, getd("$JobStatue_" + .@class + "_Class");
+			setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_SEX, getd("$JobStatue_" + .@class + "_Sex");
+			setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_HAIRSTYLE, getd("$JobStatue_" + .@class + "_Hair");
+			setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_HAIRCOLOR, getd("$JobStatue_" + .@class + "_HColor");
+			setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_CLOTHCOLOR, getd("$JobStatue_" + .@class + "_CColor");
+			setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_BODY2, getd("$JobStatue_" + .@class + "_Body");
+			setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_HEADTOP, getd("$JobStatue_" + .@class + "_Top");
+			setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_HEADMIDDLE, getd("$JobStatue_" + .@class + "_Mid");
+			setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_HEADBOTTOM, getd("$JobStatue_" + .@class + "_Bot");
+			setunitdata getnpcid(0,"Job#"+(.@class)), UNPC_ROBE, getd("$JobStatue_" + .@class + "_Robe");
+
+			setnpcdisplay "Job#"+(.@class), getd("$JobStatue_" + .@class + "_Name$")+"#"+.@class;
+		}
+	}
+}
+
+-	script	Estatua	FAKE_NPC,{
+	set .@class, strnpcinfo(2);
+	set .@name$,"["+jobname(.@class)+"]";
+	mes .@name$;
+	set .@statue,getd("$ESTATUA_" + strnpcinfo(2));
+	if( .@statue ){
+		mes "El primer "+jobname(.@class)+ " nivel máximo fue "+ getd("$JobStatue_" + .@class + "_Name$");
+		mes "Fecha:";
+		mes getd("$JobStatue_" + .@class + "_Time$");
+	}
+	else
+	{
+		mes "Aún ningún " + jobname(.@class) + " llega a nivel máximo.";
+	}
+	close;
+}
+
+batt_off,79,46,6	duplicate(Estatua)	Job#4008	844
+batt_off,79,48,6	duplicate(Estatua)	Job#4009	844
+batt_off,79,50,6	duplicate(Estatua)	Job#4010	844
+batt_off,79,52,6	duplicate(Estatua)	Job#4011	844
+batt_off,79,54,6	duplicate(Estatua)	Job#4012	844
+batt_off,79,56,6	duplicate(Estatua)	Job#4013	844
+batt_off,79,58,6	duplicate(Estatua)	Job#4015	844
+batt_off,79,60,6	duplicate(Estatua)	Job#4017	844
+batt_off,79,62,6	duplicate(Estatua)	Job#4016	844
+batt_off,104,46,2	duplicate(Estatua)	Job#4018	844
+batt_off,104,48,2	duplicate(Estatua)	Job#4019	844
+batt_off,104,50,2	duplicate(Estatua)	Job#4020	844
+batt_off,104,52,2	duplicate(Estatua)	Job#4021	844
+batt_off,104,54,2	duplicate(Estatua)	Job#4047	844
+batt_off,104,56,2	duplicate(Estatua)	Job#4049	844
+batt_off,104,58,2	duplicate(Estatua)	Job#23	844
+batt_off,104,60,2	duplicate(Estatua)	Job#24	844
+batt_off,104,62,2	duplicate(Estatua)	Job#25	844

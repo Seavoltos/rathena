@@ -1,0 +1,1560 @@
+
+startermap,27,27,4	script	Elephant#SM1	3162,{
+	emotion ET_COOL;
+	if( QuestNovice == 0 )
+		viewpointmap "startermap", 1, 40, 30, 1, 0xFF0000;
+	else
+		if( getd("$starterpack" + get_unique_id() + "") == 0  && #FirstWeek == 0 )
+			viewpointmap "startermap", 1, 34, 56, 1, 0xFF0000;
+	else
+		if( JobLevel > 9) 
+			viewpointmap "startermap", 1, 40, 30, 1, 0xFF0000;
+	else
+		viewpointmap "startermap", 1, 43, 56, 1, 0xFF0000;
+	end;
+OnInit:
+	npcspeed 200;
+	initnpctimer;
+	//disablenpc "Elephant#SM1";
+	end;
+
+OnTimer10000:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	set .@curX, callfunc("move_XY",.@x,22,51);
+	set .@curY, callfunc("move_XY",.@y,22,51);
+	npcwalkto .@curX, .@curY;
+	initnpctimer;
+	end;
+}
+
+startermap,53,27,4	script	Gorilla#SM1	3163,{
+	emotion ET_COOL;
+	if( QuestNovice == 0 )
+		viewpointmap "startermap", 1, 40, 30, 1, 0xFFFFFF;
+	else
+		if( getd("$starterpack" + get_unique_id() + "") == 0  && #FirstWeek == 0 )
+			viewpointmap "startermap", 1, 34, 56, 1, 0xFFFFFF;
+	else
+		if( JobLevel > 9) 
+			viewpointmap "startermap", 1, 40, 30, 1, 0xFFFFFF;
+	else
+		viewpointmap "startermap", 1, 43, 56, 1, 0xFFFFFF;
+	end;
+OnInit:
+	npcspeed 200;
+	initnpctimer;
+	//disablenpc "Gorilla#SM1";
+	end;
+
+OnTimer10000:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	set .@curX, callfunc("move_XY",.@x,22,51);
+	set .@curY, callfunc("move_XY",.@y,22,51);
+	npcwalkto .@curX, .@curY;
+	initnpctimer;
+	end;
+}
+
+startermap,50,50,4	script	Lion#SM1	3164,{
+	emotion ET_COOL;
+	if( QuestNovice == 0 )
+		viewpointmap "startermap", 1, 40, 30, 1, 0x00FF00;
+	else
+		if( getd("$starterpack" + get_unique_id() + "") == 0  && #FirstWeek == 0 )
+			viewpointmap "startermap", 1, 34, 56, 1, 0x00FF00;
+	else
+		if( JobLevel > 9) 
+			viewpointmap "startermap", 1, 40, 30, 1, 0x00FF00;
+	else
+		viewpointmap "startermap", 1, 43, 56, 1, 0x00FF00;
+	end;
+OnInit:
+	npcspeed 200;
+	initnpctimer;
+	//disablenpc "Lion#SM1";
+	end;
+
+OnTimer10000:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	set .@curX, callfunc("move_XY",.@x,22,51);
+	set .@curY, callfunc("move_XY",.@y,22,51);
+	npcwalkto .@curX, .@curY;
+	initnpctimer;
+	end;
+}
+
+startermap,26,50,4	script	Rhino#SM1	3165,{
+	emotion ET_COOL;
+	if( QuestNovice == 0 )
+		viewpointmap "startermap", 1, 40, 30, 1, 0x0000FF;
+	else
+		if( getd("$starterpack" + get_unique_id() + "") == 0  && #FirstWeek == 0 )
+			viewpointmap "startermap", 1, 34, 56, 1, 0x0000FF;
+	else
+		if( JobLevel > 9) 
+			viewpointmap "startermap", 1, 40, 30, 1, 0x0000FF;
+	else
+		viewpointmap "startermap", 1, 43, 56, 1, 0x0000FF;
+	end;
+OnInit:
+	npcspeed 200;
+	initnpctimer;
+	//disablenpc "Rhino#SM1";
+	end;
+
+OnTimer10000:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	set .@curX, callfunc("move_XY",.@x,22,51);
+	set .@curY, callfunc("move_XY",.@y,22,51);
+	npcwalkto .@curX, .@curY;
+	initnpctimer;
+	end;
+}
+
+startermap,40,30,4	script	Tiago	10396,{
+	set .@name$,"[^008040Tiago^000000]";
+	if( JobLevel < 10) 
+	{
+		mes .@name$;
+		mes "Bienvenido a ^ff0000KaiyouRO^000000";
+		mes "Debes probar tu valor en el campo de batalla.";
+		next;
+		mes .@name$;
+		mes "Llega hasta nivel 10 de clase para poder enviarte a viajar por Midgard.";
+		close;	
+	}
+	mes .@name$;
+	mes "Tus habilidades en la batalla me han sorprendido, ya puedes viajar por el mundo de Midgard!";
+	next;
+	mes .@name$;
+	mes "En que ciudad te gustaría iniciar tu travesía?";
+	next;
+	switch(select("^D23010 [ > ] ^000000Prontera:^10B2D2 [ > ] ^000000Morocc:^10B2D2 [ > ] ^000000Geffen:^10B2D2 [ > ] ^000000Payon:^10B2D2 [ > ] ^000000Alberta:^10B2D2 [ > ] ^000000Izlude"))
+	{
+		case 1:
+			savepoint "prontera",273,354,1,1;
+			warp "prontera",273,354;
+			break;
+		case 2:
+			savepoint "morocc",160,94,1,1;
+			warp "morocc",160,94;
+			break;
+		case 3:
+			savepoint "geffen",120,100,1,1;
+			warp "geffen",120,100;
+			break;
+		case 4:
+			savepoint "payon",70,100,1,1;
+			warp "payon",70,100;
+			break;
+		case 5:
+			savepoint "alberta",116,57,1,1;
+			warp "alberta",116,57;
+			break;
+		case 6:
+			savepoint "izlude",94,103,1,1;
+			warp "izlude",94,103;
+			break;
+	}
+	end;
+
+OnInit:
+	setcell "startermap",21,21,58,58,cell_basilica,1;
+	end;
+	
+}
+
+startermap2,208,177,3	script	Eeta#Quest2	10402,{
+	set .@name$,"[^400040Eeta^000000]";
+	mes .@name$;
+	mes "Veo que llegaste hasta el final, deseas volver?";
+	next;
+	if(select("Volver a la zona segura:Deseo seguir cazando") == 1)
+	{
+		mes .@name$;
+		mes "Allá vamos";
+		close2;
+		getitem 569,100; //Novice_Potion
+		warp "startermap",40,28;
+		end;
+	}
+	mes .@name$;
+	mes "Veo que lo estas pasando bien, no hay problema";
+	close;
+}
+
+startermap,43,56,3	script	Eeta#Quest	10402,{
+	set .@name$,"[^400040Eeta^000000]";
+	mes .@name$;
+	set @Sexo$,"Bienvenido";
+	if(Sex==0) set @Sexo$,"Bienvenida";
+	mes @Sexo$ + " a ^ff0000KaiyouRO^000000";
+	mes "Soy Eeta y me han encargado entrenar a los novatos en el servidor.";
+	next;
+	switch(select(
+				( QuestNovice == 0 )?"^10B2D2 [ > ] ^000000Información del juego":"",
+				( QuestNovice != 0 )?"^10B2D2 [ > ] ^000000Ir a la zona de entrenamiento":""
+				))
+	{
+		case 1:
+			mes .@name$;
+			mes "Pon atención, ya que no volveré a repetir esto una segunda vez";
+			next;
+			mes .@name$;
+			mes "Lo primero, es posible mover cada ventana en tu pantalla, sólo debes mantener presionada el botón de tu mouse y arrastrarlo.";
+			next;
+			mes .@name$;
+			mes "Ahora deja explicarte lo que ves de acuerdo a las posiciones por defecto.";
+			next;
+			mes .@name$;
+			mes "Arriba a la izquierda, puedes ver el nombre de tu personaje y el nivel. Esa es la ^3355FFVentana de información básica.";
+			next;
+			mes .@name$;
+			if (BaseLevel < 8) {
+				mes "Deja darte algunos puntos de experiencia...";
+				mes "Mantén la vista en tu ventana de información básica y observa como cambia tu nivel báse.";
+				next;
+				mes .@name$;
+				mes "Lo viste?";
+				mes "Ganando experiencia ir progresando en el juego.";
+				mes "Una vez que logres el 100%, ganaras un nuevo nivel, y el contador volverá a 0.";
+				set QuestNovice,1;
+				switch (BaseLevel) {
+					case 1: getexp 20,0; break;
+					case 2: getexp 30,0; break;
+					case 3: getexp 50,0; break;
+					case 4: getexp 70,0; break;
+					case 5: getexp 150,0; break;
+					case 6: getexp 220,0; break;
+					case 7: getexp 310,0; break;
+				}
+			}
+			else
+			{
+				mes "Pero...";
+				mes "veo que ya estás acostumbrado a subir de nivel.";
+			}
+			next;
+			mes .@name$;
+			mes "En esta misma ventana observarás dos niveles diferentes uno es de habilidades y el otro de base.";
+			next;
+			mes .@name$;
+			mes "Cuando completes la barra inferior, ganarás un nivel de Job, y un ^3355FFPunto de habilidad^000000. Estos puntos son usados para aprender habilidades para tu personaje.";
+			next;
+			mes .@name$;
+			mes "Al lado derecho verás varios botones, al pulsar estos botones podrás acceder al inventario o a la ventana de Party.";
+			next;
+			mes .@name$;
+			mes "Ahora, la ^3355FFventana de Chat^000000 esta justo en el lado inferior izquierdo de tu pantalla.";
+			next;
+			mes .@name$;
+			mes "En el costado derecho de esta ventana, podrás ver dos botones azules. El botón de la izquierda te permite cambiar las opciones de esta ventana.";
+			next;
+			mes .@name$;
+			mes "La opción '^3355FFSend to All^000000'";
+			mes "te permite enviar un mensaje a todos en tu pantalla.";
+			next;
+			mes .@name$;
+			mes "Las opciones '^3355FFSend to Party^000000' y '^3355FFSend to Guild^000000' te dejan enviar mensajes sólo a los miembros de tu party o guild, aunque te encuentres lejos de ellos.";
+			next;
+			mes .@name$;
+			mes "ahora puedes desplazar la rueda del mouse sobre esta ventana y podrás observar el historial de conversaciones desde que estuvieste activo, espero que no tengas problemas con ningún otro jugador.";
+			next;
+			mes .@name$;
+			mes "Ahora, uno de los más importantes, el ^3355FFMini-Mapa^000000, ubicado arriba a la derecha de tu pantalla.";
+			next;
+			mes .@name$;
+			mes "Los puntos rojos en los mini-mapas significan ^3355FFWarp Portals^000000 que conectan dos diferentes zonas.";
+			next;
+			mes .@name$;
+			mes "Si te unes a una party o guild, el minimapa además te mostrará la ubicación de ellos mientras se encuentren en el mismo mapa.";
+			next;
+			mes .@name$;
+			mes "Bueno, creo que eso es lo básico en cuanto a la interface.";
+			if (JobLevel < 7) {
+				next;
+				mes .@name$;
+				mes "Dejame ayudarte un poco con algunos puntos de experiencia. Abre tu ventana de habilidades y distribuye estos puntos en tu habilidad ^3355FFBasic Skills^000000.";
+				set QuestNovice,2;
+				switch (JobLevel) {
+					case 1: getexp 0,30; break;
+					case 2: getexp 0,70; break;
+					case 3: getexp 0,100; break;
+					case 4: getexp 0,160; break;
+					case 5: getexp 0,300; break;
+					case 6: getexp 0,600; break;
+				}
+			}
+			else {
+				mes "[Kris]";
+				mes "Tu nivel de Job es mucho más alto de lo que esperaba. Creo que ya conoces esta información básica.";
+			};
+			next;
+			mes .@name$;
+			mes "Ahora abre tu ventana de habilidades pulsando '^3355FFAlt^000000' y '^3355FFS^000000' al mismo tiempo. Y distribuye los puntos de habilidad en tu ^3355FFBasic Skills^000000.";
+			next;
+			mes .@name$;
+			mes "Deja enseñarte una habilidad que te servirá mucho. ^3355FFFirst Aid^000000 es una habilidad que te servirá cuando estes en aprietos.";
+			skill "NV_FIRSTAID",1,SKILL_PERM;
+			percentheal -50,0;
+			next;
+			mes .@name$;
+			mes "Intenta usar la habilidad, necesitas apretar doble click sobre el ícono para poder usarla.";
+			next;
+			mes .@name$;
+			mes "Pero cuidado, al usar una habilidad usaras un poco de SP. Esta habilidad es util para los nuevos, debido a que recupera un poco de HP.";
+			next;
+			mes .@name$;
+			mes "Eres un muy buen estudiante. Ten otro poco de experiencia.";
+			set QuestNovice,3;
+			switch (BaseLevel) {
+				case 1: getexp 20,0; break;
+				case 2: getexp 30,0; break;
+				case 3: getexp 50,0; break;
+				case 4: getexp 70,0; break;
+				case 5: getexp 150,0; break;
+				case 6: getexp 220,0; break;
+				case 7: getexp 310,0; break;
+			}
+			next;
+			mes .@name$;
+			mes "Ahora veamos la ventana de objetos. Para abrirla debes pulsar al mismo instante las teclas '^3355FFAlt^000000' y '^3355FFE^000000'.";
+			next;
+			mes .@name$;
+			mes "Aquí podras observar 4 etiquetas ^3355FFuse^000000, ^3355FFeqp^000000, ^3355FFetc^000000 y  ^3355FFfav^000000. En ^4A708Buse^000000 se encuentran los consumibles.";
+			next;
+			mes .@name$;
+			mes "Ahora haz click en la ventana de ^4A708Buse^000000, te daré una Novice Potion. Para que puedas beberla. Anda intentalo!";
+			getitem 569,1; //Novice_Potion
+			percentheal -50,0;
+			next;
+			mes .@name$;
+			set QuestNovice,4;
+			if (countitem(569) < 1) {
+				if (BaseLevel < 8) {
+					mes "Bien~!";
+					mes "y aquí";
+					mes "pequeña recompensa";
+					mes "Sólo por seguir las indicaciones.";
+					set nov_get_item04,11;
+					switch (BaseLevel) {
+						case 1: getexp 10,0; break;
+						case 2: getexp 17,0; break;
+						case 3: getexp 26,0; break;
+						case 4: getexp 37,0; break;
+						case 5: getexp 78,0; break;
+						case 6: getexp 115,0; break;
+						case 7: getexp 155,0; break;
+					}
+				}
+				else {
+					mes "Buen trabajo!.";
+				}
+			}
+			else {
+				mes "Um...";
+				mes "bueno, la puedes beber";
+				mes "luego supongo.";
+			}
+			next;
+			mes .@name$;
+			mes "Deja explicarte";
+			mes "sobre la etiqueta de ^4A708Beqp^000000";
+			mes "en la ventana de inventario.";
+			next;
+			mes .@name$;
+			mes "Cuando le haces click a la pestaña de ^4A708Beqp^000000, puedes ver todos los objetos que puedes equiparte. Deja darte algunas cosas para que lo intentes.";
+			next;
+			mes .@name$;
+			mes "Veo que eres de esta talla.";
+			mes "Ahora haz doble click en";
+			mes "los Novice Slippers";
+			mes "Acabo de darte unos inténtalo.";
+			getitem 2510,1; //Novice_Hood
+			getitem 2414,1; //Novice_Boots
+			next;
+			mes .@name$;
+			set QuestNovice,5;
+			if (isequipped(2414)) {
+				if (BaseLevel < 8) {
+					mes "Sorpresa~!";
+					mes "Lo lograste!";
+					mes "Mereces una recompensa!";
+					switch (BaseLevel) {
+						case 1: getexp 10,0; break;
+						case 2: getexp 17,0; break;
+						case 3: getexp 26,0; break;
+						case 4: getexp 37,0; break;
+						case 5: getexp 78,0; break;
+						case 6: getexp 115,0; break;
+						case 7: getexp 155,0; break;
+					}
+				}
+				else {
+					mes "Buen trabajo!.";
+				}
+			}
+			else {
+				mes "Er...";
+				mes "sólo tenias que hacer";
+				mes "double-click";
+				mes "para equiparlo.";
+				mes "Bueno sólo";
+				mes "recuerdalo, okay?";
+			}
+			next;
+			mes .@name$;
+			mes "Bueno creo que ya estás listo para ir a la ^00ff00zona de entrenamiento^000000, recorre lo último y me avisas.";
+			close2;
+			getitem 569,100; //Novice_Potion
+			getitem 1243,1; //Novice_Knife
+			getitem 2352,1; //Novice_Plate
+			getitem 2112,1; //Novice_Guard
+			getitem 601,20; //Wing_Of_Fly
+			getitem 7059,10; //Free Ticket for Kafra Storage
+			getitem 7060,10; //Free Ticket for Kafra Transportation
+			getitem 611,20;
+			end;
+			
+		case 2:
+			mes .@name$;
+			mes "Cierra esta ventana para ir.";
+			close2;
+			if(countitem(12324) == 0)
+				getitem 12324,1;
+			if(countitem(569) == 0)
+				getitem 569,100;
+			warp "startermap2",102,24;
+			sleep2 3000;
+			message strcharinfo(0), "[Novice] Recuerda que tienes una "+ getitemname(12324) + " para que puedas volver.";
+			end;
+			
+	}
+	end;
+OnPCLoadMapEvent:
+	showevent QTYPE_QUEST,0; // Show the icon to Novice
+	end;
+
+}
+
+
+startermap,34,56,5	script	Elena#Starter	10400,{
+	set .@name$,"[^400040Elena^000000]";
+	mes .@name$;
+	set @Sexo$,"Bienvenido";
+	if(Sex==0) set @Sexo$,"Bienvenida";
+	mes @Sexo$ + " a ^ff0000KaiyouRO^000000";
+	mes "Soy Elena encargada de darte la bienvenida y darte algunas recomendaciones y recompensas.";
+	next;
+	switch(select(
+				( getd("$starterpack" + get_unique_id() + "") == 0 && #FirstWeek == 0 )?"^10B2D2 [ > ] ^000000Pedir Pack Inicio":"",
+				//( #FirstWeek == 0 )?"^10B2D2 [ > ] ^000000Pedir Pack Inicio":"",
+				( JobItem == 0 )?"^10B2D2 [ > ] ^000000Test de JOB":"",					
+				"Información del servidor"
+				))
+	{
+		case 1:
+			mes .@name$;
+			mes "Te recomiendo leer todas las instrucciones, esto te lo diré ^FF0000solo 1 vez^000000, por lo que te recomiendo poner atención.";
+			next;
+			mes .@name$;
+			mes "KaiyouRO fue creado para satisfacer la necesidad de todos los usuarios que buscaban un ^0000A0servidor transparente^000000, ^004000sin servicios exclusivos para los donadores^000000 y ^008000sin lag^000000.";
+			next;
+			mes .@name$;
+			mes "Ofrecemos diversos sistemas y eventos:";
+			mes "1)^008040Sistema de Cocina, Pesca y Minería.^000000.";
+			mes "2)^800080Eventos automáticos^000000";
+			mes "3)^008040Sistema de seguridad Gepard 3.0^000000.";
+			mes "4)^0080FFInstancias nuevas^000000.";
+			next;
+			mes .@name$;
+			mes "Otra forma de diversión son los diversos sistemas implementados como los de:";
+			mes "i)Hunting Mision: Sistema de cazeria de Mob normales.";
+			mes "ii)Mineria: Todo lo necesario para refinar tu equipamiento.";
+			mes "iii)Battleground: Sistemas que se acomodan a la experiencia del usuario.";
+			mes "iv) Ranking MvP: Gana premios por tus acciones.";
+			next;
+	FAIL1:
+			mes .@name$;
+			mes "Además de algunos otros como el Race of the Day o raza del día, ^ff0000ROTD^000000, que está diseñado para ir ganando experiencia en diferentes zonas, con diferentes quest dependiendo de tu nivel.";
+			next;
+			mes .@name$;
+			mes "Todo esto lo puedes solicitar en la ciudad principal de ^ff0000Prontera^000000.";
+			mes "¿Cuál es la sigla del sistema Race of The Day?";
+			next;
+			input .@var$;
+			if( .@var$ == "rotd" || .@var$ == "Rotd" || .@var$ == "ROTD")
+			{
+				mes .@name$;
+				mes "Muy bien!";
+				getexp 37,0;
+				next;
+			}
+			else
+			{
+				mes .@name$;
+				mes "Si deseas recibir las recompensas debes responder a las preguntas que se vayan haciendo.";
+				next;
+				//goto FAIL1;
+			}
+			mes .@name$;
+			mes "Los MvP dentro de KaiyouRO se encuentran divididos en tres categorias.";
+			mes "Los de bajo nivel: Estos te otorgarán entre 1 y 10 puntos";
+			mes "Ejemplo Doppelganger, Hatii o Maya.";
+			next;
+			mes .@name$;
+			mes "Lo de nivel medio: Estos te otorgarán entre 5 y 15 puntos.";
+			mes "Ejemplo Detardeurus, Kiel D-01 o Vesper.";
+			next;
+			mes .@name$;
+			mes "Y por último los de nivel alto: Estos te otorgarán entre 10 y 20 puntos.";
+			mes "Ejemplo Fallen Bishop Hibram, Lord Knight o Wounded Morroc.";
+			next;
+			mes .@name$;
+			mes "Estos puntos les servirán para ir avanzando en el Ranking.";
+			next;
+	FAIL2:
+			mes .@name$;
+			mes "Todos los días en KaiyouRO hay eventos automáticos, estos inician a las 8:05 y finalizan a las 03:05.";
+			next;
+			mes .@name$;
+			mes "Las monedas que te otorgan estos eventos se pueden usar en la ^004080Ruleta^000000 en la esquina superior derecha.";
+			mes "Entonces, ¿donde conseguirás estas monedas?";
+			next;
+			input .@var$;
+			if( .@var$ == "Eventos" || .@var$ == "eventos"|| .@var$ == "automáticos" || .@var$ == "ruleta")
+			{
+				mes .@name$;
+				mes "Muy bien!";
+				getexp 37,0;
+				next;
+			}
+			else
+			{
+				mes .@name$;
+				mes "Si deseas recibir las recompensas debes responder a las preguntas que se vayan haciendo.";
+				next;
+				//goto FAIL2;
+			}
+			mes .@name$;
+			mes "Contamos actualmente con diversas experiencias dentro del Battleground como son:";
+			mes "- Stone Control";
+			mes "- Team Deathmatch";
+			mes "- Capture the Flag";
+			mes "- Rush";
+			mes "- Conquest";
+			mes "- Eye of Storm";
+			mes "- War of Element";
+			mes .@name$;
+			mes "Todos ellos puedes acceder desde la interface de battleground.";
+			next;
+			mes .@name$;
+			mes "El cash point dentro del servidor es accesible por diferentes medios, como por ejemplo cazando MvP, realizando misiones de cacería o donando, pero el principal es por medio de Battleground.";
+			next;
+			mes .@name$;
+			mes "Para realizar un donativo debes realizar un depósito en la cuenta indicada en la página web.";
+			mes "Y seguir las instrucciones que ahí mismo se explican, si tienes dudas acude a algún GM.";
+			next;
+			mes .@name$;
+			mes "En la misma casa donde refinas y sacas las cartas se encuentra ^008040Issan^000000.";
+			mes "^008040Issan^000000 te dará misiones todos los días, que te darán zenny, puntos de misión, medallas y cash point!";
+			next;
+			mes .@name$;
+			mes "En esta misma habitación podrás cambiar tus puntos y medallas por valiosos objetos.";
+			mes "Y por si no fuera poco, si te encuentras en el primer lugar de puntos, adquiriras Cash Point extra todos los días, mientras mantengas el primer lugar!";
+			next;
+			mes .@name$;
+			mes "Para evitar errores es importante tener una buena comunicación con los GM, si necesitas ayuda no dudes en pedirla, pero siempre con el respeto que merece toda persona."; 
+			next;
+			mes .@name$;
+			mes "En KaiyouRO la idea es pasar un rato agradable y toda persona que no ayude con esta meta será penalizada según corresponda, no te arriesgues a sanciones innecesarias.";
+			next;
+	FAIL3:
+			mes .@name$;
+			mes "Finalmente si tienes algún problema dentro o relacionado al juego, el principal medio de contacto con el Staff es el discord del servidor, por lo que recomendamos unirte y estar constantemente revisándolo.";
+			next;
+			mes .@name$;
+			mes "Por este medio se publicarán los eventos y toda la información relacionada con el servidor.";
+			mes "Entonces, ¿Cuál es el principal medio de comunicación con el staff?";
+			next;
+			input .@var$;
+			if( .@var$ == "Dc" || .@var$ == "dc" || .@var$ == "discord" || .@var$ == "Discord")
+			{
+				mes .@name$;
+				mes "Muy bien! Con esto ya te podemos dar la bienvenida oficial al servidor!";
+				getexp 37,0;
+			}
+			else
+			{
+				mes .@name$;
+				mes "Si deseas recibir las recompensas debes responder a las preguntas que se vayan haciendo.";
+				next;
+				//goto FAIL3;
+				close;
+			}
+			close2;
+			getitem 7803,2;		//2 Libros exp
+			getitem 41001,1;	//3 dias premium 
+			getitem 65107,1;	//1 Costume
+			set #FirstWeek,1;
+			setd "$starterpack" + get_unique_id() + "",1;
+			end;
+		case 2:
+			mes .@name$;
+			mes "^A62A2A" + strcharinfo(0) + "^000000.";
+			mes "Para poder definir cual job se adecúa a tu personalidad, debes responder una breve encuesta,";
+			mes "pero no es una encuesta obligatoria.";
+			next;
+			mes .@name$;
+			mes "Sin embargo, existen algunos beneficios";
+			mes "al tomar este test. Cuando lo respondas, podrás recibir algunas recompensas.";
+			next;
+			mes .@name$;
+			mes "Ahora...";
+			mes "Qué te gustaría hacer?";
+			next;
+			mes .@name$;
+			mes "Deseas empezar directamente en el juego, o tomar el test?";
+			next;
+			switch(select("Tomaré el test:No gracias, iré por mi cuenta."))
+			{
+			case 1:
+				mes .@name$;
+				mes "Excelente elección!";
+				next;
+				mes .@name$;
+				mes "Muy bien, déjame comenzar la prueba de personalidad, por favor relájate";
+				mes "y tómatelo con calma.";
+				next;
+				mes .@name$;
+				mes "Recuerda, este test es sólo para revisar tu personalidad, por lo que no hay respuestas correctas o incorrectas. Ahora! Empecemos el test!";
+				next;
+				mes .@name$;
+				mes "Elija la palabra que mejor";
+				mes "se adapte a usted de";
+				mes "entre las siguientes.";
+				next;
+				switch(select("Estudiar:Ejercicio:Servicio público:Violencia")) {
+				case 1:
+					set .@magician_p,.@magician_p+1;
+					break;
+				case 2:
+					set .@thief_p,.@thief_p+1;
+					set .@swordman_p,.@swordman_p+1;
+					break;
+				case 3:
+					set .@acolyte_p,.@acolyte_p+1;
+					break;
+				case 4:
+					set .@thief_p,.@thief_p+1;
+					break;
+				}
+				switch(select("Cambiante:Conservador")) {
+				case 1:
+					set .@magician_p,.@magician_p+1;
+					break;
+				case 2:
+					set .@acolyte_p,.@acolyte_p+1;
+					break;
+				}
+				switch(select("Consumista:Vendedor:Productor")) {
+				case 1:
+					set .@swordman_p,.@swordman_p+1;
+					set .@thief_p,.@thief_p+1;
+					set .@acolyte_p,.@acolyte_p+1;
+					break;
+				case 2:
+					set .@merchant_p,.@merchant_p+1;
+					break;
+				case 3:
+					set .@magician_p,.@magician_p+1;
+					break;
+				}
+				switch(select("Celebridad:Prudencia")) {
+				case 1:
+					set .@thief_p,.@thief_p+1;
+					break;
+				case 2:
+					set .@archer_p,.@archer_p+1;
+					break;
+				}
+				switch(select("Teorías:Experiencia")) {
+				case 1:
+					set .@magician_p,.@magician_p+1;
+					break;
+				case 2:
+					set .@swordman_p,.@swordman_p+1;
+					break;
+				}
+				switch(select("El pasado:Realidad:El futuro")) {
+				case 1:
+					set .@archer_p,.@archer_p+1;
+					break;
+				case 2:
+					set .@merchant_p,.@merchant_p+1;
+					set .@thief_p,.@thief_p+1;
+					break;
+				case 3:
+					set .@magician_p,.@magician_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Por favor responde";
+				mes "'Si' o 'No' a";
+				mes "las siguientes preguntas";
+				next;
+				mes .@name$;
+				mes "Preferiría morir";
+				mes "que vivir sumisamente.";
+				next;
+				switch(select("Si.:No.")) {
+				case 1:
+					set .@swordman_p,.@swordman_p+1;
+					break;
+				case 2:
+					set .@thief_p,.@thief_p+1;
+					set .@merchant_p,.@merchant_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "A menudo te molesta ver";
+				mes "a alguien mejor que tú";
+				next;
+				switch(select("Si.:No.")) {
+				case 1:
+					set .@merchant_p,.@merchant_p+1;
+					break;
+				case 2:
+					set .@acolyte_p,.@acolyte_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "No te importa";
+				mes "explorar lugares que sean";
+				mes "peligrosos.";
+				next;
+				switch(select("Si.:No.")) {
+				case 1:
+					set .@swordman_p,.@swordman_p+1;
+					break;
+				case 2:
+					set .@magician_p,.@magician_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Eres del tipo de";
+				mes "persona que";
+				mes "lidera los grupos.";
+				next;
+				switch(select("Si.:No.")) {
+				case 1:
+					set .@swordman_p,.@swordman_p+1;
+					break;
+				case 2:
+					set .@archer_p,.@archer_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Mientras exploras";
+				mes "una dungeon, tu corres";
+				mes "a un callejón sin salida.";
+				next;
+				mes .@name$;
+				mes "Sin embargo, hay un letrero que dice 'no empujar' junto a una piedra que se parece extrañamente a un botón en la pared a tu lado.";
+				next;
+				mes .@name$;
+				mes "Cedes a la necesidad";
+				mes "de presionar";
+				mes "este botón?";
+				next;
+				switch(select("Si.:No.")) {
+				case 1:
+					set .@thief_p,.@thief_p+1;
+					break;
+				case 2:
+					set .@swordman_p,.@swordman_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "A menudos ves";
+				mes "cosas que no existen.";
+				next;
+				switch(select("Si.:No.")) {
+				case 1:
+					set .@acolyte_p,.@acolyte_p+1;
+					break;
+				case 2:
+					set .@magician_p,.@magician_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Si te caes por un";
+				mes "acantilado, te sentirás";
+				mes "como si estuvieras volando.";
+				next;
+				switch(select("Si.:No.")) {
+				case 1:
+					set .@acolyte_p,.@acolyte_p+1;
+					break;
+				case 2:
+					set .@magician_p,.@magician_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "El dinero habla.";
+				next;
+				switch(select("Si.:No.")) {
+				case 1:
+					set .@merchant_p,.@merchant_p+1;
+					break;
+				case 2:
+					set .@archer_p,.@archer_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Ahora, déjeme darle algunas preguntas diferentes. Por favor, relájese y tómelo con calma, y elija la respuesta que más le parezca.";
+				next;
+				mes .@name$;
+				mes "Mientras revisas";
+				mes "tu apretada agenda....";
+				next;
+				switch(select("Te sientes como un robot.:Estas orgulloso y satisfecho.:Agenda? Cual agenda?")) {
+				case 1:
+					set .@swordman_p,.@swordman_p+1;
+					set .@thief_p,.@thief_p+1;
+					break;
+				case 2:
+					set .@acolyte_p,.@acolyte_p+1;
+					set .@magician_p,.@magician_p+1;
+					break;
+				case 3:
+					set .@archer_p,.@archer_p+1;
+					set .@merchant_p,.@merchant_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Cuando vas de compras,";
+				mes "encuentras un artículo realmente interesante en una tienda, debatiendo si comprarlo o no.";
+				mes "Antes de realizar la compra, lo primero que";
+				mes "tu haces es...";
+				next;
+				switch(select("Considerar si lo necesitas.:Revisar el precio.:No lo pienso dos veces, y lo compro!")) {
+				case 1:
+					set .@archer_p,.@archer_p+1;
+					break;
+				case 2:
+					set .@merchant_p,.@merchant_p+1;
+					break;
+				case 3:
+					set .@thief_p,.@thief_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Rellena el vació:";
+				mes "A mí ^3355FF_____^000000";
+				mes "competir con otros...";
+				next;
+				switch(select("no me molesta...:no me gusta...:no me interesa...")) {
+				case 1:
+					set .@merchant_p,.@merchant_p+1;
+					break;
+				case 2:
+					set .@thief_p,.@thief_p+1;
+					break;
+				case 3:
+					set .@acolyte_p,.@acolyte_p+1;
+					set .@swordman_p,.@swordman_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Eres responsable de una tarea que requiere que cooperes con muchas personas. Si lo maneja solo, requerirá mucho esfuerzo y tiempo.";
+				next;
+				mes .@name$;
+				mes "Pero si coopera con los demás, será una tarea sencilla y agradable. Lo harías... ";
+				next;
+				switch(select("Manejo yo mismo, incluso si es difícil.:Pide ayuda a tus amigos.")) {
+				case 1:
+					set .@magician_p,.@magician_p+1;
+					break;
+				case 2:
+					set .@merchant_p,.@merchant_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Vas caminando por la calle";
+				mes "cuando encuentras a una mujer";
+				mes "que se desmayó.";
+				mes "Qué es lo que harías?";
+				next;
+				switch(select("La llevo a un hospital.:Evalúo la situación antes de actuar.:Sólo la ignoro.")) {
+				case 1:
+					set .@acolyte_p,.@acolyte_p+1;
+					break;
+				case 2:
+					set .@swordman_p,.@swordman_p+1;
+					set .@archer_p,.@archer_p+1;
+					break;
+				case 3:
+					set .@magician_p,.@magician_p+1;
+					set .@thief_p,.@thief_p+1;
+					set .@merchant_p,.@merchant_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Le sucede que te";
+				mes "encuentras 'ropa.'";
+				mes "Que es lo que harías?";
+				next;
+				switch(select("Revisar la marca.:Me pregunto quien lo perdió.:Busco algun guardia!:Lo dejo donde estaba.")) {
+				case 1:
+					set .@merchant_p,.@merchant_p+1;
+					break;
+				case 2:
+					set .@acolyte_p,.@acolyte_p+1;
+					break;
+				case 3:
+					set .@merchant_p,.@merchant_p+1;
+					set .@thief_p,.@thief_p+1;
+					break;
+				case 4:
+					set .@magician_p,.@magician_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Por accidente, te metes en una conversación que no deseabas. ¿Cómo afrontas esta situación?";
+				next;
+				switch(select("Pretendes que es una broma.:Cambias el tema.:Lo analisas como corresponde.:Te disculpas.")) {
+				case 1:
+					set .@thief_p,.@thief_p+1;
+					break;
+				case 2:
+					set .@swordman_p,.@swordman_p+1;
+					break;
+				case 3:
+					set .@magician_p,.@magician_p+1;
+					break;
+				case 4:
+					set .@acolyte_p,.@acolyte_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Estás de viaje con tu amada. Tu pareja te pide que compres un recuerdo que no es particularmente bueno. ¿Qué haces?";
+				next;
+				switch(select("Compras el objeto para él/ella.:Le dices que no.:Le prometes que la próxima vez")) {
+				case 1:
+					set .@swordman_p,.@swordman_p+1;
+					break;
+				case 2:
+					set .@merchant_p,.@merchant_p+1;
+					break;
+				case 3:
+					set .@thief_p,.@thief_p+1;
+					break;
+				}
+				mes .@name$;
+				mes "Okay~! Eso es todo. Has terminado el test de personalidad. Felicitaciones!";
+				next;
+				mes .@name$;
+				mes "Ahora, te recomendaré un JOB que sea adecuado a tu personalidad. Por favor, espera un momento.";
+				next;
+				mes .@name$;
+				mes "...";
+				next;
+				mes .@name$;
+				mes "...";
+				mes "......";
+				next;
+				mes .@name$;
+				mes "Aquí está";
+				mes "el resultado final";
+				mes "de tu examen.";
+				next;
+				if (.@swordman_p > .@magician_p) {
+					if (.@swordman_p > .@merchant_p) {
+						if (.@swordman_p > .@thief_p) {
+							if (.@swordman_p > .@archer_p) {
+								if (.@swordman_p > .@acolyte_p) {
+									set .@job_c,1;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+							else {
+								if (.@archer_p > .@acolyte_p) {
+									set .@job_c,5;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+						}
+						else {
+							if (.@thief_p > .@archer_p) {
+								if (.@thief_p > .@acolyte_p) {
+									set .@job_c,4;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+							else {
+								if (.@archer_p > .@acolyte_p) {
+									set .@job_c,5;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+						}
+					}
+					else {
+						if (.@merchant_p > .@thief_p) {
+							if (.@merchant_p > .@archer_p) {
+								if (.@merchant_p > .@acolyte_p) {
+									set .@job_c,3;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+							else {
+								if (.@archer_p > .@acolyte_p) {
+									set .@job_c,5;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+						}
+						else {
+							if (.@thief_p > .@archer_p) {
+								if (.@thief_p > .@acolyte_p) {
+									set .@job_c,4;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+							else {
+								if (.@archer_p > .@acolyte_p) {
+									set .@job_c,5;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+						}
+					}
+				}
+				else {
+					if (.@magician_p > .@merchant_p) {
+						if (.@magician_p > .@thief_p) {
+							if (.@magician_p > .@archer_p) {
+								if (.@magician_p > .@acolyte_p) {
+									set .@job_c,2;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+							else {
+								if (.@archer_p > .@acolyte_p) {
+									set .@job_c,5;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+						}
+						else {
+							if (.@thief_p > .@archer_p) {
+								if (.@thief_p > .@acolyte_p) {
+									set .@job_c,4;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+							else {
+								if (.@archer_p > .@acolyte_p) {
+									set .@job_c,5;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+						}
+					}
+					else {
+						if (.@merchant_p > .@thief_p) {
+							if (.@merchant_p > .@archer_p) {
+								if (.@merchant_p > .@acolyte_p) {
+									set .@job_c,3;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+							else {
+								if (.@archer_p > .@acolyte_p) {
+									set .@job_c,5;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+						}
+						else {
+							if (.@thief_p > .@archer_p) {
+								if (.@thief_p > .@acolyte_p) {
+									set .@job_c,4;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+							else {
+								if (.@archer_p > .@acolyte_p) {
+									set .@job_c,5;
+								}
+								else {
+									set .@job_c,6;
+								}
+							}
+						}
+					}
+				}
+				if (.@job_c == 1) {
+					mes .@name$;
+					mes "Aunque eres muy sencillo y de mente simple, tienes una voluntad";
+					mes "fuerte y quieres ser una persona importante para este mundo.";
+					next;
+					mes .@name$;
+					mes "Tu estas siempre";
+					mes "tratando de proteger a los débiles.";
+					next;
+					mes .@name$;
+					mes "Para tí, que tienes tu propia voluntad, ^696969Swordman^000000 es tu JOB más adecuado.";
+					next;
+					mes .@name$;
+					mes "Te gustaría aceptar nuestra recomendación, o te gustaría hacer tu propia elección?";
+					next;
+					switch(select("Swordman!:Mi propia elección!")) {
+					case 1:
+						mes .@name$;
+						mes "Es una gran decisión!";
+						next;
+						mes "^660000Lista de recompensas^000000";
+						mes "^0000331 Swordman Figure^000000";
+						mes "^0000331 Hat especial^000000";
+						next;
+						rentitem 2766,604800;
+						switch(rand(1,4))
+						{
+							case 1:
+								rentitem 18929,1209600;	//Hat ID experiencia
+								break;
+							case 2:
+								rentitem 18930,1209600;	//Hat ID experiencia
+								break;
+							case 3:
+								rentitem 18931,1209600;	//Hat ID experiencia
+								break;
+							case 4:
+								rentitem 18932,1209600;	//Hat ID experiencia
+								break;
+						}
+						set JobItem,1;
+						mes .@name$;
+						mes "Verifique su inventario para ver si ha recibido todos los suministros.";
+						next;
+						mes .@name$;
+						mes "Buena suerte,";
+						mes "^A62A2A" + strcharinfo(0) + "^000000";
+						mes "nos estamos viendo.";
+						close2;
+						end;
+					case 2:
+						callsub S_UserJobchoice,"Swordsman";
+						end;
+					}
+				}
+				else if (.@job_c == 2) {
+					mes .@name$;
+					mes "Disfrutas analizando las cosas que te rodean y eres muy independiente. Ha utilizado un juicio perspicaz y puede ser muy tímido y lógico.";
+					next;
+					mes .@name$;
+					mes "Para ti, el intelectual observador, ^696969Mage^000000 es el JOB ideal.";
+					next;
+					mes .@name$;
+					mes "Te gustaría aceptar nuestra recomendación, o te gustaría hacer tu propia elección?";
+					next;
+					switch(select("Mage!:Mi propia elección!")) {
+					case 1:
+						mes .@name$;
+						mes "Es una gran decisión!";
+						next;
+						mes "^660000Lista de recompensas^000000";
+						mes "^0000331 Mage Figure^000000";
+						mes "^0000331 Hat especial^000000";
+						next;
+						rentitem 2768,604800;
+						switch(rand(1,4))
+						{
+							case 1:
+								rentitem 18929,1209600;	//Hat ID experiencia
+								break;
+							case 2:
+								rentitem 18930,1209600;	//Hat ID experiencia
+								break;
+							case 3:
+								rentitem 18931,1209600;	//Hat ID experiencia
+								break;
+							case 4:
+								rentitem 18932,1209600;	//Hat ID experiencia
+								break;
+						}
+						set JobItem,1;
+						mes .@name$;
+						mes "Verifique su inventario para ver si ha recibido todos los suministros.";
+						next;
+						mes .@name$;
+						mes "Buena suerte,";
+						mes "^A62A2A" + strcharinfo(0) + "^000000";
+						mes "nos estamos viendo.";
+						close2;
+						end;
+					case 2:
+						callsub S_UserJobchoice,"Mage";
+						end;
+					}
+				}
+				else if (.@job_c == 3) {
+					mes .@name$;
+					mes "Eres muy voluntarioso y muy bien organizado. Ya te has fijado una meta en la vida y te has vuelto muy responsable de tus acciones.";
+					next;
+					mes .@name$;
+					mes "Por tu impulso y deseo de triunfar, ^696969Merchant^000000 es el JOB ideal.";
+					next;
+					mes .@name$;
+					mes "Te gustaría aceptar nuestra recomendación, o te gustaría hacer tu propia elección?";
+					next;
+					switch(select("Merchant!:Mi propia elección!")) {
+					case 1:
+						mes .@name$;
+						mes "Es una gran decisión!";
+						next;
+						mes "^660000Lista de recompensas^000000";
+						mes "^0000331 Merchant Figure^000000";
+						mes "^0000331 Hat especial^000000";
+						next;
+						rentitem 2771,604800;
+						switch(rand(1,4))
+						{
+							case 1:
+								rentitem 18929,1209600;	//Hat ID experiencia
+								break;
+							case 2:
+								rentitem 18930,1209600;	//Hat ID experiencia
+								break;
+							case 3:
+								rentitem 18931,1209600;	//Hat ID experiencia
+								break;
+							case 4:
+								rentitem 18932,1209600;	//Hat ID experiencia
+								break;
+						}
+						set JobItem,1;
+						mes .@name$;
+						mes "Verifique su inventario para ver si ha recibido todos los suministros.";
+						next;
+						mes .@name$;
+						mes "Buena suerte,";
+						mes "^A62A2A" + strcharinfo(0) + "^000000";
+						mes "nos estamos viendo.";
+						close2;
+						end;
+					case 2:
+						callsub S_UserJobchoice,"Merchant";
+						end;
+					}
+				}
+				else if (.@job_c == 4) {
+					mes .@name$;
+					mes "Carpe diem:";
+					mes "Aprovecha el día.";
+					mes "Asi es como vives.";
+					next;
+					mes .@name$;
+					mes "De tu curiosidad natural";
+					mes "viene una sensación de aventura despreocupada y un deseo de explorar.";
+					next;
+					mes .@name$;
+					mes "Para alguien como tu,";
+					mes "^696969Thief^000000 es el JOB ideal.";
+					next;
+					mes .@name$;
+					mes "Te gustaría aceptar nuestra recomendación, o te gustaría hacer tu propia elección?";
+					next;
+					switch(select("Thief!:Mi propia elección!")) {
+					case 1:
+						mes .@name$;
+						mes "Es una gran decisión!";
+						next;
+						mes "^660000Lista de recompensas^000000";
+						mes "^0000331 Thief Figure^000000";
+						mes "^0000331 Hat especial^000000";
+						next;
+						rentitem 2770,604800;
+						switch(rand(1,4))
+						{
+							case 1:
+								rentitem 18929,1209600;	//Hat ID experiencia
+								break;
+							case 2:
+								rentitem 18930,1209600;	//Hat ID experiencia
+								break;
+							case 3:
+								rentitem 18931,1209600;	//Hat ID experiencia
+								break;
+							case 4:
+								rentitem 18932,1209600;	//Hat ID experiencia
+								break;
+						}
+						set JobItem,1;
+						mes .@name$;
+						mes "Verifique su inventario para ver si ha recibido todos los suministros.";
+						next;
+						mes .@name$;
+						mes "Buena suerte,";
+						mes "^A62A2A" + strcharinfo(0) + "^000000";
+						mes "nos estamos viendo.";
+						close2;
+						end;
+					case 2:
+						callsub S_UserJobchoice,"Thief";
+						end;
+					}
+				}
+				else if (.@job_c == 5) {
+					mes .@name$;
+					mes "Siempre intentas comprender a otras personas, aunque sean extrañas. Esperas que otros traten de entenderte.";
+					next;
+					mes .@name$;
+					mes "Te niegas a ser una persona común mientras persigues tu sueño. Como persona sensible a la naturaleza, ^696969Archer^000000 es el JOB ideal.";
+					next;
+					mes .@name$;
+					mes "Te gustaría aceptar nuestra recomendación, o te gustaría hacer tu propia elección?";
+					next;
+					switch(select("Archer!:Mi propia elección!")) {
+					case 1:
+						mes .@name$;
+						mes "Es una gran decisión!";
+						next;
+						mes "^660000Lista de recompensas^000000";
+						mes "^0000331 Archer Figure^000000";
+						mes "^0000331 Hat especial^000000";
+						next;
+						rentitem 2769,604800;
+						switch(rand(1,4))
+						{
+							case 1:
+								rentitem 18929,1209600;	//Hat ID experiencia
+								break;
+							case 2:
+								rentitem 18930,1209600;	//Hat ID experiencia
+								break;
+							case 3:
+								rentitem 18931,1209600;	//Hat ID experiencia
+								break;
+							case 4:
+								rentitem 18932,1209600;	//Hat ID experiencia
+								break;
+						}
+						set JobItem,1;
+						mes .@name$;
+						mes "Verifique su inventario para ver si ha recibido todos los suministros.";
+						next;
+						mes .@name$;
+						mes "Buena suerte,";
+						mes "^A62A2A" + strcharinfo(0) + "^000000";
+						mes "nos estamos viendo.";
+						close2;
+						end;
+					case 2:
+						callsub S_UserJobchoice,"Archer";
+						end;
+					}
+				}
+				else if (.@job_c == 6) {
+					mes .@name$;
+					mes "Eres muy amable y considerado, y estás dispuesto a sacrificar tu bienestar por el de los demás.";
+					next;
+					mes .@name$;
+					mes "Siempre estás ansioso por ayudar a los demás, por eso te agradan tanto.";
+					next;
+					mes .@name$;
+					mes "Para ti que eres amable, ^696969Acolyte^000000 es el JOB ideal.";
+					next;
+					mes .@name$;
+					mes "Te gustaría aceptar nuestra recomendación, o te gustaría hacer tu propia elección?";
+					next;
+					switch(select("Acolyte!:Mi propia elección!")) {
+					case 1:
+						mes .@name$;
+						mes "Es una gran decisión!";
+						next;
+						mes "^660000Lista de recompensas^000000";
+						mes "^0000331 Acolyte Figure^000000";
+						mes "^0000331 Hat especial^000000";
+						next;
+						rentitem 2767,604800;
+						switch(rand(1,4))
+						{
+							case 1:
+								rentitem 18929,1209600;	//Hat ID experiencia
+								break;
+							case 2:
+								rentitem 18930,1209600;	//Hat ID experiencia
+								break;
+							case 3:
+								rentitem 18931,1209600;	//Hat ID experiencia
+								break;
+							case 4:
+								rentitem 18932,1209600;	//Hat ID experiencia
+								break;
+						}
+						set JobItem,1;
+						mes .@name$;
+						mes "Verifique su inventario para ver si ha recibido todos los suministros.";
+						next;
+						mes .@name$;
+						mes "Buena suerte,";
+						mes "^A62A2A" + strcharinfo(0) + "^000000";
+						mes "nos estamos viendo.";
+						close2;
+						end;
+					case 2:
+						callsub S_UserJobchoice,"Acolyte";
+						end;
+					}
+				}
+			case 2:
+				mes .@name$;
+				mes "Lo entiendo.";
+				mes "Pero te aviso que cuando salgas de esta habitación no podrás volver.";
+				close2;
+				end;
+			}
+		case 3:
+			mes .@name$;
+			mes "Información";
+			close2;
+			end;
+	}
+
+S_UserJobchoice:
+	mes .@name$;
+	mes "Ya veo, es tu elección.";
+	mes "No es obligación elegir el job recomendado. Por favor, elige el job que desees.";
+	next;
+	select( "Swordsman:Mage:Merchant:Thief:Archer:Acolyte" );
+	// @menu is already set by Core.
+	setarray .@Jobs$[1],"Swordsman","Mage","Merchant","Thief","Archer","Acolyte";
+
+	next;
+	mes .@name$;
+	mes "Dejame ofrecerte";
+	mes "algunos objetos.";
+	next;
+	mes "^660000Lista de recompensas^000000";
+	mes "^0000331 Figure^000000";
+	mes "^0000331 Hat especial^000000";
+	next;
+	//-------------------------------------
+	if(@menu == 1) {
+		rentitem 2766,604800;
+	}
+	else if (@menu == 2) {
+		rentitem 2768,604800;
+	}
+	else if (@menu == 3) {
+		rentitem 2771,604800;
+	}
+	else if (@menu == 4) {
+		rentitem 2770,604800;
+	}
+	else if (@menu == 5) {
+		rentitem 2769,604800;
+	}
+	else {
+		rentitem 2767,604800;
+	}
+	switch(rand(1,4))
+	{
+		case 1:
+			rentitem 18929,1209600;	//Hat ID experiencia
+			break;
+		case 2:
+			rentitem 18930,1209600;	//Hat ID experiencia
+			break;
+		case 3:
+			rentitem 18931,1209600;	//Hat ID experiencia
+			break;
+		case 4:
+			rentitem 18932,1209600;	//Hat ID experiencia
+			break;
+	}
+	set JobItem,1;
+	//-------------------------------------
+	mes .@name$;
+	mes "Verifique su inventario para ver si ha recibido todos los suministros.";
+	next;
+	mes .@name$;
+	mes "Buena suerte,";
+	mes "^A62A2A" + strcharinfo(0) + "^000000";
+	mes "nos estamos viendo.";
+	close2;
+	return;
+
+OnPCLoadMapEvent:
+	if( getd("$starterpack" + get_unique_id() + "") == 0 && #FirstWeek == 0 || JobItem == 0)
+	//if(#FirstWeek == 0 || JobItem == 0)
+		showevent QTYPE_EVENT,0; // Show the icon to Novice
+	end;
+}
+
+startermap	mapflag	nogo
+startermap	mapflag	nodrop
+startermap	mapflag	loadevent
+
+//startermap,0,0,0,0	monster	Elephant	3162,1
+//startermap,0,0,0,0	monster	Gorilla	3163,1
+//startermap,0,0,0,0	monster	Lion	3164,1
+//startermap,0,0,0,0	monster	Rhino	3165,1
+
+
+startermap2	mapflag	nogo
+startermap2	mapflag	nomemo
+
+//Inicio
+startermap2,135,34,80,40	monster	Baby Poring	1002,20,20000
+startermap2,135,34,80,40	monster	Baby Drops	1113,10,20000
+startermap2,135,34,80,40	monster	Baby Lunatic	1063,10,20000
+//startermap2,135,34,50,20	monster	ChonChon	1011,10
+//startermap2,135,34,50,20	monster	Fabre	1184,5
+
+//Medio
+startermap2,123,105,50,5	monster	Baby Condor	1009,10,20000
+startermap2,123,105,50,5	monster	Baby Picky	1050,10,20000
+startermap2,123,105,50,5	monster	Baby Willow	1010,10,20000
+startermap2,123,105,50,5	monster	Baby Roda Frog	1012,10,20000
+startermap2,123,105,50,5	monster	Baby Fabre	1184,5,20000
+
+//Final
+startermap2,124,191,50,5	monster	Baby Rocker	1052,10,20000
+startermap2,124,191,50,5	monster	Baby Thief Bug	1051,10,20000
+startermap2,124,191,50,5	monster	Baby Thief Bug	1053,10,20000
+startermap2,124,191,50,5	monster	Baby Spore	1014,10,20000
+startermap2,124,191,50,5	monster	Baby Fabre	1184,5,20000 

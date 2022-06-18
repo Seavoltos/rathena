@@ -3501,6 +3501,9 @@ int mob_summonslave(struct mob_data *md2,int *value,int amount,uint16 skill_id)
 	 **/
 	md2->can_summon = 1;
 
+	if( map_getmapflag(data.m, MF_NOSLAVE) )
+		return 0;
+	
 	while(count < 5 && mobdb_checkid(value[count])) count++;
 	if(count < 1) return 0;
 	if (amount > 0 && amount < count) { //Do not start on 0, pick some random sub subset [Skotlex]

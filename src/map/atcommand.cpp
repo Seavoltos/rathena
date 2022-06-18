@@ -4695,6 +4695,11 @@ ACMD_FUNC(mapinfo) {
 		strcat(atcmd_output, " NoCostume |");
 	clif_displaymessage(fd, atcmd_output);
 
+	if (map_getmapflag(m_id, MF_NOEQUIP)) {
+		sprintf(atcmd_output, "NoEquip. GM level bypass %d", map_getmapflag(m_id, MF_NOEQUIP));
+		clif_displaymessage(fd, atcmd_output);
+	}
+
 	switch (list) {
 	case 0:
 		// Do nothing. It's list 0, no additional display.

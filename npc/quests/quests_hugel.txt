@@ -7677,7 +7677,7 @@ L_MilkCow:
 
 // Odin Temple Excavation Quest :: hg_tem
 //============================================================
-hugel,91,152,1	script	Sign	837,{
+hugel,109,155,1	script	Sign	837,{
 	mes "**Recruitment Notice**";
 	mes " ";
 	if (hg_odin < 60) {

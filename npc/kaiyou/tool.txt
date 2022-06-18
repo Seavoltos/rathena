@@ -1,0 +1,45 @@
+
+
+-	shop	Ventas	776,1750:1,1751:3,1752:3,506:40,501:50,502:200,503:550,504:1200,601:60,602:300,611:40,645:800,656:1500,657:3000,1065:100,717:600,610:4000
+
+-	script	Tool Dealer	FAKE_NPC,{
+	
+	if( #QUESTTool > 7 )
+		callshop "Ventas",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Visita al menos a 8 Tool Dealer antes de poder entrar a este mercado. Recien haz visitado "+#QUESTTool+".";
+		close;
+	}
+
+}
+
+prontera,151,188,5	duplicate(Tool Dealer)	Tool Dealer#0	776
+morocc,162,100,3	duplicate(Tool Dealer)	Tool Dealer#1	776
+morold,162,100,3	duplicate(Tool Dealer)	Tool Dealer#mocold1	776
+geffen,114,68,5	duplicate(Tool Dealer)	Tool Dealer#2	776
+payon,162,233,3	duplicate(Tool Dealer)	Tool Dealer#3	776
+alberta,55,244,3	duplicate(Tool Dealer)	Tool Dealer#4	776
+alberta,220,100,6	duplicate(Tool Dealer)	Tool Dealer#5	776
+izlude,129,118,3	duplicate(Tool Dealer)	Tool Dealer#6	776
+aldebaran,145,119,3	duplicate(Tool Dealer)	Tool Dealer#7	776
+xmas,154,130,3	duplicate(Tool Dealer)	Tool Dealer#8	776
+comodo,264,180,3	duplicate(Tool Dealer)	Tool Dealer#9	776
+yuno,164,171,3	duplicate(Tool Dealer)	Tool Dealer#10	776
+amatsu,120,107,3	duplicate(Tool Dealer)	Tool Dealer#11	776
+gonryun,153,127,5	duplicate(Tool Dealer)	Tool Dealer#12	776
+louyang,225,115,3	duplicate(Tool Dealer)	Tool Dealer#13	776
+jawaii,196,242,3	duplicate(Tool Dealer)	Tool Dealer#14	776
+ayothaya,156,111,3	duplicate(Tool Dealer)	Tool Dealer#15	776
+lighthalzen,165,86,3	duplicate(Tool Dealer)	Tool Dealer#16	776
+hugel,101,146,3	duplicate(Tool Dealer)	Tool Dealer#17	776
+rachel,135,109,3	duplicate(Tool Dealer)	Tool Dealer#18	776
+veins,222,109,3	duplicate(Tool Dealer)	Tool Dealer#19	776
+moscovia,230,184,3	duplicate(Tool Dealer)	Tool Dealer#20	776
+einbech,193,81,5	duplicate(Tool Dealer)	Tool Dealer#21	776
+
+
+batt_off,150,96,3	duplicate(Tool Dealer)	Tool Dealer#BG	548
+

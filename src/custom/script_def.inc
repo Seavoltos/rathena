@@ -9,7 +9,9 @@
  **/
 
 //BUILDIN_DEF(example,""),
-
+BUILDIN_DEF(storeitem2,"viiiiiiii?"),
+BUILDIN_DEF(checkspace,"viiiiiiii"),
+BUILDIN_DEF(storeitem,"vi?"),
 BUILDIN_DEF(instance_setdifficulty,"ii"),
 BUILDIN_DEF(instance_getdifficulty,"i"),
 BUILDIN_DEF(instance_setpenalty,"iii"),

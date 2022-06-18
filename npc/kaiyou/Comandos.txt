@@ -1,0 +1,111 @@
+prontera,150,193,5	script	Configuraciones::menu_vip	641,{
+	set .@name$,"^000077Configuraciones^000000";
+	mes .@name$;
+	mes "Soy el encargado de revisar los comandos que se activan cuando te conectas.";
+	mes "¿Qué deseas hacer?";
+	while(1)
+	{
+		switch(select(
+					" [ ^BA4A00JUGAR^000000 ] Roulette",
+					( #AUTOLOOT )?" [ ^10B2D2"+#AUTOLOOT+"%^000000 ] Autoloot":" [ ^ff1919OFF^000000 ] Autoloot",
+					( #SHOWEXP )?" [ ^10B2D2ON^000000 ] Show exp":" [ ^ff1919OFF^000000 ] Show exp",
+					( #NOASK )?" [ ^10B2D2ON^000000 ] No ask":" [ ^ff1919OFF^000000 ] No ask",
+					( #NOKS )?" [ ^10B2D2ON^000000 ] No KS":" [ ^ff1919OFF^000000 ] No KS",
+					( #LISTENBG )?" [ ^10B2D2ON^000000 ] Escuchar BG":" [ ^ff1919OFF^000000 ] Escuchar BG",
+					( #Efectos_Acc )?" [ ^10B2D2OFF^000000 ] Efectos Healer y Warper":" [ ^ff1919ON^000000 ] Efectos Healer y Warper"
+					))
+		{
+			next;
+			case 1:
+				mes .@name$;
+				mes "Cierra esta ventana para continuar.";
+				close2;
+				open_roulette;
+				end;
+			case 2:
+				mes .@name$;
+				mes "Introduce un porcentaje";
+				mes "( 0 - 100 )";
+				next;
+				input .@AUTOLOO;
+				if(.@AUTOLOO < 0 || .@AUTOLOO > 100){
+					message strcharinfo(0), "[ KaiyouRO] El valor debe ser entre 0 y 100";
+					break;
+				}
+				if( .@AUTOLOO == 0 )
+					message strcharinfo(0), "[ KaiyouRO] Autoloot desactivado";
+				else
+					message strcharinfo(0), "[ KaiyouRO] Autoloot automático ajustado a "+.@AUTOLOO+"%";
+					
+				set #AUTOLOOT, .@AUTOLOO;
+				atcommand "@autoloot "+#AUTOLOOT;
+				break;
+			case 3:
+				if(#SHOWEXP == 1){
+					message strcharinfo(0), "[ KaiyouRO] Mostrar experiencia desactivado";
+					set #SHOWEXP, 0;
+				} else {
+					message strcharinfo(0), "[ KaiyouRO] Mostrar experiencia activado";
+					set #SHOWEXP, 1;
+				}
+				atcommand "@showexp";
+				break;
+			case 4:
+				if(#NOASK == 1){
+					message strcharinfo(0), "[ KaiyouRO] No molestar desactivado";
+					set #NOASK, 0;
+				} else {
+					message strcharinfo(0), "[ KaiyouRO] No molestar activado";
+					set #NOASK, 1;
+				}
+				atcommand "@noask";
+				break;
+			case 5:
+				if(#NOKS == 1){
+					message strcharinfo(0), "[ KaiyouRO] No KS desactivado";
+					set #NOKS, 0;
+				} else {
+					message strcharinfo(0), "[ KaiyouRO] No KS activado";
+					set #NOKS, 1;
+				}
+				atcommand "@noks";
+				break;
+			case 6:
+				if(#LISTENBG == 1){
+					message strcharinfo(0), "[ KaiyouRO] Escuchar Battleground anuncios desactivado";
+					set #LISTENBG, 0;
+				} else {
+					message strcharinfo(0), "[ KaiyouRO] Escuchar Battleground anuncios activado";
+					set #LISTENBG, 1;
+				}
+				atcommand "@listenbg";
+				break;
+			case 7:
+				if(#Efectos_Acc == 1){
+					message strcharinfo(0), "[ KaiyouRO] Los efectos han sido activados";
+					set #Efectos_Acc, 0;
+				} else {
+					message strcharinfo(0), "[ KaiyouRO] Los efectos han sido desactivados";
+					set #Efectos_Acc, 1;
+				}
+				break;
+		}
+	}
+
+	end;
+
+OnComandos:
+OnWhisperGlobal:
+OnPCLoginEvent:
+	if(#AUTOLOOT != 0)
+		atcommand "@autoloot "+#AUTOLOOT;
+	if(#SHOWEXP == 1)
+		atcommand "@showexp";
+	if(#NOASK == 1)
+		atcommand "@noask";
+	if(#NOKS == 1)
+		atcommand "@noks";
+	if(#LISTENBG == 1)
+		atcommand "@listenbg";
+	end;
+}

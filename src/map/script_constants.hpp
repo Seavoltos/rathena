@@ -536,6 +536,8 @@
 	export_constant(MF_NORENEWALEXPPENALTY);
 	export_constant(MF_NOPETCAPTURE);
 	export_constant(MF_NOBUYINGSTORE);
+	export_constant(MF_NOSLAVE);
+	export_constant(MF_NOEQUIP);
 
 	/* setcell types */
 	export_constant(CELL_WALKABLE);
@@ -5773,6 +5775,50 @@
 	export_constant(IG_SHADOW_CUBE_SHIELD);
 	export_constant(IG_SHADOW_CUBE_SHOES);
 	export_constant(IG_SHADOW_CUBE_WEAPON);
+
+	/* Custom box */
+	export_constant(IG_Box_99_70);
+	export_constant(IG_COSTUME1);
+	export_constant(IG_COSTUME2);
+	export_constant(IG_COSTUME3);
+	export_constant(IG_COSTUME4);
+	export_constant(IG_COSTUME5);
+	export_constant(IG_COSTUME6);
+	export_constant(IG_COSTUME7);
+	export_constant(IG_COSTUME8);
+	export_constant(IG_COSTUME9);
+	export_constant(IG_COSTUME10);
+	export_constant(IG_COSTUME11);
+	export_constant(IG_COSTUME12);
+	export_constant(IG_COSTUME13);
+	export_constant(IG_COSTUME14);
+	export_constant(IG_COSTUME15);
+	export_constant(IG_KEY_BOX);
+	export_constant(IG_EVENT_BOX);
+	export_constant(IG_INSTANCE_1);
+	export_constant(IG_INSTANCE_2);
+	export_constant(IG_INSTANCE_3);
+	export_constant(IG_INSTANCE_4);
+	export_constant(IG_INSTANCE_5);
+	export_constant(IG_INSTANCE_6);
+	export_constant(IG_INSTANCE_7);
+	export_constant(IG_INSTANCE_8);
+	export_constant(IG_INSTANCE_9);
+	export_constant(IG_INSTANCE_10);
+	export_constant(IG_INSTANCE_11);
+	export_constant(IG_INSTANCE_12);
+	export_constant(IG_MES_1);
+	export_constant(IG_MES_2);
+	export_constant(IG_MES_3);
+	export_constant(IG_MES_4);
+	export_constant(IG_MES_5);
+	export_constant(IG_MES_6);
+	export_constant(IG_MES_7);
+	export_constant(IG_MES_8);
+	export_constant(IG_MES_9);
+	export_constant(IG_MES_10);
+	export_constant(IG_MES_11);
+	export_constant(IG_MES_12);
 
 	/* unit stop walking */
 	export_constant(USW_NONE);

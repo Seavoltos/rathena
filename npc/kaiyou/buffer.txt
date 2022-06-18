@@ -1,0 +1,153 @@
+prontera,164,175,4	script	Healer	677,{
+	.@npc_name$ = "[^0000FFHealer^000000]";
+	if( vip_status(VIP_STATUS_ACTIVE) )
+		.@precio_z = 1000;
+	else
+		.@precio_z = 2000;
+
+	mes .@npc_name$;
+	mes "Bienvenido aventurero,";
+	mes "¿Cómo puedo ayudarte?";
+	switch(select(
+		( Zeny < .@precio_z )?"^934504 [ > ] ^000000Descansar -> "+.@precio_z+" zeny":"^10B2D2 [ > ] ^000000Descansar -> "+.@precio_z+" zeny",
+		( #ENDOW == 0 )?"^934504 [ > ] ^000000Endow":"^10B2D2 [ > ] ^000000Endow",
+		" ~ Cerrar"
+		))
+	{
+	case 1:
+		if (isequipped(18929) || isequipped(18930) || isequipped(18931) || isequipped(18932) )
+		{
+			if( #Efectos_Acc == 0 )
+			{
+				mes "descansa como corresponde~";
+				close2;
+				percentheal 100,50;
+				atcommand "@refresh";
+				end;
+			}
+			else
+				percentheal 100,50;
+				end;
+		}
+		if(Zeny < .@precio_z){
+			if( #Efectos_Acc == 0 )
+			{
+				mes .@npc_name$;
+				mes "Lo siento, pero el costo del servicio es "+.@precio_z+" zeny. Revisa que tengas el dinero necesario, okay?";
+				close;
+			}
+			else
+				message strcharinfo(0), "Lo siento, pero el costo del servicio es "+ .@precio_z +" zeny.";
+				end;
+		}
+		if( #Efectos_Acc == 0 )
+		{
+			mes "descansar como corresponde~";
+			close2;
+		}
+		set Zeny,Zeny - .@precio_z;
+		percentheal 100,50;
+		atcommand "@refresh";
+		end;
+	case 2:
+		if( (Class == 16 || Class == 4017) && BaseLevel > 69)
+			set #ENDOW,1;
+		
+		if ( #ENDOW == 0 )
+		{
+			mes "Primero debes hablarme con un ^0000FFSage^000000 o ^0000FFProfessor^000000 lvl 70 para poder desbloquear esta opción en esta cuenta.";
+			close;
+		}
+		
+		mes "¿Con qué elemento deseas encantar tu arma?";
+		next;
+		switch(select(
+			( countitem(991) < 1 )?"^934504 [ > ] ^000000Agua":"^10B2D2 [ > ] ^000000Agua",
+			( countitem(992) < 1 )?"^934504 [ > ] ^000000Viento":"^10B2D2 [ > ] ^000000Viento",
+			( countitem(990) < 1 )?"^934504 [ > ] ^000000Fuego":"^10B2D2 [ > ] ^000000Fuego",
+			( countitem(993) < 1 )?"^934504 [ > ] ^000000Tierra":"^10B2D2 [ > ] ^000000Tierra"
+			))
+		{
+			case 1:
+				set .@EndowSC,SC_WATERWEAPON;
+				set .@StoneReq,991;
+				set .@effect, 256;
+				break;
+			case 2:
+				set .@EndowSC,SC_WINDWEAPON;
+				set .@StoneReq,992;
+				set .@effect, 257;
+				break;
+			case 3:
+				set .@EndowSC,SC_FIREWEAPON;
+				set .@StoneReq,990;
+				set .@effect, 255;
+				break;
+			case 4:
+				set .@EndowSC,SC_EARTHWEAPON;
+				set .@StoneReq,993;
+				set .@effect, 258;
+				break;
+		}
+		if( countitem(.@StoneReq) == 0 )
+		{
+			mes .@npc_name$;
+			mes "Necesitarás una ^934504" + getitemname(.@StoneReq) + "^000000.";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Consumiras una " + getitemname(.@StoneReq);
+		next;
+		if(select("Confirmar:Cancelar") == 2 )
+		{
+			mes .@npc_name$;
+			mes "Entendido.";
+			close;
+		}
+		if( countitem(.@StoneReq) == 0 )
+		{
+			mes .@npc_name$;
+			mes "Lo siento, pero parece que te falta la ^934504" + getitemname(.@StoneReq) + "^000000.";
+			close;
+		}
+		mes .@npc_name$;
+		mes "Listo!";
+		message strcharinfo(0), "[Healer] Se ha consumido 1 " + getitemname(.@StoneReq) + ".";
+		sc_start .@EndowSC,1800000,0;
+		delitem .@StoneReq,1;
+		specialeffect2 .@effect;
+		close;
+	case 3:
+		//skill "AM_BIOETHICS",1,SKILL_PERM;
+		//skill "MC_LOUD",1,SKILL_PERM;
+		//skill "MC_CHANGECART",1,SKILL_PERM;
+		//skill "MC_CARTREVOLUTION",1,SKILL_PERM;
+		erasequest 60200;
+		erasequest 60201;
+		close;
+	}
+}
+
+//Duplicate
+morocc,152,100,5	duplicate(Healer)	Healer#1	677
+morold,152,100,5	duplicate(Healer)	Healer#moc1	677
+geffen,125,72,3	duplicate(Healer)	Healer#2	677
+payon,160,235,3	duplicate(Healer)	Healer#3	677
+alberta,44,244,5	duplicate(Healer)	Healer#4	677
+alberta,209,100,5	duplicate(Healer)	Healer#5	677
+izlude,123,121,5	duplicate(Healer)	Healer#6	677
+aldebaran,134,119,5	duplicate(Healer)	Healer#7	677
+xmas,141,130,6	duplicate(Healer)	Healer#8	677
+comodo,253,180,5	duplicate(Healer)	Healer#9	677
+yuno,151,171,5	duplicate(Healer)	Healer#10	677
+amatsu,107,107,5	duplicate(Healer)	Healer#11	677
+gonryun,162,122,4	duplicate(Healer)	Healer#12	677
+louyang,210,115,5	duplicate(Healer)	Healer#13	677
+jawaii,184,242,5	duplicate(Healer)	Healer#14	677
+ayothaya,143,111,5	duplicate(Healer)	Healer#15	677
+lighthalzen,152,86,5	duplicate(Healer)	Healer#16	677
+hugel,89,146,5	duplicate(Healer)	Healer#17	677
+rachel,124,109,5	duplicate(Healer)	Healer#18	677
+veins,209,109,5	duplicate(Healer)	Healer#19	677
+moscovia,217,184,5	duplicate(Healer)	Healer#20	677
+einbech,202,81,3	duplicate(Healer)	Healer#21	677

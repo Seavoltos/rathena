@@ -42,3 +42,155 @@
 Header:
   Type: STATUS_DB
   Version: 2
+
+Body:
+  - Status: ID_Cast
+    Icon: EFST_ID_CAST
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+  - Status: ID_ASPD
+    Icon: EFST_ID_ASPD
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      Aspd: true
+  - Status: ID_MAXHP
+    Icon: EFST_ID_MAXHP
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      MaxHp: true
+  - Status: ID_MAXSP
+    Icon: EFST_ID_MAXSP
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      MaxSp: true
+  - Status: ID_ALLSTATS
+    Icon: EFST_ID_ALLSTATS
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      Str: true
+      Agi: true
+      Vit: true
+      Dex: true
+      Int: true
+      Luk: true
+  - Status: ID_SPEED
+    Icon: EFST_ID_SPEED
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      Speed: true
+  - Status: ID_ATK
+    Icon: EFST_ID_ATK
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      Batk: true
+  - Status: ID_MATK
+    Icon: EFST_ID_MATK
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      Matk: true
+  - Status: II_Cast
+    Icon: EFST_II_CAST
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+  - Status: II_ASPD
+    Icon: EFST_II_ASPD
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      Aspd: true
+  - Status: II_MAXHP
+    Icon: EFST_II_MAXHP
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      MaxHp: true
+  - Status: II_MAXSP
+    Icon: EFST_II_MAXSP
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      MaxSp: true
+  - Status: II_ALLSTATS
+    Icon: EFST_II_ALLSTATS
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      Str: true
+      Agi: true
+      Vit: true
+      Dex: true
+      Int: true
+      Luk: true
+  - Status: II_SPEED
+    Icon: EFST_II_SPEED
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      Speed: true
+  - Status: II_ATK
+    Icon: EFST_II_ATK
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      Batk: true
+  - Status: II_MATK
+    Icon: EFST_II_MATK
+    Flags:
+      NoRemoveOnDead: true
+      Debuff: true
+      NoDispell: true
+      NoBanishingBuster: true
+    CalcFlags:
+      Matk: true

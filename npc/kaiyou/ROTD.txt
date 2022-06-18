@@ -1,0 +1,392 @@
+
+
+prontera,147,170,5	script	ROTD	437,{
+	set .@gmlevel,getgmlevel();
+	// Quest IDs: 65000-65039
+	
+	for ( set .@i , 0 ; .@i < 40 ; set .@i , .@i + 1 )
+	{
+		set .@quest, 65000 + .@i;
+		if(checkquest(.@quest,HUNTING) == 2)
+		{
+			set .@quest2,(.@quest+100);
+			mes "[ROTD]";
+			mes "^ff0000Felicitaciones!^000000 Completaste una misión.";
+			mes "Por favor, acepta esta recompensa.";
+			erasequest .@quest;
+			set .@playtime, checkquest(.@quest2,PLAYTIME);
+			if (.@playtime > -1) erasequest .@quest2;
+			setquest .@quest2;
+
+			// Job Experience calculation.
+			if (JobLevel > 50 && JobLevel < 56) set .@jexp,67000;
+			else if (JobLevel > 55 && JobLevel < 61) set .@jexp,94000;
+			else if (JobLevel > 60 && JobLevel < 66) set .@jexp,141000;
+			else if (JobLevel > 65 && JobLevel < 69) set .@jexp,212000;
+			else if (JobLevel == 69) set .@jexp,311000;
+
+			getexp2 .expb[.@i],.@jexp;
+			next;
+		}
+	}
+		
+do{
+	set .@menu,select("^10B2D2 [ > ] ^000000ROTD Información",
+				"^10B2D2 [ > ] ^000000Misiones",
+				( .@gmlevel < .gm_level )?"":"^FF0000 [ > ] ^000000Configurar Nueva raza",
+				( .@gmlevel < .gm_level )?"":"^FF0000 [ > ] ^000000Configurar EXP Bonus",		
+				( .@gmlevel < .gm_level )?"":"^FF0000 [ > ] ^000000Configurar Item / Zeny Bonus"
+			);
+				
+	switch( .@menu ) {
+		case 1:
+			mes "[ROTD]";
+			mes "^FF0000ROTD^000000 hace referencia a ^0000FFRace of the Day^000000";
+			mes "En otras palabras, esto significa que dependiendo de la ^FF0000Raza del Mounstro^000000 que tu asesines puede otorgarte ^FF0000Extra Bonus EXP^000000.";
+			next;
+			mes "[ROTD]";
+			mes "^FF0000La raza del día^000000";
+			mes "^0000FF"+.rotd$[.today_rotd]+"^000000";
+			if ( .rotd_exp_bonus ) mes " ~ ^777777"+.rotd_exp_bonus+"% más exp^000000";
+			if ( ( .rotd_item_amount && .rotd_item_rate ) || .rotd_zeny || .rotd_exp_bonus ) {
+				mes " ";
+				//mes "Recompenza : "+( ( .rotd_item_rate )? .rotd_item_rate+"%":"" )+" : ";
+				if ( .rotd_item_amount && .rotd_item_rate ) mes " ~ ^777777"+.rotd_item_amount+" x "+getitemname( .rotd_item_id )+"^000000";
+				if ( .rotd_zeny ) mes " ~ ^777777"+.rotd_zeny+" Zeny^000000";
+				mes " ";
+				mes "Montos son aleatorios...";
+			}
+			break;
+		case 2:
+			mes "[ROTD]";
+			mes "Hoy hay misiones de la raza "+.rotd$[.today_rotd]+".";
+			mes "¿De qué nivel te gustaría acceder?";
+			next;
+			switch(select(
+				( ( Baselevel > 19) && ( Baselevel < 41) )?"^10B2D2 [ > ] ^000000Nivel 1 (Lvl 20 a 40)":"",
+				( ( Baselevel > 40) && ( Baselevel < 61) )?"^10B2D2 [ > ] ^000000Nivel 2 (Lvl 41 a 60)":"",
+				( ( Baselevel > 60) && ( Baselevel < 81) )?"^10B2D2 [ > ] ^000000Nivel 3 (Lvl 61 a 80)":"",
+				( ( Baselevel > 80) )?"^10B2D2 [ > ] ^000000Nivel 4 (Lvl 81 a 99)":"",
+				( ( Baselevel > 90) )?"^10B2D2 [ > ] ^000000Nivel S (Lvl 91 a 99)":"",
+				( ( Baselevel < 20) )?"^10B2D2 [ > ] ^000000Información":""
+				))
+			{
+				case 1:
+					switch(.today_rotd)
+					{
+						case 0: 
+							callsub L_Quest,65000,"Eggyra",67000,"¿¡±â¶óÄ«µå","Puede ser encontrado en ^8B4513Payon Field 7^000000.";
+						case 1:
+							callsub L_Quest,65001,"Munak",67000,"¹«³«Ä«µå","Puede ser encontrado en ^8B4513Payon Dungeon F3^000000.";
+						case 2:
+							callsub L_Quest,65002,"Wolf",67000,"¿ïÇÁÄ«µå","Puede ser encontrado en ^8B4513Payon Fild 2^000000.";
+						case 3:
+							callsub L_Quest,65003,"Muka",67000,"¹«Ä«Ä«µå","Puede ser encontrado en ^8B4513Morocc Field 18^000000.";
+						case 4:
+							callsub L_Quest,65004,"Horn",67000,"È£¸¥Ä«µå","Puede ser encontrado en ^8B4513Mjolnir Field 9^000000.";
+						case 5:
+							callsub L_Quest,65005,"Thara Frog",67000,"Å¸¶óÇÁ·Î±×Ä«µå","Puede ser encontrado en ^8B4513Mao, the East Cave^000000.";
+						case 6:
+							callsub L_Quest,65006,"Dokebi",67000,"µµ±úºñÄ«µå","Puede ser encontrado en ^8B4513Payon Field 10^000000.";
+						case 7:
+							callsub L_Quest,65007,"Zerom",67000,"Á¦·ÒÄ«µå","Puede ser encontrado en ^8B4513Sphinx Dungeon 2^000000.";
+						case 8:
+							mes "[ROTD]";
+							mes "Lo siento, pero los ángeles son demasiado poderosos para tí.";
+							close3;
+						case 9:
+							mes "[ROTD]";
+							mes "Lo siento, pero los dragones son demasiado poderosos para tí.";
+							close3;
+					}
+				case 2:
+					switch(.today_rotd)
+					{
+						case 0: 
+							callsub L_Quest,65010,"Mi Gao",100500,"½Ä¾çÄ«µå","Puede ser encontrado en ^8B4513Louyang Field 1^000000.";
+						case 1:
+							callsub L_Quest,65011,"Pitman",100500,"ÇÍ¸Ç","Puede ser encontrado en ^8B4513Glast Heim Prision 1^000000.";
+						case 2:
+							callsub L_Quest,65012,"Hill Wind",100500,"ÈúÀ©µåÄ«µå","Puede ser encontrado en ^8B4513Rachel Field 5^000000.";
+						case 3:
+							callsub L_Quest,65013,"Les",100500,"Les_Card","Puede ser encontrado en ^8B4513Moscovia Dungeon 1^000000.";
+						case 4:
+							callsub L_Quest,65014,"Mantis",100500,"¸ÇÆ¼½ºÄ«µå","Puede ser encontrado en ^8B4513Mjolnir Field 8^000000.";
+						case 5:
+							callsub L_Quest,65015,"Obeaune",100500,"¿Àº»´ÀÄ«µå","Puede ser encontrado en ^8B4513Amatsu Field 1^000000.";
+						case 6:
+							callsub L_Quest,65016,"Miyabi Ningyo",100500,"¹Ì¾ßºñÀÎÇüÄ«µå","Puede ser encontrado en ^8B4513Tatami Maze^000000.";
+						case 7:
+							callsub L_Quest,65017,"Marduk",100500,"¸¶¸£µÎÅ©Ä«µå","Puede ser encontrado en ^8B4513Sphinx Dungeon 3^000000.";
+						case 8:
+							mes "[ROTD]";
+							mes "Lo siento, pero los ángeles son demasiado poderosos para tí.";
+							close3;
+						case 9:
+							mes "[ROTD]";
+							mes "Lo siento, pero los dragones son demasiado poderosos para tí.";
+							close3;
+					}
+				case 3:
+					switch(.today_rotd)
+					{
+						case 0: 
+							callsub L_Quest,65020,"Sting",40810,"½ºÆÃÄ«µå","Puede ser encontrado en ^8B4513Glast Heim Culvert F3^000000.";
+						case 1:
+							callsub L_Quest,65021,"Evil Druid",28900,"µå·çÀÌµåÄ«µå","Puede ser encontrado en ^8B4513Abbey Cursed Monastery F2^000000.";
+						case 2:
+							callsub L_Quest,65022,"Fur Seal",37650,"ÆÛ¾ÁÄ«µå","Puede ser encontrado en ^8B4513Comodo Field 2^000000.";
+						case 3:
+							callsub L_Quest,65023,"Dryad",27630,"µå¶óÀÌ¾îµåÄ«µå","Puede ser encontrado en ^8B4513Luluka Forest^000000.";
+						case 4:
+							callsub L_Quest,65024,"Dragon Tail",35870,"µå·¡°ïÅ×ÀÏÄ«µå","Puede ser encontrado en ^8B4513Payon Field 11^000000.";
+						case 5:
+							callsub L_Quest,65025,"Strouf",30800,"½ºÆ®¶ó¿ìÇÁÄ«µå","Puede ser encontrado en ^8B4513Undersea Tunnel F5^000000.";
+						case 6:
+							callsub L_Quest,65026,"Kaho",39900,"Ä«È£Ä«µå","Puede ser encontrado en ^8B4513Nogg Road F1^000000.";
+						case 7:
+							callsub L_Quest,65027,"Raydric",34100,"·¹ÀÌµå¸¯Ä«µå","Puede ser encontrado en ^8B4513Inside Glast Heim Chivalry F1^000000.";
+						case 8:
+							mes "[ROTD]";
+							mes "Lo siento, pero los ángeles son demasiado poderosos para tí.";
+							close3;
+						case 9:
+							callsub L_Quest,65029,"Deleter",34030,"°øÁßµô¸®ÅÍÄ«µå","Puede ser encontrado en ^8B4513Magma Dungeon 2^000000.";
+					}
+				case 4:
+					switch(.today_rotd)
+					{
+						case 0: 
+							callsub L_Quest,65030,"Apocalypse",65400,"¾ÆÆ÷Ä®¸³½ºÄ«µå","Puede ser encontrado en ^8B4513Juperos Ruins F2^000000.";
+						case 1:
+							callsub L_Quest,65031,"Ragged Zombie",85000,"´©´õ±âÁ»ºñÄ«µå","Puede ser encontrado en ^8B4513Abbey Cursed Monastery F1^000000.";
+						case 2:
+							callsub L_Quest,65032,"Goat",33570,"°í¿ìÆ®Ä«µå","Puede ser encontrado en ^8B4513Yuno Field 7^000000.";
+						case 3:
+							callsub L_Quest,65033,"Mavka",83010,"Mavka_Card","Puede ser encontrado en ^8B4513Moscovia Dungeon 3^000000.";
+						case 4:
+							mes "[ROTD]";
+							mes "Lo siento, pero los insectos son demasiado débiles.";
+							close3;
+						case 5:
+							callsub L_Quest,65035,"Penomena",28700,"Æä³ë¸Þ³ªÄ«µå","Puede ser encontrado en ^8B4513Clock Tower B3^000000.";
+						case 6:
+							callsub L_Quest,65036,"Banshee",170000,"¹ê½ÃÄ«µå","Puede ser encontrado en ^8B4513Abbey Cursed Monastery F1^000000.";
+						case 7:
+							callsub L_Quest,65037,"Anubis",280000,"¾Æ´©ºñ½ºÄ«µå","Puede ser encontrado en ^8B4513Sphinx F4^000000.";
+						case 8:
+							callsub L_Quest,65038,"Retribution",283320,"½Å¹úÀÇ´ëÇàÀÚÄ«µå","Puede ser encontrado en ^8B4513Thanatos Tower 12^000000.";
+						case 9:
+							callsub L_Quest,65039,"Green Ferus",67500,"±×¸°Æä·¯½ºÄ«µå","Puede ser encontrado en ^8B4513Abyss Lakes Underground F1^000000.";
+					}
+				case 5:
+					switch(.today_rotd)
+					{
+						case 0: 
+							callsub L_Quest,65040,"Salamander",720000,"»ø·¯¸Ç´õÄ«µå","Puede ser encontrado en ^8B4513Thor Volcano 3^000000.";
+						case 1:
+							callsub L_Quest,65041,"Necromancer",450000,"³×Å©·Î¸Ç¼­Ä«µå","Puede ser encontrado en ^8B4513Abbey Cursed Monastery F3^000000.";
+						case 2:
+							callsub L_Quest,65042,"Majoruros",85250,"¸ÞÀÌÀú¿ì·Î½ºÄ«µå","Puede ser encontrado en ^8B4513The Lowest Cave in Glast Heim F2^000000.";
+						case 3:
+							mes "[ROTD]";
+							mes "Lo siento, pero las plantas son demasiado débiles.";
+							close3;
+						case 4:
+							mes "[ROTD]";
+							mes "Lo siento, pero los insectos son demasiado débiles.";
+							close3;
+						case 5:
+							callsub L_Quest,65045,"Anolian",59000,"¾Æ³î¸®¾ÈÄ«µå","Puede ser encontrado en ^8B4513Zenhai Marsh^000000.";
+						case 6:
+							callsub L_Quest,65046,"Eremes",1000000,"¿¡·¹¸Þ½º°¡ÀÏÄ«µå","Puede ser encontrado en ^8B4513Bio Laboratory F3^000000.";
+							//callsub L_Quest,65056,"Incarnation of Morroc",167500,"morocc_2","Puede ser encontrado en ^8B4513Dimensional Gorge^000000.";
+						case 7:
+							callsub L_Quest,65047,"Harword",1000000,"ÇÏ¿öµå¾ËÆ®¾ÆÀÌÁ¨Ä«µå","Puede ser encontrado en ^8B4513Bio Laboratory F3^000000.";
+						case 8:
+							callsub L_Quest,65048,"Skeggiold",992000,"½ºÄÉ°ñÆ®","Puede ser encontrado en ^8B4513Odin Temple 3^000000.";
+							//callsub L_Quest,65058,"Incarnation of Morroc",167500,"Ahat_Card","Puede ser encontrado en ^8B4513Dimensional Gorge^000000.";
+						case 9:
+							callsub L_Quest,65049,"Gold Acidus",280430,"°ñµå¾î½Ã´õ½º","Puede ser encontrado en ^8B4513Abyss Lakes Underground F3^000000.";
+					}
+				case 6:
+					mes "[ROTD]";
+					mes "A partir de nivel 20 podrás iniciar una serie de misiones dependiendo de la raza del día.";
+					close3;
+				case 7:
+				default:
+					close3;
+			}
+		Case 3:
+			mes "Seleccionar una nueva raza.";
+			set .today_rotd,select( .rotd_menu$ ) - 1;
+			if ( .today_rotd >= .rotd_size ) set .today_rotd,rand( .rotd_size );
+			mes "Nueva raza : ^777777"+.rotd$[.today_rotd]+"^000000";
+			delwaitingroom;
+			waitingroom "[Misiones]: "+.rotd$[.today_rotd]+" ",0;
+			break;
+		Case 4:
+			mes "Configurar nuevo exp bonus. (%)";
+			input .rotd_exp_bonus,0,100;
+			if ( .rotd_exp_bonus ) mes "ROTD EXP : "+.rotd_exp_bonus+" %";
+			break;
+		Case 5:
+			mes "Configurar Rotd bonus";
+			mes "Configurar Zeny Bonus";
+			input .@zeny;
+			mes "Configurar Item ID";
+			do{
+				input .@item,0,32767; 
+				if ( !.@item ) close3;
+			}while( getitemname( .@item ) == "null" );
+			mes "Ingresa monto.";
+			input .@amount,0,30000;
+			mes "Ingresa porcentaje.";
+			input .@rate,0,100;
+			if ( .@amount && .@rate ) {
+				next;
+				mes "Actualizado item bonus : ( "+.@rate+"% )";
+				mes "^777777"+.@amount+" x "+getitemname( .@item )+"^000000";
+				mes "^777777"+.@zeny+" Zeny^000000";
+				if ( select( "Confirmar","Cancelar" ) == 1 ) {
+					set .rotd_item_id,.@item;	
+					set .rotd_item_amount,.@amount;
+					set .rotd_item_rate,.@rate;
+					set .rotd_zeny,.@zeny;
+					mes "Actualizado.";
+				}
+			}
+		default: close3;
+	}
+	next;
+}while( .@menu != 5 );
+close3;
+//callsub L_Quest,<quest ID>,"<monster name>",<reward EXP>,"<cutin image>","<description>"{,"s"};
+L_Quest:
+	set .@quest1, getarg(0);
+	set .@quest2, .@quest1+100;
+	.@cutin$ = getarg(3);
+	set .@playtime, checkquest(.@quest2,PLAYTIME);
+	if (.@playtime == 0 || .@playtime == 1) {
+		mes "[ROTD]";
+		mes "Necesitas esperar al menos 3 horas para volver a tomar esta misión.";
+		close3;
+	}
+	set .@hunting, checkquest(.@quest1,HUNTING);
+	if (.@hunting == 0 || .@hunting == 1) {
+		if (.@cutin$ != "") cutin .@cutin$,2;
+		mes "[ROTD]";
+		mes "Caza ^0000ff60 "+getarg(1)+"^000000 para completar esta misión de experiencia extra.";
+		mes getarg(4);
+		close3;
+	} else if (.@hunting == 2) {
+		mes "[ROTD]";
+		mes "Felicitaciones! Completaste la misión.";
+		mes "Por favor, acepta esta recompensa.";
+		erasequest .@quest1;
+		if (.@playtime > -1) erasequest .@quest2;
+		setquest .@quest2;
+		set .@jexp,30000;
+		// Job Experience calculation.
+		if (JobLevel > 50 && JobLevel < 56) set .@jexp,67000;
+		else if (JobLevel > 55 && JobLevel < 61) set .@jexp,94000;
+		else if (JobLevel > 60 && JobLevel < 66) set .@jexp,141000;
+		else if (JobLevel > 65 && JobLevel < 69) set .@jexp,212000;
+		else if (JobLevel == 69) set .@jexp,311000;
+
+		getexp2 getarg(2),.@jexp;
+		close3;
+	} else {
+		if (.@cutin$ != "") cutin .@cutin$,2;
+		mes "[ROTD]";
+		mes "Caza ^0000ff60 "+getarg(1)+"^000000 para completar esta misión de experiencia extra.";
+		mes getarg(4);
+		next;
+		if(select("Vamos por ellos.:No, gracias") == 1) {
+			mes "[ROTD]";
+			mes "Cuando hayas terminado, vuelve para recolectar tu recompensa.";
+			if (.@playtime > -1) erasequest .@quest2;
+			setquest .@quest1;
+		}
+		close3;
+	}
+	end;
+
+OnPCLoadMapEvent:
+	if (BaseLevel > 98)
+		end;
+	else
+		showevent QTYPE_QUEST2,0;
+	end;
+	
+OnInit:
+	// min gm level
+	waitingroom "[Misiones]",0;
+	set .gm_level,80;
+	setarray .expb[0],67000,67000,67000,67000,67000,67000,67000,67000,0,0,
+					  100500,100500,100500,100500,100500,100500,100500,100500,0,0,
+					  40810,28900,37650,27630,35870,30800,39900,34100,0,34030,
+					  65400,85000,33570,83010,0,28700,170000,280000,283320,67500,
+					  720000,450000,85250,0,0,59000,1000000,1000000,992000,280430;
+	// monster race list
+	setarray .rotd$[0],
+		"Formless",
+		"Undead",
+		"Brute",
+		"Plant",
+		"Insect",
+		"Fish",
+		"Demon",
+		"Demi Human",
+		"Angel",
+		"Dragon";
+	set .rotd_size,getarraysize( .rotd$ );
+	for( set .@i,0; .@i < .rotd_size; set .@i,.@i + 1 )
+		set .rotd_menu$,.rotd_menu$ + .rotd$[.@i] +":";
+	set .rotd_menu$,.rotd_menu$ + "^0055FFRandom Race^000000";
+	set .questexp,getbattleflag( "quest_exp_rate" );
+	// min party member lv to gain exp
+	set .party_level_range,15;
+
+// daily reset
+OnClock0000:
+	set .today_rotd,rand( .rotd_size );
+	set .rotd_exp_bonus,rand( 5,15 );
+	delwaitingroom;
+	waitingroom "[Misiones]: "+.rotd$[.today_rotd]+" ",0;
+	end;
+	
+OnNPCKillEvent:
+	if ( getmonsterinfo( killedrid,MOB_RACE ) == .today_rotd ) {
+		set .@partyid,getcharid(1);
+		set .@mob_base_exp, getmonsterinfo( killedrid,MOB_BASEEXP )  * .rotd_exp_bonus / 100;
+		set .@mob_job_exp, getmonsterinfo( killedrid,MOB_JOBEXP )  * .rotd_exp_bonus / 100;
+		if ( .@partyid ) {
+			set .@aid,getcharid(3);
+			set .@baselevel,BaseLevel;
+			set .@map$,strcharinfo(3);
+			getpartymember .@partyid,1;
+			getpartymember .@partyid,2;
+			while( .@i < $@partymembercount ) {
+				if ( isloggedin( $@partymemberaid[.@i],$@partymembercid[.@i] ) )
+					if ( attachrid( $@partymemberaid[.@i] ) )
+						if ( strcharinfo(3) == .@map$ && Hp >= 1 ) {
+							if( BaseLevel >= .@baselevel && ( BaseLevel - .@baselevel ) <= .party_level_range ) {
+								if( .@mob_base_exp != 0 && .@mob_job_exp != 0)
+									getexp2 .@mob_base_exp,.@mob_job_exp;
+							} else if ( BaseLevel <= .@baselevel && ( .@baselevel - BaseLevel ) <= .party_level_range ) {
+								if( .@mob_base_exp != 0 && .@mob_job_exp != 0)
+									getexp2 .@mob_base_exp,.@mob_job_exp;
+							}
+						}
+				set .@i,.@i + 1;
+			}
+			attachrid( .@aid );
+		}
+		else {
+			if( .@mob_base_exp != 0 && .@mob_job_exp != 0)
+				getexp2 .@mob_base_exp,.@mob_job_exp;
+		}
+	end;
+	}
+}

@@ -1,0 +1,61 @@
+
+
+-	script	Guardia#woe	-1,{
+
+	if ( getgmlevel() < 60)
+	{
+		dispbottom "[Guardia WoE] Alto ahí! Esta es una zona prohibida! ";
+		warp "prontera",155,181;
+		end;
+	}
+}
+
+prtg_cas01,98,32,4	duplicate(Guardia#woe)	Guardia#prtcas01	56,15,15
+prtg_cas02,43,227,4	duplicate(Guardia#woe)	Guardia#prtcas02	56,15,15
+prtg_cas03,168,16,4	duplicate(Guardia#woe)	Guardia#prtcas03	56,15,15
+prtg_cas04,86,19,4	duplicate(Guardia#woe)	Guardia#prtcas04	56,15,15
+prtg_cas05,17,238,4	duplicate(Guardia#woe)	Guardia#prtcas05	56,15,15
+
+
+payg_cas01,214,52,4	duplicate(Guardia#woe)	Guardia#paycas01	56,15,15
+payg_cas02,267,61,4	duplicate(Guardia#woe)	Guardia#paycas02	56,15,15
+payg_cas03,226,30,4	duplicate(Guardia#woe)	Guardia#paycas03	56,15,15
+payg_cas04,252,266,4	duplicate(Guardia#woe)	Guardia#paycas04	56,15,15
+payg_cas05,61,233,4	duplicate(Guardia#woe)	Guardia#paycas05	56,15,15
+
+
+gefg_cas01,34,145,4	duplicate(Guardia#woe)	Guardia#gefcas011	56,15,15
+gefg_cas01,92,178,4	duplicate(Guardia#woe)	Guardia#gefcas012	56,15,15
+gefg_cas02,70,143,4	duplicate(Guardia#woe)	Guardia#gefcas02	56,15,15
+gefg_cas03,123,246,4	duplicate(Guardia#woe)	Guardia#gefcas031	56,15,15
+gefg_cas03,96,280,4	duplicate(Guardia#woe)	Guardia#gefcas032	56,15,15
+gefg_cas03,64,284,4	duplicate(Guardia#woe)	Guardia#gefcas033	56,15,15
+gefg_cas03,85,160,4	duplicate(Guardia#woe)	Guardia#gefcas034	56,15,15
+gefg_cas04,24,153,4	duplicate(Guardia#woe)	Guardia#gefcas04	56,15,15
+gefg_cas05,98,196,4	duplicate(Guardia#woe)	Guardia#gefcas051	56,15,15
+gefg_cas05,16,139,4	duplicate(Guardia#woe)	Guardia#gefcas052	56,15,15
+
+
+aldeg_cas01,34,244,4	duplicate(Guardia#woe)	Guardia#aldecas01	56,15,15
+aldeg_cas02,88,168,4	duplicate(Guardia#woe)	Guardia#aldecas02	56,15,15
+aldeg_cas03,107,283,4	duplicate(Guardia#woe)	Guardia#aldecas03	56,15,15
+aldeg_cas04,159,18,4	duplicate(Guardia#woe)	Guardia#aldecas04	56,15,15
+aldeg_cas05,216,97,4	duplicate(Guardia#woe)	Guardia#aldecas05	56,15,15
+
+//WOE 2.0
+
+arug_cas01,270,93,4	duplicate(Guardia#woe)	Guardia#arucas01	56,15,15
+arug_cas02,139,35,4	duplicate(Guardia#woe)	Guardia#arucas02	56,15,15
+arug_cas03,141,50,4	duplicate(Guardia#woe)	Guardia#arucas03	56,15,15
+arug_cas04,141,50,4	duplicate(Guardia#woe)	Guardia#arucas04	56,15,15
+arug_cas05,141,50,4	duplicate(Guardia#woe)	Guardia#arucas05	56,15,15
+
+
+schg_cas01,119,12,4	duplicate(Guardia#woe)	Guardia#schcas01	56,15,15
+schg_cas02,339,81,4	duplicate(Guardia#woe)	Guardia#schcas02	56,15,15
+schg_cas03,337,327,4	duplicate(Guardia#woe)	Guardia#schcas03	56,15,15
+schg_cas04,119,12,4	duplicate(Guardia#woe)	Guardia#schcas04	56,15,15
+schg_cas05,119,12,4	duplicate(Guardia#woe)	Guardia#schcas05	56,15,15
+
+
+schg_cas01	mapflag	norodex

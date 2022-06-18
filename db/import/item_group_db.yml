@@ -32,12 +32,8 @@
 #          Duration            Makes the item a rental item which will expire within the given amount in minutes. Not intended for use with stackable items. (Default: 0)
 #          Announced           If player obtains this item it will be broadcasted to the server. (Default: false)
 #          UniqueId            Makes the given item(s) have a Unique ID. (Default: UniqueId from item_db)
-#          Stacked             Whether stackable items are given stacked or not. (Default: true)
 #          Named               Inscribes the item with the obtainer's name. (Default: false)
 #          Bound               Binds the obtained item. (Default: None)
-#          RandomOptionGroup   Applies random options of this group to all equipable items (Default: None)
-#          RefineMinimum       Applies at least this refine level to all equipable items (Default: 0)
-#          RefineMaximum       Applies at most this refine level to all equipable items (Default: 0)
 #          Clear               Remove the given item. (Optional)
 #       Clear                  Remove the given SubGroup. (Optional)
 ###########################################################################
@@ -45,3 +41,614 @@
 Header:
   Type: ITEM_GROUP_DB
   Version: 2
+Body:
+  - Group: EVENT_BOX
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: Roulette_Gold_Coin
+            Rate: 1
+          - Item: Roulette_Silver_Coin
+            Rate: 5
+          - Item: Roulette_Copper_Coin
+            Rate: 80
+          - Item: Bronze_Key_MvP
+            Rate: 1
+  - Group: MES_1
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Hat_Of_Cake
+            Rate: 10
+          - Item: C_Cowboy_Hat
+            Rate: 10
+          - Item: Full_Moon
+            Rate: 10
+          - Item: C_Dragonhelm_Copper
+            Rate: 10
+          - Item: C_Sahkkat
+            Rate: 10
+          - Item: C_Takius_Blindfold
+            Rate: 10
+          - Item: C_Heart_Eyebandage
+            Rate: 10
+          - Item: C_Zorro_Mask
+            Rate: 10
+          - Item: C_Angry_Mouth
+            Rate: 10
+          - Item: C_Pirate_Dagger
+            Rate: 10
+  - Group: MES_2
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Side_Cap
+            Rate: 10
+          - Item: C_Engineer_Cap
+            Rate: 10
+          - Item: C_Mono_Gothic_Bonnet
+            Rate: 10
+          - Item: C_Angel_Mini_Silk_Hat_B
+            Rate: 10
+          - Item: C_Fallen_Angel_Blessing
+            Rate: 10
+          - Item: C_Hawkeye
+            Rate: 10
+          - Item: C_Black_Cat
+            Rate: 10
+          - Item: C_War_Princess_Ribbon
+            Rate: 10
+          - Item: C_Necklace_Rosary
+            Rate: 10
+          - Item: C_Cat_Ears_Cape_Red
+            Rate: 10
+  - Group: MES_3
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Cowlick_WH
+            Rate: 10
+          - Item: C_Flight_Cap
+            Rate: 10
+          - Item: C_Parcel_Hat
+            Rate: 10
+          - Item: C_Ancient_Queen
+            Rate: 10
+          - Item: C_Hair_Bun_WH
+            Rate: 10
+          - Item: C_Rabbit_Ribbon_Hat
+            Rate: 10
+          - Item: C_Skymet_
+            Rate: 10
+          - Item: C_Wing_Of_Happiness
+            Rate: 10
+  - Group: MES_4
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_CatEars_Cyber_HeadP_R
+            Rate: 10
+          - Item: C_Small_Horn_Of_Devil
+            Rate: 10
+          - Item: C_Vanargandr_Helm
+            Rate: 10
+          - Item: C_Hunting_Cap
+            Rate: 10
+          - Item: C_Shura_King_Pledge
+            Rate: 10
+          - Item: C_Moon_Eyepatch
+            Rate: 10
+          - Item: C_Shiba_Inu
+            Rate: 10
+          - Item: C_Under_Rim_Glasses
+            Rate: 10
+  - Group: MES_5
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Sweet_Bonnet
+            Rate: 10
+          - Item: C_Soulless_Wing
+            Rate: 10
+          - Item: C_Tare_Neko_Cru
+            Rate: 10
+          - Item: C_Vane_Hairpin
+            Rate: 10
+          - Item: C_Misty_Ears
+            Rate: 10
+          - Item: C_Love_Chick_Hat
+            Rate: 10
+          - Item: C_Garnet_Tiara
+            Rate: 10
+          - Item: C_Bell_Ribbon
+            Rate: 10
+  - Group: MES_6
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Wind-Up_Key
+            Rate: 10
+          - Item: C_Gothic_Pumpkin_Head
+            Rate: 10
+          - Item: C_Catharina_Von_Brad_60th
+            Rate: 10
+          - Item: C_Cat_Ears_Punkish
+            Rate: 10
+          - Item: C_Crow
+            Rate: 10
+          - Item: C_False_Ears
+            Rate: 10
+          - Item: C_Suit_Sollar
+            Rate: 10
+          - Item: C_Glastheim_Obeserver
+            Rate: 10
+          - Item: C_Volume_Low_Twin
+            Rate: 10
+  - Group: MES_7
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Alice_Wig
+            Rate: 10
+          - Item: C_Khalitzburg_KN_Helm
+            Rate: 10
+          - Item: C_Chung_E_Shinyon_Cap
+            Rate: 10
+          - Item: C_Faceworm_Eggshell
+            Rate: 10
+          - Item: C_Gerhard_Von_Devi
+            Rate: 10
+          - Item: C_Rolf_Von_Ziege_666_II
+            Rate: 10
+          - Item: C_Stretched_Nose_M
+            Rate: 10
+          - Item: C_Flame_Muffler
+            Rate: 10
+          - Item: C_Fallen_Angel_Valletta
+            Rate: 10
+          - Item: C_Queen_Scarabas_Helmet
+            Rate: 10
+  - Group: MES_8
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Camouflage_RabbitHood
+            Rate: 10
+          - Item: C_Love_Rabbit_Hood
+            Rate: 10
+          - Item: C_Rabbit_Ear_Hat
+            Rate: 10
+          - Item: C_Rabbit_Ear_Knit_Hat
+            Rate: 10
+          - Item: C_Rabbit_Magic_Hat
+            Rate: 10
+          - Item: C_Snow_Rabbit_Knit_Hat
+            Rate: 10
+          - Item: C_Rabbit_Earplug
+            Rate: 10
+          - Item: C_Pretty_Rabbit_Hood
+            Rate: 10
+  - Group: MES_9
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Laser_of_Eagle
+            Rate: 10
+          - Item: C_Radio_Antenna
+            Rate: 10
+          - Item: C_Sorcerer_Hood
+            Rate: 10
+          - Item: C_Yellow_Wizardry_Hat
+            Rate: 10
+          - Item: C_Blinking_Eyes
+            Rate: 10
+          - Item: C_Floating_Stone_Of_Int
+            Rate: 10
+          - Item: C_Book_Of_Magic
+            Rate: 10
+          - Item: C_Darkness_Veil
+            Rate: 10
+          - Item: C_Vajra
+            Rate: 10
+          - Item: C_Magic_Circle
+            Rate: 10
+  - Group: MES_10
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Astro_Circle
+            Rate: 10
+          - Item: Lightning_Cloud
+            Rate: 10
+          - Item: C_Blue_Magicianhat
+            Rate: 10
+          - Item: C_Drooping_Kitty
+            Rate: 10
+          - Item: C_Snow_Bear_Food
+            Rate: 10
+          - Item: C_Penguin_Cap_BU
+            Rate: 10
+          - Item: C_Baby_Penguin
+            Rate: 10
+          - Item: C_Fluffy_Heart_Earmuffs
+            Rate: 10
+          - Item: C_Luwmin_Ice
+            Rate: 10
+          - Item: C_Fluffy_Angel_Cape
+            Rate: 10
+  - Group: MES_11
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Pope_Sitting_Head
+            Rate: 10
+          - Item: C_Light_Moonlight_Hat
+            Rate: 10
+          - Item: C_Stings_Silk_Ribbon
+            Rate: 10
+          - Item: C_Blue_Frill_Ribbon
+            Rate: 10
+          - Item: C_SeraphimCoronet
+            Rate: 10
+          - Item: C_Blue_Rose_Eyepatch
+            Rate: 10
+          - Item: C_White_Cat
+            Rate: 10
+          - Item: C_Toy_Syringe
+            Rate: 10
+          - Item: C_Lolita_Two_Side_Up
+            Rate: 10
+          - Item: C_L_RibbonMuff_Black
+            Rate: 10
+  - Group: MES_12
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Celestial_Flower
+            Rate: 10
+          - Item: C_Miyabi_Long_Hair
+            Rate: 10
+          - Item: C_Cherry_Blossom_Hat_YL
+            Rate: 10
+          - Item: C_Sinsuncho_Hat
+            Rate: 10
+          - Item: C_Fairy_Feathers
+            Rate: 10
+          - Item: C_Fox_Ears_Bell_Ribbon
+            Rate: 10
+          - Item: C_Ninja_Scroll
+            Rate: 10
+          - Item: C_Love_Piece
+            Rate: 10
+          - Item: C_Full_BloomCherry_Tree
+            Rate: 10
+  - Group: COSTUME1
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Orc_Helm
+            Rate: 10
+          - Item: C_Snake_Hat2
+            Rate: 10
+          - Item: Donation_Ribbon
+            Rate: 10
+          - Item: C_Green_Feeler
+            Rate: 10
+          - Item: C_Jack_A_Dandy
+            Rate: 10
+          - Item: C_Helm
+            Rate: 10
+          - Item: C_Sharp_Gear
+            Rate: 10
+          - Item: C_Iron_Cane
+            Rate: 10
+          - Item: C_Angelic_Chain
+            Rate: 10
+          - Item: C_Goggle
+            Rate: 10
+          - Item: C_Magestic_Goat
+            Rate: 10
+          - Item: C_Elven_Ears
+            Rate: 10
+          - Item: C_Centimental_Flower
+            Rate: 10
+          - Item: C_Assassin_Mask_
+            Rate: 10
+          - Item: C_Sphinx_Helm
+            Rate: 10
+          - Item: C_Zorro_Mask
+            Rate: 10
+          - Item: C_Ribbon_Red
+            Rate: 10
+          - Item: C_Puppy_Headband
+            Rate: 10
+          - Item: C_Corsair
+            Rate: 10
+          - Item: C_Bunny_Band
+            Rate: 10
+          - Item: C_Headset
+            Rate: 10
+          - Item: C_Tiara
+            Rate: 10
+          - Item: C_Crown
+            Rate: 10
+          - Item: C_Hat
+            Rate: 10
+          - Item: C_Flu_Mask
+            Rate: 10
+          - Item: C_Pierrot_Nose
+            Rate: 10
+          - Item: C_Nurse_Cap
+            Rate: 10
+          - Item: C_Pink_Ribbon
+            Rate: 10
+          - Item: C_Coronet
+            Rate: 10
+          - Item: C_Goblin_Mask_04
+            Rate: 10
+          - Item: C_Panda_Cap
+            Rate: 10
+          - Item: C_Binoculars
+            Rate: 10
+          - Item: C_Fin_Helm
+            Rate: 10
+          - Item: C_Morrigane's_Helm
+            Rate: 10
+          - Item: C_Wedding_Veil
+            Rate: 10
+          - Item: C_Goblin_Mask_01
+            Rate: 10
+          - Item: C_Goblin_Mask_02
+            Rate: 10
+          - Item: C_Goblin_Mask_03
+            Rate: 10
+          - Item: C_Lord_Circlet
+            Rate: 10
+          - Item: C_Bone_Helm
+            Rate: 10
+          - Item: C_Apple_Of_Archer
+            Rate: 10
+          - Item: C_Golden_Gear
+            Rate: 10
+          - Item: C_Angry_Mouth
+            Rate: 10
+          - Item: C_Sunglasses
+            Rate: 10
+          - Item: C_Poring_Hat
+            Rate: 10
+          - Item: C_Big_Sis_Ribbon
+            Rate: 10
+          - Item: C_Munak_Turban
+            Rate: 10
+          - Item: C_Bongun_Hat
+            Rate: 10
+          - Item: C_Galapago_Cap
+            Rate: 10
+          - Item: C_Horn_Of_Succubus
+            Rate: 10
+          - Item: C_Inccubus_Horn
+            Rate: 10
+          - Item: C_Joker_Jester
+            Rate: 10
+          - Item: C_Blinker
+            Rate: 10
+          - Item: C_Luxury_Sunglasses
+            Rate: 10
+          - Item: C_One_Eyed_Glass
+            Rate: 10
+          - Item: C_Glasses
+            Rate: 10
+          - Item: C_Pair_Of_Red_Ribbon
+            Rate: 10
+          - Item: C_Cigar
+            Rate: 10
+          - Item: C_Poo_Poo_Hat
+            Rate: 10
+          - Item: C_Marionette_Doll
+            Rate: 10
+          - Item: C_Orange_Ribbon
+            Rate: 10
+          - Item: C_Ph.D_Hat
+            Rate: 10
+          - Item: C_Stop_Post
+            Rate: 10
+          - Item: C_Baby_Pacifier
+            Rate: 10
+          - Item: C_Ghost_Bandana
+            Rate: 10
+          - Item: C_Construction_Helmet
+            Rate: 10
+          - Item: C_Biretta
+            Rate: 10
+          - Item: C_Smoking_Pipe
+            Rate: 10
+          - Item: C_Star_Sparkling
+            Rate: 10
+          - Item: C_Masquerade
+            Rate: 10
+          - Item: C_Mini_Glasses
+            Rate: 10
+          - Item: C_Bomb_Wick
+            Rate: 10
+          - Item: C_Magni_Cap
+            Rate: 10
+          - Item: C_Fricca's_Circlet
+            Rate: 10
+          - Item: C_Morpheus's_Hood
+            Rate: 10
+          - Item: C_Goibne's_Helm
+            Rate: 10
+          - Item: C_Bandana
+            Rate: 10
+          - Item: C_Ribbon_Yellow
+            Rate: 10
+          - Item: C_Sunflower
+            Rate: 10
+  - Group: COSTUME2
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Spore_Hat
+            Rate: 10
+          - Item: C_Boys_Cap
+            Rate: 10
+          - Item: C_Valkyrie_Helm
+            Rate: 10
+          - Item: C_Deviruchi_Cap
+            Rate: 10
+          - Item: C_Frog_Cap
+            Rate: 10
+          - Item: C_Blush
+            Rate: 10
+          - Item: C_Hahoe_Mask
+            Rate: 10
+          - Item: C_Kabuki_Mask
+            Rate: 10
+          - Item: C_Feather_Beret
+            Rate: 10
+          - Item: C_Note_Headphone
+            Rate: 10
+          - Item: C_Mask_Of_Fox
+            Rate: 10
+          - Item: C_Dectective_Hat
+            Rate: 10
+          - Item: C_Ear_Of_Devils_Wing
+            Rate: 10
+          - Item: C_Mini_Propeller
+            Rate: 10
+          - Item: C_Mr_Smile
+            Rate: 10
+          - Item: C_Sahkkat
+            Rate: 10
+          - Item: C_Captain_Hat
+            Rate: 10
+          - Item: C_Coppola
+            Rate: 10
+          - Item: C_Poring_Cake_Hat
+            Rate: 10
+          - Item: C_Romantic_Gent
+            Rate: 10
+          - Item: C_Gas_Mask
+            Rate: 10
+          - Item: C_Water_Lily_Crown
+            Rate: 10
+          - Item: C_Well_Baked_Toast
+            Rate: 10
+          - Item: C_Mistress_Crown
+            Rate: 10
+          - Item: C_Alarm_Mask
+            Rate: 10
+          - Item: C_Foxhat
+            Rate: 10
+          - Item: C_Straw_Hat
+            Rate: 10
+          - Item: C_L_Magestic_Goat
+            Rate: 10
+          - Item: C_Opera_Ghost_Mask
+            Rate: 10
+          - Item: C_Leaf_Headgear
+            Rate: 10
+          - Item: C_Lazy_Raccoon
+            Rate: 10
+          - Item: C_Cap_Of_Concentration
+            Rate: 10
+          - Item: C_Antler
+            Rate: 10
+          - Item: C_AFK_Hat
+            Rate: 10
+          - Item: C_Hot_Blood_Headband
+            Rate: 10
+          - Item: C_Welding_Mask
+            Rate: 10
+          - Item: C_Hairband_Of_Grandpeco
+            Rate: 10
+          - Item: C_Funeral_Costume
+            Rate: 10
+          - Item: C_Hat_Of_Cake
+            Rate: 10
+          - Item: C_Antenna
+            Rate: 10
+          - Item: C_Fur_Hat
+            Rate: 10
+          - Item: C_Poporing_Cap
+            Rate: 10
+          - Item: C_Fashionable_Glasses
+            Rate: 10
+          - Item: C_Observer
+            Rate: 10
+          - Item: C_Poison_Spore_Hat
+            Rate: 10
+          - Item: C_Prontera_Army_Cap
+            Rate: 10
+          - Item: C_Hockey_Mask
+            Rate: 10
+          - Item: C_Zealotus_Mask
+            Rate: 10
+          - Item: C_Bird_Nest_Hat
+            Rate: 10
+          - Item: C_Mandragora_Cap
+            Rate: 10
+          - Item: C_Sombrero
+            Rate: 10
+  - Group: Box_99_70
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: C_Rune_Circlet
+            Rate: 10
+          - Item: C_Mitra
+            Rate: 10
+          - Item: C_Driver_Band_R
+            Rate: 10
+          - Item: C_Driver_Band_Y
+            Rate: 10
+          - Item: C_Shadow_Handicraft
+            Rate: 10
+          - Item: C_Minstrel_Song_Hat
+            Rate: 10
+          - Item: C_Midas_Whisper
+            Rate: 10
+          - Item: C_Magic_Stone_Hat
+            Rate: 10
+          - Item: C_Blazing_Soul
+            Rate: 10
+          - Item: C_Wind_Whisper
+            Rate: 10
+          - Item: C_Dying_Swan
+            Rate: 10
+          - Item: C_Protect_Of_Crown
+            Rate: 10
+          - Item: C_Circlet_Of_Bone
+            Rate: 10
+          - Item: C_Camouflage_RabbitHood
+            Rate: 10
+          - Item: C_Sniper_Google
+            Rate: 10
+          - Item: C_Schmitz_Helm
+            Rate: 10
+  - Group: COSTUME3
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: Drooping_Kiehl
+            Rate: 10
+          - Item: Drooping_Aliot
+            Rate: 10
+          - Item: C_Droopy_Alice_Doll
+            Rate: 10
+          - Item: C_Drooping_Gunslinger
+            Rate: 10
+          - Item: C_Tare_Pope_Casual
+            Rate: 10
+          - Item: C_Tare_W_Doll
+            Rate: 10
+          - Item: C_Tare_Ahat
+            Rate: 10
+          - Item: C_JP_EV12
+            Rate: 10
+          - Item: Costume_Drooping_Schmidt
+            Rate: 10
+          - Item: Costume_Drooping_Oscar
+            Rate: 10
+          - Item: Costume_Drooping_Heinrich
+            Rate: 10

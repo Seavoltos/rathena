@@ -1,0 +1,347 @@
+//===== rAthena Script ======================================= 
+//= Kafras (Cities/Dungeons/Fields)
+//===== By: ================================================== 
+//= 
+//===== Current Version: ===================================== 
+//= 
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: =========================================
+//= Argument settings for callfunc "F_Kafra":
+//=  arg(0): 0 - Default Kafra message
+//=          1 - Niflhiem Kafra message
+//=          2 - Guild Kafra message
+//=  arg(1): 1 - Disable teleport menu 
+//=  arg(2): 1 - Disable info menu
+//=  arg(3): Cost of Storage service
+//=  arg(4): Cost of Rent a Pushcart service
+//===== Additional Comments: ================================= 
+//= 
+//============================================================ 
+
+// Kafras
+//============================================================
+prontera,147,175,5	script	Kafra Employee::kaf_01	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "prontera",155,181,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Prontera";
+}
+
+morocc,160,104,3	script	Kafra Employee::kaf_02	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "morocc",157,97,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Morocc";
+}
+
+morold,160,104,3	script	Kafra Employee::kaf_MOC02	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "morold",157,97,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Morocc";
+}
+
+geffen,114,71,5	script	Kafra Employee::kaf_03	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "geffen",120,73,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Geffen";
+}
+
+payon,151,235,5	script	Kafra Employee::kaf_04	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "payon",156,230,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Payon";
+}
+
+alberta,53,247,4	script	Kafra Employee::kaf_05	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "alberta",49,242,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Alberta";
+}
+
+alberta,218,103,4	script	Kafra Employee::kaf_06	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "alberta",214,98,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Alberta";
+}
+
+izlude,132,121,4	script	Kafra Employee::kaf_07	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "izlude",128,113,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Izlude";
+}
+
+aldebaran,144,122,3	script	Kafra Employee::kaf_08	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "aldebaran",140,116,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Aldebaran";
+}
+
+xmas,152,133,3	script	Kafra Employee::kaf_09	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "xmas",148,126,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Lutie";
+}
+
+comodo,262,183,3	script	Kafra Employee::kaf_10	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "comodo",258,177,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Comodo";
+}
+
+yuno,161,174,3	script	Kafra Employee::kaf_11	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "yuno",157,166,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Yuno";
+}
+
+amatsu,118,111,3	script	Kafra Employee::kaf_12	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "amatsu",114,105,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Amatsu";
+}
+
+gonryun,164,127,3	script	Kafra Employee::kaf_13	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "gonryun",159,118,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Gonryun";
+}
+
+louyang,223,118,3	script	Kafra Employee::kaf_14	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "louyang",217,112,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Louyang";
+}
+
+jawaii,194,245,3	script	Kafra Employee::kaf_15	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "jawaii",190,239,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Jawaii";
+}
+
+ayothaya,154,115,3	script	Kafra Employee::kaf_16	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "ayothaya",149,108,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Ayothaya";
+}
+
+lighthalzen,163,80,3	script	Kafra Employee::kaf_17	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "lighthalzen",159,90,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Lighthalzen";
+}
+
+hugel,92,154,5	script	Kafra Employee::kaf_18	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "hugel",96,149,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Hugel";
+}
+
+rachel,133,101,3	script	Kafra Employee::kaf_19	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "rachel",129,110,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Rachel";
+}
+
+veins,219,106,3	script	Kafra Employee::kaf_20	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "veins",216,103,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Veins";
+}
+
+moscovia,226,188,3	script	Kafra Employee::kaf_21	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "moscovia",223,181,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Moscovia";
+}
+
+batt_off,138,98,3	script	Kafra Employee::kaf_22	114,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "batt_off",128,92,1,1;
+	callfunc "F_KafEnd",0,1,"en el Battle Office";
+}
+
+einbech,200,84,3	script	Kafra Employee::kaf_23	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "einbech",186,74,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Einbech";
+}
+
+
+
+
+/*
+// Fogatas
+//============================================================
+-	script	Fogata	FAKE_NPC,{
+}
+
+alberta,50,244,4	duplicate(Fogata)	#Fogata1	10252
+
+*/

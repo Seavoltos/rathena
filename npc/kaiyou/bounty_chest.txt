@@ -1,0 +1,163 @@
+-	script	bounty_chest#Bounty	FAKE_NPC,{
+	function F_TreasureCache;
+	end;
+
+OnBounty:
+	announce "[Bounty Chest] ¡Felicitaciones! "+strcharinfo(0) +" ha encontrado el Bounty Chest!", bc_map, 0x234190;
+	.@area = getbattleflag("area_size");
+	getmapxy(@map$, @x, @y, BL_PC);
+	addrid(4,0,@x+.@area, @y+.@area, @x-.@area, @y-.@area);
+	F_TreasureCache;
+	
+	function	F_TreasureCache	{
+		if ( checkvending() && .novend || checkchatting() && .nopub || checkidle() > .idle_time ) end;
+		getitem 41036,1;
+		return;
+	}
+	initnpctimer;
+	end;
+
+OnTimer21600000:
+	sleep rand(0,21600000);
+	monster strnpcinfo(2),0,0,"Atrapame!",2058,1,"bounty_chest#"+strnpcinfo(2)+"::OnBounty";
+	end;
+
+OnInit:
+	// Ignore players who are vending?
+	.novend = true;
+	// Ignore players who are in pubs/chatroom? 
+	.nopub = true;
+	// Ignore idle players? if yes, set how many seconds/min/hours to be considered as idle?
+	// sec * min * hour
+	// Default : 5 mins
+	.idle_time = 60 * 5; 
+	if ( strnpcinfo(2) == "Bounty" ) end;
+	monster strnpcinfo(2),0,0,"Cache Me",2058,1,"bounty_chest#"+strnpcinfo(2)+"::OnBounty";
+	end;
+}
+
+//-	duplicate(bounty_chest#Bounty)	bounty_chest#jupe_ele	844
+
+-	duplicate(bounty_chest#Bounty)	bounty_chest#abyss_01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#abyss_02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#abyss_03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#abbey01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#abbey02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#abbey03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ama_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ama_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ama_dun03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#anthell01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#anthell02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ayo_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ayo_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#beach_dun	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#beach_dun2	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#beach_dun3	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#lhz_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#lhz_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#lhz_dun03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#iz_dun00	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#iz_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#iz_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#iz_dun03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#iz_dun04	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#c_tower1	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#c_tower2	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#c_tower3	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#c_tower4	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#mjo_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#mjo_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#mjo_dun03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#prt_sewb1	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#prt_sewb2	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#prt_sewb3	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#prt_sewb4	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ein_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ein_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gef_dun00	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gef_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gef_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#glast_01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_church	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_chyard	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_cas01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_cas02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_prison	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_prison1	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_knt01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_knt02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_in01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_step	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_sew01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_sew02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_sew03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gl_sew04	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gon_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gon_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#gon_dun03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#prt_maze01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#prt_maze02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#prt_maze03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ice_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ice_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ice_dun03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#juperos_01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#juperos_02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#jupe_core	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#kh_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#kh_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#lou_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#lou_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#lou_dun03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#mag_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#mag_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#mosk_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#mosk_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#mosk_dun03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#orcsdun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#orcsdun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#pay_dun00	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#pay_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#pay_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#pay_dun03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#moc_pryd01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#moc_pryd02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#moc_pryd03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#moc_pryd04	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#moc_pryd05	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#moc_pryd06	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ra_san01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ra_san02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ra_san03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ra_san04	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#ra_san05	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#in_sphinx1	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#in_sphinx2	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#in_sphinx3	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#in_sphinx4	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#in_sphinx5	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#treasure01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#treasure02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#tha_t01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#tha_t02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#tha_t03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#tha_t04	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#tha_t05	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#tha_t06	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#thor_v01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#thor_v02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#thor_v03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#xmas_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#xmas_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#tur_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#tur_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#tur_dun03	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#tur_dun04	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#um_dun01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#um_dun02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#odin_tem01	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#odin_tem02	844
+-	duplicate(bounty_chest#Bounty)	bounty_chest#odin_tem03	844
+
+

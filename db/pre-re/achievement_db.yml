@@ -46,1407 +46,792 @@ Header:
   Version: 2
 
 Body:
-  - Id: 110000
-    Group: Eat
-    Name: At this time I live to eat
-    Score: 10
-  - Id: 110001
-    Group: Chatting
-    Name: A fan of this polarity
-    Targets:
-      - Id: 0
-        Count: 1
-      - Id: 1
-        Count: 1
-      - Id: 2
-        Count: 1
-      - Id: 3
-        Count: 1
-      - Id: 4
-        Count: 1
-      - Id: 5
-        Count: 1
-      - Id: 6
-        Count: 1
-    Score: 10
   - Id: 120001
     Group: Adventure
     Name: North Prontera Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120002
     Group: Adventure
     Name: North Prontera Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120003
     Group: Adventure
     Name: North Prontera Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120004
     Group: Adventure
     Name: West Prontera Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120005
     Group: Adventure
     Name: West Prontera Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120006
     Group: Adventure
     Name: East Prontera Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120007
     Group: Adventure
     Name: South Prontera Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120008
     Group: Adventure
     Name: South Prontera Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120009
     Group: Adventure
     Name: South Prontera Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120010
     Group: Adventure
     Name: South Prontera Field Exploration(4)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120011
     Group: Adventure
     Name: East Geffen Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120012
     Group: Adventure
     Name: Southeast Geffen Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120013
     Group: Adventure
     Name: Northwest Geffen Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120014
     Group: Adventure
     Name: Northwest Geffen Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120015
     Group: Adventure
     Name: Northwest Geffen Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120016
     Group: Adventure
     Name: South Geffen Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120017
     Group: Adventure
     Name: South Geffen Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120018
     Group: Adventure
     Name: Sograt Desert Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120019
     Group: Adventure
     Name: Sograt Desert Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120020
     Group: Adventure
     Name: Sograt Desert Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120021
     Group: Adventure
     Name: Sograt Desert Field Exploration(4)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120022
     Group: Adventure
     Name: Sograt Desert Field Exploration(5)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120023
     Group: Adventure
     Name: Sograt Desert Field Exploration(6)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120024
     Group: Adventure
     Name: Southwest Payon Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120025
     Group: Adventure
     Name: Southwest Payon Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120026
     Group: Adventure
     Name: Southwest Payon Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120027
     Group: Adventure
     Name: Southwest Payon Field Exploration(4)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120028
     Group: Adventure
     Name: East Payon Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120029
     Group: Adventure
     Name: East Payon Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120030
     Group: Adventure
     Name: East Payon Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120031
     Group: Adventure
     Name: East Payon Field Exploration(4)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120032
     Group: Adventure
     Name: North Mjolnir Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120033
     Group: Adventure
     Name: North Mjolnir Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120034
     Group: Adventure
     Name: North Mjolnir Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120035
     Group: Adventure
     Name: North Mjolnir Field Exploration(4)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120036
     Group: Adventure
     Name: North Mjolnir Field Exploration(5)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120037
     Group: Adventure
     Name: South Mjolnir Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120038
     Group: Adventure
     Name: South Mjolnir Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120039
     Group: Adventure
     Name: South Mjolnir Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120040
     Group: Adventure
     Name: South Mjolnir Field Exploration(4)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120041
     Group: Adventure
     Name: South Mjolnir Field Exploration(5)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120042
     Group: Adventure
     Name: South Mjolnir Field Exploration(6)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120043
     Group: Adventure
     Name: South Aldebaran Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120044
     Group: Adventure
     Name: Comodo Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120045
     Group: Adventure
     Name: Comodo Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120046
     Group: Adventure
     Name: Comodo Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120047
     Group: Adventure
     Name: Comodo Field Exploration(4)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120048
     Group: Adventure
     Name: Comodo Field Exploration(5)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120049
     Group: Adventure
     Name: Comodo Field Exploration(6)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120050
     Group: Adventure
     Name: Comodo Field Exploration(7)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120051
     Group: Adventure
     Name: Comodo Field Exploration(8)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120052
     Group: Adventure
     Name: Border Checkpoint Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120053
     Group: Adventure
     Name: Border Checkpoint Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120054
     Group: Adventure
     Name: Kiel Hyre Mansion Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120055
     Group: Adventure
     Name: El Mes Plateau Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120056
     Group: Adventure
     Name: El Mes Plateau Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120057
     Group: Adventure
     Name: El Mes Plateau Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120058
     Group: Adventure
     Name: El Mes Gorge Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120059
     Group: Adventure
     Name: Kiel Hyre Academy Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120060
     Group: Adventure
     Name: Guard Camp Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120061
     Group: Adventure
     Name: Juno Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120062
     Group: Adventure
     Name: Front of Thanatos Tower Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120063
     Group: Adventure
     Name: Hugel Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120064
     Group: Adventure
     Name: Hugel Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120065
     Group: Adventure
     Name: Hugel Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120066
     Group: Adventure
     Name: Abyss Lake Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120067
     Group: Adventure
     Name: Einbroch Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120068
     Group: Adventure
     Name: Einbroch Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120069
     Group: Adventure
     Name: Einbroch Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120070
     Group: Adventure
     Name: Einbroch Field Exploration(4)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120071
     Group: Adventure
     Name: Einbroch Field Exploration(5)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120072
     Group: Adventure
     Name: Einbroch Field Exploration(6)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120073
     Group: Adventure
     Name: Einbroch Field Exploration(7)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120074
     Group: Adventure
     Name: Einbroch Field Exploration(8)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120075
     Group: Adventure
     Name: Lighthalzen Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120076
     Group: Adventure
     Name: Lighthalzen Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120077
     Group: Adventure
     Name: Lighthalzen Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120078
     Group: Adventure
     Name: Rachel Audhumbla Plains Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120079
     Group: Adventure
     Name: Rachel Plains Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120080
     Group: Adventure
     Name: Rachel Plains Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120081
     Group: Adventure
     Name: Rachel Plains Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120082
     Group: Adventure
     Name: Rachel Audhumbla Grassland Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120083
     Group: Adventure
     Name: Rachel Audhumbla Grassland Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120084
     Group: Adventure
     Name: Portus Luna Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120085
     Group: Adventure
     Name: Veins Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120086
     Group: Adventure
     Name: Veins Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120087
     Group: Adventure
     Name: Veins Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120088
     Group: Adventure
     Name: Veins Field Exploration(4)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120089
     Group: Adventure
     Name: Veins Field Exploration(5)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120090
-    Group: Adventure
-    Name: Eclage Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120091
-    Group: Adventure
-    Name: North Bitfrost Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120092
-    Group: Adventure
-    Name: South Bitfrost Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120093
-    Group: Adventure
-    Name: Splendide Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120094
-    Group: Adventure
-    Name: Splendide Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120095
-    Group: Adventure
-    Name: Splendide Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120096
-    Group: Adventure
-    Name: Manuk Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120097
-    Group: Adventure
-    Name: Manuk Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120098
-    Group: Adventure
-    Name: Manuk Field Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120099
-    Group: Adventure
-    Name: Outskirts of Kamidal Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120100
-    Group: Adventure
-    Name: Outskirts of Kamidal Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120101
     Group: Adventure
     Name: Amatsu Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120102
     Group: Adventure
     Name: Kunlun Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120103
     Group: Adventure
     Name: Kunlun Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120104
     Group: Adventure
     Name: Ayothaya Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120105
     Group: Adventure
     Name: Moscovia Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120106
-    Group: Adventure
-    Name: Brasilis Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120107
-    Group: Adventure
-    Name: Dewata Field Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120108
-    Group: Adventure
-    Name: Malaya Field Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
-  - Id: 120109
-    Group: Adventure
-    Name: Malaya Field Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 10
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120110
     Group: Adventure
     Name: Abbey Underground Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120111
     Group: Adventure
     Name: Abyss Lake Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120112
     Group: Adventure
     Name: Clock Tower Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120113
     Group: Adventure
     Name: Amatsu Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120114
     Group: Adventure
     Name: Ant Hell Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120115
     Group: Adventure
     Name: Ayothaya Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120116
     Group: Adventure
     Name: Comodo Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120117
     Group: Adventure
     Name: Brasilis Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120118
     Group: Adventure
     Name: Clock Tower Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120119
     Group: Adventure
     Name: Istana Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120120
     Group: Adventure
     Name: Scaraba Hole Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120121
     Group: Adventure
     Name: Bitfrost Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120122
     Group: Adventure
     Name: Einbroch Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120123
     Group: Adventure
     Name: Geffen Underground Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120124
     Group: Adventure
     Name: Glastheim Dungeon Exploration(1)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120125
     Group: Adventure
     Name: Glastheim Dungeon Exploration(2)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120126
     Group: Adventure
     Name: Glastheim Dungeon Exploration(3)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120127
     Group: Adventure
     Name: Glastheim Dungeon Exploration(4)
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120128
     Group: Adventure
     Name: Kunlun Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120129
     Group: Adventure
     Name: Rachel Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120130
     Group: Adventure
     Name: Sphinx Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120131
     Group: Adventure
     Name: Izlude Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120132
     Group: Adventure
     Name: Robot Factory Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120133
     Group: Adventure
     Name: Bio Lab Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120134
     Group: Adventure
     Name: Kunlun Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120135
     Group: Adventure
     Name: Nogg Road Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120136
     Group: Adventure
     Name: Coal Mine Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120137
     Group: Adventure
     Name: Pyramid Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120138
     Group: Adventure
     Name: Orc Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120139
     Group: Adventure
     Name: Payon Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120140
     Group: Adventure
     Name: Labyrinth Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120141
     Group: Adventure
     Name: Undersea Tunnel Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120142
     Group: Adventure
     Name: Thanatos Tower Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120143
     Group: Adventure
     Name: Thor Volcano Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120144
     Group: Adventure
     Name: Sunken Ship Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120145
     Group: Adventure
     Name: Turtle Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 120146
     Group: Adventure
     Name: Toy Factory Dungeon Exploration
-    #Rewards:
-    #  Item: Shabby_Purse
-    Score: 20
-  - Id: 127001
-    Group: Chatting
-    Name: Prontera Contribution
-    Targets:
-      - Id: 0
-        Count: 3000
-      - Id: 1
-        Count: 6000
-      - Id: 2
-        Count: 12000
-      - Id: 3
-        Count: 20000
-      - Id: 4
-        Count: 1000
-    Map: prontera
-    Score: 10
-  - Id: 127002
-    Group: Chatting
-    Name: Geffen Contribution
-    Targets:
-      - Id: 0
-        Count: 3000
-      - Id: 1
-        Count: 6000
-      - Id: 2
-        Count: 12000
-      - Id: 3
-        Count: 20000
-      - Id: 4
-        Count: 1000
-    Map: geffen
-    Score: 10
-  - Id: 127003
-    Group: Chatting
-    Name: Morocc Contribution
-    Targets:
-      - Id: 0
-        Count: 3000
-      - Id: 1
-        Count: 6000
-      - Id: 2
-        Count: 12000
-      - Id: 3
-        Count: 20000
-      - Id: 4
-        Count: 1000
-    Map: morocc
-    Score: 10
-  - Id: 127004
-    Group: Chatting
-    Name: Payon Contribution
-    Targets:
-      - Id: 0
-        Count: 3000
-      - Id: 1
-        Count: 6000
-      - Id: 2
-        Count: 12000
-      - Id: 3
-        Count: 20000
-      - Id: 4
-        Count: 1000
-    Map: payon
-    Score: 10
-  - Id: 127005
-    Group: Chatting
-    Name: Juno Contribution
-    Targets:
-      - Id: 0
-        Count: 3000
-      - Id: 1
-        Count: 6000
-      - Id: 2
-        Count: 12000
-      - Id: 3
-        Count: 20000
-      - Id: 4
-        Count: 1000
-    Map: yuno
-    Score: 10
-  - Id: 127006
-    Group: Chatting
-    Name: Lighthalzen Contribution
-    Targets:
-      - Id: 0
-        Count: 3000
-      - Id: 1
-        Count: 6000
-      - Id: 2
-        Count: 12000
-      - Id: 3
-        Count: 20000
-      - Id: 4
-        Count: 1000
-    Map: lighthalzen
-    Score: 10
-  - Id: 127007
-    Group: Chatting
-    Name: Einbroch Contribution
-    Targets:
-      - Id: 0
-        Count: 3000
-      - Id: 1
-        Count: 6000
-      - Id: 2
-        Count: 12000
-      - Id: 3
-        Count: 20000
-      - Id: 4
-        Count: 1000
-    Map: einbroch
-    Score: 10
-  - Id: 127008
-    Group: Chatting
-    Name: Rachel Contribution
-    Targets:
-      - Id: 0
-        Count: 3000
-      - Id: 1
-        Count: 6000
-      - Id: 2
-        Count: 12000
-      - Id: 3
-        Count: 20000
-      - Id: 4
-        Count: 1000
-    Map: rachel
-    Score: 10
-  - Id: 127009
-    Group: Chatting
-    Name: Veins Contribution
-    Targets:
-      - Id: 0
-        Count: 3000
-      - Id: 1
-        Count: 6000
-      - Id: 2
-        Count: 12000
-      - Id: 3
-        Count: 20000
-      - Id: 4
-        Count: 1000
-    Map: veins
-    Score: 10
-  - Id: 128000
-    Group: Battle
-    Name: Uninvited Guest
-    #Targets:
-    #  - Id: 0
-    #    Mob: XM_CELINE_KIMI
-    Score: 10
-  - Id: 128001
-    Group: Battle
-    Name: Strange Guest
-    #Targets:
-    #  - Id: 0
-    #    Mob: XM_CELINE_KIMI
-    #    Count: 10
-    Score: 10
-  - Id: 128002
-    Group: Battle
-    Name: Get along with map...
-    #Targets:
-    #  - Id: 0
-    #    Mob: XM_CELINE_KIMI
-    #    Count: 25
-    Score: 20
-  - Id: 128003
-    Group: Battle
-    Name: Welcomed Guest
-    #Targets:
-    #  - Id: 0
-    #    Mob: XM_CELINE_KIMI
-    #    Count: 50
-    Score: 30
-  - Id: 128004
-    Group: Battle
-    Name: Kimmy's best friend
-    #Targets:
-    #  - Id: 0
-    #    Mob: XM_CELINE_KIMI
-    #    Count: 100
-    Score: 50
-  - Id: 128005
-    Group: Battle
-    Name: Novice Angler
-    #Targets:
-    #  - Id: 0
-    #    Mob: BAKONAWA_3
-    Score: 10
-  - Id: 128006
-    Group: Battle
-    Name: Juicy Hunter
-    #Targets:
-    #  - Id: 0
-    #    Mob: BAKONAWA_3
-    #    Count: 10
-    Score: 20
-  - Id: 128007
-    Group: Battle
-    Name: Rhythm Master
-    #Targets:
-    #  - Id: 0
-    #    Mob: BAKONAWA_3
-    #    Count: 50
-    Score: 50
-  - Id: 128008
-    Group: Battle
-    Name: Bold Adventurer
-    Targets:
-      - Id: 0
-        Mob: BAPHOMET_I
-    Score: 10
-  - Id: 128009
-    Group: Battle
-    Name: Baphomet Hatred
-    Targets:
-      - Id: 0
-        Mob: BAPHOMET_I
-        Count: 10
-    Score: 20
-  - Id: 128010
-    Group: Battle
-    Name: Goat's Nemesis
-    Targets:
-      - Id: 0
-        Mob: BAPHOMET_I
-        Count: 50
-    Score: 50
-  - Id: 128011
-    Group: Battle
-    Name: Ordinary Tourist
-    #Targets:
-    #  - Id: 0
-    #    Mob: GRIM_REAPER_ANKOU
-    Score: 10
-  - Id: 128012
-    Group: Battle
-    Name: Backcountry Expert
-    #Targets:
-    #  - Id: 0
-    #    Mob: GRIM_REAPER_ANKOU
-    #    Count: 10
-    Score: 20
-  - Id: 128013
-    Group: Battle
-    Name: Able to eat more like this
-    #Targets:
-    #  - Id: 0
-    #    Mob: GRIM_REAPER_ANKOU
-    #    Count: 50
-    Score: 50
-  - Id: 128014
-    Group: Battle
-    Name: Digest hard meat
-    #Targets:
-    #  - Id: 0
-    #    Mob: BUWAYA
-    Score: 10
-  - Id: 128015
-    Group: Battle
-    Name: Master of Escape
-    #Targets:
-    #  - Id: 0
-    #    Mob: BUWAYA
-    #    Count: 10
-    Score: 20
-  - Id: 128016
-    Group: Battle
-    Name: Immortal Hunter
-    #Targets:
-    #  - Id: 0
-    #    Mob: BUWAYA
-    #    Count: 50
-    Score: 50
-  - Id: 128017
-    Group: Battle
-    Name: Stood up and overcame despair
-    #Targets:
-    #  - Id: 0
-    #    Mob: MM_MOROCC_ADT
-    Score: 10
-  - Id: 128018
-    Group: Battle
-    Name: Ember of Hope
-    #Targets:
-    #  - Id: 0
-    #    Mob: MM_MOROCC_ADT
-    #    Count: 10
-    Score: 10
-  - Id: 128019
-    Group: Battle
-    Name: Pouring Aurora
-    #Targets:
-    #  - Id: 0
-    #    Mob: MM_MOROCC_ADT
-    #    Count: 25
-    Score: 20
-  - Id: 128020
-    Group: Battle
-    Name: Who is desperate? I am hopeless!
-    #Targets:
-    #  - Id: 0
-    #    Mob: MM_MOROCC_ADT
-    #    Count: 50
-    Score: 30
-  - Id: 128021
-    Group: Battle
-    Name: I know god will save the world
-    #Targets:
-    #  - Id: 0
-    #    Mob: MM_MOROCC_ADT
-    #    Count: 100
-    Score: 50
-  - Id: 128022
-    Group: Battle
-    Name: There was mercy in Morocc army
-    #Targets:
-    #  - Id: 0
-    #    Mob: EP14_MORS_BOSSB
-    Score: 10
-  - Id: 128023
-    Group: Battle
-    Name: There was fear in Morocc army
-    #Targets:
-    #  - Id: 0
-    #    Mob: EP14_MORS_BOSSB
-    #    Count: 10
-    Score: 20
-  - Id: 128024
-    Group: Battle
-    Name: Guard of weak army
-    #Targets:
-    #  - Id: 0
-    #    Mob: EP14_MORS_BOSSB
-    #    Count: 50
-    Score: 50
-  - Id: 128025
-    Group: Battle
-    Name: Audience with the queen
-    #Targets:
-    #  - Id: 0
-    #    Mob: FACEWORM_QUEEN
-    Score: 10
-  - Id: 128026
-    Group: Battle
-    Name: Warm earth
-    #Targets:
-    #  - Id: 0
-    #    Mob: FACEWORM_QUEEN_G
-    Score: 10
-  - Id: 128027
-    Group: Battle
-    Name: Water is very good exactly
-    #Targets:
-    #  - Id: 0
-    #    Mob: FACEWORM_QUEEN_B
-    Score: 10
-  - Id: 128028
-    Group: Battle
-    Name: Pleasant breeze
-    #Targets:
-    #  - Id: 0
-    #    Mob: FACEWORM_QUEEN_Y
-    Score: 10
-  - Id: 128029
-    Group: Battle
-    Name: Visitor of old castle
-    #Targets:
-    #  - Id: 0
-    #    Mob: MG_AMDARAIS
-    Score: 10
-  - Id: 128030
-    Group: Battle
-    Name: Lord of old castle
-    #Targets:
-    #  - Id: 0
-    #    Mob: MG_AMDARAIS
-    #    Count: 10
-    Score: 20
-  - Id: 128031
-    Group: Battle
-    Name: Conqueror of old castle
-    #Targets:
-    #  - Id: 0
-    #    Mob: MG_AMDARAIS
-    #    Count: 50
-    Score: 50
-  - Id: 128032
-    Group: Battle
-    Name: Haggard sucker
-    #Targets:
-    #  - Id: 0
-    #    Mob: MG_AMDARAIS_H
-    Score: 10
-  - Id: 128033
-    Group: Battle
-    Name: Hope of the Knight
-    #Targets:
-    #  - Id: 0
-    #    Mob: MG_AMDARAIS_H
-    #    Count: 10
-    Score: 20
-  - Id: 128034
-    Group: Battle
-    Name: Guardian of the Dawn
-    #Targets:
-    #  - Id: 0
-    #    Mob: MG_AMDARAIS_H
-    #    Count: 50
-    Score: 50
-  - Id: 128035
-    Group: Battle
-    Name: Time Traveler
-    #Targets:
-    #  - Id: 0
-    #    Mob: MM_SARAH
-    Score: 10
-  - Id: 128036
-    Group: Battle
-    Name: Restore ancient relic
-    #Targets:
-    #  - Id: 0
-    #    Mob: MM_SARAH
-    #    Count: 10
-    Score: 20
-  - Id: 128037
-    Group: Battle
-    Name: Master of relic transport
-    #Targets:
-    #  - Id: 0
-    #    Mob: MM_SARAH
-    #    Count: 50
-    Score: 50
-  - Id: 128038
-    Group: Battle
-    Name: Show Jailbreak to the captain
-    #Targets:
-    #  - Id: 0
-    #    Mob: E1_FELOCK
-    Score: 10
-  - Id: 128039
-    Group: Battle
-    Name: Show Jailbreak to the weak captain
-    #Targets:
-    #  - Id: 0
-    #    Mob: E2_FELOCK
-    Score: 10
-  - Id: 128040
-    Group: Battle
-    Name: Riot on board
-    #Targets:
-    #  - Id: 0
-    #    Mob: E1_FELOCK
-    Score: 20
-  - Id: 128041
-    Group: Battle
-    Name: Turmoil on board
-    #Targets:
-    #  - Id: 0
-    #    Mob: E1_FELOCK
-    #    Count: 10
-    Score: 20
-  - Id: 128042
-    Group: Battle
-    Name: Rebellion on board
-    #Targets:
-    #  - Id: 0
-    #    Mob: E1_FELOCK
-    #    Count: 50
-    Score: 50
-  - Id: 128043
-    Group: Battle
-    Name: Revolt of Riot
-    #Targets:
-    #  - Id: 0
-    #    Mob: E2_FELOCK
-    #    Count: 50
-    Score: 50
-  - Id: 128044
-    Group: Battle
-    Name: Magic tournament champion
-    #Targets:
-    #  - Id: 0
-    #    Mob: GEFFEN_FENRIR
-    Score: 10
-  - Id: 128045
-    Group: Battle
-    Name: Gladiator of Coliseum
-    #Targets:
-    #  - Id: 0
-    #    Mob: GEFFEN_FENRIR
-    #    Count: 10
-    Score: 20
-  - Id: 128046
-    Group: Battle
-    Name: Slayer of Colosseum
-    #Targets:
-    #  - Id: 0
-    #    Mob: GEFFEN_FENRIR
-    #    Count: 50
-    Score: 50
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
   - Id: 128047
     Group: Battle
     Name: Endless Tower challenger
@@ -1470,29 +855,6 @@ Body:
         Mob: NAGHT_SIEGER
         Count: 50
     Score: 50
-  - Id: 128050
-    Group: Battle
-    Name: Novice Exorcist
-    #Targets:
-    #  - Id: 0
-    #    Mob: BANGUNGOT_3
-    Score: 10
-  - Id: 128051
-    Group: Battle
-    Name: Experienced Exorcist
-    #Targets:
-    #  - Id: 0
-    #    Mob: BANGUNGOT_3
-    #    Count: 10
-    Score: 20
-  - Id: 128052
-    Group: Battle
-    Name: Legendary Exorcist
-    #Targets:
-    #  - Id: 0
-    #    Mob: BANGUNGOT_3
-    #    Count: 50
-    Score: 50
   - Id: 129001
     Group: Adventure
     Name: Prontera Explorer
@@ -1509,7 +871,7 @@ Body:
       120010: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129002
     Group: Adventure
     Name: Geffen Explorer
@@ -1523,7 +885,7 @@ Body:
       120017: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129003
     Group: Adventure
     Name: Sograt Desert Explorer
@@ -1536,7 +898,7 @@ Body:
       120023: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129004
     Group: Adventure
     Name: Payon Explorer
@@ -1551,7 +913,7 @@ Body:
       120031: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129005
     Group: Adventure
     Name: North Mjolnir Explorer
@@ -1563,7 +925,7 @@ Body:
       120036: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129006
     Group: Adventure
     Name: South Mjolnir Explorer
@@ -1577,7 +939,7 @@ Body:
       120043: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129007
     Group: Adventure
     Name: Comodo Explorer
@@ -1592,7 +954,7 @@ Body:
       120051: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129008
     Group: Adventure
     Name: Rune-Midgarts Explorer
@@ -1606,7 +968,7 @@ Body:
       129007: true
     Rewards:
       Item: Old_Violet_Box
-    Score: 50
+    Score: 20
   - Id: 129009
     Group: Adventure
     Name: Juno Explorer
@@ -1623,7 +985,7 @@ Body:
       120061: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129010
     Group: Adventure
     Name: Hugel Explorer
@@ -1635,7 +997,7 @@ Body:
       120066: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129011
     Group: Adventure
     Name: Einbroch Explorer
@@ -1650,7 +1012,7 @@ Body:
       120074: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129012
     Group: Adventure
     Name: Lighthalzen Explorer
@@ -1660,7 +1022,7 @@ Body:
       120077: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129013
     Group: Adventure
     Name: Schwarzwald Explorer
@@ -1671,7 +1033,7 @@ Body:
       129012: true
     Rewards:
       Item: Old_Violet_Box
-    Score: 50
+    Score: 20
   - Id: 129014
     Group: Adventure
     Name: Rachel Explorer
@@ -1685,7 +1047,7 @@ Body:
       120084: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129015
     Group: Adventure
     Name: Veins Explorer
@@ -1697,7 +1059,7 @@ Body:
       120089: true
     Rewards:
       Item: Gift_Box
-    Score: 20
+    Score: 10
   - Id: 129016
     Group: Adventure
     Name: Arunafeltz Explorer
@@ -1706,41 +1068,7 @@ Body:
       129015: true
     Rewards:
       Item: Old_Violet_Box
-    Score: 50
-  - Id: 129017
-    Group: Adventure
-    Name: Laphine Explorer
-    Dependents:
-      120090: true
-      120091: true
-      120092: true
-      120093: true
-      120094: true
-      120095: true
-    Rewards:
-      Item: Gift_Box
     Score: 20
-  - Id: 129018
-    Group: Adventure
-    Name: Manuk Explorer
-    Dependents:
-      120096: true
-      120097: true
-      120098: true
-      120099: true
-      120100: true
-    Rewards:
-      Item: Gift_Box
-    Score: 20
-  - Id: 129019
-    Group: Adventure
-    Name: Eclage Explorer
-    Dependents:
-      129017: true
-      129018: true
-    Rewards:
-      Item: Old_Violet_Box
-    Score: 50
   - Id: 129020
     Group: Adventure
     Name: Localizing fields explorer
@@ -1750,60 +1078,9 @@ Body:
       120103: true
       120104: true
       120105: true
-      120106: true
-      120107: true
-      120108: true
-      120109: true
     Rewards:
       Item: Old_Violet_Box
-    Score: 50
-  - Id: 129021
-    Group: Battle
-    Name: Glastheim Challenge Mode # Complete 100 times?
-    Rewards:
-      TitleId: 1045
-    Score: 10
-  - Id: 130000
-    Group: Chatting
-    Name: Socialite debut
-    Targets:
-      - Id: 0
-        Count: 1
-      - Id: 1
-        Count: 1
-      - Id: 2
-        Count: 1
-      - Id: 3
-        Count: 1
-      - Id: 4
-        Count: 1
-      - Id: 5
-        Count: 1
-      - Id: 6
-        Count: 1
-    Rewards:
-      TitleId: 1034
-    Score: 10
-  - Id: 170000
-    Group: Chatting
-    Name: Song chamber is not an accident
-    Targets:
-      - Id: 0
-        Count: 1
-    Score: 10
-  - Id: 190000
-    Group: Chatting
-    Name: Alliance workers of merchant city
-    Targets:
-      - Id: 0
-        Count: 1
-      - Id: 1
-        Count: 10
-      - Id: 2
-        Count: 30
-      - Id: 3
-        Count: 100
-    Score: 50
+    Score: 20
   - Id: 200000
     Group: Goal_Level
     Name: Acquire the first aura!
@@ -1813,28 +1090,6 @@ Body:
       Script: " specialeffect2 EF_BLESSING; sc_start SC_BLESSING,30000,10; "
       TitleId: 1000
     Score: 50
-  - Id: 200001
-    Group: Goal_Level
-    Name: Acquire the second aura!
-    Condition: " BaseLevel >= 150 "
-    Dependents:
-      200000: true
-    Rewards:
-      Item: Dark_Snake_Lord_Hat
-      Script: " specialeffect2 EF_BLESSING; sc_start SC_BLESSING,30000,10; "
-      TitleId: 1001
-    Score: 60
-  - Id: 200002
-    Group: Goal_Level
-    Name: Acquire the third aura!
-    Condition: " BaseLevel >= 175 "
-    Dependents:
-      200001: true
-    Rewards:
-    #  Item: BLACKDEATHKING_GOLDEN
-      Script: " specialeffect2 EF_BLESSING; sc_start SC_BLESSING,30000,10; "
-      TitleId: 1002
-    Score: 70
   - Id: 200003
     Group: Goal_Level
     Name: Master Job level!
@@ -1851,7 +1106,7 @@ Body:
     Dependents:
       200003: true
     Rewards:
-    #  Item: Old_Card_Album_
+      Item: Box_99_70
       Script: " specialeffect2 EF_BLESSING; sc_start SC_BLESSING,30000,10; "
       TitleId: 1004
     Score: 50
@@ -1897,38 +1152,6 @@ Body:
     Rewards:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 30
-  - Id: 200011
-    Group: Job_Change
-    Name: Elite Adventurer! (1)
-    Condition: " Class >= JOB_RUNE_KNIGHT && Class <= JOB_GUILLOTINE_CROSS "
-    Rewards:
-    #  Item: Abrasive_Box_10
-      Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
-    Score: 50
-  - Id: 200012
-    Group: Job_Change
-    Name: Transcendentaler! (1)
-    Condition: " Class >= JOB_RUNE_KNIGHT_T && Class <= JOB_GUILLOTINE_CROSS_T "
-    Rewards:
-    #  Item: Abrasive_Box_10
-      Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
-    Score: 60
-  - Id: 200013
-    Group: Job_Change
-    Name: Elite Adventurer! (2)
-    Condition: " Class >= JOB_ROYAL_GUARD && Class <= JOB_SHADOW_CHASER "
-    Rewards:
-    #  Item: Abrasive_Box_10
-      Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
-    Score: 50
-  - Id: 200014
-    Group: Job_Change
-    Name: Transcendentaler! (2)
-    Condition: " Class >= JOB_ROYAL_GUARD_T && Class <= JOB_SHADOW_CHASER_T "
-    Rewards:
-    #  Item: Abrasive_Box_10
-      Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
-    Score: 60
   - Id: 200015
     Group: Job_Change
     Name: The way of exceptional character
@@ -1936,14 +1159,6 @@ Body:
     Rewards:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
-  - Id: 200016
-    Group: Job_Change
-    Name: This is My way!
-    Condition: " Class == JOB_STAR_GLADIATOR || Class == JOB_SOUL_LINKER || Class == JOB_KAGEROU || Class == JOB_OBORO || Class == JOB_REBELLION "
-    Rewards:
-    #  Item: Abrasive_Box_10
-      Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
-    Score: 20
   - Id: 200017
     Group: Goal_Status
     Name: Bearish Power!
@@ -1981,57 +1196,6 @@ Body:
     Rewards:
       Script: " sc_start SC_GIANTGROWTH,180000,1; "
     Score: 20
-  - Id: 200024
-    Group: Goal_Status
-    Name: Magic Insanity
-    Condition: " readparam(bInt) >= 125 "
-    Rewards:
-      Script: " specialeffect2 EF_HASTEUP; bonus_script \"{ bonus2 bHPLossRate,100,10000; bonus bBaseAtk,20; bonus bAspdRate,25; }\",60,0,0,EFST_STEAMPACK; "
-    Score: 20
-  - Id: 200025
-    Group: Goal_Status
-    Name: Rock Alloy
-    Condition: " readparam(bVit) >= 125 "
-    Rewards:
-      Script: " specialeffect2 EF_HEAL3; sc_start2 SC_S_LIFEPOTION,600000,-5,5; "
-    Score: 20
-  - Id: 200026
-    Group: Goal_Status
-    Name: Speed of Light
-    Condition: " readparam(bAgi) >= 125 "
-    Rewards:
-      Script: " specialeffect2 EF_STEAL; sc_start SC_INCFLEE2,60000,20; "
-    Score: 20
-  - Id: 200027
-    Group: Goal_Status
-    Name: Falcon's Eyes
-    Condition: " readparam(bDex) >= 125 "
-    Rewards:
-      Script: " specialeffect2 EF_MAGICALATTHIT; sc_start SC_INCCRI,300000,30; "
-    Score: 20
-  - Id: 200028
-    Group: Goal_Status
-    Name: Lucky Fever
-    Condition: " readparam(bLuk) >= 125 "
-    Rewards:
-      Script: " specialeffect2 EF_GLORIA; sc_start SC_GLORIA,15000,0; "
-    Score: 20
-  - Id: 200029
-    Group: Goal_Status
-    Name: Incarnation of Love and Hate
-    Condition: " BaseLevel == 99 && Class == JOB_NOVICE "
-    Rewards:
-    #  Item: Abrasive_Box_10
-      Script: " specialeffect2 EF_BLESSING; sc_start SC_BLESSING,30000,10; "
-    Score: 30
-  - Id: 200030
-    Group: Goal_Status
-    Name: I really love it!
-    Condition: " BaseLevel == 99 && (Class >= JOB_SWORDMAN && Class <= JOB_THIEF) "
-    Rewards:
-    #  Item: Bubble_Gum_Box_10
-      Script: " specialeffect2 EF_BLESSING; sc_start SC_BLESSING,30000,10; "
-    Score: 30
   - Id: 200031
     Group: Job_Change
     Name: Reborn in Valhalla!
@@ -2040,27 +1204,6 @@ Body:
     #  Item: Adventurer_Box_1
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
-  - Id: 200032
-    Group: Goal_Level
-    Name: The start of another adventure!
-    Condition: " BaseLevel == 100 "
-    #Rewards:
-    #  Item: Rebeginer_Box_100
-    Score: 10
-  - Id: 200033
-    Group: Goal_Level
-    Name: With a new mind!(1)
-    Condition: " BaseLevel == 170 && (Class >= JOB_RUNE_KNIGHT && Class <= JOB_GUILLOTINE_CROSS_T) "
-    #Rewards:
-    #  Item: Costume_Ticket
-    Score: 50
-  - Id: 200034
-    Group: Goal_Level
-    Name: With a new mind!(2)
-    Condition: " BaseLevel == 170 && (Class >= JOB_ROYAL_GUARD && Class <= JOB_SHADOW_CHASER_T) "
-    #Rewards:
-    #  Item: Costume_Ticket
-    Score: 50
   - Id: 220000
     Group: Chatting_Create
     Name: Community begin
@@ -2268,7 +1411,6 @@ Body:
       230101: true
       230102: true
       230103: true
-      230104: true
     Rewards:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
       TitleId: 1025
@@ -2338,13 +1480,6 @@ Body:
     Targets:
       - Id: 0
         Mob: POPORING
-    Score: 10
-  - Id: 230104
-    Group: Taming
-    Name: Novice Poring - taming
-    #Targets:
-    #  - Id: 0
-    #    Mob: LITTLE_PORING
     Score: 10
   - Id: 230111
     Group: Taming
@@ -2508,16 +1643,13 @@ Body:
       - Id: 0
         Mob: PORING
         Count: 10
-    #  - Id: 1
-    #    Mob: LITTLE_PORING
-    #    Count: 10
-      - Id: 2
+      - Id: 1
         Mob: DROPS
         Count: 10
-      - Id: 3
+      - Id: 2
         Mob: POPORING
         Count: 10
-      - Id: 4
+      - Id: 3
         Mob: MARIN
         Count: 10
     Score: 10
@@ -2755,3 +1887,973 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
       TitleId: 1024
     Score: 10
+  - Id: 150000
+    Group: Adventure
+    Name: Abbey Underground Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150001
+    Group: Adventure
+    Name: Abbey Underground Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150002
+    Group: Adventure
+    Name: Abyss Lake Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150003
+    Group: Adventure
+    Name: Abyss Lake Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150004
+    Group: Adventure
+    Name: Amatsu Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150005
+    Group: Adventure
+    Name: Amatsu Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150006
+    Group: Adventure
+    Name: Ant Hell Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150007
+    Group: Adventure
+    Name: Ayothaya Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150008
+    Group: Adventure
+    Name: Izlude Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150009
+    Group: Adventure
+    Name: Izlude Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150010
+    Group: Adventure
+    Name: Izlude Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150011
+    Group: Adventure
+    Name: Izlude Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150012
+    Group: Adventure
+    Name: Izlude Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150013
+    Group: Adventure
+    Name: Clock Tower Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150014
+    Group: Adventure
+    Name: Clock Tower Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150015
+    Group: Adventure
+    Name: Clock Tower Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150016
+    Group: Adventure
+    Name: Clock Tower Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150017
+    Group: Adventure
+    Name: Clock Tower Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150018
+    Group: Adventure
+    Name: Clock Tower Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150019
+    Group: Adventure
+    Name: Coal Mine Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150020
+    Group: Adventure
+    Name: Coal Mine Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150021
+    Group: Adventure
+    Name: Comodo Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150022
+    Group: Adventure
+    Name: Comodo Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150023
+    Group: Adventure
+    Name: Einbroch Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150024
+    Group: Adventure
+    Name: Geffen Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150025
+    Group: Adventure
+    Name: Glastheim Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150026
+    Group: Adventure
+    Name: Glastheim Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150027
+    Group: Adventure
+    Name: Glastheim Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150028
+    Group: Adventure
+    Name: Glastheim Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150029
+    Group: Adventure
+    Name: Glastheim Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150029
+    Group: Adventure
+    Name: Glastheim Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150030
+    Group: Adventure
+    Name: Glastheim Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150031
+    Group: Adventure
+    Name: Kunlun Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150032
+    Group: Adventure
+    Name: Kunlun Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150033
+    Group: Adventure
+    Name: Labyrinth Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150034
+    Group: Adventure
+    Name: Labyrinth Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150035
+    Group: Adventure
+    Name: Kunlun Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150036
+    Group: Adventure
+    Name: Kunlun Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150037
+    Group: Adventure
+    Name: Nogg Road Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150038
+    Group: Adventure
+    Name: Orc Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150039
+    Group: Adventure
+    Name: Payon Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150040
+    Group: Adventure
+    Name: Payon Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150041
+    Group: Adventure
+    Name: Payon Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150042
+    Group: Adventure
+    Name: Payon Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150043
+    Group: Adventure
+    Name: Izlude Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150044
+    Group: Adventure
+    Name: Izlude Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150045
+    Group: Adventure
+    Name: Izlude Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150046
+    Group: Adventure
+    Name: Pyramid Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150047
+    Group: Adventure
+    Name: Pyramid Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150048
+    Group: Adventure
+    Name: Pyramid Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150049
+    Group: Adventure
+    Name: Pyramid Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150050
+    Group: Adventure
+    Name: Pyramid Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150051
+    Group: Adventure
+    Name: Rachel Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150052
+    Group: Adventure
+    Name: Rachel Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150053
+    Group: Adventure
+    Name: Robot Factory Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150054
+    Group: Adventure
+    Name: Bio Lab Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150055
+    Group: Adventure
+    Name: Bio Lab Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150056
+    Group: Adventure
+    Name: Sphinx Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150057
+    Group: Adventure
+    Name: Sphinx Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150058
+    Group: Adventure
+    Name: Sphinx Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150059
+    Group: Adventure
+    Name: Sphinx Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150060
+    Group: Adventure
+    Name: Sunken Ship Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150061
+    Group: Adventure
+    Name: Thanatos Tower Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150062
+    Group: Adventure
+    Name: Thanatos Tower Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150063
+    Group: Adventure
+    Name: Thanatos Tower Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150064
+    Group: Adventure
+    Name: Thanatos Tower Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150065
+    Group: Adventure
+    Name: Thanatos Tower Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150066
+    Group: Adventure
+    Name: Thor Volcano Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150067
+    Group: Adventure
+    Name: Thor Volcano Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150068
+    Group: Adventure
+    Name: Toy Factory Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150069
+    Group: Adventure
+    Name: Turtle Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150070
+    Group: Adventure
+    Name: Turtle Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150071
+    Group: Adventure
+    Name: Turtle Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150072
+    Group: Adventure
+    Name: Odin Temple Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150073
+    Group: Adventure
+    Name: Odin Temple Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150074
+    Group: Adventure
+    Name: Odin Temple Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150075
+    Group: Adventure
+    Name: Umbala Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150076
+    Group: Adventure
+    Name: Umbala Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150077
+    Group: Adventure
+    Name: Moscovia Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150078
+    Group: Adventure
+    Name: Moscovia Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150079
+    Group: Adventure
+    Name: Moscovia Dungeon Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150080
+    Group: Adventure
+    Name: Rachel Santuary Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150081
+    Group: Adventure
+    Name: Rachel Santuary Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150082
+    Group: Adventure
+    Name: Rachel Santuary Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150083
+    Group: Adventure
+    Name: Rachel Santuary Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 150084
+    Group: Adventure
+    Name: Rachel Santuary Exploration
+    Rewards:
+      Item: Shabby_Purse
+    Score: 5
+  - Id: 160000
+    Group: Adventure
+    Name: Abbey Underground Complete
+    Dependents:
+      120110: true
+      150000: true
+      150001: true
+    Score: 10
+    Rewards:
+      Script: " set #abbey,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Abbey Underground\"; "
+  - Id: 160001
+    Group: Adventure
+    Name: Abyss Lake Complete
+    Dependents:
+      120111: true
+      150002: true
+      150003: true
+    Score: 10
+    Rewards:
+      Script: " set #abyss,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Abyss Lake\"; "
+  - Id: 160002
+    Group: Adventure
+    Name: Amatsu Dungeon Complete
+    Dependents:
+      120113: true
+      150004: true
+      150005: true
+    Score: 10
+    Rewards:
+      Script: " set #amatsud,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Amatsu Dungeon\"; "
+  - Id: 160003
+    Group: Adventure
+    Name: Ant Hell Complete
+    Dependents:
+      120114: true
+      150006: true
+    Score: 10
+    Rewards:
+      Script: " set #anthell,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Ant Hell\"; "
+  - Id: 160004
+    Group: Adventure
+    Name: Ayothaya Dungeons Complete
+    Dependents:
+      120115: true
+      150007: true
+    Score: 10
+    Rewards:
+      Script: " set #ayothayad,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Ayothaya Dungeon\"; "
+  - Id: 160005
+    Group: Adventure
+    Name: Byalan Dungeon Complete
+    Dependents:
+      150008: true
+      150009: true
+      150010: true
+      150011: true
+      150012: true
+    Score: 10
+    Rewards:
+      Script: " set #byalan,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Byalan Dungeon\"; "
+  - Id: 160006
+    Group: Adventure
+    Name: Clock Tower Complete
+    Dependents:
+      120112: true
+      150013: true
+      150014: true
+      150015: true
+      120118: true
+      150016: true
+      150017: true
+      150018: true
+    Score: 10
+    Rewards:
+      Script: " set #clocktower,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Clock Tower\"; "
+  - Id: 160007
+    Group: Adventure
+    Name: Coal Mine Complete
+    Dependents:
+      120136: true
+      150019: true
+      150020: true
+    Score: 10
+    Rewards:
+      Script: " set #coalmine,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Coal Mine\"; "
+  - Id: 160008
+    Group: Adventure
+    Name: Comodo Dungeon Complete
+    Dependents:
+      120116: true
+      150021: true
+      150022: true
+    Score: 10
+  - Id: 160009
+    Group: Adventure
+    Name: Einbech Complete
+    Dependents:
+      120122: true
+      150023: true
+    Score: 10
+    Rewards:
+      Script: " set #einbechd,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Einbech\"; "
+  - Id: 160010
+    Group: Adventure
+    Name: Geffen Dungeon Complete
+    Dependents:
+      120123: true
+      150024: true
+    Score: 10
+    Rewards:
+      Script: " set #geffend,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Geffen Dungeon\"; "
+  - Id: 160011
+    Group: Adventure
+    Name: Glastheim Complete
+    Dependents:
+      120124: true
+      150025: true
+      120125: true
+      150026: true
+      150027: true
+      150028: true
+      120126: true
+      150029: true
+      120127: true
+      150030: true
+    Score: 10
+    Rewards:
+      Script: " set #glastheim,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Glastheim\"; "
+  - Id: 160012
+    Group: Adventure
+    Name: Kunlun Dungeon Complete
+    Dependents:
+      120128: true
+      150031: true
+      150032: true
+    Score: 10
+    Rewards:
+      Script: " set #kunlun,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Kunlun Dungeon\"; "
+  - Id: 160013
+    Group: Adventure
+    Name: Labyrinth Complete
+    Dependents:
+      120140: true
+      150033: true
+      150034: true
+    Score: 10
+    Rewards:
+      Script: " set #labyrinth,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Labyrinth\"; "
+  - Id: 160014
+    Group: Adventure
+    Name: Louyang Dungeon Complete
+    Dependents:
+      120134: true
+      150035: true
+      150036: true
+    Score: 10
+    Rewards:
+      Script: " set #louyangd,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Louyang Dungeon\"; "
+  - Id: 160015
+    Group: Adventure
+    Name: Nogg Road Complete
+    Dependents:
+      120135: true
+      150037: true
+    Score: 10
+    Rewards:
+      Script: " set #noggroad,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Nogg Road\"; "
+  - Id: 160016
+    Group: Adventure
+    Name: Orc Dungeon Complete
+    Dependents:
+      120138: true
+      150038: true
+    Score: 10
+    Rewards:
+      Script: " set #orcdung,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Orc Dungeon\"; "
+  - Id: 160017
+    Group: Adventure
+    Name: Payon Dungeon Complete
+    Dependents:
+      120139: true
+      150039: true
+      150040: true
+      150041: true
+      150042: true
+    Score: 10
+    Rewards:
+      Script: " set #payond,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Payon Dungeon\"; "
+  - Id: 160018
+    Group: Adventure
+    Name: Prontera Culvert Complete
+    Dependents:
+      120131: true
+      150043: true
+      150044: true
+      150045: true
+    Score: 10
+    Rewards:
+      Script: " set #pronterag,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Prontera Culvert\"; "
+  - Id: 160019
+    Group: Adventure
+    Name: Pyramid Complete
+    Dependents:
+      120137: true
+      150046: true
+      150047: true
+      150048: true
+      150049: true
+      150050: true
+    Score: 10
+    Rewards:
+      Script: " set #pyramid,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Pyramid\"; "
+  - Id: 160020
+    Group: Adventure
+    Name: Rachel Dungeon Complete
+    Dependents:
+      120129: true
+      150051: true
+      150052: true
+    Score: 10
+    Rewards:
+      Script: " set #icedun,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Ice Dungeon\"; "
+  - Id: 160021
+    Group: Adventure
+    Name: Robot Factory Complete
+    Dependents:
+      120132: true
+      150053: true
+    Score: 10
+    Rewards:
+      Script: " set #robotfact,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Robot Factory\"; "
+  - Id: 160022
+    Group: Adventure
+    Name: Somatology Lab Complete
+    Dependents:
+      120133: true
+      150054: true
+      150055: true
+    Score: 10
+    Rewards:
+      Script: " set #biolab,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Somatology Lab\"; "
+  - Id: 160023
+    Group: Adventure
+    Name: Sphinx Complete
+    Dependents:
+      120130: true
+      150056: true
+      150057: true
+      150058: true
+      150059: true
+    Score: 10
+    Rewards:
+      Script: " set #sphinx,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Sphinx\"; "
+  - Id: 160024
+    Group: Adventure
+    Name: Sunken Ship Complete
+    Dependents:
+      120144: true
+      150060: true
+    Score: 10
+    Rewards:
+      Script: " set #sunked,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Sunken Ship\"; "
+  - Id: 160025
+    Group: Adventure
+    Name: Thanatos Tower Complete
+    Dependents:
+      120142: true
+      150061: true
+      150062: true
+      150063: true
+      150064: true
+      150065: true
+    Score: 10
+    Rewards:
+      Script: " set #thanatos,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Thanatos Tower\"; "
+  - Id: 160026
+    Group: Adventure
+    Name: Odin Temple Complete
+    Dependents:
+      150072: true
+      150073: true
+      150074: true
+    Score: 10
+    Rewards:
+      Script: " set #odintemp,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Odin Temple\"; "
+  - Id: 160027
+    Group: Adventure
+    Name: Thors Volcano Complete
+    Dependents:
+      120143: true
+      150066: true
+      150067: true
+    Score: 10
+    Rewards:
+      Script: " set #thorv,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Thors Volcano\"; "
+  - Id: 160028
+    Group: Adventure
+    Name: Toy Factory Complete
+    Dependents:
+      120146: true
+      150068: true
+    Score: 10
+    Rewards:
+      Script: " set #toyfact,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Toy Factory\"; "
+  - Id: 160029
+    Group: Adventure
+    Name: Turtle Island Dungeon Complete
+    Dependents:
+      120145: true
+      150069: true
+      150070: true
+      150071: true
+    Score: 10
+    Rewards:
+      Script: " set #turtleisland,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Turtle Island Dungeon\"; "
+  - Id: 160030
+    Group: Adventure
+    Name: Moscovia Dungeon Complete
+    Dependents:
+      150077: true
+      150078: true
+      150079: true
+    Score: 10
+    Rewards:
+      Script: " set #moscoviad,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Moscovia Dungeon\"; "
+  - Id: 160031
+    Group: Adventure
+    Name: Umbala Dungeon Complete
+    Dependents:
+      150075: true
+      150076: true
+    Score: 10
+    Rewards:
+      Script: " set #umbalad,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Umbala Dungeon\"; "
+  - Id: 160032
+    Group: Adventure
+    Name: Rachel Santuary Complete
+    Dependents:
+      150080: true
+      150081: true
+      150082: true
+      150083: true
+      150084: true
+    Score: 10
+    Rewards:
+      Script: " set #rachelsan,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Rachel Santuary\"; "
+  - Id: 170000
+    Group: Adventure
+    Name: Aldebaran City
+    Rewards:
+      Script: " set #aldebaran,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Aldebaran\"; "
+    Score: 5
+  - Id: 170001
+    Group: Adventure
+    Name: Amatsu City
+    Rewards:
+      Script: " set #amatsu,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Amatsu\"; "
+    Score: 5
+  - Id: 170002
+    Group: Adventure
+    Name: Ayothaya City
+    Rewards:
+      Script: " set #ayothaya,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Ayothaya\"; "
+    Score: 5
+  - Id: 170003
+    Group: Adventure
+    Name: Comodo City
+    Rewards:
+      Script: " set #comodo,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Comodo\"; "
+    Score: 5
+  - Id: 170004
+    Group: Adventure
+    Name: Einbech City
+    Rewards:
+      Script: " set #einbech,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Einbech\"; "
+    Score: 5
+  - Id: 170005
+    Group: Adventure
+    Name: Einbroch City
+    Rewards:
+      Script: " set #einbroch,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Einbroch\"; "
+    Score: 5
+  - Id: 170007
+    Group: Adventure
+    Name: Gonryun City
+    Rewards:
+      Script: " set #gonryun,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Gonryun\"; "
+    Score: 5
+  - Id: 170008
+    Group: Adventure
+    Name: Hugel City
+    Rewards:
+      Script: " set #hugel,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Hugel\"; "
+    Score: 5
+  - Id: 170009
+    Group: Adventure
+    Name: Jawaii City
+    Rewards:
+      Script: " set #jawaii,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Jawaii\"; "
+    Score: 5
+  - Id: 170010
+    Group: Adventure
+    Name: Lighthalzen City
+    Rewards:
+      Script: " set #lighthalzen,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Lighthalzen\"; "
+    Score: 5
+  - Id: 170011
+    Group: Adventure
+    Name: Louyang City
+    Rewards:
+      Script: " set #louyang,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Louyang\"; "
+    Score: 5
+  - Id: 170012
+    Group: Adventure
+    Name: Lutie City
+    Rewards:
+      Script: " set #lutie,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Lutie\"; "
+    Score: 5
+  - Id: 170013
+    Group: Adventure
+    Name: Moscovia City
+    Rewards:
+      Script: " set #moscovia,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Moscovia\"; "
+    Score: 5
+  - Id: 170014
+    Group: Adventure
+    Name: Niflheim City
+    Rewards:
+      Script: " set #niflheim,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Niflheim\"; "
+    Score: 5
+  - Id: 170015
+    Group: Adventure
+    Name: Rachel City
+    Rewards:
+      Script: " set #rachel,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Rachel\"; "
+    Score: 5
+  - Id: 170016
+    Group: Adventure
+    Name: Veins City
+    Rewards:
+      Script: " set #veins,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Veins\"; "
+    Score: 5
+  - Id: 170017
+    Group: Adventure
+    Name: Yuno City
+    Rewards:
+      Script: " set #yuno,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Yuno\"; "
+    Score: 5
+  - Id: 170018
+    Group: Adventure
+    Name: Umbala City
+    Rewards:
+      Script: " set #umbala,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Umbala\"; "
+    Score: 5

@@ -1,0 +1,738 @@
+//===== eAthena Script ======================================= 
+//= Last Warp Super Warper NPC
+//===== By: ================================================== 
+//= Seavoltos
+//===== Description: ========================================= 
+//= This is a warper. I am sure that is self explanatory.
+//============================================================
+
+-	shop	WarperCiudad	776,30000:10000,30001:10000,30002:10000,30003:10000,30004:10000,30005:10000,30006:10000,30007:10000,30008:10000,30009:10000,30010:10000,30011:10000,30012:10000,30013:10000,30014:10000,30015:10000,30016:10000,30017:10000
+
+-	shop	WarperDungeon	776,30030:10000000,30031:100000,30032:3000000,30033:100000,30034:3000000,30035:100000,30036:100000,30037:100000,30038:100000,30039:100000,30040:1000000,30041:100000,30042:100000,30043:100000,30044:100000,30045:3000000,30046:100000,30047:100000,30048:100000,30049:10000,30050:100000,30051:100000,30052:10000000,30053:1000000,30054:10000000,30055:100000,30056:100000,30057:100000,30058:100000,30059:100000,30060:1000000,30061:100000
+
+prontera,159,188,4	script	Warper::Warper	669,{
+	set .@name$, "[^008ef9Warper^000000]";
+	mes .@name$;
+	mes "Buen día ^7900f9"+ strcharinfo(0) +"^000000.";
+	mes "Entonces, hacia donde deseas ir?";
+	
+	menu	( lastmap$ == "" )?"":"[ > ] Último Warp",warptolast,"[ > ] Ciudades",city,"[ > ] Dungeon",dungeon,"[ > ] Battle Office",wbattleground,( BaseLevel < 50 )?"":"[ > ] PvP",wpvp,( !#payond )?"":"[ > ] Tienda",tienda;
+	
+tienda:
+menu
+	//"[ > ] Mapas Ciudades",buyCiudades,
+	"[ > ] Mapas Dungeon",buyDungeon;
+
+city:
+menu 
+	"[ > ] Prontera",wprontera,
+	"[ > ] Alberta",walberta,
+	( !#aldebaran )?"":"[ > ] Aldebaran",waldebaran,
+	( #aldebaran )?"":"[ > ] (10,000z) Aldebaran",waldebaranzeny,
+	( !#amatsu )?"":"[ > ] Amatsu",wamatsu,
+	( #amatsu )?"":"[ > ] (10,000z) Amatsu",wamatsuzeny,
+	( !#ayothaya )?"":"[ > ] Ayothaya",wayot,
+	( #ayothaya )?"":"[ > ] (10,000z) Ayothaya",wayotzeny,
+	( !#comodo )?"":"[ > ] Comodo",wcomodo,
+	( #comodo )?"":"[ > ] (10,000z) Comodo",wcomodozeny,
+	( !#einbech )?"":"[ > ] Einbech",weinbech,
+	( #einbech )?"":"[ > ] (10,000z) Einbech",weinbechzeny,
+	( !#einbroch )?"":"[ > ] Einbroch",weinbroch,
+	( #einbroch )?"":"[ > ] (10,000z) Einbroch",weinbrochzeny,
+	"[ > ] Geffen",wgeffen,
+	( !#gonryun )?"":"[ > ] Gonryun",wgonryun,
+	( #gonryun )?"":"[ > ] (10,000z) Gonryun",wgonryunzeny,
+	( !#hugel )?"":"[ > ] Hugel",whugel,
+	( #hugel )?"":"[ > ] (10,000z) Hugel",whugelzeny,
+	"[ > ] Izlude",wizlude,
+	( !#jawaii )?"":"[ > ] Jawaii",wjawaii,
+	( #jawaii )?"":"[ > ] (100.000z) Jawaii",wjawaiizeny,
+	( !#lighthalzen )?"":"[ > ] Lighthalzen",wlighthalzen,
+	( #lighthalzen )?"":"[ > ] (10,000z) Lighthalzen",wlighthalzenzeny,
+	( !#louyang )?"":"[ > ] Louyang",wlouyang,
+	( #louyang )?"":"[ > ] (10,000z) Louyang",wlouyangzeny,
+	( !#lutie )?"":"[ > ] Lutie",wxmas,
+	( #lutie )?"":"[ > ] (10,000z) Lutie",wxmaszeny,
+	"[ > ] Morroc",wmorroc,
+	( !#moscovia )?"":"[ > ] Moscovia",wmoscovia,
+	( #moscovia )?"":"[ > ] (10,000z) Moscovia",wmoscoviazeny,
+	( !#niflheim )?"":"[ > ] Niflheim",wniflheim,
+	( #niflheim )?"":"[ > ] (10,000z) Niflheim",wniflheimzeny,
+	"[ > ] Payon",wpayon,
+	( !#rachel )?"":"[ > ] Rachel",wafeltz,
+	( #rachel )?"":"[ > ] (10,000z) Rachel",wafeltzzeny,
+	( !#veins )?"":"[ > ] Veins",wveins,
+	( #veins )?"":"[ > ] (10,000z) Veins",wveinszeny,
+	( !#yuno )?"":"[ > ] Yuno",wyuno,
+	( #yuno )?"":"[ > ] (10,000z) Yuno",wyunozeny,
+	( !#umbala )?"":"[ > ] Umbala",wumbala,
+	( #umbala )?"":"[ > ] (10,000z) Umbala",wumbalazeny;
+
+
+dungeon:
+menu 
+	( !#abbey )?"":"[ > ] Abbey, Cursed Monastery",abbey,
+	( !#abyss )?"":"[ > ] Abyss Lakes",abyss,
+	( !#amatsud )?"":"[ > ] Amatsu Dungeon",ama,
+	( !#anthell )?"":"[ > ] Anthell",ant,
+	( !#ayothayad )?"":"[ > ] Ayothaya Dungeons",ayodun,
+	( !#byalan )?"":"[ > ] Byalan Dungeon",byalan,
+	( !#clocktower )?"":"[ > ] Clock Tower",clock,
+	( !#coalmine )?"":"[ > ] Coal Mines",coal,
+	( !#einbechd )?"":"[ > ] Einbech Dungeons",eindun,
+	( !#geffend )?"":"[ > ] Geffen Dungeon",geffen,
+	( !#glastheim )?"":"[ > ] Glast Heim",glast,
+	( !#kunlun )?"":"[ > ] Gonryun Dungeon",gon,
+	( !#icedun )?"":"[ > ] Ice Dungeon",iced,
+	( !#labyrinth )?"":"[ > ] Labyrinth Dungeon",hidden,
+	( !#louyangd )?"":"[ > ] Louyang Dungeons",loudun,
+	( !#moscoviad )?"":"[ > ] Moscovia Dungeon",mosk,
+	( !#noggroad )?"":"[ > ] Nogg Road",magma,
+	( !#orcdung )?"":"[ > ] Orc Dungeon",orc,
+	( !#odintemp )?"":"[ > ] Odin Temple",odint,
+	( !#payond )?"¿Cómo funciona?":"[ > ] Payon Dungeon",payon,
+	( !#pronterag )?"":"[ > ] Prontera Culverts",culvert,
+	( !#pyramid )?"":"[ > ] Pyramids",pyramids,
+	( !#rachelsan )?"":"[ > ] Rachel Sanctuary",rachels,
+	( !#robotfact )?"":"[ > ] Robot Factory",kieldun,
+	( !#biolab )?"":"[ > ] Somatology Lab",lhzdun,
+	( !#sphinx )?"":"[ > ] Sphinx",sphinx,
+	( !#sunked )?"":"[ > ] Sunken Ship",sunken,
+	( !#thanatos )?"":"[ > ] Thanatos Tower",that,
+	( !#thorv )?"":"[ > ] Thor Volcano",thor,
+	( !#toyfact )?"":"[ > ] Toy Factory",toy,
+	( !#turtleisland )?"":"[ > ] Turtle Dungeon",turtle,
+	( !#umbalad )?"":"[ > ] Umbala Dungeons",umdun;
+
+//Tienda
+buyCiudades:
+	next;
+	mes .@name$;
+	mes "Cierra esta ventana para abrir la tienda";
+	close2;
+	callshop "WarperCiudad",1;
+	end;
+
+buyDungeon:
+	next;
+	mes .@name$;
+	mes "Cierra esta ventana para abrir la tienda";
+	close2;
+	callshop "WarperDungeon",1;
+	end;
+
+//City
+walberta:
+	set .@lastmap$,"alberta"; 
+	set .@lastx,49; 
+	set .@lasty,242;
+	goto warpto;
+	end;
+waldebaranzeny:
+	set .@precio_w,10000;
+	set .@a,1;
+waldebaran:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"aldebaran"; 
+	set .@lastx,140; 
+	set .@lasty,116;
+	goto warpto;
+	end;
+wamatsuzeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wamatsu:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"amatsu"; 
+	set .@lastx,114; 
+	set .@lasty,105;
+	goto warpto;
+	end;
+wayotzeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wayot:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"ayothaya"; 
+	set .@lastx,149; 
+	set .@lasty,108;
+	goto warpto;
+	end;
+wcomodozeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wcomodo:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"comodo"; 
+	set .@lastx,258; 
+	set .@lasty,177;
+	goto warpto;
+	end;
+weinbechzeny:
+	set .@precio_w,10000;
+	set .@a,1;
+weinbech:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"einbech"; 
+	set .@lastx,186; 
+	set .@lasty,74;
+	goto warpto;
+	end;
+weinbrochzeny:
+	set .@precio_w,10000;
+	set .@a,1;
+weinbroch:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"einbroch"; 
+	set .@lastx,173; 
+	set .@lasty,161;
+	goto warpto;
+	end;
+wgeffen:
+	set .@lastmap$,"geffen"; 
+	set .@lastx,120; 
+	set .@lasty,73;
+	goto warpto;
+	end;
+wgonryunzeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wgonryun:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"gonryun"; 
+	set .@lastx,159; 
+	set .@lasty,118;
+	goto warpto;
+	end;
+whugelzeny:
+	set .@precio_w,10000;
+	set .@a,1;
+whugel:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"hugel"; 
+	set .@lastx,96; 
+	set .@lasty,149;
+	goto warpto;
+	end;
+wizlude:
+	set .@lastmap$,"izlude"; 
+	set .@lastx,128; 
+	set .@lasty,113;
+	goto warpto;
+	end;
+wjawaiizeny:
+	set .@precio_w,100000;
+	set .@a,1;
+wjawaii:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"jawaii"; 
+	set .@lastx,190; 
+	set .@lasty,239;
+	goto warpto;
+	end;
+wlighthalzenzeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wlighthalzen:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"lighthalzen"; 
+	set .@lastx,159; 
+	set .@lasty,90;
+	goto warpto;
+	end;
+wlouyangzeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wlouyang:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"louyang"; 
+	set .@lastx,217; 
+	set .@lasty,112;
+	goto warpto;
+	end;
+wxmaszeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wxmas:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"xmas"; 
+	set .@lastx,148; 
+	set .@lasty,126;
+	goto warpto;
+	end;
+wmorroc:
+	set .@lastmap$,"morocc"; 
+	set .@lastx,157; 
+	set .@lasty,97;
+	goto warpto;
+	end;
+wmoscoviazeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wmoscovia:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"moscovia"; 
+	set .@lastx,223; 
+	set .@lasty,181;
+	goto warpto;
+	end;
+wniflheimzeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wniflheim:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"niflheim"; 
+	set .@lastx,21; 
+	set .@lasty,152;
+	goto warpto;
+	end;
+wpayon:
+	set .@lastmap$,"payon"; 
+	set .@lastx,156; 
+	set .@lasty,230;
+	goto warpto;
+	end;
+wprontera:
+	set .@lastmap$,"prontera"; 
+	set .@lastx,155; 
+	set .@lasty,181;
+	goto warpto;
+	end;
+wafeltzzeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wafeltz:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"rachel"; 
+	set .@lastx,129; 
+	set .@lasty,110;
+	goto warpto;
+	end;
+wveinszeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wveins:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"veins"; 
+	set .@lastx,216; 
+	set .@lasty,103;
+	goto warpto;
+	end;
+wyunozeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wyuno:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"yuno"; 
+	set .@lastx,157; 
+	set .@lasty,166;
+	goto warpto;
+	end;
+wumbalazeny:
+	set .@precio_w,10000;
+	set .@a,1;
+wumbala:
+	if ( !.@a )
+		set .@precio_w,600;
+	set .@lastmap$,"umbala"; 
+	set .@lastx,130; 
+	set .@lasty,82;
+	goto warpto;
+	end;
+
+//Dungeon
+abbey:
+	set .@lastmap$,"abbey01"; 
+	set .@lastx,51; 
+	set .@lasty,14;
+	goto warpto;
+	end;
+abyss:
+	set .@lastmap$,"abyss_01"; 
+	set .@lastx,263; 
+	set .@lasty,270; 
+	goto warpto;
+	end;
+ama:
+	set .@lastmap$,"ama_dun01"; 
+	set .@lastx,228; 
+	set .@lasty,11; 
+	goto warpto;
+	end;
+ant:
+	set .@lastmap$,"anthell01"; 
+	set .@lastx,35; 
+	set .@lasty,262; 
+	goto warpto;
+	end;
+ayodun:
+	set .@lastmap$,"ayo_dun01"; 
+	set .@lastx,275; 
+	set .@lasty,19; 
+	goto warpto;
+	end;
+byalan:
+	set .@lastmap$,"iz_dun00"; 
+	set .@lastx,168; 
+	set .@lasty,168; 
+	goto warpto;
+	end;
+clock:
+	set .@lastmap$,"c_tower1"; 
+	set .@lastx,199; 
+	set .@lasty,159; 
+	goto warpto;
+	end;
+coal:
+	set .@lastmap$,"mjo_dun01"; 
+	set .@lastx,52; 
+	set .@lasty,17;
+	goto warpto;
+	end;
+eindun:
+	set .@lastmap$,"ein_dun01"; 
+	set .@lastx,22; 
+	set .@lasty,14;
+	goto warpto;
+	end;
+geffen:
+	set .@lastmap$,"gef_dun00"; 
+	set .@lastx,104; 
+	set .@lasty,99;
+	goto warpto;
+	end;
+glast:
+	set .@lastmap$,"glast_01"; 
+	set .@lastx,372; 
+	set .@lasty,304;
+	goto warpto;
+	end;
+gon:
+	set .@lastmap$,"gon_dun01"; 
+	set .@lastx,153; 
+	set .@lasty,53;
+	goto warpto;
+	end;
+iced:
+	set .@lastmap$,"ice_dun01"; 
+	set .@lastx,157; 
+	set .@lasty,14;
+	goto warpto;
+	end;
+hidden:
+	set .@lastmap$,"prt_maze01"; 
+	set .@lastx,176; 
+	set .@lasty,7;
+	goto warpto;
+	end;
+loudun:
+	set .@lastmap$,"lou_dun01"; 
+	set .@lastx,218; 
+	set .@lasty,196;
+	goto warpto;
+	end;
+mosk:
+	set .@lastmap$,"mosk_dun01"; 
+	set .@lastx,189; 
+	set .@lasty,46;
+	goto warpto;
+	end;
+magma:
+	set .@lastmap$,"mag_dun01"; 
+	set .@lastx,126; 
+	set .@lasty,68;
+	goto warpto;
+	end;
+orc:
+	set .@lastmap$,"orcsdun01"; 
+	set .@lastx,32; 
+	set .@lasty,170;
+	goto warpto;
+	end;
+odint:
+	set .@lastmap$,"odin_tem01"; 
+	set .@lastx,298; 
+	set .@lasty,167;
+	goto warpto;
+	end;
+payon:
+	if(#payond)
+	{
+		set .@lastmap$,"pay_dun00"; 
+		set .@lastx,21; 
+		set .@lasty,183;
+		goto warpto;
+		end;
+	}
+PrimerWarp:
+	next;
+	mes .@name$;
+	mes "Para poder desbloquear cada warp existen tres diferentes métodos";
+	mes " - Encontrando los cofres.";
+	mes " - Comprando por Zeny.";
+	mes " - Comprando con CashPoint.";
+	next;
+	cutin "warper1",4;
+	mes .@name$;
+	mes "Primero deberás ir al mapa que deseas desbloquear y encontrar los cofres que se encuentran en cada nivel.";
+	next;
+	cutin "warper3",4;
+	mes .@name$;
+	mes "Una vez que encuentres el cofre obtendrás un logro, que podrás canjear en los 'Achievement Challenges'";
+	next;
+	cutin "warper5",4;
+	mes .@name$;
+	mes "Cuando tengas el logro, podrás volver cuantas veces quieras al primer piso de ese dungeon, para las ciudades es diferente, sólo deberás poner un pie en la ciudad para poder desbloquearla y obtener el logro.";
+	next;
+	cutin "warper5",255;
+	mes .@name$;
+	mes "Los otros dos métodos consisten en que podrás comprar el acceso a los dungeon ya sea por Zeny o por CashPoints.";
+	mes "Los precios cambian cada cierto tiempo.";
+	next;
+	mes .@name$;
+	mes "Se entiende lo que intento explicar?";
+	next;
+	if(select("No, repíteme la información:Si, todo claro.") == 1)
+	{
+		mes .@name$;
+		mes "Claro, no hay problema.";
+		next;
+		goto PrimerWarp;
+	}
+	if(achievementexists(160017))
+	{
+		mes .@name$;
+		mes "Ve a ^ff0000'Achievement Challenges'^000000 y cobra tu acceso a ^0000ff'Payon Dungeon'^000000";
+		close;
+	}
+	mes .@name$;
+	mes "Bueno, ya que está todo claro, ten de recompensa 'Payon Dungeon'";
+	achievementcomplete(160017);
+	next;
+	mes .@name$;
+	mes "Ve a ^ff0000'Achievement Challenges'^000000 y cobra tu acceso a ^0000ff'Payon Dungeon'^000000";
+	close;
+	close;
+	end;
+culvert:
+	set .@lastmap$,"prt_sewb1"; 
+	set .@lastx,131; 
+	set .@lasty,247;
+	goto warpto;
+	end;
+pyramids:
+	set .@lastmap$,"moc_pryd01"; 
+	set .@lastx,192; 
+	set .@lasty,9;
+	goto warpto;
+	end;
+rachels:
+	set .@lastmap$,"ra_san01"; 
+	set .@lastx,140; 
+	set .@lasty,11;
+	goto warpto;
+	end;
+kieldun:
+	set .@lastmap$,"kh_dun01"; 
+	set .@lastx,28; 
+	set .@lasty,226;
+	goto warpto;
+	end;
+lhzdun:
+	set .@lastmap$,"lhz_dun01"; 
+	set .@lastx,150; 
+	set .@lasty,228;
+	goto warpto;
+	end;
+sphinx:
+	set .@lastmap$,"in_sphinx1"; 
+	set .@lastx,288; 
+	set .@lasty,9;
+	goto warpto;
+	end;
+sunken:
+	set .@lastmap$,"treasure01"; 
+	set .@lastx,69; 
+	set .@lasty,24;
+	goto warpto;
+	end;
+that:
+	set .@lastmap$,"tha_t01"; 
+	set .@lastx,150; 
+	set .@lasty,39;
+	goto warpto;
+	end;
+thor:
+	set .@lastmap$,"thor_v01"; 
+	set .@lastx,21; 
+	set .@lasty,228;
+	goto warpto;
+	end;
+toy:
+	set .@lastmap$,"xmas_dun01"; 
+	set .@lastx,205; 
+	set .@lasty,15;
+	goto warpto;
+	end;
+turtle:
+	set .@lastmap$,"tur_dun01"; 
+	set .@lastx,154; 
+	set .@lasty,49;
+	goto warpto;
+	end;
+umdun:
+	set .@lastmap$,"um_dun01"; 
+	set .@lastx,42; 
+	set .@lasty,31;
+	goto warpto;
+	end;
+
+
+//Battleground
+wbattleground:
+	set .@precio_w,0;
+	set .@lastmap$,"batt_off"; 
+	set .@lastx,91; 
+	set .@lasty,39; 
+	goto warpto;
+	end;
+
+//PvP
+wpvp:
+	set .@precio_w,0;
+	set .@lastmap$,"guild_vs3"; 
+	set .@lastx,0; 
+	set .@lasty,0; 
+	goto warpto;
+	end;
+
+//Efectos
+warptolast:
+	set .@precio_w, precio_w;
+warpto:
+	if( countitem(602) == 0 && Zeny >= 300 && !getskilllv(26) )
+	{
+		mes "";
+		mes "Parece que no llevas ninguna ^0000ff"+getitemname(602)+"^000000. ¿Deseas comprar una por ^ff0000300^000000z?";
+		next;
+		if( select(" [ > ] Comprar (^ff0000300^000000z): [ > ] No gracias.") == 2 )
+		{
+			mes .@name$;
+			mes "No hay problema, partimos para allá.";
+			close2;
+		}
+		else
+		{
+			if( Zeny >= 300 )
+			{
+				getitem 602,1;
+				set Zeny, Zeny - 300;
+			}
+			mes .@name$;
+			mes "Ahora sí, allá vamos!";
+			next;
+		}
+	}
+	if( .@precio_w != 0 )
+		if( Zeny < .@precio_w )
+		{
+			mes "";
+			mes "Parece que no puedes pagar los "+ callfunc("F_InsertComma",.@precio_w) + "z del servicio.";
+			close;
+		}
+		else
+		{
+			mes "";
+			mes "El costo es de " + callfunc("F_InsertComma",.@precio_w) + "z.";
+			if( select(" [ > ] Viajar por (^ff0000" + callfunc("F_InsertComma",.@precio_w) + "^000000z): [ > ] No gracias.") == 2 )
+			{
+				mes "";
+				mes "No hay problema.";
+				close;
+			}
+		}
+	
+	if( #Efectos_Acc == 0 )
+	{
+		specialeffect2 35;
+		sleep2 100;
+		specialeffect2 34;
+		sleep2 100;
+		emotion 12;
+		specialeffect2 36;
+		sleep2 200;
+		specialeffect2 304;
+	}
+	
+	if (.@lastmap$ != "" )
+		set lastmap$, .@lastmap$;
+	if (.@lastx != 0 )
+		set lastx, .@lastx;
+	if (.@lasty != 0 )
+		set lasty, .@lasty;
+	set precio_w, .@precio_w;
+	if( precio_w != 0 )
+		set Zeny, Zeny - precio_w;
+	warp lastmap$,lastx,lasty;
+	end;
+}
+
+morocc,154,104,5	duplicate(Warper)	Warper#1	669
+morold,154,104,5	duplicate(Warper)	Warper#moc1	669
+geffen,125,68,3	duplicate(Warper)	Warper#2	669
+payon,149,233,5	duplicate(Warper)	Warper#3	669
+alberta,46,247,5	duplicate(Warper)	Warper#4	669
+alberta,211,103,5	duplicate(Warper)	Warper#5	669
+izlude,126,118,5	duplicate(Warper)	Warper#6	669
+aldebaran,135,122,5	duplicate(Warper)	Warper#7	669
+xmas,143,133,5	duplicate(Warper)	Warper#8	669
+comodo,255,183,5	duplicate(Warper)	Warper#9	669
+yuno,154,174,5	duplicate(Warper)	Warper#10	669
+amatsu,109,111,5	duplicate(Warper)	Warper#11	669
+gonryun,155,122,5	duplicate(Warper)	Warper#12	669
+louyang,212,118,5	duplicate(Warper)	Warper#13	669
+jawaii,187,245,5	duplicate(Warper)	Warper#14	669
+ayothaya,145,115,5	duplicate(Warper)	Warper#15	669
+lighthalzen,154,80,5	duplicate(Warper)	Warper#16	669
+hugel,89,150,5	duplicate(Warper)	Warper#17	669
+rachel,126,101,5	duplicate(Warper)	Warper#18	669
+veins,212,106,5	duplicate(Warper)	Warper#19	669
+moscovia,220,188,5	duplicate(Warper)	Warper#20	669
+instance,48,46,5	duplicate(Warper)	Warper#21	669
+einbech,195,84,5	duplicate(Warper)	Warper#22	669
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

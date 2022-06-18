@@ -1,0 +1,168 @@
+
+//VIP
+batt_off,91,36,0	warp	BattleOfficePRT	2,2,prontera,155,181
+batt_off,38,41,0	warp	BattleOfficeINS	2,2,instance,48,43
+
+batt_off,127,95,4	script	Alice#BO1	1275,{
+	switch( rand(1,5) )
+	{
+	case 1: npctalk "Si señor, ya casi termino mis labores."; break;
+	case 2: npctalk "Desea algo de tomar, talvez en la cocina encuentres..."; break;
+	case 3: npctalk "No me pagan suficiente por esto"; break;
+	case 4: npctalk "Que suerte, me encontré unas moneditas"; break;
+	case 5: npctalk "Esta casa es un asco"; break;
+	}
+	end;
+OnInit:
+	npcspeed 100;
+	disablenpc "Alice#BO1";
+	end;
+
+OnTimer40000:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	set .@curX, callfunc("move_XY",.@x,117,139);
+	set .@curY, callfunc("move_XY",.@y,86,103);
+	npcwalkto .@curX, .@curY;
+	initnpctimer;
+	end;
+}
+
+batt_off,92,85,4	script	Alice#BO2	1275,{
+	switch( rand(1,5) )
+	{
+	case 1: npctalk "Si señor, ya casi termino mis labores."; break;
+	case 2: npctalk "Desea algo de tomar, talvez en la cocina encuentres..."; break;
+	case 3: npctalk "No me pagan suficiente por esto"; break;
+	case 4: npctalk "Que suerte, me encontré unas moneditas"; break;
+	case 5: npctalk "Esta casa es un asco"; break;
+	}
+	end;
+OnInit:
+	npcspeed 100;
+	disablenpc "Alice#BO2";
+	end;
+
+OnTimer30000:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	set .@curX, callfunc("move_XY",.@x,78,105);
+	set .@curY, callfunc("move_XY",.@y,85,103);
+	npcwalkto .@curX, .@curY;
+	initnpctimer;
+	end;
+}
+
+-	script	Cleaning#BO	FAKE_NPC,{
+	end;
+OnInit:
+	sleep 5000;
+	enablenpc "Alice#BO1";
+	initnpctimer "Alice#BO1";
+	enablenpc "Alice#BO2";
+	initnpctimer "Alice#BO2";
+	end;
+}
+
+-	script	Guardia#BO	-1,{
+	if ( ( getcharid(2) != GetCastleData("prtg_cas02",1) || getcharid(2) == 0 ) && getgmlevel() < 60 )
+	{
+		set @alert,@alert+1;
+		sleep2 500;
+		npctalk "[Guardia] Alto ahí! Esta es una zona VIP!";
+		sleep2 1000;
+		if(@alert > 2)
+			warp "prontera",0,0;
+		else
+			warp "batt_off",81,72;
+		end;
+	}
+	if(rand(0,100) < 10)
+		npctalk "[Guardia] Buen día,"+strcharinfo(0)+"! ";
+	end;
+}
+
+batt_off,80,80,6	duplicate(Guardia#BO)	Guardia#BO01	852,6,5
+batt_off,81,93,6	duplicate(Guardia#BO)	Guardia#BO02	852,7,7
+
+-	script	Guardia#BO1	-1,{
+	if ( ( getcharid(2) != GetCastleData("prtg_cas02",1) || getcharid(2) == 0 ) && getgmlevel() < 60 )
+	{
+		set @alert,@alert+1;
+		sleep2 500;
+		npctalk "[Guardia] Alto ahí! Esta es una zona VIP!";
+		sleep2 1000;
+		if(@alert > 2)
+			warp "prontera",0,0;
+		else
+			warp "batt_off",101,72;
+		end;
+	}
+	if(rand(0,100) < 10)
+		npctalk "[Guardia] Buen día,"+strcharinfo(0)+"! ";
+	end;
+}
+
+batt_off,103,80,3	duplicate(Guardia#BO1)	Guardia#BO11	852,6,5
+batt_off,102,93,3	duplicate(Guardia#BO1)	Guardia#BO12	852,7,7
+
+-	script	InsideFlagsBO	722,{
+	end;
+
+OnRecvCastlePt02:
+	FlagEmblem GetCastleData("prtg_cas02",1);
+	end;
+}
+
+batt_off,87,77,4	duplicate(InsideFlagsBO)	Swanhild#40	722
+batt_off,96,77,4	duplicate(InsideFlagsBO)	Swanhild#41	722
+
+batt_off,54,90,3	script	Entrenamiento	10180,{
+	mes "[Entrenamiento]";
+	mes "Los huevos son tipo:";
+	mes " - Demi-human";
+	mes " - Medium";
+	mes " - MvP";
+	mes " - Neutral";
+	close;
+}
+
+batt_off,54,86,0	script	PunchingBag#0	844,{
+	end;
+	
+OnMyMobDead:
+OnInit:
+	getunitdata(getnpcid(0), .@d);
+	monster strnpcinfo(4),.@d[UNPC_X],.@d[UNPC_Y],"Punching Bag",2411,1,strnpcinfo(0)+"::OnMyMobDead";
+	.@dupid = atoi(strnpcinfo(2));
+	.gid[.@dupid] = $@mobid[0];
+	.mhp[.@dupid] = strmobinfo(4,2411);
+	setunitdata .gid[.@dupid],UMOB_MODE,.@d[UMOB_MODE]|0x4000000|0x0200000; // Set MD_STATUS_IMMUNE (0x4000000) because EDP/burn/%MHP based status can skew the DPS counter so much.
+	initnpctimer;
+	end;
+	
+OnTimer5000:
+	.@dupid = atoi(strnpcinfo(2));
+	if(unitexists(.gid[.@dupid])){
+		getunitdata(.gid[.@dupid],.@d);
+		.@diff = (.mhp[.@dupid] - .@d[UMOB_HP]);
+		if(.@diff > 0){
+			npctalk "Punching Bag : He recibido " + (.@diff/5) + " daño por segundo, el los últimos 5 segundos.";
+			setunitdata .gid[.@dupid],UMOB_HP,.mhp[.@dupid];
+			specialeffect EF_HEAL;
+		}
+	}
+	initnpctimer;
+}
+
+batt_off,49,86,0	duplicate(PunchingBag#0)	PunchingBag#1	844
+batt_off,59,86,0	duplicate(PunchingBag#0)	PunchingBag#2	844
+
+//batt_off	mapflag	bg_join
+batt_off	mapflag	noteleport
+batt_off	mapflag	nowarpto
+batt_off	mapflag	nomemo
+batt_off	mapflag	novending
+batt_off	mapflag	monster_noteleport
+batt_off	mapflag	nobranch
+batt_off	mapflag	noicewall
+batt_off	mapflag	nocashshop
+batt_off	mapflag	norodex

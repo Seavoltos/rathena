@@ -1,0 +1,294 @@
+//===== rAthena Script =======================================================
+//= Treasure Cache
+//===== By: ==================================================================
+//= ~Seavoltos~
+//===== Current Version: =====================================================
+//= 2.0
+//===== Compatible With: =====================================================
+//=	rAthena
+//===== Description: =========================================================
+//= Treasure Cache
+//===== Topic ================================================================
+//= 
+//===== Additional Comments: =================================================
+//= 
+//============================================================================
+
+batt_off,116,36,6	script	Treasure Cache Opener	10056,{
+	set .@name$, "[^000091"+strnpcinfo(0)+"^000000]";
+	cutin "verus_ian01",2;
+	mes .@name$;
+	mes "Hola,";
+	mes "¿Qué deseas hoy?";
+	next;
+	switch(select("Abrir Treasure:¿Qué haces?"))
+	{
+		case 1:
+			mes .@name$;
+			mes "¿Qué llave deseas usar?";
+			next;
+			switch(select(
+			( (countitem(41030)+countitem(41031)) > 0 && countitem(41036) > 0 )?"^10B2D2 [ > ] ^000000Usar una Bronze Key":"",
+			( (countitem(41032)+countitem(41033)) > 0 && countitem(41036) > 0 )?"^10B2D2 [ > ] ^000000Usar una Silver Key":"",
+			( (countitem(41034)+countitem(41035)) > 0 && countitem(41036) > 0 )?"^10B2D2 [ > ] ^000000Usar una Golden Key":"",
+			( (countitem(41030)+countitem(41031)+countitem(41032)+countitem(41033)+countitem(41034)+countitem(41035)) == 0 )?"^10B2D2 [ > ] ^000000Al parecer no tengo ninguna llave":""
+			))
+			{
+				case 1:
+					if( countitem(41030) > 0 )
+					{
+						delitem 41030,1;
+						delitem 41036,1;
+						set .@intentos,1;
+						break;
+					}
+					else if( countitem(41031) > 0 )
+					{
+						delitem 41031,1;
+						delitem 41036,1;
+						set .@intentos,1;
+						break;
+					}
+					else
+					{
+						mes .@name$;
+						mes "Parece que no tienes ninguna Bronze Key.";
+						close2;
+						cutin "verus_ian01",255;
+						end;
+					}
+				case 2:
+					if( countitem(41032) > 0 )
+					{
+						delitem 41032,1;
+						delitem 41036,1;
+						set .@intentos,2;
+						break;
+					}
+					else if( countitem(41033) > 0 )
+					{
+						delitem 41033,1;
+						delitem 41036,1;
+						set .@intentos,2;
+						break;
+					}
+					else
+					{
+						mes .@name$;
+						mes "Parece que no tienes ninguna Silver Key.";
+						close2;
+						cutin "verus_ian01",255;
+						end;
+					}
+				case 3:
+					if( countitem(41034) > 0 )
+					{
+						delitem 41034,1;
+						delitem 41036,1;
+						set .@intentos,3;
+						break;
+					}
+					else if( countitem(41035) > 0 )
+					{
+						delitem 41035,1;
+						delitem 41036,1;
+						set .@intentos,3;
+						break;
+					}
+					else
+					{
+						mes .@name$;
+						mes "Parece que no tienes ninguna Golden Key.";
+						close2;
+						cutin "verus_ian01",255;
+						end;
+					}
+				case 4:
+					mes .@name$;
+					set .@lugar$,"No te preocupes, recuerda que las puedes encontrar en ";
+					switch(rand(1,3))
+					{
+						case 1:
+							set .@lugar$, .@lugar$ + "algunos MvP.";
+							break;
+						case 2:
+							set .@lugar$, .@lugar$ + "algunos eventos de comunidad";
+							break;
+						case 3:
+							set .@lugar$, .@lugar$ + "la tienda de Cash Shop";
+							break;
+					}
+					mes .@lugar$;
+					close2;
+					cutin "verus_ian01",255;
+					end;
+			}
+			while ( .@intentos > 0 )
+			{
+				set .@intentos,.@intentos -1;
+				mes .@name$;
+				mes "Dejame revisar este cofre!";
+				next;
+				mes "...";
+				next;
+				mes "...";
+				mes "...";
+				next;
+				mes "...";
+				mes "...";
+				mes "...";
+				next;
+				//Configuración de recompensas!
+				set .@rand, rand(0,100);
+				
+				if( .@rand < 70 )
+				{
+					switch(rand(1,7)){
+						case 1:
+							set .@itemid,501;
+							set .@cantidad,rand(30,40);
+							break;
+						case 2:
+							set .@itemid,503;
+							set .@cantidad,rand(20,30);
+							break;
+						case 3:
+							set .@itemid,504;
+							set .@cantidad,rand(5,15);
+							break;
+						case 4:
+							set .@itemid,505;
+							set .@cantidad,rand(5,10);
+							break;
+						case 5:
+							set .@itemid,12016;
+							set .@cantidad,rand(3,5);
+							break;
+						case 6:
+							set .@itemid,717;
+							set .@cantidad,rand(1,10);
+							break;
+						case 7:
+							set .@itemid,12043+rand(0,5)*5;
+							set .@cantidad,rand(1,4);
+							break;
+					}
+				} else if( .@rand < 98 )
+				{
+					switch(rand(1,20)){
+						default:
+						case 1:
+							setarray .@card[0],4032,4062,4043,4344,4114,4075,4247,4074,4215,4063,4009,4041,4015,4061,4040,4082,4023,4098,4385,4179,4069,4004,4056,4052,4080,4423,4149,4110,4157,4060,4072,4081,4019,4103,4116,4109,4287,4292,4091,4027,4195,4193,4006,4432,4030,4079,4084,4113,4095,4046,4200,4036,4106,4090,4108,4167,4334,4093,4256,4255,4085,4066,4071,4309,4031,4007,4008,4073,4389,4048,4175,4033,4337,4001,4294,4083,4186,4021,4014,4192,4422,4219,4101,4216,4078,4068,4273,4117,4025,4092,4044,4022,4039,4042,4224,4225,4111,4089,4028,4058,4016,4012,4306,4308,4049,4053,4102,4257,4029,4261,4260,4034,4051,4064,4281,4038;
+							//4416,4424
+							set .@itemid,.@card[rand(0,getarraysize(.@card)-1)];
+							set .@cantidad,1;
+							break;
+						case 2:
+							set .@itemid,2313;
+							set .@cantidad,1;
+							break;
+						case 3:
+							set .@itemid,2304;
+							set .@cantidad,1;
+							break;
+						case 4:
+							set .@itemid,2306;
+							set .@cantidad,1;
+							break;
+						case 5:
+							set .@itemid,2336;
+							set .@cantidad,1;
+							break;
+						case 6:
+							set .@itemid,2326;
+							set .@cantidad,1;
+							break;
+						case 7:
+							set .@itemid,2333;
+							set .@cantidad,1;
+							break;
+						case 8:
+							set .@itemid,2308;
+							set .@cantidad,1;
+							break;
+						case 9:
+							set .@itemid,2502;
+							set .@cantidad,1;
+							break;
+						case 10:
+							set .@itemid,2285;
+							set .@cantidad,1;
+							break;
+						case 11:
+							set .@itemid,2627;
+							set .@cantidad,1;
+							break;
+					}
+				} else if( .@rand < 100 )
+				{
+					setarray .@quest[0],502;
+					set .@itemid,.@quest[rand(0,getarraysize(.@quest)-1)];
+					set .@cantidad,1;
+					break;
+				}else if( .@rand == 100 )
+				{
+					switch(rand(1,3)){
+						case 1:
+							set .@itemid,12045+rand(0,5)*5;
+							set .@cantidad,rand(1,4);
+							break;
+							break;
+						case 2:
+							set .@itemid,12210;
+							set .@cantidad,1;
+							break;
+						case 3:
+							set .@itemid,7621;
+							set .@cantidad,1;
+							break;
+					}
+				}
+				
+				
+				mes .@name$;
+				mes "WOW! logro ver "+ .@cantidad + " "+getitemname(.@itemid)+".";
+				mes "¿Qué deseas hacer?";
+				next;
+				switch(select(
+				"^10B2D2 [ > ] ^000000Abrir el cofre y recibir estos items.",
+				( .@intentos > 0 )?"^10B2D2 [ > ] ^000000Otro compartimiento y perder estos items":""
+				))
+				{
+					case 1:
+						mes .@name$;
+						mes "Ten tu recompensa!";
+						getitem .@itemid, .@cantidad;
+						close2;
+						cutin "verus_ian01",255;
+						end;
+					case 2:
+						mes .@name$;
+						mes "Recuerda que este objeto se perderá";
+						next;
+				}
+			}
+			close2;
+			cutin "verus_ian01",255;
+			end;
+		case 2:
+			mes .@name$;
+			mes "He estudiado por años como abrir los cofres sin dañar su contenido, todos los cofres contienen tres compartimientos donde guardan sus tesoros.";
+			next;
+			mes .@name$;
+			mes "Con ayuda de una llave y mi experiencia puedo observar hasta tres compartimientos.";
+			next;
+			mes .@name$;
+			mes "El problema que aún no logro resolver, es que puedo observar sólo un compartimiento, si miro otro, el que veía antes se destruye.";
+			next;
+			mes .@name$;
+			mes "Esto es mucho más dificil de lo que parece.";
+			close2;
+			cutin "verus_ian01",255;
+			end;
+	}
+}

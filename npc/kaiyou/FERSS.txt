@@ -1,0 +1,69 @@
+//===== rAthena Script =======================================================
+//= MvP ladder ( SQL only )
+//===== By: ==================================================================
+//= ~Seavoltos~
+//===== Current Version: =====================================================
+//= 2.0
+//===== Compatible With: =====================================================
+//= eAthena SQL 14279, with MySQL 5.1
+//=	rAthena
+//===== Description: =========================================================
+//= MvP ladder store in SQL table
+//= MvP Guild ladder store in SQL table
+//===== Topic ================================================================
+//= 
+//===== Additional Comments: =================================================
+//= 
+//============================================================================
+
+-	script	FERSS	-1,{
+function F_ShowMob;
+OnInit:
+	setarray $@FURIOUS_ID[0],		   2606,       2611;
+	setarray $@FURIOUS_MID[0],		   1015,       1499;
+	setarray $@FURIOUS_MAP$[0],	"pay_dun00","um_fild02";
+	
+	.novend = true;
+	.nopub = true;
+	.idle_time = 60 * 5; 
+	end;
+
+OnNPCKillEvent:
+	getmapxy(.@map$,.@x,.@y,BL_PC);
+	
+	for( set .@i, 0; .@i < getarraysize($@FURIOUS_ID); set .@i, .@i + 1 )
+	{
+		if( killedrid == $@FURIOUS_MID[.@i] && getd("$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocado") ==0 && .@map$ == $@FURIOUS_MAP$[.@i] )
+		{
+			setd "$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocar",getd("$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocar") + 1;
+			dispbottom "Han matado "+getd("$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocar")+"/200 "+strmobinfo(1,killedrid)+".";
+			if( getd("$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocar") == 200 )
+			{
+				//Invocar mob
+				setd "$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocado",1;
+				monster .@map$,0,0,strmobinfo(1,$@FURIOUS_ID[.@i]),$@FURIOUS_ID[.@i],1,"FERSS::OnFuriousDead";
+				//Reset contador
+				setd "$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocar",0;
+				//Anunciar
+				mapannounce .@map$," - - Apareció un "+strmobinfo(1,$@FURIOUS_ID[.@i])+" - - ",bc_all;
+				addrid(1);
+				F_ShowMob;
+				//Finalizar
+				end;
+			}
+			end;
+		}
+	}
+	end;
+
+OnFuriousDead:
+	setd "$@FURIOUS_ID" + killedrid + "_invocar",0;
+	setd "$@FURIOUS_ID" + killedrid + "_invocado",0;
+	end;
+	
+	function	F_ShowMob	{
+		if ( checkvending() && .novend || checkchatting() && .nopub || checkidle() > .idle_time ) end;
+		atcommand "@showmobs "+ $@FURIOUS_ID[.@i];
+		return;
+	}
+}

@@ -22,7 +22,7 @@
 //= 2.0 Removed unused "name" variable. [L0ne_W0lf]
 //============================================================ 
 
-alberta,43,244,0	script	Tourist#thai	99,{
+alberta,39,247,0	script	Tourist#thai	99,{
 	if (checkweight(1201,1) == 0) {
 		mes "- Wait a moment! -";
 		mes "- Currently you're carrying -";
