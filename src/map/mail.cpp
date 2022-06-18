@@ -130,6 +130,12 @@ enum mail_attach_result mail_setitem(struct map_session_data *sd, short idx, uin
 	if( pc_istrading(sd) )
 		return MAIL_ATTACH_ERROR;
 
+	if( sd->state.protection_acc )
+	{
+		clif_displaymessage(sd->fd, msg_txt(sd,2500));
+		return MAIL_ATTACH_ERROR;
+	}
+
 	if( idx == 0 ) { // Zeny Transfer
 		if( !pc_can_give_items(sd) )
 			return MAIL_ATTACH_UNTRADEABLE;

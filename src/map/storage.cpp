@@ -452,6 +452,12 @@ void storage_storageaddfromcart(struct map_session_data *sd, struct s_storage *s
  */
 void storage_storagegettocart(struct map_session_data* sd, struct s_storage *stor, int index, int amount)
 {
+	if( sd->state.protection_acc )
+	{
+		clif_displaymessage(sd->fd, msg_txt(sd,2500));
+		return;
+	}
+	
 	unsigned char flag = 0;
 	enum e_storage_add result;
 
@@ -770,6 +776,12 @@ bool storage_guild_additem(struct map_session_data* sd, struct s_storage* stor, 
 
 	if ((item_data->bound == BOUND_ACCOUNT || item_data->bound > BOUND_GUILD) && !pc_can_give_bounded_items(sd)) {
 		clif_displaymessage(sd->fd, msg_txt(sd,294));
+		return false;
+	}
+
+	if( sd->state.protection_acc )
+	{
+		clif_displaymessage(sd->fd, msg_txt(sd,2500));
 		return false;
 	}
 

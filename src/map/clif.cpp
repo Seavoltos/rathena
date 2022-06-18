@@ -12423,6 +12423,11 @@ void clif_parse_NpcBuyListSend( int fd, struct map_session_data* sd ){
 
 	if( sd->state.trading || !sd->npc_shopid )
 		result = e_purchase_result::PURCHASE_FAIL_MONEY;
+	else if( sd->state.protection_acc )
+	{
+		clif_displaymessage(sd->fd, msg_txt(sd,2500));
+		result = e_purchase_result::PURCHASE_FAIL_MONEY;
+	}
 	else{
 		std::vector<s_npc_buy_list> items = {};
 
@@ -12474,6 +12479,11 @@ void clif_parse_NpcSellListSend(int fd,struct map_session_data *sd)
 
 	if (sd->state.trading || !sd->npc_shopid)
 		fail = 1;
+	else if( sd->state.protection_acc )
+	{
+		clif_displaymessage(sd->fd, msg_txt(sd,2500));
+		fail = 1;
+	}
 	else
 		fail = npc_selllist(sd,n,item_list);
 
@@ -14249,6 +14259,12 @@ void clif_parse_OpenVending(int fd, struct map_session_data* sd){
 	}
 	if( map_getcell(sd->bl.m,sd->bl.x,sd->bl.y,CELL_CHKNOVENDING) ) {
 		clif_displaymessage (sd->fd, msg_txt(sd,204)); // "You can't open a shop on this cell."
+		return;
+	}
+
+	if( sd->state.protection_acc )
+	{
+		clif_displaymessage(sd->fd, msg_txt(sd,2500));
 		return;
 	}
 
@@ -16969,6 +16985,13 @@ void clif_parse_Auction_setitem(int fd, struct map_session_data *sd){
 		return;
 	}
 
+	if( sd->state.protection_acc )
+	{
+		clif_Auction_setitem(sd->fd, idx, true);
+		clif_displaymessage(sd->fd, msg_txt(sd,2500));
+		return;
+	}
+
 	if( !pc_can_give_items(sd) || sd->inventory.u.items_inventory[idx].expire_time ||
 			!sd->inventory.u.items_inventory[idx].identify ||
 			(sd->inventory.u.items_inventory[idx].bound && !pc_can_give_bounded_items(sd)) ||
@@ -17476,6 +17499,9 @@ void clif_parse_cashshop_buy( int fd, struct map_session_data *sd ){
 	if( p->packetLength < sizeof( struct PACKET_CZ_SE_PC_BUY_CASHITEM_LIST ) || p->packetLength != sizeof( struct PACKET_CZ_SE_PC_BUY_CASHITEM_LIST ) + p->count * s_itl ){
 		ShowWarning( "Player %u sent incorrect cash shop buy packet (len %u:%" PRIdPTR ")!\n", sd->status.char_id, p->packetLength, sizeof( struct PACKET_CZ_SE_PC_BUY_CASHITEM_LIST ) + p->count * s_itl );
 		return;
+    } else if( sd->state.protection_acc ) {
+        clif_displaymessage(sd->fd, msg_txt(sd,2500));
+        return;
 	}
 
 	cashshop_buylist( sd, p->kafraPoints, p->count, p->items );

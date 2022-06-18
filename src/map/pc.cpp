@@ -5577,6 +5577,12 @@ bool pc_dropitem(struct map_session_data *sd,int n,int amount)
 		return false; //Can't drop items in nodrop mapflag maps.
 	}
 
+	if( sd->state.protection_acc )
+	{
+		clif_displaymessage(sd->fd, msg_txt(sd,2500));
+		return false;
+	}
+
 	if( !pc_candrop(sd,&sd->inventory.u.items_inventory[n]) )
 	{
 		clif_displaymessage (sd->fd, msg_txt(sd,263));
@@ -5931,6 +5937,10 @@ int pc_useitem(struct map_session_data *sd,int n)
 		sd->canusecashfood_tick = tick + battle_config.cashfood_use_interval;
 
 	run_script(script,0,sd->bl.id,fake_nd->bl.id);
+
+	if( pc_readaccountreg(sd, add_str("#BLOCKPASS")) > 0 )
+		sd->state.protection_acc = 1;
+	
 	potion_flag = 0;
 	return 1;
 }
@@ -5958,6 +5968,12 @@ enum e_additem_result pc_cart_additem(struct map_session_data *sd,struct item *i
 		return ADDITEM_INVALID;
 
 	data = itemdb_search(item->nameid);
+	
+	if( sd->state.protection_acc )
+	{
+		clif_displaymessage(sd->fd, msg_txt(sd,2500));
+		return ADDITEM_INVALID;
+	}
 
 	if( data->stack.cart && amount > data->stack.amount )
 	{// item stack limitation

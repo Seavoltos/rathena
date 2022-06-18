@@ -26044,6 +26044,29 @@ BUILDIN_FUNC( enchantgradeui ){
 #endif
 }
 
+/*==========================================
+ * Account Protection - [Orce brAthena]
+ *------------------------------------------*/
+BUILDIN_FUNC(block) {
+	struct map_session_data *sd = NULL;
+	if (!script_rid2sd(sd))
+		return SCRIPT_CMD_SUCCESS;
+
+	int value = script_getnum(st, 2);
+
+	sd->state.protection_acc = (value) ? 1 : 0;
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(blockcheck) {
+	struct map_session_data *sd = NULL;
+	if (!script_rid2sd(sd))
+		return SCRIPT_CMD_SUCCESS;
+
+	script_pushint(st,sd->state.protection_acc);
+	return SCRIPT_CMD_SUCCESS;
+}
+
 #include "../custom/script.inc"
 
 // declarations that were supposed to be exported from npc_chat.cpp
@@ -26765,6 +26788,8 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(getjobexp_ratio, "i??"),
 	BUILDIN_DEF(enchantgradeui, "?" ),
 
+	BUILDIN_DEF(block,"i"), // Account Protection
+	BUILDIN_DEF(blockcheck,""), // Account Protection
 #include "../custom/script_def.inc"
 
 	{NULL,NULL,NULL},

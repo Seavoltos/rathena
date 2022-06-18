@@ -7471,7 +7471,13 @@ ACMD_FUNC(trade)
 	nullpo_retr(-1, sd);
 
 	memset(atcmd_player_name, '\0', sizeof(atcmd_player_name));
-
+	
+	if( sd->state.protection_acc )
+	{
+		clif_displaymessage(sd->fd, msg_txt(sd,2500));
+		return -1;
+	}
+	
 	if (!message || !*message || sscanf(message, "%23[^\n]", atcmd_player_name) < 1) {
 		clif_displaymessage(fd, msg_txt(sd,1230)); // Please enter a player name (usage: @trade <char name>).
 		return -1;

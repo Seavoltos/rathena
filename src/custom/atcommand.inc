@@ -18,6 +18,22 @@
 //	return 0;
 //}
 
+ACMD_FUNC(hold)
+{
+	nullpo_retr(-1, sd);
+	
+	if (!sd->state.block_action)
+	{
+		sd->state.block_action  = true;
+		clif_displaymessage(fd, "Character movement turned off");
+	}
+	else
+	{
+		sd->state.block_action  = false;
+		clif_displaymessage(fd, "Character movement turned on");
+	}
+	return 0;
+}
 
 ACMD_FUNC(heart)
 {
