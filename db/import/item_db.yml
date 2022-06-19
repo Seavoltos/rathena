@@ -20275,3 +20275,18 @@ Body:
       NoAuction: true
     Script: |
       set #umbalad,1;
+###########################################################################
+#
+# Vending
+#
+###########################################################################
+  - Id: 35000
+    AegisName: Zeny
+    Name: Zeny
+    Type: Etc
+    Weight: 1
+  - Id: 35001
+    AegisName: Cash
+    Name: Cash
+    Type: Etc
+    Weight: 1

@@ -16,7 +16,7 @@ prontera,159,188,4	script	Warper::Warper	669,{
 	mes "Buen día ^7900f9"+ strcharinfo(0) +"^000000.";
 	mes "Entonces, hacia donde deseas ir?";
 	
-	menu	( lastmap$ == "" )?"":"[ > ] Último Warp",warptolast,"[ > ] Ciudades",city,"[ > ] Dungeon",dungeon,"[ > ] Battle Office",wbattleground,( BaseLevel < 50 )?"":"[ > ] PvP",wpvp,( !#payond )?"":"[ > ] Tienda",tienda;
+	menu	( lastmap$ == "" )?"":"[ > ] Último Warp",warptolast,"[ > ] Ciudades",city,"[ > ] Dungeon",dungeon,"[ > ] Battle Office",wbattleground,( BaseLevel < 50 )?"":"[ > ] PvP",wpvp,( !#payond )?"":"[ > ] Tienda",tienda,"[ > ] Mercado",mercado;
 	
 tienda:
 menu
@@ -357,6 +357,14 @@ wumbala:
 	goto warpto;
 	end;
 
+//Mercado
+mercado:
+	set .@precio_w,0;
+	set .@lastmap$,"vend_zone"; 
+	set .@lastx,99; 
+	set .@lasty,99;
+	goto warpto;
+	end;
 //Dungeon
 abbey:
 	set .@lastmap$,"abbey01"; 
@@ -717,6 +725,7 @@ veins,212,106,5	duplicate(Warper)	Warper#19	669
 moscovia,220,188,5	duplicate(Warper)	Warper#20	669
 instance,48,46,5	duplicate(Warper)	Warper#21	669
 einbech,195,84,5	duplicate(Warper)	Warper#22	669
+vend_zone,94,101,6	duplicate(Warper)	Warper#23	669
 
 
 

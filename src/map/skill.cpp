@@ -906,12 +906,12 @@ bool skill_isNotOk(uint16 skill_id, struct map_session_data *sd)
 			}
 			break;
 		case MC_VENDING:
-			if (map_getmapflag(sd->bl.m, MF_NOVENDING)) {
+			if ( !map_getmapflag(sd->bl.m, MF_NOVENDING)) {
 				clif_displaymessage(sd->fd, msg_txt(sd, 276)); // "You can't open a shop on this map"
 				clif_skill_fail(sd, skill_id, USESKILL_FAIL_LEVEL, 0);
 				return true;
 			}
-			if (map_getcell(sd->bl.m, sd->bl.x, sd->bl.y, CELL_CHKNOVENDING)) {
+			if ( !map_getcell(sd->bl.m, sd->bl.x, sd->bl.y, CELL_CHKNOVENDING)) {
 				clif_displaymessage(sd->fd, msg_txt(sd, 204)); // "You can't open a shop on this cell."
 				clif_skill_fail(sd, skill_id, USESKILL_FAIL_LEVEL, 0);
 				return true;
@@ -926,12 +926,12 @@ bool skill_isNotOk(uint16 skill_id, struct map_session_data *sd)
 			}
 			break;
 		case ALL_BUYING_STORE:
-			if( map_getmapflag(sd->bl.m, MF_NOBUYINGSTORE) ) {
+			if( !map_getmapflag(sd->bl.m, MF_NOBUYINGSTORE) ) {
 				clif_displaymessage (sd->fd, msg_txt(sd,276)); // "You can't open a shop on this map"
 				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
 				return true;
 			}
-			if( map_getcell(sd->bl.m,sd->bl.x,sd->bl.y,CELL_CHKNOBUYINGSTORE) ) {
+			if( !map_getcell(sd->bl.m,sd->bl.x,sd->bl.y,CELL_CHKNOBUYINGSTORE) ) {
 				clif_displaymessage (sd->fd, msg_txt(sd,204)); // "You can't open a shop on this cell."
 				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
 				return true;
@@ -8918,11 +8918,47 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 				sd->state.prevend = 1;
 				sd->state.workinprogress = WIP_DISABLE_ALL;
 				sd->vend_skill_lv = skill_lv;
+				sd->vend_loot = 0;
 				ARR_FIND(0, MAX_CART, i, sd->cart.u.items_cart[i].nameid && sd->cart.u.items_cart[i].id == 0);
 				if (i < MAX_CART)
 					intif_storage_save(sd, &sd->cart);
-				else
-					clif_openvendingreq(sd,2+skill_lv);
+				if (battle_config.extended_vending) {
+					struct item_data *item;
+					char output[CHAT_SIZE_MAX];
+					int c = 0, i, d = 0;
+					sd->vend_lvl = skill_lv;
+					if (battle_config.item_zeny)
+						d++;
+					if (battle_config.item_cash)
+						d++;
+					for (const auto &it : itemdb_vending) {
+						if ((item = itemdb_exists(it.first)) != NULL &&
+							item->nameid != ITEMID_ZENY && item->nameid != ITEMID_CASH)
+							c++;
+					}
+					c += d;
+
+					if (c > 1)
+						clif_vend(sd, sd->vend_lvl);
+					else {
+						sd->state.prevend = 1;
+						if (c) {
+							item = itemdb_exists(battle_config.item_zeny ? battle_config.item_zeny : battle_config.item_cash ? battle_config.item_cash : item->nameid);
+							sd->vend_loot = item->nameid;
+							sprintf(output, msg_txt(sd, 1596), itemdb_name(sd->vend_loot));
+							clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], output, false, SELF);
+							clif_openvendingreq(sd, 2 + sd->vend_lvl);
+						}
+						else {
+							sd->vend_loot = 0;
+							clif_openvendingreq(sd, 2 + sd->vend_lvl);
+						}
+					}
+				}
+				else {
+					sd->state.prevend = 1;
+					clif_openvendingreq(sd, 2 + skill_lv);
+				}
 			}
 		}
 		break;
@@ -18942,6 +18978,27 @@ void skill_identify(struct map_session_data *sd, int idx)
 		}
 	}
 	clif_item_identified(sd,idx,flag);
+}
+
+int skill_vending(struct map_session_data *sd, t_itemid nameid) {
+	struct item_data *item;
+	char output[1024];
+	nullpo_ret(sd);
+
+	if (!pc_can_give_items(sd) || (item = itemdb_exists(nameid)) == NULL) {
+		sd->state.prevend = 0;
+		sd->vend_loot = 0;
+		sd->state.workinprogress = WIP_DISABLE_NONE;
+		clif_skill_fail(sd, MC_VENDING, USESKILL_FAIL_LEVEL, 0);
+	}
+	else {
+		sd->vend_loot = nameid;
+		sd->state.prevend = 1;
+		clif_openvendingreq(sd, 2 + sd->vend_lvl);
+		sprintf(output, msg_txt(sd, 1594), item->ename.c_str());
+		clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], output, false, SELF);
+	}
+	return 0;
 }
 
 /*==========================================

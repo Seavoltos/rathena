@@ -880,6 +880,10 @@ struct map_session_data {
 		uint16 level;
 		int target;
 	} skill_keep_using;
+	
+	///Extended Vending system [Lilith]
+	unsigned short vend_loot;
+	int vend_lvl;
 };
 
 extern struct eri *pc_sc_display_ers; /// Player's SC display table

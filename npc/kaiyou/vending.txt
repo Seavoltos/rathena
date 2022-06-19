@@ -1,0 +1,122 @@
+
+vend_zone,99,104,5	script	Reglas Merchant	681,{
+
+	set .@nombre$, "[^0000FFReglas Merchant^000000]";
+	mes .@nombre$;
+	mes "Bienvenido a la ^FF0000Zona Merchant^000000.";
+	mes "Si deseas instalar tu merchant, debes respetar las siguientes reglas:";
+	next;
+	mes .@nombre$;
+	mes "Regla 1: Debes Situarte sobre los ^ff0000recuadro gris/celeste^000000 que se encuentran por todo el mapa.";
+	next;
+	mes .@nombre$;
+	mes "Regla 2: No puedes abrir tiendas con nombres ofensivos.";
+	next;
+	mes .@nombre$;
+	mes "Regla 3: Coloca nombres representativos de acuerdo a lo que vendes, esto ayudara a que te compren más rápido.";
+	next;
+	mes .@nombre$;
+	mes "Espero que respetes las reglas, o algun Gm tendra que sacarte.";
+	if( getskilllv(41) && !getskilllv(2535) )
+	{
+		//set Zeny,Zeny-10000;
+		getitem 6377,5; //Buy_Stall_Permit
+		skill "ALL_BUYING_STORE",1,SKILL_PERM_GRANT;
+	}
+	close;
+
+}
+
+
+-	script	vend_zone	FAKE_NPC,{
+OnInit:
+	set .@map$,"vend_zone";
+	
+	//Circulo interno
+	setarray .@x[0], 104,107,110,113,113,113,113,113,113,113,113,110,107,104, 95, 92, 89, 86, 86, 86 ,86,86,86,86,86,89,92,95;
+	setarray .@y[0],  86, 86, 86, 86, 89, 92, 95,104,107,110,113,113,113,113,113,113,113,113,110,107,104,95,92,89,86,86,86,86;
+	//Verticales
+	//Izquierda 1
+	set .@x_1,54;
+	setarray .@y_1[0],56,59,62,65,68,71,74,77,80,83,86,89,92,95,98,101,104,107,110,113,116,119,122,125,128,131,134,137,140,143;
+	//Izquierda 2
+	set .@x_2,59;
+	setarray .@y_2[0],62,65,68,71,74,77,80,83,86,89,92,95,104,107,110,113,116,119,122,125,128,131,134,137;
+	//Izquierda 3
+	set .@x_3,64;
+	setarray .@y_3[0],68,71,74,77,80,83,86,89,92,95,104,107,110,113,116,119,122,125,128,131;
+	//Izquierda 4
+	set .@x_4,74;
+	setarray .@y_4[0],75,78,81,84,87,90,93,106,109,112,115,118,122,125;
+	//Izquierda 5
+	set .@x_5,79;
+	setarray .@y_5[0],81,84,87,90,93,106,109,112,115,118;
+	//Izquierda 6
+	set .@x_6,120;
+	setarray .@y_6[0],81,84,87,90,93,106,109,112,115,118;
+	//Izquierda 7
+	set .@x_7,125;
+	setarray .@y_7[0],74,81,84,87,90,93,106,109,112,115,118,121,124;
+	//Izquierda 8
+	set .@x_8,135;
+	setarray .@y_8[0],68,71,74,77,80,83,86,89,92,95,104,107,110,113,116,119,122,125,128,131;
+	//Izquierda 9
+	set .@x_9,140;
+	setarray .@y_9[0],62,65,68,71,74,77,80,83,86,89,92,95,104,107,110,113,116,119,122,125,128,131,134,137;
+	//Izquierda 10
+	set .@x_10,145;
+	setarray .@y_10[0],56,59,62,65,68,71,74,77,80,83,86,89,92,95,98,101,104,107,110,113,116,119,122,125,128,131,134,137,140,143;
+	//Horizontales
+	//Abajo 1
+	setarray .@x_11[0],56,59,62,65,68,71,74,77,80,83,86,89,92,95,98,101,104,107,110,113,116,119,122,125,128,131,134,137,140,143;
+	set .@y_11,54;
+	//Abajo 2
+	setarray .@x_12[0],59,62,65,68,71,74,77,80,83,86,89,92,95,104,107,110,113,116,119,122,125,128,131,134,137,140;
+	set .@y_12,59;
+	//Abajo 3
+	setarray .@x_13[0],65,68,71,74,77,80,83,86,89,92,95,104,107,110,113,116,119,122,125,128,131,134;
+	set .@y_13,64;
+	//Abajo 4
+	setarray .@x_14[0],77,80,83,86,89,92,95,104,107,110,113,116,119,122,125;
+	set .@y_14,74;
+	//Abajo 5
+	setarray .@x_15[0],80,83,86,89,92,95,104,107,110,113,116,119;
+	set .@y_15,79;
+	//Abajo 6
+	setarray .@x_16[0],80,83,86,89,92,95,104,107,110,113,116,119;
+	set .@y_16,120;
+	//Abajo 7
+	setarray .@x_17[0],77,80,83,86,89,92,95,104,107,110,113,116,119,122;
+	set .@y_17,125;
+	//Abajo 8
+	setarray .@x_18[0],65,68,71,74,77,80,83,86,89,92,95,104,107,110,113,116,119,122,125,128,131,134;
+	set .@y_18,135;
+	//Abajo 9
+	setarray .@x_19[0],59,62,65,68,71,74,77,80,83,86,89,92,95,104,107,110,113,116,119,122,125,128,131,134,137,140;
+	set .@y_19,140;
+	//Abajo 10
+	setarray .@x_20[0],56,59,62,65,68,71,74,77,80,83,86,89,92,95,98,101,104,107,110,113,116,119,122,125,128,131,134,137,140,143;
+	set .@y_20,145;
+	
+	//Celdas vending
+	setmapflag .@map$, MF_NOVENDING, TRUE;
+	setmapflag .@map$, MF_NOBUYINGSTORE, TRUE;
+	for( set .@i, 0; .@i < getarraysize(.@x); set .@i, .@i + 1 )
+	{
+		setcell .@map$,.@x[.@i],.@y[.@i],.@x[.@i],.@y[.@i],CELL_NOVENDING,TRUE;
+		setcell .@map$,.@x[.@i],.@y[.@i],.@x[.@i],.@y[.@i],CELL_NOBUYINGSTORE,TRUE;
+	}
+	for( set .@j,1; .@j < 11; set .@j, .@j+1 )
+		for( set .@i, 0; .@i < getarraysize(getd(".@y_"+.@j)); set .@i, .@i + 1 )
+		{
+			setcell .@map$,getd(".@x_"+.@j),getd(".@y_"+.@j+"["+.@i+"]"),getd(".@x_"+.@j),getd(".@y_"+.@j+"["+.@i+"]"),CELL_NOVENDING,TRUE;
+			setcell .@map$,getd(".@x_"+.@j),getd(".@y_"+.@j+"["+.@i+"]"),getd(".@x_"+.@j),getd(".@y_"+.@j+"["+.@i+"]"),CELL_NOBUYINGSTORE,TRUE;
+		}
+	for( set .@j,11; .@j < 21; set .@j, .@j+1 )
+		for( set .@i, 0; .@i < getarraysize(getd(".@x_"+.@j)); set .@i, .@i + 1 )
+		{
+			setcell .@map$,getd(".@x_"+.@j+"["+.@i+"]"),getd(".@y_"+.@j),getd(".@x_"+.@j+"["+.@i+"]"),getd(".@y_"+.@j),CELL_NOVENDING,TRUE;
+			setcell .@map$,getd(".@x_"+.@j+"["+.@i+"]"),getd(".@y_"+.@j),getd(".@x_"+.@j+"["+.@i+"]"),getd(".@y_"+.@j),CELL_NOBUYINGSTORE,TRUE;
+		}
+	end;
+}
