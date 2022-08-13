@@ -2505,13 +2505,23 @@ int skill_counter_additional_effect (struct block_list* src, struct block_list *
 	sd = BL_CAST(BL_PC, src);
 	dstsd = BL_CAST(BL_PC, bl);
 
-	if(dstsd && attack_type&BF_WEAPON) {	//Counter effects.
+	if(dstsd && attack_type & BF_WEAPONMASK) {	//Counter effects.
 		for (const auto &it : dstsd->addeff_atked) {
 			rate = it.rate;
 			if (attack_type&BF_LONG)
 				rate += it.arrow_rate;
-			if (!rate)
+			if (rate == 0)
 				continue;
+
+			if ((it.flag&(ATF_WEAPON|ATF_MAGIC|ATF_MISC)) != (ATF_WEAPON|ATF_MAGIC|ATF_MISC)) {
+				// Trigger has attack type consideration.
+				if ((it.flag&ATF_WEAPON && attack_type&BF_WEAPON) ||
+					(it.flag&ATF_MAGIC && attack_type&BF_MAGIC) ||
+					(it.flag&ATF_MISC && attack_type&BF_MISC))
+					;
+				else
+					continue;
+			}
 
 			if ((it.flag&(ATF_LONG|ATF_SHORT)) != (ATF_LONG|ATF_SHORT)) {	//Trigger has range consideration.
 				if((it.flag&ATF_LONG && !(attack_type&BF_LONG)) ||
@@ -3898,6 +3908,14 @@ int64 skill_attack (int attack_type, struct block_list* src, struct block_list *
 				skill_counter_additional_effect(src, bl, skill_id, skill_lv, dmg.flag, tick);
 		} else
 			battle_delay_damage(tick, dmg.amotion,src,bl,dmg.flag,skill_id,skill_lv,damage,dmg.dmg_lv,dmg.dmotion, additional_effects, false);
+	} else {
+		// Trigger monster skill condition for damage skills with no amotion.
+		if (bl->type == BL_MOB && src != bl && !status_isdead(bl)) {
+			if (damage > 0)
+				mobskill_event(BL_CAST(BL_MOB, bl), src, tick, dmg.flag);
+			if (skill_id > 0)
+				mobskill_event(BL_CAST(BL_MOB, bl), src, tick, MSC_SKILLUSED | (skill_id << 16));
+		}
 	}
 
 	if (tsc  && skill_id != NPC_EVILLAND && skill_id != SP_SOULEXPLOSION && skill_id != SJ_NOVAEXPLOSING
@@ -7510,7 +7528,11 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			src,skill_id,skill_lv,tick, flag|BCT_ENEMY|1, skill_castend_damage_id);
 		clif_skill_nodamage (src,src,skill_id,skill_lv,1);
 		// Initiate 20% of your damage becomes fire element.
+#ifdef RENEWAL
+		sc_start4(src,src,SC_SUB_WEAPONPROPERTY,100,3,20,skill_id,0,skill_get_time2(skill_id, skill_lv));
+#else
 		sc_start4(src,src,SC_WATK_ELEMENT,100,3,20,0,0,skill_get_time2(skill_id, skill_lv));
+#endif
 		break;
 
 	case TK_JUMPKICK:
@@ -7577,7 +7599,9 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case HW_MAGICPOWER:
 	case PF_MEMORIZE:
 	case PA_SACRIFICE:
+#ifndef RENEWAL
 	case ASC_EDP:
+#endif
 	case PF_DOUBLECASTING:
 	case SG_SUN_COMFORT:
 	case SG_MOON_COMFORT:
@@ -7667,6 +7691,15 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		clif_skill_nodamage(src,bl,skill_id,skill_lv,
 			sc_start(src,bl,type,100,skill_lv,skill_get_time(skill_id,skill_lv)));
 		break;
+
+#ifdef RENEWAL
+	// EDP also give +25% WATK poison pseudo element to user.
+	case ASC_EDP:
+		clif_skill_nodamage(src,bl,skill_id,skill_lv,
+			sc_start(src,bl,type,100,skill_lv,skill_get_time(skill_id,skill_lv)));
+		sc_start4(src,src,SC_SUB_WEAPONPROPERTY,100,5,25,skill_id,0,skill_get_time2(skill_id, skill_lv));
+		break;
+#endif
 
 	case LG_SHIELDSPELL:
 		if (skill_lv == 1)
@@ -9343,17 +9376,20 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		break;
 
 	case TF_BACKSLIDING: //This is the correct implementation as per packet logging information. [Skotlex]
-		skill_blown(src,bl,skill_get_blewcount(skill_id,skill_lv),unit_getdir(bl),(enum e_skill_blown)(BLOWN_IGNORE_NO_KNOCKBACK
+		{
+			short blew_count = skill_blown(src,bl,skill_get_blewcount(skill_id,skill_lv),unit_getdir(bl),(enum e_skill_blown)(BLOWN_IGNORE_NO_KNOCKBACK
 #ifdef RENEWAL
 			|BLOWN_DONT_SEND_PACKET
 #endif
-		));
-		clif_skill_nodamage(src, bl, skill_id, skill_lv, 1);
+			));
+			clif_skill_nodamage(src, bl, skill_id, skill_lv, 1);
 #ifdef RENEWAL
-		clif_blown(src); // Always blow, otherwise it shows a casting animation. [Lemongrass]
+			if(blew_count > 0)
+				clif_blown(src); // Always blow, otherwise it shows a casting animation. [Lemongrass]
 #else
-		clif_slide(bl, bl->x, bl->y); //Show the casting animation on pre-re
+			clif_slide(bl, bl->x, bl->y); //Show the casting animation on pre-re
 #endif
+		}
 		break;
 
 	case TK_HIGHJUMP:
@@ -11041,7 +11077,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 					break;
 				i++;
 			}
-			pc_overheat(sd, limit[min(i, 2)]);
+			pc_overheat(*sd, limit[min(i, 2)]);
 		}
 		break;
 
@@ -12539,7 +12575,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			status_change_end(src,SC_CURSEDCIRCLE_ATKER,INVALID_TIMER);
 	}
 
-	if (dstmd) { //Mob skill event for no damage skills (damage ones are handled in battle_calc_damage) [Skotlex]
+	if (dstmd) { //Mob skill event for no damage skills (damage ones are handled in battle_damage/skill_attack) [Skotlex]
 		mob_log_damage(dstmd, src, 0); //Log interaction (counts as 'attacker' for the exp bonus)
 		mobskill_event(dstmd, src, tick, MSC_SKILLUSED|(skill_id<<16));
 	}
@@ -12705,6 +12741,7 @@ TIMER_FUNC( skill_keep_using ){
 
 	if( sd && sd->skill_keep_using.skill_id ){
 		clif_parse_skill_toid( sd, sd->skill_keep_using.skill_id, sd->skill_keep_using.level, sd->skill_keep_using.target );
+		sd->skill_keep_using.tid = INVALID_TIMER;
 	}
 
 	return 0;
@@ -12965,7 +13002,7 @@ TIMER_FUNC(skill_castend_id){
 		else
 			skill_castend_damage_id(src,target,ud->skill_id,ud->skill_lv,tick,flag);
 
-		if( sd && sd->skill_keep_using.skill_id > 0 && sd->skill_keep_using.skill_id == ud->skill_id && !skill_isNotOk(ud->skill_id, sd) && skill_check_condition_castbegin(sd, ud->skill_id, ud->skill_lv) ){
+		if( sd && sd->skill_keep_using.tid == INVALID_TIMER && sd->skill_keep_using.skill_id > 0 && sd->skill_keep_using.skill_id == ud->skill_id && !skill_isNotOk(ud->skill_id, sd) && skill_check_condition_castbegin(sd, ud->skill_id, ud->skill_lv) ){
 			sd->skill_keep_using.tid = add_timer( sd->ud.canact_tick + 100, skill_keep_using, sd->bl.id, 0 );
 		}
 
@@ -18619,7 +18656,7 @@ int skill_castfix_sc(struct block_list *bl, double time, uint8 flag)
 		}
 	}
 
-	time = max(time, 0);
+	time = std::max(time, 0.0);
 	//ShowInfo("Castime castfix_sc = %f\n",time);
 
 	return (int)time;
@@ -24164,6 +24201,8 @@ void SkillDatabase::loadingFinished(){
 	if( this->skill_num > MAX_SKILL ){
 		ShowError( "There are more skills defined in the skill database (%d) than the MAX_SKILL (%d) define. Please increase it and recompile.\n", this->skill_num, MAX_SKILL );
 	}
+
+	TypesafeCachedYamlDatabase::loadingFinished();
 }
 
 /**

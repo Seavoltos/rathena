@@ -4143,7 +4143,6 @@ Body:
       DropEffect: BLUE_PILLAR
     Script: |
       skill "TF_DOUBLE",1;
-      bonus bDoubleRate,5;
   - Id: 4118
     AegisName: Petit_Card
     Name: Earth Petite Card
