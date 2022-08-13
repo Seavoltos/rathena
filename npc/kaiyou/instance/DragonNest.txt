@@ -1,0 +1,2651 @@
+//===== rAthena Script =======================================
+//= Dragon's Nest
+//===== Description: =========================================
+//= Dragon Nest Instance
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Seavoltos]
+//============================================================
+//============================================================
+
+instance,41,37,5	script	Old Sign#1	4_BOARD3,{
+	//erasequest 12325;
+	.@dragon_name$ = $120719_str_dragon$;
+	.@dragon_timer  = $120719_num_dragon;
+	.@dragon_member = $120903_num_dragon;
+	.@time_m = .@dragon_timer / 60;
+	.@time_s = .@dragon_timer - (.@time_m * 60);
+	if (.@dragon_name$ == "") {
+		mes "-- Dragon's Nest Records --";
+		mes "Aún no hay registros de esta instancia.";// Custom text
+		close;
+	}
+	if (.@dragon_timer < 60)
+		.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+	else
+		.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "Minuto" ) + " " + callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+	if (.@dragon_member > 0)
+		.@string$ =  " con ^ff0044" + .@dragon_member + " miembros^000000";
+	mes "-- Dragon's Nest Records --";
+	mes "Mejor tiempo para ^ff0044" + .@dragon_name$ + "^000000" + .@string$ + ".";
+	mes "Con el tiempo de ^0000ff" + .@time_txt$ + "^000000.";
+	close;
+
+OnInit:
+	if (!$120719_num_dragon)
+		$120719_num_dragon = 3600;
+	/*
+	if (rand(1,100) > 97) {
+		$120719_num_dragon = 3600;
+		$120719_str_dragon$ = "";
+	}
+	*/
+	end;
+}
+
+instance,37,35,7	script	Magic Scholar	4_M_SAGE_C,{
+	if (BaseLevel < 90) {
+		mes "[Magic Scholar]";
+		mes "Tu nivel de poder no es el suficientemente alto para poder viajar. Vuelve cuando seas al menos nivel 90.";
+		close;
+	}
+	.@party_id = getcharid(1);
+	.@md_name$ = "Dragon's Nest";
+	if (.@party_id < 1) {
+		mes "[Magic Scholar]";
+		mes "Sin party? Vuelve cuando hayas creado una, ni pensarlo en hacer esto solo.";
+		close;
+	}
+	switch( checkquest(12325,PLAYTIME) ) {
+	case -1:
+		if (is_party_leader() == true) {
+			mes "[Magic Scholar]";
+			mes "Qué puedo hacer por ti?";
+			next;
+			switch( select("Reservar Dragon's Nest:Qué haces aquí?:Parar de hablar.") ) {
+			case 1:
+				switch( instance_create(.@md_name$) ) {
+				case -3:
+					dispbottom "Memorial Dungeon, '" + .@md_name$ + "' ya está en progreso.",0xFFFFFF;
+					break;
+				case -4:
+				case -2:
+				case -1:
+					mes "[Magic Scholar]";
+					mes "Vaya, mis manos se han resbalado. Se requiere volver a activar el portal.";
+					close;
+				}
+				mes "[Magic Scholar]";
+				mes "El espacio está bajo control";
+				mes "Por favor espera un minuto.";
+				close;
+			case 2:
+				break;
+			case 3:
+				mes "[Magic Scholar]";
+				mes "Ok, lo entiendo. Ven a verme cuando cambies de idea.";
+				close;
+			}
+		}
+		mes "[Magic Scholar]";
+		mes "Estoy investigando esta brecha en el espacio tiempo.";
+		next;
+		mes "[Magic Scholar]";
+		mes "Con mis estudios he logrado estabilizarla momentáneamente.";
+		next;
+		mes "[Magic Scholar]";
+		mes "Esta brecha en particular nos lleva al pasado, pero aún no logro averiguar a cual aventura...";
+		next;
+		mes "[Magic Scholar]";
+		mes "De todos modos, lo puedo activar si tu eres el party lider.";
+		close;
+	case 0:
+	case 1:
+		mes "[Magic Scholar]";
+		mes "La brecha aún no es segura, por favor espera a que pase un tiempo.";
+		close;
+	case 2:
+		mes "^0000ffLa brecha se ha estabilizado. Puedes volver a viajar.^000000";
+		erasequest 12325;
+		close;
+	}
+}
+
+instance,35,28,4	script	Interdimensional Device	PORTAL,{
+	if (BaseLevel < 90) {
+		mes "[Interdimensional Device]";
+		mes "Tu nivel de poder no es el suficientemente alto para poder viajar. Vuelve cuando seas al menos nivel 90.";
+		close;
+	}
+	.@party_id = getcharid(1);
+	.@md_name$ = "Dragon's Nest";
+	if (.@party_id < 1) {
+		mes "[Interdimensional Device]";
+		mes "Sin party? Vuelve cuando hayas creado una, ni pensarlo en hacer esto solo.";
+		close;
+	}
+	switch( checkquest(12325,PLAYTIME) ) {
+	case -1:
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "[Interdimensional Device]";
+			mes "Un error desconocido ha ocurrido.";
+			close;
+		case IE_NOINSTANCE:
+			mes "[Interdimensional Device]";
+			mes "El pasaje para viajar entre dimensiones aún no se ha activado.";
+			close;
+		case IE_NOMEMBER:// Custom text
+			mes "[Interdimensional Device]";
+			mes "No tienes permitido acceder a este dispositivo.";
+			close;
+		case IE_OK:
+			mapannounce "instance", "[" + getpartyname(.@party_id) + "] " + strcharinfo(0) + " ha entrado a " + .@md_name$ + ".",bc_map,"0x00ff99";
+			setquest 12325;// Dragon's Nest after-effects
+			end;
+		}
+	case 0:
+	case 1:
+		mes "[Interdimensional Device]";
+		mes "Aún quedan restos de tu último viaje. Acceso denegado.";
+		close;
+	case 2:
+		mes "^0000ffLos restos de tu último viaje han desaparecido. Ahora puedes volver a moverte entre dimensiones.^000000";
+		erasequest 12325;
+		close;
+	}
+}
+
+// Instance Scripts :: in_face
+// 1st Stage
+//============================================================
+abyss_04,190,53,3	script	Chaos#0	4_M_CHAOS,{
+	cutin "h_chaos01",2;
+	if (is_party_leader() == false) {
+		mes "[Chaos]";
+		mes "Aún no sé que trata, pero estoy hablando con tu lider asique por favor espera ok?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	.@account_id = getcharid(3);
+	.@player_name$ = strcharinfo(0);
+	mes "[Chaos]";
+	mes "Enserio? No sabía que la liga de cazadores viniera hasta acá.";
+	npctalk "Chaos: Enserio? No sabía que la liga de cazadores viniera hasta acá.";
+	next;
+	select("Espera! esto es un malentendido.");
+	cutin "",255;
+	mes "[" + .@player_name$ + "]";
+	mes "No! Yo creo que estás equivocado! Nosotros no somos de la liga de cazadores...";
+	unittalk .@account_id, .@player_name$ + ":No! Yo creo que estás equivocado! Nosotros no somos de la liga de cazadores...";
+	next;
+	cutin "h_chaos01",2;
+	mes "[Chaos]";
+	mes "No, No necesito más excusas... Este nido no pertenece a nadie.";
+	npctalk "Chaos: No, No necesito más excusas... Este nido no pertenece a nadie.";
+	next;
+	select("Nido?");
+	cutin "",255;
+	mes "[" + .@player_name$ + "]";
+	mes "Nido? Yo nunca he escuchado de eso.";
+	unittalk .@account_id, .@player_name$ + ": Nido? Yo nunca he escuchado de eso.";
+	close2;
+	donpcevent instance_npcname("Chaos#01") + "::OnStart";
+	end;
+OnInit:
+	
+}
+
+abyss_04,190,53,3	script	Chaos#01	4_M_CHAOS,{
+	end;
+OnStart:
+	.@iris_name$ = instance_npcname("Iris#0");
+	donpcevent instance_npcname("#globaltimer22") + "::OnT_s";
+	hideoffnpc instance_npcname("Chaos#01");
+	hideonnpc instance_npcname("Chaos#0");
+	sleep 5000;
+	npctalk "Chaos: Hahaha, enserio nunca escuchaste sobre esto? Este nido esta lleno de dragones que se han mostrado por esta área.";
+	sleep 5000;
+	npctalk "Chaos: No me importa. No le daré importancia mientras no me estorbes.";
+	sleep 5000;
+	npctalk "Iris: Ah~ Una briza suave~", .@iris_name$;
+	sleep 3000;
+	npctalk "Iris: Hehe, el clima está genial. Estoy muy feliz~", .@iris_name$;
+	sleep 3000;
+	npctalk "Iris: Que tal tú Chaos?", .@iris_name$;
+	sleep 3000;
+	npctalk "Chaos: Será solo por el momento.";
+	sleep 3000;
+	npctalk "Chaos: Una oscura briza a comenzado.";
+	sleep 4000;
+	npctalk "Chaos: Iris! Siento como nos están rodeando. Quizas el Rey se encuentra en las profundidades de esta cueva!";
+	sleep 5000;
+	npctalk "Iris: Ahah~ Cuidémosnos como siempre, como siempre, ok?", .@iris_name$;
+	sleep 3000;
+	npctalk "Chaos: Si, ocupemonos de ellos y volvamos. Hey aventureros. Cuidado! que pronto habrá muchos dragoproblemas.";
+	sleep 6000;
+	hideonnpc instance_npcname("Chaos#01");
+	hideonnpc instance_npcname("Iris#0");
+	donpcevent instance_npcname("#dragoncontrol1") + "::OnStart";
+	mapannounce 'map_name$, "El ataque de los dragones ha comenzado. Mientrás más rápido acaben con ellos mejores porcentajes de recompensas tendrán.",bc_map,"0xffffff";
+	//donpcevent instance_npcname("#dragonprize1") + "::OnStart";
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Chaos#01");
+	end;
+}
+
+abyss_04,181,55,8	script	Iris#0	4_F_IRIS,{
+	cutin "h_iris02",2;
+	mes "[Iris]";
+	mes "Lo siento~ Sólo disfruto esta fresca briza.";
+	close2;
+	cutin "",255;
+	end;
+}
+
+abyss_04,1,5,3	script	#dragoncontrol1	CLEAR_NPC,{
+	end;
+OnStart:
+	.@mob_c = getmapusers('map_name$) + 1;
+	.@event$ = instance_npcname("#dragoncontrol1") + "::OnMyMobDead";
+	killmonster 'map_name$, .@event$;
+	areamonster 'map_name$,147,28,168,37,"Dragon",20487, (.@mob_c*2), .@event$;
+	areamonster 'map_name$,147,28,168,37,"Dragon",20488, (.@mob_c*2), .@event$;
+	areamonster 'map_name$,198,35,214,48,"Dragon",20487, (.@mob_c*2), .@event$;
+	areamonster 'map_name$,198,35,214,48,"Dragon",20488, (.@mob_c*2), .@event$;
+	end;
+OnMyMobDead:
+	.@mob_dead_num = mobcount( 'map_name$, instance_npcname("#dragoncontrol1") +"::OnMyMobDead" );
+	mapannounce 'map_name$, "Aún quedan " + .@mob_dead_num + " Dragones vivos.",bc_map,"0xffffff";
+	if (.@mob_dead_num < 3)
+		initnpctimer;
+	end;
+OnTimer1000:
+	killmonster 'map_name$, instance_npcname("#dragoncontrol1") + "::OnMyMobDead";
+	donpcevent instance_npcname("#dragonboss1") + "::OnStart";
+	mapannounce 'map_name$, "Un dragón muy raro ha aparecido.",bc_map,"0xffffff";
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragoncontrol1");
+	end;
+}
+
+abyss_04,1,4,3	script	#dragonboss1	CLEAR_NPC,{
+	end;
+OnStart:
+	areamonster 'map_name$,170,28,191,53,"Dark Dragon",20504,1,instance_npcname("#dragonboss1") + "::OnMyMobDead";
+	'BOSS[1] = $@mobid[0];
+	.@dfacehp = ( 15 - getmapusers('map_name$) ) * 20500;
+	.@MOB_HP = 616460 - .@dfacehp;
+	if (.@MOB_HP < 308230)
+		.@MOB_HP = 308230;
+	setunitdata 'BOSS[1], UMOB_HP, .@MOB_HP;
+	initnpctimer;
+	end;
+OnTimer1111:
+	.@mapcount = getmapusers('map_name$);
+	if (.@mapcount < 1)
+		setunitdata 'BOSS[1], UMOB_HP, 616460;// Note : weird behaviour.
+	else if (rand(1,(22-.@mapcount)) < 17) {
+		getunitdata 'BOSS[1], .@arr;
+		if (.@arr[UMOB_HP] > 308230 && .@arr[UMOB_HP] < 616460)
+			donpcevent instance_npcname("#dragonboss12") + "::OnStart1";
+		else if (.@arr[UMOB_HP] > 10000 && .@arr[UMOB_HP] < 308230)
+			donpcevent instance_npcname("#dragonboss12") + "::OnStart2";
+	}
+	end;
+OnTimer14000:
+	stopnpctimer;
+	getunitdata 'BOSS[1], .@arr;
+	if (.@arr[UMOB_HP] > 10000)
+		initnpctimer;
+	end;
+
+OnMyMobDead:
+	if (mobcount( 'map_name$,instance_npcname("#dragonboss1") +"::OnMyMobDead" ) < 1) {
+		//hideoffnpc instance_npcname("#dragonprize1");
+		enablenpc instance_npcname("#dragonenter1");
+		enablenpc instance_npcname("#dragonexit1");
+		hideoffnpc instance_npcname("Chaos#1");
+		hideoffnpc instance_npcname("Iris#1");
+		donpcevent instance_npcname("#dragonboss12") + "::OnEnd";
+		mapannounce 'map_name$, "Un portal ha aparecido luego de cazar al Dragon.",bc_map,"0xffffff";
+		stopnpctimer;
+	}
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss1");
+	end;
+}
+
+abyss_04,1,4,3	script	#dragonboss12	CLEAR_NPC,{
+	end;
+OnStart1:
+	callsub S_Spawn,3;
+OnStart2:
+	callsub S_Spawn,6;
+S_Spawn:
+	initnpctimer;
+	.@arg = getarg(0);
+	.@event$ = instance_npcname("#dragonboss12") +"::OnMyMobDead";
+	if (mobcount( 'map_name$,.@event$ ) > .@arg)
+		killmonster 'map_name$, .@event$;
+	getunitdata 'BOSS[1], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,(.@mobx-4),.@moby,"Dragon Egg",1721,1,.@event$;
+	monster 'map_name$,(.@mobx+4),.@moby,"Dragon Egg",1721,1,.@event$;
+	if (.@arg == 6) {
+		monster 'map_name$,.@mobx,(.@moby+4),"Dragon Egg",1721,1,.@event$;
+		monster 'map_name$,.@mobx,(.@moby-4),"Dragon Egg",1721,1,.@event$;
+	}
+	end;
+OnTimer12000:
+	.@mob_dead_num = mobcount( 'map_name$,instance_npcname("#dragonboss12") +"::OnMyMobDead" );
+	if (.@mob_dead_num > 3)
+		callsub S_Heal,4,150000;
+	else if (.@mob_dead_num > 2)
+		callsub S_Heal,3,55000;
+	else if (.@mob_dead_num > 1)
+		callsub S_Heal,2,20000;
+	else if (.@mob_dead_num > 0)
+		callsub S_Heal,1,7200;
+	donpcevent instance_npcname("#dragonboss12") + "::OnEnd";
+	end;
+S_Heal:
+	.@mapcount = getmapusers('map_name$);
+	getunitdata 'BOSS[1], .@arr;
+	.@r_hpp = (.@mapcount + 1) * getarg(1);
+	.@dfacehp = .@arr[UMOB_HP] + .@r_hpp;
+	.@r_hpp2 = 616460 - ( (15 - .@mapcount) * 20500 );
+	if (.@dfacehp > .@r_hpp2)
+		.@dfacehp = .@r_hpp2;
+	setunitdata 'BOSS[1], UMOB_HP, .@dfacehp;
+	mapannounce 'map_name$, "El Dragon ha absorbido la energía de " + getarg(0) + " huevos sin nacer, y ha recuperado " + .@r_hpp + " de energía.",bc_map,"0xff00ee";
+	return;
+
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#dragonboss12") + "::OnMyMobDead";
+	stopnpctimer;
+	end;
+OnMyMobDead:
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss12");
+	end;
+}
+
+abyss_04,146,34,0	script	#dragonenter1	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp 'map_name$,99,59;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#dragonenter1");
+	end;
+}
+
+abyss_04,102,57,0	script	#dragonexit1	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp 'map_name$,149,34;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#dragonexit1");
+	end;
+}
+
+// 2nd Stage
+//============================================================
+abyss_04,53,150,6	script	Chaos#1	4_M_CHAOS,{
+	cutin "h_chaos01",2;
+	if (is_party_leader() == false) {
+		mes "[Chaos]";
+		mes "Aún no sé que trata, pero estoy hablando con tu lider asique por favor espera ok?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	mes "[Chaos]";
+	mes "Wow, eres bastante rápido como para seguirme el paso.";
+	npctalk "Chaos: Wow, eres bastante rápido como para seguirme el paso.";
+	next;
+	select("El dragon de recién...");
+	cutin "",255;
+	mes "[" + strcharinfo(0) + "]";
+	mes "Acabamos de ver un dragón muy raro.";
+	unittalk getcharid(3), strcharinfo(0) + ": Acabamos de ver un dragón muy raro.";
+	next;
+	cutin "h_chaos01",2;
+	mes "[Chaos]";
+	mes "No~~ Ese no puede ser el lider de este lugar.";
+	close2;
+	donpcevent instance_npcname("Chaos#11") + "::OnStart";
+	cutin "",255;
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Chaos#1");
+	end;
+}
+
+abyss_04,53,150,6	script	Chaos#11	4_M_CHAOS,{
+	end;
+OnStart:
+	.@iris_name$ = instance_npcname("Iris#1");
+	hideoffnpc instance_npcname("Chaos#11");
+	hideonnpc instance_npcname("Chaos#1");
+	npctalk "Chaos: No~~ Ese no puede ser el lider de aquí.";
+	sleep 4000;
+	npctalk "Chaos: Ese era sólo una mutación de los dragones.";
+	sleep 5000;
+	npctalk "Chaos: Espera! La piel de estos dragones puede ser muy útil.";
+	sleep 3000;
+	npctalk "Iris: Pero la batalla tomó mucho tiempo. La piel ha sido dañada, por lo que es inutil!", .@iris_name$;
+	sleep 5000;
+	npctalk "Iris: Escuché que los cazadores más experimentados pueden sacar su piel muy rápido.", .@iris_name$;
+	sleep 6000;
+	npctalk "Iris: Chaos, eres bueno en eso?", .@iris_name$;
+	sleep 3000;
+	npctalk "Chaos: No... no del todo! Usé sólo Magnum Break, y la piel se quemó...";
+	sleep 3000;
+	npctalk "Iris: Inutil Chaos.", .@iris_name$;
+	sleep 3000;
+	npctalk "Chaos: Además, el que buscamos no está aquí. Regresaré primero, así que encárgate del resto ok?";
+	sleep 5000;
+	hideonnpc instance_npcname("Chaos#11");
+	npctalk "Iris: Chaos! Me estás dejando sola?", .@iris_name$;
+	sleep 3000;
+	hideonnpc .@iris_name$;
+	donpcevent instance_npcname("#dragoncontrol2") + "::OnStart";
+	//donpcevent instance_npcname("#dragonprize2") + "::OnStart";
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Chaos#11");
+	end;
+}
+
+abyss_04,60,152,3	script	Iris#1	4_F_IRIS,{
+	cutin "h_iris02",2;
+	mes "[Iris]";
+	mes "Chaos es un buen amigo, aunque el sólo puede usar Magnum Break...";
+	close2;
+	cutin "",255;
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Iris#1");
+	end;
+}
+
+abyss_04,2,5,3	script	#dragoncontrol2	CLEAR_NPC,{
+	end;
+OnStart:
+	.@mob_c = getmapusers('map_name$) + 1;
+	.@event$ = instance_npcname("#dragoncontrol2") + "::OnMyMobDead";
+	areamonster 'map_name$,50,90,77,128,"Dragon",20487, (.@mob_c*4), .@event$;
+	areamonster 'map_name$,50,90,77,128,"Dragon",20488, (.@mob_c*4), .@event$;
+	areamonster 'map_name$,50,90,77,128,"Dragon",20485, (.@mob_c*2), .@event$;
+	areamonster 'map_name$,50,90,77,128,"Dragon",20486, (.@mob_c*2), .@event$;
+	end;
+OnMyMobDead:
+	.@mob_dead_num = mobcount( 'map_name$,instance_npcname("#dragoncontrol2") +"::OnMyMobDead" );
+	mapannounce 'map_name$, "Aún quedan " + .@mob_dead_num + " Dragones vivos.",bc_map,"0xffffff";
+	if (.@mob_dead_num < 3)
+		initnpctimer;
+	end;
+OnTimer1000:
+	killmonster 'map_name$, instance_npcname("#dragoncontrol2") + "::OnMyMobDead";
+	donpcevent instance_npcname("#dragonboss2") + "::OnStart";
+	mapannounce 'map_name$, "Un Dragon muy raro ha vuelto aparecer.",bc_map,"0xffffff";
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragoncontrol2");
+	end;
+}
+
+abyss_04,2,5,3	script	#dragonboss2	CLEAR_NPC,{
+	end;
+OnStart:
+	areamonster 'map_name$,50,90,77,128,"Frost Dragon",20505,1,instance_npcname("#dragonboss2") + "::OnMyMobDead";
+	'BOSS[2] = $@mobid[0];
+	.@dfacehp = ( 15 - getmapusers('map_name$) ) * 30000;
+	.@MOB_HP = 924690 - .@dfacehp;
+	if (.@MOB_HP < 462345)
+		.@MOB_HP = 462345;
+	setunitdata 'BOSS[2], UMOB_HP, .@MOB_HP;
+	initnpctimer;
+	end;
+OnTimer1111:
+	.@mapcount = getmapusers('map_name$);
+	if (.@mapcount < 1)
+		setunitdata 'BOSS[2], UMOB_HP, 924690;
+	else if (rand(1,(22-.@mapcount)) < 17) {
+		getunitdata 'BOSS[2], .@arr;
+		if (.@arr[UMOB_HP] > 462345 && .@arr[UMOB_HP] < 924690)
+			donpcevent instance_npcname("#dragonboss22") + "::OnStart1";
+		else if (.@arr[UMOB_HP] > 10000 && .@arr[UMOB_HP] < 462345)
+			donpcevent instance_npcname("#dragonboss22") + "::OnStart2";
+	}
+	end;
+OnTimer12000:
+	stopnpctimer;
+	getunitdata 'BOSS[2], .@arr;
+	if (.@arr[UMOB_HP] > 10000)
+		initnpctimer;
+	end;
+
+OnMyMobDead:
+	if (mobcount( 'map_name$,instance_npcname("#dragonboss2") +"::OnMyMobDead" ) < 1) {
+		enablenpc instance_npcname("#dragonenter2");
+		enablenpc instance_npcname("#dragonexit2");
+		//hideoffnpc instance_npcname("#dragonprize2");
+		hideoffnpc instance_npcname("Chaos#2");
+		hideoffnpc instance_npcname("Iris#2");
+		donpcevent instance_npcname("#dragonboss22") + "::OnEnd";
+		mapannounce 'map_name$, "Puedes escuchar algo gritar hacia el centro del mapa. En esa dirección debe estar el lider del nido.",bc_map,"0xffffff";
+		stopnpctimer;
+	}
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss2");
+	end;
+}
+
+abyss_04,1,4,3	script	#dragonboss22	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#dragonboss22") +"::OnMyMobDead";
+	stopnpctimer;
+	end;
+OnStart1:
+	initnpctimer;
+	if (mobcount( 'map_name$,instance_npcname("#dragonboss22") +"::OnMyMobDead" ) > 4)
+		killmonster 'map_name$, instance_npcname("#dragonboss22") + "::OnMyMobDead";
+	getunitdata 'BOSS[2], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#waterball",2539,1,instance_npcname("#dragonboss22") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#waterball",2539,1,instance_npcname("#dragonboss22") + "::OnMyMobDead";
+	end;
+OnStart2:
+	initnpctimer;
+	if (mobcount( 'map_name$,instance_npcname("#dragonboss22") +"::OnMyMobDead" ) > 8)
+		killmonster 'map_name$, instance_npcname("#dragonboss22") + "::OnMyMobDead";
+	getunitdata 'BOSS[2], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#waterball",2539,1,instance_npcname("#dragonboss22") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#waterball",2539,1,instance_npcname("#dragonboss22") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#waterball",2539,1,instance_npcname("#dragonboss22") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#waterball",2539,1,instance_npcname("#dragonboss22") + "::OnMyMobDead";
+	end;
+OnTimer20000:
+	donpcevent instance_npcname("#dragonboss22") + "::OnEnd";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss22");
+	end;
+}
+
+abyss_04,42,211,0	script	#dragonenter2	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp 'map_name$,116,280;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#dragonenter2");
+	end;
+}
+
+abyss_04,112,280,0	script	#dragonexit2	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp 'map_name$,42,207;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#dragonexit2");
+	end;
+}
+
+// 3rd Stage
+//============================================================
+abyss_04,177,297,5	script	Chaos#2	4_M_CHAOS,{
+	cutin "h_chaos01",2;
+	if (is_party_leader() == false) {
+		mes "[Chaos]";
+		mes "Aún no sé que trata, pero estoy hablando con tu lider asique por favor espera ok?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	mes "[Chaos]";
+	mes "Son realmente buenos! Pero ahora deben tener cuidado, esta sección se ve llena de peligros.";
+	npctalk "Chaos: Son realmente buenos! Pero ahora deben tener cuidado, esta sección se ve llena de peligros.";
+	close2;
+	donpcevent instance_npcname("Chaos#22") + "::OnStart";
+	cutin "",255;
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Chaos#2");
+	end;
+}
+
+abyss_04,177,297,5	script	Chaos#22	4_M_CHAOS,{
+	end;
+OnStart:
+	hideoffnpc instance_npcname("Chaos#22");
+	hideonnpc instance_npcname("Chaos#2");
+	sleep 4000;
+	npctalk "Iris: No me siento comoda en este lugar. Vamos a ver a otra parte Chaos!", instance_npcname("Iris#2");
+	sleep 4000;
+	npctalk "Chaos: Ok, vamos. Sígueme!";
+	sleep 4000;
+	hideonnpc instance_npcname("Chaos#22");
+	hideonnpc instance_npcname("Iris#2");
+	donpcevent instance_npcname("#dragoncontrol3") + "::OnStart";
+	//donpcevent instance_npcname("#dragonprize3") + "::OnStart";
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Chaos#22");
+	end;
+}
+
+abyss_04,182,301,3	script	Iris#2	4_F_IRIS,{
+	cutin "h_iris01",2;
+	mes "[Iris]";
+	mes "Este parte se siente extraña. No me siento cómoda no deberíamos estar demasiado tiempo.";
+	close2;
+	cutin "",255;
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Iris#2");
+	end;
+}
+
+abyss_04,2,5,3	script	#dragoncontrol3	CLEAR_NPC,{
+	end;
+OnStart:
+	.@mon_num = ( getmapusers('map_name$) + 1 );
+	areamonster 'map_name$,194,266,222,297,"Dragon",20487,.@mon_num * 4,instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
+	areamonster 'map_name$,194,266,222,297,"Dragon",20488,.@mon_num * 4,instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
+	areamonster 'map_name$,194,266,222,297,"Dragon",20485,.@mon_num * 3,instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
+	areamonster 'map_name$,194,266,222,297,"Dragon",20486,.@mon_num * 3,instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
+	end;
+OnMyMobDead:
+	.@mob_dead_num = mobcount('map_name$,instance_npcname("#dragoncontrol3") + "::OnMyMobDead");
+	mapannounce 'map_name$, "Aún hay " + .@mob_dead_num + " dragones vivos.",bc_map,"0xffffff";
+	if (.@mob_dead_num < 3)
+		initnpctimer;
+	end;
+OnTimer1000:
+	killmonster 'map_name$, instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
+	donpcevent instance_npcname("#dragonboss3") + "::OnStart";
+	mapannounce 'map_name$, "Cuidado! Un dragón muy peligroso ha aparecido.",bc_map,"0xffffff";
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragoncontrol3");
+	end;
+}
+
+abyss_04,2,5,3	script	#dragonboss3	CLEAR_NPC,{
+	end;
+OnStart:
+	areamonster 'map_name$,194,266,222,297,"Dragon Veneno",20506,1,instance_npcname("#dragonboss3") + "::OnMyMobDead";
+	'BOSS[3] = $@mobid[0];
+	.@MOB_HP = 924690 - ( (15 - getmapusers('map_name$)) * 30000 );
+	if (.@MOB_HP < 462345)
+		.@MOB_HP = 462345;
+	setunitdata 'BOSS[3], UMOB_HP, .@MOB_HP;
+	initnpctimer;
+	end;
+OnTimer1111:
+	.@mapcount = getmapusers('map_name$);
+	if (.@mapcount < 1)
+		setunitdata 'BOSS[3], UMOB_HP, 924690;
+	else if (rand(1,(22-.@mapcount)) < 17) {
+		getunitdata 'BOSS[3], .@arr;
+		if (.@arr[UMOB_HP] > 693517 && .@arr[UMOB_HP] < 924690 || .@arr[UMOB_HP] > 390103 && .@arr[UMOB_HP] < 520138)
+			donpcevent instance_npcname("#dragonboss32") + "::OnStart1";
+		else if (.@arr[UMOB_HP] > 10000 && .@arr[UMOB_HP] < 292577 || .@arr[UMOB_HP] > 312577 && .@arr[UMOB_HP] < 380103)
+			donpcevent instance_npcname("#dragonboss32") + "::OnStart2";
+	}
+	end;
+OnTimer7000:
+	stopnpctimer;
+	getunitdata 'BOSS[3], .@arr;
+	if (.@arr[UMOB_HP] > 10000)
+		initnpctimer;
+	end;
+OnMyMobDead:
+	if (mobcount( 'map_name$,instance_npcname("#dragonboss3") +"::OnMyMobDead" ) < 1) {
+		//hideoffnpc instance_npcname("#dragonprize3");
+		enablenpc instance_npcname("#dragonenter3");
+		enablenpc instance_npcname("#dragonexit3");
+		enablenpc instance_npcname("#chaoson");
+		donpcevent instance_npcname("#dragonboss32") + "::OnEnd";
+		mapannounce 'map_name$, "Escuchas a lo lejos una pila de huesos moviéndose. Esto está cada vez más raro.",bc_map,"0xffffff";
+		stopnpctimer;
+	}
+	end;
+OnHeal01:
+	.@mapcount = getmapusers('map_name$);
+	getunitdata 'BOSS[3], .@arr;
+	.@r_hpp = ((.@mapcount+1) * 5000) * rand(1,10);
+	.@dfacehp = .@arr[UMOB_HP] + .@r_hpp;
+	.@r_hpp2 = 5200000 - ((15-.@mapcount) * 200000);
+	if (.@dfacehp > .@r_hpp2)
+		.@dfacehp = .@r_hpp2;
+	setunitdata 'BOSS[3], UMOB_HP, .@dfacehp;
+	mapannounce 'map_name$, "El dragón ha recogido sacos de veneno y ha recuperado " + .@r_hpp + " de energía.",bc_map,"0x66ff00";
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss3");
+	end;
+}
+
+abyss_04,1,4,3	script	#dragonboss32	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#dragonboss32") + "::OnMyMobDead";
+	end;
+OnStart1:
+	callsub S_Spawn, 3;
+OnStart2:
+	callsub S_Spawn, 5;
+S_Spawn:
+	getunitdata 'BOSS[3], .@arr;
+	.@num = getarg(0);
+	.@coord_x = .@arr[UMOB_X] + .@num;
+	.@coord_y = .@arr[UMOB_Y] - .@num;
+	.@vmobx = .@arr[UMOB_X] - .@num;
+	do {
+		.@vmoby = .@arr[UMOB_Y] + .@num;
+		do {
+			monster 'map_name$,.@vmobx,.@vmoby,"Veneno",2531,1,instance_npcname("#dragonboss32") + "::OnMyMobDead";
+			.@vmoby -= 2;
+		}
+		while( .@vmoby >= .@coord_y );
+		.@vmobx += 2;
+	}
+	while( .@vmobx <= .@coord_x );
+	donpcevent instance_npcname("#dragonboss3") + "::OnHeal01";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss32");
+	end;
+}
+
+abyss_04,264,205,0	script	#dragonenter3	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp 'map_name$,302,153;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#dragonenter3");
+	end;
+}
+
+abyss_04,304,156,0	script	#dragonexit3	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp 'map_name$,264,210;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#dragonexit3");
+	end;
+}
+
+// 4th Stage
+//============================================================
+abyss_04,287,152,0	script	#chaoson	HIDDEN_WARP_NPC,7,7,{
+	end;
+OnTouch_:
+	disablenpc instance_npcname("#chaoson");
+	donpcevent instance_npcname("#announcer1") + "::OnStart";
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#chaoson");
+	end;
+}
+
+abyss_04,1,10,7	script	#announcer1	CLEAR_NPC,{
+	end;
+OnStart:
+	mapannounce 'map_name$, "La voz de Chaos: Oigan aventureros, deben tener cuidado! Esquiven el veneno!",bc_map,"0xffff00";
+	sleep 6000;
+	mapannounce 'map_name$, "La voz de Chaos: Estamos buscando en otra parte, avisen si encuentran algo.",bc_map,"0xffff00";
+	donpcevent instance_npcname("#dragoncontrol4") + "::OnStart";
+	donpcevent instance_npcname("#dragoncontrol42") + "::OnStart";
+	//donpcevent instance_npcname("#dragonprize4") + "::OnStart";
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#announcer1");
+	end;
+}
+
+abyss_04,2,5,3	script	#dragoncontrol4	CLEAR_NPC,{
+	end;
+OnStart:
+	.@mob_c = getmapusers('map_name$) + 1;
+	.@mon_num = .@mob_c * 6;
+	areamonster 'map_name$,246,118,300,152,"Dragon",20485,.@mon_num,instance_npcname("#dragoncontrol4") + "::OnMyMobDead";
+	.@mon_num = .@mob_c * 5;
+	areamonster 'map_name$,246,118,300,152,"Dragon",20486,.@mon_num,instance_npcname("#dragoncontrol4") + "::OnMyMobDead";
+	end;
+OnMyMobDead:
+	.@mob_dead_num = mobcount('map_name$,instance_npcname("#dragoncontrol4") + "::OnMyMobDead");
+	mapannounce 'map_name$, "Aún quedan " + .@mob_dead_num + " Dragones vivos.",bc_map,"0xffffff";
+	if (.@mob_dead_num < 3)
+		initnpctimer;
+	end;
+OnTimer1000:
+	killmonster 'map_name$, instance_npcname("#dragoncontrol4") + "::OnMyMobDead";
+	donpcevent instance_npcname("#dragonboss4") + "::OnStart";
+	mapannounce 'map_name$, "Escuchas algo gritar al Oeste.",bc_map,"0xffffff";
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragoncontrol4");
+	end;
+}
+
+abyss_04,2,6,3	script	#dragoncontrol42	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#dragoncontrol42") + "::OnMyMobDead";
+	end;
+OnStart:
+	.@mon_num = ( getmapusers('map_name$) ) * 5 + 8;
+	areamonster 'map_name$,246,118,300,152,"#toxicarea",2536,.@mon_num,instance_npcname("#dragoncontrol42") + "::OnMyMobDead";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragoncontrol42");
+	end;
+}
+
+abyss_04,2,5,3	script	#dragonboss4	CLEAR_NPC,{
+	end;
+OnStart:
+	areamonster 'map_name$,246,118,300,152,"Undead Dragon",20507+rand(0,1),1,instance_npcname("#dragonboss4") + "::OnMyMobDead";
+	'BOSS[4] = $@mobid[0];
+	.@dfacehp = ( 15 - getmapusers('map_name$) ) * 41000;
+	.@MOB_HP = 1232920 - .@dfacehp;
+	if (.@MOB_HP < 616460)
+		.@MOB_HP = 616460;
+	setunitdata 'BOSS[4], UMOB_HP, .@MOB_HP;
+	initnpctimer;
+	end;
+OnTimer1111:
+	.@mapcount = getmapusers('map_name$);
+	if (.@mapcount < 1)
+		setunitdata 'BOSS[4], UMOB_HP, 1232920;
+	else if (rand(1,22-.@mapcount) < 17) {
+		getunitdata 'BOSS[4], .@arr;
+		if (.@arr[UMOB_HP] > 924690 && .@arr[UMOB_HP] < 1232920 || .@arr[UMOB_HP] > 554814 && .@arr[UMOB_HP] < 739752)
+			donpcevent instance_npcname("#dragonboss42") + "::OnStart1";
+		else if (.@arr[UMOB_HP] > 10000 && .@arr[UMOB_HP] < 416110)
+			donpcevent instance_npcname("#dragonboss42") + "::OnStart2";
+	}
+	end;
+OnTimer10000:
+	stopnpctimer;
+	getunitdata 'BOSS[4], .@arr;
+	if (.@arr[UMOB_HP] > 10000)
+		initnpctimer;
+	else
+		donpcevent instance_npcname("#dragonboss42") + "::OnEnd";
+	end;
+OnMyMobDead:
+	if (mobcount( 'map_name$,instance_npcname("#dragonboss4") +"::OnMyMobDead" ) < 1) {
+		donpcevent instance_npcname("#dragoncontrol42") + "::OnEnd";
+		//hideoffnpc instance_npcname("#dragonprize4");
+		enablenpc instance_npcname("#dragonenter4");
+		enablenpc instance_npcname("#dragonexit4");
+		hideoffnpc instance_npcname("Chaos#4");
+		hideoffnpc instance_npcname("Iris#4");
+		enablenpc instance_npcname("#chaoson2");
+		donpcevent instance_npcname("#dragonboss42") + "::OnEnd";
+		mapannounce 'map_name$, "Creo que puedes ver otro portal. Esta podría ser la salida.",bc_map,"0xffffff";
+		stopnpctimer;
+	}
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss4");
+	end;
+}
+
+abyss_04,1,4,3	script	#dragonboss42	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#dragonboss42") + "::OnMyMobDead";
+	stopnpctimer;
+	end;
+OnStart1:
+	initnpctimer;
+	.@label$ = instance_npcname("#dragonboss42") + "::OnMyMobDead";
+	if (mobcount( 'map_name$,.@label$ ) > 12)
+		killmonster 'map_name$, .@label$;
+	getunitdata 'BOSS[4], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-3,.@moby+3,"#venomfog",2536,1, .@label$;
+	monster 'map_name$,.@mobx+3,.@moby+3,"#venomfog",2536,1, .@label$;
+	monster 'map_name$,.@mobx-3,.@moby-3,"#venomfog",2536,1, .@label$;
+	monster 'map_name$,.@mobx+3,.@moby-3,"#venomfog",2536,1, .@label$;
+	end;
+OnStart2:
+	initnpctimer;
+	.@label$ = instance_npcname("#dragonboss42") + "::OnMyMobDead";
+	if (mobcount( 'map_name$,.@label$ ) > 27)
+		killmonster 'map_name$, .@label$;
+	getunitdata 'BOSS[4], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-5,.@moby+5,"#venomfog",2536,1, .@label$;
+	monster 'map_name$,  .@mobx,.@moby+5,"#venomfog",2536,1, .@label$;
+	monster 'map_name$,.@mobx+5,.@moby+5,"#venomfog",2536,1, .@label$;
+	monster 'map_name$,.@mobx-5,  .@moby,"#venomfog",2536,1, .@label$;
+	monster 'map_name$,  .@mobx,  .@moby,"#venomfog",2536,1, .@label$;
+	monster 'map_name$,.@mobx+5,  .@moby,"#venomfog",2536,1, .@label$;
+	monster 'map_name$,.@mobx-5,.@moby-5,"#venomfog",2536,1, .@label$;
+	monster 'map_name$,  .@mobx,.@moby-5,"#venomfog",2536,1, .@label$;
+	monster 'map_name$,.@mobx+5,.@moby-5,"#venomfog",2536,1, .@label$;
+	end;
+OnTimer30000:
+	donpcevent instance_npcname("#dragonboss42") + "::OnEnd";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss42");
+	end;
+}
+
+abyss_04,245,160,0	script	#dragonenter4	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp 'map_name$,235,188;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#dragonenter4");
+	end;
+}
+
+abyss_04,239,186,0	script	#dragonexit4	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp 'map_name$,249,157;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#dragonexit4");
+	end;
+}
+
+// 5th Stage (Final Boss Room)
+//============================================================
+abyss_04,168,166,0	script	#chaoson2	HIDDEN_WARP_NPC,7,7,{
+	end;
+OnTouch_:
+	disablenpc instance_npcname("#chaoson2");
+	donpcevent instance_npcname("Chaos#4") + "::OnStart";
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#chaoson2");
+	end;
+}
+
+abyss_04,165,164,6	script	Chaos#5	4_M_CHAOS,{
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Chaos#5");
+	end;
+}
+
+abyss_04,165,164,6	script	Chaos#4	4_M_CHAOS,{
+	cutin "h_chaos01",2;
+	mes "[Chaos]";
+	mes "Hew. Este charco es extraño.";
+	close2;
+	cutin "",255;
+	end;
+
+OnStart:
+	.@iris$ = instance_npcname("Iris#4");
+	.@chaos5$ = instance_npcname("Chaos#5");
+	sleep 2000;
+	npctalk "Chaos: Iris, Para qué es este charco?";
+	sleep 3000;
+	npctalk "Iris: Bueno, yo creo que es demasiado chico para ser el nido de los dragones.", .@iris$;
+	sleep 4000;
+	npctalk "Chaos: Hmm, okay, debería ir abajo y revisarlo?";
+	sleep 3000;
+	npctalk "Iris: Chaos! corta tus juegos.", .@iris$;
+	sleep 3000;
+	npctalk "Chaos: Por qué no? No parece tan peligroso!";
+	sleep 5000;
+	hideonnpc instance_npcname("Chaos#4");
+	sleep 3000;
+	npctalk "Iris: Arrghh, Chaos sólo me generas problemas.", .@iris$;
+	sleep 6000;
+	npctalk "Chaos: Ugh! Arrgh!! Qué es esto?", .@chaos5$;
+	sleep 2000;
+	npctalk "Iris: Chaos! Qué es eso?", .@iris$;
+	sleep 2000;
+	npctalk "Chaos: Ah", .@chaos5$;
+	sleep 100;
+	npctalk "Chaos: Argh", .@chaos5$;
+	sleep 100;
+	npctalk "Chaos: Argghh", .@chaos5$;
+	sleep 100;
+	npctalk "Chaos: Argghhhhh", .@chaos5$;
+	sleep 100;
+	npctalk "Chaos: Argghhhhhhh", .@chaos5$;
+	sleep 100;
+	npctalk "Chaos: Argghhhhhhhhh", .@chaos5$;
+	sleep 100;
+	npctalk "Chaos: Argghhhhhhhhhhh!!", .@chaos5$;
+	sleep 5000;
+	hideoffnpc instance_npcname("Chaos#4");
+	sleep 3000;
+	npctalk "Chaos: Maldición, estuve demasiado cerca para que me comieran vivo.";
+	sleep 3000;
+	npctalk "Iris: Te pregunté que pasó!", .@iris$;
+	sleep 3000;
+	npctalk "Chaos: El lider del nido está realmente enojado y viene para acá. Es momento de retirarnos.";
+	sleep 6000;
+	hideonnpc instance_npcname("Chaos#4");
+	sleep 1000;
+	npctalk "Iris: Chaos idiota!!", .@iris$;
+	specialeffect EF_DUSTSTORM,AREA, .@chaos5$;
+	specialeffect EF_MAPPILLAR2,AREA, .@chaos5$;
+	sleep 5000;
+	hideonnpc instance_npcname("Iris#4");
+	sleep 9000;
+	donpcevent instance_npcname("#dragonboss5") + "::OnStart";
+	//donpcevent instance_npcname("#dragonprize5") + "::OnStart";
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Chaos#4");
+	end;
+}
+
+abyss_04,173,165,1	script	Iris#4	4_F_IRIS,{
+	cutin "h_iris01",2;
+	mes "[Iris]";
+	mes "Algo parece sospechoso por aquí. Es peligroso.";
+	close2;
+	cutin "",255;
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Iris#4");
+	end;
+}
+
+abyss_04,1,4,3	script	#dragonboss5	CLEAR_NPC,{
+	if (callfunc("F_GM_NPC",1854,0) == 1) {
+		mes "" + mobcount('map_name$,instance_npcname("#dragonboss5") + "::OnMyMobDead");
+		close;
+	}
+	end;
+
+OnHeal05:
+	callsub S_Heal, 5;
+OnHeal04:
+	callsub S_Heal, 4, 74000;
+OnHeal03:
+	callsub S_Heal, 3, 19500;
+OnHeal02:
+	callsub S_Heal, 2, 9750;
+OnHeal01:
+	callsub S_Heal, 1, 5000;
+S_Heal:
+	getunitdata 'BOSS[5],.@arr;
+	.@type = getarg(0);
+	.@mapcount = getmapusers('map_name$);
+	if (.@type == 5)
+		.@r_hpp = (.@mapcount+1) * 2000 * rand(1,10);
+	else
+		.@r_hpp = .@mapcount * getarg(1);
+	.@dfacehp = .@arr[UMOB_HP] + .@r_hpp;
+	.@r_hpp2 = 3698760 - ((15-.@mapcount) * 120000);
+	if (.@dfacehp > .@r_hpp2)
+		.@dfacehp = .@r_hpp2;
+	setunitdata 'BOSS[5], UMOB_HP, .@dfacehp;
+	if (.@type == 5)
+		mapannounce 'map_name$, "El lider dragón ha recogido sacos de veneno y ha recuperado " + .@r_hpp + " de energía.",bc_map,"0x66ff00",FW_NORMAL,14;
+	else
+		mapannounce 'map_name$, "El lider dragón ha absorbido la energía de " + .@type + " huevos sin nacer, y ha recuperado " + .@r_hpp + " de energía.",bc_map,"0x66ff00",FW_NORMAL,14;
+	end;
+OnDamage:
+	getunitdata 'BOSS[5],.@arr;
+	.@r_hpp_1 = ( getmapusers('map_name$) + 7 ) * 25;
+	.@dr_hpp = rand(20,.@r_hpp_1) * 1000;
+	.@dfacehp = .@arr[UMOB_HP] - .@dr_hpp;
+	if (.@dfacehp < 462345)
+		.@dfacehp = 462345;
+	setunitdata 'BOSS[5], UMOB_HP, .@dfacehp;
+	mapannounce 'map_name$, "Chaos realiza un golpe mortal de " + .@dr_hpp + "!!",bc_map,"0xffff33",FW_NORMAL,17;
+	end;
+OnBerserk2:
+	getunitdata 'BOSS[5],.@arr;
+	.@MOB_HP2 = (('BOSS_HP - .@arr[UMOB_HP]) / 100 ) * 20;
+	'BOSS_HP = .@arr[UMOB_HP] + .@MOB_HP2;
+	killmonster 'map_name$, instance_npcname("#dragonboss5") + "::OnMyMobDead";
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y],"Lider del Nido",20509,1,instance_npcname("#dragonboss5") + "::OnMyMobDead";
+	'BOSS[5] = $@mobid[0];
+	setunitdata 'BOSS[5], UMOB_HP, 'BOSS_HP;
+	mapannounce 'map_name$, "El lider del nido se ha recuperado " + .@MOB_HP2 + " y su poder se ha incrementado.",bc_map,"0xff8888",FW_NORMAL,13;
+	end;
+OnBerserk:
+	getunitdata 'BOSS[5],.@arr;
+	if (.@arr[UMOB_X] < 108 || .@arr[UMOB_X] > 210 || .@arr[UMOB_Y] < 141 || .@arr[UMOB_Y] > 221) {
+		killmonster 'map_name$, instance_npcname("#dragonboss5") + "::OnMyMobDead";
+		monster 'map_name$,.@arr[UMOB_X],.@arr[UMOB_Y],"Lider del nido",20618,1,instance_npcname("#dragonboss5") + "::OnMyMobDead";
+		'BOSS[5] = $@mobid[0];
+		setunitdata 'BOSS[5], UMOB_HP, .@arr[UMOB_HP];
+		'BOSS_HP = .@arr[UMOB_HP];
+		donpcevent instance_npcname("#dragonboss50") + "::OnCalm";
+		mapannounce 'map_name$, "Esta demasiado lejos del nido. El lider se ha comenzado a enojar.",bc_map,"0xff3333",FW_NORMAL,15;
+	}
+	end;
+OnCalm:
+	getunitdata 'BOSS[5],.@arr;
+	killmonster 'map_name$, instance_npcname("#dragonboss5") + "::OnMyMobDead";
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y],"Lider del nido",20509,1,instance_npcname("#dragonboss5") + "::OnMyMobDead";
+	'BOSS[5] = $@mobid[0];
+	setunitdata 'BOSS[5], UMOB_HP, .@arr[UMOB_HP];
+	'BOSS_HP = .@arr[UMOB_HP];
+	end;
+OnChange:
+	getunitdata 'BOSS[5],.@arr;
+	.@chan_f = rand(1,14);
+	if (.@chan_f >= 10)
+		end;
+	if (.@chan_f > 0 && .@chan_f < 3) {
+		.@element$ = "holy";
+		.@mob_id = 20485;
+	}
+	else if (.@chan_f > 2 && .@chan_f < 5) {
+		.@element$ = "wind";
+		.@mob_id = 20486;
+	}
+	else if (.@chan_f > 4 && .@chan_f < 7) {
+		.@element$ = "earth";
+		.@mob_id = 20488;
+	}
+	else if (.@chan_f > 6 && .@chan_f < 10) {
+		.@element$ = "fire";
+		.@mob_id = 20487;
+	}
+	mapannounce 'map_name$, "El lider ha traído refuerzos del tipo " + .@element$ + ".",bc_map,"0xffffff";
+	sleep 1000;
+	if (unitexists('BOSS[5]) == false)
+		stopnpctimer;
+	else {
+		.@mon_num = ( getmapusers('map_name$) ) * 3 + 5;
+		areamonster 'map_name$,108,141,210,221,"Dragon",.@mob_id,.@mon_num,instance_npcname("#dragonboss5") + "::OnMyMobDeadSub";
+	}
+	end;
+OnWarning:
+	getunitdata 'BOSS[5],.@arr;
+	if (.@arr[UMOB_X] < 128 || .@arr[UMOB_X] > 190 || .@arr[UMOB_Y] < 161 || .@arr[UMOB_Y] > 201)
+		mapannounce 'map_name$, "Por favor no vayas tan lejos del nido. El lider se puede volver violento.",bc_map,"0xff5555",FW_NORMAL,15;
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#dragonboss5") + "::OnMyMobDead";
+	killmonster 'map_name$, instance_npcname("#dragonboss5") + "::OnMyMobDeadSub";
+	stopnpctimer;
+	end;
+OnStart:
+	monster 'map_name$,165,164,"Lider del nido",20509,1,instance_npcname("#dragonboss5") + "::OnMyMobDead";
+	'BOSS[5] = $@mobid[0];
+	getunitdata 'BOSS[5],.@arr;
+	.@dfacehp = ( 15- getmapusers('map_name$) ) * 2000000;
+	.@MOB_HP2 = 52000000 - .@dfacehp;
+	if (.@MOB_HP2 < 15000000)
+		.@MOB_HP2 = 15000000;
+	setunitdata 'BOSS[5], UMOB_HP, .@MOB_HP2;
+	'BOSS_HP = .@MOB_HP2;
+	initnpctimer;
+	end;
+OnTimer1000:
+	if (mobcount( 'map_name$,instance_npcname("#dragonboss5") + "::OnMyMobDead" ) < 1) {
+		stopnpctimer;
+		end;
+	}
+	getunitdata 'BOSS[5],.@arr;
+	'BOSS_HP = .@arr[UMOB_HP];
+	end;
+OnTimer5555:
+	.@mapcount = getmapusers('map_name$);
+	if (.@mapcount < 1) {
+		setunitdata 'BOSS[5], UMOB_HP, 50000000;
+		for ( .@i = 1; .@i <= 4; ++.@i )
+			donpcevent instance_npcname( "#dragonboss5" + .@i ) + "::OnEnd";
+		stopnpctimer;
+	}
+	else if (rand(1,(22-.@mapcount)) < 17) {
+		getunitdata 'BOSS[5],.@arr;
+		if (.@arr[UMOB_HP] > 3287786 && .@arr[UMOB_HP] < 3698760)
+			donpcevent instance_npcname("#dragonboss51") + "::OnStart1";
+		else if (.@arr[UMOB_HP] > 2876813 && .@arr[UMOB_HP] < 3087786)
+			donpcevent instance_npcname("#dragonboss52") + "::OnStart1";
+		else if (.@arr[UMOB_HP] > 2465840 && .@arr[UMOB_HP] < 2676813)
+			donpcevent instance_npcname("#dragonboss53") + "::OnStart1";
+		else if (.@arr[UMOB_HP] > 2054866 && .@arr[UMOB_HP] < 2265840)
+			donpcevent instance_npcname("#dragonboss54") + "::OnStart1";
+		else if (.@arr[UMOB_HP] > 1643893 && .@arr[UMOB_HP] < 1854866)
+			donpcevent instance_npcname("#dragonboss51") + "::OnStart2";
+		else if (.@arr[UMOB_HP] > 1232920 && .@arr[UMOB_HP] < 1443893)
+			donpcevent instance_npcname("#dragonboss52") + "::OnStart2";
+		else if (.@arr[UMOB_HP] > 821946 && .@arr[UMOB_HP] < 1032920)
+			donpcevent instance_npcname("#dragonboss53") + "::OnStart2";
+		else if (.@arr[UMOB_HP] > 410973 && .@arr[UMOB_HP] < 721946)
+			donpcevent instance_npcname("#dragonboss54") + "::OnStart2";
+		else if (.@arr[UMOB_HP] > 205486 && .@arr[UMOB_HP] < 370973) {
+			if (rand(1,3) == 1)
+				donpcevent instance_npcname("#dragonboss53") + "::OnStart1";
+			else
+				donpcevent instance_npcname("#dragonboss51") + "::OnStart1";
+			donpcevent instance_npcname("#dragonboss54") + "::OnStart1";
+		}
+		else if (.@arr[UMOB_HP] > 205486 && .@arr[UMOB_HP] < 821946) {
+			if (rand(1,3) == 1)
+				donpcevent instance_npcname("#dragonboss53") + "::OnStart2";
+			else
+				donpcevent instance_npcname("#dragonboss51") + "::OnStart2";
+			donpcevent instance_npcname("#dragonboss54") + "::OnStart2";
+		}
+	}
+	end;
+OnTimer10000:
+	donpcevent instance_npcname("#dragonboss5") + "::OnWarning";
+	end;
+OnTimer12000:
+	donpcevent instance_npcname("#dragonboss5") + "::OnChange";
+	end;
+OnTimer13000:
+	if (unitexists('BOSS[5]) == false)
+		stopnpctimer;
+	getunitdata 'BOSS[5],.@arr;
+	if (.@arr[UMOB_HP] > 1000000)
+		donpcevent instance_npcname("#support") + "::OnSupport_2";
+	end;
+OnTimer14000:
+	donpcevent instance_npcname("#dragonboss5") + "::OnBerserk";
+	end;
+OnTimer19000:
+	getunitdata 'BOSS[5],.@arr;
+	if ('BOSS_HP > .@arr[UMOB_HP]) {
+		.@MOB_HP3 = 'BOSS_HP - .@arr[UMOB_HP];
+		.@mapcount = getmapusers('map_name$);
+		if (.@mapcount && .@MOB_HP3 > ((.@mapcount + 7) * 40000))
+			donpcevent instance_npcname("#dragonboss5") + "::OnBerserk2";
+	}
+	end;
+OnTimer25000:
+	stopnpctimer;
+	getunitdata 'BOSS[5],.@arr;
+	if (.@arr[UMOB_HP] > 200000)
+		initnpctimer;
+	else {
+		for ( .@i = 1; .@i <= 4; ++.@i )
+			donpcevent instance_npcname( "#dragonboss5" + .@i ) + "::OnEnd";
+	}
+	end;
+OnMyMobDead:
+	if (mobcount( 'map_name$,instance_npcname("#dragonboss5") + "::OnMyMobDead" ) < 1) {
+		'120903_str_dragon$ = strcharinfo(1);
+		//hideoffnpc instance_npcname("#dragonprize5");
+		hideoffnpc instance_npcname("Chaos#6");
+		hideoffnpc instance_npcname("Iris#6");
+		enablenpc instance_npcname("#chaoson3");
+		for ( .@i = 0; .@i <= 4; ++.@i )
+			donpcevent instance_npcname( "#dragonboss5" + .@i ) + "::OnEnd";
+		donpcevent instance_npcname("#dragonboss5") + "::OnEnd";
+	}
+OnMyMobDeadSub:
+	end;
+}
+
+abyss_04,2,3,5	script	#support	CLEAR_NPC,{
+	end;
+OnSupport_2:
+	.@sup_m = getmapusers('map_name$) + 10;
+	if (.@sup_m < 8)
+		.@sup_m = 8;
+	.@chan_f = rand(1,.@sup_m);
+	if (.@chan_f > 0 && .@chan_f < 3) {
+		donpcevent instance_npcname("#chaos_north") + "::OnStart";
+		mapannounce 'map_name$, "La voz de Chaos: Hey! Traelo al Norte! Yo lo venceré!",bc_map,"0xff44aa",FW_NORMAL,14;
+	} else if (.@chan_f > 2 && .@chan_f < 5) {
+		donpcevent instance_npcname("#chaos_south") + "::OnStart";
+		mapannounce 'map_name$, "The voice of Chaos: Hey! Traelo al Sur! Yo lo venceré!",bc_map,"0xff44aa",FW_NORMAL,14;
+	} else if (.@chan_f > 4 && .@chan_f < 7) {
+		donpcevent instance_npcname("#chaos_east") + "::OnStart";
+		mapannounce 'map_name$, "The voice of Chaos: Hey! Traelo al Este! Yo lo venceré!",bc_map,"0xff44aa",FW_NORMAL,14;
+	} else if (.@chan_f > 6 && .@chan_f < 9) {
+		donpcevent instance_npcname("#chaos_west") + "::OnStart";
+		mapannounce 'map_name$, "The voice of Chaos: Hey! Traelo al Oeste! Yo lo venceré!",bc_map,"0xff44aa",FW_NORMAL,14;
+	}
+	end;
+}
+
+abyss_04,169,211,0	script	#chaos_north	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch_:
+	if (unitexists('BOSS[5]) == true) {
+		getunitdata 'BOSS[5],.@arr;
+		if (.@arr[UMOB_X] > 128 && .@arr[UMOB_X] < 190 && .@arr[UMOB_Y] > 201 && .@arr[UMOB_Y] < 221) {
+			specialeffect EF_MAGNUMBREAK,AREA,instance_npcname("Chaos#north");
+			specialeffect EF_LORD,AREA,instance_npcname("Chaos#north");
+			donpcevent instance_npcname("#dragonboss5") + "::OnDamage";
+		}
+		else
+			npctalk "Chaos: Aún no puedes atraer al Lider del nido a mí?";
+	}
+	disablenpc instance_npcname("#chaos_north");
+	donpcevent instance_npcname("Chaos#north") + "::OnEnd";
+	end;
+OnStart:
+	initnpctimer;
+	enablenpc instance_npcname("#chaos_north");
+	hideoffnpc instance_npcname("Chaos#north");
+	end;
+OnTimer15000:
+	disablenpc instance_npcname("#chaos_north");
+	hideonnpc instance_npcname("Chaos#north");
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#chaos_north");
+	end;
+}
+
+abyss_04,169,151,0	script	#chaos_south	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch_:
+	if (unitexists('BOSS[5]) == true) {
+		getunitdata 'BOSS[5],.@arr;
+		if (.@arr[UMOB_X] > 128 && .@arr[UMOB_X] < 190 && .@arr[UMOB_Y] > 141 && .@arr[UMOB_Y] < 161) {
+			specialeffect EF_MAGNUMBREAK,AREA,instance_npcname("Chaos#south");
+			specialeffect EF_LORD,AREA,instance_npcname("Chaos#south");
+			donpcevent instance_npcname("#dragonboss5") + "::OnDamage";
+		}
+		else
+			npctalk "Chaos: Hey~ somos compañeros. No puedes sólo correr!";
+	}
+	disablenpc instance_npcname("#chaos_south");
+	donpcevent instance_npcname("Chaos#south") + "::OnEnd";
+	end;
+OnStart:
+	initnpctimer;
+	enablenpc instance_npcname("#chaos_south");
+	hideoffnpc instance_npcname("Chaos#south");
+	end;
+OnTimer15000:
+	disablenpc instance_npcname("#chaos_south");
+	hideonnpc instance_npcname("Chaos#south");
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#chaos_south");
+	end;
+}
+
+abyss_04,200,175,0	script	#chaos_east	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch_:
+	if (unitexists('BOSS[5]) == true) {
+		getunitdata 'BOSS[5],.@arr;
+		if (.@arr[UMOB_X] > 190 && .@arr[UMOB_X] < 210 && .@arr[UMOB_Y] > 161 && .@arr[UMOB_Y] < 201) {
+			specialeffect EF_MAGNUMBREAK,AREA,instance_npcname("Chaos#east");
+			specialeffect EF_LORD,AREA,instance_npcname("Chaos#east");
+			donpcevent instance_npcname("#dragonboss5") + "::OnDamage";
+		}
+		else
+			npctalk "Chaos: Atraelo y podré ayudarte. No puedo vencerlo solo!";
+	}
+	disablenpc instance_npcname("#chaos_east");
+	donpcevent instance_npcname("Chaos#east") + "::OnEnd";
+	end;
+OnStart:
+	initnpctimer;
+	enablenpc instance_npcname("#chaos_east");
+	hideoffnpc instance_npcname("Chaos#east");
+	end;
+OnTimer15000:
+	disablenpc instance_npcname("#chaos_east");
+	hideonnpc instance_npcname("Chaos#east");
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#chaos_east");
+	end;
+}
+
+abyss_04,118,175,0	script	#chaos_west	HIDDEN_WARP_NPC,2,2,{
+	end;
+OnTouch_:
+	if (unitexists('BOSS[5]) == true) {
+		getunitdata 'BOSS[5],.@arr;
+		if (.@arr[UMOB_X] > 108 && .@arr[UMOB_X] < 128 && .@arr[UMOB_Y] > 161 && .@arr[UMOB_Y] < 201) {
+			specialeffect EF_MAGNUMBREAK,AREA,instance_npcname("Chaos#west");
+			specialeffect EF_LORD,AREA,instance_npcname("Chaos#west");
+			donpcevent instance_npcname("#dragonboss5") + "::OnDamage";
+		}
+		else
+			npctalk "Chaos: Porque dejaste el lider atrás? Nuestras vidas depende de esto. Atraelo!";
+	}
+	disablenpc instance_npcname("#chaos_west");
+	donpcevent instance_npcname("Chaos#west") + "::OnEnd";
+	end;
+OnStart:
+	initnpctimer;
+	enablenpc instance_npcname("#chaos_west");
+	hideoffnpc instance_npcname("Chaos#west");
+	end;
+OnTimer15000:
+	disablenpc instance_npcname("#chaos_west");
+	hideonnpc instance_npcname("Chaos#west");
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#chaos_west");
+	end;
+}
+
+abyss_04,169,211,5	script	Chaos#north	4_M_CHAOS,{
+	end;
+OnEnd:
+	initnpctimer;
+	end;
+OnTimer1000:
+	hideonnpc instance_npcname(strnpcinfo(0));
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname(strnpcinfo(0));
+	end;
+}
+abyss_04,169,151,0	duplicate(Chaos#north)	Chaos#south	4_M_CHAOS
+abyss_04,200,175,3	duplicate(Chaos#north)	Chaos#east	4_M_CHAOS
+abyss_04,118,175,6	duplicate(Chaos#north)	Chaos#west	4_M_CHAOS
+
+abyss_04,1,4,3	script	#dragonboss50	CLEAR_NPC,{
+	end;
+OnEnd:
+	stopnpctimer;
+	end;
+OnCalm:
+	initnpctimer;
+	end;
+OnTimer15000:
+	donpcevent instance_npcname("#dragonboss5") + "::OnCalm";
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss50");
+	end;
+}
+
+abyss_04,1,4,3	script	#dragonboss51	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#dragonboss51") + "::OnMyMobDead";
+	stopnpctimer;
+	end;
+OnStart1:
+	initnpctimer;
+	.@label$ = instance_npcname("#dragonboss51") + "::OnMyMobDead";
+	if (mobcount( 'map_name$,.@label$ ) > 3)
+		killmonster 'map_name$, .@label$;
+	getunitdata 'BOSS[5],.@arr;
+	monster 'map_name$, .@arr[UMOB_X]-4, .@arr[UMOB_Y], "Dragon Egg",1721,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]+4, .@arr[UMOB_Y], "Dragon Egg",1721,1, .@label$;
+	end;
+OnStart2:
+	initnpctimer;
+	.@label$ = instance_npcname("#dragonboss51") + "::OnMyMobDead";
+	if (mobcount( 'map_name$,.@label$ ) > 6)
+		killmonster 'map_name$, .@label$;
+	getunitdata 'BOSS[5],.@arr;
+	monster 'map_name$, .@arr[UMOB_X]-4, .@arr[UMOB_Y], "Dragon Egg",1721,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y]+4, "Dragon Egg",1721,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]+4, .@arr[UMOB_Y], "Dragon Egg",1721,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y]-4, "Dragon Egg",1721,1, .@label$;
+	end;
+OnTimer12000:
+	.@mob_dead_num = mobcount('map_name$,instance_npcname("#dragonboss51") + "::OnMyMobDead");
+	if (.@mob_dead_num > 3)
+		donpcevent instance_npcname("#dragonboss5") + "::OnHeal04";
+	else if (.@mob_dead_num > 2)
+		donpcevent instance_npcname("#dragonboss5") + "::OnHeal03";
+	else if (.@mob_dead_num > 1)
+		donpcevent instance_npcname("#dragonboss5") + "::OnHeal02";
+	else if (.@mob_dead_num > 0)
+		donpcevent instance_npcname("#dragonboss5") + "::OnHeal01";
+	donpcevent instance_npcname("#dragonboss51") + "::OnEnd";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss51");
+	end;
+}
+
+abyss_04,1,4,3	script	#dragonboss52	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#dragonboss52") + "::OnMyMobDead";
+	stopnpctimer;
+	end;
+OnStart1:
+	initnpctimer;
+	.@label$ = instance_npcname("#dragonboss52") + "::OnMyMobDead";
+	if (mobcount( 'map_name$,.@label$ ) > 6)
+		killmonster 'map_name$, .@label$;
+	getunitdata 'BOSS[5],.@arr;
+	monster 'map_name$, .@arr[UMOB_X]-4, .@arr[UMOB_Y],"#waterball",2539,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y]+4,"#waterball",2539,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]+4, .@arr[UMOB_Y],"#waterball",2539,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y]-4,"#waterball",2539,1, .@label$;
+	end;
+OnStart2:
+	initnpctimer;
+	.@label$ = instance_npcname("#dragonboss52") + "::OnMyMobDead";
+	if (mobcount( 'map_name$,.@label$ ) > 12)
+		killmonster 'map_name$, .@label$;
+	getunitdata 'BOSS[5], .@arr;
+	monster 'map_name$, .@arr[UMOB_X]-4, .@arr[UMOB_Y],"#waterball",2539,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y]+4,"#waterball",2539,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]+4, .@arr[UMOB_Y],"#waterball",2539,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y]-4,"#waterball",2539,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]-4, .@arr[UMOB_Y]+4,"#waterball",2539,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]-4, .@arr[UMOB_Y]-4,"#waterball",2539,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]+4, .@arr[UMOB_Y]+4,"#waterball",2539,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]+4, .@arr[UMOB_Y]-4,"#waterball",2539,1, .@label$;
+	end;
+OnTimer20000:
+	donpcevent instance_npcname("#dragonboss52") + "::OnEnd";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss52");
+	end;
+}
+
+abyss_04,1,4,3	script	#dragonboss53	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#dragonboss53") + "::OnMyMobDead";
+	end;
+OnStart1:
+	callsub S_Spawn, 5;
+OnStart2:
+	callsub S_Spawn, 7;
+S_Spawn:
+	getunitdata 'BOSS[5], .@arr;
+	.@num = getarg(0);
+	.@coord_x = .@arr[UMOB_X] + .@num;
+	.@coord_y = .@arr[UMOB_Y] - .@num;
+	.@vmobx = .@arr[UMOB_X] - .@num;
+	do {
+		.@vmoby = .@arr[UMOB_Y] + .@num;
+		do {
+			monster 'map_name$,.@vmobx,.@vmoby,"Veneno",2531,1,instance_npcname("#dragonboss53") + "::OnMyMobDead";
+			.@vmoby -= 2;
+		}
+		while( .@vmoby >= .@coord_y );
+		.@vmobx += 2;
+	}
+	while( .@vmobx <= .@coord_x );
+	donpcevent instance_npcname("#dragonboss5") + "::OnHeal05";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss53");
+	end;
+}
+
+abyss_04,1,4,3	script	#dragonboss54	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#dragonboss54") + "::OnMyMobDead";
+	stopnpctimer;
+	end;
+OnStart1:
+	initnpctimer;
+	.@label$ = instance_npcname("#dragonboss54") + "::OnMyMobDead";
+	if (mobcount( 'map_name$,.@label$ ) > 20)
+		killmonster 'map_name$, .@label$;
+	getunitdata 'BOSS[5],.@arr;
+	monster 'map_name$, .@arr[UMOB_X]-3, .@arr[UMOB_Y]+3, "#venomfog",2536,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]+3, .@arr[UMOB_Y]+3, "#venomfog",2536,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]-3, .@arr[UMOB_Y]-3, "#venomfog",2536,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]+3, .@arr[UMOB_Y]-3, "#venomfog",2536,1, .@label$;
+	end;
+OnStart2:
+	initnpctimer;
+	.@label$ = instance_npcname("#dragonboss54") + "::OnMyMobDead";
+	if (mobcount( 'map_name$,.@label$ ) > 45)
+		killmonster 'map_name$, .@label$;
+	getunitdata 'BOSS[5],.@arr;
+	monster 'map_name$, .@arr[UMOB_X]-5, .@arr[UMOB_Y]+5, "#venomfog",2537,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y]+5, "#venomfog",2537,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]+5, .@arr[UMOB_Y]+5, "#venomfog",2537,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]-5, .@arr[UMOB_Y], "#venomfog",2537,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y], "#venomfog",2537,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]+5, .@arr[UMOB_Y], "#venomfog",2537,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]-5, .@arr[UMOB_Y]-5, "#venomfog",2537,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y]-5, "#venomfog",2537,1, .@label$;
+	monster 'map_name$, .@arr[UMOB_X]+5, .@arr[UMOB_Y]-5, "#venomfog",2537,1, .@label$;
+	end;
+OnTimer30000:
+	donpcevent instance_npcname("#dragonboss54") + "::OnEnd";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#dragonboss54");
+	end;
+}
+
+abyss_04,169,155,0	script	#chaoson3	HIDDEN_WARP_NPC,7,7,{
+	end;
+OnTouch_:
+	//'120903_str_dragon120903_str_dragon$ = strcharinfo(1);
+	disablenpc instance_npcname("#chaoson3");
+	donpcevent instance_npcname("Chaos#6") + "::OnStart";
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#chaoson3");
+	end;
+}
+
+abyss_04,164,155,6	script	Chaos#6	4_M_CHAOS,{
+	cutin "h_chaos01",2;
+	mes "[Chaos]";
+	mes "Hmm.. Eres realmente bueno, estoy impresionado.";
+	close2;
+	cutin "",255;
+	end;
+
+OnStart:
+	.@iris$ = instance_npcname("Iris#6");
+	donpcevent instance_npcname("Chaos#east") + "::OnEnd";
+	donpcevent instance_npcname("Chaos#west") + "::OnEnd";
+	donpcevent instance_npcname("Chaos#south") + "::OnEnd";
+	donpcevent instance_npcname("Chaos#north") + "::OnEnd";
+	//Custom
+	donpcevent instance_npcname("#globaltimer22") + "::OnT_s2";
+	donpcevent instance_npcname("#globaltimer22") + "::OnT_s3";
+	//
+	hideoffnpc instance_npcname("Chaos#6");
+	hideoffnpc .@iris$;
+	sleep 2000;
+	npctalk "Chaos: Phew... Esa fue una batalla demasiado larga.";
+	sleep 3000;
+	npctalk "Iris: Pero no era la que estabamos buscando.", .@iris$;
+	sleep 4000;
+	npctalk "Chaos: No podemos ayudar aquí. Nuestro equipamiento está dañado, deberiamos regresar.";
+	sleep 3000;
+	npctalk "Iris: Si, me siento mal por no poder ver al lider del Nido. Pero por suerte no salimos heridos.", .@iris$;
+	sleep 3000;
+	npctalk "Chaos: Entonces... ¡Oye, estás ahí! No estás tan mal.";
+	sleep 3000;
+	npctalk "Chaos: La caza de hoy es toda tuya, no la tocaré.";
+	sleep 3000;
+	npctalk "Chaos: Ahah~ Esperaba que hubiera algún otro tesoro por ahí....";
+	sleep 3000;
+	npctalk "Iris: Chaos, Me estoy cansando. Volvamos a la ciudad.", .@iris$;
+	sleep 3000;
+	npctalk "Chaos: Lo siento, ¿nos vamos?";
+	sleep 3000;
+	hideonnpc instance_npcname("Chaos#6");
+	hideonnpc .@iris$;
+	hideoffnpc instance_npcname("Dimensional Device#6");
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Chaos#6");
+	end;
+}
+
+abyss_04,173,159,4	script	Iris#6	4_F_IRIS,{
+	cutin "h_iris02",2;
+	mes "[Iris]";
+	mes "Eso fue peligroso. Hehehe...";
+	close2;
+	cutin "",255;
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Iris#6");
+	end;
+}
+
+abyss_04,168,160,4	script	Dimensional Device#6	PORTAL,{
+	mes "[Dimensional Device]";
+	mes "Tu tiempo acá ha finalizado. Puedes seguir mirando los alrededores o volver. ¿Qué deseas hacer?";
+	next;
+	if (select("Dar unas vueltas:Volver") == 2)
+		warp "instance",48,43;
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Dimensional Device#6");
+	end;
+}
+
+// Instance Traps ::
+//============================================================
+abyss_04,192,32,5	script	Suspicious Mound#1	4_SOIL,5,5,{
+	end;
+OnTouch_:
+	setarray .@num[1],
+		3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,
+		3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,
+		3,2,1,3,2,1,3,2,1,3,2,1,3,2,1,
+		3,2,1,3,2,1,3,2,1;
+	.@npc_name$ = instance_npcname(strnpcinfo(0));
+	specialeffect EF_VENOMDUST;
+	disablenpc .@npc_name$;
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	killmonster 'map_name$, .@npc_name$ + "::OnMyMobDead";
+	
+	.@mon_num = .@num[atoi(strnpcinfo(2))];
+	areamonster 'map_name$,.@x-1,.@y-1,.@x+1,.@y+1,"Petite",1465+rand(0,1),.@mon_num,.@npc_name$ + "::OnMyMobDead";
+	initnpctimer;
+	end;
+OnTimer45000:
+	enablenpc instance_npcname(strnpcinfo(0));
+	stopnpctimer;
+	end;
+OnMyMobDead:
+	end;
+}
+
+abyss_04,172,41,5	duplicate(Suspicious Mound#1)	Suspicious Mound#2	4_SOIL,5,5
+abyss_04,147,31,5	duplicate(Suspicious Mound#1)	Suspicious Mound#3	4_SOIL,5,5
+abyss_04,169,60,5	duplicate(Suspicious Mound#1)	Suspicious Mound#4	4_SOIL,5,5
+abyss_04,245,73,5	duplicate(Suspicious Mound#1)	Suspicious Mound#5	4_SOIL,5,5
+abyss_04,279,106,5	duplicate(Suspicious Mound#1)	Suspicious Mound#6	4_SOIL,5,5
+abyss_04,296,115,5	duplicate(Suspicious Mound#1)	Suspicious Mound#7	4_SOIL,5,5
+abyss_04,308,154,5	duplicate(Suspicious Mound#1)	Suspicious Mound#8	4_SOIL,5,5
+abyss_04,283,135,5	duplicate(Suspicious Mound#1)	Suspicious Mound#9	4_SOIL,5,5
+abyss_04,51,113,5	duplicate(Suspicious Mound#1)	Suspicious Mound#10	4_SOIL,5,5
+abyss_04,59,140,5	duplicate(Suspicious Mound#1)	Suspicious Mound#11	4_SOIL,5,5
+abyss_04,59,156,5	duplicate(Suspicious Mound#1)	Suspicious Mound#12	4_SOIL,5,5
+abyss_04,30,149,5	duplicate(Suspicious Mound#1)	Suspicious Mound#13	4_SOIL,5,5
+abyss_04,42,178,5	duplicate(Suspicious Mound#1)	Suspicious Mound#14	4_SOIL,5,5
+abyss_04,60,101,5	duplicate(Suspicious Mound#1)	Suspicious Mound#15	4_SOIL,5,5
+abyss_04,160,297,5	duplicate(Suspicious Mound#1)	Suspicious Mound#16	4_SOIL,5,5
+abyss_04,172,295,5	duplicate(Suspicious Mound#1)	Suspicious Mound#17	4_SOIL,5,5
+abyss_04,195,281,5	duplicate(Suspicious Mound#1)	Suspicious Mound#18	4_SOIL,5,5
+abyss_04,161,281,5	duplicate(Suspicious Mound#1)	Suspicious Mound#19	4_SOIL,5,5
+abyss_04,191,311,5	duplicate(Suspicious Mound#1)	Suspicious Mound#20	4_SOIL,5,5
+abyss_04,215,300,5	duplicate(Suspicious Mound#1)	Suspicious Mound#21	4_SOIL,5,5
+abyss_04,228,282,5	duplicate(Suspicious Mound#1)	Suspicious Mound#22	4_SOIL,5,5
+abyss_04,223,266,5	duplicate(Suspicious Mound#1)	Suspicious Mound#23	4_SOIL,5,5
+abyss_04,238,251,5	duplicate(Suspicious Mound#1)	Suspicious Mound#24	4_SOIL,5,5
+abyss_04,260,273,5	duplicate(Suspicious Mound#1)	Suspicious Mound#25	4_SOIL,5,5
+abyss_04,280,247,5	duplicate(Suspicious Mound#1)	Suspicious Mound#26	4_SOIL,5,5
+abyss_04,269,228,5	duplicate(Suspicious Mound#1)	Suspicious Mound#27	4_SOIL,5,5
+abyss_04,226,246,5	duplicate(Suspicious Mound#1)	Suspicious Mound#28	4_SOIL,5,5
+abyss_04,86,60,5	duplicate(Suspicious Mound#1)	Suspicious Mound#29	4_SOIL,5,5
+abyss_04,87,81,5	duplicate(Suspicious Mound#1)	Suspicious Mound#30	4_SOIL,5,5
+abyss_04,111,95,5	duplicate(Suspicious Mound#1)	Suspicious Mound#31	4_SOIL,5,5
+abyss_04,63,84,5	duplicate(Suspicious Mound#1)	Suspicious Mound#32	4_SOIL,5,5
+abyss_04,39,131,5	duplicate(Suspicious Mound#1)	Suspicious Mound#33	4_SOIL,5,5
+abyss_04,59,184,5	duplicate(Suspicious Mound#1)	Suspicious Mound#34	4_SOIL,5,5
+abyss_04,86,111,5	duplicate(Suspicious Mound#1)	Suspicious Mound#35	4_SOIL,5,5
+abyss_04,100,105,5	duplicate(Suspicious Mound#1)	Suspicious Mound#36	4_SOIL,5,5
+abyss_04,118,292,5	duplicate(Suspicious Mound#1)	Suspicious Mound#37	4_SOIL,5,5
+abyss_04,242,133,5	duplicate(Suspicious Mound#1)	Suspicious Mound#38	4_SOIL,5,5
+abyss_04,287,91,5	duplicate(Suspicious Mound#1)	Suspicious Mound#39	4_SOIL,5,5
+abyss_04,286,152,5	duplicate(Suspicious Mound#1)	Suspicious Mound#40	4_SOIL,5,5
+abyss_04,239,167,5	duplicate(Suspicious Mound#1)	Suspicious Mound#41	4_SOIL,5,5
+abyss_04,225,154,5	duplicate(Suspicious Mound#1)	Suspicious Mound#42	4_SOIL,5,5
+abyss_04,263,138,5	duplicate(Suspicious Mound#1)	Suspicious Mound#43	4_SOIL,5,5
+abyss_04,168,144,5	duplicate(Suspicious Mound#1)	Suspicious Mound#44	4_SOIL,5,5
+abyss_04,134,167,5	duplicate(Suspicious Mound#1)	Suspicious Mound#45	4_SOIL,5,5
+abyss_04,114,164,5	duplicate(Suspicious Mound#1)	Suspicious Mound#46	4_SOIL,5,5
+abyss_04,117,188,5	duplicate(Suspicious Mound#1)	Suspicious Mound#47	4_SOIL,5,5
+abyss_04,134,200,5	duplicate(Suspicious Mound#1)	Suspicious Mound#48	4_SOIL,5,5
+abyss_04,159,203,5	duplicate(Suspicious Mound#1)	Suspicious Mound#49	4_SOIL,5,5
+abyss_04,194,199,5	duplicate(Suspicious Mound#1)	Suspicious Mound#50	4_SOIL,5,5
+abyss_04,208,210,5	duplicate(Suspicious Mound#1)	Suspicious Mound#51	4_SOIL,5,5
+abyss_04,222,199,5	duplicate(Suspicious Mound#1)	Suspicious Mound#52	4_SOIL,5,5
+abyss_04,157,152,5	duplicate(Suspicious Mound#1)	Suspicious Mound#53	4_SOIL,5,5
+abyss_04,170,182,5	duplicate(Suspicious Mound#1)	Suspicious Mound#54	4_SOIL,5,5
+
+
+
+// Instance Venom ::
+//============================================================
+abyss_04,197,275,0	script	#toxicarea1	HIDDEN_WARP_NPC,10,10,{
+	end;
+OnTouch_:
+	setarray .@num[1],25,30,50,30,50,30,40,50,50;
+	.@npc_name$ = instance_npcname(strnpcinfo(0));
+	specialeffect EF_VENOMDUST;
+	disablenpc .@npc_name$;
+	killmonster 'map_name$, .@npc_name$ + "::OnMyMobDead";
+	.@val = atoi(charat(strnpcinfo(2),9));
+	switch(.@val) {
+		case 1: setarray .@xy[0],198,287,15; break;
+		case 2: setarray .@xy[0],216,267,15; break;
+		case 3: setarray .@xy[0],246,269,20; break;
+		case 4: setarray .@xy[0],272,236,15; break;
+		case 5: setarray .@xy[0],287,224,20; break;
+		case 6: setarray .@xy[0],207,270,15; break;
+		case 7: setarray .@xy[0],261,141,15; break;
+		case 8: setarray .@xy[0],283,126,50; break;
+		case 9: setarray .@xy[0],281,137,50; break;
+	}
+	.@mon_num = .@num[.@val];
+	areamonster 'map_name$,.@xy[0]-.@xy[2],.@xy[1]-.@xy[2],.@xy[0]+.@xy[2],.@xy[1]+.@xy[2],"Veneno",2531,.@mon_num, .@npc_name$ + "::OnMyMobDead";
+	initnpctimer;
+	end;
+OnTimer15000:
+	enablenpc instance_npcname(strnpcinfo(0));
+	stopnpctimer;
+	end;
+OnMyMobDead:
+	end;
+}
+
+abyss_04,220,270,0	duplicate(#toxicarea1)	#toxicarea2	HIDDEN_WARP_NPC,10,10
+abyss_04,261,268,0	duplicate(#toxicarea1)	#toxicarea3	HIDDEN_WARP_NPC,10,10
+abyss_04,274,228,0	duplicate(#toxicarea1)	#toxicarea4	HIDDEN_WARP_NPC,10,10
+abyss_04,293,223,0	duplicate(#toxicarea1)	#toxicarea5	HIDDEN_WARP_NPC,10,10
+abyss_04,195,264,0	duplicate(#toxicarea1)	#toxicarea6	HIDDEN_WARP_NPC,10,10
+abyss_04,265,118,0	duplicate(#toxicarea1)	#toxicarea7	HIDDEN_WARP_NPC,10,10
+abyss_04,288,105,0	duplicate(#toxicarea1)	#toxicarea8	HIDDEN_WARP_NPC,10,10
+abyss_04,305,129,0	duplicate(#toxicarea1)	#toxicarea9	HIDDEN_WARP_NPC,10,10
+
+// Instance Timer
+//============================================================
+abyss_04,3,1,5	script	#globaltimer22	CLEAR_NPC,{
+	end;
+OnT_s:
+	initnpctimer;
+	end;
+OnT_s2:
+	.@dragon_timer = $120719_num_dragon;
+	if (!.@dragon_timer)
+		.@dragon_timer = 3600;
+	.@dragon_member = getmapusers('map_name$);
+	.@winner_name$ = '120903_str_dragon$;
+	.@current_timer = getnpctimer(0) / 1000;
+	if (.@current_timer < 1)
+		end;
+	.@time_m = .@current_timer / 60;
+	.@time_s = .@current_timer % 60;
+	if (.@current_timer < 60)
+		.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+	else
+		.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "Minuto" ) + " " + callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+	if (.@current_timer >= .@dragon_timer)
+		mapannounce 'map_name$, "El tiempo de " + .@time_txt$ + " ha sido guardado. Pero no ha roto la marca.",bc_map,"0xffff33";
+	else {
+		announce "La party "+.@winner_name$ + " con " + .@dragon_member + " miembro(s) en party han mejorado el tiempo en Dragon's Nest (" + .@time_txt$ + ").",bc_all,"0xffff33",FW_NORMAL,15;
+		$120719_str_dragon$ = .@winner_name$;
+		$120719_num_dragon = .@current_timer;
+		$120903_num_dragon = .@dragon_member;
+	}
+	end;
+OnT_s3:
+	for ( .@i = 1; .@i <= 27; ++.@i ) {
+		if (rand(1,100) > 50)
+			hideoffnpc instance_npcname( "Dragon Treasure#" + .@i );
+	}
+	end;
+OnTimer3600000:
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#globaltimer22");
+	end;
+}
+
+// Instance Treasures
+//============================================================
+abyss_04,163,65,3	script	Dragon Treasure#1	4_TREASURE_BOX,{
+	function F_OnTreasure;
+	specialeffect EF_COIN;
+	.@val = atoi(strnpcinfo(2));
+	switch(.@val) {
+	case 1:
+		setarray .@xy[0],165,65;
+		break;
+	case 2:
+		setarray .@xy[0],61,90;
+		break;
+	case 3:
+		setarray .@xy[0],118,85;
+		break;
+	case 4:
+		setarray .@xy[0],53,127;
+		break;
+	case 5:
+		setarray .@xy[0],65,175;
+		break;
+	case 6:
+		setarray .@xy[0],135,289;
+		break;
+	case 7:
+		setarray .@xy[0],168,308;
+		break;
+	case 8:
+		setarray .@xy[0],191,276;
+		break;
+	case 9:
+		setarray .@xy[0],211,299;
+		break;
+	case 10:
+		setarray .@xy[0],229,264;
+		break;
+	case 11:
+		setarray .@xy[0],253,273;
+		break;
+	case 12:
+		setarray .@xy[0],293,228;
+		break;
+	case 13:
+		setarray .@xy[0],265,152;
+		break;
+	case 14:
+		setarray .@xy[0],261,148;
+		break;
+	case 15:
+		setarray .@xy[0],260,160;
+		break;
+	case 16:
+		setarray .@xy[0],278,161;
+		break;
+	case 17:
+		setarray .@xy[0],277,97;
+		break;
+	case 18:
+		setarray .@xy[0],147,161;
+		break;
+	case 19:
+		setarray .@xy[0],143,191;
+		break;
+	case 20:
+		setarray .@xy[0],167,198;
+		break;
+	case 21:
+		setarray .@xy[0],214,196;
+		break;
+	case 22:
+		setarray .@xy[0],190,138;
+		break;
+	case 23:
+		setarray .@xy[0],163,122;
+		break;
+	case 24:
+		setarray .@xy[0],171,241;
+		break;
+	case 25:
+		setarray .@xy[0],204,179;
+		break;
+	case 26:
+		setarray .@xy[0],184,153;
+		break;
+	case 27:
+		setarray .@xy[0],197,165;
+		break;
+	}
+	mapannounce 'map_name$, "["+ strcharinfo(1) +"] El jugador " + strcharinfo(0) + " ha encontrado un Dragon Treasure.",bc_map,"0xffff33";
+	if (rand(1,1000) > 200)
+		makeitem 2610+rand(0,1),1,'map_name$,.@xy[0],.@xy[1];	// Ring
+	if (rand(1,1000) > 400)
+		makeitem 7754,1,'map_name$,.@xy[0]+1,.@xy[1]+2;	// Crown
+	if (rand(1,1000) > 700)
+		makeitem 969,1,'map_name$,.@xy[0]+2,.@xy[1]+2;	// Gold
+	if (rand(1,1000) > 900)
+		makeitem 7444,1,'map_name$,.@xy[0]+3,.@xy[1]+2;	// Treasure Chest
+	hideonnpc instance_npcname(strnpcinfo(0));
+	addrid(1);
+	F_OnTreasure;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname(strnpcinfo(0));
+	end;
+
+	function	F_OnTreasure	{
+		if ( checkvending() || checkchatting() || checkidle() > 60 ) end;
+		set #DRAGONNESTTREASURE,#DRAGONNESTTREASURE+1;
+		return;
+	}
+}
+
+abyss_04,59,89,3	duplicate(Dragon Treasure#1)	Dragon Treasure#2	4_TREASURE_BOX
+abyss_04,120,85,3	duplicate(Dragon Treasure#1)	Dragon Treasure#3	4_TREASURE_BOX
+abyss_04,54,124,3	duplicate(Dragon Treasure#1)	Dragon Treasure#4	4_TREASURE_BOX
+abyss_04,67,174,3	duplicate(Dragon Treasure#1)	Dragon Treasure#5	4_TREASURE_BOX
+abyss_04,135,291,3	duplicate(Dragon Treasure#1)	Dragon Treasure#6	4_TREASURE_BOX
+abyss_04,168,309,3	duplicate(Dragon Treasure#1)	Dragon Treasure#7	4_TREASURE_BOX
+abyss_04,193,276,3	duplicate(Dragon Treasure#1)	Dragon Treasure#8	4_TREASURE_BOX
+abyss_04,212,301,3	duplicate(Dragon Treasure#1)	Dragon Treasure#9	4_TREASURE_BOX
+abyss_04,231,264,3	duplicate(Dragon Treasure#1)	Dragon Treasure#10	4_TREASURE_BOX
+abyss_04,253,275,3	duplicate(Dragon Treasure#1)	Dragon Treasure#11	4_TREASURE_BOX
+abyss_04,295,228,3	duplicate(Dragon Treasure#1)	Dragon Treasure#12	4_TREASURE_BOX
+abyss_04,265,154,3	duplicate(Dragon Treasure#1)	Dragon Treasure#13	4_TREASURE_BOX
+abyss_04,260,149,3	duplicate(Dragon Treasure#1)	Dragon Treasure#14	4_TREASURE_BOX
+abyss_04,260,161,3	duplicate(Dragon Treasure#1)	Dragon Treasure#15	4_TREASURE_BOX
+abyss_04,280,162,3	duplicate(Dragon Treasure#1)	Dragon Treasure#16	4_TREASURE_BOX
+abyss_04,277,95,3	duplicate(Dragon Treasure#1)	Dragon Treasure#17	4_TREASURE_BOX
+abyss_04,148,161,3	duplicate(Dragon Treasure#1)	Dragon Treasure#18	4_TREASURE_BOX
+abyss_04,143,190,3	duplicate(Dragon Treasure#1)	Dragon Treasure#19	4_TREASURE_BOX
+abyss_04,167,197,3	duplicate(Dragon Treasure#1)	Dragon Treasure#20	4_TREASURE_BOX
+abyss_04,213,196,3	duplicate(Dragon Treasure#1)	Dragon Treasure#21	4_TREASURE_BOX
+abyss_04,192,138,3	duplicate(Dragon Treasure#1)	Dragon Treasure#22	4_TREASURE_BOX
+abyss_04,164,123,3	duplicate(Dragon Treasure#1)	Dragon Treasure#23	4_TREASURE_BOX
+abyss_04,171,242,3	duplicate(Dragon Treasure#1)	Dragon Treasure#24	4_TREASURE_BOX
+abyss_04,204,180,3	duplicate(Dragon Treasure#1)	Dragon Treasure#25	4_TREASURE_BOX
+abyss_04,183,154,3	duplicate(Dragon Treasure#1)	Dragon Treasure#26	4_TREASURE_BOX
+abyss_04,196,166,3	duplicate(Dragon Treasure#1)	Dragon Treasure#27	4_TREASURE_BOX
+
+// Instance GM Function 
+//==========================================
+abyss_04,1,1,3	script	#forestspirit1	CLEAR_NPC,{
+	if (callfunc("F_GM_NPC",1854,0) == 1) {
+		mes "[Time Manager]";
+		mes "What time would you like to return?";
+		next;
+		switch( select("Cancel:1st Stage Start:2nd Stage Start:3rd Stage Start:4th Stage Start:Boss Start:Treasures")) {
+		case 1:
+			break;
+		case 2:
+			hideonnpc instance_npcname("Chaos#0");
+			hideonnpc instance_npcname("Iris#0");
+			donpcevent instance_npcname("#dragoncontrol1") + "::OnStart";
+			mapannounce 'map_name$, "Un dragón muy raro ha aparecido.",bc_map,"0xffffff";
+			donpcevent instance_npcname("#globaltimer22") + "::OnT_s";
+			//donpcevent instance_npcname("#dragonprize1") + "::OnStart";
+			warp 'map_name$,181,42;
+			break;
+		case 3:
+			enablenpc instance_npcname("#dragonenter1");
+			enablenpc instance_npcname("#dragonexit1");
+			hideoffnpc instance_npcname("Chaos#1");
+			hideoffnpc instance_npcname("Iris#1");
+			mapannounce 'map_name$, "Un portal ha aparecido luego de cazar al Dragon.",bc_map,"0xffffff";
+			warp 'map_name$,100,60;
+			break;
+		case 4:
+			enablenpc instance_npcname("#dragonenter2");
+			enablenpc instance_npcname("#dragonexit2");
+			hideoffnpc instance_npcname("Chaos#2");
+			hideoffnpc instance_npcname("Iris#2");
+			mapannounce 'map_name$, "Un Dragon muy raro ha vuelto aparecer.",bc_map,"0xffffff";
+			warp 'map_name$,116,280;
+			break;
+		case 5:
+			enablenpc instance_npcname("#dragonenter3");
+			enablenpc instance_npcname("#dragonexit3");
+			enablenpc instance_npcname("#chaoson");
+			mapannounce 'map_name$, "Cuidado! Un dragón muy peligroso ha aparecido.",bc_map,"0xffffff";
+			warp 'map_name$,302,153;
+			break;
+		case 6:
+			enablenpc instance_npcname("#dragonenter4");
+			enablenpc instance_npcname("#dragonexit4");
+			hideoffnpc instance_npcname("Chaos#4");
+			hideoffnpc instance_npcname("Iris#4");
+			enablenpc instance_npcname("#chaoson2");
+			mapannounce 'map_name$, "Puedes escuchar algo gritar hacia el centro del mapa. En esa dirección debe estar el lider del nido.",bc_map,"0xffffff";
+			warp 'map_name$,237,189;
+			break;
+		case 7:
+			//hideoffnpc instance_npcname("#dragonprize5");
+			//donpcevent instance_npcname("#dragonprize5") + "::OnStart";
+			warp 'map_name$,168,156;
+			break;
+		}
+	}
+	close;
+}
+
+abyss_04,3,1,3	script	#forestspiritboss1	CLEAR_NPC,{
+	mes "" + getmapusers('map_name$) + " people.";
+	if (callfunc("F_GM_NPC",1854,0) == 1) {
+		mes "[Boss Manager]";
+		mes "What time would you like to return?";
+		next;
+		switch( select("Cancel:1st Boss:2nd Boss:3rd Boss:4th Boss:Final Boss")) {
+		case 1:
+			break;
+		case 2:
+			hideonnpc instance_npcname("Chaos#0");
+			hideonnpc instance_npcname("Iris#0");
+			donpcevent instance_npcname("#dragonboss1") + "::OnStart";
+			donpcevent instance_npcname("#globaltimer22") + "::OnT_s";
+			//donpcevent instance_npcname("#dragonprize1") + "::OnStart";
+			warp 'map_name$,140,70;
+			break;
+		case 3:
+			donpcevent instance_npcname("#dragonboss2") + "::OnStart";
+			//donpcevent instance_npcname("#dragonprize2") + "::OnStart";
+			warp 'map_name$,160,270;
+			break;
+		case 4:
+			donpcevent instance_npcname("#dragonboss3") + "::OnStart";
+			//donpcevent instance_npcname("#dragonprize3") + "::OnStart";
+			warp 'map_name$,270,300;
+			break;
+		case 5:
+			donpcevent instance_npcname("#dragonboss4") + "::OnStart";
+			//donpcevent instance_npcname("#dragonprize4") + "::OnStart";
+			warp 'map_name$,210,105;
+			break;
+		case 6:
+			donpcevent instance_npcname("#dragonboss5") + "::OnStart";
+			//donpcevent instance_npcname("#dragonprize5") + "::OnStart";
+			warp 'map_name$,214,148;
+			break;
+		}
+	}
+	close;
+
+OnInstanceInit:
+	'map_name$ = instance_mapname("abyss_04");
+	monster 'map_name$,0,0,"Dragon",1758,50;
+	monster 'map_name$,0,0,"Dragon",1760,50;
+	monster 'map_name$,0,0,"Treasure Mimic",20613,50;
+	end;
+}
+
+abyss_04,3,1,3	script	#forestspiritWall	CLEAR_NPC,{
+	end;
+
+OnInit:
+	setwall "abyss_04",141,34,4,0,0,"dragon1";
+	setwall "abyss_04",110,51,7,0,0,"dragon2";
+	setwall "abyss_04",74,135,10,0,0,"dragon3";
+	setwall "abyss_04",91,134,13,0,0,"dragon4";
+	setwall "abyss_04",154,71,26,6,0,"dragon5";
+	setwall "abyss_04",155,75,26,6,0,"dragon6";
+	setwall "abyss_04",260,86,22,6,0,"dragon7";
+	setwall "abyss_04",246,79,28,6,0,"dragon8";
+	setwall "abyss_04",35,213,13,6,0,"dragon9";
+	setwall "abyss_04",34,217,15,6,0,"dragon10";
+	setwall "abyss_04",109,276,14,0,0,"dragon11";
+	setwall "abyss_04",95,276,6,6,0,"dragon12";
+	setwall "abyss_04",116,251,18,6,0,"dragon13";
+	setwall "abyss_04",117,255,17,6,0,"dragon14";
+	setwall "abyss_04",174,244,8,6,0,"dragon15";
+	setwall "abyss_04",174,251,8,6,0,"dragon16";
+	setwall "abyss_04",246,207,16,5,0,"dragon17";
+	setwall "abyss_04",254,209,13,5,0,"dragon18";
+	setwall "abyss_04",302,159,8,6,0,"dragon19";
+	setwall "abyss_04",301,189,13,6,0,"dragon20";
+	setwall "abyss_04",241,185,22,0,0,"dragon21";
+	setwall "abyss_04",240,164,15,0,0,"dragon22";
+	setwall "abyss_04",227,150,7,0,0,"dragon23";
+	setwall "abyss_04",230,159,7,6,0,"dragon24";
+	setwall "abyss_04",239,151,5,0,0,"dragon25";
+	setwall "abyss_04",241,164,17,6,0,"dragon26";
+	setwall "abyss_04",212,87,21,0,0,"dragon27";
+	setwall "abyss_04",241,112,20,0,0,"dragon28";
+	setwall "abyss_04",260,89,22,6,0,"dragon29";
+	setwall "abyss_04",253,209,13,5,0,"dragon30";
+	setwall "abyss_04",85,207,9,0,0,"dragon31";
+	setwall "abyss_04",87,220,7,0,0,"dragon32";
+	setwall "abyss_04",87,229,11,0,0,"dragon33";
+	
+	end;
+}
+
+// Instance Egg ::
+//============================================================
+abyss_04,117,255,5	script	Dragon Egg#DN	2540,{
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	message strcharinfo(0), "[Dragon Egg] No debería pisarlos, antes debo de investigar la zona.";
+	end;
+}
+
+abyss_04,117,253,5	duplicate(Dragon Egg#DN)	Dragon Egg#2	2540
+abyss_04,123,255,5	duplicate(Dragon Egg#DN)	Dragon Egg#3	2540
+abyss_04,126,253,5	duplicate(Dragon Egg#DN)	Dragon Egg#4	2540
+abyss_04,129,255,5	duplicate(Dragon Egg#DN)	Dragon Egg#5	2540
+abyss_04,132,253,5	duplicate(Dragon Egg#DN)	Dragon Egg#6	2540
+abyss_04,91,146,5	duplicate(Dragon Egg#DN)	Dragon Egg#7	2540
+abyss_04,91,142,5	duplicate(Dragon Egg#DN)	Dragon Egg#8	2540
+abyss_04,91,138,5	duplicate(Dragon Egg#DN)	Dragon Egg#9	2540
+abyss_04,91,135,5	duplicate(Dragon Egg#DN)	Dragon Egg#10	2540
+abyss_04,89,144,5	duplicate(Dragon Egg#DN)	Dragon Egg#11	2540
+abyss_04,89,140,5	duplicate(Dragon Egg#DN)	Dragon Egg#12	2540
+abyss_04,90,137,5	duplicate(Dragon Egg#DN)	Dragon Egg#13	2540
+abyss_04,89,134,5	duplicate(Dragon Egg#DN)	Dragon Egg#14	2540
+abyss_04,75,145,5	duplicate(Dragon Egg#DN)	Dragon Egg#15	2540
+abyss_04,75,142,5	duplicate(Dragon Egg#DN)	Dragon Egg#16	2540
+abyss_04,75,139,5	duplicate(Dragon Egg#DN)	Dragon Egg#17	2540
+abyss_04,75,137,5	duplicate(Dragon Egg#DN)	Dragon Egg#18	2540
+abyss_04,78,136,5	duplicate(Dragon Egg#DN)	Dragon Egg#19	2540
+abyss_04,78,139,5	duplicate(Dragon Egg#DN)	Dragon Egg#20	2540
+abyss_04,79,142,5	duplicate(Dragon Egg#DN)	Dragon Egg#21	2540
+abyss_04,80,145,5	duplicate(Dragon Egg#DN)	Dragon Egg#22	2540
+abyss_04,82,143,5	duplicate(Dragon Egg#DN)	Dragon Egg#23	2540
+abyss_04,82,140,5	duplicate(Dragon Egg#DN)	Dragon Egg#24	2540
+abyss_04,82,137,5	duplicate(Dragon Egg#DN)	Dragon Egg#25	2540
+abyss_04,83,134,5	duplicate(Dragon Egg#DN)	Dragon Egg#26	2540
+abyss_04,85,137,5	duplicate(Dragon Egg#DN)	Dragon Egg#27	2540
+abyss_04,85,142,5	duplicate(Dragon Egg#DN)	Dragon Egg#28	2540
+abyss_04,85,145,5	duplicate(Dragon Egg#DN)	Dragon Egg#29	2540
+abyss_04,87,141,5	duplicate(Dragon Egg#DN)	Dragon Egg#30	2540
+abyss_04,87,134,5	duplicate(Dragon Egg#DN)	Dragon Egg#31	2540
+abyss_04,87,137,5	duplicate(Dragon Egg#DN)	Dragon Egg#32	2540
+abyss_04,85,140,5	duplicate(Dragon Egg#DN)	Dragon Egg#33	2540
+abyss_04,154,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#34	2540
+abyss_04,156,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#35	2540
+abyss_04,158,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#36	2540
+abyss_04,160,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#37	2540
+abyss_04,162,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#38	2540
+abyss_04,164,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#39	2540
+abyss_04,166,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#40	2540
+abyss_04,168,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#41	2540
+abyss_04,170,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#42	2540
+abyss_04,172,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#43	2540
+abyss_04,174,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#44	2540
+abyss_04,176,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#45	2540
+abyss_04,178,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#46	2540
+abyss_04,180,71,5	duplicate(Dragon Egg#DN)	Dragon Egg#47	2540
+abyss_04,155,70,5	duplicate(Dragon Egg#DN)	Dragon Egg#48	2540
+abyss_04,157,69,5	duplicate(Dragon Egg#DN)	Dragon Egg#49	2540
+abyss_04,159,70,5	duplicate(Dragon Egg#DN)	Dragon Egg#50	2540
+abyss_04,161,69,5	duplicate(Dragon Egg#DN)	Dragon Egg#51	2540
+abyss_04,163,70,5	duplicate(Dragon Egg#DN)	Dragon Egg#52	2540
+abyss_04,165,69,5	duplicate(Dragon Egg#DN)	Dragon Egg#53	2540
+abyss_04,167,70,5	duplicate(Dragon Egg#DN)	Dragon Egg#54	2540
+abyss_04,169,69,5	duplicate(Dragon Egg#DN)	Dragon Egg#55	2540
+abyss_04,171,70,5	duplicate(Dragon Egg#DN)	Dragon Egg#56	2540
+abyss_04,173,69,5	duplicate(Dragon Egg#DN)	Dragon Egg#57	2540
+abyss_04,175,70,5	duplicate(Dragon Egg#DN)	Dragon Egg#58	2540
+abyss_04,177,69,5	duplicate(Dragon Egg#DN)	Dragon Egg#59	2540
+abyss_04,179,70,5	duplicate(Dragon Egg#DN)	Dragon Egg#60	2540
+abyss_04,155,73,5	duplicate(Dragon Egg#DN)	Dragon Egg#61	2540
+abyss_04,157,72,5	duplicate(Dragon Egg#DN)	Dragon Egg#62	2540
+abyss_04,159,73,5	duplicate(Dragon Egg#DN)	Dragon Egg#63	2540
+abyss_04,161,72,5	duplicate(Dragon Egg#DN)	Dragon Egg#64	2540
+abyss_04,163,73,5	duplicate(Dragon Egg#DN)	Dragon Egg#65	2540
+abyss_04,165,72,5	duplicate(Dragon Egg#DN)	Dragon Egg#66	2540
+abyss_04,167,73,5	duplicate(Dragon Egg#DN)	Dragon Egg#67	2540
+abyss_04,169,72,5	duplicate(Dragon Egg#DN)	Dragon Egg#68	2540
+abyss_04,171,73,5	duplicate(Dragon Egg#DN)	Dragon Egg#69	2540
+abyss_04,173,72,5	duplicate(Dragon Egg#DN)	Dragon Egg#70	2540
+abyss_04,175,73,5	duplicate(Dragon Egg#DN)	Dragon Egg#71	2540
+abyss_04,177,72,5	duplicate(Dragon Egg#DN)	Dragon Egg#72	2540
+abyss_04,179,73,5	duplicate(Dragon Egg#DN)	Dragon Egg#73	2540
+abyss_04,86,237,5	duplicate(Dragon Egg#DN)	Dragon Egg#74	2540
+abyss_04,86,234,5	duplicate(Dragon Egg#DN)	Dragon Egg#75	2540
+abyss_04,86,231,5	duplicate(Dragon Egg#DN)	Dragon Egg#76	2540
+abyss_04,86,228,5	duplicate(Dragon Egg#DN)	Dragon Egg#77	2540
+abyss_04,86,225,5	duplicate(Dragon Egg#DN)	Dragon Egg#78	2540
+abyss_04,86,222,5	duplicate(Dragon Egg#DN)	Dragon Egg#79	2540
+abyss_04,86,219,5	duplicate(Dragon Egg#DN)	Dragon Egg#80	2540
+abyss_04,86,216,5	duplicate(Dragon Egg#DN)	Dragon Egg#81	2540
+abyss_04,86,213,5	duplicate(Dragon Egg#DN)	Dragon Egg#82	2540
+abyss_04,86,210,5	duplicate(Dragon Egg#DN)	Dragon Egg#83	2540
+abyss_04,86,207,5	duplicate(Dragon Egg#DN)	Dragon Egg#84	2540
+abyss_04,84,238,5	duplicate(Dragon Egg#DN)	Dragon Egg#85	2540
+abyss_04,84,235,5	duplicate(Dragon Egg#DN)	Dragon Egg#86	2540
+abyss_04,84,232,5	duplicate(Dragon Egg#DN)	Dragon Egg#87	2540
+abyss_04,84,229,5	duplicate(Dragon Egg#DN)	Dragon Egg#88	2540
+abyss_04,84,226,5	duplicate(Dragon Egg#DN)	Dragon Egg#89	2540
+abyss_04,84,223,5	duplicate(Dragon Egg#DN)	Dragon Egg#90	2540
+abyss_04,84,220,5	duplicate(Dragon Egg#DN)	Dragon Egg#91	2540
+abyss_04,84,217,5	duplicate(Dragon Egg#DN)	Dragon Egg#92	2540
+abyss_04,84,214,5	duplicate(Dragon Egg#DN)	Dragon Egg#93	2540
+abyss_04,84,211,5	duplicate(Dragon Egg#DN)	Dragon Egg#94	2540
+abyss_04,83,210,5	duplicate(Dragon Egg#DN)	Dragon Egg#95	2540
+abyss_04,83,213,5	duplicate(Dragon Egg#DN)	Dragon Egg#96	2540
+abyss_04,83,216,5	duplicate(Dragon Egg#DN)	Dragon Egg#97	2540
+abyss_04,83,219,5	duplicate(Dragon Egg#DN)	Dragon Egg#98	2540
+abyss_04,83,222,5	duplicate(Dragon Egg#DN)	Dragon Egg#99	2540
+abyss_04,83,225,5	duplicate(Dragon Egg#DN)	Dragon Egg#100	2540
+abyss_04,83,228,5	duplicate(Dragon Egg#DN)	Dragon Egg#101	2540
+abyss_04,83,231,5	duplicate(Dragon Egg#DN)	Dragon Egg#102	2540
+abyss_04,83,234,5	duplicate(Dragon Egg#DN)	Dragon Egg#103	2540
+abyss_04,83,237,5	duplicate(Dragon Egg#DN)	Dragon Egg#104	2540
+abyss_04,82,238,5	duplicate(Dragon Egg#DN)	Dragon Egg#105	2540
+abyss_04,82,235,5	duplicate(Dragon Egg#DN)	Dragon Egg#106	2540
+abyss_04,82,232,5	duplicate(Dragon Egg#DN)	Dragon Egg#107	2540
+abyss_04,82,229,5	duplicate(Dragon Egg#DN)	Dragon Egg#108	2540
+abyss_04,82,226,5	duplicate(Dragon Egg#DN)	Dragon Egg#109	2540
+abyss_04,82,223,5	duplicate(Dragon Egg#DN)	Dragon Egg#110	2540
+abyss_04,82,220,5	duplicate(Dragon Egg#DN)	Dragon Egg#111	2540
+abyss_04,82,217,5	duplicate(Dragon Egg#DN)	Dragon Egg#112	2540
+abyss_04,82,214,5	duplicate(Dragon Egg#DN)	Dragon Egg#113	2540
+abyss_04,82,211,5	duplicate(Dragon Egg#DN)	Dragon Egg#114	2540
+abyss_04,80,210,5	duplicate(Dragon Egg#DN)	Dragon Egg#115	2540
+abyss_04,80,213,5	duplicate(Dragon Egg#DN)	Dragon Egg#116	2540
+abyss_04,80,216,5	duplicate(Dragon Egg#DN)	Dragon Egg#117	2540
+abyss_04,80,219,5	duplicate(Dragon Egg#DN)	Dragon Egg#118	2540
+abyss_04,80,222,5	duplicate(Dragon Egg#DN)	Dragon Egg#119	2540
+abyss_04,80,225,5	duplicate(Dragon Egg#DN)	Dragon Egg#120	2540
+abyss_04,80,228,5	duplicate(Dragon Egg#DN)	Dragon Egg#121	2540
+abyss_04,80,231,5	duplicate(Dragon Egg#DN)	Dragon Egg#122	2540
+abyss_04,80,234,5	duplicate(Dragon Egg#DN)	Dragon Egg#123	2540
+abyss_04,80,237,5	duplicate(Dragon Egg#DN)	Dragon Egg#124	2540
+abyss_04,83,212,5	duplicate(Dragon Egg#DN)	Dragon Egg#125	2540
+abyss_04,83,215,5	duplicate(Dragon Egg#DN)	Dragon Egg#126	2540
+abyss_04,83,218,5	duplicate(Dragon Egg#DN)	Dragon Egg#127	2540
+abyss_04,83,221,5	duplicate(Dragon Egg#DN)	Dragon Egg#128	2540
+abyss_04,83,224,5	duplicate(Dragon Egg#DN)	Dragon Egg#129	2540
+abyss_04,83,227,5	duplicate(Dragon Egg#DN)	Dragon Egg#130	2540
+abyss_04,83,230,5	duplicate(Dragon Egg#DN)	Dragon Egg#131	2540
+abyss_04,83,233,5	duplicate(Dragon Egg#DN)	Dragon Egg#132	2540
+abyss_04,83,236,5	duplicate(Dragon Egg#DN)	Dragon Egg#133	2540
+abyss_04,83,239,5	duplicate(Dragon Egg#DN)	Dragon Egg#134	2540
+abyss_04,107,276,5	duplicate(Dragon Egg#DN)	Dragon Egg#135	2540
+abyss_04,107,278,5	duplicate(Dragon Egg#DN)	Dragon Egg#136	2540
+abyss_04,107,280,5	duplicate(Dragon Egg#DN)	Dragon Egg#137	2540
+abyss_04,107,282,5	duplicate(Dragon Egg#DN)	Dragon Egg#138	2540
+abyss_04,107,284,5	duplicate(Dragon Egg#DN)	Dragon Egg#139	2540
+abyss_04,107,286,5	duplicate(Dragon Egg#DN)	Dragon Egg#140	2540
+abyss_04,107,288,5	duplicate(Dragon Egg#DN)	Dragon Egg#141	2540
+abyss_04,106,289,5	duplicate(Dragon Egg#DN)	Dragon Egg#142	2540
+abyss_04,106,285,5	duplicate(Dragon Egg#DN)	Dragon Egg#143	2540
+abyss_04,106,281,5	duplicate(Dragon Egg#DN)	Dragon Egg#144	2540
+abyss_04,106,277,5	duplicate(Dragon Egg#DN)	Dragon Egg#145	2540
+abyss_04,108,279,5	duplicate(Dragon Egg#DN)	Dragon Egg#146	2540
+abyss_04,108,283,5	duplicate(Dragon Egg#DN)	Dragon Egg#147	2540
+abyss_04,108,287,5	duplicate(Dragon Egg#DN)	Dragon Egg#148	2540
+abyss_04,105,287,5	duplicate(Dragon Egg#DN)	Dragon Egg#149	2540
+abyss_04,105,283,5	duplicate(Dragon Egg#DN)	Dragon Egg#150	2540
+abyss_04,105,279,5	duplicate(Dragon Egg#DN)	Dragon Egg#177	2540
+abyss_04,109,277,5	duplicate(Dragon Egg#DN)	Dragon Egg#151	2540
+abyss_04,109,281,5	duplicate(Dragon Egg#DN)	Dragon Egg#152	2540
+abyss_04,109,285,5	duplicate(Dragon Egg#DN)	Dragon Egg#153	2540
+abyss_04,109,289,5	duplicate(Dragon Egg#DN)	Dragon Egg#154	2540
+abyss_04,47,217,5	duplicate(Dragon Egg#DN)	Dragon Egg#155	2540
+abyss_04,45,217,5	duplicate(Dragon Egg#DN)	Dragon Egg#156	2540
+abyss_04,43,217,5	duplicate(Dragon Egg#DN)	Dragon Egg#157	2540
+abyss_04,41,217,5	duplicate(Dragon Egg#DN)	Dragon Egg#158	2540
+abyss_04,39,217,5	duplicate(Dragon Egg#DN)	Dragon Egg#159	2540
+abyss_04,37,217,5	duplicate(Dragon Egg#DN)	Dragon Egg#160	2540
+abyss_04,35,217,5	duplicate(Dragon Egg#DN)	Dragon Egg#161	2540
+abyss_04,42,219,5	duplicate(Dragon Egg#DN)	Dragon Egg#162	2540
+abyss_04,44,219,5	duplicate(Dragon Egg#DN)	Dragon Egg#163	2540
+abyss_04,46,219,5	duplicate(Dragon Egg#DN)	Dragon Egg#164	2540
+abyss_04,46,215,5	duplicate(Dragon Egg#DN)	Dragon Egg#165	2540
+abyss_04,44,215,5	duplicate(Dragon Egg#DN)	Dragon Egg#166	2540
+abyss_04,42,215,5	duplicate(Dragon Egg#DN)	Dragon Egg#167	2540
+abyss_04,40,215,5	duplicate(Dragon Egg#DN)	Dragon Egg#168	2540
+abyss_04,38,215,5	duplicate(Dragon Egg#DN)	Dragon Egg#169	2540
+abyss_04,36,215,5	duplicate(Dragon Egg#DN)	Dragon Egg#170	2540
+abyss_04,212,89,5	duplicate(Dragon Egg#DN)	Dragon Egg#171	2540
+abyss_04,212,94,5	duplicate(Dragon Egg#DN)	Dragon Egg#172	2540
+abyss_04,212,99,5	duplicate(Dragon Egg#DN)	Dragon Egg#173	2540
+abyss_04,212,104,5	duplicate(Dragon Egg#DN)	Dragon Egg#174	2540
+abyss_04,211,102,5	duplicate(Dragon Egg#DN)	Dragon Egg#175	2540
+abyss_04,213,102,5	duplicate(Dragon Egg#DN)	Dragon Egg#176	2540
+abyss_04,211,97,5	duplicate(Dragon Egg#DN)	Dragon Egg#178	2540
+abyss_04,213,97,5	duplicate(Dragon Egg#DN)	Dragon Egg#179	2540
+abyss_04,211,92,5	duplicate(Dragon Egg#DN)	Dragon Egg#180	2540
+abyss_04,213,92,5	duplicate(Dragon Egg#DN)	Dragon Egg#181	2540
+abyss_04,210,100,5	duplicate(Dragon Egg#DN)	Dragon Egg#182	2540
+abyss_04,214,100,5	duplicate(Dragon Egg#DN)	Dragon Egg#183	2540
+abyss_04,210,95,5	duplicate(Dragon Egg#DN)	Dragon Egg#184	2540
+abyss_04,214,95,5	duplicate(Dragon Egg#DN)	Dragon Egg#185	2540
+abyss_04,210,90,5	duplicate(Dragon Egg#DN)	Dragon Egg#186	2540
+abyss_04,214,90,5	duplicate(Dragon Egg#DN)	Dragon Egg#187	2540
+abyss_04,210,105,5	duplicate(Dragon Egg#DN)	Dragon Egg#188	2540
+abyss_04,214,105,5	duplicate(Dragon Egg#DN)	Dragon Egg#189	2540
+abyss_04,210,87,5	duplicate(Dragon Egg#DN)	Dragon Egg#190	2540
+abyss_04,174,248,5	duplicate(Dragon Egg#DN)	Dragon Egg#191	2540
+abyss_04,175,247,5	duplicate(Dragon Egg#DN)	Dragon Egg#192	2540
+abyss_04,176,248,5	duplicate(Dragon Egg#DN)	Dragon Egg#193	2540
+abyss_04,177,247,5	duplicate(Dragon Egg#DN)	Dragon Egg#194	2540
+abyss_04,178,248,5	duplicate(Dragon Egg#DN)	Dragon Egg#195	2540
+abyss_04,179,247,5	duplicate(Dragon Egg#DN)	Dragon Egg#196	2540
+abyss_04,180,248,5	duplicate(Dragon Egg#DN)	Dragon Egg#197	2540
+abyss_04,181,247,5	duplicate(Dragon Egg#DN)	Dragon Egg#198	2540
+abyss_04,174,245,5	duplicate(Dragon Egg#DN)	Dragon Egg#199	2540
+abyss_04,176,245,5	duplicate(Dragon Egg#DN)	Dragon Egg#200	2540
+abyss_04,178,245,5	duplicate(Dragon Egg#DN)	Dragon Egg#201	2540
+abyss_04,180,245,5	duplicate(Dragon Egg#DN)	Dragon Egg#202	2540
+abyss_04,175,250,5	duplicate(Dragon Egg#DN)	Dragon Egg#203	2540
+abyss_04,177,250,5	duplicate(Dragon Egg#DN)	Dragon Egg#204	2540
+abyss_04,179,250,5	duplicate(Dragon Egg#DN)	Dragon Egg#205	2540
+abyss_04,181,250,5	duplicate(Dragon Egg#DN)	Dragon Egg#206	2540
+abyss_04,265,199,5	duplicate(Dragon Egg#DN)	Dragon Egg#207	2540
+abyss_04,263,201,5	duplicate(Dragon Egg#DN)	Dragon Egg#208	2540
+abyss_04,260,204,5	duplicate(Dragon Egg#DN)	Dragon Egg#209	2540
+abyss_04,257,207,5	duplicate(Dragon Egg#DN)	Dragon Egg#210	2540
+abyss_04,255,209,5	duplicate(Dragon Egg#DN)	Dragon Egg#211	2540
+abyss_04,254,207,5	duplicate(Dragon Egg#DN)	Dragon Egg#212	2540
+abyss_04,252,208,5	duplicate(Dragon Egg#DN)	Dragon Egg#213	2540
+abyss_04,254,205,5	duplicate(Dragon Egg#DN)	Dragon Egg#214	2540
+abyss_04,257,204,5	duplicate(Dragon Egg#DN)	Dragon Egg#215	2540
+abyss_04,259,201,5	duplicate(Dragon Egg#DN)	Dragon Egg#216	2540
+abyss_04,261,200,5	duplicate(Dragon Egg#DN)	Dragon Egg#217	2540
+abyss_04,263,198,5	duplicate(Dragon Egg#DN)	Dragon Egg#218	2540
+abyss_04,264,196,5	duplicate(Dragon Egg#DN)	Dragon Egg#219	2540
+abyss_04,257,199,5	duplicate(Dragon Egg#DN)	Dragon Egg#220	2540
+abyss_04,254,202,5	duplicate(Dragon Egg#DN)	Dragon Egg#221	2540
+abyss_04,248,207,5	duplicate(Dragon Egg#DN)	Dragon Egg#222	2540
+abyss_04,250,207,5	duplicate(Dragon Egg#DN)	Dragon Egg#223	2540
+abyss_04,251,205,5	duplicate(Dragon Egg#DN)	Dragon Egg#224	2540
+abyss_04,252,203,5	duplicate(Dragon Egg#DN)	Dragon Egg#225	2540
+abyss_04,255,201,5	duplicate(Dragon Egg#DN)	Dragon Egg#226	2540
+abyss_04,257,202,5	duplicate(Dragon Egg#DN)	Dragon Egg#227	2540
+abyss_04,258,196,5	duplicate(Dragon Egg#DN)	Dragon Egg#228	2540
+abyss_04,260,194,5	duplicate(Dragon Egg#DN)	Dragon Egg#229	2540
+abyss_04,263,194,5	duplicate(Dragon Egg#DN)	Dragon Egg#230	2540
+abyss_04,255,199,5	duplicate(Dragon Egg#DN)	Dragon Egg#231	2540
+abyss_04,119,256,5	duplicate(Dragon Egg#DN)	Dragon Egg#232	2540
+abyss_04,121,257,5	duplicate(Dragon Egg#DN)	Dragon Egg#233	2540
+abyss_04,125,256,5	duplicate(Dragon Egg#DN)	Dragon Egg#234	2540
+abyss_04,127,257,5	duplicate(Dragon Egg#DN)	Dragon Egg#235	2540
+abyss_04,132,256,5	duplicate(Dragon Egg#DN)	Dragon Egg#236	2540
+abyss_04,119,254,5	duplicate(Dragon Egg#DN)	Dragon Egg#237	2540
+abyss_04,121,253,5	duplicate(Dragon Egg#DN)	Dragon Egg#238	2540
+abyss_04,123,253,5	duplicate(Dragon Egg#DN)	Dragon Egg#239	2540
+abyss_04,125,254,5	duplicate(Dragon Egg#DN)	Dragon Egg#240	2540
+abyss_04,128,253,5	duplicate(Dragon Egg#DN)	Dragon Egg#241	2540
+abyss_04,130,253,5	duplicate(Dragon Egg#DN)	Dragon Egg#242	2540
+abyss_04,127,252,5	duplicate(Dragon Egg#DN)	Dragon Egg#243	2540
+abyss_04,131,252,5	duplicate(Dragon Egg#DN)	Dragon Egg#244	2540
+abyss_04,122,252,5	duplicate(Dragon Egg#DN)	Dragon Egg#245	2540
+abyss_04,119,252,5	duplicate(Dragon Egg#DN)	Dragon Egg#246	2540
+abyss_04,118,251,5	duplicate(Dragon Egg#DN)	Dragon Egg#247	2540
+abyss_04,121,251,5	duplicate(Dragon Egg#DN)	Dragon Egg#248	2540
+abyss_04,125,251,5	duplicate(Dragon Egg#DN)	Dragon Egg#249	2540
+abyss_04,129,251,5	duplicate(Dragon Egg#DN)	Dragon Egg#250	2540
+abyss_04,302,189,5	duplicate(Dragon Egg#DN)	Dragon Egg#251	2540
+abyss_04,304,189,5	duplicate(Dragon Egg#DN)	Dragon Egg#252	2540
+abyss_04,306,189,5	duplicate(Dragon Egg#DN)	Dragon Egg#253	2540
+abyss_04,308,189,5	duplicate(Dragon Egg#DN)	Dragon Egg#254	2540
+abyss_04,310,189,5	duplicate(Dragon Egg#DN)	Dragon Egg#255	2540
+abyss_04,312,189,5	duplicate(Dragon Egg#DN)	Dragon Egg#256	2540
+abyss_04,303,188,5	duplicate(Dragon Egg#DN)	Dragon Egg#257	2540
+abyss_04,307,188,5	duplicate(Dragon Egg#DN)	Dragon Egg#258	2540
+abyss_04,311,188,5	duplicate(Dragon Egg#DN)	Dragon Egg#259	2540
+abyss_04,301,190,5	duplicate(Dragon Egg#DN)	Dragon Egg#260	2540
+abyss_04,305,190,5	duplicate(Dragon Egg#DN)	Dragon Egg#261	2540
+abyss_04,309,190,5	duplicate(Dragon Egg#DN)	Dragon Egg#262	2540
+abyss_04,305,186,5	duplicate(Dragon Egg#DN)	Dragon Egg#263	2540
+abyss_04,309,186,5	duplicate(Dragon Egg#DN)	Dragon Egg#264	2540
+abyss_04,303,192,5	duplicate(Dragon Egg#DN)	Dragon Egg#265	2540
+abyss_04,307,192,5	duplicate(Dragon Egg#DN)	Dragon Egg#266	2540
+abyss_04,305,188,5	duplicate(Dragon Egg#DN)	Dragon Egg#267	2540
+abyss_04,309,188,5	duplicate(Dragon Egg#DN)	Dragon Egg#268	2540
+abyss_04,303,190,5	duplicate(Dragon Egg#DN)	Dragon Egg#269	2540
+abyss_04,307,190,5	duplicate(Dragon Egg#DN)	Dragon Egg#270	2540
+abyss_04,303,159,5	duplicate(Dragon Egg#DN)	Dragon Egg#271	2540
+abyss_04,306,159,5	duplicate(Dragon Egg#DN)	Dragon Egg#272	2540
+abyss_04,309,159,5	duplicate(Dragon Egg#DN)	Dragon Egg#273	2540
+abyss_04,311,160,5	duplicate(Dragon Egg#DN)	Dragon Egg#274	2540
+abyss_04,302,160,5	duplicate(Dragon Egg#DN)	Dragon Egg#275	2540
+abyss_04,305,160,5	duplicate(Dragon Egg#DN)	Dragon Egg#276	2540
+abyss_04,308,160,5	duplicate(Dragon Egg#DN)	Dragon Egg#277	2540
+abyss_04,304,161,5	duplicate(Dragon Egg#DN)	Dragon Egg#278	2540
+abyss_04,307,161,5	duplicate(Dragon Egg#DN)	Dragon Egg#279	2540
+abyss_04,310,161,5	duplicate(Dragon Egg#DN)	Dragon Egg#280	2540
+abyss_04,143,34,5	duplicate(Dragon Egg#DN)	Dragon Egg#281	2540
+abyss_04,143,36,5	duplicate(Dragon Egg#DN)	Dragon Egg#282	2540
+abyss_04,142,37,5	duplicate(Dragon Egg#DN)	Dragon Egg#283	2540
+abyss_04,142,35,5	duplicate(Dragon Egg#DN)	Dragon Egg#284	2540
+abyss_04,141,34,5	duplicate(Dragon Egg#DN)	Dragon Egg#285	2540
+abyss_04,141,36,5	duplicate(Dragon Egg#DN)	Dragon Egg#286	2540
+abyss_04,246,79,5	duplicate(Dragon Egg#DN)	Dragon Egg#287	2540
+abyss_04,251,79,5	duplicate(Dragon Egg#DN)	Dragon Egg#288	2540
+abyss_04,256,79,5	duplicate(Dragon Egg#DN)	Dragon Egg#289	2540
+abyss_04,261,79,5	duplicate(Dragon Egg#DN)	Dragon Egg#290	2540
+abyss_04,266,79,5	duplicate(Dragon Egg#DN)	Dragon Egg#291	2540
+abyss_04,271,79,5	duplicate(Dragon Egg#DN)	Dragon Egg#292	2540
+abyss_04,267,77,5	duplicate(Dragon Egg#DN)	Dragon Egg#293	2540
+abyss_04,252,77,5	duplicate(Dragon Egg#DN)	Dragon Egg#294	2540
+abyss_04,253,78,5	duplicate(Dragon Egg#DN)	Dragon Egg#295	2540
+abyss_04,248,78,5	duplicate(Dragon Egg#DN)	Dragon Egg#296	2540
+abyss_04,249,78,5	duplicate(Dragon Egg#DN)	Dragon Egg#297	2540
+abyss_04,247,77,5	duplicate(Dragon Egg#DN)	Dragon Egg#298	2540
+abyss_04,250,77,5	duplicate(Dragon Egg#DN)	Dragon Egg#299	2540
+abyss_04,254,78,5	duplicate(Dragon Egg#DN)	Dragon Egg#300	2540
+abyss_04,255,77,5	duplicate(Dragon Egg#DN)	Dragon Egg#301	2540
+abyss_04,257,77,5	duplicate(Dragon Egg#DN)	Dragon Egg#302	2540
+abyss_04,258,78,5	duplicate(Dragon Egg#DN)	Dragon Egg#303	2540
+abyss_04,259,78,5	duplicate(Dragon Egg#DN)	Dragon Egg#304	2540
+abyss_04,260,77,5	duplicate(Dragon Egg#DN)	Dragon Egg#305	2540
+abyss_04,263,78,5	duplicate(Dragon Egg#DN)	Dragon Egg#306	2540
+abyss_04,265,77,5	duplicate(Dragon Egg#DN)	Dragon Egg#307	2540
+abyss_04,262,77,5	duplicate(Dragon Egg#DN)	Dragon Egg#308	2540
+abyss_04,264,78,5	duplicate(Dragon Egg#DN)	Dragon Egg#309	2540
+abyss_04,268,78,5	duplicate(Dragon Egg#DN)	Dragon Egg#310	2540
+abyss_04,269,78,5	duplicate(Dragon Egg#DN)	Dragon Egg#311	2540
+abyss_04,270,77,5	duplicate(Dragon Egg#DN)	Dragon Egg#312	2540
+abyss_04,251,75,5	duplicate(Dragon Egg#DN)	Dragon Egg#313	2540
+abyss_04,256,75,5	duplicate(Dragon Egg#DN)	Dragon Egg#314	2540
+abyss_04,261,75,5	duplicate(Dragon Egg#DN)	Dragon Egg#315	2540
+abyss_04,266,75,5	duplicate(Dragon Egg#DN)	Dragon Egg#316	2540
+abyss_04,248,80,5	duplicate(Dragon Egg#DN)	Dragon Egg#317	2540
+abyss_04,249,80,5	duplicate(Dragon Egg#DN)	Dragon Egg#318	2540
+abyss_04,253,80,5	duplicate(Dragon Egg#DN)	Dragon Egg#319	2540
+abyss_04,254,80,5	duplicate(Dragon Egg#DN)	Dragon Egg#320	2540
+abyss_04,258,80,5	duplicate(Dragon Egg#DN)	Dragon Egg#321	2540
+abyss_04,263,80,5	duplicate(Dragon Egg#DN)	Dragon Egg#322	2540
+abyss_04,264,80,5	duplicate(Dragon Egg#DN)	Dragon Egg#323	2540
+abyss_04,268,80,5	duplicate(Dragon Egg#DN)	Dragon Egg#324	2540
+abyss_04,269,80,5	duplicate(Dragon Egg#DN)	Dragon Egg#325	2540
+abyss_04,251,82,5	duplicate(Dragon Egg#DN)	Dragon Egg#326	2540
+abyss_04,256,82,5	duplicate(Dragon Egg#DN)	Dragon Egg#327	2540
+abyss_04,261,82,5	duplicate(Dragon Egg#DN)	Dragon Egg#328	2540
+abyss_04,266,82,5	duplicate(Dragon Egg#DN)	Dragon Egg#329	2540
+abyss_04,280,85,5	duplicate(Dragon Egg#DN)	Dragon Egg#330	2540
+abyss_04,279,83,5	duplicate(Dragon Egg#DN)	Dragon Egg#331	2540
+abyss_04,276,85,5	duplicate(Dragon Egg#DN)	Dragon Egg#332	2540
+abyss_04,274,83,5	duplicate(Dragon Egg#DN)	Dragon Egg#333	2540
+abyss_04,271,84,5	duplicate(Dragon Egg#DN)	Dragon Egg#334	2540
+abyss_04,271,82,5	duplicate(Dragon Egg#DN)	Dragon Egg#335	2540
+abyss_04,274,81,5	duplicate(Dragon Egg#DN)	Dragon Egg#336	2540
+abyss_04,268,85,5	duplicate(Dragon Egg#DN)	Dragon Egg#337	2540
+abyss_04,264,84,5	duplicate(Dragon Egg#DN)	Dragon Egg#338	2540
+abyss_04,261,85,5	duplicate(Dragon Egg#DN)	Dragon Egg#339	2540
+abyss_04,259,84,5	duplicate(Dragon Egg#DN)	Dragon Egg#340	2540
+abyss_04,255,85,5	duplicate(Dragon Egg#DN)	Dragon Egg#341	2540
+abyss_04,253,83,5	duplicate(Dragon Egg#DN)	Dragon Egg#342	2540
+abyss_04,250,85,5	duplicate(Dragon Egg#DN)	Dragon Egg#343	2540
+abyss_04,248,83,5	duplicate(Dragon Egg#DN)	Dragon Egg#344	2540
+abyss_04,241,165,5	duplicate(Dragon Egg#DN)	Dragon Egg#345	2540
+abyss_04,243,166,5	duplicate(Dragon Egg#DN)	Dragon Egg#346	2540
+abyss_04,244,165,5	duplicate(Dragon Egg#DN)	Dragon Egg#347	2540
+abyss_04,246,166,5	duplicate(Dragon Egg#DN)	Dragon Egg#348	2540
+abyss_04,250,165,5	duplicate(Dragon Egg#DN)	Dragon Egg#349	2540
+abyss_04,251,167,5	duplicate(Dragon Egg#DN)	Dragon Egg#350	2540
+abyss_04,253,166,5	duplicate(Dragon Egg#DN)	Dragon Egg#351	2540
+abyss_04,256,165,5	duplicate(Dragon Egg#DN)	Dragon Egg#352	2540
+abyss_04,257,168,5	duplicate(Dragon Egg#DN)	Dragon Egg#353	2540
+abyss_04,253,169,5	duplicate(Dragon Egg#DN)	Dragon Egg#354	2540
+abyss_04,256,172,5	duplicate(Dragon Egg#DN)	Dragon Egg#355	2540
+abyss_04,249,170,5	duplicate(Dragon Egg#DN)	Dragon Egg#356	2540
+abyss_04,246,168,5	duplicate(Dragon Egg#DN)	Dragon Egg#357	2540
+abyss_04,243,169,5	duplicate(Dragon Egg#DN)	Dragon Egg#358	2540
+abyss_04,256,172,5	duplicate(Dragon Egg#DN)	Dragon Egg#359	2540
+abyss_04,249,170,5	duplicate(Dragon Egg#DN)	Dragon Egg#360	2540
+abyss_04,246,168,5	duplicate(Dragon Egg#DN)	Dragon Egg#361	2540
+abyss_04,243,169,5	duplicate(Dragon Egg#DN)	Dragon Egg#362	2540
+abyss_04,241,170,5	duplicate(Dragon Egg#DN)	Dragon Egg#363	2540
+abyss_04,242,168,5	duplicate(Dragon Egg#DN)	Dragon Egg#364	2540
+abyss_04,243,174,5	duplicate(Dragon Egg#DN)	Dragon Egg#365	2540
+abyss_04,241,174,5	duplicate(Dragon Egg#DN)	Dragon Egg#366	2540
+abyss_04,242,177,5	duplicate(Dragon Egg#DN)	Dragon Egg#367	2540
+abyss_04,244,177,5	duplicate(Dragon Egg#DN)	Dragon Egg#368	2540
+abyss_04,247,179,5	duplicate(Dragon Egg#DN)	Dragon Egg#369	2540
+abyss_04,243,181,5	duplicate(Dragon Egg#DN)	Dragon Egg#370	2540
+abyss_04,245,183,5	duplicate(Dragon Egg#DN)	Dragon Egg#371	2540
+abyss_04,248,180,5	duplicate(Dragon Egg#DN)	Dragon Egg#372	2540
+abyss_04,250,181,5	duplicate(Dragon Egg#DN)	Dragon Egg#373	2540
+abyss_04,253,178,5	duplicate(Dragon Egg#DN)	Dragon Egg#374	2540
+abyss_04,255,175,5	duplicate(Dragon Egg#DN)	Dragon Egg#375	2540
+abyss_04,245,185,5	duplicate(Dragon Egg#DN)	Dragon Egg#376	2540
+abyss_04,246,189,5	duplicate(Dragon Egg#DN)	Dragon Egg#377	2540
+abyss_04,243,189,5	duplicate(Dragon Egg#DN)	Dragon Egg#378	2540
+abyss_04,244,193,5	duplicate(Dragon Egg#DN)	Dragon Egg#379	2540
+abyss_04,242,197,5	duplicate(Dragon Egg#DN)	Dragon Egg#380	2540
+abyss_04,244,199,5	duplicate(Dragon Egg#DN)	Dragon Egg#381	2540
+abyss_04,242,202,5	duplicate(Dragon Egg#DN)	Dragon Egg#382	2540
+abyss_04,245,204,5	duplicate(Dragon Egg#DN)	Dragon Egg#383	2540
+abyss_04,246,205,5	duplicate(Dragon Egg#DN)	Dragon Egg#384	2540
+abyss_04,247,203,5	duplicate(Dragon Egg#DN)	Dragon Egg#385	2540
+abyss_04,248,199,5	duplicate(Dragon Egg#DN)	Dragon Egg#386	2540
+abyss_04,250,195,5	duplicate(Dragon Egg#DN)	Dragon Egg#387	2540
+abyss_04,251,189,5	duplicate(Dragon Egg#DN)	Dragon Egg#388	2540
+abyss_04,254,188,5	duplicate(Dragon Egg#DN)	Dragon Egg#389	2540
+abyss_04,229,155,5	duplicate(Dragon Egg#DN)	Dragon Egg#390	2540
+abyss_04,228,153,5	duplicate(Dragon Egg#DN)	Dragon Egg#391	2540
+abyss_04,229,151,5	duplicate(Dragon Egg#DN)	Dragon Egg#392	2540
+abyss_04,231,152,5	duplicate(Dragon Egg#DN)	Dragon Egg#393	2540
+abyss_04,231,155,5	duplicate(Dragon Egg#DN)	Dragon Egg#394	2540
+abyss_04,233,157,5	duplicate(Dragon Egg#DN)	Dragon Egg#395	2540
+abyss_04,235,157,5	duplicate(Dragon Egg#DN)	Dragon Egg#396	2540
+abyss_04,236,155,5	duplicate(Dragon Egg#DN)	Dragon Egg#397	2540
+abyss_04,238,153,5	duplicate(Dragon Egg#DN)	Dragon Egg#398	2540
+abyss_04,236,152,5	duplicate(Dragon Egg#DN)	Dragon Egg#399	2540
+abyss_04,234,153,5	duplicate(Dragon Egg#DN)	Dragon Egg#400	2540
+
+/*
+abyss_04,7777,7777,5	duplicate(Dragon Egg#DN)	Dragon Egg#330	2540
+abyss_04,7777,7777,5	duplicate(Dragon Egg#DN)	Dragon Egg#331	2540
+abyss_04,7777,7777,5	duplicate(Dragon Egg#DN)	Dragon Egg#332	2540
+abyss_04,7777,7777,5	duplicate(Dragon Egg#DN)	Dragon Egg#333	2540
+abyss_04,7777,7777,5	duplicate(Dragon Egg#DN)	Dragon Egg#334	2540
+abyss_04,7777,7777,5	duplicate(Dragon Egg#DN)	Dragon Egg#335	2540
+abyss_04,7777,7777,5	duplicate(Dragon Egg#DN)	Dragon Egg#336	2540
+abyss_04,7777,7777,5	duplicate(Dragon Egg#DN)	Dragon Egg#337	2540
+abyss_04,7777,7777,5	duplicate(Dragon Egg#DN)	Dragon Egg#338	2540
+abyss_04,7777,7777,5	duplicate(Dragon Egg#DN)	Dragon Egg#339	2540
+*/
+
+
+abyss_04	mapflag	nowarp
+abyss_04	mapflag	nowarpto
+abyss_04	mapflag	noteleport
+abyss_04	mapflag	nosave	SavePoint
+abyss_04	mapflag	nomemo
+abyss_04	mapflag	nobranch
+abyss_04	mapflag	noicewall
+abyss_04	mapflag	monster_noteleport

@@ -1,0 +1,2116 @@
+//===== rAthena Script =======================================
+//= Thanatos Tower
+//===== Description: =========================================
+//= Thanatos Tower Instance
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Seavoltos]
+//============================================================
+//============================================================
+
+// Piso 0
+//============================================================
+instance,29,55,6	script	Thanatos Staff	418,{
+	if (BaseLevel < 70) {
+		mes "[Thanatos Staff]";
+		mes "Sólo estamos reclutando gente fuerte para esta travesía. Vuelve cuando seas al menos nivel 70.";
+		close;
+	}
+	.@party_id = getcharid(1);
+	.@md_name$ = "Thanatos Tower";
+	if (.@party_id < 1) {
+		mes "[Thanatos Staff]";
+		mes "Sin party? Vuelve cuando hayas creado una, ni pensarlo en hacer esto solo.";
+		close;
+	}
+	switch( checkquest(12326,PLAYTIME) ) {
+	case -1:
+		if (is_party_leader() == true) {
+			mes "[Thanatos Staff]";
+			mes "Qué puedo hacer por ti?";
+			next;
+			switch( select("Reservar Thanatos Tower:Qué haces aquí?:Parar de hablar.") ) {
+			case 1:
+				switch( instance_create(.@md_name$) ) {
+				case -3:
+					dispbottom "Memorial Dungeon, '" + .@md_name$ + "' ya está en progreso.",0xFFFFFF;
+					break;
+				case -4:
+				case -2:
+				case -1:
+					mes "[Thanatos Staff]";
+					mes "Vaya, creo que anote mal los datos. Se requiere volver a activar el portal.";
+					close;
+				}
+				mes "[Thanatos Staff]";
+				mes "El espacio está bajo control";
+				mes "Por favor espera un minuto.";
+				close;
+			case 2:
+				break;
+			case 3:
+				mes "[Thanatos Staff]";
+				mes "Ok, lo entiendo. Ven a verme cuando cambies de idea.";
+				close;
+			}
+		}
+		mes "[Thanatos Staff]";
+		mes "Estamos reclutando sólo gente poderosa.";
+		next;
+		mes "[Thanatos Staff]";
+		mes "Mi busqueda es poder librar toda la oscuridad en la torre.";
+		next;
+		mes "[Thanatos Staff]";
+		mes "Este portal te puede llevar al pasado. Muchas aventuras te esperan ahí...";
+		next;
+		mes "[Thanatos Staff]";
+		mes "de todas formas, si deseas activar el portal, debe hacerlo con su party lider.";
+		close;
+	case 0:
+	case 1:
+		mes "[Thanatos Staff]";
+		mes "El portal aún no es seguro, vuelve cuando el tiempo haya pasado.";
+		close;
+	case 2:
+		mes "^0000ffLos restos del portal han desaparecido. Ahora puedes volver a viajar.^000000";
+		erasequest 12326;
+		close;
+	}
+}
+
+instance,22,51,4	script	Thanatos Tower Device	PORTAL,{
+	if (BaseLevel < 70) {
+		mes "[Thanatos Tower Device]";
+		mes "Tu nivel de poder no es el suficientemente alto para poder viajar. Vuelve cuando seas al menos nivel 70.";
+		close;
+	}
+	.@party_id = getcharid(1);
+	.@md_name$ = "Thanatos Tower";
+	if (.@party_id < 1) {
+		mes "[Thanatos Staff]";
+		mes "Sin party? Vuelve cuando hayas creado una, ni pensarlo en hacer esto solo.";
+		close;
+	}
+	switch( checkquest(12326,PLAYTIME) ) {
+	case -1:
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "[Thanatos Staff]";
+			mes "Un error desconocido ha ocurrido.";
+			close;
+		case IE_NOINSTANCE:
+			mes "[Thanatos Staff]";
+			mes "El pasaje para viajar entre dimensiones aún no se ha activado.";
+			close;
+		case IE_NOMEMBER:// Custom text
+			mes "[Thanatos Staff]";
+			mes "No tienes permitido acceder a este dispositivo.";
+			close;
+		case IE_OK:
+			mapannounce "instance", "[" + getpartyname(.@party_id) + "] " + strcharinfo(0) + " ha entrado a " + .@md_name$ + ".",bc_map,"0x00ff99";
+			setquest 12326;// Thanatos Tower after-effects
+			end;
+		}
+	case 0:
+	case 1:
+		mes "[Interdimensional Device]";
+		mes "Aún quedan restos de tu último viaje. Acceso denegado.";
+		close;
+	case 2:
+		mes "^0000ffLos restos de tu último viaje han desaparecido. Ahora puedes volver a moverte entre dimensiones.^000000";
+		erasequest 12326;
+		close;
+	}
+}
+
+instance,33,56,5	script	Old Sign#2	4_BOARD3,{
+	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
+		mes "-- Thanatos Tower Records --";
+		.@ttower_name$ = getd("$120719_str_ttower"+.@i+"$");
+		.@ttower_timer  = getd("$120719_num_ttower"+.@i);
+		.@ttower_member = getd("$120903_num_ttower"+.@i);
+		
+		.@time_m = .@ttower_timer / 60;
+		.@time_s = .@ttower_timer - (.@time_m * 60);
+		if (.@ttower_name$ == "") {
+			mes "Aún no hay registros de esta instancia.";
+		}
+		else {
+			if (.@ttower_timer < 60)
+				.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+			else
+				.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "Minuto" ) + " " + callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+			if (.@ttower_member > 0)
+				.@string$ =  " con ^ff0044" + .@ttower_member + " miembros^000000";
+			mes "Mejor tiempo para ^ff0044" + .@ttower_name$ + "^000000" + .@string$ + ".";
+			mes "Con el tiempo de ^0000ff" + .@time_txt$ + "^000000.";
+		}
+		mes "Dificultad " + .dificultad$[.@i];
+		if( .@i == 4 )
+			close;
+		else
+			next;
+	}
+	close;
+
+OnInit:
+	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
+		if (!getd("$120719_num_ttower"+.@i))
+			setd "$120719_num_ttower"+.@i,14400;
+		
+			//setd "$120719_num_ttower"+.@i , 14400;
+			//setd "$120719_num_ttower"+.@i+"$" , "";
+	}
+
+	setarray .dificultad$,"","^008000Easy^000000","Normal","^BA7100Hard^000000","^ff0000Insane^000000";
+	end;
+}
+
+
+// Piso 1
+//============================================================
+1@thts,91,374,3	script	Chaos#TT0	4_M_CHAOS,{
+	cutin "h_chaos01",2;
+	if (is_party_leader() == false) {
+		mes "[Chaos]";
+		mes "Aún no sé que trata, pero estoy hablando con tu lider asique por favor espera ok?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	.@account_id = getcharid(3);
+	.@player_name$ = strcharinfo(0);
+	mes "[Chaos]";
+	mes "Esta zona es muy pequeña, han identificado sólo un piso que contiene una estatua.";
+	npctalk "Chaos: Esta zona es muy pequeña, han identificado sólo un piso que contiene una estatua.";
+	next;
+	select("Pero si tiene más de 10 pisos");
+	cutin "",255;
+	mes "[" + .@player_name$ + "]";
+	mes "Estas equivocado, la Thanatos Tower tiene más de 10 pisos, no puede ser tan pequeña...";
+	unittalk .@account_id, .@player_name$ + ":Estas equivocado, la Thanatos Tower tiene más de 10 pisos, no puede ser tan pequeña...";
+	next;
+	cutin "h_chaos01",2;
+	mes "[Chaos]";
+	mes "Bueno tendremos que investigar entonces.";
+	npctalk "Chaos: Bueno tendremos que investigar entonces.";
+	close2;
+	cutin "",255;
+	donpcevent instance_npcname("Chaos#TT01") + "::OnStart";
+	end;
+}
+
+1@thts,91,374,3	script	Chaos#TT01	4_M_CHAOS,{
+	end;
+OnStart:
+	.@iris_name$ = instance_npcname("Iris#TT0");
+	donpcevent instance_npcname("#globaltimer50") + "::OnT_s";
+	hideoffnpc instance_npcname("Chaos#TT01");
+	hideonnpc instance_npcname("Chaos#TT0");
+	sleep 5000;
+	npctalk "Chaos: Al parecer tenemos un misterio frente a nosotros.";
+	sleep 5000;
+	npctalk "Chaos: No te preocupes Iris, seremos los primeros en investigar que sucede acá.";
+	sleep 5000;
+	npctalk "Iris: Me encanta el suspenso de este lugar ~", .@iris_name$;
+	sleep 5000;
+	npctalk "Iris: La decoración antigua es lo mejor ~", .@iris_name$;
+	sleep 5000;
+	npctalk "Chaos: Mejor vamos a ver que hay más adelante.";
+	sleep 3000;
+	hideonnpc instance_npcname("Chaos#TT01");
+	hideonnpc instance_npcname("Iris#TT0");
+	sleep 2000;
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "Se escucha una voz muy baja de fondo...",bc_map,"0xffffff";
+	sleep 4000;
+	mapannounce 'map_name$, "[Voz] ...Por el espíritu de antaño, los muros están cerrados...",bc_map,"0xffffff";
+	sleep 4000;
+	mapannounce 'map_name$, "[Voz] ...Pisos superiores son tabú para el extranjero...",bc_map,"0xffffff";
+	sleep 4000;
+	mapannounce 'map_name$, "[Voz] ...Por el orden de las estatuas encontrarás el camino...",bc_map,"0xffffff";
+	sleep 4000;
+	mapannounce 'map_name$, "[Voz] ...Que tal vez un día te traiga a mí...",bc_map,"0xffffff";
+	sleep 4000;
+	mapannounce 'map_name$, "[Voz] ...Thanatos...",bc_map,"0xffffff";
+	//donpcevent instance_npcname("#TTowerprize1") + "::OnStart";
+	enablenpc instance_npcname("#TTowerenter1");
+	hideoffnpc instance_npcname("Chaos#TT1");
+	hideoffnpc instance_npcname("Iris#TT1");
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Chaos#TT01");
+	end;
+}
+
+
+1@thts,91,369,1	script	Iris#TT0	4_F_IRIS,{
+	cutin "h_iris02",2;
+	mes "[Iris]";
+	mes "Sorry~ disfuto del suspenso de este lugar.";
+	close2;
+	//warp instance_mapname("8@thts"), 135, 140;
+	cutin "",255;
+	end;
+}
+
+1@thts,168,371,3	script	#TTowerenter1	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp instance_mapname("2@thts"),25,166;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#TTowerenter1");
+	end;
+}
+
+// Piso 2
+//============================================================
+//	10042 = Energía roja		38	145			70050		Rubylit		3317		FLAME_KNIGHT	3323
+//	10043 = Energía azul		61	96			70052		Sapphilit	3318		ICE_KNIGHT		3324
+//	10044 = Energía amarilla	33	42			70051		Topalit		3320		LIGHT_KNIGHT	3326
+//	10045 = Energía negra		107	39			70054		Amalit		3321		DARK_KNIGHT		3327
+//	10046 = Energía	blanca		102	135			70053		Emelit		3319		STONE_KNIGHT	3325
+
+2@thts,38,145,1	script	#EnergiaRoja	10042,2,2,{
+	end;
+OnTouch:
+	if(countitem(70050) < 1)
+	{
+		getitem 70050,1;
+		specialeffect2 470;
+		sc_start4 SC_ELEMENTALCHANGE,60000,4,Ele_Fire,1,0;
+	}
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#EnergiaRoja");
+	end;
+}
+
+2@thts,61,96,1	script	#EnergiaAzul	10043,2,2,{
+	end;
+OnTouch:
+	if(countitem(70052) < 1)
+	{
+		getitem 70052,1;
+		specialeffect2 469;
+		sc_start4 SC_ELEMENTALCHANGE,60000,4,Ele_Water,1,0;
+	}
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#EnergiaAzul");
+	end;
+}
+
+2@thts,33,42,1	script	#EnergiaAmarilla	10044,2,2,{
+	end;
+OnTouch:
+	if(countitem(70051) < 1)
+	{
+		getitem 70051,1;
+		specialeffect2 468;
+		sc_start4 SC_ELEMENTALCHANGE,60000,4,Ele_Wind,1,0;
+	}
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#EnergiaAmarilla");
+	end;
+}
+
+2@thts,107,39,1	script	#EnergiaNegra	10045,2,2,{
+	end;
+OnTouch:
+	if(countitem(70054) < 1)
+	{
+		getitem 70054,1;
+		specialeffect2 467;
+		sc_start4 SC_ELEMENTALCHANGE,60000,4,Ele_Earth,1,0;
+	}
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#EnergiaNegra");
+	end;
+}
+
+2@thts,102,135,1	script	#EnergiaBlanca	10046,2,2,{
+	end;
+OnTouch:
+	if(countitem(70053) < 1)
+	{
+		getitem 70053,1;
+		specialeffect2 471;
+		sc_start4 SC_ELEMENTALCHANGE,60000,4,Ele_Undead,1,0;
+	}
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#EnergiaBlanca");
+	end;
+}
+
+2@thts,34,174,6	script	Chaos#TT1	4_M_CHAOS,{
+	cutin "h_chaos01",2;
+	if (is_party_leader() == false) {
+		mes "[Chaos]";
+		mes "Aún no sé que trata, pero estoy hablando con tu lider asique por favor espera ok?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	mes "[Chaos]";
+	mes "Me ha parecido ver algo flotando en el aire, deberíamos ir a investigar.";
+	npctalk "Chaos: Me ha parecido ver algo flotando en el aire, deberíamos ir a investigar.";
+	close2;
+	donpcevent instance_npcname("Chaos#TT11") + "::OnStart";
+	cutin "",255;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("Chaos#TT1");
+	end;
+}
+
+2@thts,34,174,6	script	Chaos#TT11	4_M_CHAOS,{
+	end;
+OnStart:
+	.@iris_name$ = instance_npcname("Iris#TT1");
+	hideoffnpc instance_npcname("Chaos#TT11");
+	hideonnpc instance_npcname("Chaos#TT1");
+	sleep 6000;
+	npctalk "Chaos: No~~ no puede ser, lo he vuelto a ver, estoy seguro que hay algo.";
+	sleep 4000;
+	npctalk "Chaos: Iris! Estoy seguro que acá hay un misterio oculto, vamos a investigar.";
+	hideonnpc instance_npcname("Chaos#TT11");
+	sleep 1000;
+	npctalk "Iris: Esperame Chaos, siempre lo mismo contigo!", .@iris_name$;
+	sleep 2000;
+	hideonnpc .@iris_name$;
+	donpcevent instance_npcname("#TTowercontrol2") + "::OnStart";
+	//donpcevent instance_npcname("#TTowerprize2") + "::OnStart";
+	
+	
+OnInstanceInit:
+	hideonnpc instance_npcname("Chaos#TT11");
+	end;
+}
+
+2@thts,34,168,6	script	Iris#TT1	4_F_IRIS,{
+	cutin "h_iris02",2;
+	mes "[Iris]";
+	mes "Chaos es un muy observador, aunque el sólo puede ver donde hay batallas...";
+	close2;
+	cutin "",255;
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Iris#TT1");
+	end;
+}
+
+2@thts,2,5,3	script	#TTowercontrol2	CLEAR_NPC,{
+	end;
+OnStart:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	areamonster 'map_name$,46,82,93,129,"Rubylit",3317, 1, instance_npcname("#TTowercontrol2") + "::OnMyMobDeadRuby";
+	areamonster 'map_name$,46,82,93,129,"Sapphilit",3318, 1, instance_npcname("#TTowercontrol2") + "::OnMyMobDeadSapp";
+	areamonster 'map_name$,46,82,93,129,"Topalit",3320, 1, instance_npcname("#TTowercontrol2") + "::OnMyMobDeadTopa";
+	areamonster 'map_name$,46,82,93,129,"Amalit",3321, 1, instance_npcname("#TTowercontrol2") + "::OnMyMobDeadAmal";
+	areamonster 'map_name$,46,82,93,129,"Emelit",3319, 1, instance_npcname("#TTowercontrol2") + "::OnMyMobDeadEmel";
+	end;
+	
+OnMyMobDeadRuby:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] "+strcharinfo(0)+" siente que le quema una ira por dentro.",bc_map,"0xffffff";
+	enablenpc instance_npcname("#EnergiaRoja");
+	goto OnWarpThanatos;
+	end;
+OnMyMobDeadSapp:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] "+strcharinfo(0)+" se ahoga en una profunda desesperación.",bc_map,"0xffffff";
+	enablenpc instance_npcname("#EnergiaAzul");
+	goto OnWarpThanatos;
+	end;
+OnMyMobDeadTopa:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] "+strcharinfo(0)+" siente que le caen todos los pesares.",bc_map,"0xffffff";
+	enablenpc instance_npcname("#EnergiaAmarilla");
+	goto OnWarpThanatos;
+	end;
+OnMyMobDeadAmal:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] "+strcharinfo(0)+" siente que lo perturban los vientos del agobio.",bc_map,"0xffffff";
+	enablenpc instance_npcname("#EnergiaNegra");
+	goto OnWarpThanatos;
+	end;
+OnMyMobDeadEmel:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] "+strcharinfo(0)+" siente una angustia que no lo deja estar de pie.",bc_map,"0xffffff";
+	enablenpc instance_npcname("#EnergiaBlanca");
+	goto OnWarpThanatos;
+	end;
+
+OnWarpThanatos:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	set .@aux, mobcount( 'map_name$,instance_npcname("#TTowercontrol2") +"::OnMyMobDeadRuby" ) + mobcount( 'map_name$,instance_npcname("#TTowercontrol2") +"::OnMyMobDeadSapp" ) + mobcount( 'map_name$,instance_npcname("#TTowercontrol2") +"::OnMyMobDeadTopa" ) + mobcount( 'map_name$,instance_npcname("#TTowercontrol2") +"::OnMyMobDeadAmal" ) + mobcount( 'map_name$,instance_npcname("#TTowercontrol2") +"::OnMyMobDeadEmel" );
+	
+	if ( .@aux < 1 )
+	{
+		mapannounce 'map_name$, "[Thanatos Tower] Un portal ha aparecido.",bc_map,"0xffffff";
+		enablenpc instance_npcname("#TTowerenter2");
+	}
+	stopnpctimer;
+	end;
+}
+
+2@thts,114,166,3	script	#TTowerenter2	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if(countitem(70050) < 1 || countitem(70051) < 1 || countitem(70052) < 1 || countitem(70053) < 1 || countitem(70054) < 1) goto nostone;
+	warp instance_mapname("1@thts"),31,224;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#TTowerenter2");
+	end;
+
+nostone:
+	mes "[Thanatos Tower]";
+	mes "Sin el poder de las piedras no sobrevivirás.";
+	close;
+}
+
+// Piso 3
+//============================================================
+1@thts,33,165,3	script	#TTowerenter3	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if(countitem(70050) < 1 || countitem(70051) < 1 || countitem(70052) < 1 || countitem(70053) < 1 || countitem(70054) < 1) goto nostone;
+	warp instance_mapname("3@thts"),25,43;
+	end;
+
+nostone:
+	mes "[Thanatos Tower]";
+	mes "Sin el poder de las piedras no sobrevivirás.";
+	close;
+}
+
+3@thts,69,106,4	script	Statue	111,{
+	mes "Por detras de la estatua puedes leer:";
+	mes "'Por el espíritu de antaño, los muros están cerrados";
+	mes "Pisos superiores son tabú para el extranjero";
+	mes "Por el orden de las estatuas encontrarás el camino";
+	mes "Que tal vez un día te traiga a mí.";
+	mes ".....Thanatos '";
+	close;
+}
+
+3@thts,1,1,0	script	#CharmStoneTT	844,{
+	end;
+OnInstanceInit:
+OnEnable:
+	initnpctimer;
+	end;
+OnTimer1000:
+	donpcevent instance_npcname("Cristal#tt_r1") + "::OnEnable";
+	donpcevent instance_npcname("Cristal#tt_g1") + "::OnEnable";
+	donpcevent instance_npcname("Cristal#tt_b1") + "::OnEnable";
+	donpcevent instance_npcname("Cristal#tt_y1") + "::OnEnable";
+	end;
+OnTimer60000:
+	donpcevent instance_npcname("Cristal#tt_r1") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_g1") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_b1") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_y1") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_r2") + "::OnEnable";
+	donpcevent instance_npcname("Cristal#tt_g2") + "::OnEnable";
+	donpcevent instance_npcname("Cristal#tt_b2") + "::OnEnable";
+	donpcevent instance_npcname("Cristal#tt_y2") + "::OnEnable";
+	end;
+OnTimer120000:
+	donpcevent instance_npcname("Cristal#tt_r2") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_g2") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_b2") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_y2") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_r3") + "::OnEnable";
+	donpcevent instance_npcname("Cristal#tt_g3") + "::OnEnable";
+	donpcevent instance_npcname("Cristal#tt_b3") + "::OnEnable";
+	donpcevent instance_npcname("Cristal#tt_y3") + "::OnEnable";
+	end;
+OnTimer180000:
+	donpcevent instance_npcname("Cristal#tt_r3") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_g3") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_b3") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_y3") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_r4") + "::OnEnable";
+	donpcevent instance_npcname("Cristal#tt_g4") + "::OnEnable";
+	donpcevent instance_npcname("Cristal#tt_b4") + "::OnEnable";
+	donpcevent instance_npcname("Cristal#tt_y4") + "::OnEnable";
+	end;
+OnTimer240000:
+	donpcevent instance_npcname("Cristal#tt_r4") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_g4") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_b4") + "::OnDisable";
+	donpcevent instance_npcname("Cristal#tt_y4") + "::OnDisable";
+	donpcevent instance_npcname("#CharmStoneTT") + "::OnEnable";
+	end;
+}
+
+3@thts,90,153,0	script	Cristal#tt_r1	844,{
+	if (countitem(70050) > 0) {
+		mes "La bola de cristal emite una luz muy misteriosa.";
+		next;
+		mes "Por el costado puedes ver que existe un patrón en el suelo.";
+		mes "Parece que faltara una pieza para ser incrustada...";
+		next;
+		mes "Insertas la Red Charm Stone y comienza a brillar rápidamente...";
+		mes "Sientes una increible desolación y depresión en el fondo de tu corazón...";
+		next;
+		mes "^4d4dffColocaste la Red Charm Stone que concentra el cruel destino y una profunda oscuridad.^000000";
+		delitem 70050,1; //Red Charm Stone
+		close;
+	}
+	mes "La bola de cristal está emitiendo una energía muy misteriosa.";
+	mes "Definitivamente hay algo extraño... ¿Qué podría ser?";
+	close;
+
+OnInstanceInit:
+OnDisable:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+OnEnable:
+	enablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+3@thts,90,62,0	duplicate(Cristal#tt_r1)	Cristal#tt_r2	844
+3@thts,49,59,0	duplicate(Cristal#tt_r1)	Cristal#tt_r3	844
+3@thts,49,144,0	duplicate(Cristal#tt_r1)	Cristal#tt_r4	844
+
+3@thts,49,153,0	script	Cristal#tt_y1	844,{
+	if (countitem(70051) > 0) {
+		mes "La bola de cristal emite una luz muy misteriosa.";
+		next;
+		mes "Por el costado puedes ver que existe un patrón en el suelo.";
+		mes "Parece que faltara una pieza para ser incrustada...";
+		next;
+		mes "Insertas la Yellow Charm Stone y comienza brillar rápidamente...";
+		mes "Tu corazón comienza a latir como si tuvieras el corazón roto.";
+		next;
+		mes "^4d4dffColocaste la Yellow Charm Stone que concentra el dolor y el misterio.^000000";
+		delitem 70051,1; //Yellow Charm Stone
+		close;
+	}
+	mes "La bola de cristal está emitiendo una energía muy misteriosa.";
+	mes "Definitivamente hay algo extraño... ¿Qué podría ser?";
+	close;
+
+OnInstanceInit:
+OnDisable:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+OnEnable:
+	enablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+3@thts,90,150,0	duplicate(Cristal#tt_y1)	Cristal#tt_y2	844
+3@thts,90,59,0	duplicate(Cristal#tt_y1)	Cristal#tt_y3	844
+3@thts,49,56,0	duplicate(Cristal#tt_y1)	Cristal#tt_y4	844
+
+3@thts,49,65,0	script	Cristal#tt_b1	844,{
+	if (countitem(70052) > 0) {
+		mes "La bola de cristal emite una luz muy misteriosa.";
+		next;
+		mes "Por el costado puedes ver que existe un patrón en el suelo.";
+		mes "Parece que faltara una pieza para ser incrustada...";
+		next;
+		mes "Insertas la Blue Charm Stone y comienza brillar rápidamente...";
+		mes "Los sollozos de alguien llegan a tus oídos mientras hueles sangre en el viento y de repente te enojas.";
+		next;
+		mes "^4d4dffColocaste la Blue Charm Stone que concentra el rencor y el poder.^000000";
+		delitem 70052,1; //Blue Charm Stone
+		close;
+	}
+	mes "La bola de cristal está emitiendo una energía muy misteriosa.";
+	mes "Definitivamente hay algo extraño... ¿Qué podría ser?";
+	close;
+
+OnInstanceInit:
+OnDisable:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+OnEnable:
+	enablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+3@thts,49,150,0	duplicate(Cristal#tt_b1)	Cristal#tt_b2	844
+3@thts,90,147,0	duplicate(Cristal#tt_b1)	Cristal#tt_b3	844
+3@thts,90,56,0	duplicate(Cristal#tt_b1)	Cristal#tt_b4	844
+
+3@thts,90,65,0	script	Cristal#tt_g1	844,{
+	if (countitem(70053) > 0) {
+		mes "La bola de cristal emite una luz muy misteriosa.";
+		next;
+		mes "Por el costado puedes ver que existe un patrón en el suelo.";
+		mes "Parece que faltara una pieza para ser incrustada...";
+		next;
+		mes "Insertas la Green Charm Stone y comienza brillar rápidamente...";
+		mes "Te empieza a doler la cabeza y te sientes preocupado y ansioso por algo.";
+		next;
+		mes "^4d4dffColocaste la Green Charm Stone que concentra un profundo sufrimiento.^000000";
+		delitem 70053,1; //Green Charm Stone
+		close;
+	}
+	mes "La bola de cristal está emitiendo una energía muy misteriosa.";
+	mes "Definitivamente hay algo extraño... ¿Qué podría ser?";
+	close;
+
+OnInstanceInit:
+OnDisable:
+	disablenpc instance_npcname(strnpcinfo(0));
+	end;
+OnEnable:
+	enablenpc instance_npcname(strnpcinfo(0));
+	end;
+}
+3@thts,49,62,0	duplicate(Cristal#tt_g1)	Cristal#tt_g2	844
+3@thts,49,147,0	duplicate(Cristal#tt_g1)	Cristal#tt_g3	844
+3@thts,90,144,0	duplicate(Cristal#tt_g1)	Cristal#tt_g4	844
+
+3@thts,114,43,3	script	#TTowerenter3_2	WARPNPC,2,2,{
+	end;
+OnTouch:
+	if(countitem(70050) == 1 || countitem(70051) == 1 || countitem(70052) == 1 || countitem(70053) == 1 || countitem(70054) < 1) goto nostone;
+	warp instance_mapname("1@thts"),180,224;
+	end;
+
+nostone:
+	mes "[Thanatos Tower]";
+	mes "Cargas con demasiada energía negativa.";
+	close;
+}
+
+// Piso 4
+//============================================================
+1@thts,183,165,3	script	#TTowerenter4	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp instance_mapname("4@thts"),16,94;
+	end;
+}
+
+4@thts,29,108,1	script	#EnergiaRojaF4	10042,2,2,{
+	end;
+OnTouch:
+	specialeffect2 470;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Fire,1,0;
+	end;
+}
+
+4@thts,42,127,1	script	#EnergiaAzulF4	10043,2,2,{
+	end;
+OnTouch:
+	specialeffect2 469;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Water,1,0;
+	end;
+}
+
+4@thts,30,149,1	script	#EnergiaAmarillaF4	10044,2,2,{
+	end;
+OnTouch:
+	specialeffect2 468;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Wind,1,0;
+	end;
+}
+
+4@thts,75,154,1	script	#EnergiaNegraF4	10045,2,2,{
+	end;
+OnTouch:
+	specialeffect2 467;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Earth,1,0;
+	end;
+}
+
+4@thts,17,105,3	script	Chaos#TT04	4_M_CHAOS,{
+	cutin "h_chaos01",2;
+	if (is_party_leader() == false) {
+		mes "[Chaos]";
+		mes "Aún no sé que trata, pero estoy hablando con tu lider asique por favor espera ok?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	.@account_id = getcharid(3);
+	.@player_name$ = strcharinfo(0);
+	mes "[Chaos]";
+	mes "Wow no esperaba encontrarlos acá";
+	npctalk "Chaos: Wow no esperaba encontrarlos acá";
+	next;
+	mes "[Chaos]";
+	mes "Según leí hay que encontrar las estatuas y hablarles en un orden específico.";
+	npctalk "Chaos: Según leí hay que encontrar las estatuas y hablarles en un orden específico.";
+	next;
+	mes "[Chaos]";
+	mes "Primero encuentra a Thalos y Mediane.";
+	npctalk "Chaos: Primero encuentra a Thalos y Mediane.";
+	next;
+	mes "[Chaos]";
+	mes "Vamos a buscarlas iris.";
+	npctalk "Chaos: Vamos a buscarlas iris.";
+	close2;
+	cutin "",255;
+	hideonnpc instance_npcname("Chaos#TT04");
+	npctalk "Iris: Ahah~ Vamos esto estará entretenido", .@iris_name$;
+	hideonnpc instance_npcname("Iris#TT04");
+	donpcevent instance_npcname("#TTowercontrol4") + "::OnStart";
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] Sientes que te quema una ira por dentro.",bc_map,"0xffffff";
+	end;
+}
+
+4@thts,19,102,8	script	Iris#TT04	4_F_IRIS,{
+	cutin "h_iris02",2;
+	mes "[Iris]";
+	mes "Aquí hace demasiado calor.";
+	close2;
+	cutin "",255;
+	end;
+}
+
+4@thts,1,5,3	script	#TTowercontrol4	CLEAR_NPC,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("#TTowercontrol4") + "::OnMyMobDead";
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	killmonster 'map_name$, .@event$;
+	areamonster 'map_name$,35,113,81,160,"Memory of Agony",20778, 1, .@event$;
+	'BOSS[1] = $@mobid[0];
+	hideoffnpc instance_npcname("#TTowerboss1");
+	//donpcevent instance_npcname("#TTowerboss1") + "::OnStart1";
+	initnpctimer;
+	end;
+
+OnTimer1111:
+	if (rand(1,15) < 10) 
+		donpcevent instance_npcname("#TTowerboss1") + "::OnStart1";
+	else
+		donpcevent instance_npcname("#TTowerboss1") + "::OnStart2";
+	end;
+
+OnTimer12000:
+	stopnpctimer;
+	initnpctimer;
+	end;
+
+OnMyMobDead:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] Encuentra las estatuas para poder avanzar",bc_map,"0xffffff";
+	donpcevent instance_npcname("#TTowerboss1") + "::OnEnd";
+	stopnpctimer;
+	hideonnpc instance_npcname("#TTowerboss1");
+	hideoffnpc instance_npcname("Thalos#TT");
+	hideoffnpc instance_npcname("Mediane#TT");
+	enablenpc instance_npcname("#TTowerenter5");
+	end;
+}
+
+4@thts,1,4,3	script	#TTowerboss1	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#TTowerboss1") +"::OnMyMobDead";
+	stopnpctimer;
+	end;
+OnStart1:
+	initnpctimer;
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss1") +"::OnMyMobDead" ) > 4)
+		killmonster 'map_name$, instance_npcname("#TTowerboss1") + "::OnMyMobDead";
+	getunitdata 'BOSS[1], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#meteor",2337,1,instance_npcname("#TTowerboss1") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#meteor",2337,1,instance_npcname("#TTowerboss1") + "::OnMyMobDead";
+	end;
+OnStart2:
+	initnpctimer;
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss1") +"::OnMyMobDead" ) > 8)
+		killmonster 'map_name$, instance_npcname("#TTowerboss1") + "::OnMyMobDead";
+	getunitdata 'BOSS[1], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#meteor",2337,1,instance_npcname("#TTowerboss1") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#meteor",2337,1,instance_npcname("#TTowerboss1") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#meteor",2337,1,instance_npcname("#TTowerboss1") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#meteor",2337,1,instance_npcname("#TTowerboss1") + "::OnMyMobDead";
+	end;
+OnTimer20000:
+	donpcevent instance_npcname("#TTowerboss1") + "::OnEnd";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#TTowerboss1");
+	end;
+}
+
+//4@thts :
+//(Thalos)(U,L)-->4@thts,17,158,4
+//(Mediane)(D,R)-->4@thts,84,99,4
+//Script:
+
+4@thts,17,158,4	script	Thalos#TT	111,{
+	if(TSQ_CHK == 1) goto done;
+	mes "[Thalos]";
+	mes "Ahora debes encontrar la segunda estatua.";
+	set TSQ_CHK,1;
+	close;
+done:
+	mes "[Thalos]";
+	mes "Anda a buscar la segunda estatua!";
+	close;
+	
+OnInstanceInit:
+	hideonnpc instance_npcname("Thalos#TT");
+	end;
+}
+
+4@thts,84,99,4	script	Mediane#TT	111,{
+	if(TSQ_CHK != 1) goto nook;
+	mes "[Mediane]";
+	mes "Ok, ahora te llevo al siguiente piso.";
+	close2;
+	set TSQ_CHK,0;
+	warp instance_mapname("1@thts"),14,74;
+	end;
+nook:
+	mes "[Mediane]";
+	mes "Deberías hablar con el espíritu de la primera estatua primero.";
+	close;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Mediane#TT");
+	end;
+}
+
+// Piso 5
+//============================================================
+1@thts,17,15,3	script	#TTowerenter5	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp instance_mapname("5@thts"),167,137;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#TTowerenter5");
+	end;
+}
+
+5@thts,141,150,1	script	#EnergiaRojaF5	10042,2,2,{
+	end;
+OnTouch:
+	specialeffect2 470;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Fire,1,0;
+	end;
+}
+
+5@thts,104,124,1	script	#EnergiaAzulF5	10043,2,2,{
+	end;
+OnTouch:
+	specialeffect2 469;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Water,1,0;
+	end;
+}
+
+5@thts,112,104,1	script	#EnergiaAmarillaF5	10044,2,2,{
+	end;
+OnTouch:
+	specialeffect2 468;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Wind,1,0;
+	end;
+}
+
+5@thts,157,107,1	script	#EnergiaNegraF5	10045,2,2,{
+	end;
+OnTouch:
+	specialeffect2 467;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Earth,1,0;
+	end;
+}
+
+5@thts,161,142,3	script	Chaos#TT05	4_M_CHAOS,{
+	cutin "h_chaos01",2;
+	if (is_party_leader() == false) {
+		mes "[Chaos]";
+		mes "Aún no sé que trata, pero estoy hablando con tu lider asique por favor espera ok?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	.@account_id = getcharid(3);
+	.@player_name$ = strcharinfo(0);
+	mes "[Chaos]";
+	mes "Nos ha costado mucho encontrar las dos estatuas.";
+	npctalk "Chaos: Nos ha costado mucho encontrar las dos estatuas.";
+	next;
+	mes "[Chaos]";
+	mes "Ahora parece que tenemos que encontrar a Melkor, Zebrus y Veriaelle.";
+	npctalk "Chaos: Ahora parece que tenemos que encontrar a Melkor, Zebrus y Veriaelle.";
+	next;
+	mes "[Chaos]";
+	mes "Iremos a escondidas nosotros primero.";
+	npctalk "Chaos: Iremos a escondidas nosotros primero.";
+	next;
+	mes "[Chaos]";
+	mes "Vamos a buscarlas iris.";
+	npctalk "Chaos: Vamos a buscarlas iris.";
+	close2;
+	cutin "",255;
+	hideonnpc instance_npcname("Chaos#TT05");
+	npctalk "Iris: Ahah~ Vamos en silencio", .@iris_name$;
+	hideonnpc instance_npcname("Iris#TT05");
+	donpcevent instance_npcname("#TTowercontrol5") + "::OnStart";
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] Te ahogas en una profunda desesperación.",bc_map,"0xffffff";
+	end;
+}
+
+5@thts,158,137,8	script	Iris#TT05	4_F_IRIS,{
+	cutin "h_iris02",2;
+	mes "[Iris]";
+	mes "Aquí está demasiado húmedo.";
+	close2;
+	cutin "",255;
+	end;
+}
+
+5@thts,1,5,3	script	#TTowercontrol5	CLEAR_NPC,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("#TTowercontrol5") + "::OnMyMobDead";
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	killmonster 'map_name$, .@event$;
+	areamonster 'map_name$,99,113,165,165,"Memory of Sadness",20777, 1, .@event$;
+	'BOSS[2] = $@mobid[0];
+	hideoffnpc instance_npcname("#TTowerboss2");
+	//donpcevent instance_npcname("#TTowerboss2") + "::OnStart";
+	initnpctimer;
+	end;
+	
+OnTimer1111:
+	if (rand(1,15) < 10) 
+		donpcevent instance_npcname("#TTowerboss2") + "::OnStart1";
+	else
+		donpcevent instance_npcname("#TTowerboss2") + "::OnStart2";
+	end;
+
+OnTimer12000:
+	stopnpctimer;
+	initnpctimer;
+	end;
+
+OnMyMobDead:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] Encuentra las estatuas para poder avanzar",bc_map,"0xffffff";
+	donpcevent instance_npcname("#TTowerboss2") + "::OnEnd";
+	stopnpctimer;
+	hideonnpc instance_npcname("#TTowerboss2");
+	hideoffnpc instance_npcname("Melkor#TT");
+	hideoffnpc instance_npcname("Zebrus#TT");
+	hideoffnpc instance_npcname("Veriaelle#TT");
+	enablenpc instance_npcname("#TTowerenter6");
+	end;
+}
+
+
+5@thts,1,4,3	script	#TTowerboss2	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#TTowerboss2") +"::OnMyMobDead";
+	stopnpctimer;
+	end;
+OnStart1:
+	initnpctimer;
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss2") +"::OnMyMobDead" ) > 4)
+		killmonster 'map_name$, instance_npcname("#TTowerboss2") + "::OnMyMobDead";
+	getunitdata 'BOSS[2], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#storm",2343,1,instance_npcname("#TTowerboss2") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#storm",2343,1,instance_npcname("#TTowerboss2") + "::OnMyMobDead";
+	end;
+OnStart2:
+	initnpctimer;
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss2") +"::OnMyMobDead" ) > 8)
+		killmonster 'map_name$, instance_npcname("#TTowerboss2") + "::OnMyMobDead";
+	getunitdata 'BOSS[2], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#storm",2343,1,instance_npcname("#TTowerboss2") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#storm",2343,1,instance_npcname("#TTowerboss2") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#storm",2343,1,instance_npcname("#TTowerboss2") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#storm",2343,1,instance_npcname("#TTowerboss2") + "::OnMyMobDead";
+	end;
+OnTimer20000:
+	donpcevent instance_npcname("#TTowerboss2") + "::OnEnd";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#TTowerboss2");
+	end;
+}
+
+//5@thts :
+//(Melkor)(U)-->5@thts,130,159,4
+//(Zebrus)(D,R)-->5@thts,160,98,4
+//(Veriaelle)(D,L)-->5@thts,99,97,4
+//Script:
+
+5@thts,130,159,4	script	Melkor#TT	111,{
+	if(TSQ_CHK == 1) goto done;
+	mes "[Melkor]";
+	mes "Debes encontrar los otros espíritus.";
+	mes "Somos tres.";
+	set TSQ_CHK,1;
+	close;
+done:
+	mes "[Melkor]";
+	mes "Anda y busca los otros espíritus, están en este piso.";
+	close;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Melkor#TT");
+	end;
+}
+
+5@thts,160,98,4	script	Zebrus#TT	111,{
+	if(TSQ_CHK != 1) goto nook;
+	mes "[Zebrus]";
+	mes "Sigue buscando, aún queda un espíritu.";
+	set TSQ_CHK,2;
+	close;
+nook:
+	mes "[Zebrus]";
+	mes "Parece que estas perdido, busca y habla con Melkor.";
+	set TSQ_CHK,0;
+	close;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Zebrus#TT");
+	end;
+}
+
+5@thts,99,97,4	script	Veriaelle#TT	111,{
+	if(TSQ_CHK != 2) goto nook;
+	mes "[Veriaelle]";
+	mes "Ok, te llevo al siguiente piso.";
+	close2;
+	set TSQ_CHK,0;
+	warp instance_mapname("1@thts"),181,73;
+	end;
+nook:
+	mes "[Veriaelle]";
+	mes "Veo que estas perdido, ve y busca a Melkor.";
+	set TSQ_CHK,0;
+	close;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Veriaelle#TT");
+	end;
+}
+
+// Piso 6
+//============================================================
+1@thts,183,15,3	script	#TTowerenter6	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp instance_mapname("6@thts"),89,36;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#TTowerenter6");
+	end;
+}
+
+6@thts,49,62,1	script	#EnergiaRojaF6	10042,2,2,{
+	end;
+OnTouch:
+	specialeffect2 470;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Fire,1,0;
+	end;
+}
+
+6@thts,74,78,1	script	#EnergiaAzulF6	10043,2,2,{
+	end;
+OnTouch:
+	specialeffect2 469;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Water,1,0;
+	end;
+}
+
+6@thts,20,75,1	script	#EnergiaAmarillaF6	10044,2,2,{
+	end;
+OnTouch:
+	specialeffect2 468;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Wind,1,0;
+	end;
+}
+
+6@thts,24,34,1	script	#EnergiaNegraF6	10045,2,2,{
+	end;
+OnTouch:
+	specialeffect2 467;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Earth,1,0;
+	end;
+}
+
+6@thts,85,40,3	script	Chaos#TT06	4_M_CHAOS,{
+	cutin "h_chaos01",2;
+	if (is_party_leader() == false) {
+		mes "[Chaos]";
+		mes "Aún no sé que trata, pero estoy hablando con tu lider asique por favor espera ok?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	.@account_id = getcharid(3);
+	.@player_name$ = strcharinfo(0);
+	mes "[Chaos]";
+	mes "Esto parece un laberinto.";
+	npctalk "Chaos: Esto parece un laberinto.";
+	next;
+	mes "[Chaos]";
+	mes "No alcanzamos a leer los nombres para este piso. Sólo encontramos un papel.";
+	npctalk "Chaos: No alcanzamos a leer los nombres para este piso. Sólo encontramos un papel.";
+	next;
+	mes "[Chaos]";
+	mes "El papel tenía 4 letras: 'TKMS'.";
+	npctalk "Chaos: El papel tenía 4 letras: 'TKMS'.";
+	next;
+	mes "[Chaos]";
+	mes "Vamos a investigar.";
+	npctalk "Chaos: Vamos a investigar.";
+	close2;
+	cutin "",255;
+	hideonnpc instance_npcname("Chaos#TT06");
+	npctalk "Iris: Esto se ve muy peligroso.", .@iris_name$;
+	hideonnpc instance_npcname("Iris#TT06");
+	donpcevent instance_npcname("#TTowercontrol6") + "::OnStart";
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] Sientes que te perturban los vientos del agobio.",bc_map,"0xffffff";
+	end;
+}
+
+6@thts,83,38,8	script	Iris#TT06	4_F_IRIS,{
+	cutin "h_iris02",2;
+	mes "[Iris]";
+	mes "Este viento de seguro que me despeina.";
+	close2;
+	cutin "",255;
+	end;
+}
+
+6@thts,1,1,3	script	#TTowercontrol6	CLEAR_NPC,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("#TTowercontrol6") + "::OnMyMobDead";
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	killmonster 'map_name$, .@event$;
+	areamonster 'map_name$,27,32,82,83,"Memory of Despair",20776, 1, .@event$;
+	'BOSS[3] = $@mobid[0];
+	hideoffnpc instance_npcname("#TTowerboss3");
+	//donpcevent instance_npcname("#TTowerboss3") + "::OnStart";
+	initnpctimer;
+	end;
+	
+OnTimer1111:
+	if (rand(1,15) < 13) 
+		donpcevent instance_npcname("#TTowerboss3") + "::OnStart1";
+	else
+		donpcevent instance_npcname("#TTowerboss3") + "::OnStart2";
+	end;
+
+OnTimer12000:
+	stopnpctimer;
+	initnpctimer;
+	end;
+	
+OnMyMobDead:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] Encuentra las estatuas para poder avanzar",bc_map,"0xffffff";
+	donpcevent instance_npcname("#TTowerboss3") + "::OnEnd";
+	stopnpctimer;
+	hideonnpc instance_npcname("#TTowerboss3");
+	hideoffnpc instance_npcname("Throtre#TT");
+	hideoffnpc instance_npcname("Klermaz#TT");
+	hideoffnpc instance_npcname("Mihane#TT");
+	hideoffnpc instance_npcname("Seranes#TT");
+	enablenpc instance_npcname("#TTowerenter7");
+	end;
+}
+
+6@thts,1,4,3	script	#TTowerboss3	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#TTowerboss3") +"::OnMyMobDead";
+	stopnpctimer;
+	end;
+OnStart1:
+	initnpctimer;
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss3") +"::OnMyMobDead" ) > 4)
+		killmonster 'map_name$, instance_npcname("#TTowerboss3") + "::OnMyMobDead";
+	getunitdata 'BOSS[3], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#Wind",2915,1,instance_npcname("#TTowerboss3") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#Wind",2915,1,instance_npcname("#TTowerboss3") + "::OnMyMobDead";
+	end;
+OnStart2:
+	initnpctimer;
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss3") +"::OnMyMobDead" ) > 8)
+		killmonster 'map_name$, instance_npcname("#TTowerboss3") + "::OnMyMobDead";
+	getunitdata 'BOSS[3], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#Wind",2915,1,instance_npcname("#TTowerboss3") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#Wind",2915,1,instance_npcname("#TTowerboss3") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#Wind",2915,1,instance_npcname("#TTowerboss3") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#Wind",2915,1,instance_npcname("#TTowerboss3") + "::OnMyMobDead";
+	end;
+OnTimer20000:
+	donpcevent instance_npcname("#TTowerboss3") + "::OnEnd";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#TTowerboss3");
+	end;
+}
+
+//6@thts :
+//(Throtre)(U,L)-->6@thts,16,85,4
+//(Klermaz)(D,R)-->6@thts,85,16,4
+//(Mihane)(D,L)-->6@thts,16,16,4
+//(Seranes)(U,R)-->6@thts,85,85,4
+//Script:
+
+6@thts,16,85,4	script	Throtre#TT	111,{
+	if(TSQ_CHK == 1) goto done;
+	mes "[Throtre]";
+	mes "Tienes mi autorización para avanzar al siguiente piso";
+	mes "Como sea, debes mostrar tu fortaleza a los demás espíritus.";
+	set TSQ_CHK,1;
+	close;
+done:
+	mes "[Throtre]";
+	mes "Anda a buscarlos, ellos no pueden abandonar este piso.";
+	close;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Throtre#TT");
+	end;
+}
+
+6@thts,85,16,4	script	Klermaz#TT	111,{
+	if(TSQ_CHK != 1) goto nook;
+	mes "[Klermaz]";
+	mes "Veo que Throtre te ha dejado pasar.";
+	mes "Bueno tienes mi bendición, ahora sólo te faltan 2 espíritus.";
+	set TSQ_CHK,2;
+	close;
+nook:
+	mes "[Klermaz]";
+	mes "Pareces perdido, deberías hablar con Throtre.";
+	set TSQ_CHK,0;
+	close;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Klermaz#TT");
+	end;
+}
+
+6@thts,16,16,4	script	Mihane#TT	111,{
+	if(TSQ_CHK != 2) goto nook;
+	mes "[Mihane]";
+	mes "Mantente así, sólo te queda un espíritu.";
+	set TSQ_CHK,3;
+	close;
+nook:
+	mes "[Mihane]";
+	mes "Lo siento, deberás volver desde el principio.";
+	set TSQ_CHK,0;
+	close;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Mihane#TT");
+	end;
+}
+
+6@thts,85,85,4	script	Seranes#TT	111,{
+	if(TSQ_CHK != 3 ) goto nook;
+	mes "[Seranes]";
+	mes "Perfecto, parece que está todo en orden,";
+	mes "te llevaré al siguiente piso.";
+	close2;
+	set TSQ_CHK,0;
+	warp instance_mapname("1@thts"),72,288;
+	end;
+nook:
+	mes "[Seranes]";
+	mes "No seguiste el orden correcto, deberás comenzar nuevamente.";
+	set TSQ_CHK,0;
+	close;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Seranes#TT");
+	end;
+}
+
+// Piso 7
+//============================================================
+
+1@thts,170,287,3	script	#TTowerenter7	WARPNPC,2,2,{
+	end;
+OnTouch:
+	warp instance_mapname("7@thts"),127,14;
+	end;
+OnInstanceInit:
+	disablenpc instance_npcname("#TTowerenter7");
+	end;
+}
+
+7@thts,154,31,1	script	#EnergiaRojaF7	10042,2,2,{
+	end;
+OnTouch:
+	specialeffect2 470;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Fire,1,0;
+	end;
+}
+
+7@thts,157,80,1	script	#EnergiaAzulF7	10043,2,2,{
+	end;
+OnTouch:
+	specialeffect2 469;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Water,1,0;
+	end;
+}
+
+7@thts,105,77,1	script	#EnergiaAmarillaF7	10044,2,2,{
+	end;
+OnTouch:
+	specialeffect2 468;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Wind,1,0;
+	end;
+}
+
+7@thts,99,28,1	script	#EnergiaNegraF7	10045,2,2,{
+	end;
+OnTouch:
+	specialeffect2 467;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Earth,1,0;
+	end;
+}
+
+7@thts,115,14,8	script	Chaos#TT07	4_M_CHAOS,{
+	cutin "h_chaos01",2;
+	if (is_party_leader() == false) {
+		mes "[Chaos]";
+		mes "Aún no sé que trata, pero estoy hablando con tu lider asique por favor espera ok?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	.@account_id = getcharid(3);
+	.@player_name$ = strcharinfo(0);
+	mes "[Chaos]";
+	mes "Alcanzamos a matar a unos ángeles camino para acá.";
+	npctalk "Chaos: Alcanzamos a matar a unos ángeles camino para acá.";
+	next;
+	mes "[Iris]";
+	mes "Que estás diciendo si eran unos demonios.";
+	npctalk "Iris: Que estás diciendo si eran unos demonios.", .@iris_name$;
+	next;
+	mes "[Chaos]";
+	mes "Ángeles demonios, da lo mismo lo importante es que están muertos.";
+	npctalk "Chaos: Ángeles demonios, da lo mismo lo importante es que están muertos.";
+	next;
+	mes "[Chaos]";
+	mes "Pero aún mejor es que nos dijeron un conjuro Nox Vox Hox Dox Sox.";
+	npctalk "Chaos: Pero aún mejor es que nos dijeron un conjuro Nox Vox Hox Dox Sox.";
+	next;
+	mes "[Chaos]";
+	mes "Vamos por ellos ahora.";
+	npctalk "Chaos: Vamos por ellos ahora.";
+	close2;
+	cutin "",255;
+	hideonnpc instance_npcname("Chaos#TT07");
+	npctalk "Iris: Pero Chaos no me dejes atrás!", .@iris_name$;
+	hideonnpc instance_npcname("Iris#TT07");
+	donpcevent instance_npcname("#TTowercontrol7") + "::OnStart";
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] Sientes una angustia que no te deja estar de pie.",bc_map,"0xffffff";
+	end;
+}
+
+7@thts,115,18,4	script	Iris#TT07	4_F_IRIS,{
+	cutin "h_iris02",2;
+	mes "[Iris]";
+	mes "Siento que el piso se mueve.";
+	close2;
+	cutin "",255;
+	end;
+}
+
+7@thts,1,5,3	script	#TTowercontrol7	CLEAR_NPC,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("#TTowercontrol7") + "::OnMyMobDead";
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	killmonster 'map_name$, .@event$;
+	areamonster 'map_name$,105,57,159,80,"Memory of Anger",20775, 1, .@event$;
+	'BOSS[4] = $@mobid[0];
+	hideoffnpc instance_npcname("#TTowerboss4");
+	//donpcevent instance_npcname("#TTowerboss4") + "::OnStart";
+	initnpctimer;
+	end;
+	
+OnTimer1111:
+	if (rand(1,15) < 10) 
+		donpcevent instance_npcname("#TTowerboss4") + "::OnStart1";
+	else
+		donpcevent instance_npcname("#TTowerboss4") + "::OnStart2";
+	end;
+
+OnTimer12000:
+	stopnpctimer;
+	initnpctimer;
+	end;
+	
+OnMyMobDead:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] Encuentra las estatuas para poder avanzar",bc_map,"0xffffff";
+	donpcevent instance_npcname("#TTowerboss4") + "::OnEnd";
+	stopnpctimer;
+	hideonnpc instance_npcname("#TTowerboss4");
+	hideoffnpc instance_npcname("Nox#TT");
+	hideoffnpc instance_npcname("Vox#TT");
+	hideoffnpc instance_npcname("Hox#TT");
+	hideoffnpc instance_npcname("Dox#TT");
+	hideoffnpc instance_npcname("Sox#TT");
+	end;
+}
+
+7@thts,1,4,3	script	#TTowerboss4	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#TTowerboss4") +"::OnMyMobDead";
+	stopnpctimer;
+	end;
+OnStart1:
+	initnpctimer;
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss4") +"::OnMyMobDead" ) > 2)
+		killmonster 'map_name$, instance_npcname("#TTowerboss4") + "::OnMyMobDead";
+	getunitdata 'BOSS[4], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#Earth",3038,1,instance_npcname("#TTowerboss4") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#Earth",3038,1,instance_npcname("#TTowerboss4") + "::OnMyMobDead";
+	end;
+OnStart2:
+	initnpctimer;
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss4") +"::OnMyMobDead" ) > 4)
+		killmonster 'map_name$, instance_npcname("#TTowerboss4") + "::OnMyMobDead";
+	getunitdata 'BOSS[4], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#Earth",3038,1,instance_npcname("#TTowerboss4") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#Earth",3038,1,instance_npcname("#TTowerboss4") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#Earth",3038,1,instance_npcname("#TTowerboss4") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#Earth",3038,1,instance_npcname("#TTowerboss4") + "::OnMyMobDead";
+	end;
+OnTimer20000:
+	donpcevent instance_npcname("#TTowerboss4") + "::OnEnd";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#TTowerboss4");
+	end;
+}
+
+//7@thts ( M: Middle):
+//(Nox)(D,L)-->7@thts,103,18,4
+//(Vox)(R)-->7@thts,162,58,4
+//(Hox)(L)-->7@thts,96,57,4
+//(Dox)(D,R)-->7@thts,153,17,4
+//(Sox)(U)-->7@thts,128,88,4
+//Script:
+
+7@thts,103,18,4	script	Nox#TT	111,{
+	if(TSQ_CHK == 1 ) goto done;
+	mes "[Nox]";
+	mes "Bien, quedan 4 espíritus.";
+	set TSQ_CHK,1;
+	close;
+done:
+	mes "[Nox]";
+	mes "Encuentra ahora al resto, no pueden abandonar el piso.";
+	close;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Nox#TT");
+	end;
+}
+
+7@thts,162,58,4	script	Vox#TT	111,{
+	if(TSQ_CHK != 1 ) goto nook;
+	mes "[Vox]";
+	mes "Bien hecho! Ahora sólo te quedan 3 espíritus!";
+	set TSQ_CHK,2;
+	close;
+nook:
+	mes "[Vox]";
+	mes "Lo siento, vuelve a hablar con Nox.";
+	set TSQ_CHK,0;
+	close;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Vox#TT");
+	end;
+}
+
+7@thts,96,57,4	script	Hox#TT	111,{
+	if(TSQ_CHK != 2 ) goto nook;
+	mes "[Hox]";
+	mes "Vas bien, sólo quedan 2 espíritus!";
+	set TSQ_CHK,3;
+	close;
+nook:
+	mes "[Hox]";
+	mes "Lo siento, deberás comenzar nuevamente.";
+	set TSQ_CHK,0;
+	close;
+	
+OnInstanceInit:
+	hideonnpc instance_npcname("Hox#TT");
+	end;
+}
+
+7@thts,153,17,4	script	Dox#TT	111,{
+	if(TSQ_CHK != 3 ) goto nook;
+	mes "[Dox]";
+	mes "Perfecto, sólo queda 1 espíritu.";
+	set TSQ_CHK,4;
+	close;
+nook:
+	mes "[Dox]";
+	mes "Lo siento, vuelve y habla con Nox.";
+	set TSQ_CHK,0;
+	close;
+	
+OnInstanceInit:
+	hideonnpc instance_npcname("Dox#TT");
+	end;
+}
+
+7@thts,128,88,4	script	Sox#TT	111,{
+	if(TSQ_CHK != 4 ) goto nook;
+	mes "[Sox]";
+	mes "Has pasado la prueba completamente.";
+	mes "Tendrás que darme la Black Charm Stone.";
+	next;
+	if(countitem(70054) < 1) goto nostone;
+	delitem 70054,1;
+	mes "[Sox]";
+	mes "Te llevaré ahora al último piso.";
+	mes "buena suerte con todo.";
+	close2;
+	set TSQ_CHK,0;
+	warp instance_mapname("8@thts"), 135, 140;
+	end;
+
+nostone:
+	mes "[Sox]";
+	mes "Oh, veo que tienes un problema no posees la Black Charm Stone.";
+	close;
+
+nook:
+	mes "[Sox]";
+	mes "Lo siento, vuelve y habla con Nox.";
+	set TSQ_CHK,0;
+	close;
+	
+OnInstanceInit:
+	hideonnpc instance_npcname("Sox#TT");
+	end;
+}
+
+// Piso 8
+//============================================================
+
+8@thts,131,133,8	script	Chaos#TT08	4_M_CHAOS,{
+	cutin "h_chaos01",2;
+	if (is_party_leader() == false) {
+		mes "[Chaos]";
+		mes "Aún no sé que trata, pero estoy hablando con tu lider asique por favor espera ok?";
+		close2;
+		cutin "",255;
+		end;
+	}
+	.@account_id = getcharid(3);
+	.@player_name$ = strcharinfo(0);
+	mes "[Chaos]";
+	mes "WoW! que hermosa vista desde acá.";
+	npctalk "Chaos: WoW! que hermosa vista desde acá.";
+	next;
+	mes "[Iris]";
+	mes "Esta briza es de otro mundo.";
+	npctalk "Iris: Esta briza es de otro mundo.", .@iris_name$;
+	next;
+	mes "[Chaos]";
+	mes "Vamos a explorar que hay por acá, se ve demasiado vacío.";
+	npctalk "Chaos: Vamos a explorar que hay por acá, se ve demasiado vacío.";
+	next;
+	mes "[Chaos]";
+	mes "Cualquier cosa les avisaremos.";
+	npctalk "Chaos: Cualquier cosa les avisaremos.";
+	next;
+	mes "[Chaos]";
+	mes "Vamos por abajo primero.";
+	npctalk "Chaos: Vamos por abajo primero.";
+	close2;
+	cutin "",255;
+	hideonnpc instance_npcname("Chaos#TT08");
+	npctalk "Iris: Vamos a revisar!", .@iris_name$;
+	hideonnpc instance_npcname("Iris#TT08");
+	donpcevent instance_npcname("#TTowercontrol8") + "::OnStart";
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	mapannounce 'map_name$, "[Thanatos Tower] Todos los pesares caen sobre ustedes.",bc_map,"0xffffff";
+	end;
+}
+
+8@thts,140,133,4	script	Iris#TT08	4_F_IRIS,{
+	cutin "h_iris02",2;
+	mes "[Iris]";
+	mes "Desde aquí se puede ver hasta la ciudad de Hugel.";
+	close2;
+	cutin "",255;
+	end;
+}
+
+8@thts,126,149,1	script	#EnergiaRojaF8	10042,2,2,{
+	end;
+OnTouch:
+	specialeffect2 470;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Fire,1,0;
+	end;
+}
+
+8@thts,145,149,1	script	#EnergiaAzulF8	10043,2,2,{
+	end;
+OnTouch:
+	specialeffect2 469;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Water,1,0;
+	end;
+}
+
+8@thts,145,130,1	script	#EnergiaAmarillaF8	10044,2,2,{
+	end;
+OnTouch:
+	specialeffect2 468;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Wind,1,0;
+	end;
+}
+
+8@thts,126,130,1	script	#EnergiaNegraF8	10045,2,2,{
+	end;
+OnTouch:
+	specialeffect2 467;
+	sc_start4 SC_ELEMENTALCHANGE,120000,4,Ele_Earth,1,0;
+	end;
+}
+
+8@thts,1,1,3	script	#TTowercontrol8	CLEAR_NPC,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("#TTowercontrol8") + "::OnMyMobDead";
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	killmonster 'map_name$, .@event$;
+	areamonster 'map_name$,131,202,150,222,"Memory of Thanatos",20785, 1, .@event$;
+	'BOSS[5] = $@mobid[0];
+	hideoffnpc instance_npcname("#TTowerboss5");
+	initnpctimer;
+	end;
+OnTimer1000:
+	switch(rand(1,4))
+	{
+		case 1:
+			donpcevent instance_npcname("#TTowerboss5") + "::OnStartFire";
+			setunitdata 'BOSS[5], UMOB_ELETYPE, Ele_Fire;
+			break;
+		case 2:
+			donpcevent instance_npcname("#TTowerboss5") + "::OnStartEarth";
+			setunitdata 'BOSS[5], UMOB_ELETYPE, Ele_Earth;
+			break;
+		case 3:
+			donpcevent instance_npcname("#TTowerboss5") + "::OnStartWind";
+			setunitdata 'BOSS[5], UMOB_ELETYPE, Ele_Wind;
+			break;
+		case 4:
+			donpcevent instance_npcname("#TTowerboss5") + "::OnStartWater";
+			setunitdata 'BOSS[5], UMOB_ELETYPE, Ele_Water;
+			break;
+	}
+	end;
+
+OnTimer70000:
+	stopnpctimer;
+	killmonster 'map_name$, instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	initnpctimer;
+	end;
+	
+OnMyMobDead:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	'120903_str_TTower$ = strcharinfo(1);
+	'120903_str_TTowerDif = instance_getdifficulty(instance_id(IM_PARTY));
+	mapannounce 'map_name$, "[Thanatos Tower] Ya puedes volver a tu tiempo.",bc_map,"0xffffff";
+	donpcevent instance_npcname("#TTowerboss5") + "::OnEnd";
+	stopnpctimer;
+	hideonnpc instance_npcname("#TTowerboss5");
+	donpcevent instance_npcname("#globaltimer50") + "::OnT_s2";
+	hideoffnpc instance_npcname("Dimensional Device#TT");
+	end;
+}
+
+8@thts,1,4,3	script	#TTowerboss5	CLEAR_NPC,{
+	end;
+OnEnd:
+	killmonster 'map_name$, instance_npcname("#TTowerboss5") +"::OnMyMobDead";
+	stopnpctimer;
+	end;
+OnStartFire:
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss5") +"::OnMyMobDead" ) > 8)
+		killmonster 'map_name$, instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	getunitdata 'BOSS[5], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#meteor",2337,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#meteor",2337,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#meteor",2337,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#meteor",2337,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	sleep 30000;
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss5") +"::OnMyMobDead" ) > 8)
+		killmonster 'map_name$, instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	getunitdata 'BOSS[5], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#meteor",2337,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#meteor",2337,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#meteor",2337,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#meteor",2337,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	end;
+OnStartEarth:
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss5") +"::OnMyMobDead" ) > 8)
+		killmonster 'map_name$, instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	getunitdata 'BOSS[5], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#Earth",3038,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#Earth",3038,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#Earth",3038,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#Earth",3038,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	sleep 30000;
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss5") +"::OnMyMobDead" ) > 8)
+		killmonster 'map_name$, instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	getunitdata 'BOSS[5], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#Earth",3038,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#Earth",3038,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#Earth",3038,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#Earth",3038,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	end;
+OnStartWind:
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss5") +"::OnMyMobDead" ) > 8)
+		killmonster 'map_name$, instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	getunitdata 'BOSS[5], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#Wind",2915,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#Wind",2915,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#Wind",2915,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#Wind",2915,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	sleep 30000;
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss5") +"::OnMyMobDead" ) > 8)
+		killmonster 'map_name$, instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	getunitdata 'BOSS[5], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#Wind",2915,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#Wind",2915,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#Wind",2915,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#Wind",2915,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	end;
+OnStartWater:
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss5") +"::OnMyMobDead" ) > 8)
+		killmonster 'map_name$, instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	getunitdata 'BOSS[5], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#storm",2343,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#storm",2343,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#storm",2343,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#storm",2343,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	sleep 30000;
+	if (mobcount( 'map_name$,instance_npcname("#TTowerboss5") +"::OnMyMobDead" ) > 8)
+		killmonster 'map_name$, instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	getunitdata 'BOSS[5], .@arr;
+	.@mobx = .@arr[UMOB_X];
+	.@moby = .@arr[UMOB_Y];
+	monster 'map_name$,.@mobx-4,.@moby,"#storm",2343,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby+4,"#storm",2343,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx+4,.@moby,"#storm",2343,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	monster 'map_name$,.@mobx,.@moby-4,"#storm",2343,1,instance_npcname("#TTowerboss5") + "::OnMyMobDead";
+	end;
+OnMyMobDead:
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#TTowerboss5");
+	end;
+}
+
+8@thts,135,139,4	script	Dimensional Device#TT	PORTAL,{
+	mes "[Dimensional Device]";
+	mes "Tu tiempo acá ha finalizado. Puedes seguir mirando los alrededores o volver. ¿Qué deseas hacer?";
+	next;
+	if (select("Dar unas vueltas:Volver") == 2)
+		warp "instance",48,43;
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Dimensional Device#TT");
+	end;
+}
+
+// Instance Timer :: in_ttowertimer
+//============================================================
+8@thts,3,1,5	script	#globaltimer50	CLEAR_NPC,{
+	end;
+OnT_s:
+	initnpctimer;
+	end;
+OnT_s2:
+	.@TTower_timer = getd("$120719_num_TTower"+'120903_str_TTowerDif);
+	if (!.@TTower_timer)
+		.@TTower_timer = 14400;
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	.@TTower_member = getmapusers('map_name$);
+	.@winner_name$ = '120903_str_TTower$;
+	.@current_timer = getnpctimer(0) / 1000;
+	if (.@current_timer < 1)
+		end;
+	.@time_m = .@current_timer / 60;
+	.@time_s = .@current_timer % 60;
+	if (.@current_timer < 60)
+		.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "Second" );
+	else
+		.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "Minute" ) + " " + callfunc( "F_InsertPlural", .@time_s, "Second" );
+	if (.@current_timer >= .@TTower_timer)
+		mapannounce 'map_name$, "El tiempo de " + .@time_txt$ + " ha sido guardado. Pero no ha roto la marca.",bc_map,"0xffff33";
+	else {
+		announce "La party "+.@winner_name$ + " con " + .@TTower_member + " miembro(s) han mejorado el tiempo en Thanatos Tower (" + .@time_txt$ + ").",bc_all,"0xffff33",FW_NORMAL,15;
+		
+		setd "$120719_str_TTower"+'120903_str_TTowerDif+"$" , .@winner_name$;
+		setd "$120719_num_TTower"+'120903_str_TTowerDif , .@current_timer;
+		setd "$120903_num_TTower"+'120903_str_TTowerDif , .@EndlessTower_member;
+	}
+	end;
+
+OnTimer3600000:
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#globaltimer50");
+	end;
+}
+/*
+20773	1701	Mistress of Empathizer
+20774	1700	Happy Giver
+20779	1699	Void Ancient Mimic
+20780	1698	Book of Death
+20781	1377	Eldest
+20782	1320	Crow Duke
+20783	1295	Crow Baron
+20844	1702	Pray Giver
+20845	1703	Smile Giver
+20608			Plasma Arch
+*/
+//==================================================
+// 1@thts - Thanatos Tower F3
+//==================================================
+1@thts,1,5,3	script	#ThanatosMonsterF1	CLEAR_NPC,{
+	end;
+OnInstanceInit:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	//.@mob_c = getmapusers('map_name$) + 1;
+	.@event$ = instance_npcname("#ThanatosMonsterF1") + "::OnMyMobDead";
+	areamonster .@map$,14,12,227,227,"Eldest",20781,10,.@event$;
+	areamonster .@map$,14,12,227,227,"Crow Duke",20782,10,.@event$;
+	areamonster .@map$,14,12,227,227,"Crow Baron",20783,10,.@event$;
+	areamonster .@map$,14,12,227,227,"Plasma Arch",20608,4,.@event$;
+	end;
+OnMyMobDead:
+	end;
+}
+
+//==================================================
+// 3@thts - Thanatos Tower F3
+//==================================================
+3@thts,1,5,3	script	#ThanatosMonsterF3	CLEAR_NPC,{
+	end;
+OnInstanceInit:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	//.@mob_c = getmapusers('map_name$) + 1;
+	.@event$ = instance_npcname("#ThanatosMonsterF3") + "::OnMyMobDead";
+	areamonster .@map$,45,41,94,168,"Book of Death",20780,10,.@event$;
+	areamonster .@map$,45,41,94,168,"Void Ancient Mimic",20779,10,.@event$;
+	areamonster .@map$,45,41,94,168,"Smile Giver",20845,5,.@event$;
+	areamonster .@map$,45,41,94,168,"Mistress of Empathizer",20773,5,.@event$;
+	areamonster .@map$,45,41,94,168,"Pray Giver",20844,20,.@event$;
+	areamonster .@map$,45,41,94,168,"Happy Giver",20774,5,.@event$;
+	end;
+OnMyMobDead:
+	end;
+}
+
+//==================================================
+// 4@thts - Thanatos Tower F4
+//==================================================
+4@thts,1,5,3	script	#ThanatosMonsterF4	CLEAR_NPC,{
+	end;
+OnInstanceInit:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	//.@mob_c = getmapusers('map_name$) + 1;
+	.@event$ = instance_npcname("#ThanatosMonsterF4") + "::OnMyMobDead";
+	areamonster .@map$,39,117,87,164,"Plasma Arch",20608,5,.@event$;
+	areamonster .@map$,39,117,87,164,"Smile Giver",20845,20,.@event$;
+	areamonster .@map$,39,117,87,164,"Pray Giver",20844,5,.@event$;
+	areamonster .@map$,39,117,87,164,"Mistress of Empathizer",20773,5,.@event$;
+	areamonster .@map$,39,117,87,164,"Happy Giver",20774,5,.@event$;
+	end;
+OnMyMobDead:
+	end;
+}
+
+//==================================================
+// 5@thts - Thanatos Tower F5
+//==================================================
+
+5@thts,1,5,3	script	#ThanatosMonsterF5	CLEAR_NPC,{
+	end;
+OnInstanceInit:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	//.@mob_c = getmapusers('map_name$) + 1;
+	.@event$ = instance_npcname("#ThanatosMonsterF5") + "::OnMyMobDead";
+	areamonster .@map$,118,118,165,165,"Plasma Arch",20608,5,.@event$;
+	areamonster .@map$,118,118,165,165,"Smile Giver",20845,5,.@event$;
+	areamonster .@map$,118,118,165,165,"Pray Giver",20844,20,.@event$;
+	areamonster .@map$,118,118,165,165,"Mistress of Empathizer",20773,5,.@event$;
+	areamonster .@map$,118,118,165,165,"Happy Giver",20774,5,.@event$;
+	end;
+OnMyMobDead:
+	end;
+}
+
+//==================================================
+// 6@thts - Thanatos Tower F6
+//==================================================
+
+6@thts,1,5,3	script	#ThanatosMonsterF6	CLEAR_NPC,{
+	end;
+OnInstanceInit:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	//.@mob_c = getmapusers('map_name$) + 1;
+	.@event$ = instance_npcname("#ThanatosMonsterF6") + "::OnMyMobDead";
+	areamonster .@map$,16,13,83,83,"Plasma Arch",20608,5,.@event$;
+	areamonster .@map$,16,13,83,83,"Smile Giver",20845,5,.@event$;
+	areamonster .@map$,16,13,83,83,"Pray Giver",20844,5,.@event$;
+	areamonster .@map$,16,13,83,83,"Mistress of Empathizer",20773,20,.@event$;
+	areamonster .@map$,16,13,83,83,"Happy Giver",20774,5,.@event$;
+	end;
+OnMyMobDead:
+	end;
+}
+
+//==================================================
+// 7@thts - Thanatos Tower F7
+//==================================================
+
+7@thts,1,5,3	script	#ThanatosMonsterF7	CLEAR_NPC,{
+	end;
+OnInstanceInit:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	//.@mob_c = getmapusers('map_name$) + 1;
+	.@event$ = instance_npcname("#ThanatosMonsterF7") + "::OnMyMobDead";
+	areamonster .@map$,92,14,165,87,"Plasma Arch",20608,5,.@event$;
+	areamonster .@map$,92,14,165,87,"Smile Giver",20845,5,.@event$;
+	areamonster .@map$,92,14,165,87,"Pray Giver",20844,5,.@event$;
+	areamonster .@map$,92,14,165,87,"Mistress of Empathizer",20773,20,.@event$;
+	areamonster .@map$,92,14,165,87,"Happy Giver",20774,20,.@event$;
+	end;
+OnMyMobDead:
+	end;
+}
+
+1@thts	mapflag	nowarp
+1@thts	mapflag	nowarpto
+1@thts	mapflag	noteleport
+1@thts	mapflag	nosave	SavePoint
+1@thts	mapflag	nomemo
+1@thts	mapflag	nobranch
+1@thts	mapflag	noicewall
+1@thts	mapflag	monster_noteleport
+
+2@thts	mapflag	nowarp
+2@thts	mapflag	nowarpto
+2@thts	mapflag	noteleport
+2@thts	mapflag	nosave	SavePoint
+2@thts	mapflag	nomemo
+2@thts	mapflag	nobranch
+2@thts	mapflag	noicewall
+2@thts	mapflag	monster_noteleport
+
+3@thts	mapflag	nowarp
+3@thts	mapflag	nowarpto
+3@thts	mapflag	noteleport
+3@thts	mapflag	nosave	SavePoint
+3@thts	mapflag	nomemo
+3@thts	mapflag	nobranch
+3@thts	mapflag	noicewall
+3@thts	mapflag	monster_noteleport
+
+4@thts	mapflag	nowarp
+4@thts	mapflag	nowarpto
+4@thts	mapflag	noteleport
+4@thts	mapflag	nosave	SavePoint
+4@thts	mapflag	nomemo
+4@thts	mapflag	nobranch
+4@thts	mapflag	noicewall
+4@thts	mapflag	monster_noteleport
+
+5@thts	mapflag	nowarp
+5@thts	mapflag	nowarpto
+5@thts	mapflag	noteleport
+5@thts	mapflag	nosave	SavePoint
+5@thts	mapflag	nomemo
+5@thts	mapflag	nobranch
+5@thts	mapflag	noicewall
+5@thts	mapflag	monster_noteleport
+
+6@thts	mapflag	nowarp
+6@thts	mapflag	nowarpto
+6@thts	mapflag	noteleport
+6@thts	mapflag	nosave	SavePoint
+6@thts	mapflag	nomemo
+6@thts	mapflag	nobranch
+6@thts	mapflag	noicewall
+6@thts	mapflag	monster_noteleport
+
+7@thts	mapflag	nowarp
+7@thts	mapflag	nowarpto
+7@thts	mapflag	noteleport
+7@thts	mapflag	nosave	SavePoint
+7@thts	mapflag	nomemo
+7@thts	mapflag	nobranch
+7@thts	mapflag	noicewall
