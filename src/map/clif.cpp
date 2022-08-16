@@ -14240,7 +14240,7 @@ void clif_parse_PurchaseReq2(int fd, struct map_session_data* sd){
 ///     0 = canceled
 ///     1 = open
 void clif_parse_OpenVending(int fd, struct map_session_data* sd){
-	struct item_data *item = itemdb_exists(sd->vend_loot);
+	std::shared_ptr<item_data> item = item_db.find(sd->vend_loot);
 	int cmd = RFIFOW(fd,0);
 	struct s_packet_db* info = &packet_db[cmd];
 	short len = (short)RFIFOW(fd,info->pos[0]);

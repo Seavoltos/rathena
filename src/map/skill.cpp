@@ -8956,7 +8956,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 				if (i < MAX_CART)
 					intif_storage_save(sd, &sd->cart);
 				if (battle_config.extended_vending) {
-					struct item_data *item;
+					std::shared_ptr<item_data> item;
 					char output[CHAT_SIZE_MAX];
 					int c = 0, i, d = 0;
 					sd->vend_lvl = skill_lv;
@@ -8965,7 +8965,8 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 					if (battle_config.item_cash)
 						d++;
 					for (const auto &it : itemdb_vending) {
-						if ((item = itemdb_exists(it.first)) != NULL &&
+						item = item_db.find(it.first);						
+						if (item != nullptr &&
 							item->nameid != ITEMID_ZENY && item->nameid != ITEMID_CASH)
 							c++;
 					}
@@ -8976,7 +8977,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 					else {
 						sd->state.prevend = 1;
 						if (c) {
-							item = itemdb_exists(battle_config.item_zeny ? battle_config.item_zeny : battle_config.item_cash ? battle_config.item_cash : item->nameid);
+							item = item_db.find(battle_config.item_zeny ? battle_config.item_zeny : battle_config.item_cash ? battle_config.item_cash : item->nameid);
 							sd->vend_loot = item->nameid;
 							sprintf(output, msg_txt(sd, 1596), itemdb_name(sd->vend_loot));
 							clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], output, false, SELF);
@@ -19018,11 +19019,11 @@ void skill_identify(struct map_session_data *sd, int idx)
 }
 
 int skill_vending(struct map_session_data *sd, t_itemid nameid) {
-	struct item_data *item;
+	std::shared_ptr<item_data> item;
 	char output[1024];
 	nullpo_ret(sd);
 
-	if (!pc_can_give_items(sd) || (item = itemdb_exists(nameid)) == NULL) {
+	if (!pc_can_give_items(sd) || (item = itemdb_exists(nameid)) == nullptr) {
 		sd->state.prevend = 0;
 		sd->vend_loot = 0;
 		sd->state.workinprogress = WIP_DISABLE_NONE;

@@ -55,4 +55,428 @@
 
 Header:
   Type: QUEST_DB
-  Version: 2
+  Version: 3
+
+Body:
+  - Id: 65000
+    Title: ROTD Eggyra Hunting
+    Targets:
+      - Mob: EGGYRA
+        Count: 60
+  - Id: 65001
+    Title: ROTD Munak Hunting
+    Targets:
+      - Mob: MUNAK
+        Count: 60
+  - Id: 65002
+    Title: ROTD Wolf Hunting
+    Targets:
+      - Mob: WOLF
+        Count: 60
+  - Id: 65003
+    Title: ROTD Muka Hunting
+    Targets:
+      - Mob: MUKA
+        Count: 60
+  - Id: 65004
+    Title: ROTD Horn Hunting
+    Targets:
+      - Mob: HORN
+        Count: 60
+  - Id: 65005
+    Title: ROTD Thara Frog Hunting
+    Targets:
+      - Mob: THARA_FROG
+        Count: 60
+  - Id: 65006
+    Title: ROTD Dokebi Hunting
+    Targets:
+      - Mob: DOKEBI
+        Count: 60
+  - Id: 65007
+    Title: ROTD Zerom Hunting
+    Targets:
+      - Mob: ZEROM
+        Count: 60
+  - Id: 65008
+    Title: ROTD Fake Angel Hunting
+    Targets:
+      - Mob: FAKE_ANGEL
+        Count: 60
+  - Id: 65009
+    Title: ROTD Red Novus Hunting
+    Targets:
+      - Mob: NOVUS
+        Count: 60
+  - Id: 65010
+    Title: ROTD Mi Gao Hunting
+    Targets:
+      - Mob: INCREASE_SOIL
+        Count: 60
+  - Id: 65011
+    Title: ROTD Pitman Hunting
+    Targets:
+      - Mob: PITMAN
+        Count: 60
+  - Id: 65012
+    Title: ROTD Hill Wind Hunting
+    Targets:
+      - Mob: HILL_WIND_1
+        Count: 60
+  - Id: 65013
+    Title: ROTD Les Hunting
+    Targets:
+      - Mob: LES
+        Count: 60
+  - Id: 65014
+    Title: ROTD Mantis Hunting
+    Targets:
+      - Mob: MANTIS
+        Count: 60
+  - Id: 65015
+    Title: ROTD Obeaune Hunting
+    Targets:
+      - Mob: OBEAUNE
+        Count: 60
+  - Id: 65016
+    Title: ROTD Miyabi Ningyo Hunting
+    Targets:
+      - Mob: MIYABI_NINGYO
+        Count: 60
+  - Id: 65017
+    Title: ROTD Marduk Hunting
+    Targets:
+      - Mob: MARDUK
+        Count: 60
+  - Id: 65018
+    Title: ROTD Fake Angel Hunting
+    Targets:
+      - Mob: FAKE_ANGEL
+        Count: 60
+  - Id: 65019
+    Title: ROTD Zhu po Long Hunting
+    Targets:
+      - Mob: DANCING_DRAGON
+        Count: 60
+  - Id: 65020
+    Title: ROTD Sting Hunting
+    Targets:
+      - Mob: STING
+        Count: 60
+  - Id: 65021
+    Title: ROTD Evil Druid Hunting
+    Targets:
+      - Mob: EVIL_DRUID
+        Count: 60
+  - Id: 65022
+    Title: ROTD Fur Seal Hunting
+    Targets:
+      - Mob: FUR_SEAL
+        Count: 60
+  - Id: 65023
+    Title: ROTD Dryad Hunting
+    Targets:
+      - Mob: DRYAD
+        Count: 60
+  - Id: 65024
+    Title: ROTD Dragon Tail Hunting
+    Targets:
+      - Mob: DRAGON_TAIL
+        Count: 60
+  - Id: 65025
+    Title: ROTD Strouf Hunting
+    Targets:
+      - Mob: STROUF
+        Count: 60
+  - Id: 65026
+    Title: ROTD Kaho Hunting
+    Targets:
+      - Mob: KAHO
+        Count: 60
+  - Id: 65027
+    Title: ROTD Raydric Hunting
+    Targets:
+      - Mob: RAYDRIC
+        Count: 60
+  - Id: 65028
+    Title: ROTD Lady Solace Hunting
+    Targets:
+      - Mob: SOLACE
+        Count: 60
+  - Id: 65029
+    Title: ROTD Deleter Hunting
+    Targets:
+      - Mob: DELETER
+        Count: 60
+  - Id: 65030
+    Title: ROTD Apocalypse Hunting
+    Targets:
+      - Mob: APOCALIPS
+        Count: 60
+  - Id: 65031
+    Title: ROTD Ragged Zombie Hunting
+    Targets:
+      - Mob: RAGGED_ZOMBIE
+        Count: 60
+  - Id: 65032
+    Title: ROTD Goat Hunting
+    Targets:
+      - Mob: GOAT
+        Count: 60
+  - Id: 65033
+    Title: ROTD Mavka Hunting
+    Targets:
+      - Mob: MAVKA
+        Count: 60
+  - Id: 65034
+    Title: ROTD Centipede Larva Hunting
+    Targets:
+      - Mob: CENTIPEDE_LARVA
+        Count: 60
+  - Id: 65035
+    Title: ROTD Penomena Hunting
+    Targets:
+      - Mob: PENOMENA
+        Count: 60
+  - Id: 65036
+    Title: ROTD Banshee Hunting
+    Targets:
+      - Mob: BANSHEE
+        Count: 60
+  - Id: 65037
+    Title: ROTD Anubis Hunting
+    Targets:
+      - Mob: ANUBIS
+        Count: 60
+  - Id: 65038
+    Title: ROTD Retribution Hunting
+    Targets:
+      - Mob: RETRIBUTION
+        Count: 60
+  - Id: 65039
+    Title: ROTD Green Ferus Hunting
+    Targets:
+      - Mob: FERUS_
+        Count: 60
+  - Id: 65040
+    Title: ROTD Salamander Hunting
+    Targets:
+      - Mob: SALAMANDER
+        Count: 60
+  - Id: 65041
+    Title: ROTD Necromancer Hunting
+    Targets:
+      - Mob: NECROMANCER
+        Count: 60
+  - Id: 65042
+    Title: ROTD Majoruros Hunting
+    Targets:
+      - Mob: MAJORUROS
+        Count: 60
+  - Id: 65043
+    Title: ROTD Plant S Hunting
+  - Id: 65044
+    Title: ROTD Insect S Hunting
+  - Id: 65045
+    Title: ROTD Anolian Hunting
+    Targets:
+      - Mob: ANOLIAN
+        Count: 60
+  - Id: 65046
+    Title: ROTD Eremes Hunting
+    Targets:
+      - Mob: EREMES
+        Count: 60
+  - Id: 65047
+    Title: ROTD Harword Hunting
+    Targets:
+      - Mob: HARWORD
+        Count: 60
+  - Id: 65048
+    Title: ROTD Skeggiold Hunting
+    Targets:
+      - Mob: SKEGGIOLD_
+        Count: 60
+  - Id: 65049
+    Title: ROTD Gold Acidus Hunting
+    Targets:
+      - Mob: ACIDUS
+        Count: 60
+  - Id: 65056
+    Title: ROTD Incarnation of Morroc Hunting
+    Targets:
+      - Mob: MOROCC_2
+        Count: 60
+  - Id: 65058
+    Title: ROTD Incarnation of Morroc Hunting
+    Targets:
+      - Mob: MOROCC_1
+        Count: 60
+  - Id: 65100
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65101
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65102
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65103
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65104
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65105
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65106
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65107
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65108
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65109
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65110
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65111
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65112
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65113
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65114
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65115
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65116
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65117
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65118
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65119
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65120
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65121
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65122
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65123
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65124
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65125
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65126
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65127
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65128
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65129
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65130
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65131
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65132
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65133
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65134
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65135
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65136
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65137
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65138
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65139
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65140
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65141
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65142
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65143
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65144
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65145
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65146
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65147
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65148
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65149
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65156
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 65158
+    Title: ROTD Cooldown Mission
+    TimeLimit: +3h
+  - Id: 15050
+    Title: "Memorial Dungeon: Airship Assault"
+    TimeLimit: +23h
+  - Id: 15051
+    Title: "Memorial Dungeon: Airship Assault"
+    TimeLimit: +5mn
+  - Id: 12325
+    Title: Dragon's Nest after-effects
+    TimeLimit: +23h
+  - Id: 12326
+    Title: Thanatos Tower after-effects
+    TimeLimit: +23h

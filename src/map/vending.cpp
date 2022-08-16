@@ -322,7 +322,7 @@ void vending_purchasereq(struct map_session_data* sd, int aid, int uid, const ui
 		idx -= 2;
 		z = 0.; // zeny counter
 
-		struct item_data *item_sold = itemdb_exists(vsd->cart.u.items_cart[idx].nameid);
+		std::shared_ptr<item_data> item_sold = item_db.find(vsd->cart.u.items_cart[idx].nameid);
 		// vending item
 		pc_additem(sd, &vsd->cart.u.items_cart[idx], amount, LOG_TYPE_VENDING);
 		vsd->vending[vend_list[i]].amount -= amount;

@@ -30,7 +30,7 @@ BUILDIN_FUNC(checkspace)
 	else
 	{
 		struct script_data *data = script_getdata(st,2);
-		struct item_data *id;
+		std::shared_ptr<item_data> id;
 		struct item it;
 		int i;
 
@@ -56,13 +56,13 @@ BUILDIN_FUNC(checkspace)
 		it.card[2] = (short)script_getnum(st,9);
 		it.card[3] = (short)script_getnum(st,10);
 
-		if( nameid < 500 || amount <= 0 || (id = itemdb_exists(nameid)) == NULL || !itemdb_canstore(&it, pc_get_group_level(sd)) || !itemdb_isstackable2(id) )
+		if( nameid < 500 || amount <= 0 || (id = item_db.find(nameid)) == nullptr || !itemdb_canstore(&it, pc_get_group_level(sd)) || !itemdb_isstackable2(id.get()) )
 		{
 			script_pushint(st,0);
 			return 0;
 		}
 
-		if( itemdb_isstackable2(id) )
+		if( itemdb_isstackable2(id.get()) )
 		{
 			ARR_FIND(0,MAX_STORAGE,i,compare_item(&sd->storage.u.items_storage[i],&it,0));
 			if( i < MAX_STORAGE )
