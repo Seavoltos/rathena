@@ -399,6 +399,7 @@ struct map_session_data {
 		t_itemid laphine_upgrade;
 		bool roulette_open;
 		unsigned int protection_acc : 1;
+		t_itemid item_reform;
 	} state;
 	struct {
 		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
@@ -1085,7 +1086,8 @@ static bool pc_cant_act2( struct map_session_data* sd ){
 		|| sd->state.stylist_open || sd->state.inventory_expansion_confirmation || sd->npc_shopid
 		|| sd->state.barter_open || sd->state.barter_extended_open
 		|| sd->state.laphine_synthesis || sd->state.laphine_upgrade
-		|| sd->state.roulette_open || sd->state.enchantgrade_open;
+		|| sd->state.roulette_open || sd->state.enchantgrade_open
+		|| sd->state.item_reform;
 }
 // equals pc_cant_act2 and additionally checks for chat rooms and npcs
 static bool pc_cant_act( struct map_session_data* sd ){
