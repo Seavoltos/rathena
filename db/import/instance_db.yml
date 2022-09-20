@@ -40,3 +40,34 @@
 Header:
   Type: INSTANCE_DB
   Version: 2
+Body:
+  - Id: 5
+    Name: Assault on the Airship
+    Enter:
+      Map: 1@air1
+      X: 244
+      Y: 73
+    AdditionalMaps:
+      1@air2: true
+  - Id: 6
+    Name: Dragon's Nest
+    TimeLimit: 7200
+    Enter:
+      Map: abyss_04
+      X: 181
+      Y: 42
+  - Id: 7
+    Name: Thanatos Tower
+    TimeLimit: 7200
+    Enter:
+      Map: 1@thts
+      X: 69
+      Y: 372
+    AdditionalMaps:
+      2@thts: true
+      3@thts: true
+      4@thts: true
+      5@thts: true
+      6@thts: true
+      7@thts: true
+      8@thts: true

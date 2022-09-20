@@ -9,117 +9,153 @@
 
 // Piso 0
 //============================================================
-instance,29,55,6	script	Thanatos Staff	418,{
-	if (BaseLevel < 70) {
-		mes "[Thanatos Staff]";
-		mes "Sólo estamos reclutando gente fuerte para esta travesía. Vuelve cuando seas al menos nivel 70.";
-		close;
-	}
-	.@party_id = getcharid(1);
+
+instance,22,51,4	script	Thanatos Tower Device	PORTAL,{
+
+	set .@party_id,getcharid(1);
 	.@md_name$ = "Thanatos Tower";
-	if (.@party_id < 1) {
-		mes "[Thanatos Staff]";
-		mes "Sin party? Vuelve cuando hayas creado una, ni pensarlo en hacer esto solo.";
+
+	set .@ttower_timer,checkquest(12326,PLAYTIME); // 1 week
+
+	/*if (!instance_check_party(.@party_id,2)) {
+		mes "Crea o únete a una party con 1 o más miembros e intentalo nuevamente!";
+		close;
+	}*/ 
+	if (checkweight(1201,1) == 0) {
+		mes "^008800Alto ahí!!";
+		mes "Llevas demasiadas cosas, eso podría colocar un fallo. Guarda algunas cosas y luego regresa.^000000";
 		close;
 	}
-	switch( checkquest(12326,PLAYTIME) ) {
+	if (BaseLevel < 70) {
+		mes "mmm... No creo que debería saltar ahí dentro...";
+		close;
+	}
+	switch(.@ttower_timer) {
 	case -1:
 		if (is_party_leader() == true) {
-			mes "[Thanatos Staff]";
-			mes "Qué puedo hacer por ti?";
+			mes "^00B2EE[Thanatos Tower]^000000";
+			mes "Confirmado, la Party se ha creado, ¿te gustaría acceder a la Thanatos Tower?";
 			next;
-			switch( select("Reservar Thanatos Tower:Qué haces aquí?:Parar de hablar.") ) {
+			switch(select("Generar dungeon "+.@md_name$+":Entrar al dungeon:Cancelar")) {
 			case 1:
-				switch( instance_create(.@md_name$) ) {
-				case -3:
-					dispbottom "Memorial Dungeon, '" + .@md_name$ + "' ya está en progreso.",0xFFFFFF;
+				switch(select("^3CB371[»]^000000 ^008000Modo Easy^000000","^3CB371[»]^000000 Modo Normal","^3CB371[»]^000000 ^BA7100Modo Hard^000000","^3CB371[»]^000000 ^ff0000Modo Insane^000000")){
+				case 1:
+					set .@level$,ID_EASY;
 					break;
-				case -4:
-				case -2:
-				case -1:
-					mes "[Thanatos Staff]";
-					mes "Vaya, creo que anote mal los datos. Se requiere volver a activar el portal.";
+				case 2:
+					set .@level$,ID_NORMAL;
+					break;
+				case 3:
+					set .@level$,ID_HARD;
+					break;
+				case 4:
+					set .@level$,ID_INSANE;
+					break;
+				}
+				//if (instance_create(.@md_name$) < 0) {
+				if (instance_create(.@md_name$,IM_PARTY,.@party_id,.@level$) < 0) {
+					mes "Nombre de la Party: "+ getpartyname(.@party_id);
+					mes "Lider de la Party: "+strcharinfo(0);
+					mes "^0000ff"+.@md_name$+" ^000000- La reserva ha fallado!";
 					close;
 				}
-				mes "[Thanatos Staff]";
-				mes "El espacio está bajo control";
-				mes "Por favor espera un minuto.";
+				set .@instanceid,instance_id(IM_PARTY);
+				if (instance_getdifficulty(.@instanceid) == 4){
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXHP,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MATK,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_CAST,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ASPD,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXSP,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ALLSTATS,20);
+				}
+				if (instance_getdifficulty(.@instanceid) == 3){
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXHP,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MATK,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_CAST,10);
+				}
+				if (instance_getdifficulty(.@instanceid) == 1){
+					instance_setbuff(instance_id(IM_PARTY),SC_II_MAXHP,5);
+					instance_setbuff(instance_id(IM_PARTY),SC_II_MAXSP,5);
+					instance_setbuff(instance_id(IM_PARTY),SC_II_ALLSTATS,5);
+				}
+				mes "^FFA500[Thanatos Tower]^000000";
+				mes "^0000ff"+.@md_name$+"^000000 - Reserva confirmada";
+				mes "Luego de la reserva, debes volver a hablar y seleccionar 'Entrar al Dungeon' para ingresar.";
 				close;
 			case 2:
-				break;
+				callsub L_Enter,0,1;
 			case 3:
-				mes "[Thanatos Staff]";
-				mes "Ok, lo entiendo. Ven a verme cuando cambies de idea.";
 				close;
 			}
 		}
-		mes "[Thanatos Staff]";
-		mes "Estamos reclutando sólo gente poderosa.";
-		next;
-		mes "[Thanatos Staff]";
-		mes "Mi busqueda es poder librar toda la oscuridad en la torre.";
-		next;
-		mes "[Thanatos Staff]";
-		mes "Este portal te puede llevar al pasado. Muchas aventuras te esperan ahí...";
-		next;
-		mes "[Thanatos Staff]";
-		mes "de todas formas, si deseas activar el portal, debe hacerlo con su party lider.";
-		close;
-	case 0:
-	case 1:
-		mes "[Thanatos Staff]";
-		mes "El portal aún no es seguro, vuelve cuando el tiempo haya pasado.";
-		close;
-	case 2:
-		mes "^0000ffLos restos del portal han desaparecido. Ahora puedes volver a viajar.^000000";
-		erasequest 12326;
-		close;
-	}
-}
-
-instance,22,51,4	script	Thanatos Tower Device	PORTAL,{
-	if (BaseLevel < 70) {
-		mes "[Thanatos Tower Device]";
-		mes "Tu nivel de poder no es el suficientemente alto para poder viajar. Vuelve cuando seas al menos nivel 70.";
-		close;
-	}
-	.@party_id = getcharid(1);
-	.@md_name$ = "Thanatos Tower";
-	if (.@party_id < 1) {
-		mes "[Thanatos Staff]";
-		mes "Sin party? Vuelve cuando hayas creado una, ni pensarlo en hacer esto solo.";
-		close;
-	}
-	switch( checkquest(12326,PLAYTIME) ) {
-	case -1:
-		switch( instance_enter(.@md_name$) ) {
-		case IE_OTHER:
-			mes "[Thanatos Staff]";
-			mes "Un error desconocido ha ocurrido.";
-			close;
-		case IE_NOINSTANCE:
-			mes "[Thanatos Staff]";
-			mes "El pasaje para viajar entre dimensiones aún no se ha activado.";
-			close;
-		case IE_NOMEMBER:// Custom text
-			mes "[Thanatos Staff]";
-			mes "No tienes permitido acceder a este dispositivo.";
-			close;
-		case IE_OK:
-			mapannounce "instance", "[" + getpartyname(.@party_id) + "] " + strcharinfo(0) + " ha entrado a " + .@md_name$ + ".",bc_map,"0x00ff99";
-			setquest 12326;// Thanatos Tower after-effects
+		switch(select("Entrar a "+.@md_name$+":Cancelar")) {
+		case 1:
+			callsub L_Enter,1,1;
+		case 2:
 			end;
 		}
 	case 0:
 	case 1:
-		mes "[Interdimensional Device]";
-		mes "Aún quedan restos de tu último viaje. Acceso denegado.";
-		close;
+		if (getcharid(1) == ttower_partyid) {
+			mes "Si tienes la instancia generada puedes ingresar. ";
+			next;
+			switch(select("Entrar a "+.@md_name$+":Cancelar")) {
+			case 1:
+				callsub L_Enter,0,0;
+			case 2:
+				close;
+			}
+		} else {
+			set .@dun_lim_time,ttower_timer+82800; // 1 week
+			set .@dun_cur_time,gettimetick(2);
+			set .@dun_ent_t,(.@dun_lim_time - .@dun_cur_time);
+			set .@dun_h,(.@dun_ent_t / 3600);
+			set .@dun_m,(.@dun_ent_t - (.@dun_h * 3600)) / 60;
+			set .@dun_s,.@dun_ent_t - ((.@dun_h * 3600) + (.@dun_m * 60));
+			mes "^00B2EE[Thanatos Tower]^000000";
+			mes "Aún persisten los efectos de la torre, no puedes ingresar hasta ^FFA500" + .@dun_h + "^000000 ^3950ffhora(s)^000000 ^FFA500" + .@dun_m + "^000000 ^3950ffminuto(s)^000000 ^FFA500" + .@dun_s + "^000000 ^3950ffsegundo(s)^000000.";
+			close;
+		}
 	case 2:
-		mes "^0000ffLos restos de tu último viaje han desaparecido. Ahora puedes volver a moverte entre dimensiones.^000000";
+		set ttower_timer,0;
 		erasequest 12326;
+		mes "^0000ffLos registros y los efectos han desaparecido. Puedes volver a ingresar a la Thanatos Tower nuevamente.^000000";
 		close;
 	}
+
+L_Enter:
+	switch(instance_enter("Thanatos Tower")) {
+	case IE_OTHER:
+		mes "Un error desconocido ha ocurrido.";
+		close;
+	case IE_NOINSTANCE:
+		mes "La instancia no existe o el lider de la Party no la ha generado.";
+		close;
+	case IE_NOMEMBER:
+		mes "Sólo puedes ingresar luego de hacer una Party";
+		close;
+	case IE_OK:
+		mapannounce "instance", strcharinfo(0) +" de la Party, "+ getpartyname( getcharid(1) ) +", ha entrado a la dungeon, Thanatos Tower.",bc_map,"0x00ff99",FW_NORMAL,12;
+		if (getarg(1)) {
+			set ttower_timer,gettimetick(2);
+			set ttower_partyid, getcharid(1);
+			setquest 12326;
+		}
+		if (getarg(0) == 0) close;
+		else end;
+	}
+}
+
+instance,29,55,6	script	Thanatos Staff	418,{
+	set .@name$,strcharinfo(0);
+		set ttower_timer,0;
+		erasequest 12326;
+	mes "^0000ffEl anciano te mira fijamente y se acerca caminando hacia tí.^000000";
+	close;
 }
 
 instance,33,56,5	script	Old Sign#2	4_BOARD3,{
@@ -187,7 +223,7 @@ OnInit:
 	cutin "",255;
 	mes "[" + .@player_name$ + "]";
 	mes "Estas equivocado, la Thanatos Tower tiene más de 10 pisos, no puede ser tan pequeña...";
-	unittalk .@account_id, .@player_name$ + ":Estas equivocado, la Thanatos Tower tiene más de 10 pisos, no puede ser tan pequeña...";
+	unittalk .@account_id, .@player_name$ + ": Estas equivocado, la Thanatos Tower tiene más de 10 pisos, no puede ser tan pequeña...";
 	next;
 	cutin "h_chaos01",2;
 	mes "[Chaos]";
@@ -2069,7 +2105,6 @@ OnMyMobDead:
 2@thts	mapflag	nomemo
 2@thts	mapflag	nobranch
 2@thts	mapflag	noicewall
-2@thts	mapflag	monster_noteleport
 
 3@thts	mapflag	nowarp
 3@thts	mapflag	nowarpto
