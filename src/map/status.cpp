@@ -231,6 +231,32 @@ uint64 RefineDatabase::parseBodyNode( const ryml::NodeRef& node ){
 						}
 					}
 
+					if (this->nodeExists(refineLevelNode, "BroadcastSuccess")) {
+						bool bcast;
+						if (!this->asBool(refineLevelNode, "BroadcastSuccess", bcast)) {
+							return 0;
+						}
+						level_info->broadcast_success = bcast;
+					}
+					else {
+						if (!level_exists) {
+							level_info->broadcast_success = false;
+						}
+					}
+
+					if (this->nodeExists(refineLevelNode, "BroadcastFailure")) {
+						bool bcast;
+						if (!this->asBool(refineLevelNode, "BroadcastFailure", bcast)) {
+							return 0;
+						}
+						level_info->broadcast_failure = bcast;
+					}
+					else {
+						if (!level_exists) {
+							level_info->broadcast_failure = false;
+						}
+					}
+
 					if( this->nodeExists( refineLevelNode, "Chances" ) ){
 						const auto& chancesNode = refineLevelNode["Chances"];
 						for( const auto& chanceNode : chancesNode ){
@@ -1916,10 +1942,15 @@ bool status_check_skilluse(struct block_list *src, struct block_list *target, ui
 			return false;
 
 		if (sc->data[SC_WINKCHARM] && target && !flag) { // Prevents skill usage
-			if (unit_bl2ud(src) && (unit_bl2ud(src))->walktimer == INVALID_TIMER)
-				unit_walktobl(src, map_id2bl(sc->data[SC_WINKCHARM]->val2), 3, 1);
-			clif_emotion(src, ET_THROB);
-			return false;
+			block_list *wink_target = map_id2bl(sc->data[SC_WINKCHARM]->val2);
+
+			if (wink_target != nullptr) {
+				unit_data *wink_ud = unit_bl2ud(src);
+				if (wink_ud != nullptr && wink_ud->walktimer == INVALID_TIMER)
+					unit_walktobl(src, wink_target, 3, 1);
+				clif_emotion(src, ET_THROB);
+			} else
+				status_change_end(src, SC_WINKCHARM);
 		}
 
 		if (sc->data[SC_BLADESTOP]) {

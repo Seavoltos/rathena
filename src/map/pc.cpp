@@ -1863,7 +1863,7 @@ bool pc_authok(struct map_session_data *sd, uint32 login_id2, time_t expiration_
 	         sd->status.name, sd->status.account_id, sd->status.char_id,
 	         CONVIP(ip), sd->group_id);
 	// Send friends list
-	clif_friendslist_send(sd);
+	clif_friendslist_send( *sd );
 
 	if( !changing_mapservers ) {
 
@@ -9324,7 +9324,7 @@ int pc_dead(struct map_session_data *sd,struct block_list *src)
 
 	pc_setdead(sd);
 
-	clif_party_dead( sd );
+	clif_party_dead( *sd );
 
 	pc_setparam(sd, SP_PCDIECOUNTER, sd->die_counter+1);
 	pc_setparam(sd, SP_KILLERRID, src?src->id:0);
@@ -10515,7 +10515,7 @@ bool pc_jobchange(struct map_session_data *sd,int job, char upper)
 
 			if( i < MAX_PARTY ){
 				p->party.member[i].class_ = sd->status.class_;
-				clif_party_job_and_level(sd);
+				clif_party_job_and_level( *sd );
 			}
 		}
 	}
@@ -11207,7 +11207,7 @@ void pc_addeventtimercount(struct map_session_data *sd,const char *name,int tick
 	for(i=0;i<MAX_EVENTTIMER;i++)
 		if( sd->eventtimer[i] != INVALID_TIMER && strcmp(
 			(char *)(get_timer(sd->eventtimer[i])->data), name)==0 ){
-				addt_tickimer(sd->eventtimer[i],tick);
+				addtick_timer(sd->eventtimer[i],tick);
 				break;
 		}
 }
@@ -12559,7 +12559,7 @@ bool pc_setstand(struct map_session_data *sd, bool force){
 	sd->ssregen.tick.hp = sd->ssregen.tick.sp = 0;
 	if( pc_isdead( sd ) ){
 		sd->state.dead_sit = sd->vd.dead_sit = 0;
-		clif_party_dead( sd );
+		clif_party_dead( *sd );
 	}else{
 		sd->state.dead_sit = sd->vd.dead_sit = 0;
 	}
@@ -14427,7 +14427,7 @@ struct s_bonus_script_entry *pc_bonus_script_add(struct map_session_data *sd, co
 			if (strcmpi(script_str, StringBuf_Value(entry->script_buf)) == 0) {
 				t_tick newdur = gettick() + dur;
 				if (flag&BSF_FORCE_REPLACE && entry->tick < newdur) { // Change duration
-					sett_tickimer(entry->tid, newdur);
+					settick_timer(entry->tid, newdur);
 					script_free_code(script);
 					return NULL;
 				}
