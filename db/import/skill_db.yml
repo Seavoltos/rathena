@@ -141,18 +141,3 @@
 Header:
   Type: SKILL_DB
   Version: 3
-
-Body:
-  - Id: 10019
-    Name: GD_EMERGENCY_MOVE
-    Description: Emergency Move
-    MaxLevel: 1
-    TargetType: Self
-    DamageFlags:
-      NoDamage: true
-      Splash: true
-    Flags:
-      IsGuild: true
-    SplashArea: 15
-    Duration1: 15000
-    Cooldown: 60000
