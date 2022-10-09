@@ -828,11 +828,6 @@ void clif_hpmeter_single( struct map_session_data& sd, uint32 id, uint32 hp, uin
 void clif_party_job_and_level( struct map_session_data& sd );
 void clif_party_dead( struct map_session_data& sd );
 
-// Adventurer's Agency [Shakto]
-void clif_parse_party_agency_join(int fd, struct map_session_data *sd);
-void clif_party_agency_askleader(int fd, struct map_session_data *sd);
-void clif_parse_party_agency_answer(int fd, struct map_session_data *sd);
-
 // guild
 void clif_guild_created(struct map_session_data *sd,int flag);
 void clif_guild_belonginfo( struct map_session_data& sd );

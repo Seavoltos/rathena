@@ -4706,43 +4706,6 @@ struct PACKET_ZC_PERSONAL_INFOMATION {
 DEFINE_PACKET_HEADER(ZC_PERSONAL_INFOMATION, 0x097b);
 #endif  // PACKETVER_MAIN_NUM >= 20120503 || PACKETVER_RE_NUM >= 20120502 || defined(PACKETVER_ZERO)
 
-// Adventurer's Agency [Shakto]
-// 2018-01-03aRagexeRE or 2018-01-03bRagexeRE
-#if PACKETVER >= 20180103
-struct PACKET_CZ_PARTY_AGENCY_JOIN {
-	int16 PacketType;
-	uint32 GID;
-	uint32 AID;
-} __attribute__((packed));
-DEFINE_PACKET_HEADER(CZ_PARTY_AGENCY_JOIN, 0x0ae6);
-#endif
-
-// Adventurer's Agency [Shakto]
-// 2018-01-03aRagexeRE or 2018-01-03bRagexeRE
-#if PACKETVER >= 20180103
-struct PACKET_ZC_PARTY_AGENCY_ASK_LEADER {
-	int16 PacketType;
-	uint32 AID;
-	uint32 GID;
-	char name[NAME_LENGTH];
-	int16 baseLevel;
-	int16 class_;
-} __attribute__((packed));
-DEFINE_PACKET_HEADER(ZC_PARTY_AGENCY_ASK_LEADER, 0x0ae7);
-#endif
-
-// Adventurer's Agency [Shakto]
-// 2018-01-03aRagexeRE or 2018-01-03bRagexeRE
-#if PACKETVER >= 20180103
-struct PACKET_CZ_PARTY_AGENCY_ANSWER {
-	int16 PacketType; // 2
-	uint32 AID; //4
-	uint32 GID; // 4
-	int8 flag; // 1
-} __attribute__((packed));
-DEFINE_PACKET_HEADER(CZ_PARTY_AGENCY_ANSWER, 0x0af8);
-#endif
-
 struct PACKET_CZ_REQUEST_ACTNPC {
 	int16 packetType;
 	uint32 GID;
