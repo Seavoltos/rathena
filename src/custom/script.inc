@@ -110,7 +110,7 @@ BUILDIN_FUNC(storeitem)
 	else if( data_isint(data) )
 	{ // <item id>
 		nameid = conv_num(st,data);
-		if( nameid <= 0 || !itemdb_exists(nameid) )
+		if( nameid <= 0 || !item_db.exists(nameid) )
 		{
 			ShowError("buildin_storeitem: Nonexistant item %d requested.\n", nameid);
 			result = 0;
@@ -180,7 +180,7 @@ BUILDIN_FUNC(storeitem2)
 	else if( data_isint(data) )
 	{
 		nameid = conv_num(st,data);
-		if( nameid <= 0 || !itemdb_exists(nameid) )
+		if( nameid <= 0 || !item_db.exists(nameid) )
 		{
 			ShowError("buildin_storeitem2: Nonexistant item %d requested.\n", nameid);
 			result = 0;

@@ -19116,8 +19116,9 @@ int skill_vending(struct map_session_data *sd, t_itemid nameid) {
 	std::shared_ptr<item_data> item;
 	char output[1024];
 	nullpo_ret(sd);
+	item = item_db.find(nameid);
 
-	if (!pc_can_give_items(sd) || (item = itemdb_exists(nameid)) == nullptr) {
+	if (!pc_can_give_items(sd) || !item_db.exists(nameid) ) {
 		sd->state.prevend = 0;
 		sd->vend_loot = 0;
 		sd->state.workinprogress = WIP_DISABLE_NONE;

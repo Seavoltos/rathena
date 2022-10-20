@@ -132,8 +132,8 @@ startermap,40,30,4	script	Tiago	10396,{
 	switch(select("^D23010 [ > ] ^000000Prontera:^10B2D2 [ > ] ^000000Morocc:^10B2D2 [ > ] ^000000Geffen:^10B2D2 [ > ] ^000000Payon:^10B2D2 [ > ] ^000000Alberta:^10B2D2 [ > ] ^000000Izlude"))
 	{
 		case 1:
-			savepoint "prontera",273,354,1,1;
-			warp "prontera",273,354;
+			savepoint "prontera",155,181,1,1;
+			warp "prontera",155,181;
 			break;
 		case 2:
 			savepoint "morocc",160,94,1,1;

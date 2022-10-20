@@ -28034,6 +28034,8 @@ Body:
         Rate: 10
       - Item: Goibne's_Shoulder_Arms
         Rate: 1000
+        RandomOptionGroup: OPT_Goibne_Arms_Normal
+        StealProtected: true
       - Item: Tha_Odium_Card
         Rate: 1
         StealProtected: true
@@ -28081,6 +28083,8 @@ Body:
         Rate: 10
       - Item: Goibne's_Combat_Boots
         Rate: 1000
+        RandomOptionGroup: OPT_Goibne_Boots_Normal
+        StealProtected: true        
       - Item: Tha_Despero_Card
         Rate: 1
         StealProtected: true
@@ -28128,6 +28132,8 @@ Body:
         Rate: 10
       - Item: Goibne's_Armor
         Rate: 1000
+        RandomOptionGroup: OPT_Goibne_Armor_Normal
+        StealProtected: true
       - Item: Tha_Maero_Card
         Rate: 1
         StealProtected: true
@@ -28175,6 +28181,8 @@ Body:
         Rate: 10
       - Item: Goibne's_Helmet
         Rate: 1000
+        RandomOptionGroup: OPT_Goibne_Helmet_Normal
+        StealProtected: true
       - Item: Tha_Dolor_Card
         Rate: 1
         StealProtected: true

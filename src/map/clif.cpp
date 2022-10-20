@@ -24074,12 +24074,12 @@ int clif_vend(struct map_session_data *sd, int skill_lv) {
 	p->packetType = HEADER_ZC_MAKINGARROW_LIST;
 
 	int i, count = 0;
-	if (battle_config.item_zeny && itemdb_exists(battle_config.item_zeny)) {
+	if (battle_config.item_zeny && item_db.exists(battle_config.item_zeny)) {
 		p->items[count].itemId = client_nameid(battle_config.item_zeny);
 		count++;
 	}
 
-	if (battle_config.item_cash && itemdb_exists(battle_config.item_cash) ) {
+	if (battle_config.item_cash && item_db.exists(battle_config.item_cash) ) {
 		p->items[count].itemId = client_nameid(battle_config.item_cash);
 		count++;
 	}
