@@ -1,0 +1,722 @@
+//===== rAthena Script ======================================= 
+//= Tool Dealer
+//===== By: ================================================== 
+//= rAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Town Tool Dealer NPCs.
+//===== Additional Comments: ================================= 
+//= 
+//============================================================ 
+
+//=======================================================
+// Alberta
+//=======================================================
+-	shop	Tool Dealer#alb	83,1750:-1,1751:-1,1752:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1
+-	shop	Tool Dealer#alb2	73,1750:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,2243:-1
+
+alb2trea,87,65,5	script	Tool Dealer#TDalb	83,{
+	
+	if( #ToolAlberta == 1)
+		callshop "Tool Dealer#alb",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Alberta.";
+		set #ToolAlberta,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#alb",0;
+	}
+	end;
+}
+
+alberta_in,182,97,0	script	Tool Dealer#TDalb2	73,{
+	
+	if( #ToolAlberta == 1)
+		callshop "Tool Dealer#alb2",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Alberta.";
+		set #ToolAlberta,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#alb2",0;
+	}
+	end;
+}
+
+//=======================================================
+// Al De Baran
+//=======================================================
+-	shop	Tool Dealer#alde	83,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,611:-1,610:-1
+
+aldeba_in,94,56,5	script	Tool Dealer#TDalde	83,{
+	
+	if( #ToolAlDeBaran == 1)
+		callshop "Tool Dealer#alde",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Al De Baran.";
+		set #ToolAlDeBaran,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#alde",0;
+	}
+	end;
+}
+
+//=======================================================
+// Amatsu
+//=======================================================
+-	shop	Tool Dealer#ama	763,1750:-1,1770:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1
+
+ama_in01,24,30,5	script	Tool Dealer#TDama	763,{
+	
+	if( #ToolAmatsu == 1)
+		callshop "Tool Dealer#ama",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Amatsu.";
+		set #ToolAmatsu,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#ama",0;
+	}
+	end;
+}
+
+//=======================================================
+// Ayothaya
+//=======================================================
+-	shop	Tool Dealer#ayo	840,1750:-1,1770:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1
+
+ayo_in01,18,182,1	script	Tool Dealer#TDayo	840,{
+	
+	if( #ToolAyothaya == 1)
+		callshop "Tool Dealer#ayo",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Ayothaya.";
+		set #ToolAyothaya,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#ayo",0;
+	}
+	end;
+}
+
+//=======================================================
+// Brasilis
+//=======================================================
+-	shop	Tool Dealer#bra	478,645:-1,656:-1,601:-1,602:-1,611:-1,1065:-1,610:-1
+
+brasilis,252,257,3	script	Tool Dealer#TDbra	478,{
+	
+	if( #ToolBrasilis == 1)
+		callshop "Tool Dealer#bra",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Brasilis.";
+		set #ToolBrasilis,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#bra",0;
+	}
+	end;
+}
+
+//=======================================================
+// Comodo
+//=======================================================
+-	shop	Tool Dealer#cmd	83,1770:-1,501:-1,502:-1,503:-1,504:-1,645:-1,656:-1,657:-1,601:-1,602:-1,611:-1,1065:-1
+-	shop	Tool Dealer#cmd2	83,1770:-1,501:-1,502:-1,503:-1,504:-1,645:-1,656:-1,601:-1,602:-1,611:-1,1065:-1
+
+cmd_in01,79,182,5	script	Tool Dealer#TDcmd	83,{
+	
+	if( #ToolComodo == 1)
+		callshop "Tool Dealer#cmd",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Comodo.";
+		set #ToolComodo,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#cmd",0;
+	}
+	end;
+}
+
+cmd_fild07,257,126,5	script	Tool Dealer#TDcmd2	83,{
+	
+	if( #ToolComodo == 1)
+		callshop "Tool Dealer#cmd2",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Comodo.";
+		set #ToolComodo,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#cmd2",0;
+	}
+	end;
+}
+
+//=======================================================
+// Einbroch
+//=======================================================
+-	shop	Tool Dealer#ein	850,1750:-1,1752:-1,1751:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1
+
+ein_in01,189,15,1	script	Tool Dealer#TDein	850,{
+	
+	if( #ToolEinbroch == 1)
+		callshop "Tool Dealer#ein",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Einbroch.";
+		set #ToolEinbroch,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#ein",0;
+	}
+	end;
+}
+
+//=======================================================
+// Geffen
+//=======================================================
+-	shop	Tool Dealer#gef	68,1750:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,2241:-1
+-	shop	Tool Dealer#gef2	64,1092:-1,1093:-1
+
+geffen_in,77,167,0	script	Tool Dealer#TDgef	68,{
+	
+	if( #ToolGeffen == 1)
+		callshop "Tool Dealer#gef",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Geffen.";
+		set #ToolGeffen,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#gef",0;
+	}
+	end;
+}
+
+geffen_in,171,123,4	script	Tool Dealer#TDgef2	64,{
+	
+	if( #ToolGeffen == 1)
+		callshop "Tool Dealer#gef2",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Geffen.";
+		set #ToolGeffen,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#gef2",0;
+	}
+	end;
+}
+
+
+//=======================================================
+// Kunlun
+//=======================================================
+-	shop	Tool Dealer#gon	777,1750:-1,1770:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1
+
+gonryun,147,84,5	script	Tool Dealer#TDgon	777,{
+	
+	if( #ToolKunlun == 1)
+		callshop "Tool Dealer#gon",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Kunlun.";
+		set #ToolKunlun,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#gon",0;
+	}
+	end;
+}
+
+//=======================================================
+// Hugel
+//=======================================================
+-	shop	Tool Dealer#hu	53,1750:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1
+-	shop	Tool Dealer#hu2	90,717:-1,2201:-1,910:-1,528:-1
+
+hu_in01,241,368,2	script	Tool Dealer#TDhu	53,{
+	
+	if( #ToolHugel == 1)
+		callshop "Tool Dealer#hu",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Hugel.";
+		set #ToolHugel,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#hu",0;
+	}
+	end;
+}
+
+hu_in01,252,368,3	script	Tool Dealer#TDhu2	90,{
+	
+	if( #ToolHugel == 1)
+		callshop "Tool Dealer#hu2",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Hugel.";
+		set #ToolHugel,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#hu2",0;
+	}
+	end;
+}
+
+//=======================================================
+// Izlude
+//=======================================================
+-	shop	Tool Dealer#iz	47,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1,1750:-1
+
+izlude_in,115,61,0	script	Tool Dealer#TDiz	47,{
+	
+	if( #ToolIzlude == 1)
+		callshop "Tool Dealer#iz",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Izlude.";
+		set #ToolIzlude,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#iz",0;
+	}
+	end;
+}
+
+//=======================================================
+// Juno
+//=======================================================
+-	shop	Tool Dealer#yuno	84,1750:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1
+-	shop	Tool Dealer#yuno1	83,911:-1,910:-1,912:-1
+
+yuno,218,97,5	script	Tool Dealer#TDyuno	84,{
+	
+	if( #ToolJuno == 1)
+		callshop "Tool Dealer#yuno",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Juno.";
+		set #ToolJuno,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#yuno",0;
+	}
+	end;
+}
+
+yuno,226,107,5	script	Tool Dealer#TDyuno1	83,{
+	
+	if( #ToolJuno == 1)
+		callshop "Tool Dealer#yuno1",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Juno.";
+		set #ToolJuno,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#yuno1",0;
+	}
+	end;
+}
+
+//=======================================================
+// Lighthalzen
+//=======================================================
+-	shop	Tool Dealer#lhz	90,611:-1,503:-1,504:-1,506:-1,657:-1,656:-1,601:-1,602:-1,1065:-1,610:-1,1770:-1
+-	shop	Tool Dealer#lhz2	850,501:-1,502:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1,611:-1
+
+lhz_in02,31,145,4	script	Tool Dealer#TDlhz	90,{
+	
+	if( #ToolLighthalzen == 1)
+		callshop "Tool Dealer#lhz",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Lighthalzen.";
+		set #ToolLighthalzen,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#lhz",0;
+	}
+	end;
+}
+
+lhz_in03,239,106,5	script	Tool Dealer#TDlhz2	850,{
+	
+	if( #ToolLighthalzen == 1)
+		callshop "Tool Dealer#lhz2",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Lighthalzen.";
+		set #ToolLighthalzen,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#lhz2",0;
+	}
+	end;
+}
+
+//=======================================================
+// Luoyang
+//=======================================================
+-	shop	Tool Dealer#lou	818,1750:-1,1770:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1
+
+lou_in02,239,176,5	script	Tool Dealer#TDlou	818,{
+	
+	if( #ToolLuoyang == 1)
+		callshop "Tool Dealer#lou",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Luoyang.";
+		set #ToolLuoyang,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#lou",0;
+	}
+	end;
+}
+
+//=======================================================
+// Lutie
+//=======================================================
+-	shop	Tool Dealer#xmas	83,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,611:-1,610:-1
+
+xmas_in,40,38,5	script	Tool Dealer#TDxmas	83,{
+	
+	if( #ToolLutie == 1)
+		callshop "Tool Dealer#xmas",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Lutie.";
+		set #ToolLutie,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#xmas",0;
+	}
+	end;
+}
+
+//=======================================================
+// Morocc - Post Ep. 12.1
+//=======================================================
+-	shop	Tool Dealer#moc1	93,1750:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1
+-	shop	Tool Dealer#moc2	93,1750:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1,2242:-1
+
+moc_ruins,91,128,4	script	Tool Dealer#TDmoc1	93,{
+	
+	if( #ToolMorocc == 1)
+		callshop "Tool Dealer#moc1",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Morocc.";
+		set #ToolMorocc,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#moc1",0;
+	}
+	end;
+}
+
+moc_ruins,114,63,6	script	Tool Dealer#TDmoc2	93,{
+	
+	if( #ToolMorocc == 1)
+		callshop "Tool Dealer#moc2",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Morocc.";
+		set #ToolMorocc,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#moc2",0;
+	}
+	end;
+}
+
+//=======================================================
+// Moscovia
+//=======================================================
+-	shop	Tool Dealer#mosk	968,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1,1750:-1
+
+mosk_in,21,254,5	script	Tool Dealer#TDmosk	968,{
+	
+	if( #ToolMoscovia == 1)
+		callshop "Tool Dealer#mosk",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Moscovia.";
+		set #ToolMoscovia,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#mosk",0;
+	}
+	end;
+}
+
+//=======================================================
+// Niflheim
+//=======================================================
+-	shop	Tool Dealer#nif	801,535:-1,1062:-1,902:-1,7106:-1,537:-1,7154:-1,1052:-1,934:-1
+
+nif_in,145,23,1	script	Tool Dealer#TDnif	801,{
+	
+	if( #ToolNiflheim == 1)
+		callshop "Tool Dealer#nif",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Niflheim.";
+		set #ToolNiflheim,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#nif",0;
+	}
+	end;
+}
+
+//=======================================================
+// Payon
+//=======================================================
+-	shop	Tool Dealer#pay	88,1750:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1
+-	shop	Tool Dealer#pay2	75,1750:-1,1751:-1,611:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1
+-	shop	Tool Dealer#pay3	88,1750:-1,501:-1,645:-1,601:-1,602:-1
+
+payon_in01,5,49,7	script	Tool Dealer#TDpay	88,{
+	
+	if( #ToolPayon == 1)
+		callshop "Tool Dealer#pay",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Payon.";
+		set #ToolPayon,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#pay",0;
+	}
+	end;
+}
+
+payon_in02,87,34,0	script	Tool Dealer#TDpay2	75,{
+	
+	if( #ToolPayon == 1)
+		callshop "Tool Dealer#pay2",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Payon.";
+		set #ToolPayon,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#pay2",0;
+	}
+	end;
+}
+
+payon,159,96,4	script	Tool Dealer#TDpay3	88,{
+	
+	if( #ToolPayon == 1)
+		callshop "Tool Dealer#pay3",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Payon.";
+		set #ToolPayon,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#pay3",0;
+	}
+	end;
+}
+
+//=======================================================
+// Prontera
+//=======================================================
+-	shop	Tool Dealer#prt	83,1750:-1,611:-1,501:-1,502:-1,506:-1,645:-1,601:-1,602:-1
+-	shop	Tool Dealer#prt1	53,611:-1,1750:-1,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,1065:-1,2239:-1
+
+prt_fild05,290,221,2	script	Tool Dealer#TDprt	83,{
+	
+	if( #ToolProntera == 1)
+		callshop "Tool Dealer#prt",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Prontera.";
+		set #ToolProntera,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#prt",0;
+	}
+	end;
+}
+
+prt_in,126,76,0	script	Tool Dealer#TDprt1	53,{
+	
+	if( #ToolProntera == 1)
+		callshop "Tool Dealer#prt1",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Prontera.";
+		set #ToolProntera,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#prt1",0;
+	}
+	end;
+}
+
+//=======================================================
+// Rachel
+//=======================================================
+-	shop	Tool Dealer#ra	919,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,611:-1,1065:-1,610:-1
+
+ra_in01,257,269,3	script	Tool Dealer#TDra	919,{
+	
+	if( #ToolRachel == 1)
+		callshop "Tool Dealer#ra",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Rachel.";
+		set #ToolRachel,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#ra",0;
+	}
+	end;
+}
+
+//=======================================================
+// Turtle Island
+//=======================================================
+-	shop	Tool Dealer#tu	99,1750:-1,501:-1,502:-1,503:-1,504:-1,506:-1,601:-1,602:-1,645:-1,656:-1,2242:-1
+
+tur_dun01,158,54,6	script	Tool Dealer#TDtu	99,{
+	
+	if( #ToolTurtleIsland == 1)
+		callshop "Tool Dealer#tu",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Turtle Island.";
+		set #ToolTurtleIsland,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#tu",0;
+	}
+	end;
+}
+
+//=======================================================
+// Umbala
+//=======================================================
+-	shop	Tool Dealer#um	788,512:-1,515:-1,535:-1,516:-1,513:-1,517:-1,528:-1,537:-1,601:-1,602:-1,645:-1,656:-1,610:-1
+
+um_in,104,124,3	script	Tool Dealer#TDum	788,{
+	
+	if( #ToolUmbala == 1)
+		callshop "Tool Dealer#um",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Umbala.";
+		set #ToolUmbala,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#um",0;
+	}
+	end;
+}
+
+//=======================================================
+// Veins
+//=======================================================
+-	shop	Tool Dealer#ve	943,501:-1,502:-1,503:-1,504:-1,506:-1,645:-1,656:-1,601:-1,602:-1,611:-1,1065:-1,610:-1
+
+ve_in,243,303,5	script	Tool Dealer#TDve	943,{
+	
+	if( #ToolVeins == 1)
+		callshop "Tool Dealer#ve",0;
+	else
+	{
+		set .@name$,"[^0000FFTool Dealer^000000]";
+		mes .@name$;
+		mes "Felicitaciones acabas de visitar el Tool Dealer de Veins.";
+		set #ToolVeins,1;
+		set #QUESTTool,#QUESTTool+1;
+		close2;
+		callshop "Tool Dealer#ve",0;
+	}
+	end;
+}

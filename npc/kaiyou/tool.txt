@@ -10,7 +10,7 @@
 	{
 		set .@name$,"[^0000FFTool Dealer^000000]";
 		mes .@name$;
-		mes "Visita al menos a 8 Tool Dealer antes de poder entrar a este mercado. Recien haz visitado "+#QUESTTool+".";
+		mes "Visita al menos a 8 Tool Dealer antes de poder entrar a este mercado. Sólo llevas "+#QUESTTool+" Tool Dealer visitados.";
 		close;
 	}
 
