@@ -41,7 +41,7 @@ instance,25,38,3	script	Dimensional Device#air1	PORTAL,{
 		close;
 	}
 	if (.@party_id < 1) {
-		mes "^ff0000Para ingresar, debes crear una party de 1 o más miembros.^000000";
+		mes "^ff0000Para ingresar, debes crear una party de 2 o más miembros.^000000";
 		close;
 	}
 	if (!instance_check_party(.@party_id,2,70)) {
@@ -53,134 +53,166 @@ instance,25,38,3	script	Dimensional Device#air1	PORTAL,{
 		mes "^ff0000Tu Party tiene 4 miembros o más.";
 		close;
 	}
-	.@s = select( "Power Up the Device", "Use the Device", "Cancel" );
-	
-	switch(.@s) {
-	case 1:
+
+	set .@aasault_timer,checkquest(15050,PLAYTIME); // 23h
+
+	switch(.@aasault_timer) {
+	case -1:
 		if (is_party_leader() == true) {
-			if (instance_create(.@md_name$) < 0) {
-				mes "Party: " + .@p_name$;
-				mes "Nombre: " + strcharinfo(0);
-				mes "^0000ff" + .@md_name$ + "^000000 - Ha fallado!";
+			mes "^00B2EE["+.@md_name$+"]^000000";
+			mes "Confirmado, la Party se ha creado, ¿te gustaría acceder a "+.@md_name$+"?";
+			next;
+			switch(select("Generar dungeon "+.@md_name$+":Entrar al dungeon:Cancelar")) {
+			case 1:
+				switch(select("^3CB371[»]^000000 ^008000Modo Easy^000000","^3CB371[»]^000000 Modo Normal","^3CB371[»]^000000 ^BA7100Modo Hard^000000","^3CB371[»]^000000 ^ff0000Modo Insane^000000")){
+				case 1:
+					set .@level$,ID_EASY;
+					break;
+				case 2:
+					set .@level$,ID_NORMAL;
+					break;
+				case 3:
+					set .@level$,ID_HARD;
+					break;
+				case 4:
+					set .@level$,ID_INSANE;
+					break;
+				}
+				//if (instance_create(.@md_name$) < 0) {
+				if (instance_create(.@md_name$,IM_PARTY,.@party_id,.@level$) < 0) {
+					mes "Nombre de la Party: "+ getpartyname(.@party_id);
+					mes "Lider de la Party: "+strcharinfo(0);
+					mes "^0000ff"+.@md_name$+" ^000000- La reserva ha fallado!";
+					close;
+				}
+				set .@instanceid,instance_id(IM_PARTY);
+				if (instance_getdifficulty(.@instanceid) == 4){
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXHP,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MATK,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_CAST,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ASPD,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXSP,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ALLSTATS,20);
+				}
+				if (instance_getdifficulty(.@instanceid) == 3){
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXHP,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MATK,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_CAST,10);
+				}
+				if (instance_getdifficulty(.@instanceid) == 1){
+					instance_setbuff(instance_id(IM_PARTY),SC_II_MAXHP,5);
+					instance_setbuff(instance_id(IM_PARTY),SC_II_MAXSP,5);
+					instance_setbuff(instance_id(IM_PARTY),SC_II_ALLSTATS,5);
+				}
+				mes "^00B2EE["+.@md_name$+"]^000000";
+				mes "^0000ff"+.@md_name$+"^000000 - Reserva confirmada";
+				mes "Luego de la reserva, debes volver a hablar y seleccionar 'Entrar al Dungeon' para ingresar.";
+				close;
+			case 2:
+				callsub L_Enter,0,1;
+			case 3:
 				close;
 			}
-			mes "^ff0000El dispositivo funciona correctamente^000000";
-			mes "^ff0000Hablale nuevamente.^000000";
-		} else {
-			mes "^ff0000El dispositivo funciona correctamente^000000";
-			mes "^ff0000Sólo el Party Leader puede iniciar la Instance.^000000";
 		}
-		close;
-	case 2:
-		switch( instance_enter(.@md_name$) ) {
-		case IE_OK:
-			if (isbegin_quest(15050) == 0) {
-				setquest 15050;// Memorial Dungeon: Airship Assault
-				setquest 15051;// Memorial Dungeon: Airship Assault
-			}
-			mapannounce "1@ghvy", "" + strcharinfo(0) + ", miembro de la party " + .@p_name$ + " ha ingresado a " + .@md_name$ + ".", bc_map,"0x00ff99";
-			specialeffect2 EF_WARP;
-			// warp "1@air1",244,73;
+		switch(select("Entrar a "+.@md_name$+":Cancelar")) {
+		case 1:
+			callsub L_Enter,1,1;
+		case 2:
 			end;
-		case IE_NOMEMBER:
-			mes "^ff0000Para ingresar, debes crear una party de uno o más miembros.^000000";
-			close;
-		case IE_NOINSTANCE:
-			mes "^ff0000El Lider de la party aún no ha creado la instancia.^000000";
-			close;
-		case IE_OTHER:
-			mes "Error desconocido, comunícate con alguien del Staff.";// Custom
-			close;
 		}
-	case 3:
-		end;
-	}
-	
-	/*
-	if (is_party_leader() == false) {
-		mes "^ff0000This Memorial Dungeon is only for 1 person. Only the party leader can enter.^000000";
-		close;
-	}
-	.@s = select( "Power Up the Device", "Use the Device", "Cancel" );
-	
-	if (is_party_leader(.@party_id) == false) {
-		mes "^ff0000This Memorial Dungeon is only for 1 person. Only the party leader can enter.^000000";
-		close;
-	}
-	switch(.@s) {
+	case 0:
 	case 1:
-		if (instance_create(.@md_name$) < 0) {
-			mes "Party: " + getpartyname( getcharid(1) );
-			mes "Nombre: " + strcharinfo(0);
-			mes "^0000ff" + .@md_name$ + "^000000 - Ha fallado!";
-			close;
-		}
-		mes "^ff0000El dispositivo funciona correctamente^000000";
-		mes "^ff0000Hablale nuevamente.^000000";
-		close;
-	case 2:
-		switch( instance_enter(.@md_name$) ) {
-		case IE_OK:
-			if (isbegin_quest(15050) == 0) {
-				setquest 15050;// Memorial Dungeon: Airship Assault
-				setquest 15051;// Memorial Dungeon: Airship Assault
+		if (getcharid(1) == aasault_partyid) {
+			mes "Si tienes la instancia generada puedes ingresar. ";
+			next;
+			switch(select("Entrar a "+.@md_name$+":Cancelar")) {
+			case 1:
+				callsub L_Enter,0,0;
+			case 2:
+				close;
 			}
-			mapannounce "dali02", "" + strcharinfo(0) + ", miembro de la party " + getpartyname( getcharid(1) ) + " ha ingresado a " + .@md_name$ + ".", bc_map,"0x00ff99";
-			specialeffect2 EF_WARP;
-			// warp "1@air1",244,73;
-			end;
-		case IE_NOMEMBER:
-			mes "^ff0000Para ingresar, debes crear una party de uno o más miembros.^000000";
-			close;
-		case IE_NOINSTANCE:
-			mes "^ff0000El Lider de la party aún no ha creado la instancia.^000000";
-			close;
-		case IE_OTHER:
-			mes "Error desconocido, comunícate con alguien del Staff.";// Custom
+		} else {
+			set .@dun_lim_time,aasault_timer+82800; // 23h
+			set .@dun_cur_time,gettimetick(2);
+			set .@dun_ent_t,(.@dun_lim_time - .@dun_cur_time);
+			set .@dun_h,(.@dun_ent_t / 3600);
+			set .@dun_m,(.@dun_ent_t - (.@dun_h * 3600)) / 60;
+			set .@dun_s,.@dun_ent_t - ((.@dun_h * 3600) + (.@dun_m * 60));
+			mes "^00B2EE["+.@md_name$+"]^000000";
+			mes "Aún persisten los efectos de la torre, no puedes ingresar hasta ^FFA500" + .@dun_h + "^000000 ^3950ffhora(s)^000000 ^FFA500" + .@dun_m + "^000000 ^3950ffminuto(s)^000000 ^FFA500" + .@dun_s + "^000000 ^3950ffsegundo(s)^000000.";
 			close;
 		}
-	case 3:
-		end;
+	case 2:
+		set aasault_timer,0;
+		erasequest 15050;
+		mes "^0000ffLos registros y los efectos han desaparecido. Puedes volver a ingresar a la "+.@md_name$+" nuevamente.^000000";
+		close;
 	}
-	*/
-	
+
+L_Enter:
+	switch(instance_enter("Assault on the Airship")) {
+	case IE_OTHER:
+		mes "Un error desconocido ha ocurrido.";
+		close;
+	case IE_NOINSTANCE:
+		mes "La instancia no existe o el lider de la Party no la ha generado.";
+		close;
+	case IE_NOMEMBER:
+		mes "Sólo puedes ingresar luego de hacer una Party";
+		close;
+	case IE_OK:
+		mapannounce "instance", strcharinfo(0) +" de la Party, "+ getpartyname( getcharid(1) ) +", ha entrado a la dungeon, "+.@md_name$+".",bc_map,"0x00ff99",FW_NORMAL,12;
+		if (getarg(1)) {
+			set aasault_timer,gettimetick(2);
+			set aasault_partyid, getcharid(1);
+			setquest 15050;
+		}
+		if (getarg(0) == 0) close;
+		else end;
+	}
 }
 
-
-
 instance,34,45,5	script	Old Sign#3	4_BOARD3,{
-	erasequest 15050;// Memorial Dungeon: Airship Assault
-	erasequest 15051;
-	.@AAsault_name$ = $120719_str_AAsault$;
-	.@AAsault_timer  = $120719_num_AAsault;
-	.@AAsault_member = $120903_num_AAsault;
-	.@time_m = .@AAsault_timer / 60;
-	.@time_s = .@AAsault_timer - (.@time_m * 60);
-	if (.@AAsault_name$ == "") {
+	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
 		mes "-- Airship Assault Records --";
-		mes "Aún no hay registros de esta instancia.";// Custom text
-		close;
+		.@AAsault_name$ = getd("$120719_str_AAsault"+.@i+"$");
+		.@AAsault_timer  = getd("$120719_num_AAsault"+.@i);
+		.@AAsault_member = getd("$120903_num_AAsault"+.@i);
+		
+		.@time_m = .@AAsault_timer / 60;
+		.@time_s = .@AAsault_timer - (.@time_m * 60);
+		if (.@AAsault_name$ == "") {
+			mes "Aún no hay registros de esta instancia.";
+		}
+		else {
+			if (.@AAsault_timer < 60)
+				.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+			else
+				.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "Minuto" ) + " " + callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+			if (.@AAsault_member > 0)
+				.@string$ =  " con ^ff0044" + .@AAsault_member + " miembros^000000";
+			mes "Mejor tiempo para ^ff0044" + .@AAsault_name$ + "^000000" + .@string$ + ".";
+			mes "Con el tiempo de ^0000ff" + .@time_txt$ + "^000000.";
+		}
+		mes "Dificultad " + .dificultad$[.@i];
+		if( .@i == 4 )
+			close;
+		else
+			next;
 	}
-	if (.@AAsault_timer < 60)
-		.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "Segundo" );
-	else
-		.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "Minuto" ) + " " + callfunc( "F_InsertPlural", .@time_s, "Segundo" );
-	if (.@AAsault_member > 0)
-		.@string$ =  " con ^ff0044" + .@AAsault_member + " miembros^000000";
-	mes "-- Airship Assault Records --";
-	mes "Mejor tiempo para ^ff0044" + .@AAsault_name$ + "^000000" + .@string$ + ".";
-	mes "Con el tiempo de ^0000ff" + .@time_txt$ + "^000000.";
 	close;
 
 OnInit:
-	if (!$120719_num_AAsault)
-		$120719_num_AAsault = 3600;
-	/*
-	if (rand(1,100) > 97) {
-		$120719_num_ttower = 3600;
-		$120719_str_ttower$ = "";
+	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
+		if (!getd("$120719_num_AAsault"+.@i))
+			setd "$120719_num_AAsault"+.@i,3600;
 	}
-	*/
+
+	setarray .dificultad$,"","^008000Easy^000000","Normal","^BA7100Hard^000000","^ff0000Insane^000000";
 	end;
 }
 
@@ -190,7 +222,8 @@ OnT_s:
 	initnpctimer;
 	end;
 OnT_s2:
-	.@AAsault_timer = $120719_num_AAsault;
+	'120903_str_AAsaultDif = instance_getdifficulty(instance_id(IM_PARTY));
+	.@AAsault_timer = getd("$120719_num_AAsault"+'120903_str_AAsaultDif);
 	if (!.@AAsault_timer)
 		.@AAsault_timer = 3600;
 	getmapxy 'map_name$, .@x, .@y, BL_NPC;
@@ -209,9 +242,9 @@ OnT_s2:
 		mapannounce 'map_name$, "El tiempo de " + .@time_txt$ + " ha sido guardado. Pero no ha roto la marca.",bc_map,"0xffff33";
 	else {
 		announce "La party "+.@winner_name$ + " con " + .@AAsault_member + " miembro(s) han mejorado el tiempo en Airship Assault (" + .@time_txt$ + ").",bc_all,"0xffff33",FW_NORMAL,15;
-		$120719_str_AAsault$ = .@winner_name$;
-		$120719_num_AAsault = .@current_timer;
-		$120903_num_AAsault = .@AAsault_member;
+		setd "$120719_str_AAsault"+'120903_str_AAsaultDif+"$" , .@winner_name$;
+		setd "$120719_num_AAsault"+'120903_str_AAsaultDif , .@current_timer;
+		setd "$120903_num_AAsault"+'120903_str_AAsaultDif , .@AAsault_member;
 	}
 	end;
 

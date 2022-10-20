@@ -8,37 +8,41 @@
 //============================================================
 
 instance,41,37,5	script	Old Sign#1	4_BOARD3,{
-	//erasequest 12325;
-	.@dragon_name$ = $120719_str_dragon$;
-	.@dragon_timer  = $120719_num_dragon;
-	.@dragon_member = $120903_num_dragon;
-	.@time_m = .@dragon_timer / 60;
-	.@time_s = .@dragon_timer - (.@time_m * 60);
-	if (.@dragon_name$ == "") {
+	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
 		mes "-- Dragon's Nest Records --";
-		mes "Aún no hay registros de esta instancia.";// Custom text
-		close;
+		.@dragon_name$ = getd("$120719_str_dragon"+.@i+"$");
+		.@dragon_timer  = getd("$120719_num_dragon"+.@i);
+		.@dragon_member = getd("$120903_num_dragon"+.@i);
+		
+		.@time_m = .@dragon_timer / 60;
+		.@time_s = .@dragon_timer - (.@time_m * 60);
+		if (.@dragon_name$ == "") {
+			mes "Aún no hay registros de esta instancia.";
+		}
+		else {
+			if (.@dragon_timer < 60)
+				.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+			else
+				.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "Minuto" ) + " " + callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+			if (.@dragon_member > 0)
+				.@string$ =  " con ^ff0044" + .@dragon_member + " miembros^000000";
+			mes "Mejor tiempo para ^ff0044" + .@dragon_name$ + "^000000" + .@string$ + ".";
+			mes "Con el tiempo de ^0000ff" + .@time_txt$ + "^000000.";
+		}
+		mes "Dificultad " + .dificultad$[.@i];
+		if( .@i == 4 )
+			close;
+		else
+			next;
 	}
-	if (.@dragon_timer < 60)
-		.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "Segundo" );
-	else
-		.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "Minuto" ) + " " + callfunc( "F_InsertPlural", .@time_s, "Segundo" );
-	if (.@dragon_member > 0)
-		.@string$ =  " con ^ff0044" + .@dragon_member + " miembros^000000";
-	mes "-- Dragon's Nest Records --";
-	mes "Mejor tiempo para ^ff0044" + .@dragon_name$ + "^000000" + .@string$ + ".";
-	mes "Con el tiempo de ^0000ff" + .@time_txt$ + "^000000.";
 	close;
 
 OnInit:
-	if (!$120719_num_dragon)
-		$120719_num_dragon = 3600;
-	/*
-	if (rand(1,100) > 97) {
-		$120719_num_dragon = 3600;
-		$120719_str_dragon$ = "";
+	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
+		if (!getd("$120719_num_dragon"+.@i))
+			setd "$120719_num_dragon"+.@i,3600;
 	}
-	*/
+	setarray .dificultad$,"","^008000Easy^000000","Normal","^BA7100Hard^000000","^ff0000Insane^000000";
 	end;
 }
 
@@ -55,58 +59,125 @@ instance,37,35,7	script	Magic Scholar	4_M_SAGE_C,{
 		mes "Sin party? Vuelve cuando hayas creado una, ni pensarlo en hacer esto solo.";
 		close;
 	}
-	switch( checkquest(12325,PLAYTIME) ) {
+	set .@dragon_timer,checkquest(12325,PLAYTIME);
+	
+	switch( .@dragon_timer ) {
 	case -1:
 		if (is_party_leader() == true) {
-			mes "[Magic Scholar]";
-			mes "Qué puedo hacer por ti?";
+			mes "^00B2EE[Dragon's Nest]^000000";
+			mes "Confirmado, la Party se ha creado, ¿te gustaría acceder al Dragon's Nest?";
 			next;
-			switch( select("Reservar Dragon's Nest:Qué haces aquí?:Parar de hablar.") ) {
+			switch(select("Generar dungeon "+.@md_name$+":Entrar al dungeon:Cancelar")) {
 			case 1:
-				switch( instance_create(.@md_name$) ) {
-				case -3:
-					dispbottom "Memorial Dungeon, '" + .@md_name$ + "' ya está en progreso.",0xFFFFFF;
+				switch(select("^3CB371[»]^000000 ^008000Modo Easy^000000","^3CB371[»]^000000 Modo Normal","^3CB371[»]^000000 ^BA7100Modo Hard^000000","^3CB371[»]^000000 ^ff0000Modo Insane^000000")){
+				case 1:
+					set .@level$,ID_EASY;
 					break;
-				case -4:
-				case -2:
-				case -1:
-					mes "[Magic Scholar]";
-					mes "Vaya, mis manos se han resbalado. Se requiere volver a activar el portal.";
+				case 2:
+					set .@level$,ID_NORMAL;
+					break;
+				case 3:
+					set .@level$,ID_HARD;
+					break;
+				case 4:
+					set .@level$,ID_INSANE;
+					break;
+				}
+				//if (instance_create(.@md_name$) < 0) {
+				if (instance_create(.@md_name$,IM_PARTY,.@party_id,.@level$) < 0) {
+					mes "Nombre de la Party: "+ getpartyname(.@party_id);
+					mes "Lider de la Party: "+strcharinfo(0);
+					mes "^0000ff"+.@md_name$+" ^000000- La reserva ha fallado!";
 					close;
 				}
-				mes "[Magic Scholar]";
-				mes "El espacio está bajo control";
-				mes "Por favor espera un minuto.";
+				set .@instanceid,instance_id(IM_PARTY);
+				if (instance_getdifficulty(.@instanceid) == 4){
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXHP,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MATK,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_CAST,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ASPD,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXSP,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ALLSTATS,20);
+				}
+				if (instance_getdifficulty(.@instanceid) == 3){
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXHP,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MATK,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_CAST,10);
+				}
+				if (instance_getdifficulty(.@instanceid) == 1){
+					instance_setbuff(instance_id(IM_PARTY),SC_II_MAXHP,5);
+					instance_setbuff(instance_id(IM_PARTY),SC_II_MAXSP,5);
+					instance_setbuff(instance_id(IM_PARTY),SC_II_ALLSTATS,5);
+				}
+				mes "^FFA500[Dragon's Nest]^000000";
+				mes "^0000ff"+.@md_name$+"^000000 - Reserva confirmada";
+				mes "Luego de la reserva, debes volver a hablar y seleccionar 'Entrar al Dungeon' para ingresar.";
 				close;
 			case 2:
-				break;
+				callsub L_Enter,0,1;
 			case 3:
-				mes "[Magic Scholar]";
-				mes "Ok, lo entiendo. Ven a verme cuando cambies de idea.";
 				close;
 			}
 		}
-		mes "[Magic Scholar]";
-		mes "Estoy investigando esta brecha en el espacio tiempo.";
-		next;
-		mes "[Magic Scholar]";
-		mes "Con mis estudios he logrado estabilizarla momentáneamente.";
-		next;
-		mes "[Magic Scholar]";
-		mes "Esta brecha en particular nos lleva al pasado, pero aún no logro averiguar a cual aventura...";
-		next;
-		mes "[Magic Scholar]";
-		mes "De todos modos, lo puedo activar si tu eres el party lider.";
-		close;
+		switch(select("Entrar a "+.@md_name$+":Cancelar")) {
+		case 1:
+			callsub L_Enter,1,1;
+		case 2:
+			end;
+		}
 	case 0:
 	case 1:
-		mes "[Magic Scholar]";
-		mes "La brecha aún no es segura, por favor espera a que pase un tiempo.";
-		close;
+		if (.@dragon_timer < 2 && getcharid(1) == dragon_partyid) {
+			mes "Si tienes la instancia generada puedes ingresar. ";
+			next;
+			switch(select("Entrar a "+.@md_name$+":Cancelar")) {
+			case 1:
+				callsub L_Enter,0,0;
+			case 2:
+				close;
+			}
+		} else {
+			set .@dun_lim_time,dragon_timer+82800; // 23h
+			set .@dun_cur_time,gettimetick(2);
+			set .@dun_ent_t,(.@dun_lim_time - .@dun_cur_time);
+			set .@dun_h,(.@dun_ent_t / 3600);
+			set .@dun_m,(.@dun_ent_t - (.@dun_h * 3600)) / 60;
+			set .@dun_s,.@dun_ent_t - ((.@dun_h * 3600) + (.@dun_m * 60));
+			mes "^00B2EE[Dragon's Nest]^000000";
+			mes "Aún persisten los efectos del nido, no puedes ingresar hasta ^FFA500" + .@dun_h + "^000000 ^3950ffhora(s)^000000 ^FFA500" + .@dun_m + "^000000 ^3950ffminuto(s)^000000 ^FFA500" + .@dun_s + "^000000 ^3950ffsegundo(s)^000000.";
+			close;
+		}
 	case 2:
-		mes "^0000ffLa brecha se ha estabilizado. Puedes volver a viajar.^000000";
+		set dragon_timer,0;
 		erasequest 12325;
+		mes "^0000ffLos registros y los efectos han desaparecido. Puedes volver a ingresar a Dragon's Nest nuevamente.^000000";
 		close;
+	}
+
+L_Enter:
+	switch(instance_enter("Dragon's Nest")) {
+	case IE_OTHER:
+		mes "Un error desconocido ha ocurrido.";
+		close;
+	case IE_NOINSTANCE:
+		mes "La instancia no existe o el lider de la Party no la ha generado.";
+		close;
+	case IE_NOMEMBER:
+		mes "Sólo puedes ingresar luego de hacer una Party";
+		close;
+	case IE_OK:
+		mapannounce "instance", strcharinfo(0) +" de la Party, "+ getpartyname( getcharid(1) ) +", ha entrado a la dungeon, Dragon's Nest.",bc_map,"0x00ff99",FW_NORMAL,12;
+		if (getarg(1)) {
+			set dragon_timer,gettimetick(2);
+			set dragon_partyid, getcharid(1);
+			setquest 12325;
+		}
+		if (getarg(0) == 0) close;
+		else end;
 	}
 }
 
@@ -1697,6 +1768,7 @@ OnStart:
 	donpcevent instance_npcname("Chaos#south") + "::OnEnd";
 	donpcevent instance_npcname("Chaos#north") + "::OnEnd";
 	//Custom
+	'120903_str_dragonDif = instance_getdifficulty(instance_id(IM_PARTY));
 	donpcevent instance_npcname("#globaltimer22") + "::OnT_s2";
 	donpcevent instance_npcname("#globaltimer22") + "::OnT_s3";
 	//
@@ -1891,7 +1963,7 @@ OnT_s:
 	initnpctimer;
 	end;
 OnT_s2:
-	.@dragon_timer = $120719_num_dragon;
+	.@dragon_timer = getd("$120719_num_dragon"+'120903_str_dragonDif);
 	if (!.@dragon_timer)
 		.@dragon_timer = 3600;
 	.@dragon_member = getmapusers('map_name$);
@@ -1909,9 +1981,9 @@ OnT_s2:
 		mapannounce 'map_name$, "El tiempo de " + .@time_txt$ + " ha sido guardado. Pero no ha roto la marca.",bc_map,"0xffff33";
 	else {
 		announce "La party "+.@winner_name$ + " con " + .@dragon_member + " miembro(s) en party han mejorado el tiempo en Dragon's Nest (" + .@time_txt$ + ").",bc_all,"0xffff33",FW_NORMAL,15;
-		$120719_str_dragon$ = .@winner_name$;
-		$120719_num_dragon = .@current_timer;
-		$120903_num_dragon = .@dragon_member;
+		setd "$120719_str_dragon"+'120903_str_dragonDif+"$" , .@winner_name$;
+		setd "$120719_num_dragon"+'120903_str_dragonDif , .@current_timer;
+		setd "$120903_num_dragon"+'120903_str_dragonDif , .@dragon_member;
 	}
 	end;
 OnT_s3:
