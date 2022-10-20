@@ -3401,6 +3401,252 @@ Body:
         StealProtected: true
 ###########################################################################
 #
+# Instance Wave Mode
+#
+###########################################################################
+  - Id: 3075
+    AegisName: WA_TREASURE
+    Name: Treasure
+    Level: 1
+    Hp: 10
+    Attack: 1
+    Attack2: 1
+    Defense: 100
+    Dex: 1199
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Holy
+    ElementLevel: 1
+    Class: Battlefield
+    Modes:
+      NoRandomWalk: true
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+      KnockBackImmune: true
+    Drops:
+      - Item: Treasure_Chest_MvP
+        Rate: 3000
+  - Id: 3076
+    AegisName: WA_MONSTER_1
+    Name: Go!
+    Level: 100
+    Hp: 10000
+    Defense: 64
+    MagicDefense: 50
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Angel
+    Element: Holy
+    ElementLevel: 3
+    WalkSpeed: 300
+    AttackDelay: 1332
+    AttackMotion: 288
+    DamageMotion: 384
+    Ai: 25
+    Modes:
+      NoRandomWalk: true
+  - Id: 3077
+    AegisName: WA_MONSTER_2
+    Name: Go!
+    Level: 100
+    Hp: 10500
+    Defense: 64
+    MagicDefense: 50
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Angel
+    Element: Holy
+    ElementLevel: 3
+    WalkSpeed: 300
+    AttackDelay: 1332
+    AttackMotion: 288
+    Ai: 25
+    Modes:
+      NoRandomWalk: true
+  - Id: 3078
+    AegisName: WA_MONSTER_3
+    Name: Go!
+    Level: 105
+    Hp: 11000
+    Defense: 100
+    MagicDefense: 84
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Angel
+    Element: Holy
+    ElementLevel: 3
+    WalkSpeed: 160
+    AttackDelay: 1025
+    AttackMotion: 720
+    Ai: 25
+    Modes:
+      NoRandomWalk: true
+  - Id: 3079
+    AegisName: WA_MONSTER_4
+    Name: Go!
+    Level: 120
+    Hp: 12000
+    Defense: 66
+    MagicDefense: 95
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Angel
+    Element: Holy
+    ElementLevel: 3
+    WalkSpeed: 160
+    AttackDelay: 1025
+    AttackMotion: 720
+    Ai: 25
+    Modes:
+      NoRandomWalk: true
+  - Id: 3080
+    AegisName: WA_MONSTER_5
+    Name: Go!
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 4
+    WalkSpeed: 160
+    AttackDelay: 1025
+    AttackMotion: 720
+    Ai: 25
+    Modes:
+      NoRandomWalk: true
+  - Id: 3081
+    AegisName: WA_MONSTER_6
+    Name: Go!
+    Level: 125
+    Hp: 14000
+    Defense: 80
+    MagicDefense: 89
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Angel
+    Element: Holy
+    ElementLevel: 3
+    WalkSpeed: 160
+    AttackDelay: 1025
+    AttackMotion: 720
+    Ai: 25
+    Modes:
+      NoRandomWalk: true
+  - Id: 3082
+    AegisName: WA_MONSTER_7
+    Name: Go!
+    Level: 131
+    Hp: 15000
+    Defense: 85
+    MagicDefense: 92
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Angel
+    Element: Holy
+    ElementLevel: 2
+    WalkSpeed: 160
+    AttackDelay: 1025
+    AttackMotion: 720
+    Ai: 25
+    Modes:
+      NoRandomWalk: true
+  - Id: 3083
+    AegisName: WA_MONSTER_8
+    Name: Go!
+    Level: 131
+    Hp: 18000
+    Defense: 80
+    MagicDefense: 86
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Angel
+    Element: Holy
+    ElementLevel: 2
+    WalkSpeed: 160
+    AttackDelay: 1025
+    AttackMotion: 720
+    Ai: 25
+    Modes:
+      NoRandomWalk: true
+  - Id: 3084
+    AegisName: WA_MONSTER_9
+    Name: Go!
+    Level: 135
+    Hp: 20000
+    Defense: 100
+    MagicDefense: 96
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Angel
+    Element: Holy
+    ElementLevel: 3
+    WalkSpeed: 160
+    AttackDelay: 1025
+    AttackMotion: 720
+    Ai: 25
+    Modes:
+      NoRandomWalk: true
+  - Id: 3085
+    AegisName: WA_MONSTER_10
+    Name: Go!
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 4
+    WalkSpeed: 160
+    AttackDelay: 1025
+    AttackMotion: 720
+    Ai: 25
+    Modes:
+      NoRandomWalk: true
+  - Id: 3086
+    AegisName: WA_MERCENARY
+    Name: Mercenary
+    Level: 101
+    Hp: 20099
+    Attack: 557
+    Attack2: 775
+    Defense: 66
+    MagicDefense: 36
+    Str: 20
+    Agi: 46
+    Vit: 25
+    Int: 35
+    Dex: 64
+    Luk: 30
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demihuman
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 230
+    AttackDelay: 1415
+    AttackMotion: 792
+    Ai: 24
+    Class: Battlefield
+    Modes:
+      Aggressive: true
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+###########################################################################
+#
 # Instance Dragon's Nest
 #
 ###########################################################################

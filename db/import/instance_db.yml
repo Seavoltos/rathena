@@ -71,3 +71,9 @@ Body:
       6@thts: true
       7@thts: true
       8@thts: true
+  - Id: 8
+    Name: Wave Mode
+    Enter:
+      Map: 1@def02
+      X: 29
+      Y: 35
