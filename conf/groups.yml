@@ -46,6 +46,32 @@ Body:
     Name: Player
     Level: 0
     Commands:
+      commands: true
+      help: true
+      rates: true
+      uptime: true
+      exp: true
+      mobinfo: true
+      iteminfo: true
+      whodrops: true
+      time: true
+      jailtime: true
+      showexp: true
+      showzeny: true
+      whereis: true
+      refresh: true
+      noask: true
+      noks: true
+      autoloot: true
+      alootid: true
+      autoloottype: true
+      autotrade: true
+      request: true
+      breakguild: true
+      duel: true
+      invite: true
+      leave: true
+      accept: true
       changedress: true
       resurrect: true
     Permissions:
