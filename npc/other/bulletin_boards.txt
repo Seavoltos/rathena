@@ -144,16 +144,16 @@ prontera,148,49,5	script	Bulletin Board#09	837,{
 
 morocc,152,110,5	script	Bulletin Board#11	837,{
 	mes "[Morocc: The Frontier Town]";
-	mes "Welcome to Morocc, the City of the Desert. Morocc was built on an oasis, so this town can accomodate its many visitors and travelers.";
+	mes "Welcome to Morroc, the City of the Desert. Morroc was built on an oasis, so this town can accomodate its many visitors and travelers.";
 	next;
 	mes "[Morocc: The Frontier Town]";
-	mes "Morocc Castle lies in the center of this city. Please feel free to explore this town, and enjoy its unique atmosphere. However, watch your pockets and beware of Rogues and Thieves.";
+	mes "Morroc Castle lies in the center of this city. Please feel free to explore this town, and enjoy its unique atmosphere. However, watch your pockets and beware of Rogues and Thieves.";
 	next;
 	mes "[Morocc: The Frontier Town]";
-	mes "From Morocc, the ^660000Pyramid Dungeon^000000 can be found to the Northwest, and the ^660000Sphinx Dungeon^000000 can be found to the West. To the Southeast, you may find ^660000Ant Hell^000000.";
+	mes "From Morroc, the ^660000Pyramid Dungeon^000000 can be found to the Northwest, and the ^660000Sphinx Dungeon^000000 can be found to the West. To the Southeast, you may find ^660000Ant Hell^000000.";
 	next;
 	mes "[Morocc: The Frontier Town";
-	mes "The Assassin Guild is rumored to be located to the Southeast. When you head East from Morocc, and then North, you will arrive at ^3355FFProntera^000000.";
+	mes "The Assassin Guild is rumored to be located to the Southeast. When you head East from Morroc, and then North, you will arrive at ^3355FFProntera^000000.";
 	close;
 }
 
@@ -383,7 +383,6 @@ niflheim,200,191,5	script	Bulletin Board#25	837,{
 	close;
 }
 
-/*
 moc_fild15,267,264,5	script	Bulletin Board#26	837,{
 	mes "[Ant Hell]";
 	mes "^6B1312Caution!^000000";
@@ -398,7 +397,6 @@ moc_fild15,267,264,5	script	Bulletin Board#26	837,{
 	mes "a boss monster called ^6B1312Phreeoni^000000 will appear at certain time.";
 	close;
 }
-*/
 
 glast_01,369,308,5	script	Bulletin Board#28	837,{
 	mes "[Glast Heim]";

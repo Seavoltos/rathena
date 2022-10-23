@@ -4417,20 +4417,14 @@ Body:
     DamageMotion: 360
     Ai: 21
     Drops:
-      - Item: Rotten_Bandage
-        Rate: 3000
       - Item: Healing_Staff
         Rate: 10
-      - Item: Mementos
-        Rate: 550
-      - Item: Oridecon
-        Rate: 105
-      - Item: Sacred_Masque
-        Rate: 4365
-      - Item: Mitten_Of_Presbyter
-        Rate: 1
-      - Item: Blessed_Wand
-        Rate: 3
+      - Item: Earring
+        Rate: 5
+      - Item: Ring
+        Rate: 5
+      - Item: Penetration
+        Rate: 15
       - Item: Anubis_Card
         Rate: 1
         StealProtected: true
@@ -6863,8 +6857,8 @@ Body:
         Rate: 650
       - Item: Elunium
         Rate: 2600
-      - Item: Staff_Of_Bordeaux
-        Rate: 100
+      - Item: Oridecon
+        Rate: 1900
       - Item: Moonlight_Flower_Card
         Rate: 1
         StealProtected: true
@@ -12682,8 +12676,6 @@ Body:
     DamageMotion: 288
     Ai: 17
     Drops:
-      - Item: Librarian_Glove
-        Rate: 5
       - Item: Worn_Out_Page
         Rate: 1000
       - Item: Earthworm_Peeling
@@ -13059,8 +13051,6 @@ Body:
         Rate: 35
       - Item: Gladius
         Rate: 80
-      - Item: Sandstorm
-        Rate: 15
       - Item: Ghost_Bandana
         Rate: 1
       - Item: Skeleton_General_Card
@@ -13204,8 +13194,6 @@ Body:
         Rate: 200
       - Item: Book
         Rate: 8
-      - Item: Icarus_Wing
-        Rate: 5
       - Item: Fruit_Of_Mastela
         Rate: 50
       - Item: Cremy_Fear_Card
@@ -13536,8 +13524,6 @@ Body:
         Rate: 3000
       - Item: Brigan
         Rate: 5335
-      - Item: Twilight_Desert
-        Rate: 20
       - Item: Star_Crumb
         Rate: 100
       - Item: Great_Nature
@@ -13690,8 +13676,6 @@ Body:
         Rate: 3
       - Item: Scarlet_Jewel
         Rate: 20
-      - Item: Double_Bound
-        Rate: 15
       - Item: Giant_Honet_Card
         Rate: 1
         StealProtected: true
@@ -13782,8 +13766,6 @@ Body:
         Rate: 2500
       - Item: Boots_
         Rate: 9
-      - Item: Bowman_Scarf
-        Rate: 5
       - Item: Round_Shell
         Rate: 680
       - Item: Sticky_Mucus
@@ -13831,8 +13813,6 @@ Body:
         Rate: 120
       - Item: Honey
         Rate: 500
-      - Item: Pocket_Watch_
-        Rate: 5
       - Item: Gold
         Rate: 5
       - Item: Cyfar
@@ -13975,8 +13955,6 @@ Body:
         Rate: 8
       - Item: Fire_Arrow
         Rate: 10000
-      - Item: Magic_Study_Vol1
-        Rate: 20
       - Item: Flame_Heart
         Rate: 180
       - Item: Gajomart_Card
@@ -20637,8 +20615,6 @@ Body:
         Rate: 3200
       - Item: Dullahan_Armor
         Rate: 4850
-      - Item: An_Eye_Of_Dullahan
-        Rate: 1
       - Item: Manteau
         Rate: 13
       - Item: Manteau_
@@ -20687,8 +20663,6 @@ Body:
         Rate: 100
       - Item: Loki's_Whispers
         Rate: 1
-      - Item: Lunatic_Brooch
-        Rate: 5
       - Item: Loli_Ruri_Card
         Rate: 1
         StealProtected: true
@@ -25886,8 +25860,6 @@ Body:
         Rate: 10
       - Item: Chain_Mail_
         Rate: 2
-      - Item: Ring_Of_Rogue
-        Rate: 2
       - Item: Coward_
         Rate: 10
       - Item: Whikebain_Card
@@ -29269,8 +29241,6 @@ Body:
         Rate: 10
       - Item: Screw
         Rate: 500
-      - Item: Claw_
-        Rate: 10
       - Item: Elunium
         Rate: 10
       - Item: Curved_Sword
@@ -30367,9 +30337,6 @@ Body:
         Rate: 1000
       - Item: Hurricane_Fury
         Rate: 100
-      - Item: Gloom_Under_Night_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1769
     AegisName: AGAV
     Name: Agav
@@ -30458,9 +30425,6 @@ Body:
         Rate: 100
       - Item: Divine_Cloth
         Rate: 20
-      - Item: Echio_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1771
     AegisName: VANBERK
     Name: Vanberk
@@ -30596,9 +30560,6 @@ Body:
         Rate: 2000
       - Item: Shadow_Walk
         Rate: 10
-      - Item: Hodremlin_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1774
     AegisName: SEEKER
     Name: Seeker
@@ -30641,9 +30602,6 @@ Body:
         Rate: 1000
       - Item: Berdysz
         Rate: 20
-      - Item: Seeker_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1775
     AegisName: SNOWIER
     Name: Snowier
@@ -30688,9 +30646,6 @@ Body:
         Rate: 3
       - Item: Crystal_Blue
         Rate: 100
-      - Item: Snowier_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1776
     AegisName: SIROMA
     Name: Siroma
@@ -30816,9 +30771,6 @@ Body:
         Rate: 20
       - Item: Frozen_Bow
         Rate: 1
-      - Item: Gazeti_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1779
     AegisName: KTULLANUX
     Name: Ktullanux
@@ -31000,9 +30952,6 @@ Body:
         Rate: 50
       - Item: Combo_Battle_Glove
         Rate: 2
-      - Item: Roween_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1783
     AegisName: GALION
     Name: Galion
@@ -31042,9 +30991,6 @@ Body:
         Rate: 10
       - Item: Ulfhedinn
         Rate: 5
-      - Item: Galion_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1784
     AegisName: STAPO
     Name: Stapo
@@ -31086,9 +31032,6 @@ Body:
         Rate: 10
       - Item: Seismic_Fist
         Rate: 3
-      - Item: Stapo_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1785
     AegisName: ATROCE
     Name: Atroce
@@ -31144,9 +31087,6 @@ Body:
         Rate: 100
       - Item: Altas_Weapon
         Rate: 100
-      - Item: Atroce_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1786
     AegisName: G_AGAV
     Name: Agav
@@ -32572,9 +32512,6 @@ Body:
         Rate: 10
       - Item: Muscle_Cutter
         Rate: 50
-      - Item: Sword_Guardian_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1830
     AegisName: BOW_GUARDIAN
     Name: Bow Master
@@ -32617,9 +32554,6 @@ Body:
         Rate: 20
       - Item: Orleans_Glove
         Rate: 4
-      - Item: Bow_Guardian_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1831
     AegisName: SALAMANDER
     Name: Salamander
@@ -32665,9 +32599,6 @@ Body:
         Rate: 1
       - Item: Meteo_Plate_Armor
         Rate: 20
-      - Item: Salamander_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1832
     AegisName: IFRIT
     Name: Ifrit
@@ -32771,9 +32702,6 @@ Body:
         Rate: 10
       - Item: Piercing_Staff
         Rate: 10
-      - Item: Kasa_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1834
     AegisName: G_SALAMANDER
     Name: Salamander
@@ -32910,11 +32838,6 @@ Body:
         Rate: 10
       - Item: Electric_Eel
         Rate: 25
-      - Item: Flaming_Ice
-        Rate: 20
-      - Item: Imp_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1838
     AegisName: KNOCKER
     Name: Knocker
@@ -32961,9 +32884,6 @@ Body:
         Rate: 3
       - Item: Earth_Bow
         Rate: 5
-      - Item: Knocker_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1839
     AegisName: BYORGUE
     Name: Byorgue
@@ -33009,9 +32929,6 @@ Body:
         Rate: 1
       - Item: Vroken_Sword
         Rate: 4365
-      - Item: Byorgue_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1840
     AegisName: GOLDEN_SAVAGE
     Name: Golden Savage
@@ -33937,9 +33854,6 @@ Body:
         Rate: 3000
       - Item: Sticky_Mucus
         Rate: 3000
-      - Item: Zombie_Slaughter_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1865
     AegisName: RAGGED_ZOMBIE
     Name: Ragged Zombie
@@ -33981,9 +33895,6 @@ Body:
         Rate: 2
       - Item: Wasteland_Outlaw
         Rate: 10
-      - Item: Ragged_Zombie_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1866
     AegisName: HELL_POODLE
     Name: Hell Poodle
@@ -34030,9 +33941,6 @@ Body:
         Rate: 5500
       - Item: Pet_Food
         Rate: 400
-      - Item: Hell_Poodle_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1867
     AegisName: BANSHEE
     Name: Banshee
@@ -34075,9 +33983,6 @@ Body:
         Rate: 1500
       - Item: Brigan
         Rate: 5335
-      - Item: Banshee_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1868
     AegisName: G_BANSHEE
     Name: Banshee
@@ -34145,9 +34050,6 @@ Body:
         Rate: 20
       - Item: Horrendous_Mouth
         Rate: 6000
-      - Item: Flame_Skull_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1870
     AegisName: NECROMANCER
     Name: Necromancer
@@ -34190,9 +34092,6 @@ Body:
         Rate: 100
       - Item: Rent_Spell_Book
         Rate: 1500
-      - Item: Necromancer_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1871
     AegisName: FALLINGBISHOP
     Name: Fallen Bishop Hibram
@@ -34245,9 +34144,6 @@ Body:
         Rate: 5432
       - Item: Blessed_Wand
         Rate: 2000
-      - Item: Fallen_Bishop_Card
-        Rate: 1
-        StealProtected: true
   - Id: 1872
     AegisName: BEELZEBUB_FLY
     Name: Hell Fly
@@ -34545,8 +34441,6 @@ Body:
     DamageMotion: 360
     Ai: 01
     Drops:
-      - Item: Iron_Wrist
-        Rate: 5
       - Item: Solid_Twig
         Rate: 4000
       - Item: Log
@@ -34634,8 +34528,6 @@ Body:
         Rate: 1000
       - Item: Yaga_Pestle
         Rate: 5000
-      - Item: Release_Of_Wish
-        Rate: 10
       - Item: Pill
         Rate: 150
       - Item: Piece_Of_Cake
@@ -34675,8 +34567,6 @@ Body:
     Drops:
       - Item: Leaflet_Of_Hinal
         Rate: 900
-      - Item: Ancient_Magic
-        Rate: 5
       - Item: Bitter_Herb
         Rate: 100
       - Item: Fruit_Of_Mastela
@@ -34687,6 +34577,8 @@ Body:
         Rate: 1500
       - Item: Old_Blue_Box
         Rate: 3
+      - Item: Poison_Bottle
+        Rate: 1
   - Id: 1884
     AegisName: MAVKA
     Name: Mavka
@@ -34716,8 +34608,6 @@ Body:
     DamageMotion: 360
     Ai: 04
     Drops:
-      - Item: Principles_Of_Magic
-        Rate: 5
       - Item: Singing_Flower
         Rate: 300
       - Item: Singing_Plant
@@ -34777,8 +34667,6 @@ Body:
         Rate: 200
       - Item: Int_Dish10
         Rate: 1000
-      - Item: Ixion_Wing
-        Rate: 100
       - Item: Pole_Axe
         Rate: 5
       - Item: Treasure_Box
@@ -35643,19 +35531,6 @@ Body:
         Rate: 5000
       - Item: Old_Violet_Box
         Rate: 5000
-    Drops:
-      - Item: Diabolus_Helmet
-        Rate: 1000
-      - Item: Diabolus_Robe
-        Rate: 5000
-      - Item: Diabolus_Armor
-        Rate: 5000
-      - Item: Diabolus_Boots
-        Rate: 5000
-      - Item: Dark_Crystal
-        Rate: 9000
-      - Item: Dark_Debris
-        Rate: 9000
   - Id: 1918
     AegisName: MOROCC_1
     Name: Incarnation of Morocc
@@ -35686,21 +35561,6 @@ Body:
     DamageMotion: 432
     Ai: 21
     Class: Boss
-    Drops:
-      - Item: Herald_Of_GOD
-        Rate: 10
-      - Item: Dark_Crystal
-        Rate: 1000
-      - Item: Dark_Debris
-        Rate: 3000
-      - Item: Elunium
-        Rate: 160
-      - Item: Brigan
-        Rate: 4850
-      - Item: Diabolus_Manteau
-        Rate: 3
-      - Item: Nemesis
-        Rate: 20
   - Id: 1919
     AegisName: MOROCC_2
     Name: Incarnation of Morocc
@@ -35731,19 +35591,6 @@ Body:
     DamageMotion: 432
     Ai: 21
     Class: Boss
-    Drops:
-      - Item: Skin_Of_Ventus
-        Rate: 3
-      - Item: Dark_Crystal
-        Rate: 1000
-      - Item: Dark_Debris
-        Rate: 3000
-      - Item: Oridecon
-        Rate: 160
-      - Item: Cyfar
-        Rate: 3500
-      - Item: Cross_Shield
-        Rate: 15
   - Id: 1920
     AegisName: MOROCC_3
     Name: Incarnation of Morocc
@@ -35774,21 +35621,6 @@ Body:
     DamageMotion: 432
     Ai: 21
     Class: Boss
-    Drops:
-      - Item: Ragamuffin_Cape
-        Rate: 10
-      - Item: Dark_Crystal
-        Rate: 1000
-      - Item: Dark_Debris
-        Rate: 3000
-      - Item: Elunium
-        Rate: 160
-      - Item: Brigan
-        Rate: 4850
-      - Item: Cursed_Hand
-        Rate: 3
-      - Item: Bloody_Eater
-        Rate: 15
   - Id: 1921
     AegisName: MOROCC_4
     Name: Incarnation of Morocc
@@ -35819,19 +35651,6 @@ Body:
     DamageMotion: 432
     Ai: 21
     Class: Boss
-    Drops:
-      - Item: Diabolus_Ring
-        Rate: 5
-      - Item: Dark_Crystal
-        Rate: 1000
-      - Item: Dark_Debris
-        Rate: 3000
-      - Item: Oridecon
-        Rate: 160
-      - Item: Cyfar
-        Rate: 3500
-      - Item: Exorcism_Bible
-        Rate: 20
   - Id: 1922
     AegisName: G_MOROCC_1
     Name: Incarnation of Morocc

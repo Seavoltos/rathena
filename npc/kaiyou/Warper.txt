@@ -700,6 +700,104 @@ warpto:
 		set Zeny, Zeny - precio_w;
 	warp lastmap$,lastx,lasty;
 	end;
+	
+
+OnNaviGenerate:
+	//Ciudades
+	naviregisterwarp("Warper > Prontera", "prontera", 155, 183);
+	naviregisterwarp("Warper > Alberta", "alberta", 28, 234);
+	naviregisterwarp("Warper > Al De Baran", "aldebaran", 140, 131);
+	naviregisterwarp("Warper > Amatsu", "amatsu", 198, 84);
+	naviregisterwarp("Warper > Ayothaya", "ayothaya", 208, 166);
+	naviregisterwarp("Warper > Einbech", "einbech",63,35);
+	naviregisterwarp("Warper > Einbroch", "einbroch",64,200);
+	naviregisterwarp("Warper > Geffen", "geffen",119,59);
+	naviregisterwarp("Warper > Hugel", "hugel",96,145);
+	naviregisterwarp("Warper > Izlude", "izlude",128,114);
+	naviregisterwarp("Warper > Jawaii", "jawaii",251,132);
+	naviregisterwarp("Warper > Juno", "yuno",157,51);
+	naviregisterwarp("Warper > Kunlun", "gonryun",160,120);
+	naviregisterwarp("Warper > Lighthalzen", "lighthalzen",158,92);
+	naviregisterwarp("Warper > Luoyang", "louyang",217,100);
+	naviregisterwarp("Warper > Lutie", "xmas",147,134);
+	naviregisterwarp("Warper > Morocc", "morocc",156,93);
+	naviregisterwarp("Warper > Moscovia", "moscovia",223,184);
+	naviregisterwarp("Warper > Nameless Island", "nameless_n",256,215);
+	naviregisterwarp("Warper > Niflheim", "niflheim",202,174);
+	naviregisterwarp("Warper > Payon", "payon",179,100);
+	naviregisterwarp("Warper > Rachel", "rachel",130,110);
+	naviregisterwarp("Warper > Umbala", "umbala",97,153);
+	naviregisterwarp("Warper > Veins", "veins",216,123);
+	
+	//Dungeon
+	naviregisterwarp("Warper > Abyss Lakes 1", "abyss_01", 261, 272);
+	naviregisterwarp("Warper > Amatsu Dungeon 1", "ama_dun01", 228, 11);
+	naviregisterwarp("Warper > Anthell 1", "anthell01", 35, 262);
+	naviregisterwarp("Warper > Ancient Shrine Maze", "ayo_dun01", 275, 19);
+	naviregisterwarp("Warper > Beach Dungeon 1", "beach_dun", 266, 67);
+	naviregisterwarp("Warper > Bio Lab 1", "lhz_dun01", 150, 288);
+	naviregisterwarp("Warper > Byalan Dungeon 1", "iz_dun00", 168, 168);
+	naviregisterwarp("Warper > Clock Tower 1", "c_tower1", 199, 159);
+	naviregisterwarp("Warper > Coal Mines 1", "mjo_dun01", 52, 17);
+	naviregisterwarp("Warper > Culvert 1", "prt_sewb1", 131, 247);
+	naviregisterwarp("Warper > Cursed Abbey 1", "abbey01", 51, 14);
+	naviregisterwarp("Warper > Einbroch Dungeon 1", "ein_dun01", 22, 14);
+	naviregisterwarp("Warper > Gefenia 1", "gefenia01", 40, 103);
+	naviregisterwarp("Warper > Geffen Dungeon 1", "gef_dun00", 104, 99);
+	naviregisterwarp("Warper > Entrance", "glast_01", 370, 304);
+	naviregisterwarp("Warper > Kunlun Dungeon 1", "gon_dun01", 153, 53);
+	naviregisterwarp("Warper > Hidden Dungeon 1", "prt_maze01", 176, 7);
+	naviregisterwarp("Warper > Ice Dungeon 1", "ice_dun01", 157, 14);
+	naviregisterwarp("Warper > Entrance", "jupe_cave", 140, 51);
+	naviregisterwarp("Warper > Kiel Dungeon 1", "kh_dun01", 28, 226);
+	naviregisterwarp("Warper > The Royal Tomb", "lou_dun01", 218, 196);
+	naviregisterwarp("Warper > Magma Dungeon 1", "mag_dun01", 126, 68);
+	naviregisterwarp("Warper > Moscovia Dungeon 1", "mosk_dun01", 189, 48);
+	naviregisterwarp("Warper > Odin Temple 1", "odin_tem01", 298, 167);
+	naviregisterwarp("Warper > Orc Dungeon 1", "orcsdun01", 32, 170);
+	naviregisterwarp("Warper > Payon Dungeon 1", "pay_dun00", 21, 183);
+	naviregisterwarp("Warper > Pyramids 1", "moc_pryd01", 192, 9);
+	naviregisterwarp("Warper > Rachel Sanctuary 1", "ra_san01", 140, 11);
+	naviregisterwarp("Warper > Sphinx 1", "in_sphinx1", 288, 9);
+	naviregisterwarp("Warper > Sunken Ship 1", "treasure01", 69, 24);
+	naviregisterwarp("Warper > Thanatos Tower 1", "tha_t01", 150, 39);
+	naviregisterwarp("Warper > Thor Volcano 1", "thor_v01", 21, 228);
+	naviregisterwarp("Warper > Toy Factory 1", "xmas_dun01", 205, 15);
+	naviregisterwarp("Warper > Entrance", "tur_dun01", 154, 49);
+	naviregisterwarp("Warper > Carpenter's Shop in the Tree", "um_dun01", 42, 31);
+	
+	//Castillos WoE
+	naviregisterwarp("Warper > Neuschwanstein", "alde_gld", 48, 83);
+	naviregisterwarp("Warper > Hohenschwangau", "alde_gld", 95, 249);
+	naviregisterwarp("Warper > Nuenberg", "alde_gld", 142, 85);
+	naviregisterwarp("Warper > Wuerzburg", "alde_gld", 239, 242);
+	naviregisterwarp("Warper > Rothenburg", "alde_gld", 264, 90);
+	naviregisterwarp("Warper > Repherion", "gef_fild13", 214, 75);
+	naviregisterwarp("Warper > Eeyolbriggar", "gef_fild13", 308, 240);
+	naviregisterwarp("Warper > Yesnelph", "gef_fild13", 143, 240);
+	naviregisterwarp("Warper > Bergel", "gef_fild13", 193, 278);
+	naviregisterwarp("Warper > Mersetzdeitz", "gef_fild13", 305, 87);
+	naviregisterwarp("Warper > Bright Arbor", "pay_gld", 121, 233);
+	naviregisterwarp("Warper > Scarlet Palace", "pay_gld", 295, 116);
+	naviregisterwarp("Warper > Holy Shadow", "pay_gld", 317, 293);
+	naviregisterwarp("Warper > Sacred Altar", "pay_gld", 140, 160);
+	naviregisterwarp("Warper > Bamboo Grove Hill", "pay_gld", 204, 266);
+	naviregisterwarp("Warper > Kriemhild", "prt_gld", 134, 65);
+	naviregisterwarp("Warper > Swanhild", "prt_gld", 240, 128);
+	naviregisterwarp("Warper > Fadhgridh", "prt_gld", 153, 137);
+	naviregisterwarp("Warper > Skoegul", "prt_gld", 111, 240);
+	naviregisterwarp("Warper > Gondul", "prt_gld", 208, 240);
+	naviregisterwarp("Warper > Mardol", "aru_gld", 158, 272);
+	naviregisterwarp("Warper > Cyr", "aru_gld", 83, 47);
+	naviregisterwarp("Warper > Horn", "aru_gld", 68, 155);
+	naviregisterwarp("Warper > Gefn", "aru_gld", 299, 345);
+	naviregisterwarp("Warper > Banadis", "aru_gld", 292, 107);
+	naviregisterwarp("Warper > Himinn", "sch_gld", 293, 100);
+	naviregisterwarp("Warper > Andlangr", "sch_gld", 288, 252);
+	naviregisterwarp("Warper > Viblainn", "sch_gld", 97, 196);
+	naviregisterwarp("Warper > Hljod", "sch_gld", 137, 90);
+	naviregisterwarp("Warper > Skidbladnir", "sch_gld", 71, 315);
+
 }
 
 morocc,154,104,5	duplicate(Warper)	Warper#1	669

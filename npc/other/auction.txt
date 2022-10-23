@@ -18,7 +18,7 @@
 
 // Auction House warpers
 //============================================================
-moc_ruins,78,173,6	script	Auction Hall Guide#moc	98,{
+morocc,182,95,6	script	Auction Hall Guide#moc	98,{
 	callfunc "F_AuctionWarper",1;
 }
 
