@@ -3707,6 +3707,8 @@ struct npc_data *npc_create_npc(int16 m, int16 x, int16 y){
 	struct npc_data *nd = nullptr;
 
 	CREATE(nd, struct npc_data, 1);
+	new (nd) npc_data();
+	
 	nd->bl.id = npc_get_new_npc_id();
 	nd->bl.prev = nd->bl.next = nullptr;
 	nd->bl.m = m;
@@ -3718,6 +3720,8 @@ struct npc_data *npc_create_npc(int16 m, int16 x, int16 y){
 	nd->vd = npc_viewdb[0]; // Default to JT_INVISIBLE
 
 #ifdef MAP_GENERATOR
+	nd->navi = {};
+	nd->links = {};
 	nd->navi.pos = {m, x, y};
 	nd->navi.id = 0;
 	nd->navi.npc = nd;
