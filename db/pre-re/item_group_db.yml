@@ -127,14 +127,6 @@ Body:
             Rate: 1
           - Item: Expert_Ring
             Rate: 1
-          - Item: Librarian_Glove
-            Rate: 1
-          - Item: Pocket_Watch_
-            Rate: 1
-          - Item: Lunatic_Brooch
-            Rate: 1
-          - Item: Iron_Wrist
-            Rate: 1
   - Group: BLEUBOX
     SubGroups:
       - SubGroup: 1
@@ -1212,8 +1204,6 @@ Body:
           - Item: Fist_
             Rate: 3
           - Item: Claw
-            Rate: 3
-          - Item: Claw_
             Rate: 3
           - Item: Finger
             Rate: 3
@@ -2919,62 +2909,22 @@ Body:
             Rate: 1
           - Item: Agav_Card
             Rate: 1
-          - Item: Echio_Card
-            Rate: 1
           - Item: Vanberk_Card
             Rate: 1
           - Item: Isilla_Card
             Rate: 1
-          - Item: Hodremlin_Card
-            Rate: 1
           - Item: Seeker_Card
             Rate: 1
-          - Item: Snowier_Card
-            Rate: 2
           - Item: Siroma_Card
             Rate: 1
           - Item: Ice_Titan_Card
-            Rate: 1
-          - Item: Gazeti_Card
             Rate: 1
           - Item: Muscipular_Card
             Rate: 1
           - Item: Drosera_Card
             Rate: 2
-          - Item: Roween_Card
-            Rate: 1
-          - Item: Galion_Card
-            Rate: 1
-          - Item: Stapo_Card
-            Rate: 3
-          - Item: Byorgue_Card
-            Rate: 1
-          - Item: Sword_Guardian_Card
-            Rate: 1
-          - Item: Bow_Guardian_Card
-            Rate: 1
-          - Item: Salamander_Card
-            Rate: 1
-          - Item: Kasa_Card
-            Rate: 1
           - Item: Magmaring_Card
             Rate: 2
-          - Item: Imp_Card
-            Rate: 1
-          - Item: Knocker_Card
-            Rate: 1
-          - Item: Zombie_Slaughter_Card
-            Rate: 1
-          - Item: Ragged_Zombie_Card
-            Rate: 2
-          - Item: Hell_Poodle_Card
-            Rate: 2
-          - Item: Banshee_Card
-            Rate: 2
-          - Item: Flame_Skull_Card
-            Rate: 1
-          - Item: Necromancer_Card
-            Rate: 1
   - Group: CASH_FOOD
     SubGroups:
       - SubGroup: 1
@@ -6797,8 +6747,6 @@ Body:
             Rate: 7
           - Item: Diamond_Ring
             Rate: 7
-          - Item: An_Eye_Of_Dullahan
-            Rate: 1
           - Item: Safety_Ring
             Rate: 1
           - Item: Critical_Ring
