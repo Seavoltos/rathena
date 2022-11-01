@@ -1318,3 +1318,10 @@ old_ruins
 //vending
 vend_zone
 gold_mart
+
+s_room
+fishing
+
+//pirate ship
+pirate_ship
+pirate_in

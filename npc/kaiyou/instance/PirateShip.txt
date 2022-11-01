@@ -1,0 +1,747 @@
+//===== rAthena Script =======================================
+//= Pirate Ship
+//===== Description: =========================================
+//= 
+//===== Changelogs: ==========================================
+//= 1.0 First version.
+//============================================================
+instance,52,67,4	script	Old Sign#9	4_BOARD3,{
+	set pship_timer,0;
+	erasequest 12328;
+	
+	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
+		mes "-- Pirate Ship Records --";
+		.@PirateShip_name$ = getd("$9_str_PirateShip"+.@i+"$");
+		.@PirateShip_timer  = getd("$9_num_PirateShip"+.@i);
+		.@PirateShip_member = getd("$9_mem_PirateShip"+.@i);
+		
+		.@time_m = .@PirateShip_timer / 60;
+		.@time_s = .@PirateShip_timer - (.@time_m * 60);
+		if (.@PirateShip_name$ == "") {
+			mes "Aún no hay registros de esta instancia.";
+		}
+		else {
+			if (.@PirateShip_timer < 60)
+				.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+			else
+				.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "Minuto" ) + " " + callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+			if (.@PirateShip_member > 0)
+				.@string$ =  " con ^ff0044" + .@PirateShip_member + " miembros^000000";
+			mes "Menor tiempo para ^ff0044" + .@PirateShip_name$ + "^000000" + .@string$ + ".";
+			mes "tardaron ^0000ff" + .@time_txt$ + "^000000.";
+		}
+		mes "Dificultad " + .dificultad$[.@i];
+		if( .@i == 4 )
+			close;
+		else
+			next;
+	}
+	close;
+
+OnInit:
+	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
+		if (!getd("$9_num_PirateShip"+.@i))
+			setd "$9_num_PirateShip"+.@i,36000;
+	}
+	setarray .dificultad$,"","^008000Easy^000000","Normal","^BA7100Hard^000000","^ff0000Insane^000000";
+	end;
+}
+
+instance,49,78,4	script	Pirate Ship Device	PORTAL,{
+	.@player_name$ = strcharinfo(0);
+	getmapxy .@map_name$,.@x,.@y, BL_PC;
+
+	if (checkweight(1201,1) == 0) {
+		mes "^00B2EE[Pirate Ship]^000000";
+		mes "^008800Alto ahí!!";
+		mes "Llevas demasiadas cosas, eso podría colocar un fallo. Guarda algunas cosas y luego regresa.^000000";
+		close;
+	}
+	if (BaseLevel < 70) {
+		mes "^00B2EE[Pirate Ship]^000000";
+		mes "mmm... No creo que debería saltar ahí dentro...";
+		close;
+	}
+	
+	set .@pship_timer,checkquest(12328,PLAYTIME); // 23h
+	switch(.@pship_timer) {
+	case -1:
+		switch(select("Ir a Pirate Ship:Cancelar")) {
+			case 1:
+				switch( instance_enter("Pirate Ship") ) {
+				case IE_OTHER:
+					mes "[Cat Sailor]";
+					mes "Un error desconocido ha ocurrido.";
+					close;
+				case IE_NOINSTANCE:
+				case IE_NOMEMBER:
+					mes "[Cat Sailor]";
+					mes "Actualmente no existen registros para tu viaje, por favor recuerda firmar.";
+					close;
+				case IE_OK:
+					mapannounce .@map_name$, "" + .@player_name$ + " de la party " + getpartyname(getcharid(1)) + " ha ingresado a <Pirate Ship>.", bc_map,0xFF99;
+					set pship_timer,gettimetick(2);
+					setquest 12328;
+					// warp "1@def02",29,35;
+					break;
+				}
+				break;
+			case 2:
+				end;
+		}
+		end;
+	case 0:
+	case 1:
+		set .@dun_lim_time,pship_timer+82800; // 23 horas
+		set .@dun_cur_time,gettimetick(2);
+		set .@dun_ent_t,(.@dun_lim_time - .@dun_cur_time);
+		set .@dun_h,(.@dun_ent_t / 3600);
+		set .@dun_m,(.@dun_ent_t - (.@dun_h * 3600)) / 60;
+		set .@dun_s,.@dun_ent_t - ((.@dun_h * 3600) + (.@dun_m * 60));
+		mes "^00B2EE[Pirate Ship]^000000";
+		mes "Aún persisten los efectos del viaje anterior, no puedes ingresar hasta ^FFA500" + .@dun_h + "^000000 ^3950ffhora(s)^000000 ^FFA500" + .@dun_m + "^000000 ^3950ffminuto(s)^000000 ^FFA500" + .@dun_s + "^000000 ^3950ffsegundo(s)^000000.";
+		close;
+	case 2:
+		set pship_timer,0;
+		erasequest 12328;
+		mes "^0000ffLos registros y los efectos han desaparecido. Puedes volver a ingresar a Pirate Ship nuevamente.^000000";
+		close;
+	}
+
+
+}
+
+instance,51,71,4	script	Cat Sailor	4_CAT_SAILOR5,{
+	.@player_name$ = strcharinfo(0);
+	getmapxy .@map_name$,.@x,.@y, BL_PC;
+
+	if (is_party_leader() == true) {
+		.@party_id = getcharid(1);
+		getpartymember .@party_id, 1;
+		getpartymember .@party_id, 2;
+		for ( .@i = 0; .@i < $@partymembercount; .@i++ ) {
+			if (isloggedin($@partymemberaid[.@i], $@partymembercid[.@i]) == 1)
+				.@count_online++;
+		}
+		.@menu_entry$ = "¿Cuando zarpamos?";
+	}
+
+	mes "[Cat Sailor]";
+	mes "Hola aventurero, hemos cruzado con mis compañeros gatunos todo el océano buscando ayuda, deseas ayudar?";
+	next;
+	switch( select( "¿En qué consiste?", .@menu_entry$, "Cancelar." ) ) {
+	case 1:
+		mes "[Cat Sailor]";
+		mes "Al cruzar el ancho mar de midgard nos encontramos con una serie de monstruos, el barco se encuentra en muy mal estado como para continuar su viaje.";
+		next;
+		mes "[Cat Sailor]";
+		mes "No tenemos mucho que ofrecer, pero  podrías ayudarnos a terminar nuestro barco?";
+		next;
+		mes "[Cat Sailor]";
+		mes "¿Tienes alguna pregunta sobre nuestro proyecto?";
+		while(true) {
+			next;
+			switch( select( "Hablanos de esos ^6B9900<Monstruos>^000000", "Hablanos de la ^6B9900<recompensa>^000000?", "No." ) ) {
+			case 1:
+				mes "[Cat Sailor]";
+				mes "Los ^6B9900<Monstruos>^000000";
+				mes "son los mismísmos reyes del oceano, no podemos y al estar en el medio del océano las oleadas son demasiado continuas.";
+				next;
+				mes "[Cat Sailor]";
+				mes "Tu misión sería ayudarnos y reparar el barco.";
+				break;
+			case 2:
+				mes "[Cat Sailor]";
+				mes "Bueno ^6B9900<recompensas>^000000 mejor dicho,";
+				mes "somos unos piratas que han cruzado el océano una gran cantidad de veces.";
+				next;
+				mes "[Cat Sailor]";
+				mes "Pero mientras más gente, menos recompensas.";
+				break;
+			case 3:
+				mes "[Cat Sailor]";
+				mes "Muchas gracias por visitarnos, recuerda inscribirte por nuestra noble causa.";
+				close;
+			}
+			next;
+			mes "[Cat Sailor]";
+			mes "¿Alguna otra pregunta?";
+		}
+	case 2:
+		mes "[Cat Sailor]";
+		mes "Muy amable, veamos quienes van";
+		next;
+		setarray .@instance_name$, "Pirate Ship";
+		mes "[Cat Sailor]";
+		mes "" + .@count_online + " party " + (.@count_online == 1 ? "miembro encontrado" : "miembros encontrados") + " " + .@player_name$ + ", cierto?, por favor selecciona el modo.";
+		next;
+		switch(select("^3CB371[»]^000000 ^008000Modo Easy^000000","^3CB371[»]^000000 Modo Normal","^3CB371[»]^000000 ^BA7100Modo Hard^000000","^3CB371[»]^000000 ^ff0000Modo Insane^000000")){
+			case 1:
+				set .@level$,ID_EASY;
+				break;
+			case 2:
+				set .@level$,ID_NORMAL;
+				break;
+			case 3:
+				set .@level$,ID_HARD;
+				break;
+			case 4:
+				set .@level$,ID_INSANE;
+				break;
+		}
+		select("Zarpemos!");
+		mes "[Cat Sailor]";
+		mes "" + .@player_name$ + " has solicitado que te llevemos, por favor vuelve a hablarme cuando estes listo para viajar.";
+		if (instance_create(.@instance_name$,IM_PARTY,.@party_id,.@level$) < 0) {
+			mes "Party: " + getpartyname( getcharid(1) );
+			mes "Party Lider: " + strcharinfo(0);
+			mes "^0000ff" + .@instance_name$ + " ^000000 - Ha fallado.";
+			close;
+		}
+		set .@instanceid,instance_id(IM_PARTY);
+		if (instance_getdifficulty(.@instanceid) == 4){
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXHP,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_MATK,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_CAST,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_ASPD,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXSP,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_ALLSTATS,20);
+		}
+		if (instance_getdifficulty(.@instanceid) == 3){
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,10);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXHP,10);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,10);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_MATK,10);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_CAST,10);
+		}
+		if (instance_getdifficulty(.@instanceid) == 1){
+			instance_setbuff(instance_id(IM_PARTY),SC_II_MAXHP,5);
+			instance_setbuff(instance_id(IM_PARTY),SC_II_MAXSP,5);
+			instance_setbuff(instance_id(IM_PARTY),SC_II_ALLSTATS,5);
+		}
+		close;
+	case 3:
+		mes "[Cat Sailor]";
+		mes "Muchas gracias por escucharme, recuerda que estas invitado.";
+		close;
+	}
+	end;
+}
+
+pirate_in,3,1,5	script	#globaltimer9	CLEAR_NPC,{
+	end;
+OnT_s:
+	initnpctimer;
+	end;
+OnT_s2:
+	.@PirateShip_timer = getd("$9_num_PirateShip"+'9_str_PirateShipDif);
+	if (!.@PirateShip_timer)
+		.@PirateShip_timer = 3600;
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	.@PirateShip_member = getmapusers('map_name$) + getmapusers('map_name2$);
+	.@winner_name$ = '9_str_PirateShip$;
+	.@current_timer = getnpctimer(0) / 1000;
+	if (.@current_timer < 1)
+		end;
+	.@time_m = .@current_timer / 60;
+	.@time_s = .@current_timer % 60;
+	if (.@current_timer < 60)
+		.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "Second" );
+	else
+		.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "Minute" ) + " " + callfunc( "F_InsertPlural", .@time_s, "Second" );
+	if (.@current_timer >= .@PirateShip_timer)
+		mapannounce 'map_name$, "El tiempo de " + .@time_txt$ + " ha sido guardado. Pero no ha roto la marca.",bc_map,"0xffff33";
+	else {
+		announce "La party "+.@winner_name$ + " con " + .@PirateShip_member + " miembro(s) han mejorado el tiempo en Pirate Ship (" + .@time_txt$ + ").",bc_all,"0xffff33",FW_NORMAL,15;
+		setd "$9_str_PirateShip"+'9_str_PirateShipDif+"$" , .@winner_name$;
+		setd "$9_num_PirateShip"+'9_str_PirateShipDif , .@current_timer;
+		setd "$9_mem_PirateShip"+'9_str_PirateShipDif , .@PirateShip_member;
+	}
+	end;
+
+OnTimer3600000:
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#globaltimer9");
+	end;
+}
+
+pirate_in,85,116,5	script	Cat Sailor#2	4_CAT_SAILOR1,{
+	mes "[Cat Sailor]";
+	mes "Meow!";
+	mes "Si seguimos así nos vamos a hundir!";
+	close;
+}
+
+pirate_in,89,116,3	script	Cat Sailor#3	4_CAT_SAILOR2,{
+	mes "[Cat Sailor]";
+	mes "Merrooow!";
+	mes "Ayudanos a buscar madera arriba para tapar los agujeros!";
+	close;
+}
+
+pirate_in,112,117,4	script	Cat Chef#1	4_CAT_CHEF,{
+	mes "[Cat Sailor]";
+	mes "!Marramiau!";
+	mes "Con tanto caos no puedo ni cocinar!";
+	close;
+OnInstanceInit:
+	getmapxy 'map_name2$, .@x, .@y, BL_NPC;
+	end;
+}
+
+
+
+pirate_in,68,99,0	warp	warp1#pirate1	2,2,pirate_ship,99,110
+pirate_ship,102,110,0	warp	warp1#pirate2	2,2,pirate_in,71,99
+
+
+pirate_ship,116,111,4	script	Pirate Captain	4_CAT_ADMIRAL,{
+	mes "[Pirate Captain]";
+	if( 'PirateStart == 1 )
+	{
+		mes "Ayudanos con el barco!";
+		close;
+	}
+	if( 'PirateStart == 2 )
+	{
+		mes "Ayudanos arreglando la bodega del barco!";
+		close;
+	}
+	if( 'PirateStart == 3 )
+	{
+		mes "Afirmate en la cubierta del barco que viene una ola!";
+		close;
+	}
+	if( 'PirateStart == 4 )
+	{
+		mes "Me hundiré con mi barco!";
+		close;
+	}
+	mes "Cuidado algo ha subido al barco!";
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	getmapxy 'map_name2$, .@x, .@y, BL_NPC,instance_npcname("Cat Chef#1");
+	close2;
+	set 'PirateStart,1;
+	donpcevent instance_npcname("#globaltimer9") + "::OnT_s";
+	callfunc "F_Pirate_Monster",
+	'Ronda,
+	'map_name$,
+	instance_npcname("#PirateMonster")+"::OnMyMobDead";
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("warp1#pirate2");
+	end;
+}
+
+pirate_ship,68,104,4	script	#safety1	CLEAR_NPC,{
+	end;
+OnTimer2000:
+	removespecialeffect 315,AREA,instance_npcname(strnpcinfo(0));
+	stopnpctimer instance_npcname(strnpcinfo(0));
+	specialeffect 315,AREA,instance_npcname(strnpcinfo(0));
+	initnpctimer instance_npcname(strnpcinfo(0));
+	end;
+OnStop:
+	stopnpctimer instance_npcname(strnpcinfo(0));
+	removespecialeffect 315,AREA,instance_npcname(strnpcinfo(0));
+	end;
+OnStart:
+	specialeffect 315,AREA,instance_npcname(strnpcinfo(0));
+	initnpctimer instance_npcname(strnpcinfo(0));
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname(strnpcinfo(0));
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	end;
+}
+
+pirate_ship,72,106,4	duplicate(#safety1)	#safety2	CLEAR_NPC
+pirate_ship,67,110,4	duplicate(#safety1)	#safety3	CLEAR_NPC
+pirate_ship,71,114,4	duplicate(#safety1)	#safety4	CLEAR_NPC
+pirate_ship,78,118,4	duplicate(#safety1)	#safety5	CLEAR_NPC
+pirate_ship,78,104,4	duplicate(#safety1)	#safety6	CLEAR_NPC
+pirate_ship,79,110,4	duplicate(#safety1)	#safety7	CLEAR_NPC
+pirate_ship,83,117,4	duplicate(#safety1)	#safety8	CLEAR_NPC
+pirate_ship,85,111,4	duplicate(#safety1)	#safety9	CLEAR_NPC
+pirate_ship,84,105,4	duplicate(#safety1)	#safety10	CLEAR_NPC
+pirate_ship,89,102,4	duplicate(#safety1)	#safety11	CLEAR_NPC
+pirate_ship,88,111,4	duplicate(#safety1)	#safety12	CLEAR_NPC
+pirate_ship,89,117,4	duplicate(#safety1)	#safety13	CLEAR_NPC
+pirate_ship,95,116,4	duplicate(#safety1)	#safety14	CLEAR_NPC
+pirate_ship,96,111,4	duplicate(#safety1)	#safety15	CLEAR_NPC
+pirate_ship,96,104,4	duplicate(#safety1)	#safety16	CLEAR_NPC
+pirate_ship,101,104,4	duplicate(#safety1)	#safety17	CLEAR_NPC
+pirate_ship,101,105,4	duplicate(#safety1)	#safety18	CLEAR_NPC
+pirate_ship,105,118,4	duplicate(#safety1)	#safety19	CLEAR_NPC
+pirate_ship,107,113,4	duplicate(#safety1)	#safety20	CLEAR_NPC
+pirate_ship,107,107,4	duplicate(#safety1)	#safety21	CLEAR_NPC
+pirate_ship,108,105,4	duplicate(#safety1)	#safety22	CLEAR_NPC
+pirate_ship,112,102,4	duplicate(#safety1)	#safety23	CLEAR_NPC
+pirate_ship,116,105,4	duplicate(#safety1)	#safety24	CLEAR_NPC
+pirate_ship,120,104,4	duplicate(#safety1)	#safety25	CLEAR_NPC
+pirate_ship,118,110,4	duplicate(#safety1)	#safety26	CLEAR_NPC
+pirate_ship,116,117,4	duplicate(#safety1)	#safety27	CLEAR_NPC
+pirate_ship,120,118,4	duplicate(#safety1)	#safety28	CLEAR_NPC
+pirate_ship,111,118,4	duplicate(#safety1)	#safety29	CLEAR_NPC
+pirate_ship,112,115,4	duplicate(#safety1)	#safety30	CLEAR_NPC
+
+pirate_ship,1,1,1	script	#PirateWave	CLEAR_NPC,{
+	end;
+OnEnd:
+	stopnpctimer instance_npcname(strnpcinfo(0));
+	end;
+OnStart:
+	if( 'PirateStart !=  1 )
+		end;
+	set 'PirateStart, 3;
+	initnpctimer instance_npcname(strnpcinfo(0));
+	mapannounce 'map_name$, "[Pirate Captain] Cuidado! Se acerca una ola!!",bc_map,"0xffff33";
+	.safe = getmapusers('map_name$);
+	deletearray 'safetywall[0],getarraysize('safetywall);
+	setarray 'safetywall[0],0;
+	for( set .@i,0; .@i < .safe; set .@i, .@i+1 )
+	{
+		set .@aux,1;
+		while ( .@aux == 1 ) 
+		{
+			set .@rand, rand(1,30);
+			set .@aux,0;
+			for( set .@z,0; .@z < 'safetywall[0]; set .@z, .@z+1 )
+			{
+				if( .@rand == 'safetywall[.@z] )
+				{
+					set .@aux,1;
+					break;
+				}
+			}
+		}
+		set 'safetywall[.@i], .@rand;
+	}
+	for( set .@i,0; .@i < .safe; set .@i, .@i+1 )
+	{
+		donpcevent instance_npcname("#safety"+'safetywall[.@i])+"::OnStart";
+	}
+	end;
+OnTimer10000:
+	stopnpctimer instance_npcname(strnpcinfo(0));
+	set 'PirateStart, 1;
+	donpcevent instance_npcname("#PirateController") + "::OnStart";
+	addrid(2,0,'partyid);
+	getmapxy .@map$, .@x, .@y, BL_PC;
+	set .@alive,0;
+	if ( .@map$ == 'map_name2$ )
+	{
+		message strcharinfo(0), "[Pirate Captain] Cuidado con la ola!";
+		specialeffect2 620;
+		percentheal -100,-100;
+		end;
+	}
+	if(  .@map$ != 'map_name$ )
+		end;
+
+	for( set .@i, 0; .@i < getarraysize('safetywall[0]); set .@i, .@i + 1 )
+	{
+		if( .@x == 'safetywallx['safetywall[.@i]] && .@y == 'safetywally['safetywall[.@i]] )
+			set .@alive,1;
+	}
+	for( set .@i,0; .@i < .safe; set .@i, .@i+1 )
+		donpcevent instance_npcname("#safety"+'safetywall[.@i])+"::OnStop";
+		
+	
+	if(.@alive == 1)
+	{
+		message strcharinfo(0), "["+strcharinfo(0)+"] Logré afirmarme!";
+		end;
+	}
+	message strcharinfo(0), "[Pirate Captain] Cuidado con la ola!";
+	specialeffect2 620;
+	percentheal -100,-100;
+	end;
+	
+OnInstanceInit:
+	setarray 'safetywallx[0],0, 68, 72, 67, 71, 78, 78, 79, 83, 85, 84, 89, 88, 89, 95, 96, 96,101,101,105,107,107,108,112,116,120,118,116,120,111,112;
+	setarray 'safetywally[0],0,104,106,110,114,118,104,110,117,111,105,102,111,117,116,111,104,104,105,118,113,107,105,102,105,104,110,117,118,118,115;
+	hideonnpc instance_npcname(strnpcinfo(0));
+	end;
+}
+pirate_ship,1,2,1	script	#PirateRepair	CLEAR_NPC,{
+	end;
+OnEnd:
+OnStop:
+	mapannounce 'map_name2$, "[Pirate Captain] Vuelvan a ayudar arriba!!",bc_map,"0xffff33";
+	disablenpc instance_npcname("warp1#pirate2");
+	stopnpctimer;
+	end;
+OnStart:
+	if( 'PirateStart !=  1 )
+		end;
+	set 'PirateStart, 2;
+	mapannounce 'map_name$, "[Pirate Captain] Cuidado! Los monstruos han hecho un agujero en la parte baja del barco lleva maderas para repararlo!!",bc_map,"0xffff33";
+	set 'repairman$ , "";
+	//instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,50);
+	initnpctimer instance_npcname(strnpcinfo(0));
+	hideoffnpc instance_npcname("Madera#Pirate"+rand(1,4));
+	set 'clavos, rand(2,5)*5;
+	set 'madera, rand(2,5);
+	set 'hierro, rand(2,5)*2;
+	set 'repair, 1;
+	sleep 5000;
+	mapannounce 'map_name$, "[Pirate Captain] Abran la puerta para que puedan bajar a repararlo!!",bc_map,"0xffff33";
+	enablenpc instance_npcname("warp1#pirate2");
+	donpcevent instance_npcname("#crackpirate"+rand(1,4)) + "::OnStart";
+	end;
+OnTimer60000:
+	mapannounce 'map_name$, "[Pirate Captain] Apurate que el barco se hunde! Repara el agujero!",bc_map,"0xffff33";
+	end;
+OnTimer90000:
+	mapannounce 'map_name$, "[Pirate Captain] Cuidado! EL BARCO SE HUNDE!! Corre a los barcos salvavidas!",bc_map,"0xffff33";
+	enablenpc instance_npcname("warp2#pirate1");
+	enablenpc instance_npcname("warp2#pirate2");
+	set 'PirateStart, 4;
+	end;
+OnTimer100000:
+	instance_destroy;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+pirate_ship,76,113,4	script	Madera#Pirate1	4_WOODPILE,{
+	mes "[ ^0061FFPila de materiales^000000 ]\n";
+	mes "^D23010 [ > ] ^000000 ^ff0000"+ 'clavos +"^000000 Clavos.\n";
+	mes "^D23010 [ > ] ^000000 ^ff0000"+ 'madera +"^000000 Tablas de madera.\n";
+	mes "^D23010 [ > ] ^000000 ^ff0000"+ 'hierro +"^000000 Soportes de Hierro.\n";
+	next;
+	set .@aux,1;
+	while (.@aux)
+	{
+		switch( select(" ^3CB371[ > ]^000000 5 Clavos: ^3CB371[ > ]^000000 1 Tabla de madera: ^3CB371[ > ]^000000 2 Soportes de Hierro: ^D23010[ > ] ^000000Estoy Listo"))
+		{
+			case 1:
+				progressbar "ffff00",1;
+				set .@clavos, .@clavos + 5;
+				break;
+			case 2:
+				progressbar "ffff00",3;
+				set .@madera, .@madera + 1;
+				break;
+			case 3:
+				progressbar "ffff00",1;
+				set .@hierro, .@hierro + 2;
+				break;
+			case 4:
+				set .@aux,0;
+				break;
+		}
+	}
+	
+	if( .@clavos != 'clavos || .@madera != 'madera || .@hierro != 'hierro)
+	{
+		mes "["+ strcharinfo(0) +"]";
+		mes "Creo que en algo me he equivocado";
+		close;
+	}
+	if ( 'repairman$ != "" )
+	{
+		mes "["+ strcharinfo(0) +"]";
+		mes "Creo que alguien ya lleva los materiales.";
+		close;
+	}
+	mes "["+ strcharinfo(0) +"]";
+	mes "Debo apurarme a reparar el barco!";
+	set 'repairman$, strcharinfo(0);
+	setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
+	hideonnpc instance_npcname(strnpcinfo(0));
+	close2;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname(strnpcinfo(0));
+	end;
+OnInstanceDestroy:
+	addrid(2,0,'partyid);
+	if( strcharinfo(0) == 'repairman$ )
+		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
+	end;
+}
+
+pirate_ship,76,108,4	duplicate(Madera#Pirate1)	Madera#Pirate2	4_WOODPILE
+pirate_ship,113,113,4	duplicate(Madera#Pirate1)	Madera#Pirate3	4_WOODPILE
+pirate_ship,113,108,4	duplicate(Madera#Pirate1)	Madera#Pirate4	4_WOODPILE
+
+pirate_in,117,104,4	script	#crackpirate1	4_CRACK,{
+	mes "["+strcharinfo(0)+"]";
+	if ( strcharinfo(0) != 'repairman$ )
+	{
+		mes "Parece que no tengo los materiales suficientes!";
+		close;
+	}
+	mes "Debo reparar esto rápido!";
+	close2;
+	specialeffect2 EF_REPAIRWEAPON;
+	progressbar "ffff00",rand(5,15);
+	mes "["+strcharinfo(0)+"]";
+	mes "Eso fue rápido";
+	set 'repairman$, "";
+	donpcevent instance_npcname("#PirateRepair") + "::OnStop";
+	setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
+	//instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,'instanceSCID);
+	hideonnpc instance_npcname(strnpcinfo(0));
+	stopnpctimer instance_npcname(strnpcinfo(0));
+	set 'PirateStart, 1;
+	donpcevent instance_npcname("#PirateController") + "::OnStart";
+	end;
+OnTimer4000:
+	removespecialeffect 116,AREA,instance_npcname(strnpcinfo(0));
+	stopnpctimer instance_npcname(strnpcinfo(0));
+	specialeffect 116,AREA,instance_npcname(strnpcinfo(0));
+	initnpctimer instance_npcname(strnpcinfo(0));
+	end;
+OnStop:
+	stopnpctimer instance_npcname(strnpcinfo(0));
+	hideonnpc instance_npcname(strnpcinfo(0));
+	removespecialeffect 116,AREA,instance_npcname(strnpcinfo(0));
+	end;
+OnStart:
+	hideoffnpc instance_npcname(strnpcinfo(0));
+	specialeffect 116,AREA,instance_npcname(strnpcinfo(0));
+	initnpctimer instance_npcname(strnpcinfo(0));
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+pirate_in,121,104,4	duplicate(#crackpirate1)	#crackpirate2	4_CRACK
+pirate_in,126,104,4	duplicate(#crackpirate1)	#crackpirate3	4_CRACK
+pirate_in,130,100,4	duplicate(#crackpirate1)	#crackpirate4	4_CRACK
+
+// Core Functions
+//============================================================
+function	script	F_Pirate_Monster	{
+
+	set .@level, getarg(0);
+	set .@map$, getarg(1);
+	set .@label$, getarg(2);
+	areamonster .@map$,66,104,121,119,"Papare",20591,1,.@label$;
+	switch(.@level) {
+	case 1:
+		break;
+	case 2:
+		areamonster .@map$,66,104,121,119,"Pot Dofle",2203,20,.@label$;
+		areamonster .@map$,66,104,121,119,"Small Octopus",2192,20,.@label$;
+		break;
+	case 3:
+		areamonster .@map$,66,104,121,119,"Octopus Leg",2193,8,.@label$;
+		areamonster .@map$,66,104,121,119,"Giant Octopus",2194,1,.@label$;
+		break;
+	case 4:
+		areamonster .@map$,66,104,121,119,"Red Eruma",2197,30,.@label$;
+		areamonster .@map$,66,104,121,119,"King Dramoh",2198, 1,.@label$;
+		break;
+	case 5:
+		areamonster .@map$,66,104,121,119,"Mutant Anolian",2183,1,.@label$;
+		areamonster .@map$,66,104,121,119,"Sedora",2204,20,.@label$;
+		break;
+	case 6:
+		areamonster .@map$,66,104,121,119,"Tacnu",2205,20,.@label$;
+		areamonster .@map$,66,104,121,119,"Sropho",2201,20,.@label$;
+		break;
+	case 7:
+		areamonster .@map$,66,104,121,119,"Kraken Leg",2206,8,.@label$;
+		areamonster .@map$,66,104,121,119,"Kraken",2202,1,.@label$;
+		break;
+	}
+	return;
+}
+
+pirate_ship,86,102,0	warp	warp2#pirate1	2,2,instance,48,43
+pirate_ship,86,119,0	warp	warp2#pirate2	2,2,instance,48,43
+
+pirate_ship,1,3,1	script	#PirateMonster	CLEAR_NPC,{
+	end;
+
+OnInstanceInit:
+	disablenpc instance_npcname("warp2#pirate1");
+	disablenpc instance_npcname("warp2#pirate2");
+	'Ronda = 1;
+	end;
+
+OnMyMobDead:
+	if( 'PirateStart == 4 )
+		end;
+	set .@map$, 'map_name$;
+	if( 'Ronda == 1 )
+	{
+		set 'partyid, getcharid(1);
+		'Instance_ID = instance_id(IM_PARTY);
+		'9_str_PirateShipDif = instance_getdifficulty(instance_id(IM_PARTY));
+		'9_str_PirateShip$ = strcharinfo(1);
+		donpcevent instance_npcname("#PirateController") + "::OnStart";
+	}
+	set .@mob_dead_num,mobcount(.@map$,instance_npcname("#PirateMonster")+"::OnMyMobDead");
+	if (.@mob_dead_num < 1)
+		initnpctimer;
+	else
+		mapannounce .@map$, "[Pirate Captain] Aún quedan - "+.@mob_dead_num + " invasores.",bc_map,"0x00ff99";
+	end;
+
+OnTimer5000:
+	set 'Ronda,'Ronda+1;
+	if( 'Ronda > 7 )
+	{
+		mapannounce 'map_name$, "[Pirate Captain] Creo que ya no quedan más invasores, estamos a salvo!.",bc_map,"0xffff00";
+		stopnpctimer;
+		donpcevent instance_npcname("#globaltimer9") + "::OnT_s2";
+		enablenpc instance_npcname("warp2#pirate1");
+		enablenpc instance_npcname("warp2#pirate2");
+		end;
+	}
+	mapannounce 'map_name$, "[Pirate Captain] Todos los invasores han sido derrotados.",bc_map,"0xffff00";
+	sleep 5000;
+	callfunc "F_Pirate_Monster",
+		'Ronda,
+		'map_name$,
+		instance_npcname("#PirateMonster")+"::OnMyMobDead";
+	stopnpctimer;
+	end;
+}
+
+pirate_ship,1,4,1	script	#PirateController	CLEAR_NPC,{
+	end;
+
+OnStart:
+	initnpctimer;
+	end;
+
+OnTimer30000:
+	if( 'PirateStart == 1)
+	{
+		switch(rand(1,4))
+		{
+			case 1:
+				donpcevent instance_npcname("#PirateWave") + "::OnStart";
+				stopnpctimer;
+				break;
+			case 2:
+				donpcevent instance_npcname("#PirateRepair") + "::OnStart";
+				stopnpctimer;
+				break;
+			default:
+				break;
+		}
+	}	
+	end;
+
+OnTimer90000:
+	initnpctimer;
+	end;
+	
+}
+pirate_ship	mapflag	restricted	6
+pirate_in	mapflag	restricted	6

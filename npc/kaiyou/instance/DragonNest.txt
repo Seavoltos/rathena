@@ -2712,12 +2712,4 @@ abyss_04,7777,7777,5	duplicate(Dragon Egg#DN)	Dragon Egg#338	2540
 abyss_04,7777,7777,5	duplicate(Dragon Egg#DN)	Dragon Egg#339	2540
 */
 
-
-abyss_04	mapflag	nowarp
-abyss_04	mapflag	nowarpto
-abyss_04	mapflag	noteleport
-abyss_04	mapflag	nosave	SavePoint
-abyss_04	mapflag	nomemo
-abyss_04	mapflag	nobranch
-abyss_04	mapflag	noicewall
-abyss_04	mapflag	monster_noteleport
+abyss_04	mapflag	restricted	6

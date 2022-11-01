@@ -480,3 +480,9 @@ Body:
   - Id: 12326
     Title: Thanatos Tower after-effects
     TimeLimit: +23h
+  - Id: 12327
+    Title: Fallen Angel after-effects
+    TimeLimit: +23h
+  - Id: 12328
+    Title: Pirate Ship after-effects
+    TimeLimit: +23h

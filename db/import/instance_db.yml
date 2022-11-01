@@ -77,3 +77,11 @@ Body:
       Map: 1@def02
       X: 29
       Y: 35
+  - Id: 9
+    Name: Pirate Ship
+    Enter:
+      Map: pirate_in
+      X: 84
+      Y: 89
+    AdditionalMaps:
+      pirate_ship: true

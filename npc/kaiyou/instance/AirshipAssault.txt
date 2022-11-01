@@ -1579,20 +1579,5 @@ OnInstanceInit:
 	end;
 }
 
-1@air1	mapflag	nowarp
-1@air1	mapflag	nowarpto
-1@air1	mapflag	noteleport
-1@air1	mapflag	nosave	SavePoint
-1@air1	mapflag	nomemo
-1@air1	mapflag	nobranch
-1@air1	mapflag	noicewall
-1@air1	mapflag	monster_noteleport
-
-1@air2	mapflag	nowarp
-1@air2	mapflag	nowarpto
-1@air2	mapflag	noteleport
-1@air2	mapflag	nosave	SavePoint
-1@air2	mapflag	nomemo
-1@air2	mapflag	nobranch
-1@air2	mapflag	noicewall
-1@air2	mapflag	monster_noteleport
+1@air1	mapflag	restricted	6
+1@air2	mapflag	restricted	6

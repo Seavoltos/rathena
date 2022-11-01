@@ -152,8 +152,8 @@ L_Enter:
 
 instance,29,55,6	script	Thanatos Staff	418,{
 	set .@name$,strcharinfo(0);
-		set ttower_timer,0;
-		erasequest 12326;
+	//set ttower_timer,0;
+	//erasequest 12326;
 	mes "^0000ffEl anciano te mira fijamente y se acerca caminando hacia tí.^000000";
 	close;
 }
@@ -2089,63 +2089,16 @@ OnMyMobDead:
 	end;
 }
 
-1@thts	mapflag	nowarp
-1@thts	mapflag	nowarpto
-1@thts	mapflag	noteleport
-1@thts	mapflag	nosave	SavePoint
-1@thts	mapflag	nomemo
-1@thts	mapflag	nobranch
-1@thts	mapflag	noicewall
-1@thts	mapflag	monster_noteleport
+1@thts	mapflag	restricted	6
 
-2@thts	mapflag	nowarp
-2@thts	mapflag	nowarpto
-2@thts	mapflag	noteleport
-2@thts	mapflag	nosave	SavePoint
-2@thts	mapflag	nomemo
-2@thts	mapflag	nobranch
-2@thts	mapflag	noicewall
+2@thts	mapflag	restricted	6
 
-3@thts	mapflag	nowarp
-3@thts	mapflag	nowarpto
-3@thts	mapflag	noteleport
-3@thts	mapflag	nosave	SavePoint
-3@thts	mapflag	nomemo
-3@thts	mapflag	nobranch
-3@thts	mapflag	noicewall
-3@thts	mapflag	monster_noteleport
+3@thts	mapflag	restricted	6
 
-4@thts	mapflag	nowarp
-4@thts	mapflag	nowarpto
-4@thts	mapflag	noteleport
-4@thts	mapflag	nosave	SavePoint
-4@thts	mapflag	nomemo
-4@thts	mapflag	nobranch
-4@thts	mapflag	noicewall
-4@thts	mapflag	monster_noteleport
+4@thts	mapflag	restricted	6
 
-5@thts	mapflag	nowarp
-5@thts	mapflag	nowarpto
-5@thts	mapflag	noteleport
-5@thts	mapflag	nosave	SavePoint
-5@thts	mapflag	nomemo
-5@thts	mapflag	nobranch
-5@thts	mapflag	noicewall
-5@thts	mapflag	monster_noteleport
+5@thts	mapflag	restricted	6
 
-6@thts	mapflag	nowarp
-6@thts	mapflag	nowarpto
-6@thts	mapflag	noteleport
-6@thts	mapflag	nosave	SavePoint
-6@thts	mapflag	nomemo
-6@thts	mapflag	nobranch
-6@thts	mapflag	noicewall
-6@thts	mapflag	monster_noteleport
+6@thts	mapflag	restricted	6
 
-7@thts	mapflag	nowarp
-7@thts	mapflag	nowarpto
-7@thts	mapflag	noteleport
-7@thts	mapflag	nosave	SavePoint
-7@thts	mapflag	nomemo
-7@thts	mapflag	nobranch
-7@thts	mapflag	noicewall
+7@thts	mapflag	restricted	6

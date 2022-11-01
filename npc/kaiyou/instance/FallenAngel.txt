@@ -98,6 +98,69 @@ OnInit:
 	setarray .dificultad$,"","^008000Easy^000000","Normal","^BA7100Hard^000000","^ff0000Insane^000000";
 	end;
 }
+instance,35,74,4	script	Fallen Angel Device	PORTAL,{
+	.@player_name$ = strcharinfo(0);
+	getmapxy .@map_name$,.@x,.@y, BL_PC;
+
+	if (checkweight(1201,1) == 0) {
+		mes "^00B2EE[Fallen Angel]^000000";
+		mes "^008800Alto ahí!!";
+		mes "Llevas demasiadas cosas, eso podría colocar un fallo. Guarda algunas cosas y luego regresa.^000000";
+		close;
+	}
+	if (BaseLevel < 70) {
+		mes "^00B2EE[Fallen Angel]^000000";
+		mes "mmm... No creo que debería saltar ahí dentro...";
+		close;
+	}
+	
+	set .@fangel_timer,checkquest(12327,PLAYTIME); // 1 week
+	switch(.@fangel_timer) {
+	case -1:
+		switch(select("Ir a ^6B9900<Fallen Angel>^000000:Cancelar")) {
+			case 1:
+				switch( instance_enter("Wave Mode") ) {
+				case IE_OTHER:
+					mes "[Belka]";
+					mes "Un error desconocido ha ocurrido.";
+					close;
+				case IE_NOINSTANCE:
+				case IE_NOMEMBER:
+					mes "[Belka]";
+					mes "Actualmente no existen registros para tu viaje, por favor recuerda firmar.";
+					close;
+				case IE_OK:
+					mapannounce .@map_name$, "" + .@player_name$ + " de la party " + getpartyname(getcharid(1)) + " ha ingresado a <Fallen Angel>.", bc_map,0xFF99;
+					set fangel_timer,gettimetick(2);
+					setquest 12327;
+					// warp "1@def02",29,35;
+					break;
+				}
+				break;
+			case 2:
+				end;
+		}
+		end;
+	case 0:
+	case 1:
+		set .@dun_lim_time,fangel_timer+82800; // 23 horas
+		set .@dun_cur_time,gettimetick(2);
+		set .@dun_ent_t,(.@dun_lim_time - .@dun_cur_time);
+		set .@dun_h,(.@dun_ent_t / 3600);
+		set .@dun_m,(.@dun_ent_t - (.@dun_h * 3600)) / 60;
+		set .@dun_s,.@dun_ent_t - ((.@dun_h * 3600) + (.@dun_m * 60));
+		mes "^00B2EE[Fallen Angel]^000000";
+		mes "Aún persisten los efectos del vuelo anterior, no puedes ingresar hasta ^FFA500" + .@dun_h + "^000000 ^3950ffhora(s)^000000 ^FFA500" + .@dun_m + "^000000 ^3950ffminuto(s)^000000 ^FFA500" + .@dun_s + "^000000 ^3950ffsegundo(s)^000000.";
+		close;
+	case 2:
+		set fangel_timer,0;
+		erasequest 12327;
+		mes "^0000ffLos registros y los efectos han desaparecido. Puedes volver a ingresar a Fallen Angel nuevamente.^000000";
+		close;
+	}
+
+
+}
 
 instance,41,70,1	script	Belka	4_F_ZONDAGIRL,{
 	.@player_name$ = strcharinfo(0);
@@ -117,10 +180,10 @@ instance,41,70,1	script	Belka	4_F_ZONDAGIRL,{
 	mes "[Belka]";
 	mes "Bienvenido aventurero, estamos reclutando para salvar la inocencia de cada persona, deseas sumarte?";
 	next;
-	switch( select( "¿En qué consiste?", .@menu_entry$, "Ir a ^6B9900<Fallen Angel>^000000.", "Cancelar." ) ) {
+	switch( select( "¿En qué consiste?", .@menu_entry$, "Cancelar." ) ) {
 	case 1:
 		mes "[Belka]";
-		mes "Ofrecemos un servicio donde podrás viajar a las alturas. Y podrás ayudar a defender a los ayudantes de santa.";
+		mes "Ofrecemos un servicio donde podrás viajar a las alturas. Y podrás ayudar a defender a los ángeles.";
 		next;
 		mes "[Belka]";
 		mes "En todo caso, pondrás tu vida en riesgo como en muchas otras partes, pero esta organización es sin fines de lucro.";
@@ -139,15 +202,15 @@ instance,41,70,1	script	Belka	4_F_ZONDAGIRL,{
 			case 1:
 				mes "[Belka]";
 				mes "Los ^6B9900<Ángeles>^000000";
-				mes "son los mismísmos ayudantes de santa, y buscan crear un equilibrio cada año, pero existen criaturas demoniacas que no desean cooperar.";
+				mes "son los mismísmos ángeles de los cuentos, que buscan crear un equilibrio, pero existen criaturas demoniacas que no desean cooperar.";
 				next;
 				mes "[Belka]";
-				mes "Tu misión es cooperar y ayudar a estos pobres caídos del cielo..";
+				mes "Tu misión es ayudarlos y evitar que caigan del cielo.";
 				break;
 			case 2:
 				mes "[Belka]";
 				mes "Bueno ^6B9900<recompensas>^000000 mejor dicho,";
-				mes "todos amamos a Santa Claus, y si ayudamos a sus pobres angeles, es muy probable que nos ayude a nosotros también.";
+				mes "todos amamos el equilibrio, y si ayudamos a sus pobres ángeles, es muy probable que nos ayude a nosotros también.";
 				next;
 				mes "[Belka]";
 				mes "Pero mientras más gente, menos recompensas.";
@@ -185,7 +248,7 @@ instance,41,70,1	script	Belka	4_F_ZONDAGIRL,{
 		}
 		select("Firmar.");
 		mes "[Belka]";
-		mes "" + .@player_name$ + " has solicitado que te llevemos, por favor vuelve a hablarme cuando estes listo para viajar a ver a estos ingresar ^6B9900<Ángeles caídos>^000000.";
+		mes "" + .@player_name$ + " has solicitado que te llevemos, por favor vuelve a hablarme cuando estes listo para viajar a ver a estos ^6B9900<Ángeles caídos>^000000.";
 		if (instance_create(.@instance_name$[.@s],IM_PARTY,.@party_id,.@level$) < 0) {
 			mes "Party: " + getpartyname( getcharid(1) );
 			mes "Party Lider: " + strcharinfo(0);
@@ -217,30 +280,10 @@ instance,41,70,1	script	Belka	4_F_ZONDAGIRL,{
 		}
 		close;
 	case 3:
-		switch( instance_enter("Wave Mode") ) {
-		case IE_OTHER:
-			mes "[Belka]";
-			mes "Un error desconocido ha ocurrido.";
-			close;
-		case IE_NOINSTANCE:
-		case IE_NOMEMBER:
-			mes "[Belka]";
-			mes "Actualmente no existen registros para tu viaje, por favor recuerda firmar.";
-			close;
-		case IE_OK:
-			mapannounce .@map_name$, "" + .@player_name$ + " de la party " + getpartyname(getcharid(1)) + " ha ingresado a <Fallen Angel>.", bc_map,0xFF99;
-			// warp "1@def02",29,35;
-			break;
-		}
-		break;
-	case 5:
 		mes "[Belka]";
 		mes "Muchas gracias por escucharme, recuerda que estas invitado a firmar.";
 		close;
 	}
-	wave_mode_map$ = .@map_name$;
-	wave_mode_x = .@x;
-	wave_mode_y = .@y;
 	end;
 }
 
@@ -316,13 +359,7 @@ OnTouch:
 		disablenpc instance_npcname("#wave_mode_sky_entrance");
 	}
 	else if ('status_instance == 2) {
-		if (wave_mode_map$ == "")
-			warp "instance",48,43;
-		else {
-			warp wave_mode_map$, wave_mode_x, wave_mode_y;
-			wave_mode_map$ = "";
-			wave_mode_x = wave_mode_y = 0;
-		}
+		warp "instance",48,43;
 	}
 	end;
 OnTimer4000:
@@ -335,7 +372,7 @@ OnTimer4000:
 	end;
 OnStart:
 	initnpctimer;
-	mapannounce 'map_def02$, "Belka: Ayuda! Se acerca una horda de demonios desde el norte!.", bc_map;
+	mapannounce 'map_def02$, "Belka: Ayuda! Se acerca una horda de ángeles desde el norte!.", bc_map;
 	donpcevent instance_npcname("#globaltimer8") + "::OnT_s";
 	end;
 OnTimer1000:
@@ -359,7 +396,7 @@ OnTimer4000:
 	}
 	end;
 OnTimer24000:
-	mapannounce 'map_def02$, "Belka: Se observa una nueva horda de demonios! Mantenlos alejados de nuestros pobres ángeles!", bc_map;
+	mapannounce 'map_def02$, "Belka: Se observa una nueva horda de ángeles! Mantenlos alejados para que no caigan!", bc_map;
 	initnpctimer;
 	end;
 OnStop:
@@ -372,7 +409,7 @@ OnStop:
 OnStart:
 	if ('treasure_num < 5)
 		'treasure_num++;
-	mapannounce 'map_def02$, "Belka: !! " + 'treasure_num + " tesoro(s) ha(n) aparecido, Gracias Santa!!", bc_map;
+	mapannounce 'map_def02$, "Belka: !! " + 'treasure_num + " tesoro(s) ha(n) aparecido, Gracias!!", bc_map;
 	for ( .@i = 0; .@i < 'treasure_num; .@i++ ) {
 		monster 'map_def02$,0,0, "Treasure box",3075,1;	// WA_TREASURE
 		'treasure_gid[.@i] = $@mobid[0];
@@ -407,7 +444,7 @@ OnStop:
 1@def02,1,1,0	script	#wave_mode_sky_mercenary	-1,{
 	end;
 OnStart:
-	monster 'map_def02$,29,35, "Mercenary", 3086,1, "",0,AI_WAVEMODE;	// WA_MERCENARY
+	monster 'map_def02$,29,35, "Pope", 3527,1, "",0,AI_WAVEMODE;	// WA_MERCENARY
 	.@gid = $@mobid[0];
 	emotion ET_SURPRISE, .@gid;
 	setunitdata .@gid, UMOB_IGNORE_CELL_STACK_LIMIT, true;
@@ -462,7 +499,7 @@ OnTimer8500:
 	end;
 
 S_Spawn:
-	monster 'map_def02$,48,67, "Demonio", 'mob_id,1;
+	monster 'map_def02$,48,67, "Ángel", 'mob_id,1;
 	if (getarg(0) == true)
 		setunitdata $@mobid[0], UMOB_MODE, ( MD_CANMOVE|MD_NORANDOMWALK|MD_AGGRESSIVE|MD_CANATTACK );
 	.@gid = $@mobid[0];
@@ -476,7 +513,7 @@ OnIdle:
 	callfunc( "F_mobidle", ('npc_name_mob$ + "::OnIdle"), 'size_coord, 'x_mob, 0, 'y_mob, 'dist_spot_AZ );
 	'mob_escaped++;
 	if ('mob_escaped <= 20)
-		mapannounce 'map_def02$, "" + 'mob_escaped + " " + ('mob_escaped == 1 ? "demonio ha" : "demonios han") + " escapado.", bc_map;
+		mapannounce 'map_def02$, "" + 'mob_escaped + " " + ('mob_escaped == 1 ? "angel ha" : "ángeles han") + " caído.", bc_map;
 	if ('mob_escaped == 20)
 		donpcevent instance_npcname("#wave_mode_sky_out") + "::OnFail";
 	end;
@@ -534,3 +571,5 @@ OnInstanceInit:
 	}
 	end;
 }
+
+1@def02	mapflag	restricted	9
