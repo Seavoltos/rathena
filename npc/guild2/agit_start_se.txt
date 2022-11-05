@@ -22,6 +22,7 @@ OnClock2100:	//start time for Saturday
 OnClock2300:	//end time for Saturday
 
 OnAgitInit2:
+/*
 	// starting time checks
 	if((gettime(DT_DAYOFWEEK)==TUESDAY) && (gettime(DT_HOUR)>=18 && gettime(DT_HOUR)<21) ||
 	   (gettime(DT_DAYOFWEEK)==THURSDAY) && (gettime(DT_HOUR)>=18 && gettime(DT_HOUR)<21) ||
@@ -41,5 +42,6 @@ OnAgitInit2:
 		}
 		end;
 	}
+*/
 	end;
 }

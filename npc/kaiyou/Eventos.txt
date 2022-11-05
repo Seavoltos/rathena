@@ -426,7 +426,7 @@ prontera,160,193,3	script	Elizabeth	612,{
 			mes "- ^0000FFEspacio^000000";
 			mes "- ^519A38Último en pie^000000";
 			mes "- ^453359Carrera Maluca^000000";
-			mes "- ^FF00FFLydia Clar^000000";
+			mes "- ^FF0060Lydia Clar^000000";
 			mes "- ^863cc5Torneo MvP^000000";
 			mes "- ^8900ffEscapa del Poring^000000";
 			mes "- ^015d52Doble Dice^000000";

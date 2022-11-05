@@ -39,6 +39,7 @@ OnClock1600:	//start time for Saturday
 OnClock1800:	//end time for Saturday
 
 OnAgitInit:
+/*
 	// starting time checks
 	if((gettime(DT_DAYOFWEEK)==TUESDAY) && (gettime(DT_HOUR)>=21 && gettime(DT_HOUR)<23) ||
 	   (gettime(DT_DAYOFWEEK)==THURSDAY) && (gettime(DT_HOUR)>=21 && gettime(DT_HOUR)<23) ||
@@ -60,6 +61,7 @@ OnAgitInit:
 		}
 		end;
 	}
+*/
 	end;
 
 S_DisplayOwners:
