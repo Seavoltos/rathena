@@ -12,3 +12,4 @@
 ACMD_DEF(hold),
 ACMD_DEF(dance),
 ACMD_DEF(heart),
+ACMD_DEF(packetfilter),

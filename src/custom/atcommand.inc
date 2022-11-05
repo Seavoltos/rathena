@@ -100,3 +100,38 @@ ACMD_FUNC(dance)
 	
 	return 0;
 }
+
+/*==========================================
+ * Packet Filter
+ *------------------------------------------*/
+ACMD_FUNC(packetfilter)
+{
+	nullpo_retr(-1,sd);
+	if( !message || !*message )
+	{
+		clif_displaymessage(fd,"<<----- Packet Filtering Usage ----->>");
+		clif_displaymessage(fd,".   @packetfilter <options>");
+		clif_displaymessage(fd,".   C : To filter global chat messages.");
+		clif_displaymessage(fd,".   I : To filter item usage.");
+		clif_displaymessage(fd,".   - Samples");
+		clif_displaymessage(fd,".   @packetfilter CI : To filter the 2 options.");
+		clif_displaymessage(fd,".   @packetfilter off : To turn packet filter off.");
+	}
+	else if( !strcmpi(message,"off") )
+	{
+		sd->state.packet_filter = 0;
+		clif_displaymessage(fd,"<< Packet Filtering Off >>");
+	}
+	else
+	{
+		if( strstr(message,"C") )
+			sd->state.packet_filter |= 1;
+		if( strstr(message,"I") )
+			sd->state.packet_filter |= 2;
+
+		sprintf(atcmd_output,"<< Packet Filtering | Chat %s | Items %s >>", (sd->state.packet_filter&1) ? "ON" : "OFF", (sd->state.packet_filter&2) ? "ON" : "OFF");
+		clif_displaymessage(fd,atcmd_output);
+	}
+
+	return 0;
+}

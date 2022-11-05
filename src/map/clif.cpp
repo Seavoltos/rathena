@@ -561,7 +561,7 @@ static int clif_send_sub(struct block_list *bl, va_list ap)
 			return 0;
 	break;
 	case AREA_WOC:
-		if (sd->chatID || bl == src_bl)
+		if (sd->chatID || bl == src_bl || sd->state.packet_filter&1)
 			return 0;
 	break;
 	case AREA_WOSC:
