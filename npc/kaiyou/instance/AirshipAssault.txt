@@ -18,8 +18,6 @@ instance,30,43,5	script	Adventurer Leon#air1	4_M_DST_GRAND,{
 	next;
 	mes "[Adventurer Leon]";
 	mes "...aunque es un poco diferente. Aún no tengo más información...";
-	//erasequest 15050;// Memorial Dungeon: Airship Assault
-	//erasequest 15051;
 	close;
 }
 

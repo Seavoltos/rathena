@@ -3433,7 +3433,7 @@ Body:
   - Id: 3076
     AegisName: WA_MONSTER_1
     Name: Go!
-    Level: 100
+    Level: 70
     Hp: 10000
     Defense: 30
     MagicDefense: 60
@@ -3453,7 +3453,7 @@ Body:
   - Id: 3077
     AegisName: WA_MONSTER_2
     Name: Go!
-    Level: 100
+    Level: 72
     Hp: 10500
     Defense: 33
     MagicDefense: 63
@@ -3472,7 +3472,7 @@ Body:
   - Id: 3078
     AegisName: WA_MONSTER_3
     Name: Go!
-    Level: 105
+    Level: 74
     Hp: 11000
     Defense: 36
     MagicDefense: 66
@@ -3491,7 +3491,7 @@ Body:
   - Id: 3079
     AegisName: WA_MONSTER_4
     Name: Go!
-    Level: 120
+    Level: 76
     Hp: 12000
     Defense: 39
     MagicDefense: 69
@@ -3525,7 +3525,7 @@ Body:
   - Id: 3081
     AegisName: WA_MONSTER_6
     Name: Go!
-    Level: 125
+    Level: 78
     Hp: 14000
     Defense: 45
     MagicDefense: 75
@@ -3544,7 +3544,7 @@ Body:
   - Id: 3082
     AegisName: WA_MONSTER_7
     Name: Go!
-    Level: 131
+    Level: 80
     Hp: 15000
     Defense: 48
     MagicDefense: 78
@@ -3563,7 +3563,7 @@ Body:
   - Id: 3083
     AegisName: WA_MONSTER_8
     Name: Go!
-    Level: 131
+    Level: 82
     Hp: 18000
     Defense: 51
     MagicDefense: 81
@@ -3582,7 +3582,7 @@ Body:
   - Id: 3084
     AegisName: WA_MONSTER_9
     Name: Go!
-    Level: 135
+    Level: 84
     Hp: 20000
     Defense: 54
     MagicDefense: 84
@@ -5253,8 +5253,8 @@ Body:
     JobExp: 1210
     Attack: 2122
     Attack2: 312
-    Defense: 60
-    MagicDefense: 22
+    Defense: 10
+    MagicDefense: 5
     Str: 177
     Agi: 188
     Vit: 205
@@ -5293,17 +5293,17 @@ Body:
     AegisName: MD_OCTOPUS
     Name: Octopus
     JapaneseName: Small Octopus
-    Level: 90
+    Level: 72
     Hp: 6000
     BaseExp: 2000
     JobExp: 1000
     Attack: 778
     Attack2: 225
-    Defense: 60
-    MagicDefense: 21
+    Defense: 30
+    MagicDefense: 5
     Str: 145
     Agi: 91
-    Vit: 138
+    Vit: 99
     Int: 60
     Dex: 113
     Luk: 45
@@ -5334,16 +5334,16 @@ Body:
     Name: Octopus Leg
     JapaneseName: Octupus Leg
     Level: 90
-    Hp: 500000
+    Hp: 62500
     BaseExp: 2000
     JobExp: 1000
     Attack: 778
     Attack2: 225
     Defense: 60
-    MagicDefense: 21
+    MagicDefense: 5
     Str: 145
     Agi: 91
-    Vit: 138
+    Vit: 99
     Int: 60
     Dex: 113
     Luk: 45
@@ -5378,11 +5378,11 @@ Body:
     JobExp: 10000
     Attack: 1900
     Attack2: 1200
-    Defense: 60
-    MagicDefense: 21
+    Defense: 30
+    MagicDefense: 10
     Str: 145
     Agi: 91
-    Vit: 138
+    Vit: 99
     Int: 60
     Dex: 113
     Luk: 45
@@ -5423,8 +5423,8 @@ Body:
     JobExp: 1149
     Attack: 620
     Attack2: 290
-    Defense: 60
-    MagicDefense: 50
+    Defense: 30
+    MagicDefense: 20
     Str: 77
     Agi: 90
     Vit: 88
@@ -5460,14 +5460,14 @@ Body:
     AegisName: KING_DRAMOH
     Name: King Dramoh
     JapaneseName: King Kray
-    Level: 117
+    Level: 92
     Hp: 288000
     BaseExp: 2583
     JobExp: 2475
     Attack: 1320
     Attack2: 330
-    Defense: 70
-    MagicDefense: 22
+    Defense: 35
+    MagicDefense: 15
     Str: 119
     Agi: 44
     Vit: 150
@@ -5501,14 +5501,14 @@ Body:
   - Id: 2201
     AegisName: SROPHO
     Name: Sropho
-    Level: 113
+    Level: 80
     Hp: 24002
     BaseExp: 2202
     JobExp: 2106
     Attack: 571
     Attack2: 565
-    Defense: 44
-    MagicDefense: 91
+    Defense: 30
+    MagicDefense: 20
     Str: 77
     Agi: 53
     Vit: 33
@@ -5545,18 +5545,18 @@ Body:
   - Id: 2202
     AegisName: KRAKEN
     Name: Kraken
-    Level: 124
-    Hp: 5602800
+    Level: 98
+    Hp: 2302800
     BaseExp: 983332
     JobExp: 1057222
     MvpExp: 491666
     Attack: 3823
     Attack2: 1830
     Defense: 55
-    MagicDefense: 100
+    MagicDefense: 10
     Str: 196
     Agi: 99
-    Vit: 165
+    Vit: 99
     Int: 117
     Dex: 162
     Luk: 99
@@ -5571,7 +5571,7 @@ Body:
     AttackDelay: 432
     AttackMotion: 864
     DamageMotion: 360
-    DamageTaken: 10
+    DamageTaken: 90
     Ai: 21
     Class: Boss
     Modes:
@@ -5599,14 +5599,14 @@ Body:
   - Id: 2203
     AegisName: POT_DOFLE
     Name: Pot Dofle
-    Level: 115
+    Level: 83
     Hp: 25211
     BaseExp: 2246
     JobExp: 2150
     Attack: 1088
     Attack2: 212
-    Defense: 80
-    MagicDefense: 55
+    Defense: 30
+    MagicDefense: 10
     Str: 133
     Agi: 54
     Vit: 78
@@ -5643,14 +5643,14 @@ Body:
   - Id: 2204
     AegisName: SEDORA
     Name: Sedora
-    Level: 110
+    Level: 80
     Hp: 22050
     BaseExp: 1908
     JobExp: 1822
     Attack: 758
     Attack2: 444
-    Defense: 40
-    MagicDefense: 55
+    Defense: 20
+    MagicDefense: 10
     Str: 126
     Agi: 118
     Vit: 61
@@ -5693,8 +5693,8 @@ Body:
     JobExp: 4400
     Attack: 880
     Attack2: 1260
-    Defense: 35
-    MagicDefense: 35
+    Defense: 10
+    MagicDefense: 10
     Str: 68
     Agi: 95
     Vit: 78
@@ -5732,12 +5732,12 @@ Body:
     AegisName: KRAKEN_LEG
     Name: Kraken Tentacle
     JapaneseName: Kraken Leg
-    Level: 124
-    Hp: 39190
+    Level: 89
+    Hp: 180175
     Attack: 1685
     Attack2: 555
     Defense: 60
-    MagicDefense: 60
+    MagicDefense: 5
     Str: 130
     Agi: 92
     Vit: 53
@@ -5777,9 +5777,9 @@ Body:
     SkillRange: 10
     ChaseRange: 12
     Size: Medium
-    Race: Demihuman
-    Element: Holy
-    ElementLevel: 3
+    Race: Fish
+    Element: Water
+    ElementLevel: 1
     WalkSpeed: 100
     AttackDelay: 720
     AttackMotion: 720

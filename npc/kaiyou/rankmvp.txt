@@ -31,7 +31,7 @@ OnInit:
 
 
 
-OnMvpRank:
+OnNPCKillEvent:
 	if(killedrid == 0) end;
 	
 	for( set .@i, 0; .@i < getarraysize($@MvP_ID); set .@i, .@i +1 ) {
@@ -351,16 +351,3 @@ OnRecvRankMvP:
 	FlagEmblem GetCastleData("batt_off",1);
 	end;
 }
-/*
--	script	RespawnMVP	FAKE_NPC,{
-	end;
-OnInit:
-	initnpctimer;
-	end;
-
-OnTimer7200000:
-//OnTimer2000:
-	charcommand "@loadnpc npc/ocean/RespawnMvP.txt";
-	end;
-}
-*/

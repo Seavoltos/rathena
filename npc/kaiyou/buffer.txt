@@ -1,9 +1,9 @@
 prontera,164,175,4	script	Healer	677,{
 	.@npc_name$ = "[^0000FFHealer^000000]";
 	if( vip_status(VIP_STATUS_ACTIVE) )
-		.@precio_z = 1000;
-	else
 		.@precio_z = 2000;
+	else
+		.@precio_z = 5000;
 
 	mes .@npc_name$;
 	mes "Bienvenido aventurero,";
@@ -21,14 +21,15 @@ prontera,164,175,4	script	Healer	677,{
 			{
 				mes "descansa como corresponde~";
 				close2;
-				percentheal 100,50;
+				percentheal 100,100;
 				atcommand "@refresh";
 				end;
 			}
 			else
-				percentheal 100,50;
+				percentheal 100,100;
 				end;
 		}
+		
 		if(Zeny < .@precio_z){
 			if( #Efectos_Acc == 0 )
 			{
@@ -44,10 +45,10 @@ prontera,164,175,4	script	Healer	677,{
 		{
 			mes "descansar como corresponde~";
 			close2;
+			atcommand "@refresh";
 		}
 		set Zeny,Zeny - .@precio_z;
-		percentheal 100,50;
-		atcommand "@refresh";
+		percentheal 100,100;
 		end;
 	case 2:
 		if( (Class == 16 || Class == 4017) && BaseLevel > 69)
@@ -55,6 +56,8 @@ prontera,164,175,4	script	Healer	677,{
 		
 		if ( #ENDOW == 0 )
 		{
+			clear;
+			mes .@npc_name$;
 			mes "Primero debes hablarme con un ^0000FFSage^000000 o ^0000FFProfessor^000000 lvl 70 para poder desbloquear esta opción en esta cuenta.";
 			close;
 		}
@@ -118,12 +121,9 @@ prontera,164,175,4	script	Healer	677,{
 		specialeffect2 .@effect;
 		close;
 	case 3:
-		//skill "AM_BIOETHICS",1,SKILL_PERM;
-		//skill "MC_LOUD",1,SKILL_PERM;
-		//skill "MC_CHANGECART",1,SKILL_PERM;
-		//skill "MC_CARTREVOLUTION",1,SKILL_PERM;
-		erasequest 60200;
-		erasequest 60201;
+		clear;
+		mes .@npc_name$;
+		mes "Nos vemos n_n";
 		close;
 	}
 }

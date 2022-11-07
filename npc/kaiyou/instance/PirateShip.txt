@@ -6,9 +6,6 @@
 //= 1.0 First version.
 //============================================================
 instance,52,67,4	script	Old Sign#9	4_BOARD3,{
-	set pship_timer,0;
-	erasequest 12328;
-	
 	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
 		mes "-- Pirate Ship Records --";
 		.@PirateShip_name$ = getd("$9_str_PirateShip"+.@i+"$");
@@ -239,7 +236,7 @@ OnT_s2:
 	.@PirateShip_timer = getd("$9_num_PirateShip"+'9_str_PirateShipDif);
 	if (!.@PirateShip_timer)
 		.@PirateShip_timer = 3600;
-	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	getmapxy 'map_name2$, .@x, .@y, BL_NPC;
 	.@PirateShip_member = getmapusers('map_name$) + getmapusers('map_name2$);
 	.@winner_name$ = '9_str_PirateShip$;
 	.@current_timer = getnpctimer(0) / 1000;
@@ -319,6 +316,10 @@ pirate_ship,116,111,4	script	Pirate Captain	4_CAT_ADMIRAL,{
 	if( 'PirateStart == 4 )
 	{
 		mes "Me hundiré con mi barco!";
+		close;
+	}
+	if (is_party_leader() == false) {
+		mes "Aún no sé que trata, pero estoy hablando con tu lider asique por favor espera ok?";
 		close;
 	}
 	mes "Cuidado algo ha subido al barco!";
@@ -401,7 +402,7 @@ OnStart:
 	set 'PirateStart, 3;
 	initnpctimer instance_npcname(strnpcinfo(0));
 	mapannounce 'map_name$, "[Pirate Captain] Cuidado! Se acerca una ola!!",bc_map,"0xffff33";
-	.safe = getmapusers('map_name$);
+	.safe = getmapusers('map_name$)+3;
 	deletearray 'safetywall[0],getarraysize('safetywall);
 	setarray 'safetywall[0],0;
 	for( set .@i,0; .@i < .safe; set .@i, .@i+1 )
@@ -426,8 +427,16 @@ OnStart:
 	{
 		donpcevent instance_npcname("#safety"+'safetywall[.@i])+"::OnStart";
 	}
+	for( set .@i,1; .@i < 31; set .@i, .@i+1 )
+		specialeffect 116,AREA,instance_npcname("#safety"+.@i);
 	end;
 OnTimer10000:
+	mapannounce 'map_name$, "[Pirate Captain] Parate sobre los safety! AFIRMATE!!",bc_map,"0xffff33";
+	for( set .@i,1; .@i < 31; set .@i, .@i+1 )
+		specialeffect 116,AREA,instance_npcname("#safety"+.@i);
+	end;
+
+OnTimer20000:
 	stopnpctimer instance_npcname(strnpcinfo(0));
 	set 'PirateStart, 1;
 	donpcevent instance_npcname("#PirateController") + "::OnStart";
@@ -498,7 +507,13 @@ OnStart:
 OnTimer60000:
 	mapannounce 'map_name$, "[Pirate Captain] Apurate que el barco se hunde! Repara el agujero!",bc_map,"0xffff33";
 	end;
-OnTimer90000:
+OnTimer120000:
+	mapannounce 'map_name$, "[Pirate Captain] Apurate que el barco se hunde! Repara el agujero!",bc_map,"0xffff33";
+	end;
+OnTimer180000:
+	mapannounce 'map_name$, "[Pirate Captain] Apurate que el barco se hunde! Repara el agujero!",bc_map,"0xffff33";
+	end;
+OnTimer300000:
 	mapannounce 'map_name$, "[Pirate Captain] Cuidado! EL BARCO SE HUNDE!! Corre a los barcos salvavidas!",bc_map,"0xffff33";
 	enablenpc instance_npcname("warp2#pirate1");
 	enablenpc instance_npcname("warp2#pirate2");

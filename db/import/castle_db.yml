@@ -31,3 +31,10 @@
 Header:
   Type: CASTLE_DB
   Version: 1
+
+Body:
+# Ranking MvP
+  - Id: 34
+    Map: batt_off
+    Name: Ranking MvP
+    Npc: MvP Ranking#batt_off

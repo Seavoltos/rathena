@@ -1,0 +1,801 @@
+//===== rAthena Script =======================================================
+//= Fish in Mouth Quest [Fishing System]
+//===== By: ==================================================================
+//= ~Seavoltos~
+//===== Current Version: =====================================================
+//= 2.0
+//===== Compatible With: =====================================================
+//=	rAthena
+//===== Description: =========================================================
+//= Quest of Fish in Mouth and Golden Fish in Mouth
+//===== Topic ================================================================
+//= 
+//===== Additional Comments: =================================================
+//= 
+//============================================================================
+
+
+hugel,203,203,6	script	Pescador	1406,{
+	set .@name$,"[^188ABBPescador^000000]";
+	mes .@name$;
+	switch(#FISHMOUTHQ){
+		case 0:
+			mes "Hola, yo soy el pescador de por aquí";
+			mes "Manejo diferentes cañas de pescar si quiero te puedo construir una.";
+			next;
+			if(select("[ > ] Construyeme una caña:[ > ] No, gracias") == 2 ){
+				mes .@name$;
+				mes "Vuelve si necesitas una";
+				close;
+			}
+			mes .@name$;
+			mes "Sólo necesito que me traigas:\n";
+			mes " - 10 Piece of Bamboo (#7150)\n";
+			mes " -  5 Black Hair (#1020)";
+			next;
+			mes .@name$;
+			mes "Vuelve cuando las tengas";
+			set #FISHMOUTHQ,1;
+			close;
+		case 1:
+			mes "Ya tienes todo?";
+			next;
+			if(select("[ > ] Si:[ > ] No, aun me faltan")==2){
+				mes .@name$;
+				mes "Apurate.";
+				close;
+			}
+			if(countitem(7150) < 10 || countitem(1020) < 5){
+				mes .@name$;
+				mes "Aún te faltan.";
+				next;
+				mes .@name$;
+				mes "Recuerda que son:\n";
+				mes " - 10 Piece of Bamboo (#7150)\n";
+				mes " -  5 Black Hair (#1020)\n";
+				next;
+				mes .@name$;
+				mes "Vuelve cuando las tengas";
+				close;
+			}
+			delitem 7150,10;
+			delitem 1020,5;
+			set #FISHMOUTHQ,2;
+			getitem 46010,1;
+			mes .@name$;
+			mes "Aquí tienes tu "+getitemname(46010)+".";
+			next;
+			mes .@name$;
+			mes "También necesitas un cebo para poder pescar. Si me traes:\n";
+			mes " - 2 Earthworm the Dude (#623)\n";
+			mes " - 1 Fatty Chubby Earthworm (#632)\n";
+			mes "Te puedo hacer uno.";
+			close;
+		case 2:
+			mes "Ya tienes todo?";
+			next;
+			if(select("[ > ] Si:[ > ] No, aun me faltan")==2){
+				mes .@name$;
+				mes "Apurate.";
+				close;
+			}
+			if(countitem(623) < 2 || countitem(632) < 1){
+				mes .@name$;
+				mes "Aún te faltan.";
+				next;
+				mes .@name$;
+				mes "Recuerda que son:\n";
+				mes " - 2 Earthworm the Dude (#623)\n";
+				mes " - 1 Fatty Chubby Earthworm (#632)\n";
+				next;
+				mes .@name$;
+				mes "Vuelve cuando las tengas";
+				close;
+			}
+			delitem 623,2;
+			delitem 632,1;
+			set #FISHMOUTHQ,3;
+			getitem 46013,1;
+			mes .@name$;
+			mes "Aquí tienes tu "+getitemname(46013)+".";
+			next;
+			mes .@name$;
+			mes "Ya tienes todo lo necesario para poder irte a pescar.";
+			close;
+		case 3:
+			mes "Necesitas algo más?";
+			next;
+			switch(select("[ > ] Necesito otra ^10B85Fcaña^000000:[ > ] Necesito otro ^108BB8cebo^000000:[ > ] Necesito ^7D3C98información^000000:[ > ] Entregar ^0D3A9Dpeces^000000")){
+				case 1:
+					if(countitem(7150) < 10 || countitem(1020) < 5){
+						mes .@name$;
+						mes "Recuerda que son:\n";
+						mes " - 10 Piece of Bamboo (#7150)\n";
+						mes " -  5 Black Hair (#1020)\n";
+						next;
+						mes .@name$;
+						mes "Vuelve cuando las tengas";
+						close;
+					}
+					delitem 7150,10;
+					delitem 1020,5;
+					getitem 46010,1;
+					mes .@name$;
+					mes "Aquí tienes tu "+getitemname(46010)+".";
+					close;
+				case 2:
+					if(countitem(623) < 10 || countitem(632) < 5){
+						mes .@name$;
+						mes "Recuerda que son:\n";
+						mes " - 2 Earthworm the Dude (#623)\n";
+						mes " - 1 Fatty Chubby Earthworm (#632)\n";
+						next;
+						mes .@name$;
+						mes "Vuelve cuando las tengas";
+						close;
+					}
+					delitem 623,2;
+					delitem 632,1;
+					getitem 46013,1;
+					mes .@name$;
+					mes "Aquí tienes tu "+getitemname(46013)+".";
+					close;
+				case 3:
+					mes .@name$;
+					mes "La pesca es un arte que requiere de mucha paciencia.";
+					next;
+					mes .@name$;
+					mes "En este mundo existen 3 peces comunes, 18 raros y 9 legendarios.";
+					next;
+					mes .@name$;
+					mes "Los peces raros son:\n";
+					mes " "+getitemname(46032)+", "+getitemname(46035)+",\n";
+					mes " "+getitemname(46036)+", "+getitemname(46050)+",\n";
+					mes " "+getitemname(46034)+", "+getitemname(46026)+",\n";
+					mes " "+getitemname(46039)+", "+getitemname(46028)+",\n";
+					mes " "+getitemname(46045)+", "+getitemname(46025)+",\n";
+					mes " "+getitemname(46021)+", "+getitemname(46024)+",\n";
+					mes " "+getitemname(46029)+", "+getitemname(46038)+",\n";
+					mes " "+getitemname(46043)+", "+getitemname(46037)+",\n";
+					mes " "+getitemname(46042)+" y "+getitemname(46044)+".";
+					next;
+					mes .@name$;
+					mes "Los peces legendarios son:\n";
+					mes " - "+getitemname(46041)+"\n";
+					mes " - "+getitemname(46033)+"\n";
+					mes " - "+getitemname(46040)+"\n";
+					mes " - "+getitemname(46023)+"\n";
+					mes " - "+getitemname(46051)+"\n";
+					mes " - "+getitemname(46020)+"\n";
+					mes " - "+getitemname(46022)+"\n";
+					mes " - "+getitemname(46047)+"\n";
+					mes " - "+getitemname(46046)+"";
+					next;
+					mes .@name$;
+					mes "Existen 9 lugares donde viven estos peces.\n";
+					mes " - Moskovia Forest\n";
+					mes " - Nameless Island\n";
+					mes " - Undersea Tunnel\n";
+					mes " - Sunken Ship\n";
+					mes " - Komodo Beach\n";
+					mes " - Jawaii\n";
+					mes " - Abyss Lake\n";
+					mes " - Veins Field\n";
+					mes " - Amatsu Field";
+					next;
+					mes .@name$;
+					mes "Y en la instancia Pirate Ship.";
+					next;
+					mes .@name$;
+					mes "A mi me gusta coleccionar peces, si me traes peces comunes te daré Fresh Fish.";
+					next;
+					mes .@name$;
+					mes "Si me traes todos los peces raros te regalare el Fisherman Hat.";
+					next;
+					mes .@name$;
+					mes "Y si me traes todos los peces legendarios y el ^ff0000Fish in Mouth^000000 te regalaré el Golden Fish in Mouth.";
+					close;
+				case 4:
+					mes .@name$;
+					mes "Ya tienes toda la colección?";
+					next;
+					switch(select("[ > ] Peces comunes:[ > ] Peces raros:[ > ] Peces legendarios")){
+						case 1:
+							mes .@name$;
+							if( countitem(46027) < 1 && countitem(46030) < 1 && countitem(46031) < 1  )
+							{
+								mes "Recuerda que si deseas algunos Fresh Fish, no dudes en entregarlos";
+								mes "Estos son los "+getitemname(46027)+" o "+getitemname(46031)+".";
+								close;
+							}
+							set .@peces, countitem(46027) + countitem(46030) + countitem(46031);
+							mes "Tienes en total: "+.@peces+ " peces comunes";
+							mes "Deseas entregarlos?";
+							next;
+							if(select("[ > ] Si:[ > ] No")==2)
+							{
+								mes .@name$;
+								mes "Recuerda que si deseas algunos Fresh Fish, no dudes en entregarlos";
+								close;
+							}
+							set .@peces, countitem(46027) + countitem(46030) + countitem(46031);
+							delitem 46027,countitem(46027);
+							delitem 46030,countitem(46030);
+							delitem 46031,countitem(46031);
+							getitem 579, rand(2,5)*.@peces;
+							mes .@name$;
+							mes "Por ahora te puedo dar todos esos peces.";
+							close;
+							
+						case 2:
+							if( countitem(46032) < 1 || countitem(46035) < 1 ||
+							    countitem(46036) < 1 || countitem(46050) < 1 ||
+								countitem(46034) < 1 || countitem(46026) < 1 ||
+								countitem(46039) < 1 || countitem(46028) < 1 ||
+								countitem(46045) < 1 || countitem(46025) < 1 ||
+								countitem(46021) < 1 || countitem(46024) < 1 ||
+								countitem(46029) < 1 || countitem(46038) < 1 ||
+								countitem(46043) < 1 || countitem(46037) < 1 ||
+								countitem(46042) < 1 || countitem(46044) < 1 )
+							{
+									mes .@name$;
+									mes "No tienes todos los peces raros, ve a buscarlos. Recuerda que se pueden intercambiar.";
+									close;
+							}
+							delitem 46032,1;
+							delitem 46035,1;
+							delitem 46036,1;
+							delitem 46050,1;
+							delitem 46034,1;
+							delitem 46026,1;
+							delitem 46039,1;
+							delitem 46028,1;
+							delitem 46045,1;
+							delitem 46025,1;
+							delitem 46021,1;
+							delitem 46024,1;
+							delitem 46029,1;
+							delitem 46038,1;
+							delitem 46043,1;
+							delitem 46037,1;
+							delitem 46042,1;
+							delitem 46044,1;
+							getitem 5317,1;
+							//atcommand "@itembound 5317 1 1";
+							
+							mes .@name$;
+							mes "Felicidades! ahi tienes tu Fisherman Hat.";
+							close;
+						case 3:
+							if(countitem(46041) < 1 || countitem(46033) < 1 || countitem(46040) < 1 || 
+							   countitem(46023) < 1 || countitem(46051) < 1 || countitem(46020) < 1 || 
+							   countitem(46022) < 1 || countitem(46047) < 1 || countitem(46046) < 1 || countitem(5403) < 1 ){
+									mes .@name$;
+									mes "No tienes todos los peces legendarios o te falta el Fish in Mouth, ve a buscarlos. Recuerda que se pueden intercambiar.";
+									close;
+							}
+							delitem 46041,1;
+							delitem 46033,1;
+							delitem 46040,1;
+							delitem 46023,1;
+							delitem 46051,1;
+							delitem 46020,1;
+							delitem 46022,1;
+							delitem 46047,1;
+							delitem 46046,1;
+							delitem 5403,1;
+							getitem 18936,1;
+							//atcommand "@itembound 18936 1 1";
+							mes .@name$;
+							mes "Felicitaciones! Ahí tienes tu Golden Fish in Mounth.";
+							close;
+					}
+			}
+	}
+
+OnInit: 
+	npcspeed 150;
+	initnpctimer;
+	end;
+
+OnTimer4000:
+	emotion ET_DELIGHT;
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	set .@curX, callfunc("move_XY",.@x,197,207);
+	set .@curY, callfunc("move_XY",.@y,190,213);
+	npcwalkto .@curX, .@curY;
+	initnpctimer;
+	end;	
+}
+
+// Used to draw HP bar string
+function	script	DrawHP	{
+	set .@Draw$, "[";
+	set .@HP, getarg(0);
+	// Starting Color
+	if( .@HP > 20 ) set .@Draw$, .@Draw$ + "^0EAE1B";
+	else if( .@HP > 15 ) set .@Draw$, .@Draw$ + "^7CAE0E";
+	else if( .@HP > 10 ) set .@Draw$, .@Draw$ + "^E3C521";
+	else if( .@HP > 5 ) set .@Draw$, .@Draw$ + "^D86112";
+	else set .@Draw$, .@Draw$ + "^D82412";
+	// Draw HP Bar
+	for( set .@x, 0; .@x < 29; set .@x, .@x + 1 )
+	{
+		if( .@x > .@HP ) set .@Draw$, .@Draw$ + "";
+		else set .@Draw$, .@Draw$ + "=";
+	}
+	
+	set .@Draw$, .@Draw$ + "^000000]";
+	
+	return .@Draw$;
+}
+
+// Main Fishing Engine
+// arg(0) = NPC Name
+function	script	Fishing_Work	{
+	// Check Requeriments
+	if( getvariableofnpc(.Fish_Init, getarg(0)) == 0 )
+	{
+		callfunc "Fishing_Init",getarg(0),getarg(1);
+		end;
+	}
+
+	if( getvariableofnpc(.Fish_On, getarg(0)) == 0 ) end;
+	mes "[^0000FF" + strcharinfo(0) + "^000000]";
+
+	set @Fish_Ele, getvariableofnpc(.Fish_Ele, getarg(0));
+	set @Fish_Lvl, $@Spot_Lvl[@Fish_Ele];
+
+	// * Working Level
+	if( FishingLvl < @Fish_Lvl ) {
+		mes "No tengo entrenamiento para pescar aquí.";
+		mes "Nivel requerido: ^FF0000" + $@FishingLv$[@Fish_Lvl] + "^000000";
+		mes ">> ^FF0000" + $@FishingLv$[FishingLvl] + "^000000 <<";
+		set @Progress, (FishingExp * 30) / $@FishingLUp[FishingLvl];
+		mes "" + callfunc("DrawHP",@Progress) + "";
+		close;
+	}
+	
+	// * Premium Account
+	
+	if(  vip_status(1)==0 && @Fish_Lvl > 5 )
+	{
+		mes "Esta zona está reservada para cuentas Premium";
+		close;
+	}
+	
+
+	// * Old Pick
+	set .@fcast,45+rand(0,20);
+	if (isequipped(2550))	 		//Fisher's_Muffler
+		set .@fcast,.@fcast - 5;
+	if (isequipped(2443))	 		//Fish_Shoes
+		set .@fcast,.@fcast - 5;
+	if (isequipped(46010))			//Small Fishing Rod [0]
+		set .@fcast,.@fcast - 10;
+	else if(isequipped(46011))		//Medium Fishing Rod [0]
+		set .@fcast,.@fcast - 15;
+	else if(isequipped(46012))		//Large Fishing Rod [0]
+		set .@fcast,.@fcast - 20;
+	else set .@mano,1;
+	if (isequipped(1249))			//Fisherman's Dagger [0]
+		set .@fcast,.@fcast - 5;
+	if (isequipped(5317))	 		//Fisherman's Hat [0]
+		set .@fcast,.@fcast - 15;
+	if (isequipped(46013))	 		//Small Lure [0]
+		set .@fcast,.@fcast - 5;
+	else if(isequipped(46014))		//Large Lure [0]
+		set .@fcast,.@fcast - 15;
+	else set .@mano,1;
+	if( .@mano == 1 )
+	{
+		mes "Debería visitar al ^188ABBPescador^000000 en Hugel.";
+		mes " ";
+		if( isequipped(46010) || isequipped(46011) || isequipped(46012) )
+			mes ">> ^1E8449Item: Fishing Rod ^000000 <<";
+		else
+			mes ">> ^B03A2EItem: Fishing Rod ^000000 <<";
+		if( isequipped(46013) || isequipped(46014) )
+			mes ">> ^1E8449Item: Lure ^000000 <<";
+		else
+			mes ">> ^B03A2EItem: Lure ^000000 <<";
+		close;
+	}
+	if( .@fcast < 5 )
+		set .@fcast,5;
+
+	mes "Que suerte, un banco ^0000FF" + $@Fish_Size$[getvariableofnpc(.Fish_SZ, getarg(0))] + "^000000 de peces!!, veamos que encontramos en aquí.";
+		mes ">> ^FF0000" + $@FishingLv$[FishingLvl] + "^000000 <<";
+	if( FishingLvl < 7 ) {
+		set @Progress, (FishingExp * 30) / $@FishingLUp[FishingLvl];
+		mes "" + callfunc("DrawHP",@Progress) + "";
+	}
+	next;
+	cutin "2013_summer_fish_1",1;
+	// Working
+L_FishingOn:
+	if( getvariableofnpc(.Fish_On, getarg(0)) == 0 ) goto L_Close;
+	mes "> Banco de Peces:\n";
+	mes "" + callfunc("DrawHP",getvariableofnpc(.Fish_HP, getarg(0))) + "";
+	mes " ";
+	mes "[^0000FF" + strcharinfo(0) + "^000000]";
+	mes "Debo tener cuidado con mi alrededor y no moverme.";
+	next;
+	if( getvariableofnpc(.Fish_On, getarg(0)) == 0 ) goto L_Close;
+	specialeffect2 EF_BUBBLE;
+	cutin "2013_summer_fish_"+.@idcuttin,255;
+	if( .@idcuttin == 3)
+		set .@idcuttin,4;
+	else
+		set .@idcuttin,3;
+	cutin "2013_summer_fish_"+.@idcuttin,1;
+	progressbar "ffffff",.@fcast;
+	//cutin "2013_summer_fish_2",255;
+	
+	set @HPower, rand(2,10);
+	
+	// Update Spot HP
+	set getvariableofnpc(.Fish_HP, getarg(0)), getvariableofnpc(.Fish_HP, getarg(0)) - @HPower;
+	
+	// Success ??
+	specialeffect 116;
+
+	if( getvariableofnpc(.Fish_HP, getarg(0)) < 1 ) {
+		mes "[^0000FF" + strcharinfo(0) + "^000000]";
+		mes "Lo logré!! veamos los frutos del trabajo...";
+		cutin "2013_summer_fish_5",1;
+		// Exp Progress
+		if( FishingLvl < 7 )
+		{
+			set FishingExp, FishingExp + $@Spot_Exp[@Fish_Ele];
+			if( FishingExp >= $@FishingLUp[FishingLvl] ) {
+				// Level Up
+				set FishingLvl, FishingLvl + 1;
+				set FishingExp, 0;
+				specialeffect2 568;
+				dispbottom "[Subiste tu Nivel de experiencia a " + $@FishingLv$[FishingLvl] + " en el mundo de la pesca]";
+			} else {
+				set @Progress, (FishingExp * 100) / $@FishingLUp[FishingLvl];
+				//dispbottom "[ Pesca: Obtuviste " + $@Spot_Exp[@Fish_Ele] + " exp, siguiente nivel " + $@FishingLUp[FishingLvl]+" exp. ]";
+				dispbottom "[ Pesca: " + $@FishingLv$[FishingLvl] + " -> " + @Progress + "% -> Siguiente: " + $@FishingLv$[FishingLvl + 1] + " ]";
+			}
+		}
+
+		// Hide NPC
+		setnpcdisplay getarg(0),"Fishing Spot",844,0;
+		set getvariableofnpc(.Fish_Spawn, getarg(0)), rand($@Spot_SpawnMin[@Fish_Ele],$@Spot_SpawnMax[@Fish_Ele]);
+		set getvariableofnpc(.Fish_On, getarg(0)), 0;
+		initnpctimer getarg(0);
+		disablenpc getarg(0);
+		set @Fish_Size, getvariableofnpc(.Fish_SZ, getarg(0));
+		close2;
+		emotion ET_QUESTION;
+		
+		callfunc "Fishing_Drop";
+		cutin "2013_summer_fish_5",255;
+		end;
+	}
+	
+	// Lure Status
+	if( !rand(10) && isequipped(46013)) {
+		specialeffect 155;
+		mes "[^0000FF" + strcharinfo(0) + "^000000]";
+		mes "Baahhhhh.... que mala suerte... sólo se comieron el "+ getitemname(46013) +"!";
+		delitem 46013,1;
+		close2;
+		goto OnLeave;
+		end;
+	}
+	if( !rand(50) && isequipped(46014)) {
+		specialeffect 155;
+		mes "[^0000FF" + strcharinfo(0) + "^000000]";
+		mes "Baahhhhh.... que mala suerte... sólo se comieron el "+ getitemname(46014) +"!";
+		delitem 46014,1;
+		close2;
+		goto OnLeave;
+		end;
+	}
+	if( !rand(10) && isequipped(46010)) {
+		specialeffect 196;
+		mes "[^0000FF" + strcharinfo(0) + "^000000]";
+		mes "Baahhhhh.... que mala suerte... se rompio la "+ getitemname(46010) +"!";
+		delitem 46010,1;
+		close2;
+		goto OnLeave;
+		end;
+	}
+	if( !rand(50) && isequipped(46011)) {
+		specialeffect 196;
+		mes "[^0000FF" + strcharinfo(0) + "^000000]";
+		mes "Baahhhhh.... que mala suerte... se rompio la "+ getitemname(46011) +"!";
+		delitem 46011,1;
+		close2;
+		goto OnLeave;
+		end;
+	}
+	if( !rand(100) && isequipped(46012)) {
+		specialeffect 196;
+		mes "[^0000FF" + strcharinfo(0) + "^000000]";
+		mes "Baahhhhh.... que mala suerte... se rompio la "+ getitemname(46012) +"!";
+		delitem 46012,1;
+		close2;
+		goto OnLeave;
+		end;
+	}
+	
+	// Accidents
+	if( !rand(10) ) {
+		// Scream!!
+		if( sex ) soundeffect "die_male.wav",0;
+		else soundeffect "die_merchant_female.wav",0;
+		
+		percentheal -rand(5,20),0; // Damage
+		
+		mes "[^0000FF" + strcharinfo(0) + "^000000]";
+		mes "^FF0000" + $@FSAccidents$[rand(getarraysize($@FSAccidents$))] + "^000000";
+		emotion ET_HUK;
+
+		if( HP < 1 ) close; // Killed
+		next;
+	} else if( !rand(500) ) {
+		specialeffect 666;
+		atcommand "@die";
+		announce "Te llevó una ola, no lograste escapar con vida!",3;
+		end;
+	}
+	
+	if( getvariableofnpc(.Fish_On, getarg(0)) == 0 ) goto L_Close;
+	if( .@idcuttin == 0)
+		set .@idcuttin,3;
+	goto L_FishingOn;
+
+L_Close:
+	mes "[^0000FF" + strcharinfo(0) + "^000000]";
+	mes "Esta banco de peces se ha escapado, no hay más que buscar aquí.";
+	close;
+
+L_Exit:
+	mes "[^0000FF" + strcharinfo(0) + "^000000]";
+	mes "No me siento con suerte, talvez vuelva luego.";
+	close;
+	
+OnLeave:
+	cutin "2013_summer_fish_1",255;
+	cutin "2013_summer_fish_2",255;
+	cutin "2013_summer_fish_3",255;
+	cutin "2013_summer_fish_4",255;
+	cutin "2013_summer_fish_5",255;
+	cutin "2013_summer_fish_6",255;
+	end;
+}
+
+// Called on Init per Spot
+// arg(0) = NPC Name
+// arg(1) = Spot Element
+function	script	Fishing_Init	{
+	setnpcdisplay getarg(0),"Fishing Spot",844,111;
+	if( !$@FishingReady ) donpcevent "FishEngine::OnInit";
+	
+	set getvariableofnpc(.Fish_Spawn,getarg(0)), rand($@Spot_SpawnMin[atoi(getarg(1))],$@Spot_SpawnMax[atoi(getarg(1))]);
+	set getvariableofnpc(.Fish_On, getarg(0)), 0; // Spot Inactive
+	set getvariableofnpc(.Fish_Ele, getarg(0)), atoi(getarg(1));
+	set getvariableofnpc(.Fish_Init, getarg(0)), 1;
+	
+	initnpctimer getarg(0);
+	disablenpc getarg(0);
+	return;
+}
+
+// CountDown to Spot Spawn
+// arg(0) = NPC Name
+function	script	Fishing_Tick	{
+	stopnpctimer;
+	set getvariableofnpc(.Fish_Spawn,getarg(0)), getvariableofnpc(.Fish_Spawn,getarg(0)) - 1; // Tick
+	if( getvariableofnpc(.Fish_Spawn,getarg(0)) < 1 ) {
+		// Spot Spawn
+		enablenpc getarg(0);
+		set .@size, rand(100);
+		if( .@size < 10 )
+			set getvariableofnpc(.Fish_SZ, getarg(0)), 2; // Big 10%
+		else if( .@size < 60 )
+			set getvariableofnpc(.Fish_SZ, getarg(0)), 1; // Small 50%
+		else
+			set getvariableofnpc(.Fish_SZ, getarg(0)), 0; // Normal 40%
+
+		set .@Fish_Ele, getvariableofnpc(.Fish_Ele, getarg(0));
+		setnpcdisplay getarg(0), "" + $@Spot_Name$[.@Fish_Ele] + "", $@Spote_Sprite[.@Fish_Ele], getvariableofnpc(.Fish_SZ, getarg(0));
+
+		specialeffect 701;
+		switch( getvariableofnpc(.Fish_SZ, getarg(0)) ) {
+			// Spot Total HP
+			case 0: set getvariableofnpc(.Fish_HP, getarg(0)), rand(15,25); break;
+			case 1: set getvariableofnpc(.Fish_HP, getarg(0)), rand(10,15); break;
+			case 2: set getvariableofnpc(.Fish_HP, getarg(0)), rand(25,30); break;
+		}
+		
+		set getvariableofnpc(.Fish_On, getarg(0)), 1;
+		end;
+	}
+	initnpctimer getarg(0);
+	end;
+}
+
+// Spot Drop
+// Uses: @Fish_Ele @Fish_Lvl @Fish_Size
+function	script	Fishing_Drop	{
+	// Common Garbage
+	if( rand(100) < 90 ) getitem $@CommonGarbage[rand(getarraysize($@CommonGarbage))],1;
+	if( rand(100) < 90 ) getitem $@CommonGarbage[rand(getarraysize($@CommonGarbage))],1;
+	
+	// Unique Drops
+	set @size, getarraysize(getd("$@Fish_" + @Fish_Ele + "_ID"));
+	switch( @Fish_Size ) {
+		case 0: set @bonus, 2; break;
+		case 1: set @bonus, 1; break;
+		case 2: set @bonus, 3; break;
+	}
+
+	for( set @i, 0; @i < @size; set @i, @i + 1 )
+	{
+		set @rate, getd("$@Fish_" + @Fish_Ele + "_RT[" + @i + "]") * @bonus;
+
+		if( @rate >= rand(1,10000) ) getitem getd("$@Fish_" + @Fish_Ele + "_ID[" + @i + "]"), 1;
+	}
+	// Normal Garbage
+	if( rand(100) < 70 + FishingLvl ) getitem $@NormalGarbage[rand(getarraysize($@NormalGarbage))],1;
+	if( rand(100) < 70 + FishingLvl ) getitem $@NormalGarbage[rand(getarraysize($@NormalGarbage))],1;
+	// Special Garbage
+	if( rand(100) < 20 + FishingLvl ) getitem $@SpecialGarbage[rand(getarraysize($@SpecialGarbage))],1;
+
+	//Fish in Mouth
+	if( #GETFISHMOUTH < 2 )
+	{
+		set .@random, rand(1,100);
+		set .@rate, 1 + FishingLvl + @bonus;
+		if( .@random < .@rate )
+		{
+			set #GETFISHMOUTH,#GETFISHMOUTH+1;
+			getitem 5403,1;
+		}
+	}
+	return;
+}
+
+//Función
+-	script	FishEngine	-1,{
+	end;
+
+OnInit:
+	//if( $@FishingReady ) end;
+
+	// Player Settings
+	setarray $@FishingLv$[0],	"Aspirante","Novato","Aprendiz","Jornalero","Pescador","Experto","Artesano","Maestro";
+	setarray $@FishingLUp[0],	       9000,   21600,     37800,      57600,     81000,   108000,    157500,   999999;
+
+	// Per Element - Mine Settings
+	setarray $@Spot_Name$[0],	"Banco peces","Banco peces","Banco peces","Banco peces","Banco peces","Banco peces","Banco peces","Banco peces","Banco peces"; // * Nombre spot
+	setarray $@Spot_Lvl[0],		            0,            0,           0,             0,            0,            0,            0,            0,            0; // * Nivel necesario
+	setarray $@Spote_Sprite[0],	        10065,        10065,       10065,         10065,        10065,        10065,        10065,        10065,        10065; // * Sprite
+	setarray $@Spot_SpawnMin[0],	        5,           15,           5,             5,            5,            5,            5,            5,            5; // * Minimum Spawn Time
+	setarray $@Spot_SpawnMax[0],	       15,           15,          15,            15,           15,           15,           15,           15,           15; // * Maximum Spawn Time
+	setarray $@Spot_Exp[0],		          200,          200,         200,           200,          200,          200,          200,          200,          200; // * Experience
+
+	// Other Stuff
+	setarray $@Fish_Size$[0],	"mediano","pequeño","grande";
+	setarray $@FSAccidents$[0],	"Ouchhh!!! me saltó agua al ojo... snifff",
+					"OMG!!!!... me apreté el dedo!",
+					"Ouch!... se me enredó el cedal...",
+					"Auch!!!... me quemé un dedo... grr...",
+					"Arghhh!... me mordió algo...",
+					"Ayy!!... me mordió el cebo... argghh...",
+					"Grrr... siempre olvido asegurar la caña...";
+
+	// Common Drops
+	setarray $@CommonGarbage[0],	7405,7405,7405,7405,7405,7939,7203,46027,46027;
+	setarray $@NormalGarbage[0],	604,1020,46027,46027,46027;
+	setarray $@SpecialGarbage[0],	2406,2414,2401,2402,2416,2403,2404,46030,46031,46030,46031;
+
+	// Unique Moscovia
+	setarray $@Fish_0_ID[0],	 46032,46035,46041;
+	setarray $@Fish_0_RT[0],	   500,  500,   50;
+	// Unique Nameless
+	setarray $@Fish_1_ID[0],	 46036,46050,46033;
+	setarray $@Fish_1_RT[0],	   500,  500,    1;
+	// Unique Undersea Tunnel
+	setarray $@Fish_2_ID[0],	 46034,46026,46040;
+	setarray $@Fish_2_RT[0],	   500,  500,   50;
+	// Unique Sunked Ship
+	setarray $@Fish_3_ID[0],	 46039,46028,46048,46023;
+	setarray $@Fish_3_RT[0],	   500,  500,  100,    1;
+	// Unique Komodo Beach
+	setarray $@Fish_4_ID[0],	 46045,46025,46051;
+	setarray $@Fish_4_RT[0],	   500,  500,   50;
+	// Unique Jawaii
+	setarray $@Fish_5_ID[0],	 46021,46024,46020;
+	setarray $@Fish_5_RT[0],	   500,  500,   50;
+	// Unique Abyss Lake
+	setarray $@Fish_6_ID[0],	 46029,46038,46049,46022;
+	setarray $@Fish_6_RT[0],	     5,  500,  100,    1;
+	// Unique Veins Field
+	setarray $@Fish_7_ID[0],	 46042,46044,46046;
+	setarray $@Fish_7_RT[0],	   500,  500,   50;
+	// Unique Amatsu Field
+	setarray $@Fish_8_ID[0],	 46043,46037,46047;
+	setarray $@Fish_8_RT[0],	   500,  500,   50;
+	
+	set $@FishingReady,1;
+	end;
+}
+
+
+
+//Spot de pesca
+
+// *****************
+// * King Prawn *
+// *****************
+mosk_dun01,110,51,0	script	Banco de peces#0::FMOS00	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+mosk_dun01,110,60,0	script	Banco de peces#0::FMOS01	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+mosk_dun01,126,65,0	script	Banco de peces#0::FMOS02	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+mosk_dun01,130,48,0	script	Banco de peces#0::FMOS03	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+mosk_dun02,154,255,0	script	Banco de peces#0::FMOS04	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+mosk_dun02,154,262,0	script	Banco de peces#0::FMOS05	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+mosk_dun02,114,250,0	script	Banco de peces#0::FMOS06	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+mosk_dun02,111,260,0	script	Banco de peces#0::FMOS07	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+mosk_dun03,150,90,0	script	Banco de peces#0::FMOS08	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+mosk_dun03,155,88,0	script	Banco de peces#0::FMOS09	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+mosk_dun03,160,92,0	script	Banco de peces#0::FMOS10	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}

@@ -1,0 +1,218 @@
+//===== rAthena Script =======================================
+//= Thanatos Tower
+//===== Description: =========================================
+//= Thanatos Tower Instance
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Seavoltos]
+//============================================================
+//============================================================
+
+// Piso 0
+//============================================================
+
+instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
+	if ( getgmlevel() < 60) 
+		end;
+	set .@name$,"[Control Instancias]";
+	mes .@name$;
+	mes "Bienvenido al control de instancias";
+	mes "¿Qué deseas hacer?";
+	next;
+	switch(select("Tiempos Instancias:Activar Reset Instancias:Desactivar Reset Instancias"))
+	{
+		case 1:
+			mes .@name$;
+			mes "¿Qué tiempo deseas reiniciar?";
+			next;
+			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower"))
+			{
+				case 1:
+					mes .@name$;
+					mes "No hay problema, recuerda que es un proceso irreversible!";
+					close;
+				case 2:
+					set .@str_1$, "$120719_str_AAsault";
+					set .@num_1$, "$120719_num_AAsault";
+					set .@mem_1$, "$120903_num_AAsault";
+					set .@time,3600;
+					break;
+				case 5:
+					set .@str_1$, "$8_str_FallenAngel";
+					set .@num_1$, "$8_num_FallenAngel";
+					set .@mem_1$, "$8_mem_FallenAngel";
+					set .@round_1$, "$8_round_FallenAngel";					
+					set .@time,3600;
+					break;
+				case 8:
+					set .@str_1$, "$9_str_PirateShip";
+					set .@num_1$, "$9_num_PirateShip";
+					set .@mem_1$, "$9_mem_PirateShip";
+					set .@time,36000;
+					break;
+				default:
+					mes .@name$;
+					mes "En construcción";
+					close;
+			}
+			for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
+				setd .@str_1$+.@i+"$","";
+				setd .@num_1$+.@i,.@time;
+				setd .@mem_1$+.@i,0;
+				if( .@round_1$ != "" )
+					setd .@round_1$+.@i,0;
+				
+			}
+			end;
+		case 2:
+			mes .@name$;
+			mes "¿Qué instancia deseas reiniciar?";
+			next;
+			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower"))
+			{
+				case 1:
+					mes .@name$;
+					mes "No hay problema!";
+					close;
+				case 5:
+					mes .@name$;
+					mes "Deseas activar el reset de la instancia ^ff0000Fallen Angel^000000?";
+					next;
+					if(select("No:Si") == 1 ){
+						mes .@name$;
+						mes "No hay problema";
+						close;
+					}
+					enablenpc "Purification Stone#FA";
+					mes .@name$;
+					mes "La purification Stone ha sido activada.";
+					close;
+				case 8:
+					mes .@name$;
+					mes "Deseas activar el reset de la instancia ^ff0000Pirate Ship^000000?";
+					next;
+					if(select("No:Si") == 1 ){
+						mes .@name$;
+						mes "No hay problema";
+						close;
+					}
+					enablenpc "Purification Stone#PS";
+					mes .@name$;
+					mes "La purification Stone ha sido activada.";
+					close;
+				default:
+					mes .@name$;
+					mes "En construcción";
+					close;
+			}
+			end;
+		case 3:
+			mes .@name$;
+			mes "¿Qué instancia deseas desactivar?";
+			next;
+			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower"))
+			{
+				case 1:
+					mes .@name$;
+					mes "No hay problema";
+					close;
+				case 5:
+					mes .@name$;
+					mes "Deseas desactivar el reset de la instancia ^ff0000Fallen Angel^000000?";
+					next;
+					if(select("No:Si") == 1 ){
+						mes .@name$;
+						mes "No hay problema";
+						close;
+					}
+					disablenpc "Purification Stone#FA";
+					mes .@name$;
+					mes "La purification Stone ha sido desactivada.";
+					close;
+				case 8:
+					mes .@name$;
+					mes "Deseas desactivar el reset de la instancia ^ff0000Pirate Ship^000000?";
+					next;
+					if(select("No:Si") == 1 ){
+						mes .@name$;
+						mes "No hay problema";
+						close;
+					}
+					disablenpc "Purification Stone#PS";
+					mes .@name$;
+					mes "La purification Stone ha sido desactivada.";
+					close;
+				default:
+					mes .@name$;
+					mes "En construcción";
+					close;
+			}
+			end;
+	}
+
+}
+
+
+
+instance,50,66,4	script	Purification Stone#PS	406,{
+	set pship_timer,0;
+	erasequest 12328;
+	mes "^0000ffEl registro y efectos relacionados con Pirate Ship ha desaparecido. Puedes volver a ingresar nuevamente.^000000";
+	close;
+
+OnInit:
+	disablenpc "Purification Stone#PS";
+	end;
+
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	disablenpc "Purification Stone#PS";
+	end;
+
+OnTimer1000:
+	enablenpc "Purification Stone#PS";
+	end;
+
+OnTimer1740000:
+	mapannounce "instance", "La Purification Stone se destruirá en 1 minuto.",bc_map,"0x00ff99";
+	end;
+
+OnTimer1800000:
+	disablenpc "Purification Stone#PS";
+	end;
+}
+
+instance,41,65,4	script	Purification Stone#FA	406,{
+	set fangel_timer,0;
+	erasequest 12327;
+	mes "^0000ffEl registro y efectos relacionados con Fallen Angel ha desaparecido. Puedes volver a ingresar nuevamente.^000000";
+	close;
+
+OnInit:
+	disablenpc "Purification Stone#FA";
+	end;
+
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	disablenpc "Purification Stone#FA";
+	end;
+
+OnTimer1000:
+	enablenpc "Purification Stone#FA";
+	end;
+
+OnTimer1740000:
+	mapannounce "instance", "La Purification Stone se destruirá en 1 minuto.",bc_map,"0x00ff99";
+	end;
+
+OnTimer1800000:
+	disablenpc "Purification Stone#FA";
+	end;
+}
