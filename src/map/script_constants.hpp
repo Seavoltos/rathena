@@ -538,6 +538,7 @@
 	export_constant(MF_NOBUYINGSTORE);
 	export_constant(MF_NOSLAVE);
 	export_constant(MF_NOEQUIP);
+	export_constant(MF_NODYNAMICNPC);
 
 	/* setcell types */
 	export_constant(CELL_WALKABLE);

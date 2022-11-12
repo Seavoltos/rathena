@@ -26810,10 +26810,11 @@ BUILDIN_FUNC(item_enchant){
 BUILDIN_FUNC(itemlink)
 {
 	struct item item = {};
+
 	item.nameid = script_getnum(st, 2);
 	
 	if( !item_db.exists( item.nameid ) ){
-		ShowError( "Itemlink: Item ID %u does not exists.\n", item.nameid );
+		ShowError( "buildin_itemlink: Item ID %u does not exists.\n", item.nameid );
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
@@ -26826,13 +26827,13 @@ BUILDIN_FUNC(itemlink)
 	FETCH(8, item.enchantgrade);
 
 #if PACKETVER >= 20150225
-	if ( script_hasdata(st,9) && script_getitem_randomoption(st, nullptr, &item, "itemlink", 9) == SCRIPT_CMD_FAILURE ) {
+	if ( script_hasdata(st,9) && script_getitem_randomoption(st, nullptr, &item, "itemlink", 9) == false) {
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;
 	}
 #endif
 
-	std::string itemlstr = createItemLink(item);
+	std::string itemlstr = item_db.create_item_link(item);
 	script_pushstrcopy(st, itemlstr.c_str());
 	return SCRIPT_CMD_SUCCESS;
 }
@@ -27793,7 +27794,6 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(item_reform, "??"),
 	BUILDIN_DEF(item_enchant, "i?"),
 	BUILDIN_DEF(itemlink, "i?????????"),
-
 	BUILDIN_DEF(addfame, "i?"),
 	BUILDIN_DEF(getfame, "?"),
 	BUILDIN_DEF(getfamerank, "?"),
