@@ -70,6 +70,7 @@ valkyrie,53,58,3	script	Stalker#Valkyrie	747,{
 		}
 		jobchange Job_Stalker;
 		set ADVJOB,0;
+		getitem 41032,1;
 		mes "[Stalker]";
 		mes "Congratulations!";
 		mes "As a Stalker, I hope";

@@ -1071,6 +1071,7 @@ enum e_random_item_group {
 	IG_MES_10,
 	IG_MES_11,
 	IG_MES_12,
+	IG_KACHUA_KEY,
 	IG_MAX,
 };
 

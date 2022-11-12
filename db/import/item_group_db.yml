@@ -652,3 +652,320 @@ Body:
             Rate: 10
           - Item: Costume_Drooping_Heinrich
             Rate: 10
+  - Group: KACHUA_KEY
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Item: Kachua_box_1
+            Rate: 78
+          - Item: Kachua_box_2
+            Rate: 78
+          - Item: Kachua_box_3
+            Rate: 78
+          - Item: Kachua_box_4
+            Rate: 78
+          - Item: Kachua_box_5
+            Rate: 78
+          - Item: Kachua_box_6
+            Rate: 78
+          - Item: Kachua_box_7
+            Rate: 390
+          - Item: Ambernite_Card
+            Rate: 1
+          - Item: Anacondaq_Card
+            Rate: 1
+          - Item: Andre_Card
+            Rate: 1
+          - Item: Anopheles_Card
+            Rate: 1
+          - Item: Argiope_Card
+            Rate: 1
+          - Item: Argos_Card
+            Rate: 1
+          - Item: Aster_Card
+            Rate: 1
+          - Item: BigFoot_Card
+            Rate: 1
+          - Item: Blazzer_Card
+            Rate: 1
+          - Item: Caramel_Card
+            Rate: 1
+          - Item: Chonchon_Card
+            Rate: 1
+          - Item: Coco_Card
+            Rate: 1
+          - Item: Condor_Card
+            Rate: 1
+          - Item: Cornutus_Card
+            Rate: 1
+          - Item: Creamy_Card
+            Rate: 1
+          - Item: Desert_Wolf_Card
+            Rate: 1
+          - Item: Desert_Wolf_Babe_Card
+            Rate: 1
+          - Item: Dokebi_Card
+            Rate: 1
+          - Item: Dragon_Egg_Card
+            Rate: 1
+          - Item: Dragon_Fly_Card
+            Rate: 1
+          - Item: Drainliar_Card
+            Rate: 1
+          - Item: Drops_Card
+            Rate: 1
+          - Item: Dustiness_Card
+            Rate: 1
+          - Item: Elder_Wilow_Card
+            Rate: 1
+          - Item: Flora_Card
+            Rate: 1
+          - Item: Galion_Card
+            Rate: 1
+          - Item: Gargoyle_Card
+            Rate: 1
+          - Item: Ghoul_Card
+            Rate: 1
+          - Item: Goblin_Archer_Card
+            Rate: 1
+          - Item: Goblin_Card
+            Rate: 1
+          - Item: Golem_Card
+            Rate: 1
+          - Item: Hode_Card
+            Rate: 1
+          - Item: Hornet_Card
+            Rate: 1
+          - Item: Horong_Card
+            Rate: 1
+          - Item: Isis_Card
+            Rate: 1
+          - Item: Jakk_Card
+            Rate: 1
+          - Item: Kapha_Card
+            Rate: 1
+          - Item: Kobold_Archer_Card
+            Rate: 1
+          - Item: Kobold_Card
+            Rate: 1
+          - Item: Kukre_Card
+            Rate: 1
+          - Item: Leaf_Cat_Card
+            Rate: 1
+          - Item: Lude_Card
+            Rate: 1
+          - Item: Lunatic_Card
+            Rate: 1
+          - Item: Magmaring_Card
+            Rate: 1
+          - Item: Mandragora_Card
+            Rate: 1
+          - Item: Mantis_Card
+            Rate: 1
+          - Item: Marine_Sphere_Card
+            Rate: 1
+          - Item: Marionette_Card
+            Rate: 1
+          - Item: Marse_Card
+            Rate: 1
+          - Item: Martin_Card
+            Rate: 1
+          - Item: Megalith_Card
+            Rate: 1
+          - Item: Muka_Card
+            Rate: 1
+          - Item: Mummy_Card
+            Rate: 1
+          - Item: Munak_Card
+            Rate: 1
+          - Item: Myst_Card
+            Rate: 1
+          - Item: Neraid_Card
+            Rate: 1
+          - Item: Noxious_Card
+            Rate: 1
+          - Item: Obeaune_Card
+            Rate: 1
+          - Item: Orc_Archer_Card
+            Rate: 1
+          - Item: Orc_Lady_Card
+            Rate: 1
+          - Item: Orc_Skeleton_Card
+            Rate: 1
+          - Item: Orc_Warrior_Card
+            Rate: 1
+          - Item: Orc_Zombie_Card
+            Rate: 1
+          - Item: Parasite_Card
+            Rate: 1
+          - Item: Pecopeco_Card
+            Rate: 1
+          - Item: Pecopeco_Egg_Card
+            Rate: 1
+          - Item: Picky_Card
+            Rate: 1
+          - Item: Pirate_Skel_Card
+            Rate: 1
+          - Item: Plasma_Card
+            Rate: 1
+          - Item: Poison_Spore_Card
+            Rate: 1
+          - Item: Poison_Toad_Card
+            Rate: 1
+          - Item: Poporing_Card
+            Rate: 1
+          - Item: Porcellio_Card
+            Rate: 1
+          - Item: Poring_Card
+            Rate: 1
+          - Item: Quve_Card
+            Rate: 1
+          - Item: Rafflesia_Card
+            Rate: 1
+          - Item: Raggler_Card
+            Rate: 1
+          - Item: Rocker_Card
+            Rate: 1
+          - Item: Roda_Frog_Card
+            Rate: 1
+          - Item: Rotar_Zairo_Card
+            Rate: 1
+          - Item: Roween_Card
+            Rate: 1
+          - Item: Sageworm_Card
+            Rate: 1
+          - Item: Sand_Man_Card
+            Rate: 1
+          - Item: Sasquatch_Card
+            Rate: 1
+          - Item: Savage_Card
+            Rate: 1
+          - Item: Scorpion_Card
+            Rate: 1
+          - Item: Shellfish_Card
+            Rate: 1
+          - Item: Side_Winder_Card
+            Rate: 1
+          - Item: Skeleton_Card
+            Rate: 1
+          - Item: Skel_Worker_Card
+            Rate: 1
+          - Item: Smokie_Card
+            Rate: 1
+          - Item: Spore_Card
+            Rate: 1
+          - Item: Stainer_Card
+            Rate: 1
+          - Item: Steel_Chonchon_Card
+            Rate: 1
+          - Item: Stem_Worm_Card
+            Rate: 1
+          - Item: Stone_Shooter_Card
+            Rate: 1
+          - Item: Strouf_Card
+            Rate: 1
+          - Item: Sword_Fish_Card
+            Rate: 1
+          - Item: Tarou_Card
+            Rate: 1
+          - Item: Thara_Frog_Card
+            Rate: 1
+          - Item: Thief_Bug_Card
+            Rate: 1
+          - Item: Thief_Bug_Egg_Card
+            Rate: 1
+          - Item: Toad_Card
+            Rate: 1
+          - Item: Tri_Joint_Card
+            Rate: 1
+          - Item: Vadon_Card
+            Rate: 1
+          - Item: Vitata_Card
+            Rate: 1
+          - Item: Whisper_Card
+            Rate: 1
+          - Item: Wild_Rose_Card
+            Rate: 1
+          - Item: Wolf_Card
+            Rate: 1
+          - Item: Wootan_Fighter_Card
+            Rate: 1
+          - Item: Wootan_Shooter_Card
+            Rate: 1
+          - Item: Worm_Tail_Card
+            Rate: 1
+          - Item: Yoyo_Card
+            Rate: 1
+          - Item: Zerom_Card
+            Rate: 1
+          - Item: Zipper_Bear_Card
+            Rate: 1
+          - Item: Zombie_Card
+            Rate: 1
+          - Item: Padded_Armor_
+            Rate: 13
+          - Item: Leather_Jacket_
+            Rate: 13
+          - Item: Adventurere's_Suit_
+            Rate: 13
+          - Item: Thief_Clothes_
+            Rate: 13
+          - Item: Saint_Robe_
+            Rate: 13
+          - Item: Silver_Robe_
+            Rate: 13
+          - Item: Mantle_
+            Rate: 13
+          - Item: Hood_
+            Rate: 13
+          - Item: Apple_Of_Archer
+            Rate: 13
+          - Item: Belt
+            Rate: 13
+          - Item: Kachua_box_8
+            Rate: 45
+          - Item: Bubble_Gum
+            Rate: 13
+          - Item: Token_Of_Siegfried
+            Rate: 13
+            amount: 3
+          - Item: Kachua_Quest1
+            Rate: 7
+          - Item: Kachua_Quest2
+            Rate: 7
+          - Item: Kachua_Quest3
+            Rate: 7
+          - Item: Kachua_Quest4
+            Rate: 7
+          - Item: Kachua_Quest5
+            Rate: 7
+          - Item: Kachua_Quest6
+            Rate: 7
+          - Item: Kachua_Quest7
+            Rate: 7
+          - Item: Kachua_Quest8
+            Rate: 7
+          - Item: Kachua_Quest9
+            Rate: 7
+          - Item: Kachua_Quest10
+            Rate: 7
+          - Item: Kachua_Quest11
+            Rate: 7
+          - Item: Kachua_Quest12
+            Rate: 7
+          - Item: Kachua_Quest13
+            Rate: 7
+          - Item: Kachua_Quest14
+            Rate: 7
+          - Item: Kachua_Quest15
+            Rate: 7
+          - Item: Kachua_Quest16
+            Rate: 7
+          - Item: Kachua_Quest17
+            Rate: 7
+          - Item: Kachua_Quest18
+            Rate: 7
+          - Item: Kachua_Quest19
+            Rate: 7
+          - Item: Kachua_Quest20
+            Rate: 7

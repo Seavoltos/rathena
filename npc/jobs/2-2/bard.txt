@@ -881,6 +881,7 @@ comodo,226,123,5	script	Wandering Bard	741,{
 					completequest 3003;
 					callfunc "Job_Change",Job_Bard;
 					callfunc "F_ClearJobVar";		//clears all job variables for the current player
+					getitem 41032,1;
 					mes "[Lalo]";
 					mes "Very well! Hope you sing happy enjoyable songs.";
 					mes "Live like the wind and the clouds!";
@@ -916,6 +917,7 @@ S_ChangeJob:
 	completequest 3004;
 	callfunc "Job_Change",Job_Bard;
 	callfunc "F_ClearJobVar";
+	getitem 41032,1;
 	mes "[Lalo]";
 	mes "Good job. I will make you a job change souvenir with this.";
 	mes "Wait just a moment.";

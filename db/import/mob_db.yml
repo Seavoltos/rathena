@@ -3055,7 +3055,7 @@ Body:
 ###########################################################################
   - Id: 2058
     AegisName: M_MIMIC
-    Name: Treasure Cache
+    Name: Treasure Chest
     Level: 10
     Hp: 10
     BaseExp: 3
@@ -3080,6 +3080,13 @@ Body:
       IgnoreMelee: true
       IgnoreMisc: true
       IgnoreRanged: true
+    Drops:
+      - Item: Roulette_Gold_Coin
+        Rate: 10
+      - Item: Roulette_Silver_Coin
+        Rate: 150
+      - Item: Roulette_Copper_Coin
+        Rate: 500
 ###########################################################################
 #
 # Instance Airship Assault

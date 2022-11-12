@@ -61,6 +61,7 @@ valkyrie,53,54,3	script	Minstrel#Valkyrie	741,{
 		}
 		jobchange Job_Clown;
 		set ADVJOB,0;
+		getitem 41032,1;
 		mes "[Minstrel]";
 		mes "Congratulations!";
 		mes "As a Minstrel, your";

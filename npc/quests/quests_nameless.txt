@@ -1293,6 +1293,7 @@ nameless_n,259,218,3	script	Larjes#Boat1	97,{
 			delitem 7726,1; //Token_Of_King
 			set aru_monas,25;
 			//changequest 17016,17017;
+			getitem 41032,1;
 			getexp (checkre(3))?100000:1000000,0;
 			close;
 		}

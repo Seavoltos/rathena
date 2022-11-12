@@ -181,6 +181,7 @@ hu_in01,386,373,4	script	Hunter Guildsman#hnt	727,{
 			completequest 4013;
 			callfunc "Job_Change",Job_Hunter;
 			callfunc "F_ClearJobVar";		// clears all job variables for the current player
+			getitem 41032,1;
 			next;
 			mes "[Hunter Sherin]";
 			mes "Become a noble person and become a worthy representative of our Hunter Guild. Show your love of nature as a Hunter~";

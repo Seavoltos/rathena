@@ -49,7 +49,7 @@ OnNPCKillEvent:
 			{
 				set #MVPRank, #MVPRank +1;
 				//Llave bronce
-				if(rand(1,100) < 30 )
+				if(rand(0,50) < $@MvP_POINT[.@i] )
 				{
 					getitem 41030,1;
 				}

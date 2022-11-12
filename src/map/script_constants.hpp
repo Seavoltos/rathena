@@ -5911,6 +5911,7 @@
 	export_constant(IG_MES_10);
 	export_constant(IG_MES_11);
 	export_constant(IG_MES_12);
+	export_constant(IG_KACHUA_KEY);
 
 	/* unit stop walking */
 	export_constant(USW_NONE);

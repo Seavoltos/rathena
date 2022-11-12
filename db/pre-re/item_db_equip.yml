@@ -34903,8 +34903,7 @@ Body:
       NoSell: true
       NoGuildStorage: true
     Script: |
-      bonus bdex,2;
-      bonus bHitRate,3;
+      bonus bHit,3;
   - Id: 5575
     AegisName: Onigiri_Hat
     Name: Rice Ball Hat

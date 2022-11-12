@@ -62,6 +62,7 @@ valkyrie,44,39,5	script	Lord Knight#Valkyrie	56,{
 		}
 		jobchange Job_Lord_Knight;
 		set ADVJOB,0;
+		getitem 41032,1;
 		mes "[Lord Knight]";
 		mes "Congratulations!";
 		mes "As a Lord Knight,";

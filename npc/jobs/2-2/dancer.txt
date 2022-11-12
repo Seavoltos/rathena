@@ -875,6 +875,7 @@ job_duncer,95,93,4	script	Bijou#da	101,{
 		completequest 7006;
 		callfunc "Job_Change",Job_Dancer;
 		callfunc "F_ClearJobVar";
+		getitem 41032,1;
 		mes "Ooh...!";
 		mes "You look great";
 		mes "as a Dancer~";

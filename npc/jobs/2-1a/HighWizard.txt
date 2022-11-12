@@ -64,6 +64,7 @@ valkyrie,44,47,5	script	High Wizard#Valkyrie	735,{
 		}
 		jobchange Job_high_Wizard;
 		set ADVJOB,0;
+		getitem 41032,1;
 		mes "[High Wizard]";
 		mes "Congratulations.";
 		mes "As a High Wizard,";

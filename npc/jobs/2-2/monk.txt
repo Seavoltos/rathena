@@ -845,6 +845,7 @@ monk_in,99,58,1	script	Sensei Moohae#mk	60,{
 			completequest 3032;
 			callfunc "Job_Change",Job_Monk;
 			callfunc "F_ClearJobVar";
+			getitem 41032,1;
 			mes "[Sensei Moohae]";
 			mes "....You are a monk.";
 			next;

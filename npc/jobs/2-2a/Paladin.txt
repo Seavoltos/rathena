@@ -62,6 +62,7 @@ valkyrie,53,39,3	script	Paladin#Valkyrie	752,{
 		}
 		jobchange Job_Paladin;
 		set ADVJOB,0;
+		getitem 41032,1;
 		mes "[Paladin]";
 		mes "Congratulations.";
 		mes "As a Paladin, I hope";

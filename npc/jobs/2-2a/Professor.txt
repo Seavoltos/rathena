@@ -69,6 +69,7 @@ valkyrie,53,47,3	script	Scholar#Valkyrie	743,{
 		}
 		jobchange Job_Professor;
 		set ADVJOB,0;
+		getitem 41032,1;
 		mes "[Scholar]";
 		mes "Congratulations!";
 		mes "As a Professor, I hope";

@@ -61,6 +61,7 @@ valkyrie,53,56,3	script	Gypsy#Valkyrie	101,{
 		}
 		jobchange Job_Gypsy;
 		set ADVJOB,0;
+		getitem 41032,1;
 		mes "[Gypsy]";
 		mes "Congratulations!";
 		mes "As a Gypsy, I know";

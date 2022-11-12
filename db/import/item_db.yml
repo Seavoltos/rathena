@@ -383,7 +383,69 @@ Body:
       .@r = getrefine();
       bonus bMatk,7*.@r;
       autobonus "{ .@r = getrefine(); bonus bAspdRate,(.@r >= 9 ? 40 : ((.@r >= 7) ? 10 : ((.@r >= 5) ? 5 : 1))); }",.@r*20,30000,BF_MAGIC,"{ specialeffect2 EF_SPELLBREAKER; }";
-
+  - Id: 18599
+    AegisName: Black_Devil_Mask
+    Name: Black Devil Mask
+    Type: Armor
+    Buy: 20
+    Weight: 100
+    Locations:
+      Head_Mid: true
+    ArmorLevel: 1
+    View: 760
+    Trade:
+      NoDrop: true
+    Script: |
+      bonus bStr,1;
+      bonus bDex,1;
+      bonus bAgi,1;
+  - Id: 18580
+    AegisName: Yggdrasil_Crown
+    Name: Yggdrasil Crown
+    Type: Armor
+    Buy: 20
+    Weight: 200
+    Defense: 3
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    View: 746
+    Trade:
+      NoDrop: true
+    Script: |
+      bonus bMdef,3;
+      bonus bHealPower,2;
+      .@r = getrefine();
+      bonus bHealpower2,10;
+      if (.@r >= 7) {
+         bonus bHealPower,5;
+      }
+      if (.@r >= 9) {
+         bonus bHealPower,3;
+      }
+  - Id: 5465
+    AegisName: Celestial_Hat
+    Name: Hat Of Fortune
+    Type: Armor
+    Buy: 20
+    Weight: 500
+    Defense: 3
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 40
+    Refineable: true
+    View: 462
+    Script: |
+      bonus bLuk,2;
+      bonus bMdef,5;
+      .@r = getrefine();
+      if (.@r>4)
+         bonus bLuk,.@r-4;
 #ID CUSTOM
   - Id: 40000
     AegisName: Box_99_70
@@ -1126,18 +1188,20 @@ Body:
   - Id: 41036
     AegisName: Treasure_Chest_MvP
     Name: Treasure Chest
-    Type: Etc
-    Buy: 2
-    Weight: 0
+    Type: Usable
+    Delay:
+      Duration: 90000
+      Status: Reuse_Limit_E
     Trade:
-      Override: 99
       NoDrop: true
       NoTrade: true
+      NoSell: true
       NoCart: true
-      NoStorage: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      duplicate_dynamic("Treasure Cache");
   - Id: 41040
     AegisName: Reset_Str
     Name: Reset Str
@@ -1216,6 +1280,442 @@ Body:
         statusup2 bLuk, -1;
         StatusPoint += needed_status_point(bLuk, 1);
       }
+  - Id: 41051
+    AegisName: Kachua_box_1
+    Name: Red Potion Box
+    Type: Usable
+    Buy: 1
+    Weight: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 501,rand(30,40);
+  - Id: 41052
+    AegisName: Kachua_box_2
+    Name: Yellow Potion Box
+    Type: Usable
+    Buy: 1
+    Weight: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 503,rand(20,30);
+  - Id: 41053
+    AegisName: Kachua_box_3
+    Name: White Potion Box
+    Type: Usable
+    Buy: 1
+    Weight: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 504,rand(5,15);
+  - Id: 41054
+    AegisName: Kachua_box_4
+    Name: Blue Potion Box
+    Type: Usable
+    Buy: 1
+    Weight: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 505,rand(5,10);
+  - Id: 41055
+    AegisName: Kachua_box_5
+    Name: Speed Potion Box
+    Type: Usable
+    Buy: 1
+    Weight: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 12016,rand(3,5);
+  - Id: 41056
+    AegisName: Kachua_box_6
+    Name: Gemstone Box
+    Type: Usable
+    Buy: 1
+    Weight: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 715,rand(1,10);
+      getitem 716,rand(1,10);
+      getitem 717,rand(1,10);
+  - Id: 41057
+    AegisName: Kachua_box_7
+    Name: Food Box 3
+    Type: Usable
+    Buy: 1
+    Weight: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 12043+rand(0,5)*5,rand(1,4);
+  - Id: 41058
+    AegisName: Kachua_box_8
+    Name: Food Box 5
+    Type: Usable
+    Buy: 1
+    Weight: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 12045+rand(0,5)*5,rand(1,4);
+  - Id: 41061
+    AegisName: Kachua_Quest1
+    Name: Chick Hat Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41062
+    AegisName: Kachua_Quest2
+    Name: Rideword Hat Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41063
+    AegisName: Kachua_Quest3
+    Name: Lunatic Hat Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41064
+    AegisName: Kachua_Quest4
+    Name: Takius Blindfold Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41065
+    AegisName: Kachua_Quest5
+    Name: Helm of Darkness Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41066
+    AegisName: Kachua_Quest6
+    Name: Skull Cap Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41067
+    AegisName: Kachua_Quest7
+    Name: Black Devil Mask Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41068
+    AegisName: Kachua_Quest8
+    Name: Holy Marching Hat Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41069
+    AegisName: Kachua_Quest9
+    Name: Well Chewed Pencil Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41070
+    AegisName: Kachua_Quest10
+    Name: Yggdrasil Crown Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41071
+    AegisName: Kachua_Quest11
+    Name: Gentleman's Pipe Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41072
+    AegisName: Kachua_Quest12
+    Name: Baby Dragon Hat Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41073
+    AegisName: Kachua_Quest13
+    Name: Gemini Crown Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41074
+    AegisName: Kachua_Quest14
+    Name: Triple Poring Hat Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41075
+    AegisName: Kachua_Quest15
+    Name: Snake Head Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41076
+    AegisName: Kachua_Quest16
+    Name: Wandering Wolf Helm Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41077
+    AegisName: Kachua_Quest17
+    Name: Hat Of Fortune Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41078
+    AegisName: Kachua_Quest18
+    Name: Black Frame Glasses Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41079
+    AegisName: Kachua_Quest19
+    Name: Bubble Gum In Mouth Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41080
+    AegisName: Kachua_Quest20
+    Name: Ninja Scroll Certificate
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+
+
+
+
+
+
 
 #ID ITEM INSTANCIAS
   - Id: 42000

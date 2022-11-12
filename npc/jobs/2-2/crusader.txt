@@ -288,6 +288,7 @@
 		completequest 3015;
 		callfunc "Job_Change",Job_Crusader;
 		callfunc "F_ClearJobVar";		//clears all job variables for the current player
+		getitem 41032,1;
 		mes "[Michael Halig]";
 		mes "Behold...!";
 		mes "You are now a Crusader!";

@@ -80,6 +80,7 @@ valkyrie,44,58,5	script	Assassin Cross#Valkyrie	725,{
 		}
 		jobchange Job_Assassin_Cross;
 		set ADVJOB,0;
+		getitem 41032,1;
 		mes "[Assassin Cross]";
 		mes "Congratulations.";
 		mes "As an Assassin Cross,";

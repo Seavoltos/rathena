@@ -60,6 +60,7 @@ valkyrie,44,42,5	script	High Priest#Valkyrie	60,{
 		}
 		jobchange Job_High_Priest;
 		set ADVJOB,0;
+		getitem 41032,1;
 		mes "[High Priest]";
 		mes "Congratulations.";
 		mes "As a High Priest,";
