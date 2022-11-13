@@ -688,6 +688,7 @@ struct map_session_data {
 		uint8 absorb_dmg_maxhp2;
 		short critical_rangeatk;
 		short weapon_atk_rate, weapon_matk_rate;
+		unsigned short mammonite_disc;
 	} bonus;
 	// zeroed vars end here.
 

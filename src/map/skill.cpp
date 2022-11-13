@@ -18487,6 +18487,9 @@ struct s_skill_condition skill_get_requirement(struct map_session_data* sd, uint
 	// Check for cost reductions due to skills & SCs
 	switch(skill_id) {
 		case MC_MAMMONITE:
+			req.zeny -= sd->bonus.mammonite_disc;
+			if( req.zeny < 0 )
+				req.zeny = 0;
 #ifdef RENEWAL
 		case WS_CARTTERMINATION:
 #endif
