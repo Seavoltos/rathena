@@ -4969,7 +4969,7 @@ BUILDIN_FUNC(clear)
 	if (!script_rid2sd(sd))
 		return SCRIPT_CMD_FAILURE;
 
-	clif_scriptclear(sd, st->oid);
+	clif_scriptclear( *sd, st->oid );
 	return SCRIPT_CMD_SUCCESS;
 }
 
@@ -4979,18 +4979,24 @@ BUILDIN_FUNC(clear)
 /// close;
 BUILDIN_FUNC(close)
 {
-	TBL_PC* sd;
+	struct map_session_data* sd;
 
 	if( !script_rid2sd(sd) )
 		return SCRIPT_CMD_SUCCESS;
 
+	const char* command = script_getfuncname( st );
+
 	if( !st->mes_active ) {
 		st->state = END; // Keep backwards compatibility.
-		ShowWarning("Incorrect use of 'close' command!\n");
+		ShowWarning("buildin_close: Incorrect use of '%s' command!\n", command);
 		script_reportsrc(st);
 	} else {
 		st->state = CLOSE;
 		st->mes_active = 0;
+	}
+
+	if( !strcmp(command, "close3") ){
+		st->clear_cutin = true;
 	}
 
 	clif_scriptclose(sd, st->oid);
@@ -18408,58 +18414,48 @@ BUILDIN_FUNC(checkidlemer)
 
 BUILDIN_FUNC(searchitem)
 {
-	struct script_data* data = script_getdata(st, 2);
-	const char *itemname = script_getstr(st,3);
-	std::map<t_itemid, std::shared_ptr<item_data>> items;
-	int count;
-
-	char* name;
-	int32 start;
-	int32 id;
-	int32 i;
-	TBL_PC* sd = NULL;
-
-	if ((items[0] = item_db.find(strtoul(itemname, nullptr, 10))))
-		count = 1;
-	else
-		count = itemdb_searchname_array(items, MAX_SEARCH, itemname);
-
-	if (!count) {
-		script_pushint(st, 0);
-		return SCRIPT_CMD_SUCCESS;
-	}
+	script_data* data = script_getdata(st, 2);
+	const char *name = reference_getname(data);
 
 	if( !data_isreference(data) )
 	{
-		ShowError("script:searchitem: not a variable\n");
+		ShowError("buildin_searchitem: Argument %s is not a variable.\n", name);
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;// not a variable
 	}
 
-	id = reference_getid(data);
-	start = reference_getindex(data);
-	name = reference_getname(data);
-
-	if( not_server_variable(*name) && !script_rid2sd(sd) )
-	{
-		return SCRIPT_CMD_SUCCESS;// no player attached
-	}
-
 	if( is_string_variable(name) )
 	{// string array
-		ShowError("script:searchitem: not an integer array reference\n");
+		ShowError("buildin_searchitem: Argument %s is not an integer array.\n", name);
 		script_reportdata(data);
 		st->state = END;
 		return SCRIPT_CMD_FAILURE;// not supported
 	}
 
-	for( i = 0; i < count; ++start, ++i )
-	{// Set array
-		set_reg_num( st, sd, reference_uid( id, start ), name, items[i]->nameid, reference_getref( data ) );
+	map_session_data *sd = nullptr;
+
+	if (not_server_variable(*name) && !script_rid2sd(sd))
+	{
+		return SCRIPT_CMD_SUCCESS;// no player attached
 	}
 
-	script_pushint(st, count);
+	const char *itemname = script_getstr(st, 3);
+	std::map<t_itemid, std::shared_ptr<item_data>> items;
+
+	itemdb_searchname_array(items, MAX_SEARCH, itemname);
+
+	if (!items.empty()) {
+		int32 id = reference_getid(data);
+		int32 start = reference_getindex(data);
+
+		for (const auto &it : items) { // Set array
+			set_reg_num(st, sd, reference_uid(id, start), name, it.first, reference_getref(data));
+			start++;
+		}
+	}
+
+	script_pushint64(st, items.size());
 	return SCRIPT_CMD_SUCCESS;
 }
 
@@ -19870,29 +19866,6 @@ BUILDIN_FUNC(unittalk)
 		clif_disp_overhead_(bl, StringBuf_Value(&sbuf), target);
 		StringBuf_Destroy(&sbuf);
 	}
-
-	return SCRIPT_CMD_SUCCESS;
-}
-
-/// Makes the unit do an emotion.
-///
-/// unitemote <unit_id>,<emotion>;
-///
-/// @see ET_* in script_constants.hpp
-BUILDIN_FUNC(unitemote)
-{
-	int emotion;
-	struct block_list* bl;
-
-	emotion = script_getnum(st,3);
-
-	if (emotion < ET_SURPRISE || emotion >= ET_MAX) {
-		ShowWarning("buildin_emotion: Unknown emotion %d (min=%d, max=%d).\n", emotion, ET_SURPRISE, (ET_MAX-1));
-		return SCRIPT_CMD_FAILURE;
-	}
-
-	if (script_rid2bl(2,bl))
-		clif_emotion(bl, emotion);
 
 	return SCRIPT_CMD_SUCCESS;
 }
@@ -23639,7 +23612,7 @@ BUILDIN_FUNC(mergeitem) {
 	if (!script_charid2sd(2, sd))
 		return SCRIPT_CMD_FAILURE;
 
-	clif_merge_item_open(sd);
+	clif_merge_item_open( *sd );
 	return SCRIPT_CMD_SUCCESS;
 }
 
@@ -25236,7 +25209,7 @@ BUILDIN_FUNC(duplicate_dynamic){
 
 	if( dnd == nullptr ){
 		script_pushstrcopy( st, "" );
-		return SCRIPT_CMD_FAILURE;
+		return SCRIPT_CMD_SUCCESS;
 	}else{
 		script_pushstrcopy( st, dnd->exname );
 		return SCRIPT_CMD_SUCCESS;
@@ -26873,6 +26846,17 @@ BUILDIN_FUNC(getfamerank) {
 	return SCRIPT_CMD_SUCCESS;
 }
 
+BUILDIN_FUNC(isdead) {
+	struct map_session_data *sd;
+
+	if (!script_mapid2sd(2, sd))
+		return SCRIPT_CMD_FAILURE;
+
+	script_pushint(st, pc_isdead(sd));
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
 #include "../custom/script.inc"
 
 // declarations that were supposed to be exported from npc_chat.cpp
@@ -27098,6 +27082,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(clear,""),
 	BUILDIN_DEF(close,""),
 	BUILDIN_DEF(close2,""),
+	BUILDIN_DEF2(close, "close3", ""),
 	BUILDIN_DEF(menu,"sl*"),
 	BUILDIN_DEF(select,"s*"), //for future jA script compatibility
 	BUILDIN_DEF(prompt,"s*"),
@@ -27508,7 +27493,6 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(unitstopattack,"i"),
 	BUILDIN_DEF(unitstopwalk,"i?"),
 	BUILDIN_DEF(unittalk,"is?"),
-	BUILDIN_DEF_DEPRECATED(unitemote,"ii","20170811"),
 	BUILDIN_DEF(unitskilluseid,"ivi????"), // originally by Qamera [Celest]
 	BUILDIN_DEF(unitskillusepos,"iviii???"), // [Celest]
 // <--- [zBuffer] List of unit control commands
@@ -27797,6 +27781,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(addfame, "i?"),
 	BUILDIN_DEF(getfame, "?"),
 	BUILDIN_DEF(getfamerank, "?"),
+	BUILDIN_DEF(isdead, "?"),
 
 #include "../custom/script_def.inc"
 

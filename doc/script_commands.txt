@@ -1229,6 +1229,12 @@ Don't expect things to run smoothly if you don't make your scripts 'end'.
 
 ---------------------------------------
 
+*close3;
+
+The command is similar to 'close' but the cutin (if any) is cleared after closing.
+
+---------------------------------------
+
 *end;
 
 This command will stop the execution for this particular script. The two
@@ -11320,5 +11326,11 @@ Note: Only works with classes that use the ranking system.
 
 Returns fame rank (start from 1 to MAX_FAME_LIST), else 0.
 Note: Only works with classes that use the ranking system.
+
+---------------------------------------
+
+*isdead({<account id>})
+
+Returns true if the player is dead else false.
 
 ---------------------------------------
