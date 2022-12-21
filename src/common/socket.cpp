@@ -46,9 +46,6 @@
 	#endif
 #endif
 
-#include <chrono>
-#include <thread>
-
 #include "cbasetypes.hpp"
 #include "malloc.hpp"
 #include "mmo.hpp"
@@ -1248,7 +1245,7 @@ int WFIFOSET(int fd, size_t len)
 
 // (^~_~^) Gepard Shield Start
 
-	if (is_gepard_active == true && SERVER_TYPE != ATHENA_SERVER_CHAR)
+	if (is_gepard_active == true )//&& SERVER_TYPE != ATHENA_SERVER_CHAR)
 	{
 		gepard_process_sc_packet(fd, s, len);
 	}
@@ -1274,14 +1271,6 @@ int WFIFOSET(int fd, size_t len)
 	send_shortlist_add_fd(fd);
 #endif
 
-	return 0;
-}
-
-
-// replacement for do_sockets, where it does nothing
-int do_wait(t_tick next)
-{
-	std::this_thread::sleep_for(std::chrono::milliseconds(next));
 	return 0;
 }
 
