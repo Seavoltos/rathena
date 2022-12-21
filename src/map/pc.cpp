@@ -11790,7 +11790,7 @@ bool pc_equipitem(struct map_session_data *sd,short n,int req_pos,bool equipswit
 			clif_equipswitch_add(sd, n, req_pos, true);
 		}
 		else {
-			clif_equipitemack(sd, n, 0, ITEM_EQUIP_ACK_FAIL); //Fail
+			clif_equipitemack( *sd, ITEM_EQUIP_ACK_FAIL, n ); //Fail
 		}
 		return false;
 	}
