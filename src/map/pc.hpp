@@ -429,6 +429,7 @@ public:
 		unsigned int autolooting : 1; //performance-saver, autolooting state for @alootid
 		unsigned int gmaster_flag : 1;
 		unsigned int prevend : 1;//used to flag wheather you've spent 40sp to open the vending or not.
+		bool pending_vending_ui; // flag whether the vending packet should still be sent to this player or not
 		unsigned int warping : 1;//states whether you're in the middle of a warp processing
 
 	// (^~_~^) Auras Start

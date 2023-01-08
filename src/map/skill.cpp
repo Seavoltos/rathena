@@ -9060,7 +9060,9 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 				sd->vend_skill_lv = skill_lv;
 				sd->vend_loot = 0;
 				ARR_FIND(0, MAX_CART, i, sd->cart.u.items_cart[i].nameid && sd->cart.u.items_cart[i].id == 0);
-				if (i < MAX_CART)
+				if (i < MAX_CART) {
+					// Save the cart before opening the vending UI
+					sd->state.pending_vending_ui = true;
 					intif_storage_save(sd, &sd->cart);
 				if (battle_config.extended_vending) {
 					std::shared_ptr<item_data> item;
@@ -9096,9 +9098,10 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 						}
 					}
 				}
-				else {
-					sd->state.prevend = 1;
-					clif_openvendingreq(sd, 2 + skill_lv);
+				else{
+					// Instantly open the vending UI
+					sd->state.pending_vending_ui = false;
+					clif_openvendingreq(sd,2+skill_lv);
 				}
 			}
 		}
