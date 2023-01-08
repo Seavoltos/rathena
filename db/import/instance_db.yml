@@ -85,3 +85,9 @@ Body:
       Y: 89
     AdditionalMaps:
       pirate_ship: true
+  - Id: 10
+    Name: Poring Village
+    Enter:
+      Map: 1@begi
+      X: 100
+      Y: 22

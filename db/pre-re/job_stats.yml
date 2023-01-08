@@ -91,6 +91,7 @@ Body:
       Mace: 700
       2hMace: 700
       Staff: 650
+      Bow: 700
       2hStaff: 650
     BonusStats:
       - Level: 2

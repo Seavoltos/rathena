@@ -1,0 +1,561 @@
+//===== rAthena Script =======================================
+//= Poring Village
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//= Poring Village instance
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Capuche]
+//============================================================
+
+// Instance
+startermap2,120,32,5	script	Emily#0	4_GEFFEN_03,4,4,{
+	if (isbegin_quest(12417) != 0)
+		erasequest 12417;
+
+	if (BaseLevel > 20) {
+		mes "[Emily]";
+		mes "Oh, te vez mucho más fuerte. ¿Cómo creciste tan rápido?";
+		next;
+		mes "[Emily]";
+		mes "Buscaré a otros aventureros que sean más parecido a mi nivel. Encantada de conocerte.";
+		close;
+	}
+	if (isbegin_quest(12416) == 0) {
+		mes "[Emily]";
+		mes "Mi nombre es Emily. He estado esperando por alguien alguien que venga de aventura conmigo!";
+		next;
+		select("¿Quién dijo que iriamos de aventura contigo?");
+		mes "[Emily]";
+		mes "Vamos, no seas así. Escucha mi historia y luego toma una decisión, te prometo que obtendras una adecuada recompensa.";
+		next;
+		if (select( "¿Adecuada recompensa?", "No estoy interesado." ) == 2) {
+			mes "[Emily]";
+			mes "Que cuadrado! Es mucho mejor ir en juntos en grupo!";
+			close;
+		}
+		mes "[Emily]";
+		mes "Si! Una gran recompensa.";
+		next;
+		mes "[Emily]";
+		mes "Desde el puerto se ha visto una villa que puede ser asaltada por principiantes como nosotros. El único problema que es un poco salvaje...";
+		next;
+		mes "[Emily]";
+		mes "Bueno, ahora no puedo darte ninguna recompensa, pero de seguro que al terminar obtendremos algo fenomenal, es toda una villa!";
+		next;
+		select("Bueno 50-50 suena justo para mí.");
+		mes "[Emily]";
+		mes "No, imposible. 70-30. Y yo tendré 70 claramente.";
+		next;
+		select("Será un 50-50 o no será");
+		mes "[Emily]";
+		mes "Que tal un 60-40!!";
+		next;
+		select("50-50 ...");
+		mes "[Emily]";
+		mes "Me quieres volver loca, bueno un 50-50. Vamos por esto!";
+		setquest 12416;	// Contract with Emily
+		completequest 12416;
+		close;
+	}
+	switch( checkquest(12417,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "^ff0000Cualquier proceso como la captura de mounstros dentro de la instancia podría afectar su correcto proceso, por favor no lo hagas.^000000";
+		next;
+		mes "[Emily]";
+		mes "Entonces, estas listo?";
+		next;
+		mes "[Emily]";
+		mes "Te vez muy cansado.";
+		next;
+		mes "[Emily]";
+		mes "Por que no mejor tomamos un descanso por ahora?";
+		close;
+	case 2:
+		mes "^ff0000Cualquier proceso como la captura de mounstros dentro de la instancia podría afectar su correcto proceso, por favor no lo hagas.^000000";
+		next;
+		mes "[Emily]";
+		mes "Entonces, estas listo?";
+		next;
+		mes "^0000ffTodo los registro de Asalto a la Villa Poring se han eliminado^000000";
+		erasequest 12417;
+		close;
+	}
+	mes "^ff0000Cualquier proceso como la captura de mounstros dentro de la instancia podría afectar su correcto proceso, por favor no lo hagas.^000000";
+	next;
+	mes "[Emily]";
+	mes "Entonces, estas listo?";
+	if (isbegin_quest(12418) == 0)
+		setquest 12418;	// First Visit to Poring Village
+	next;
+	if (getcharid(1) < 1) {
+		mes "[Emily]";
+		mes "Hmm, primero deberías crear un grupo para comenzar esta gran aventura.";
+		close;
+	}
+	.@md_name$ = "Poring Village";
+
+	if (is_party_leader())
+		.@menu$[0] = "Crear la instancia";
+	if (instance_live_info(ILI_NAME, instance_id(IM_PARTY)) == .@md_name$)
+		.@menu$[1] = "Ir a la Villa";
+
+	switch( select( .@menu$[0], .@menu$[1], "Cancelar" ) ) {
+	case 1:
+		mes "[Emily]";
+		mes "Ahora estoy buscando como llegar, por favor vuelve a hablarme para ir.";
+		instance_create(.@md_name$);
+		close;
+	case 2:
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "Un error desconocido ha ocurrido.";
+			close;
+		case IE_NOINSTANCE:
+			mes "^ff0000Aún no se ha creado la instancia.^000000";
+			close;
+		case IE_NOMEMBER:
+			end;
+		case IE_OK:
+			mapannounce "startermap2", "[Emily] El miembro " + strcharinfo(0) + " de la party " + getpartyname(getcharid(0)) + " ha entrado a " + .@md_name$ + ".", bc_map,0xFF9900;
+			setquest 12417;	// Overcoming fatigue
+			// warp "1@begi",100,22;
+			end;
+		}
+		end;
+	case 3:
+		end;
+	}
+	end;
+
+OnTouch:
+	if (isbegin_quest(12416) == 0 && BaseLevel <= 20)
+		npctalk "Emily: Hey, tienes tiempo para hablar un minuto?";
+	end;
+
+OnInit:
+	questinfo( QTYPE_JUMPING_PORING, QMARK_YELLOW , "isbegin_quest(12416) == 0 && BaseLevel <= 20" );
+	end;
+}
+
+1@begi,106,30,0	script	#start_wp1_0	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	disablenpc();
+	donpcevent instance_npcname("#start_wp1_1") + "::OnStart";
+	end;
+
+OnInstanceInit:
+	'map_begi$ = instance_mapname("1@begi");
+
+	setcell 'map_begi$,146,35,146,41,cell_walkable,0;
+	setcell 'map_begi$,154,100,154,107,cell_walkable,0;
+	setcell 'map_begi$,59,187,59,197,cell_walkable,0;
+
+	disablenpc instance_npcname("#start_wp1_2");
+	disablenpc instance_npcname("#gift");
+	end;
+}
+
+1@begi,106,30,5	script	#start_wp1_1	4_GEFFEN_03,{
+	mes "[Emily]";
+	mes "Vamos! Avancemos!";
+	close;
+
+OnStart:
+	npctalk "Emily: Entonces.. es esta la Villa de Poring?";
+	sleep 2000;
+	npctalk "Emily: OK. Vamos!";
+	sleep 2000;
+	disablenpc();
+	donpcevent instance_npcname("#start_wp1_2") + "::OnStart";
+	donpcevent instance_npcname("poring_village_1") + "::OnStart";
+	end;
+}
+
+1@begi,140,37,5	script	#start_wp1_2	4_GEFFEN_03,{
+	mes "[Emily]";
+	mes "Voy a empezar de a poco ahora...";
+	close;
+
+OnStart:
+	enablenpc();
+	sleep 1000;
+	npctalk "Emily: Hmmm. Al parecer han colocado algunas barricadas para no dejarnos avanzar.";
+	sleep 3000;
+	npctalk "Emily: Estoy segura que los Poring deben tener un monton de tesoros en alguna parte.";
+	sleep 4000;
+	mapannounce 'map_begi$, "???: Puedo escuchar unas voces de humanos. Todos salgan a dar una bienvenida!", bc_map, 0xFFFF00;
+	sleep 4000;
+	npctalk "Emily: ¿Que está diciendo?";
+	sleep 3000;
+	npctalk "Emily: Suena como que algo se acercara... ";
+	sleep 2500;
+	mapannounce 'map_begi$, "???: No los dejen correr! Tomen todos los objetos de valor que tengan!", bc_map, 0xFFFF00;
+	sleep 2500;
+	npctalk "Emily: Bueno... OK. No se ven muy amistosos, rápido, escondete!";
+	sleep 4000;
+	// disablenpc();
+	hideonnpc();	// hideonnpc instead of disablenpc (official) to display text on rAthena
+	sleep 1000;
+	npctalk "Emily: Oooops. No te puedes esconder? Bueno ..... ánimo!";
+	// disablenpc instance_npcname("#poring_wl18");
+	hideonnpc instance_npcname("#poring_wl18");
+	specialeffect EF_LORD,AREA, instance_npcname("#poring_wl18");
+	sleep 500;
+	// disablenpc instance_npcname("#poring_wl19");
+	hideonnpc instance_npcname("#poring_wl19");
+	specialeffect EF_LORD,AREA, instance_npcname("#poring_wl19");
+	sleep 500;
+	disablenpc instance_npcname("#poring_wl15");
+	sleep 500;
+	disablenpc instance_npcname("#poring_wl16");
+	disablenpc instance_npcname("#poring_wl17");
+	disablenpc instance_npcname("#poring_wl20");
+	disablenpc instance_npcname("#poring_wl21");
+	setcell 'map_begi$,146,35,146,41,cell_walkable,1;
+	end;
+}
+
+-	script	dummy_npc	-1,{
+	end;
+}
+
+-	script	dummy_cloaked_npc	-1,{
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+// First wall
+1@begi,146,35,6	duplicate(dummy_npc)	#poring_wl15	4_ROPEPILE,1,0
+1@begi,146,36,6	duplicate(dummy_npc)	#poring_wl16	4_ROPEPILE,1,0
+1@begi,146,37,6	duplicate(dummy_npc)	#poring_wl17	4_ROPEPILE,1,0
+1@begi,146,38,6	duplicate(dummy_npc)	#poring_wl18	4_ROPEPILE,1,0
+1@begi,146,39,6	duplicate(dummy_npc)	#poring_wl19	4_ROPEPILE,1,0
+1@begi,146,40,6	duplicate(dummy_npc)	#poring_wl20	4_ROPEPILE,1,0
+1@begi,146,41,6	duplicate(dummy_npc)	#poring_wl21	4_ROPEPILE,1,0
+
+// Second wall
+1@begi,59,187,6	duplicate(dummy_npc)	#poring_wl9	4_ROPEPILE,1,0
+1@begi,59,188,6	duplicate(dummy_npc)	#poring_wl10	4_ROPEPILE,1,0
+1@begi,59,189,6	duplicate(dummy_npc)	#poring_wl11	4_ROPEPILE,1,0
+1@begi,59,190,6	duplicate(dummy_npc)	#poring_wl12	4_ROPEPILE,1,0
+1@begi,59,191,6	duplicate(dummy_npc)	#poring_wl13	4_ROPEPILE,1,0
+1@begi,59,192,6	duplicate(dummy_npc)	#poring_wl14	4_ROPEPILE,1,0
+
+// Others
+1@begi,154,100,6	duplicate(dummy_npc)	#poring_wl1	4_ROPEPILE,1,0
+1@begi,154,101,6	duplicate(dummy_npc)	#poring_wl2	4_ROPEPILE,1,0
+1@begi,154,102,6	duplicate(dummy_npc)	#poring_wl3	4_ROPEPILE,1,0
+1@begi,154,103,6	duplicate(dummy_npc)	#poring_wl4	4_ROPEPILE,1,0
+1@begi,154,104,6	duplicate(dummy_npc)	#poring_wl5	4_ROPEPILE,1,0
+1@begi,154,105,6	duplicate(dummy_npc)	#poring_wl6	4_ROPEPILE,1,0
+1@begi,154,106,6	duplicate(dummy_npc)	#poring_wl7	4_ROPEPILE,1,0
+1@begi,154,107,6	duplicate(dummy_npc)	#poring_wl8	4_ROPEPILE,1,0
+
+
+1@begi,1,1,5	script	poring_village_1	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("poring_village_1") + "::OnMobDead";
+
+	areamonster 'map_begi$, 153,32, 171,32, "--en--", "MD_DROPS",7, .@event$;
+	areamonster 'map_begi$, 48,54, 71,57, "--en--", "MD_DROPS",8, .@event$;
+	areamonster 'map_begi$, 170,38, 189,38, "--en--", "MD_POPORING",8, .@event$;
+	areamonster 'map_begi$, 24,72, 28,92, "--en--", "MD_POPORING",8, .@event$;
+	areamonster 'map_begi$, 188,42, 191,58, "--en--", "MD_MARIN",8, .@event$;
+	areamonster 'map_begi$, 158,67, 174,68, "--en--", "MD_MARIN",3, .@event$;
+	areamonster 'map_begi$, 117,68, 131,68, "--en--", "MD_MARIN",4, .@event$;
+	areamonster 'map_begi$, 79,113, 92,113, "--en--", "MD_MARIN",6, .@event$;
+
+	monster 'map_begi$,101,66, "--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,57,113, "--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,68,113, "--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,176,66, "--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,158,68, "--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,157,67, "--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,149,66, "--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,125,67, "--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,121,67, "--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,102,67, "--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,101,68, "--en--","MD_PORING",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount( 'map_begi$, instance_npcname("poring_village_1") + "::OnMobDead" ) > 3)
+		end;
+	killmonster 'map_begi$, instance_npcname("poring_village_1") + "::OnMobDead";
+	mapannounce 'map_begi$, "Emily: Wow~ Ustedes son muy fuerte! Derrotaron a todos esos Porings!", bc_map, 0xFFFF00;
+	sleep 2000;
+	mapannounce 'map_begi$, "Emily: Pero esos Poring se ven diferentes. Ten cuidado!", bc_map, 0xFFFF00;
+	sleep 2000;
+	mapannounce 'map_begi$, "Emily: Ah, que extraño se siente una fuerza al acercarse a la luz azul.", bc_map, 0xFFFF00;
+	sleep 2000;
+	monster 'map_begi$,132,103,"--en--","MD_GOLDRING",1, instance_npcname("poring_village_1") + "::OnBossDead";
+	end;
+OnBossDead:
+	if (mobcount( 'map_begi$, instance_npcname("poring_village_1") + "::OnBossDead" ) > 0)
+		end;
+	killmonster 'map_begi$, instance_npcname("poring_village_1") + "::OnBossDead";
+	donpcevent instance_npcname("poring_village_2") + "::OnStart";
+	sleep 6000;
+	// disablenpc instance_npcname("#poring_wl4");
+	hideonnpc instance_npcname("#poring_wl4");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl4");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl4");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl4");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl4");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl4");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl4");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl4");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl4");
+	// disablenpc instance_npcname("#poring_wl5");
+	hideonnpc instance_npcname("#poring_wl5");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl5");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl5");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl5");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl5");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl5");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl5");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl5");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl5");
+	disablenpc instance_npcname("#poring_wl1");
+	disablenpc instance_npcname("#poring_wl2");
+	disablenpc instance_npcname("#poring_wl3");
+	disablenpc instance_npcname("#poring_wl6");
+	disablenpc instance_npcname("#poring_wl7");
+	disablenpc instance_npcname("#poring_wl8");
+	setcell 'map_begi$,154,100,154,107,cell_walkable,1;
+	end;
+}
+
+1@begi,1,1,5	script	poring_village_2	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("poring_village_2") + "::OnMobDead";
+
+	monster 'map_begi$,191,97,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,191,97,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,191,97,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,192,97,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,194,97,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,194,97,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,195,97,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,195,97,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,199,108,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,201,107,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,203,108,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,206,107,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,213,108,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,214,109,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,214,109,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,214,109,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,214,115,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,214,112,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,214,113,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,214,117,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,214,111,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,215,108,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,215,107,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,216,107,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,197,143,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,197,143,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,192,143,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,190,143,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,188,143,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,188,143,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,184,143,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,182,143,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,157,144,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,154,143,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,154,144,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,152,143,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,142,144,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,130,144,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,129,144,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,127,144,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,120,144,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,117,144,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,116,144,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,114,143,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,103,144,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,102,144,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,102,144,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,93,143,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,88,144,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,88,144,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,84,144,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,84,144,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,83,143,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,76,143,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,75,144,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,73,144,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,73,143,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,72,144,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,69,143,"--en--","MD_POPORING",1, .@event$;
+	monster 'map_begi$,64,144,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,59,143,"--en--","MD_PORING",1, .@event$;
+	monster 'map_begi$,59,144,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,52,144,"--en--","MD_DROPS",1, .@event$;
+	monster 'map_begi$,51,143,"--en--","MD_PORING",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount( 'map_begi$, instance_npcname("poring_village_2") + "::OnMobDead" ) > 4)
+		end;
+	killmonster 'map_begi$, instance_npcname("poring_village_2") + "::OnMobDead";
+	mapannounce 'map_begi$, "Emily: Hmm.. Mira ahi hay otro Jefe... Este se ve fuerte...", bc_map, 0xFFFF00;
+	sleep 2000;
+	mapannounce 'map_begi$, "Emily: No soy muy buena en la batalla.. Dejame buscar algún tesoro por aquí. Te veo pronto~", bc_map, 0xFFFF00;
+	sleep 2000;
+	monster 'map_begi$,42,173,"--en--","MD_AMERING",1, instance_npcname("poring_village_2") + "::OnBossDead";
+	end;
+OnBossDead:
+	if (mobcount( 'map_begi$, instance_npcname("poring_village_2") + "::OnBossDead" ) > 0)
+		end;
+	killmonster 'map_begi$, instance_npcname("poring_village_2") + "::OnBossDead";
+	donpcevent instance_npcname("poring_village_3") + "::OnStart";
+	sleep 6000;
+	// disablenpc instance_npcname("#poring_wl10");
+	hideonnpc instance_npcname("#poring_wl10");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl10");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl10");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl10");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl10");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl10");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl10");
+	// disablenpc instance_npcname("#poring_wl13");
+	hideonnpc instance_npcname("#poring_wl13");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl13");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl13");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl13");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl13");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl13");
+	specialeffect EF_LORD, AREA, instance_npcname("#poring_wl13");
+	disablenpc instance_npcname("#poring_wl9");
+	disablenpc instance_npcname("#poring_wl11");
+	disablenpc instance_npcname("#poring_wl12");
+	disablenpc instance_npcname("#poring_wl14");
+	setcell 'map_begi$,59,187,59,197,cell_walkable,1;
+	end;
+}
+
+1@begi,1,1,5	script	poring_village_3	-1,{
+	end;
+OnStart:
+	.@event$ = instance_npcname("poring_village_3") + "::OnMobDead";
+
+	monster 'map_begi$,81,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,84,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,85,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,86,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,87,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,88,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,90,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,93,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,94,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,94,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,95,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,98,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,99,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,103,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,103,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,104,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,108,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,111,197,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,128,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,128,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,130,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,132,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,132,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,132,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,133,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,134,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,135,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,136,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,137,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,141,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,143,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,144,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,144,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,146,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,150,185,"--en--","MD_MARIN",1, .@event$;
+	monster 'map_begi$,150,185,"--en--","MD_MARIN",1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount( 'map_begi$, instance_npcname("poring_village_3") + "::OnMobDead" ) > 4)
+		end;
+	killmonster 'map_begi$, instance_npcname("poring_village_3") + "::OnMobDead";
+	mapannounce 'map_begi$, "King Poring: Disculpa... pero... podrias retirarte ahora?...", bc_map, 0xFFFF;
+	sleep 2000;
+	mapannounce 'map_begi$, "Emily: Que? Quién eres tú?", bc_map, 0xFFFF00;
+	sleep 2000;
+	mapannounce 'map_begi$, "King Poring: Yo soy el lider de esta Villa de Poring. Lo siento por no haberme presentado antes.", bc_map, 0xFFFF;
+	sleep 2000;
+	mapannounce 'map_begi$, "King Poring: Tal vez haya algún error en la información, pero esta villa es muy pobre y no tenemos nada de valor.", bc_map, 0xFFFF;
+	sleep 2000;
+	mapannounce 'map_begi$, "Emily: Eso lo diré yo, una vez que termine de revisar todo....", bc_map, 0xFFFF00;
+	sleep 2000;
+	mapannounce 'map_begi$, "King Poring: Ugh.... No me gusta verte por ahí observando todo, es momento que yo lo juzgue.", bc_map, 0xFFFF;
+	sleep 2000;
+	monster 'map_begi$,182,194,"--en--","PORING",10;
+	for ( .@i = 0; .@i < 10; ++.@i ) {
+		setunitdata $@mobid[.@i], UMOB_MODE, (MD_CANMOVE | MD_LOOTER | MD_AGGRESSIVE | MD_CANATTACK);
+		setunitdata $@mobid[.@i], UMOB_SPEED, 200;
+	}
+	monster 'map_begi$,182,194,"--en--","MD_KING_PORING",1, instance_npcname("poring_village_3") + "::OnBossDead";
+	end;
+OnBossDead:
+	if (mobcount( 'map_begi$, instance_npcname("poring_village_3") + "::OnBossDead" ) > 0)
+		end;
+	killmonster 'map_begi$, instance_npcname("poring_village_3") + "::OnBossDead";
+	enablenpc instance_npcname("#gift");
+	end;
+}
+
+1@begi,117,108,5	script	Blue Light Column#1	4_ENERGY_BLUE,4,4,{
+	end;
+OnTouch:
+	switch( rand(3) ) {
+	case 0:
+		unittalk getcharid(3), "" + strcharinfo(0) + " : Ohhhhh!!! Suelta el loro que llevas dentro!!!!";
+		break;
+	case 1:
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ¡¡Creo que está bien picotear a alguien ahora mismo!!";
+		break;
+	case 2:
+		unittalk getcharid(3), "" + strcharinfo(0) + " : ¿Te ha mordido un loro loco?";
+		break;
+	}
+	transform 1629,60000;
+	specialeffect2 EF_ENHANCE;
+	sc_start SC_GLASTHEIM_STATE,30000,100;
+	end;
+}
+1@begi,37,165,5	duplicate(Blue Light Column#1)	Blue Light Column#2	4_ENERGY_BLUE,4,4
+1@begi,175,199,5	duplicate(Blue Light Column#1)	Blue Light Column#3	4_ENERGY_BLUE,4,4
+
+
+1@begi,199,186,5	script	#gift	4_GEFFEN_03,{
+	mes "[Emily]";
+	mes "Puedes tener todos los artículos que encuentres en esta mazmorra. ya tengo algunos.";
+	next;
+	if (isbegin_quest(12418) == 1) {
+		mes "[Emily]";
+		mes "Ah, encontré algunos artículos. Déjame darte uno de ellos. Solo para celebrar tu primera visita.!";
+		next;
+		if (rand(100) < 50)
+			getitem 19238,1;	// PoringTownOnion
+		else
+			getitem 19239,1;	// PoringTownCarrot
+		completequest 12418;
+	}
+	mes "[Emily]";
+	mes "No necesito esta caja de novatos. Puedes tomarlo. Ahora, vamos a salir!";
+	close2;
+	getitem 23302,1;	// PoringsPreciousBox
+	warp "startermap2",100,22;
+	end;
+}

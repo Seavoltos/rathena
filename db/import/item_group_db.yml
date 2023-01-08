@@ -42,6 +42,18 @@ Header:
   Type: ITEM_GROUP_DB
   Version: 2
 Body:
+  - Group: PORINGSPRECIOUSBOX
+    SubGroups:
+      - SubGroup: 0
+        List:
+          - Item: Orange_Potion
+            Amount: 3
+          - Item: N_Fly_Wing
+            Amount: 3
+          - Item: Candy_Striper
+            Amount: 5
+          - Item: Candy
+            Amount: 5
   - Group: EVENT_BOX
     SubGroups:
       - SubGroup: 1

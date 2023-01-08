@@ -19706,7 +19706,257 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
-
+###########################################################################
+#
+# Instance Poring Village
+#
+###########################################################################
+  - Id: 19238
+    AegisName: PoringTownOnion
+    Name: Poring Village Leek
+    Type: Armor
+    View: 824
+    Buy: 20
+    Weight: 100
+    Locations:
+      Head_Low: true
+    ArmorLevel: 1
+    EquipLevelMin: 20
+    Script: |
+      autobonus "{ bonus bSpeedRate,25; }",50,5000,BF_NORMAL,"{ showscript \"Transformación-en-Smokie!\"; active_transform 1056,5000; /*SMOKIE*/ }";
+  - Id: 19239
+    AegisName: PoringTownCarrot
+    Name: Poring Village Carrot
+    Type: Armor
+    View: 829
+    Buy: 20
+    Weight: 100
+    Locations:
+      Head_Low: true
+    ArmorLevel: 1
+    EquipLevelMin: 20
+    Script: |
+      autobonus "{ bonus bSpeedRate,25; }",50,5000,BF_NORMAL,"{ showscript \"Transformación-en-Lunatic!\"; active_transform 1063,5000; /*LUNATIC*/ }";
+  - Id: 23302
+    AegisName: PoringsPreciousBox
+    Name: Poring Treasure Box
+    Type: Usable
+    Weight: 200
+    EquipLevelMin: 30
+    Flags:
+      Container: true
+    Script: |
+      getgroupitem(IG_PORINGSPRECIOUSBOX);
+  - Id: 23310
+    AegisName: Poring_Sword
+    Name: Sword
+    Type: Weapon
+    SubType: 2hSword
+    Buy: 115
+    Weight: 1
+    Attack: 115
+    Range: 1
+    Jobs:
+      Novice: true
+      Swordman: true
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 1
+    EquipLevelMin: 1
+    EquipLevelMax: 40
+    Refineable: false
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      skill 5,10;
+      skill 6,10;
+      skill 7,10;
+  - Id: 23311
+    AegisName: Poring_Book
+    Name: Book
+    Type: Weapon
+    SubType: Book
+    Buy: 50
+    Weight: 1
+    Attack: 80
+    Range: 1
+    Jobs:
+      Novice: true
+      Mage: true
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 1
+    EquipLevelMin: 1
+    EquipLevelMax: 40
+    Refineable: false
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      skill 11,10;
+      skill 15,10;
+      skill 19,10;
+  - Id: 23312
+    AegisName: Poring_Bow
+    Name: Bow
+    Type: Weapon
+    SubType: Bow
+    Buy: 50
+    Weight: 1
+    Attack: 20
+    Range: 1
+    Jobs:
+      Novice: true
+      Archer: true
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 1
+    EquipLevelMin: 1
+    EquipLevelMax: 40
+    Refineable: false
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      skill 45,10;
+      skill 44,10;
+      skill 46,10;
+  - Id: 23313
+    AegisName: Poring_Cross
+    Name: Cross
+    Type: Weapon
+    SubType: Mace
+    Buy: 50
+    Weight: 1
+    Attack: 80
+    Range: 1
+    Jobs:
+      Novice: true
+      Acolyte: true
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 1
+    EquipLevelMin: 1
+    EquipLevelMax: 40
+    Refineable: false
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      skill 28,10;
+      skill 29,10;
+      skill 34,10;
+  - Id: 23314
+    AegisName: Poring_Axe
+    Name: Axe
+    Type: Weapon
+    SubType: 2hAxe
+    Buy: 50
+    Weight: 1
+    Attack: 120
+    Range: 1
+    Jobs:
+      Novice: true
+      Merchant: true
+    Locations:
+      Both_Hand: true
+    WeaponLevel: 1
+    EquipLevelMin: 1
+    EquipLevelMax: 40
+    Refineable: false
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      skill 42,10;
+      skill 155,1;
+      bonus bMammoniteDiscount,1000;
+  - Id: 23315
+    AegisName: Poring_Knife
+    Name: Knife
+    Type: Weapon
+    SubType: Dagger
+    Buy: 50
+    Weight: 1
+    Attack: 17
+    Range: 1
+    Jobs:
+      Novice: true
+      Thief: true
+    Locations:
+      Right_Hand: true
+    WeaponLevel: 1
+    EquipLevelMin: 1
+    EquipLevelMax: 40
+    Refineable: false
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      skill 48,10;
+      skill 49,10;
+      skill 52,10;
+  - Id: 23316
+    AegisName: Poring_Arrow
+    Name: Arrow
+    Type: Ammo
+    SubType: Arrow
+    Buy: 1
+    Weight: 1
+    Attack: 25
+    Jobs:
+      Archer: true
+      Novice: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 1
+    EquipLevelMax: 40
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
 ###########################################################################
 #
 # Instance Thanatos Tower
