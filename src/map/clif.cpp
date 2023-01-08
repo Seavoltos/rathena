@@ -5222,15 +5222,15 @@ void clif_getareachar_unit( map_session_data* sd,struct block_list *bl ){
 			clif_getareachar_pc(sd, tsd);
 
 			// (^~_~^) Auras Start
-/*
+
 			if (sd->state.show_auras == 0)
 			{ // Auras by Functor
-				if (!tsd->sc.data[SC_HIDING] && !tsd->sc.data[SC_CLOAKING] && !tsd->sc.data[SC_CHASEWALK] && !pc_isinvisible(tsd))
+				if (!tsd->sc.getSCE(SC_HIDING) && !tsd->sc.getSCE(SC_CLOAKING) && !tsd->sc.getSCE(SC_CHASEWALK) && !pc_isinvisible(tsd))
 				{
 					clif_send_aura_single(bl, tsd->aura_data, sd->fd);
 				}		
 			}
-*/
+
 			// (^~_~^) Auras End
 
 			if(tsd->state.size==SZ_BIG) // tiny/big players [Valaris]

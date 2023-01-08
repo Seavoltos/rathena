@@ -9064,6 +9064,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 					// Save the cart before opening the vending UI
 					sd->state.pending_vending_ui = true;
 					intif_storage_save(sd, &sd->cart);
+				}
 				if (battle_config.extended_vending) {
 					std::shared_ptr<item_data> item;
 					char output[CHAT_SIZE_MAX];

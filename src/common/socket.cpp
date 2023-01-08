@@ -53,6 +53,12 @@
 #include "strlib.hpp"
 #include "timer.hpp"
 
+// (^~_~^) Gepard Shield Start
+
+using namespace rathena::server_core;
+
+// (^~_~^) Gepard Shield End
+
 /////////////////////////////////////////////////////////////////////
 #if defined(WIN32)
 /////////////////////////////////////////////////////////////////////
@@ -1243,14 +1249,14 @@ int WFIFOSET(int fd, size_t len)
 
 	}
 
-// (^~_~^) Gepard Shield Start
+	// (^~_~^) Gepard Shield Start
 
-	if (is_gepard_active == true )//&& SERVER_TYPE != ATHENA_SERVER_CHAR)
+	if (is_gepard_active == true && global_core->get_type() != e_core_type::CHARACTER)
 	{
 		gepard_process_sc_packet(fd, s, len);
 	}
 
-// (^~_~^) Gepard Shield End
+	// (^~_~^) Gepard Shield End
 
 	s->wdata_size += len;
 #ifdef SHOW_SERVER_STATS
