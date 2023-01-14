@@ -2475,8 +2475,6 @@ void itemdb_gen_itemmoveinfo();
 
 void itemdb_reload(void);
 
-std::string createItemLink(struct item& data);
-
 void do_final_itemdb(void);
 void do_init_itemdb(void);
 

@@ -2855,17 +2855,13 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 
 			ditem = mob_setdropitem(&md->db->dropitem[i], 1, md->mob_id);
 
-			struct item tmp_item = {};
-
 			//A Rare Drop Global Announce by Lupus
 			if( mvp_sd && md->db->dropitem[i].rate <= battle_config.rare_drop_announce && ( it->type == IT_CARD ) ) {
 				char message[128];
 				if (!battle_config.feature_itemlink)
 					sprintf (message, msg_txt(NULL,541), mvp_sd->status.name, md->name, it->ename.c_str(), (float)drop_rate/100);
-				else{
-					tmp_item.nameid = it->nameid;
-					sprintf(message, msg_txt(NULL,541), mvp_sd->status.name, md->name, createItemLink(tmp_item).c_str(), (float)drop_rate/100);
-				}
+				else
+					sprintf (message, msg_txt(NULL,541), mvp_sd->status.name, md->name, item_db.create_item_link( it->nameid ).c_str(), (float)drop_rate/100);
 				//MSG: "'%s' won %s's %s (chance: %0.02f%%)"
 				intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
 			}
@@ -3064,17 +3060,13 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 				clif_mvp_item(mvp_sd,item.nameid);
 				log_mvp_nameid = item.nameid;
 
-				struct item tmp_item = {};
-
 				//A Rare MVP Drop Global Announce by Lupus
 				if(temp<=battle_config.rare_drop_announce && ( i_data->type == IT_CARD )) {
 					char message[128];
 					if (!battle_config.feature_itemlink)
 						sprintf(message, msg_txt(NULL,541), mvp_sd->status.name, md->name, i_data->ename.c_str(), temp/100.);
-					else{
-						tmp_item.nameid = i_data->nameid;
-						sprintf(message, msg_txt(NULL,541), mvp_sd->status.name, md->name, createItemLink(tmp_item).c_str(), temp/100.); // %s: %u
-					}
+					else
+						sprintf(message, msg_txt(NULL,541), mvp_sd->status.name, md->name, item_db.create_item_link( i_data->nameid ).c_str(), temp/100.); // %s: %u
 					//MSG: "'%s' won %s's %s (chance: %0.02f%%)"
 					intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
 				}

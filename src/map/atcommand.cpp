@@ -6805,7 +6805,6 @@ ACMD_FUNC(autoloot)
  *------------------------------------------*/
 ACMD_FUNC(autolootitem)
 {
-	struct item tmp_item = {};
 	std::shared_ptr<item_data> item_data;
 	int i;
 	int action = 3; // 1=add, 2=remove, 3=help+list (default), 4=reset
@@ -7952,7 +7951,6 @@ ACMD_FUNC(mobinfo)
 		}
 #endif
 
-		struct item tmp_item = {};
 		for (i = 0; i < MAX_MOB_DROP_TOTAL; i++) {
 
 			if (mob->dropitem[i].nameid == 0 || mob->dropitem[i].rate < 1)
@@ -9480,7 +9478,6 @@ ACMD_FUNC(itemlist)
 
 	count = 0; // total slots occupied
 	counter = 0; // total items found
-	struct item tmp_item = {};
 	for( i = 0; i < size; ++i ) {
 		const struct item* it = &items[i];
 
@@ -9492,7 +9489,6 @@ ACMD_FUNC(itemlist)
 		if (itd == nullptr)
 			continue;
 
-		tmp_item.nameid = itd->nameid;
 		counter += it->amount;
 		count++;
 
