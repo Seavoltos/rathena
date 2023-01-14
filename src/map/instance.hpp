@@ -93,6 +93,8 @@ struct s_instance_data {
 		keep_timer(INVALID_TIMER),
 		idle_limit(0),
 		idle_timer(INVALID_TIMER),
+		nonpc(false),
+		nomapflag(false),
 		regs(),
 		map() { }
 };
@@ -107,6 +109,8 @@ struct s_instance_db {
 	bool nomapflag;
 	bool destroyable; ///< Destroyable flag
 	e_instance_difficulty difficulty;
+	bool infinite_limit; ///< Infinite limit flag
+	bool infinite_timeout; ///< Infinite timeout limit flag
 	struct point enter; ///< Instance entry point
 	std::vector<int16> maplist; ///< Maps in instance
 };
