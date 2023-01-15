@@ -31,8 +31,3 @@
 Header:
   Type: REPUTATION_GROUP_DB
   Version: 1
-
-Footer:
-  Imports:
-    - Path: db/re/generator/reputation_group.yml
-      Generator: true

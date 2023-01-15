@@ -31,13 +31,3 @@
 Header:
   Type: REPUTATION_DB
   Version: 1
-
-Body:
-  - Id: 1
-    Visibility: Always
-  - Id: 2
-    Visibility: Always
-  - Id: 3
-    Visibility: Exist
-  - Id: 4
-    Visibility: Exist

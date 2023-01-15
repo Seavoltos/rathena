@@ -21,3 +21,4 @@
 	{ "ex_buying_bound",				&battle_config.ex_buying_bound,				1,		0,		1,				},
 	{ "item_zeny",						&battle_config.item_zeny,					0,		0,		INT32_MAX,		},
 	{ "item_cash",						&battle_config.item_cash,					0,		0,		INT32_MAX,		},
+	{ "feature.attendance_close",		&battle_config.feature_attendance_close,	1,		0,		1,				},

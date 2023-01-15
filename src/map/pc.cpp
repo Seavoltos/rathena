@@ -15264,10 +15264,10 @@ int32 pc_attendance_counter( map_session_data* sd ){
 	int counter = static_cast<int>(pc_readreg2( sd, ATTENDANCE_COUNT_VAR ));
 
 	// Check if we have a remaining counter from a previous period
-	if( counter > 0 && pc_readreg2( sd, ATTENDANCE_DATE_VAR ) < period->start ){
+	if( counter > 0 && pc_readreg2( sd, ATTENDANCE_DATE_VAR ) < period->start  || counter == 20 ){
 		// Reset the counter to zero
 		pc_setreg2( sd, ATTENDANCE_COUNT_VAR, 0 );
-
+		clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], "Server: Attendance reset", false, SELF);
 		return 0;
 	}
 

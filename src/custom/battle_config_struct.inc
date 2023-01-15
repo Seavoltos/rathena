@@ -23,3 +23,4 @@
 	int ex_buying_bound;
 	int item_zeny;
 	int item_cash;
+	int feature_attendance_close;
