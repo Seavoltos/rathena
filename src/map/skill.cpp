@@ -10316,11 +10316,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 				src,skill_id,skill_lv,tick, flag|BCT_GUILD|1,
 				skill_castend_nodamage_id);
 			if (sd)
-#ifdef RENEWAL
 				skill_blockpc_start(sd, skill_id, skill_get_cooldown(skill_id, skill_lv));
-#else
-				guild_block_skill(sd, skill_get_time2(skill_id, skill_lv));
-#endif
 		}
 		break;
 	case GD_EMERGENCYCALL:
@@ -10359,11 +10355,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 				}
 			}
 			if (sd)
-#ifdef RENEWAL
 				skill_blockpc_start(sd, skill_id, skill_get_cooldown(skill_id, skill_lv));
-#else
-				guild_block_skill(sd, skill_get_time2(skill_id, skill_lv));
-#endif
 		}
 		break;
 	case GD_CHARGESHOUT_FLAG:
@@ -10378,6 +10370,8 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 					delete_timer(md->deletetimer, mob_timer_delete);
 				md->deletetimer = add_timer(gettick() + skill_get_time(GD_CHARGESHOUT_FLAG, skill_lv), mob_timer_delete, md->bl.id, 0);
 				mob_spawn(md);
+				if (sd)
+					skill_blockpc_start(sd, skill_id, skill_get_cooldown(skill_id, skill_lv));
 			}
 		}
 		break;
@@ -10388,7 +10382,12 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			if (pc_setpos(sd, map_id2index(mob_bl->m), mob_bl->x, mob_bl->y, CLR_RESPAWN) != SETPOS_OK)
 				clif_skill_fail(sd, skill_id, USESKILL_FAIL_LEVEL, 0);
 			else
+			{
 				clif_skill_nodamage(src, bl, skill_id, skill_lv, 1);
+				if (sd)
+					skill_blockpc_start(sd, skill_id, skill_get_cooldown(skill_id, skill_lv));
+			}
+			
 		} else
 			clif_skill_fail(sd, skill_id, USESKILL_FAIL_LEVEL, 0);
 		break;

@@ -7046,3 +7046,14 @@ Body:
       NoClearbuff: true
   - Status: WeaponBreaker
     DurationLookup: NPC_WEAPONBRAKER
+  - Status: Emergency_Move
+    Icon: EFST_INC_AGI
+    DurationLookup: GD_EMERGENCY_MOVE
+    CalcFlags:
+      Speed: true
+    Flags:
+      NoSave: true
+      NoBanishingBuster: true
+      NoDispell: true
+      NoClearance: true
+      NoClearbuff: true

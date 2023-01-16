@@ -103,7 +103,7 @@ typedef uint32 t_itemid;
 #ifdef RENEWAL
 #define MAX_GUILDSKILL	20 ///Max Guild skills
 #else
-#define MAX_GUILDSKILL	15 ///Max Guild skills
+#define MAX_GUILDSKILL	20 ///Max Guild skills
 #endif
 #define MAX_GUILDLEVEL 50 ///Max Guild level
 #define MAX_GUARDIANS 8	///Local max per castle. If this value is increased, need to add more fields on MySQL `guild_castle` table [Skotlex]
@@ -132,7 +132,7 @@ enum e_enchantgrade : uint16{
 #else
 	#define MAX_WEAPON_LEVEL 4
 	#define MAX_ARMOR_LEVEL 1
-	#define MAX_ENCHANTGRADE ENCHANTGRADE_NONE
+	#define MAX_ENCHANTGRADE ENCHANTGRADE_A
 #endif
 
 // for produce
