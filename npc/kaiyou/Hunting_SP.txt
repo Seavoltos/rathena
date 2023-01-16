@@ -2,35 +2,271 @@
 // ==============================================================================
 
 prontera,164,165,1	script	Busca Empleo?::MissionSign	837,{
-	
 	mes "^0000FF* Busca empleo?";
 	mes "* Tiene habilidades para cazar criaturas?";
 	mes "* Quiere ganar artículos y dinero?^000000";
 	mes "...";
 	mes "Busque a Issan en la sala derecha donde se encuentra el refine de prontera y no pierda más tiempo!";
-	
+
 	set .@Time_Left, Mission_Tick - gettimetick(2);
-	
-	
+
 	if( Mission_Ended == 0 || .@Time_Left < 0 )
 		navigateto "prt_in",90,72;
-
-	
-	//set Mission_Tick,0;
 	close;
+
 OnPCLoadMapEvent:
 	set .@Time_Left, Mission_Tick - gettimetick(2);
 	
-	if(Mission_ID1 != 0 && .@Time_Left > 0){
+	if(Mission_ID1 != 0 && .@Time_Left > 0)
 		end;
-	} 
 	else
-	{
 		if( .@Time_Left > 0 )
 			end;
 		else
 			showevent QTYPE_QUEST,0;
+	end;
+
+OnWhisperGlobal:
+	if ( getgmlevel() < 60) 
+		end;
+	set .@i,1;
+OnClock0030:
+	set .@rand, rand(0,33);
+
+	if(.@i)
+		input .@rand;
+
+	switch(.@rand)
+	{
+		default:
+			//Amatsu
+			setarray .@mob[0],1031,1060,1068,1400,1402,1404,1406,1401,1403,1129,1375,1191,1405;
+			setarray .@mobMvP[0], 1492;
+			set $WarperFree,1;
+			break;
+		case 1:
+			//Ayothaya
+			setarray .@mob[0],1036,1179,1587,1584,1081,1494,1056,1057,1080,1104,1586,1499;
+			setarray .@mobMvP[0], 1688;
+			set $WarperFree,2;
+			break;
+		case 2:
+			//Comodo
+			setarray .@mob[0],1271,1067,1073,1074,1254,1391,1206,1256,1266,1323,1119,1215,1258,1282,1037,1165,1215,1009,1030,1042,1148,1255,1274,1278,1279,1034,1064;
+			setarray .@mobMvP[0], 1583;
+			set $WarperFree,3;
+			break;
+		case 3:
+			//Einbroch
+			setarray .@mob[0],1199,1378,1380,1613,1628,1121,1368,1614,1615,1627,1619,1005,1145,1175,1111,1169,1151,1616,1617,1620,1622;
+			setarray .@mobMvP[0], 1623;
+			set $WarperFree,4;
+			break;
+		case 4:
+			//Geffen
+			setarray .@mob[0],1002,1007,1008,1012,1023,1213,1261,1134,1040,1094,1273,1258,1392,1282,1189,1035,1077,1015,1036,1061,1111,1130,1109,1143;
+			setarray .@mobMvP[0], 1087,1190,1389,1046;
+			set $WarperFree,5;
+			break;
+		case 5:
+			//Gonryun
+			setarray .@mob[0],1409,1415,1417,1408,1410,1412,1416,1413,1081,1031,1080,1082,1078;
+			setarray .@mobMvP[0], 1418;
+			set $WarperFree,6;
+			break;
+		case 6:
+			//Hugel
+			setarray .@mob[0],1368,1378,1627,1715,1718,1155,1384,1156,1385,1692,1687,1628,1721,1191,1216,1699,1714,1717,1713,1716;
+			setarray .@mobMvP[0], 1719;
+			set $WarperFree,7;
+			break;
+		case 7:
+			//Lighthalzen
+			setarray .@mob[0],1627,1652,1653,1654,1655,1656,1657,1682,1634,1635,1636,1637,1638,1639,1613,1628,1103,1215,1680;
+			setarray .@mobMvP[0], 1658;
+			set $WarperFree,8;
+			break;
+		case 8:
+			//Louyang
+			setarray .@mob[0],1037,1060,1139,1516,1129,1381,1517,1026,1512,1514,1513,1631;
+			setarray .@mobMvP[0], 1630;
+			set $WarperFree,9;
+			break;
+		case 9:
+			//Lutie
+			setarray .@mob[0],1002,1113,1242,1243,1031,1246,1265,1248,1249;
+			setarray .@mobMvP[0], 1251,1252;
+			set $WarperFree,10;
+			break;
+		case 10:
+			//Morocc
+			setarray .@mob[0],1047,1097,1107,1113,1019,1010,1031,1033,1116,1277,1049,1050,1040,1055,1095,1105,1127,1138,1160,1025,1030,1037,1106,1165,1119,1058,1005,1176;
+			setarray .@mobMvP[0], 1159,1147;
+			set $WarperFree,11;
+			break;
+		case 11:
+			//Moscovia
+			setarray .@mob[0],1031,1880,1881,1882,1883,1884,1081,1082,1060,1103,1139;
+			setarray .@mobMvP[0], 1885;
+			set $WarperFree,12;
+			break;
+		case 12:
+			//Mjolnir
+			setarray .@mob[0],1018,1079,1080,1103,1104,1128,1174,1004,1031,1118,1155,1100,1139,1156,1099,1077,1094,1013,1020,1054,1053,1114,1215;
+			setarray .@mobMvP[0], 1059;
+			set $WarperFree,13;
+			break;
+		case 13:
+			//Niflheim
+			setarray .@mob[0],1503,1504,1506,1508,1510,1505,1507,1509;
+			setarray .@mobMvP[0], 1373;
+			set $WarperFree,14;
+			break;
+		case 14:
+			//Payon
+			setarray .@mob[0],1002,1010,1014,1031,1013,1025,1008,1063,1113,1242,1077,1024,1053,1033,1060,1116,1056,1060,1110,1277,1321,1005,1015,1076,1016,1028,1111,1068,1188,1026,1170;
+			setarray .@mobMvP[0], 1115,1150;
+			set $WarperFree,15;
+			break;
+		case 15:
+			//Prontera
+			setarray .@mob[0],1002,1004,1007,1008,1018,1063,1051,1020,1056,1057,1052,1048,1051,1009,1047,1049,1107,1167,1166,1258,1005,1175,1014,1053,1161,1054,1077,1209;
+			setarray .@mobMvP[0], 1086;
+			set $WarperFree,16;
+			break;
+		case 16:
+			//Rachel
+			setarray .@mob[0],1368,1780,1781,1783,1782,1784,1261,1680,1627,1113,1776,1778,1775,1777,1789;
+			setarray .@mobMvP[0], 1785,1779;
+			set $WarperFree,17;
+			break;
+		case 17:
+			//Umbala / Laberynth
+			setarray .@mob[0],1114,1215,1376,1493,1499,1104,1118,1214,1494,1495,1499,1321,1500,1271,1128,1380,1035,1037,1101,1139;
+			setarray .@mobMvP[0], 1039;
+			set $WarperFree,18;
+			break;
+		case 18:
+			//Veins
+			setarray .@mob[0],1037,1055,1113,1784,1166,1782,1165,1836,1106,1780,1386,1781,1254;
+			setarray .@mobMvP[0], 1785;
+			set $WarperFree,19;
+			break;
+		case 19:
+			//Yuno
+			setarray .@mob[0],1002,1031,1114,1369,1035,1128,1494,1113,1242,1368,1162,1378,1386,1372,1376,1380;
+			setarray .@mobMvP[0], 1388;
+			set $WarperFree,20;
+			break;
+		case 20:
+			//Byaland / Sunked
+			setarray .@mob[0],1066,1068,1070,1141,1161,1067,1044,1144,1045,1142,1264,1065,1108,1071,1077,1179,1216;
+			setarray .@mobMvP[0], 1112;
+			set $WarperFree,21;
+			break;
+		case 21:
+			//Clock Tower / Glast Heim
+			setarray .@mob[0],1102,1195,1199,1269,1193,1191,1320,1194,1189,1211,1213,1209,1216,1111,1131,1253,1036,1117,1015,1192,1260,1267,1281,1163,1208,1201,1197,1257,1202,1276,1219,1132,1143,1263,1207,1206;
+			setarray .@mobMvP[0], 1272;
+			set $WarperFree,22;
+			break;
+		case 22:
+			//Juperos
+			setarray .@mob[0],1670,1671,1672,1673,1676,1677,1678,1679,1365,1668;
+			setarray .@mobMvP[0], 1685;
+			set $WarperFree,23;
+			break;
+		case 23:
+			//Kiel
+			setarray .@mob[0],1275,1735,1736,1737,1738,1745;
+			setarray .@mobMvP[0], 1734;
+			set $WarperFree,24;
+			break;
+		case 24:
+			//Magma
+			setarray .@mob[0],1072,1366,1367,1381,1383,1379,1382,1384,1385,1387;
+			setarray .@mobMvP[0], 1582,1096;
+			set $WarperFree,25;
+			break;
+		case 25:
+			//Nameless
+			setarray .@mob[0],1036,1864,1865,1866,1867,1869;
+			setarray .@mobMvP[0], 1871,1874;
+			set $WarperFree,26;
+			break;
+		case 26:
+			//Odin Temple
+			setarray .@mob[0],1692,1752,1753,1754,1755,1693;
+			setarray .@mobMvP[0], 1751,1765;
+			set $WarperFree,27;
+			break;
+		case 27:
+			//Orc Dungeon
+			setarray .@mob[0],1023,1273,1686,1005,1042,1152,1153,1111,1177;
+			setarray .@mobMvP[0], 1190;
+			set $WarperFree,28;
+			break;
+		case 28:
+			//Pyramid
+			setarray .@mob[0],1005,1031,1016,1028,1041,1111,1032,1029,1146,1191,1297,1149,1194;
+			setarray .@mobMvP[0], 1038,1511;
+			set $WarperFree,29;
+			break;
+		case 29:
+			//Rachel Sanctuary
+			setarray .@mob[0],1632,1633,1771,1772,1773,1774,1769,1770;
+			setarray .@mobMvP[0], 1768;
+			set $WarperFree,30;
+			break;
+		case 30:
+			//Sphinx
+			setarray .@mob[0],1111,1146,1164,1178,1140,1154,1191,1098,1037;
+			setarray .@mobMvP[0], 1157;
+			set $WarperFree,31;
+			break;
+		case 31:
+			//Thanatos
+			setarray .@mob[0],1191,1195,1275,1695,1703,1377,1697,1698,1699,1702,1701,1295,1320,1694,1700;
+			setarray .@mobMvP[0], 1708;
+			set $WarperFree,32;
+			break;
+		case 32:
+			//Thor
+			setarray .@mob[0],1831,1833,1836,1837,1072,1838;
+			setarray .@mobMvP[0], 1832;
+			set $WarperFree,33;
+			break;
+		case 33:
+			//Turtle Island
+			setarray .@mob[0],1034,1256,1314,1321,1322,1316,1319,1315,1318;
+			setarray .@mobMvP[0], 1312;
+			set $WarperFree,34;
+			break;
 	}
+	
+	for( set .@i, 1; .@i < 5; set .@i, .@i + 1 )
+	{
+		do{
+			set .@repetido , 0;
+			.@randmob = rand(0,getarraysize(.@mob));
+			for( set .@j, 1; .@j < .@i; set .@j, .@j + 1 )
+			{
+				set .@mobidrepetido, getd("$Hunting" + .@j);
+				if(  .@mobidrepetido == .@mob[.@randmob] )
+					set .@repetido,1;
+			}
+		}
+			while ( .@mob[.@randmob] == 0 || .@repetido == 1);
+		setd("$Hunting"+.@i),.@mob[.@randmob];
+		setd("$HuntingQ"+.@i),20 + rand(5,35);
+	}
+	do{
+		.@randmob = rand(0,getarraysize(.@mobMvP));
+	}
+		while ( .@mobMvP[.@randmob] == 0 );
+	
+	set $Hunting5,.@mobMvP[.@randmob];
+	set $HuntingQ5,1;
 	end;
 }
 
@@ -58,7 +294,7 @@ function	script	MissionInfo	{
 		.@Mission_Zeny = 250000;
 	next;
 	
-	set .@Mission_Lvl, .@Mission_Lvl / 5;
+	set .@Mission_Lvl, .@Mission_Lvl / 4;
 	
 	mes "[^2d8bd2Detalles-Misión^000000]";
 	mes "Nivel : ^0000FF" + .@Mission_Lvl + "^000000";
@@ -106,20 +342,6 @@ prt_in,94,73,0	script	Contratos	111,{
 }
 
 prt_in,90,72,4	script	Issan::HuntingSystem	732,{
-/*
-	setarray .@MobID[0],1511,1785,1630,1039,1874,2068,1272,1719,1046,1389,1112,1115,1418,1871,1252,1768,1086,1885,1832,1492,1734,1251,1779,1688,1373,1147,1059,1150,2022,1087,1190,1038,1157,1159,1623,1583,1708,1312,1751,1685,1917,1658;
-	setarray .@MobID2[0],1096,1388,1830,1839,1307,1283,1582,1091,1093,1205,1783,1681,1120,1259,1990,1720,1920,1918,1921,1921,1921,1919,1833,1090,1289,1262,1203,1870,1700,1295,1320,1702,1831,1701,1755,1754,1703,1829,1991,1705,1707,1706,1704,1204,1089,1092,1765;
-	setarray .@MobID3[0],1713,1716,1769,1193,1275,1735,1736,1737,1271,1110,1094,1030,1297,1305,1095,1206,1627,1097,1403,1098,1365,2016,1668,1016,1194,1099,1100,1654,1315,1372,1882,1415,1415,1867,1101,1102,1494,1633,1060,1084,1367,1408,1507,1079,1188,1830,2024,1692,1211,1103,1267,1987,1999,1214,1011,1246,1631,1513,1269,1104,1009,1265,1992,1067,1073,1209,1018,1293,1248,2074,1514,1260,2015,1698,1385,1384,1378,1105,1106,1107,1108,1109,1382,1670,1673,1671,1672,1506,1110,2092,2013,2014,1721,1321,1111,1380,1113,1781,1493,1504,1114,1770,1116,1377,1033,1635,1655,1412,1117,1383,1007,1371,1005,1714,1717,1869,1118,1319,1119,1762,1753,1317,1309,1391,1783,1253,1778,1681,1368,1036,1503,1121,1387,1372,1124,1122,1125,1123,1258,1040,1369,1277,1687,1080,1632,1381,1376,1636,2071,1318,1866,1213,1680,1989,1127,1773,1128,1004,1129,1035,1068,1512,1510,2069,1777,1789,1837,1919,1920,1918,1921,1516,1374,1257,1772,1029,2072,1130,1131,1072,1406,1400,1833,1639,1656,1132,1219,1838,1134,1135,1133,1282,1587,1070,1366,1586,1881,1517,1410,1505,1994,1509,1063,1637,1836,1138,1020,1139;
-	setarray .@MobID4[0],1045,1140,1242,1141,1142,1143,1144,1145,1146,1884,1148,1274,1064,1264,1613,1058,1191,1614,1292,1149,1404,1628,1055,1041,1026,1780,1151,1249,1993,1870,1988,1255,1061,1379,1180,1715,1718,1620,1044,1700,1615,1189,1686,1273,1152,1023,1153,1295,1320,1500,1154,1019,1047,1216,1314,1256,1155,1156,1158,1202,1050,1049,1160,1995,2070,1071,1616,1161,1694,1697,1695,1693,1696,1077,1402,1031,1619,1002,1199,1008,1508,1162,1865,1254,1657,1163,1276,1085,1078,1682,1164,1702,1409,1195,1052,1012,1392,1782,1201,1281,1831,1165,1243,1166,1167,1001,1323,1774,1638,1074,1701,1083,1401,1037,1776,1754,1755,1076,1196,1169,1752,1386,1056,1025,1775,1170,1703,1028,1316,1014,1322,1174,1278,1784,1280,1042,1215,1207,1495,1065,1370,1829,1069,1584,1175,1986,1622,1405,1034,1375,1051,1048,1053,1054,2073,1279,1883,1066,1771,1677,1678,1676,1679,1621,1032,1390,1176,1208,1617,1653,1179,1082,1416,1413,1261,1010,1263,1013,1880,1497,1499,1498,1024,1192,1081,1652,1057,1177,1178,1417,1015,1197,1864;
-*/
-	//1 - 55
-	setarray .@MobID[0],1078,1080,1082,1084,1079,1081,1083,1085,1002,1007,1008,1063,1047,1049,1113,1048,1050,1011,1012,1009,1051,1167,1005,1004,1052,1107,1076,1161,1053,1070,1175,1020,1094,1068,1024,1031,1074,1025,1242,1015,1014,1174,1018,1055,1095,1042,1104,2464,1162,1145,1266,1056,1128,1088,1105,1066,1077,1019,1054,1073,1033,1176,1141,1686,1057,1254,1114,1034,1058,1126,1030,1103,1784,1125,1178,1627,1067,1023,1153,1111,1064,1123,1116,1001,1124,1040,1265,1100,1060,1122,1392,1071,1013,1139,1127,1138,1166,1613,1106,1409,1619,1142,1152,1258,1121,1028,1119,1400,1069,1026,1243,1169,1782,1134,1144,1146,1177,1782,1273,1135,1016,1188,1279,1415,1110,1282,1170,1404,1494,1165,1620,1417,1164,1280,1248,1045,1628,1041,1130,1586,1032,1151,1249,1261,1789,1881,1498,1140,1215,1256,1277,1836,1036,1508,1255,1499,1406,1143,1099,1035,1621,1715,1880,1495,1621,1721,1214,1367,1616,1281,1199,1718,1037,1102,1783,1697,1155,1274,1156,1680,1781,1211,1402,1109,1383,1403,1029,1108,1695,1253,1065,1517,1882,1500,1061,1696,1189,1838,1493,1101,1587,1180,1191,1497,1267,1510,1257,1516,1380,1276,1213,1584,1196,1149,1163,1264,1192,1197,1410,1264,1514,1687,1506,1745,1682,1778;
-	//40 - 99
-	setarray .@MobID2[0],1140,1215,1256,1277,1836,1036,1508,1255,1499,1406,1143,1099,1035,1621,1715,1880,1495,1621,1721,1214,1367,1616,1281,1199,1718,1037,1102,1783,1697,1155,1274,1156,1680,1781,1211,1402,1109,1383,1403,1029,1108,1695,1253,1065,1517,1882,1500,1061,1696,1189,1838,1493,1101,1587,1180,1191,1497,1267,1510,1257,1516,1380,1276,1213,1584,1196,1149,1163,1264,1192,1197,1410,1264,1514,1687,1506,1745,1682,1778,1738,1408,1209,1512,1375,1614,1693,1633,1303,1368,1378,1692,1131,1216,1780,1652,1369,1322,1117,1503,1193,1308,1194,1195,1631,1655,1260,1771,1323,1072,1869,1656,1269,1387,1699,1278,1775,1777,1207,1391,1206,1301,1154,1657,1313,1321,1773,1504,1653,1513,1772,1275,1797,1317,1270,1132,1416,1884,1314,1297,1377,1774,1385,1371,1698,1405,1654,1365,1310,1384,1382,1386,1150,1292,1318,1381,1401,1746,1372,1717,1737,1753,1762,1316,1376,1761,1505,1315,1622,1201,1866,1319,1507,1676,1769,1202,1291,1208,1735,1739,1320,1865,1295,1736,1740,1098,1837,1716,1703,1864,1678,1379,1702,1148,1219,1668,1658,1670,1677,1701,1830,1713,1672,1700,1867,1754,1673,1638,1636,1755,1370,1833,1829,1635,1870,1671,1637,1634,1639;
-	
-	
-	setarray .@MobIDPocos[0],1090,1093,1091,1089,1120,1096,1092,1582,1186,1250,1294,1306,1388,1515,1200,1299,1205,1296,1262,1283,1204,1681,1259,1203,1302,1268,1706,1839,1705,1720,1704;
-
 	mes "[^004000Issan^000000]";
 	if( Mission_Tick < gettimetick(2) )
 	{
@@ -163,77 +385,12 @@ prt_in,90,72,4	script	Issan::HuntingSystem	732,{
 		}
 
 		mes "[^004000Issan^000000]";
-		mes "Un momento, dejar leer que te puedo asignar...";
+		mes "Un momento, déjame leer que te puedo asignar...";
 		next;
-		// Building Mission...
-		// =======================================================================================================
 		set Mission_Tick, gettimetick(2) + 86400;
 		set Mission_Ended, 0;
 		for( set .@i, 1; .@i < 6; set .@i, .@i + 1 )
-		{
-			if (rand(0,100) < 5 )
-			{
-				do{
-					set .@repetido , 0;
-					.@randmob = rand(1,getarraysize(.@MobIDPocos));
-					set .@MobLv1, getmonsterinfo(.@MobIDPocos[.@randmob], MOB_LV);
-					if( .@MobLv1 < BaseLevel )
-						set .@dif, BaseLevel - .@MobLv1;
-					else
-						set .@dif, .@MobLv1 - BaseLevel;
-					for( set .@j, 1; .@j < .@i; set .@j, .@j + 1 )
-					{
-						set .@mobidrepetido, getd("Mission_ID" + .@j);
-						if(  .@mobidrepetido == .@MobID2[.@randmob] )
-							set .@repetido,1;
-					}
-				}
-					while ( .@MobIDPocos[.@randmob] == 0 || .@dif > 50 || .@repetido == 1);
-				
-				callfunc("mission_sethunting",.@i,.@MobIDPocos[.@randmob],2 + rand(1,2));
-			} else if( BaseLevel < 45 )
-			{
-				do{
-					set .@repetido , 0;
-					.@randmob = rand(1,getarraysize(.@MobID));
-					set .@MobLv1, getmonsterinfo(.@MobID[.@randmob], MOB_LV);
-					if( .@MobLv1 < BaseLevel )
-						set .@dif, BaseLevel - .@MobLv1;
-					else
-						set .@dif, .@MobLv1 - BaseLevel;
-					for( set .@j, 1; .@j < .@i; set .@j, .@j + 1 )
-					{
-						set .@mobidrepetido, getd("Mission_ID" + .@j);
-						if(  .@mobidrepetido == .@MobID2[.@randmob] )
-							set .@repetido,1;
-					}
-				}
-					while ( .@MobID[.@randmob] == 0 || .@dif > 20 || .@repetido == 1);
-				
-				callfunc("mission_sethunting",.@i,.@MobID[.@randmob],30 + rand(10,20));
-			}
-			else
-			{
-				do{
-					set .@repetido , 0;
-					.@randmob = rand(1,getarraysize(.@MobID2));
-					set .@MobLv1, getmonsterinfo(.@MobID2[.@randmob], MOB_LV);
-					if( .@MobLv1 < BaseLevel )
-						set .@dif, BaseLevel - .@MobLv1;
-					else
-						set .@dif, .@MobLv1 - BaseLevel;
-					
-					for( set .@j, 1; .@j < .@i; set .@j, .@j + 1 )
-					{
-						set .@mobidrepetido, getd("Mission_ID" + .@j);
-						if(  .@mobidrepetido == .@MobID2[.@randmob] )
-							set .@repetido,1;
-					}
-				}
-					while ( .@MobID2[.@randmob] == 0 || .@dif > 20 || .@repetido == 1);
-				callfunc("mission_sethunting",.@i,.@MobID2[.@randmob],30 + rand(10,20));
-			}
-		}
+			callfunc("mission_sethunting",.@i,getd("$Hunting"+.@i),getd("$HuntingQ"+.@i));
 		callfunc "MissionInfo";
 		next;
 		mes "[^004000Issan^000000]";
@@ -271,7 +428,7 @@ prt_in,90,72,4	script	Issan::HuntingSystem	732,{
 					.@Mission_Zeny = 250000;
 				
 				
-				set .@Mission_Lvl, .@Mission_Lvl / 5;
+				set .@Mission_Lvl, .@Mission_Lvl / 4;
 				
 				if( .@Mission_Lvl < 50 )
 					set .@Mission_Points, 1;
@@ -331,123 +488,6 @@ prt_in,90,72,4	script	Issan::HuntingSystem	732,{
 		mes "[^004000Issan^000000]";
 		mes "Aún no completas la misión, te faltan criaturas por eliminar.";
 		mes "Consulta el cartél a mi izquierda para ver el estado de tu trabajo.";
-		next;
-		mes "[^004000Issan^000000]";
-		mes "A menos claro que desees cambiar alguna de las categorías.";
-		next;
-		if(select("No, me quedo con estas:Si, deseo cambiar una")==1){
-			mes "[^004000Issan^000000]";
-			mes "Excelente eres un muy buen cazador";
-			close;
-		}
-		//Revisar el delay
-		if(Mission_Tick_Change > gettimetick(2))
-		{
-			mes "[^004000Issan^000000]";
-			mes "Lo siento pero sólo puedo cambiar una misión cada 2 horas.";
-			next;
-			mes "[^004000Issan^000000]";
-			set .@Time_Left, Mission_Tick_Change - gettimetick(2);
-			if( .@Time_Left > 3600 )
-				mes "Te podré cambiar una misión en ^0000FF" + (.@Time_Left / 3600) + " horas^000000.";
-			else if( .@Time_Left > 60 )
-				mes "Te podré cambiar una misión en ^0000FF" + (.@Time_Left / 60) + " minutos^000000.";
-			else if( .@Time_Left > 0 )
-				mes "Te podré cambiar una misión en ^0000FF" + (.@Time_Left) + " segundos^000000.";
-			else
-				mes "Dejame ordenar mis documentos, vuelve a hablarme para cambiarte una misión.";
-			close;
-		}
-		//
-		mes "[^004000Issan^000000]";
-		mes "¿Cuál deseas cambiar?";
-
-		setarray .monst_$,strmobinfo(2,Mission_ID1),strmobinfo(2,Mission_ID2),strmobinfo(2,Mission_ID3),strmobinfo(2,Mission_ID4),strmobinfo(2,Mission_ID5),"Ninguno";
-		.menu_$ = implode( .monst_$, ":" );
-		next;
-		.@s = select( .menu_$ );
-		if( .@s == 6 ) {
-			mes "[^004000Issan^000000]";
-			mes "Adios.";
-			close;
-		}
-		
-		//callfunc("mission_sethunting",.@s,0,0);
-		
-		setarray .@MobID[0],1078,1080,1082,1084,1079,1081,1083,1085,1002,1007,1008,1063,1047,1049,1113,1048,1050,1011,1012,1009,1051,1167,1005,1004,1052,1107,1076,1161,1053,1070,1175,1020,1094,1068,1024,1031,1074,1025,1242,1015,1014,1174,1018,1055,1095,1042,1104,2464,1162,1145,1266,1056,1128,1088,1105,1066,1077,1019,1054,1073,1033,1176,1141,1686,1057,1254,1114,1034,1058,1126,1030,1103,1784,1125,1178,1627,1067,1023,1153,1111,1064,1123,1116,1001,1124,1040,1265,1100,1060,1122,1392,1071,1013,1139,1127,1138,1166,1613,1106,1409,1619,1142,1152,1258,1121,1028,1119,1400,1069,1026,1243,1169,1782,1134,1144,1146,1177,1782,1273,1135,1016,1188,1279,1415,1110,1282,1170,1404,1494,1165,1620,1417,1164,1280,1248,1045,1628,1041,1130,1586,1032,1151,1249,1261,1789,1881,1498,1140,1215,1256,1277,1836,1036,1508,1255,1499,1406,1143,1099,1035,1621,1715,1880,1495,1621,1721,1214,1367,1616,1281,1199,1718,1037,1102,1783,1697,1155,1274,1156,1680,1781,1211,1402,1109,1383,1403,1029,1108,1695,1253,1065,1517,1882,1500,1061,1696,1189,1838,1493,1101,1587,1180,1191,1497,1267,1510,1257,1516,1380,1276,1213,1584,1196,1149,1163,1264,1192,1197,1410,1264,1514,1687,1506,1745,1682,1778;
-		//40 - 99
-		setarray .@MobID2[0],1140,1215,1256,1277,1836,1036,1508,1255,1499,1406,1143,1099,1035,1621,1715,1880,1495,1621,1721,1214,1367,1616,1281,1199,1718,1037,1102,1783,1697,1155,1274,1156,1680,1781,1211,1402,1109,1383,1403,1029,1108,1695,1253,1065,1517,1882,1500,1061,1696,1189,1838,1493,1101,1587,1180,1191,1497,1267,1510,1257,1516,1380,1276,1213,1584,1196,1149,1163,1264,1192,1197,1410,1264,1514,1687,1506,1745,1682,1778,1738,1408,1209,1512,1375,1614,1693,1633,1303,1368,1378,1692,1131,1216,1780,1652,1369,1322,1117,1503,1193,1308,1194,1195,1631,1655,1260,1771,1323,1072,1869,1656,1269,1387,1699,1278,1775,1777,1207,1391,1206,1301,1154,1657,1313,1321,1773,1504,1653,1513,1772,1275,1797,1317,1270,1132,1416,1884,1314,1297,1377,1774,1385,1371,1698,1405,1654,1365,1310,1384,1382,1386,1150,1292,1318,1381,1401,1746,1372,1717,1737,1753,1762,1316,1376,1761,1505,1315,1622,1201,1866,1319,1507,1676,1769,1202,1291,1208,1735,1739,1320,1865,1295,1736,1740,1098,1837,1716,1703,1864,1678,1379,1702,1148,1219,1668,1658,1670,1677,1701,1830,1713,1672,1700,1867,1754,1673,1638,1636,1755,1370,1833,1829,1635,1870,1671,1637,1634,1639;
-		
-		setarray .@MobIDPocos[0],1090,1093,1091,1089,1120,1096,1092,1582,1186,1250,1294,1306,1388,1515,1200,1299,1205,1296,1262,1283,1204,1681,1259,1203,1302,1268,1706,1839,1705,1720,1704;
-
-		if (rand(0,100) < 2 )
-		{
-			do{
-				set .@repetido , 0;
-				.@randmob = rand(1,getarraysize(.@MobIDPocos));
-				set .@MobLv1, getmonsterinfo(.@MobIDPocos[.@randmob], MOB_LV);
-				if( .@MobLv1 < BaseLevel )
-					set .@dif, BaseLevel - .@MobLv1;
-				else
-					set .@dif, .@MobLv1 - BaseLevel;
-				for( set .@j, 1; .@j < 6; set .@j, .@j + 1 )
-				{
-					set .@mobidrepetido, getd("Mission_ID" + .@j);
-					if(  .@mobidrepetido == .@MobID2[.@randmob] )
-						set .@repetido,1;
-				}
-			}
-				while ( .@MobIDPocos[.@randmob] == 0 || .@dif > 50 || .@repetido == 1);
-			
-			callfunc("mission_sethunting",.@s,.@MobIDPocos[.@randmob],2 + rand(1,2));
-		} else if( BaseLevel < 45 )
-		{
-			do{
-				set .@repetido , 0;
-				.@randmob = rand(1,getarraysize(.@MobID));
-				set .@MobLv1, getmonsterinfo(.@MobID[.@randmob], MOB_LV);
-				if( .@MobLv1 < BaseLevel )
-					set .@dif, BaseLevel - .@MobLv1;
-				else
-					set .@dif, .@MobLv1 - BaseLevel;
-				for( set .@j, 1; .@j < 6; set .@j, .@j + 1 )
-				{
-					set .@mobidrepetido, getd("Mission_ID" + .@j);
-					if(  .@mobidrepetido == .@MobID2[.@randmob] )
-						set .@repetido,1;
-				}
-			}
-				while ( .@MobID[.@randmob] == 0 || .@dif > 20 || .@repetido == 1);
-			
-			callfunc("mission_sethunting",.@s,.@MobID[.@randmob],30 + rand(10,20));
-		}
-		else
-		{
-			do{
-				set .@repetido , 0;
-				.@randmob = rand(1,getarraysize(.@MobID2));
-				set .@MobLv1, getmonsterinfo(.@MobID2[.@randmob], MOB_LV);
-				if( .@MobLv1 < BaseLevel )
-					set .@dif, BaseLevel - .@MobLv1;
-				else
-					set .@dif, .@MobLv1 - BaseLevel;
-				
-				for( set .@j, 1; .@j < 6; set .@j, .@j + 1 )
-				{
-					set .@mobidrepetido, getd("Mission_ID" + .@j);
-					if(  .@mobidrepetido == .@MobID2[.@randmob] )
-						set .@repetido,1;
-				}
-			}
-				while ( .@MobID2[.@randmob] == 0 || .@dif > 20 || .@repetido == 1);
-			callfunc("mission_sethunting",.@s,.@MobID2[.@randmob],30 + rand(10,20));
-		}
-		
-		set Mission_Tick_Change, gettimetick(2) + 7200;
-		mes "[^004000Issan^000000]";
-		mes "Listo, ya tienes una nueva misión.";
-		next;
-		callfunc "MissionInfo";
 		close;
 	}
 	
@@ -572,8 +612,7 @@ function	script	caceria	{
 	end;
 }
 prt_in,86,72,4	script	Top Hunter	857,{
-	set Mission_Tick, gettimetick(2);
-	//set Mission_Tick_Change, gettimetick(2);
+	//set Mission_Tick, gettimetick(2);
 	mes "[^2d8bd2Mejor Cazador^000000]";
 	if( $TMission_CharID )
 	{
@@ -591,6 +630,66 @@ prt_in,86,72,4	script	Top Hunter	857,{
 	next;
 	mes "[^2d8bd2Mejor Cazador^000000]";
 	mes "El puesto al mejor cazador es asignado a quien tenga primero el mayor número de misiones terminadas.";
+	close;
+}
+
+prt_in,92,73,4	script	Mision del dia	111,{
+	mes "[^2d8bd2Tablero del día^000000]";
+	set .@Mission_Lvl, 0;
+	set .@Mission_Exp, 0;
+	set .@Mission_Job, 0;
+	for( set .@i, 1; .@i < 6; set .@i, .@i + 1 )
+	{
+		set .@MobID, getd("$Hunting" + .@i);
+		set .@Mission_Lvl, .@Mission_Lvl + strmobinfo(3, .@MobID);
+		set .@Mission_Exp, .@Mission_Exp + (strmobinfo(6, .@MobID) * (9-.@i));
+		set .@Mission_Job, .@Mission_Job + (strmobinfo(7, .@MobID) * (9-.@i));
+	}
+	
+	set .@Mission_Zeny, .@Mission_Lvl * 500;
+	if (.@Mission_Zeny > 250000)
+		.@Mission_Zeny = 250000;
+
+	set .@Mission_Lvl, .@Mission_Lvl / 4;
+	
+	if( .@Mission_Lvl < 50 )
+		set .@Mission_Points, 1;
+	else if( .@Mission_Lvl < 90 )
+		set .@Mission_Points, 2;
+	else
+		set .@Mission_Points, 4;
+	
+	mes "Nivel : ^0000FF" + .@Mission_Lvl + "^000000";
+
+	if( .@Mission_Lvl < 50 )
+	{
+		mes "Dificultad : ^008000Bajo^000000";
+		set .@Mission_Points, 1;
+	}
+	else if( .@Mission_Lvl < 90 )
+	{
+		mes "Dificultad : ^000080Media^000000";
+		set .@Mission_Points, 2;
+	}
+	else
+	{
+		mes "Dificultad : ^FF0000Alta^000000";
+		set .@Mission_Points, 4;
+	}
+	next;
+	mes "[^2d8bd2Tablero del día^000000]";
+	for( set .@i, 1; .@i < 6; set .@i, .@i + 1 )
+	{
+		set .@MobID, getd("$Hunting" + .@i);
+		mes "^0000FF" + getd("$HuntingQ" + .@i) + "^000000 x ^2d8bd2" + strmobinfo(2,.@MobID) + "^000000 (ID : " + .@MobID + ")";
+	}
+	next;
+	mes "[^2d8bd2Premio-Misión^000000]";
+	mes "Base Exp : ^0000FF" + .@Mission_Exp + "^000000";
+	mes "Job Exp : ^0000FF" + .@Mission_Job + "^000000";
+	mes "Zeny : ^0000FF" + .@Mission_Zeny + "^000000";
+	mes "Puntos : ^0000FF" + .@Mission_Points + "^000000";
+	
 	close;
 }
 

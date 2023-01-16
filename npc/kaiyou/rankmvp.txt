@@ -50,9 +50,8 @@ OnNPCKillEvent:
 				set #MVPRank, #MVPRank +1;
 				//Llave bronce
 				if(rand(0,50) < $@MvP_POINT[.@i] )
-				{
 					getitem 41030,1;
-				}
+				add_reputation_points(2,$@MvP_POINT[.@i]);
 			//Ranking Mensual personal
 				if( gettime(DT_DAYOFMONTH) < 29 ) {
 					set .@mvp[0], 0;
