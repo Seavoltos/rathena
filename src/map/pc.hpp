@@ -455,6 +455,8 @@ public:
 		bool barter_open;
 		bool barter_extended_open;
 		bool enchantgrade_open; // Whether the enchantgrade window is open or not
+		unsigned int bg_listen : 1;
+		unsigned int bg_afk : 1; // Moved here to reduce searchs
 		unsigned int block_action : 10;
 		bool refineui_open;
 		t_itemid inventory_expansion_confirmation;
@@ -1705,6 +1707,8 @@ extern int day_timer_tid;
 extern int night_timer_tid;
 TIMER_FUNC(map_day_timer); // by [yor]
 TIMER_FUNC(map_night_timer); // by [yor]
+
+int pc_update_last_action(map_session_data *sd, int type, enum idletime_option idle_option);
 
 // Rental System
 void pc_inventory_rentals(map_session_data *sd);

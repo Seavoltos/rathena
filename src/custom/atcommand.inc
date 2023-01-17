@@ -135,3 +135,62 @@ ACMD_FUNC(packetfilter)
 
 	return 0;
 }
+
+ACMD_FUNC(reportafk)
+{
+	map_session_data *pl_sd;
+	nullpo_retr(-1,sd);
+	if( !sd->bg_id )
+		clif_displaymessage(fd, "This command is reserved for Battleground Only.");
+	else if( !message || !*message )
+		clif_displaymessage(fd, "Please, enter the character name (usage: @reportafk <name>).");
+	else if( (pl_sd = map_nick2sd((char *)message,false)) == NULL )
+		clif_displaymessage(fd, msg_txt(sd,3)); // Character not found.
+	else if( sd->bg_id != pl_sd->bg_id )
+		clif_displaymessage(fd, "Destination Player is not in your Team.");
+	else if( sd == pl_sd )
+		clif_displaymessage(fd, "You cannot kick yourself.");
+	else if( pl_sd->state.bg_afk == 0 )
+		clif_displaymessage(fd, "The player is not AFK on this Battleground.");
+	else
+	{ // Everytest OK!
+		std::shared_ptr<s_battleground_data> bg = util::umap_find(bg_team_db, sd->bg_id);
+		if( !bg )
+			return -1;
+
+		bg_team_leave(pl_sd, false, true, 2);
+		clif_displaymessage(pl_sd->fd, "You have been kicked from Battleground because of your AFK status.");
+		uint16 mapindex = mapindex_name2id( pl_sd->status.save_point.map );
+		pc_setpos( pl_sd, mapindex, pl_sd->status.save_point.x, pl_sd->status.save_point.y, CLR_TELEPORT );
+		clif_refresh(pl_sd);
+
+		sprintf(atcmd_output, "- AFK [%s] Kicked -", pl_sd->status.name);
+		
+		const char *fontColor = "0x6FA8DC";
+		int         fontType = 0x190; // default fontType (FW_NORMAL)
+		int         fontSize = 12;    // default fontSize
+		int         fontAlign = 0;     // default fontAlign
+		int         fontY = 0;     // default fontY
+
+		clif_broadcast2(NULL, atcmd_output , (int)strlen(atcmd_output) + 1, strtol(fontColor, (char **)NULL, 0), fontType, fontSize, fontAlign, fontY, BG_LISTEN);
+		
+		return 0;
+	}
+	return -1;
+}
+
+ACMD_FUNC(listenbg)
+{
+	if (sd->state.bg_listen)
+	{
+		sd->state.bg_listen = 0;
+		clif_displaymessage(fd, "You will receive Battleground announcements");
+	}
+	else
+	{
+		sd->state.bg_listen = 1;
+		clif_displaymessage(fd, "You will not receive Battleground announcements.");
+	}
+
+	return 0;
+}

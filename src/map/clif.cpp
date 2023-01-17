@@ -620,7 +620,7 @@ int clif_send(const void* buf, int len, struct block_list* bl, enum send_target 
 	int x0 = 0, x1 = 0, y0 = 0, y1 = 0, fd;
 	struct s_mapiterator* iter;
 
-	if( type != ALL_CLIENT )
+	if( type != ALL_CLIENT && type != BG_LISTEN )
 		nullpo_ret(bl);
 
 	sd = BL_CAST(BL_PC, bl);
@@ -628,9 +628,12 @@ int clif_send(const void* buf, int len, struct block_list* bl, enum send_target 
 	switch(type) {
 
 	case ALL_CLIENT: //All player clients.
+	case BG_LISTEN:
 		iter = mapit_getallusers();
 		while( ( tsd = (map_session_data*)mapit_next( iter ) ) != nullptr ){
 			if( session_isActive( fd = tsd->fd ) ){
+				if (type == BG_LISTEN && (tsd->state.bg_listen))
+					continue;
 				WFIFOHEAD( fd, len );
 				memcpy( WFIFOP( fd, 0 ), buf, len );
 				WFIFOSET( fd, len );
@@ -10863,6 +10866,8 @@ static bool clif_process_message(map_session_data* sd, bool whisperFormat, char*
 	if (battle_config.mer_idle_no_share && sd->md && battle_config.idletime_mer_option&IDLE_CHAT)
 		sd->idletime_mer = last_tick;
 
+	pc_update_last_action(sd, 0, IDLE_CHAT);
+
 	//achievement_update_objective(sd, AG_CHATTING, 1, 1); // !TODO: Confirm how this achievement is triggered
 
 	return true;
@@ -11719,6 +11724,9 @@ void clif_parse_WalkToXY(int fd, map_session_data *sd)
 	if (battle_config.mer_idle_no_share && sd->md && battle_config.idletime_mer_option&IDLE_WALK)
 		sd->idletime_mer = last_tick;
 
+	if( !pc_update_last_action(sd,2,IDLE_WALK) )
+		return;
+
 	unit_walktoxy(&sd->bl, x, y, 4);
 }
 
@@ -12017,6 +12025,10 @@ void clif_parse_ActionRequest_sub(map_session_data *sd, int action_type, int tar
 			sd->idletime_hom = last_tick;
 		if (battle_config.mer_idle_no_share && sd->md && battle_config.idletime_mer_option&IDLE_ATTACK)
 			sd->idletime_mer = last_tick;
+		
+		if( !pc_update_last_action(sd,2,IDLE_ATTACK) )
+			return;
+		
 		unit_attack(&sd->bl, target_id, action_type != 0);
 		break;
 	case 0x02: // sitdown
@@ -12052,6 +12064,9 @@ void clif_parse_ActionRequest_sub(map_session_data *sd, int action_type, int tar
 		if (battle_config.mer_idle_no_share && sd->md && battle_config.idletime_mer_option&IDLE_SIT)
 			sd->idletime_mer = last_tick;
 
+		if( !pc_update_last_action(sd,1,IDLE_SIT) )
+			break;
+
 		pc_setsit(sd);
 		skill_sit(sd, true);
 		clif_sitting(&sd->bl);
@@ -12078,6 +12093,10 @@ void clif_parse_ActionRequest_sub(map_session_data *sd, int action_type, int tar
 				sd->idletime_hom = last_tick;
 			if (battle_config.mer_idle_no_share && sd->md && battle_config.idletime_mer_option&IDLE_SIT)
 				sd->idletime_mer = last_tick;
+
+			if( !pc_update_last_action(sd,1,IDLE_SIT) )
+				break;
+
 			skill_sit(sd, false);
 			clif_standing(&sd->bl);
 		}
@@ -12369,6 +12388,10 @@ void clif_parse_UseItem(int fd, map_session_data *sd)
 		sd->idletime_hom = last_tick;
 	if (battle_config.mer_idle_no_share && sd->md && battle_config.idletime_mer_option&IDLE_USEITEM)
 		sd->idletime_mer = last_tick;
+
+	if( !pc_update_last_action(sd,1,IDLE_USEITEM) )
+		return;
+
 	n = RFIFOW(fd,packet_db[RFIFOW(fd,0)].pos[0])-2;
 
 	if(n <0 || n >= MAX_INVENTORY)
@@ -12870,6 +12893,8 @@ void clif_parse_PutItemToCart( int fd, map_session_data *sd ){
 
 	struct PACKET_CZ_MOVE_ITEM_FROM_BODY_TO_CART* p = (struct PACKET_CZ_MOVE_ITEM_FROM_BODY_TO_CART*)RFIFOP( fd, 0 );
 
+	pc_update_last_action(sd,0,IDLE_WALK);
+
 	pc_putitemtocart( sd, server_index( p->index ), p->count);
 }
 
@@ -12883,6 +12908,9 @@ void clif_parse_GetItemFromCart(int fd,map_session_data *sd)
 		return;
 	if (map_getmapflag(sd->bl.m, MF_NOUSECART))
 		return;
+
+	pc_update_last_action(sd,0,IDLE_WALK);
+
 	pc_getitemfromcart(sd,RFIFOW(fd,info->pos[0])-2,RFIFOL(fd,info->pos[1]));
 }
 
@@ -13173,6 +13201,9 @@ void clif_parse_skill_toid( map_session_data* sd, uint16 skill_id, uint16 skill_
 	if (battle_config.mer_idle_no_share && sd->md && battle_config.idletime_mer_option&IDLE_USESKILLTOID)
 		sd->idletime_mer = last_tick;
 
+	if( !pc_update_last_action(sd,1 + (inf&INF_SELF_SKILL ? 0 : 2),IDLE_USESKILLTOID) )
+		return;
+
 	if( sd->npc_id ){
 		if( pc_hasprogress( sd, WIP_DISABLE_SKILLITEM ) || !sd->npc_item_flag || !( inf & INF_SELF_SKILL ) ){
 #ifdef RENEWAL
@@ -13304,6 +13335,9 @@ static void clif_parse_UseSkillToPosSub(int fd, map_session_data *sd, uint16 ski
 		sd->idletime_hom = last_tick;
 	if (battle_config.mer_idle_no_share && sd->md && battle_config.idletime_mer_option&IDLE_USESKILLTOPOS)
 		sd->idletime_mer = last_tick;
+
+	if( !pc_update_last_action(sd,3,IDLE_USESKILLTOPOS) )
+		return;
 
 	if( skill_isNotOk(skill_id, sd) )
 		return;
@@ -13817,6 +13851,8 @@ void clif_parse_MoveToKafra(int fd, map_session_data *sd)
 		storage_guild_storageadd(sd, item_index, item_amount);
 	else if (sd->state.storage_flag == 3)
 		storage_storageadd(sd, &sd->premiumStorage, item_index, item_amount);
+
+	pc_update_last_action(sd,0,IDLE_WALK);
 }
 
 
@@ -13838,6 +13874,8 @@ void clif_parse_MoveFromKafra(int fd,map_session_data *sd)
 		storage_guild_storageget(sd, item_index, item_amount);
 	else if(sd->state.storage_flag == 3)
 		storage_storageget(sd, &sd->premiumStorage, item_index, item_amount);
+
+	pc_update_last_action(sd,0,IDLE_WALK);
 }
 
 
@@ -13869,6 +13907,8 @@ void clif_parse_MoveToKafraFromCart(int fd, map_session_data *sd){
 		storage_guild_storageaddfromcart(sd, idx, amount);
 	else if (sd->state.storage_flag == 3)
 		storage_storageaddfromcart(sd, &sd->premiumStorage, idx, amount);
+
+	pc_update_last_action(sd,0,IDLE_WALK);
 }
 
 
@@ -13893,6 +13933,8 @@ void clif_parse_MoveFromKafraToCart(int fd, map_session_data *sd){
 		storage_guild_storagegettocart(sd, idx, amount);
 	else if (sd->state.storage_flag == 3)
 		storage_storagegettocart(sd, &sd->premiumStorage, idx, amount);
+
+	pc_update_last_action(sd,0,IDLE_WALK);
 }
 
 
@@ -13907,6 +13949,8 @@ void clif_parse_CloseKafra(int fd, map_session_data *sd)
 		storage_guild_storageclose(sd);
 	else if( sd->state.storage_flag == 3 )
 		storage_premiumStorage_close(sd);
+
+	pc_update_last_action(sd,0,IDLE_WALK);
 }
 
 

@@ -156,7 +156,7 @@ OnTimer5000:
 batt_off,49,86,0	duplicate(PunchingBag#0)	PunchingBag#1	844
 batt_off,59,86,0	duplicate(PunchingBag#0)	PunchingBag#2	844
 
-//batt_off	mapflag	bg_join
+batt_off	mapflag	bg_join
 batt_off	mapflag	noteleport
 batt_off	mapflag	nowarpto
 batt_off	mapflag	nomemo
@@ -164,5 +164,3 @@ batt_off	mapflag	novending
 batt_off	mapflag	monster_noteleport
 batt_off	mapflag	nobranch
 batt_off	mapflag	noicewall
-batt_off	mapflag	nocashshop
-batt_off	mapflag	norodex

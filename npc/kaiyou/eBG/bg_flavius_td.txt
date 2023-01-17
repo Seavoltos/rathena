@@ -1,0 +1,346 @@
+
+// This file is NOT public - you are not allowed to distribute it.
+
+// ==============================================================================
+// BattleGround System - TeamDeathMatch
+// ==============================================================================
+
+// Battleground Engine
+// *********************************************************************
+
+-	script	Hunter_TD	FAKE_NPC,{
+	end;
+	
+OnTeam1Quit:
+	bg_desert;
+OnTeam1Die:
+	getmapxy .@m$, .@x, .@y, BL_PC;
+	if( .@x > 85) end;
+	if( $@BG_Status_TD == 1 )
+	{
+		set .Team1Count, .Team1Count - 1;
+		donpcevent "Hunter_TD::OnValidateScore";
+	}
+	end;
+
+OnTeam2Quit:
+	bg_desert;
+OnTeam2Die:
+	getmapxy .@m$, .@x, .@y, BL_PC;
+	if( .@x < 16) end;
+	if( $@BG_Status_TD == 1 )
+	{
+		set .Team2Count, .Team2Count - 1;
+		donpcevent "Hunter_TD::OnValidateScore";
+	}
+	end;
+	
+OnGuillaumeActive:
+	warp "rwc03",12,49;
+	end;
+	
+OnCroixActive:
+	warp "rwc03",88,49;
+	end;
+
+OnReady:
+	if( $@BG_Status_TD == 0 )
+	{
+		enablenpc "Therapist in battle#htd1";
+		enablenpc "Therapist in battle#htd2";
+		bgannounce "Meijing: El Battleground Team Deathmatch ha iniciado!",$@BG_COLOR;
+	}
+	initnpctimer;
+	set $@BG_Status_TD,1;
+	set .Team1Count, 99;
+	set .Team2Count, 99;
+	set .Team1Count, bg_get_data($@BG_TD_Team1, 0);
+	set .Team2Count, bg_get_data($@BG_TD_Team2, 0);
+	bg_updatescore "rwc03",.Team1_Score,.Team2_Score;
+	sleep 2100;
+	bg_warp $@BG_TD_Team1,"rwc03",12,49;
+	bg_warp $@BG_TD_Team2,"rwc03",88,49;
+	sleep 2100;
+	//bg_team_reveal $@BG_TD_Team1;
+	//bg_team_reveal $@BG_TD_Team2;
+	donpcevent "#guitd2_respawn::OnBGStart";
+	donpcevent "#crotd2_respawn::OnBGStart";
+	end;
+
+OnValidateScore:
+	if( $@BG_Status_TD != 1 )
+		end;
+
+	bg_updatescore "rwc03",.Team1Count,.Team2Count;
+	if(.Team1Count == 0)
+	{//Team 2 won round
+		set .Team2_Score,.Team2_Score+1;
+		donpcevent "Hunter_TD::OnReady";
+	} else if(.Team2Count == 0)
+	{//Team 1 won round
+		set .Team1_Score,.Team1_Score+1;
+		donpcevent "Hunter_TD::OnReady";
+	}
+	set .@Team1Countp, bg_get_data($@BG_TD_Team1, 0);
+	set .@Team2Countp, bg_get_data($@BG_TD_Team2, 0);
+	if( .Team1_Score == 3 )
+	{ // Team 1 Won
+		mapannounce "rwc03","El ejercito de Blue Team ha ganado la batalla!",1,0x0000FF;
+		set $@BG_TD_Victory,1;
+	}
+	else if( .Team2_Score == 3 )
+	{ // Team 2 Won
+		mapannounce "rwc03","El ejercito de Red Team ha ganado la batalla!",1,0xFF0000;
+		set $@BG_TD_Victory,2;
+	}
+	else if( .@Team2Countp == 0 )
+	{ // All Team 2 Players quit
+		mapannounce "rwc03","El ejercito de Blue Team ha ganado la batalla!",1,0x0000FF;
+		set $@BG_TD_Victory,3;
+	}
+	else if( .@Team1Countp == 0 )
+	{ // All Team 1 Players quit
+		mapannounce "rwc03","El ejercito de Red Team ha ganado la batalla!",1,0xFF0000;
+		set $@BG_TD_Victory,3;
+	}
+	else end;
+	donpcevent "Hunter_TD::OnMatchEnd";
+	end;
+OnTimer25000:
+	set .Team1Count, bg_get_data($@BG_TD_Team1, 0);
+	set .Team2Count, bg_get_data($@BG_TD_Team2, 0);
+	bg_updatescore "rwc03",.Team1Count,.Team2Count;
+	end;
+OnTimer600000:
+	mapannounce "rwc03","La batalla finalizará en 5 minutos!!",1,0x808000;
+	end;
+
+OnTimer840000:
+	mapannounce "rwc03","La batalla finalizará en 1 minuto!!",1,0x808000;
+	end;
+
+OnTimer900000:
+	if( .Team1_Score > .Team2_Score )
+	{ // Team 1 Won
+		set $@BG_TD_Victory,1;
+		mapannounce "rwc03","El ejercito Blue Team ha ganado la batalla!",1,0x0000FF;
+	}
+	else if( .Team1_Score < .Team2_Score )
+	{ // Team 2 Won
+		set $@BG_TD_Victory,2;
+		mapannounce "rwc03","El ejercito Red Team ha ganado la batalla!",1,0xFF0000;
+	}
+	else
+	{
+		set $@BG_TD_Victory,3;
+		mapannounce "rwc03","La batalla ha sido un empate...!",1,0x808000;
+	}
+	bg_warp $@BG_TD_Team1,"rwc03",12,49;
+	bg_warp $@BG_TD_Team2,"rwc03",88,49;
+	sleep 1000;
+
+OnMatchEnd:
+	stopnpctimer;
+	donpcevent "#guitd2_respawn::OnBGStop";
+	donpcevent "#crotd2_respawn::OnBGStop";
+	
+	disablenpc "Therapist in battle#htd1";
+	disablenpc "Therapist in battle#htd2";
+	
+	sleep 1000;
+	
+	enablenpc "Vintenar#td_a";
+	enablenpc "Vintenar#td_b";
+	
+	set $@BG_Status_TD, 2;
+	set .Team1_Score, 0;
+	set .Team2_Score, 0;
+	
+	mapannounce "rwc03","Meijing: Reclama tus recompensas, tienes 15 segundos!!",1,0x00FF00;
+	sleep 15000;
+	bg_reserve "rwc03", true;
+	
+	$@BG_Status_TD = 0;
+	if( $@BG_TD_Team1 ) { bg_destroy $@BG_TD_Team1; $@BG_TD_Team1 = 0; }
+	if( $@BG_TD_Team2 ) { bg_destroy $@BG_TD_Team2; $@BG_TD_Team2 = 0; }
+	bg_unbook "rwc03";
+	
+	disablenpc "Vintenar#td_a";
+	disablenpc "Vintenar#td_b";
+	mapwarp "rwc03","prontera",155,181;
+	
+	bg_updatescore "rwc03",0,0;
+	end;
+
+OnInit:
+	mapwarp "rwc03","prontera",155,181;
+	set .Team1_Score, 0;
+	set .Team2_Score, 0;
+	sleep 5000;
+	bg_updatescore "rwc03",0,0;
+	setwall "rwc03",16,47,6,0,0,"bg_hunter_td1";
+	setwall "rwc03",24,47,6,0,0,"bg_hunter_td2";
+	setwall "rwc03",77,47,6,0,0,"bg_hunter_td3";
+	setwall "rwc03",85,47,6,0,0,"bg_hunter_td4";
+	end;
+}
+
+// Battleground Rewards
+// *********************************************************************
+rwc03,8,49,5	script	Vintenar#td_a	419,{
+	if (getcharid(4) == $@BG_TD_Team1) {
+		if ($@BG_TD_Victory == 1)
+			callfunc "F_BG_Badge",1,"Guillaume","TD";
+		else
+			callfunc "F_BG_Badge",0,"Guillaume","TD";
+	}
+	else if(getcharid(4) == $@BG_TD_Team2) {
+		if ($@BG_TD_Victory == 2)
+			callfunc "F_BG_Badge",1,"Croix","TD";
+		else
+			callfunc "F_BG_Badge",0,"Croix","TD";
+	}
+	bg_leave;
+	end;
+
+OnInit:
+	disablenpc "Vintenar#td_a";
+	end;
+}
+
+rwc03,91,49,3	script	Vintenar#td_b	419,{
+	if (getcharid(4) == $@BG_TD_Team1) {
+		if ($@BG_TD_Victory == 1)
+			callfunc "F_BG_Badge",1,"Guillaume","TD";
+		else
+			callfunc "F_BG_Badge",0,"Guillaume","TD";
+	}
+	else if(getcharid(4) == $@BG_TD_Team2) {
+		if ($@BG_TD_Victory == 2)
+			callfunc "F_BG_Badge",1,"Croix","TD";
+		else
+			callfunc "F_BG_Badge",0,"Croix","TD";
+	}
+	bg_leave;
+	end;
+
+OnInit:
+	disablenpc "Vintenar#td_b";
+	end;
+}
+
+// Battleground Therapist
+// *********************************************************************
+
+rwc03,8,49,5	script	Therapist in battle#htd1	4_F_SISTER,10,10,{
+	getmapxy(.@map$,.@x,.@y,BL_PC);
+	if(.@x < 16){
+		specialeffect2 EF_HEAL;
+		//sc_start 32, 600000, 10;  // Increase Agi
+		//sc_start 30, 600000, 10; // Blessing
+		percentheal 100,100;
+		repairall;
+		sc_end SC_BERSERK;
+		sc_end SC_STRIPWEAPON;
+		sc_end SC_STRIPSHIELD;
+		sc_end SC_STRIPARMOR;
+		sc_end SC_STRIPHELM;
+	}
+	end;
+OnInit:
+	disablenpc "Therapist in battle#htd1";
+	end;
+}
+
+rwc03,91,49,3	script	Therapist in battle#htd2	4_F_SISTER,10,10,{
+	getmapxy(.@map$,.@x,.@y,BL_PC);
+	if(.@x > 85){
+		specialeffect2 EF_HEAL;
+		//sc_start 32, 600000, 10;  // Increase Agi
+		//sc_start 30, 600000, 10; // Blessing
+		percentheal 100,100;
+		sc_end SC_BERSERK;
+		sc_end SC_STRIPWEAPON;
+		sc_end SC_STRIPSHIELD;
+		sc_end SC_STRIPARMOR;
+		sc_end SC_STRIPHELM;
+		repairall;
+	}
+	end;
+OnInit:
+	disablenpc "Therapist in battle#htd2";
+	end;
+}
+
+// Battleground Respawn
+// *********************************************************************
+
+rwc03,8,49,0	script	#guitd2_respawn	HIDDEN_WARP_NPC,{
+	end;
+
+OnBGStart:
+	initnpctimer;
+	end;
+
+OnBGStop:
+	stopnpctimer;
+	end;
+
+OnTimer24000:
+	specialeffect 83;
+	end;
+	
+OnTimer400000:
+OnTimer180000:
+OnTimer25000:
+	areapercentheal "rwc03",6,46,15,53,100,100;
+	areawarp "rwc03",6,46,15,53,"rwc03",25,46,29,53;;
+	end;
+
+}
+
+rwc03,91,49,0	script	#crotd2_respawn	HIDDEN_WARP_NPC,{
+	end;
+
+OnBGStart:
+	initnpctimer;
+	end;
+
+OnBGStop:
+	stopnpctimer;
+	end;
+
+OnTimer24000:
+	specialeffect 83;
+	end;
+	
+OnTimer400000:
+OnTimer180000:
+OnTimer25000:
+	areapercentheal "rwc03",86,46,93,53,100,100;
+	areawarp "rwc03",86,46,93,53,"rwc03",70,46,74,53;
+	end;
+}
+
+// Flags
+// *********************************************************************
+rwc03,81,49,4	script	Blue Flag#TDH_Blue	1_FLAG_LION,{
+	end;
+}
+rwc03,20,49,4	script	Red Flag#TDH_Red	1_FLAG_EAGLE,{
+	end;
+}
+
+// MapFlags
+// *********************************************************************
+
+rwc03	mapflag	battleground	2
+rwc03	mapflag	nomemo
+rwc03	mapflag	nosave	SavePoint
+rwc03	mapflag	noteleport
+rwc03	mapflag	nowarp
+rwc03	mapflag	nowarpto
+rwc03	mapflag	noreturn
+rwc03	mapflag	nobranch
+rwc03	mapflag	nopenalty
+rwc03	mapflag	bg_consume

@@ -538,6 +538,10 @@
 	export_constant(MF_NOBUYINGSTORE);
 	export_constant(MF_NOSLAVE);
 	export_constant(MF_NOEQUIP);
+	export_constant(MF_BG_JOIN);
+	export_constant(MF_BG_CONSUME);
+	export_constant(MF_WOE_CONSUME);
+	export_constant(MF_INSTANCECONSUME);
 	export_constant(MF_NODYNAMICNPC);
 
 	/* setcell types */

@@ -4481,9 +4481,9 @@ ACMD_FUNC(reload) {
 
 		for (auto &bg : bg_queues) {
 				for (auto &bg_sd : bg->teama_members)
-					bg_team_leave(bg_sd, false, false); // Kick Team A from battlegrounds
+					bg_team_leave(bg_sd, false, false, 1); // Kick Team A from battlegrounds
 				for (auto &bg_sd : bg->teamb_members)
-					bg_team_leave(bg_sd, false, false); // Kick Team B from battlegrounds
+					bg_team_leave(bg_sd, false, false, 1); // Kick Team B from battlegrounds
 				bg_queue_clear(bg, true);
 		}
 
@@ -4791,6 +4791,14 @@ ACMD_FUNC(mapinfo) {
 		strcat(atcmd_output, " NoLockOn |");
 	if (map_getmapflag(m_id, MF_NOTOMB))
 		strcat(atcmd_output, " NoTomb |");
+	if (map_getmapflag(m_id, MF_BG_CONSUME))
+		strcat(atcmd_output, " bgconsume |");
+	if (map_getmapflag(m_id, MF_WOE_CONSUME))
+		strcat(atcmd_output, " woeconsume |");
+	if (map_getmapflag(m_id, MF_INSTANCECONSUME))
+		strcat(atcmd_output, " instanceconsume |");
+	if (map_getmapflag(m_id, MF_BG_JOIN))
+		strcat(atcmd_output, " bg_join |");
 	if (map_getmapflag(m_id, MF_NOCOSTUME))
 		strcat(atcmd_output, " NoCostume |");
 	clif_displaymessage(fd, atcmd_output);

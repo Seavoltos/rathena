@@ -21116,7 +21116,7 @@ BUILDIN_FUNC(bg_leave)
 	if (!strcmp(script_getfuncname(st), "bg_desert"))
 		deserter = true;
 
-	bg_team_leave(sd, false, deserter);
+	bg_team_leave(sd, false, deserter, 1);
 	return SCRIPT_CMD_SUCCESS;
 }
 
@@ -21273,6 +21273,19 @@ BUILDIN_FUNC(bg_info)
 			return SCRIPT_CMD_FAILURE;
 	}
 
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(bgannounce)
+{
+	const char *mes = script_getstr(st, 2);
+	const char *fontColor = script_hasdata(st, 3) ? script_getstr(st, 3) : "0xFFFFFF";
+	int         fontType = script_hasdata(st, 4) ? script_getnum(st, 4) : 0x190; // default fontType (FW_NORMAL)
+	int         fontSize = script_hasdata(st, 5) ? script_getnum(st, 5) : 12;    // default fontSize
+	int         fontAlign = script_hasdata(st, 6) ? script_getnum(st, 6) : 0;     // default fontAlign
+	int         fontY = script_hasdata(st, 7) ? script_getnum(st, 7) : 0;     // default fontY
+
+	clif_broadcast2(NULL, mes, (int)strlen(mes) + 1, strtol(fontColor, (char **)NULL, 0), fontType, fontSize, fontAlign, fontY, BG_LISTEN);
 	return SCRIPT_CMD_SUCCESS;
 }
 
@@ -27602,6 +27615,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(bg_reserve,"s?"),
 	BUILDIN_DEF(bg_unbook,"s"),
 	BUILDIN_DEF(bg_info,"si"),
+	BUILDIN_DEF(bgannounce, "s?????"),
 
 	// Instancing
 	BUILDIN_DEF(instance_create,"s???"),

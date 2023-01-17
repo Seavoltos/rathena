@@ -1,0 +1,170 @@
+
+batt_off,119,94,5	script	Telma#2	701,{
+	mes "[^1B4F72Telma^000000]";
+	mes "Bienvenido, mitico guerrero.";
+	mes "Necesitas algunos suministros para tu batalla?";
+	next;
+	switch(select("[ > ] Comprar:[ > ] ¿Qué ofreces?:[ > ] Salir"))
+	{
+		case 1:
+			switch(select("100 Light White Potion:60 Light Blue Potion:150 Condensed White Potion:90 Blue Potion:5 Speed Potion:6 Poison Bottle:30 Fire Bottle:30 Acid Bottle:20 Plant Bottle:20 Marine Sphere Bottle:15 Glistening Coat:50 Yellow Gemstone:50 Red Gemstone:100 Blue Gemstone:20 Cobweb:5 Food STR+10:5 Food AGI+10:5 Food VIT+10:5 Food INT+10:5 Food DEX+10:5 Food LUK+10:5 Box Of Gloom:5 Box of Drowsiness:5 Box of Resentment:5 Royal Jelly:3 Berserk Potion:3 Awakening Potion:3 Concentration Potion:5 Coldproof Potion:5 Earthproof Potion:5 Fireproof Potion:5 Thunderproof Potion:8 Crystal Fragment")) {
+				case 1:		callsub S_BuyConsumableBG,11501,100;	// Light White Potion
+				case 2:		callsub S_BuyConsumableBG,11502,60;		// Light Blue Potion
+				case 3:		callsub S_BuyConsumableBG,547,150;		// Condensed White Potion
+				case 4:		callsub S_BuyConsumableBG,505,90;		// Blue Potion
+				case 5:		callsub S_BuyConsumableBG,12016,5;		// Speed Potion
+				case 6:		callsub S_BuyConsumableBG,678,6;		// Poison Bottle
+				case 7:		callsub S_BuyConsumableBG,7135,30;		// Fire Bottle
+				case 8:		callsub S_BuyConsumableBG,7136,30;		// Acid Bottle
+				case 9:		callsub S_BuyConsumableBG,7137,20;		// Plant Bottle
+				case 10:	callsub S_BuyConsumableBG,7138,20;		// Marine Sphere Bottle
+				case 11:	callsub S_BuyConsumableBG,7139,15;		// Glistening Coat
+				case 12:	callsub S_BuyConsumableBG,715,50;		// Yellow Gemstone
+				case 13:	callsub S_BuyConsumableBG,716,50;		// Red Gemstone
+				case 14:	callsub S_BuyConsumableBG,717,100;		// Blue Gemstone
+				case 15:	callsub S_BuyConsumableBG,1025,20;		// Cobweb
+				case 16:	callsub S_BuyConsumableBG,12250,5;		// Food Str+10
+				case 17:	callsub S_BuyConsumableBG,12251,5;		// Food Agi+10
+				case 18:	callsub S_BuyConsumableBG,12255,5;		// Food Vit+10
+				case 19:	callsub S_BuyConsumableBG,12252,5;		// Food Int+10
+				case 20:	callsub S_BuyConsumableBG,12253,5;		// Food Dex+10
+				case 21:	callsub S_BuyConsumableBG,12254,5;		// Food Luk+10
+				case 22:	callsub S_BuyConsumableBG,12029,5;		// Box of Gloom
+				case 23:	callsub S_BuyConsumableBG,12031,5;		// Box of Drowsiness
+				case 24:	callsub S_BuyConsumableBG,12030,5;		// Box of Resentment
+				case 25:	callsub S_BuyConsumableBG,526,5;		// Royal Jelly
+				case 26:	callsub S_BuyConsumableBG,657,3;		// Berserk Potion
+				case 27:	callsub S_BuyConsumableBG,656,3;		// Awakening Potion
+				case 28:	callsub S_BuyConsumableBG,645,3;		// Concentration Potion
+				case 29:	callsub S_BuyConsumableBG,12119,5;		// Coldproof Potion
+				case 30:	callsub S_BuyConsumableBG,12120,5;		// Earthproof Potion
+				case 31:	callsub S_BuyConsumableBG,12118,5;		// Fireproof Potion
+				case 32:	callsub S_BuyConsumableBG,12121,5;		// Thunderproof Potion
+				case 33:	callsub S_BuyConsumableBG,7321,8;		// Crystal Fragment
+			}
+			end;
+		case 2:
+			mes "[^1B4F72Telma^000000]";
+			mes "Las batallas en el ^7E5109Battleground^000000 son demasiado sangrientas.";
+			mes "Por eso ofrezco items a un muy bajo precio.";
+			next;
+			mes "[^1B4F72Telma^000000]";
+			mes "Pero ojo, estos items sólo servirán en ^7E5109Battleground^000000.";
+			close;
+			end;
+		case 3:
+			mes "[^1B4F72Telma^000000]";
+			mes "Adios, espero que tengas una digna muerte.";
+			close;
+			end;
+
+	}
+S_BuyConsumableBG:
+	set .@item_id, getarg(0);
+	set .@amt, getarg(1);
+	.@bg_itemn$ = "Battleground";
+	
+	mes "[^1B4F72Telma^000000]";
+	mes "¿Cuántos de ^0000FF"+ .@amt +" "+ getitemname(.@item_id) +"^000000 tu buscas?";
+	mes "1 = "+ .@amt   +" = 1 medallas";
+	mes "2 = "+ .@amt*2 +" = 2 medallas";
+	mes "3 = "+ .@amt*3 +" = 3 medallas";
+	mes "etc..";
+	next;
+	input .@sets;
+	mes "[^1B4F72Telma^000000]";
+	if (.@sets < 1) {
+		mes "Ingresa un número positivo por favor.";
+		close;
+	}
+	mes "Donde los quieres en tu inventario o en tu kafra?";
+	next;
+	switch(select("[ > ] Inventario:[ > ] Kafra")){
+		case 1:
+			set .@where,1;
+			break;
+		case 2:
+			set .@where,2;
+			break;
+	}
+	mes "[^1B4F72Telma^000000]";
+	mes "Tu buscas comprar ^0000FF"+ (.@amt*.@sets) +" "+ getitemname(.@item_id) +"^000000...";
+	mes "Recuerda que sólo se pueden utilizar en ^7E5109"+.@bg_itemn$+"^000000";
+	mes "Esto te va a costar "+ .@sets +" medalla(s)...";
+	mes "Ahora necesito que firmes el recibo.";
+	next;
+	switch(select("Firmar y darle "+ .@sets +" Medalla(s)")) {
+		case 1: set .@badge,43000; set .@cost,1; break;
+	}
+	.@bgchar = getBattleFlag("bg_reserved_char_id");
+	mes "[^1B4F72Telma^000000]";
+	if (countitem(.@badge) < (.@cost*.@sets)) {
+		mes "Tu no tienes suficientes ^FF0000"+getitemname(.@badge)+"s^000000 para comprar "+(.@amt*.@sets)+" "+getitemname(.@item_id)+".";
+	} else if ((!checkweight(.@item_id, .@amt*.@sets) && .@where == 1) || (!checkspace(.@item_id,.@amt*.@sets,1,0,0,254,0,.@bgchar & 0xFFFF, .@bgchar >> 0x10) && .@where == 2 )) {
+		mes "Lo siento no puedes almacenar tantos objetos.";
+	} else {
+		
+		if ( .@where == 1 )
+		{
+			getitem2 .@item_id,(.@amt*.@sets),1,0,0, 254, 0, .@bgchar & 0xFFFF, .@bgchar >> 0x10;
+			delitem .@badge, .@cost*.@sets;
+		}
+		else if(.@where == 2 )
+		{
+			if( storeitem2 (.@item_id,(.@amt*.@sets),1,0,0,254,0,.@bgchar & 0xFFFF, .@bgchar >> 0x10) )
+			{
+				delitem .@badge, .@cost*.@sets;
+			}
+			else
+			{
+				mes "No ha sido posible añadir "+.@amt*.@sets+" "+getitemname(.@item_id)+".";
+				close;
+			}
+		}
+		mes "Ya está listo tu encargo de ^0000FF"+(.@amt*.@sets)+" "+getitemname(.@item_id)+"^000000!";
+		mes "Recuerda que sólo los puedes utilizar en ^7E5109"+.@bg_itemn$;
+	}
+	close;
+}
+
+
+
+-	itemshop	BraveryExchanger	-1,43000,13036:100,13411:100,1425:100,1632:100,1634:100,1543:100,1924:100,1978:100,1574:100,1824:100,1183:100,1380:100,13305:100,1279:100,1739:100,13108:100,13172:100
+-	itemshop	ValorExchanger	-1,43000,13037:100,13410:100,1633:100,1635:100,1542:100,1923:100,1977:100,1575:100,1823:100,1184:100,1482:100,1379:100,13306:100,1280:100,1738:100,13171:100,13173:100,13174:100
+-	itemshop	EquipExchanger	-1,43000,2538:50,2539:50,2540:50,2435:50,2436:50,2437:50,2376:80,2377:80,2378:80,2379:80,2380:80,2381:80,2382:80,2720:500,2721:500,2722:500,2723:500,2724:500,2725:500,2733:500
+
+batt_off,136,103,3	script	Lucas	109,{
+	mes "[^1B4F72Lucas^000000]";
+	mes "Bienvenido, valeroso guerrero.";
+	mes "Que deseas comprar?";
+	next;
+	switch( select("[ > ] Armas Bravery","[ > ] Armas Valor","[ > ] Equipo","[ > ] Hmm, nada creo que paso.") )
+	{
+		case 1: // Bravery Items
+			mes "[^1B4F72Lucas^000000]";
+			mes "Este es el catálogo de las ^0000ffArmas Bravery^000000.";
+			mes "Cierra esta ventana para abrirlo.";
+			close2;
+			callshop "BraveryExchanger",0;
+			end;
+		case 2: // Valor Items
+			mes "[^1B4F72Lucas^000000]";
+			mes "Este es el catálogo de las ^0000ffArmas Valor^000000.";
+			mes "Cierra esta ventana para abrirlo.";
+			close2;
+			callshop "ValorExchanger",0;
+			end;
+		case 3: // Equipo
+			mes "[^1B4F72Lucas^000000]";
+			mes "Este es el catálogo de las ^0000ffEquipo^000000.";
+			mes "Cierra esta ventana para abrirlo.";
+			close2;
+			callshop "EquipExchanger",0;
+			end;
+		case 4:
+			mes "[^1B4F72Lucas^000000]";
+			mes "Como tu desees.";
+			mes "Nos vemos luego.";
+			close;
+	}
+}

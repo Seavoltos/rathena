@@ -9,15 +9,18 @@
 #include "../common/malloc.hpp"
 #include "../common/nullpo.hpp"
 #include "../common/random.hpp"
+#include "../common/socket.hpp"
 #include "../common/showmsg.hpp"
 #include "../common/strlib.hpp"
 #include "../common/timer.hpp"
+#include "../common/utils.hpp"
 #include "../common/utilities.hpp"
 
 #include "battle.hpp"
 #include "clif.hpp"
 #include "guild.hpp"
 #include "homunculus.hpp"
+#include "intif.hpp"
 #include "mapreg.hpp"
 #include "mercenary.hpp"
 #include "mob.hpp"
@@ -529,7 +532,12 @@ bool bg_team_join(int bg_id, map_session_data *sd, bool is_queue)
 
 		s_battleground_member_data member = {};
 
+		pc_update_last_action(sd,0,IDLE_WALK); // Start count from here...
+
 		sd->bg_id = bg_id;
+		
+		sd->state.bg_afk = 0;
+
 		member.sd = sd;
 		member.x = sd->bl.x;
 		member.y = sd->bl.y;
@@ -562,7 +570,7 @@ bool bg_team_join(int bg_id, map_session_data *sd, bool is_queue)
  * @param deserter: Whether to apply the deserter status or not
  * @return Remaining count in Battleground team or -1 on failure
  */
-int bg_team_leave(map_session_data *sd, bool quit, bool deserter)
+int bg_team_leave(map_session_data *sd, bool quit, bool deserter, int flag)
 {
 	if (!sd || !sd->bg_id)
 		return -1;
@@ -600,7 +608,17 @@ int bg_team_leave(map_session_data *sd, bool quit, bool deserter)
 		else
 			sprintf(output, "Server: %s is leaving the battlefield...", sd->status.name);
 
+		if (sd) {
+			switch (flag) {
+				case 3: sprintf(output, "Server: %s is leaving by AFK Status...", sd->status.name); break;
+				case 2: sprintf(output, "Server: %s is leaving by AFK Report...", sd->status.name); break;
+				case 1: sprintf(output, "Server: %s has quit the game...", sd->status.name); break;
+				case 0: sprintf(output, "Server: %s is leaving the battlefield...", sd->status.name); break;
+			}
+		}
 		clif_bg_message(bgteam.get(), 0, "Server", output, strlen(output) + 1);
+		
+		sd->state.bg_afk = 0;
 
 		if (!bgteam->logout_event.empty() && quit)
 			npc_event(sd, bgteam->logout_event.c_str(), 0);
@@ -742,14 +760,40 @@ void bg_send_message(map_session_data *sd, const char *mes, int len)
 int bg_send_xy_timer_sub(std::shared_ptr<s_battleground_data> bg)
 {
 	map_session_data *sd;
+	char output[128];
 
 	for (auto &pl_sd : bg->members) {
 		sd = pl_sd.sd;
+		if (sd == nullptr) continue;
+		
+		if( battle_config.bg_idle_autokick && DIFF_TICK(last_tick, sd->idletime) >= battle_config.bg_idle_autokick )
+		{
+			sprintf(output, "- AFK [%s] -", sd->status.name);
 
+			const char *fontColor = "0x6FA8DC";
+			int         fontType = 0x190; // default fontType (FW_NORMAL)
+			int         fontSize = 12;    // default fontSize
+			int         fontAlign = 0;     // default fontAlign
+			int         fontY = 0;     // default fontY
+
+			clif_broadcast2(NULL, output, (int)strlen(output) + 1, strtol(fontColor, (char **)NULL, 0), fontType, fontSize, fontAlign, fontY, BG_LISTEN);
+
+			bg_team_leave(sd, true, true, 3);
+			clif_displaymessage(sd->fd, "You are excluded from the battleground because of too long inactivity.");
+
+			continue;
+		}
 		if (sd->bl.x != pl_sd.x || sd->bl.y != pl_sd.y) { // xy update
 			pl_sd.x = sd->bl.x;
 			pl_sd.y = sd->bl.y;
 			clif_bg_xy(sd);
+		}
+
+		if( battle_config.bg_idle_announce && !sd->state.bg_afk && DIFF_TICK(last_tick, sd->idletime) >= battle_config.bg_idle_announce )
+		{ // Idle announces
+			sd->state.bg_afk = 1;
+			sprintf(output, "Server : %s seems to be AFK - It can be kicked out with @reportafk", sd->status.name);
+			clif_bg_message(bg.get(), 0, "Server", output, strlen(output) + 1);
 		}
 	}
 
@@ -945,9 +989,15 @@ bool bg_queue_check_joinable(std::shared_ptr<s_battleground_type> bg, map_sessio
 		return false;
 	}
 
-	if (battle_config.bgqueue_nowarp_mapflag > 0 && map_getmapflag(sd->bl.m, MF_NOWARP)) { // Check player's current position for mapflag check
+	if (battle_config.bgqueue_nowarp_mapflag > 0 && !map_getmapflag(sd->bl.m, MF_BG_JOIN)) { // Check player's current position for mapflag check
 		clif_bg_queue_apply_result(BG_APPLY_NONE, name, sd);
 		clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], msg_txt(sd, 337), false, SELF); // You can't apply to a battleground queue from this map.
+		return false;
+	}
+
+	if ( battleground_countlogin(sd, false) > 0 && battle_config.bg_logincount_check ) {
+		clif_messagecolor(&sd->bl, color_table[COLOR_RED], msg_txt(sd, 454), false, SELF);
+		clif_bg_queue_apply_result(BG_DUPLICATE_UNIQUE_ID, name, sd);
 		return false;
 	}
 
@@ -997,6 +1047,12 @@ void bg_queue_join_solo(const char *name, map_session_data *sd)
 		return;
 	}
 
+	if (battle_config.bgqueue_nowarp_mapflag && !map_getmapflag(sd->bl.m, MF_BG_JOIN))
+	{
+		clif_displaymessage(sd->fd, "You only can join BG queues from Battle Office.");
+		return;
+	}
+
 	std::shared_ptr<s_battleground_type> bg = bg_search_name(name);
 
 	if (!bg) {
@@ -1008,6 +1064,16 @@ void bg_queue_join_solo(const char *name, map_session_data *sd)
 		clif_bg_queue_apply_result(BG_APPLY_INVALID_APP, name, sd);
 		return;
 	}
+
+	char message[128];
+		sprintf (message, msg_txt(sd,455), name);
+		const char *fontColor = "0x6FA8DC";
+		int         fontType = 0x190; // default fontType (FW_NORMAL)
+		int         fontSize = 12;    // default fontSize
+		int         fontAlign = 0;     // default fontAlign
+		int         fontY = 0;     // default fontY
+
+		clif_broadcast2(NULL, message, (int)strlen(message) + 1, strtol(fontColor, (char **)NULL, 0), fontType, fontSize, fontAlign, fontY, BG_LISTEN);
 
 	bg_queue_join_multi(name, sd, { sd }); // Join as solo
 }
@@ -1021,6 +1087,12 @@ void bg_queue_join_party(const char *name, map_session_data *sd)
 {
 	if (!sd) {
 		ShowError("bg_queue_join_party: Tried to join non-existent player\n.");
+		return;
+	}
+
+	if (battle_config.bgqueue_nowarp_mapflag && !map_getmapflag(sd->bl.m, MF_BG_JOIN))
+	{
+		clif_displaymessage(sd->fd, "You only can join BG queues from Battle Office.");
 		return;
 	}
 
@@ -1072,6 +1144,16 @@ void bg_queue_join_party(const char *name, map_session_data *sd)
 			}
 		}
 
+		char message[128];
+		sprintf (message, msg_txt(sd,456), name);
+		const char *fontColor = "0x6FA8DC";
+		int         fontType = 0x190; // default fontType (FW_NORMAL)
+		int         fontSize = 12;    // default fontSize
+		int         fontAlign = 0;     // default fontAlign
+		int         fontY = 0;     // default fontY
+
+		clif_broadcast2(NULL, message, (int)strlen(message) + 1, strtol(fontColor, (char **)NULL, 0), fontType, fontSize, fontAlign, fontY, BG_LISTEN);
+
 		bg_queue_join_multi(name, sd, list); // Join as party, all on the same side of the BG
 	} else {
 		ShowWarning("clif_parse_bg_queue_apply_request: Could not find Battleground: \"%s\" requested by player: %s (AID:%d CID:%d)\n", name, sd->status.name, sd->status.account_id, sd->status.char_id);
@@ -1089,6 +1171,12 @@ void bg_queue_join_guild(const char *name, map_session_data *sd)
 {
 	if (!sd) {
 		ShowError("bg_queue_join_guild: Tried to join non-existent player\n.");
+		return;
+	}
+
+	if (battle_config.bgqueue_nowarp_mapflag && !map_getmapflag(sd->bl.m, MF_BG_JOIN))
+	{
+		clif_displaymessage(sd->fd, "You only can join BG queues from Battle Office.");
 		return;
 	}
 
@@ -1130,6 +1218,16 @@ void bg_queue_join_guild(const char *name, map_session_data *sd)
 					list.push_back(pl_sd);
 			}
 		}
+
+		char message[128];
+		sprintf (message, msg_txt(sd,457), name);
+		const char *fontColor = "0x6FA8DC";
+		int         fontType = 0x190; // default fontType (FW_NORMAL)
+		int         fontSize = 12;    // default fontSize
+		int         fontAlign = 0;     // default fontAlign
+		int         fontY = 0;     // default fontY
+		//intif_broadcast(message,strlen(message)+1,BG_LISTEN); //Broadcast Guild
+		clif_broadcast2(NULL, message, (int)strlen(message) + 1, strtol(fontColor, (char **)NULL, 0), fontType, fontSize, fontAlign, fontY, BG_LISTEN);
 
 		bg_queue_join_multi(name, sd, list); // Join as guild, all on the same side of the BG
 	} else {
@@ -1386,7 +1484,7 @@ void bg_join_active(map_session_data *sd, std::shared_ptr<s_battleground_queue> 
 		return;
 
 	// Check player's current position for mapflag check
-	if (battle_config.bgqueue_nowarp_mapflag > 0 && map_getmapflag(sd->bl.m, MF_NOWARP)) {
+	if (battle_config.bgqueue_nowarp_mapflag > 0 && !map_getmapflag(sd->bl.m, MF_BG_JOIN)) {
 		clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], msg_txt(sd, 337), false, SELF); // You can't apply to a battleground queue from this map.
 		bg_queue_leave(sd);
 		clif_bg_queue_entry_init(sd);
@@ -1450,7 +1548,7 @@ bool bg_mapflag_check(std::shared_ptr<s_battleground_queue> queue) {
 	bool found = false;
 
 	for (const auto &sd : queue->teama_members) {
-		if (map_getmapflag(sd->bl.m, MF_NOWARP)) {
+		if (!map_getmapflag(sd->bl.m, MF_BG_JOIN)) {
 			clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], msg_txt(sd, 337), false, SELF); // You can't apply to a battleground queue from this map.
 			bg_queue_leave(sd);
 			clif_bg_queue_entry_init(sd);
@@ -1459,7 +1557,7 @@ bool bg_mapflag_check(std::shared_ptr<s_battleground_queue> queue) {
 	}
 
 	for (const auto &sd : queue->teamb_members) {
-		if (map_getmapflag(sd->bl.m, MF_NOWARP)) {
+		if (!map_getmapflag(sd->bl.m, MF_BG_JOIN)) {
 			clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], msg_txt(sd, 337), false, SELF); // You can't apply to a battleground queue from this map.
 			bg_queue_leave(sd);
 			clif_bg_queue_entry_init(sd);
@@ -1590,6 +1688,26 @@ static void bg_queue_create(int bg_id, int req_players)
 	bg_queues.push_back(queue);
 }
 
+int battleground_countlogin(struct map_session_data *sd, bool check_bat_room)
+{
+	int c = 0, m = map_mapname2mapid("batt_off");
+	struct map_session_data* pl_sd;
+	struct s_mapiterator* iter;
+	nullpo_ret(sd);
+
+	iter = mapit_getallusers();
+	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
+	{
+		if( !(pl_sd->bg_queue_id || map_getmapflag(pl_sd->bl.m, MF_BATTLEGROUND) || (check_bat_room && pl_sd->bl.m == m)) )
+			continue;
+
+		if( session[sd->fd]->gepard_info.unique_id == session[pl_sd->fd]->gepard_info.unique_id )
+			c++;
+
+	}
+	mapit_free(iter);
+	return c;
+}
 /**
  * Initialize the Battleground data
  */

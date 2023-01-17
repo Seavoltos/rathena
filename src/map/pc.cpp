@@ -754,6 +754,35 @@ void pc_delete_bg_queue_timer(map_session_data *sd) {
 	}
 }
 
+/***********************************************************
+* Update Idle PC Timer
+* Type
+* 0 = Send By Server
+* 1 = KeyBoard Action
+* 2 = Mouse Click
+* 3 = Both Hands
+***********************************************************/
+int pc_update_last_action(map_session_data *sd, int type, enum idletime_option idle_option)
+{
+	t_tick tick = gettick();
+
+	if( !(battle_config.idletime_option&idle_option) )
+		return 1;
+
+	sd->idletime = last_tick;
+
+	std::shared_ptr<s_battleground_data> bg;
+	if( sd->bg_id && sd->state.bg_afk && (bg = util::umap_find(bg_team_db, sd->bg_id)) && bg!=nullptr )
+	{ // Battleground AFK announce
+		char output[128];
+		sprintf(output, "Server: %s is no longer away...", sd->status.name);
+		clif_bg_message(bg.get(), 0, "Server", output, strlen(output) + 1);
+		sd->state.bg_afk = 0;
+	}
+
+	return 1;
+}
+
 static TIMER_FUNC(pc_invincible_timer){
 	map_session_data *sd;
 
@@ -5767,9 +5796,20 @@ int pc_getcash(map_session_data *sd, int cash, int points, e_log_pick_type type)
  * @return Stored index in inventory, or -1 if not found.
  **/
 short pc_search_inventory(map_session_data *sd, t_itemid nameid) {
-	short i;
+	short i,x,y,z;
 	nullpo_retr(-1, sd);
-
+	if (map_getmapflag(sd->bl.m, MF_BG_CONSUME)) {
+		ARR_FIND( 0, MAX_INVENTORY, x, sd->inventory.u.items_inventory[x].nameid == nameid && ( MakeDWord(sd->inventory.u.items_inventory[x].card[2], sd->inventory.u.items_inventory[x].card[3]) == battle_config.bg_reserved_char_id ) && (sd->inventory.u.items_inventory[x].amount > 0 || nameid == 0) );
+			if( x < MAX_INVENTORY ) return x;
+	}
+	if (map_getmapflag(sd->bl.m, MF_WOE_CONSUME)) {
+		ARR_FIND( 0, MAX_INVENTORY, y, sd->inventory.u.items_inventory[y].nameid == nameid && ( MakeDWord(sd->inventory.u.items_inventory[y].card[2], sd->inventory.u.items_inventory[y].card[3]) == battle_config.woe_reserved_char_id ) && (sd->inventory.u.items_inventory[y].amount > 0 || nameid == 0) );
+			if( y < MAX_INVENTORY ) return y;
+	}
+	if (map_getmapflag(sd->bl.m, MF_INSTANCECONSUME)) {
+		ARR_FIND( 0, MAX_INVENTORY, z, sd->inventory.u.items_inventory[z].nameid == nameid && ( MakeDWord(sd->inventory.u.items_inventory[z].card[2], sd->inventory.u.items_inventory[z].card[3]) == battle_config.instance_reserved_char_id ) && (sd->inventory.u.items_inventory[z].amount > 0 || nameid == 0) );
+			if( z < MAX_INVENTORY ) return z;
+	}
 	ARR_FIND( 0, MAX_INVENTORY, i, sd->inventory.u.items_inventory[i].nameid == nameid && (sd->inventory.u.items_inventory[i].amount > 0 || nameid == 0) );
 	return ( i < MAX_INVENTORY ) ? i : -1;
 }
@@ -6291,6 +6331,15 @@ int pc_useitem(map_session_data *sd,int n)
 		}
 		return 0;/* regardless, effect is not run */
 	}
+	
+	if( sd->inventory.u.items_inventory[n].card[0] == CARD0_CREATE) {
+		if (MakeDWord(sd->inventory.u.items_inventory[n].card[2], sd->inventory.u.items_inventory[n].card[3]) == battle_config.bg_reserved_char_id && !map_getmapflag(sd->bl.m, MF_BG_CONSUME))
+			return 0;
+		if (MakeDWord(sd->inventory.u.items_inventory[n].card[2], sd->inventory.u.items_inventory[n].card[3]) == battle_config.woe_reserved_char_id && !map_getmapflag(sd->bl.m, MF_WOE_CONSUME))
+			return 0;
+		if (MakeDWord(sd->inventory.u.items_inventory[n].card[2], sd->inventory.u.items_inventory[n].card[3]) == battle_config.instance_reserved_char_id && !map_getmapflag(sd->bl.m, MF_INSTANCECONSUME))
+			return 0;
+	}
 
 	if (pet_db_search(id->nameid, PET_CATCH) != nullptr && map_getmapflag(sd->bl.m, MF_NOPETCAPTURE)) {
 		clif_displaymessage(sd->fd, msg_txt(sd, 669)); // You can't catch any pet on this map.
@@ -6748,7 +6797,7 @@ enum e_setpos pc_setpos(map_session_data* sd, unsigned short mapindex, int x, in
 		}
 
 		if (sd->bg_id && mapdata && !mapdata->flag[MF_BATTLEGROUND]) // Moving to a map that isn't a Battlegrounds
-			bg_team_leave(sd, false, true);
+			bg_team_leave(sd, false, true, 1);
 
 		sd->state.pmap = sd->bl.m;
 		if (sc && sc->count) { // Cancel some map related stuff.
@@ -6830,7 +6879,7 @@ enum e_setpos pc_setpos(map_session_data* sd, unsigned short mapindex, int x, in
 		}
 
 		if (sd->bg_id) // Switching map servers, remove from bg
-			bg_team_leave(sd, false, true);
+			bg_team_leave(sd, false, true, 1);
 
 		if (sd->state.vending) // Stop vending
 			vending_closevending(sd);

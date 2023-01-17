@@ -12,7 +12,14 @@
  *	 <datatype> name;
  **/
 
-
+	int bg_idle_announce;
+	int bg_idle_autokick;
+	int bg_logincount_check;
+	int bg_reserved_char_id;
+	int woe_reserved_char_id;
+	int instance_reserved_char_id;
+	int bg_can_trade;
+	int bg_party_skills;
 	int instance_penalty_show;
 	int instance_buff_show;
 	int extended_vending;

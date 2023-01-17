@@ -99,6 +99,7 @@ enum e_bg_queue_apply_ack : uint16 {
 	BG_APPLY_RECONNECT, ///< Reconnect then apply
 	BG_APPLY_PARTYGUILD_LEADER, ///< Only party/guild leader can apply
 	BG_APPLY_PLAYER_CLASS, ///< Your class can't apply
+	BG_DUPLICATE_UNIQUE_ID, ///< Your unique id is already in the queue
 };
 
 /// Enum of script command bg_info types
@@ -139,7 +140,7 @@ bool bg_queue_reservation(const char *name, bool state, bool ended);
 int bg_create(uint16 mapindex, s_battleground_team* team);
 bool bg_team_join(int bg_id, map_session_data *sd, bool is_queue);
 bool bg_team_delete(int bg_id);
-int bg_team_leave(map_session_data *sd, bool quit, bool deserter);
+int bg_team_leave(map_session_data *sd, bool quit, bool deserter, int flag);
 bool bg_team_warp(int bg_id, unsigned short mapindex, short x, short y);
 bool bg_player_is_in_bg_map(map_session_data *sd);
 bool bg_queue_check_joinable(std::shared_ptr<s_battleground_type> bg, map_session_data *sd, const char *name);
@@ -154,6 +155,8 @@ void bg_queue_on_accept_invite(map_session_data *sd);
 void bg_queue_start_battleground(std::shared_ptr<s_battleground_queue> queue);
 bool bg_member_respawn(map_session_data *sd);
 void bg_send_message(map_session_data *sd, const char *mes, int len);
+
+int battleground_countlogin(struct map_session_data *sd, bool check_bat_room);
 
 void do_init_battleground(void);
 void do_final_battleground(void);

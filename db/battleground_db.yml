@@ -59,10 +59,41 @@ Header:
   Version: 1
 
 Body:
+  - Id: 0
+    Name: Capture the Flag
+    MinPlayers: 1
+    MinLevel: 80
+    Deserter: 10
+    JobRestrictions:
+      Novice: true
+      SuperNovice: true
+      Novice_High: true
+      Baby: true
+      Super_Baby: true
+      Super_Novice_E: true
+      Super_Baby_E: true
+    Locations:
+      - Map: ctf00
+        StartEvent: Flavius_CTF::OnReadyCheck
+        TeamA:
+          RespawnX: 42
+          RespawnY: 3
+          QuitEvent: Flavius_CTF::OnTeam1Quit
+          ActiveEvent: Flavius_CTF::OnGuillaumeActive
+          DeathEvent: Flavius_CTF::OnTeam1Die
+          Variable: $@BG_CTF_Team1
+        TeamB:
+          RespawnX: 55
+          RespawnY: 3
+          QuitEvent: Flavius_CTF::OnTeam2Quit
+          ActiveEvent: Flavius_CTF::OnCroixActive
+          DeathEvent: Flavius_CTF::OnTeam2Die
+          Variable: $@BG_CTF_Team2
   - Id: 1
-    Name: Tierra Gorge
-    MinPlayers: 6
+    Name: Team DeathMatch
+    MinPlayers: 3
     MinLevel: 80
+    Deserter: 10
     JobRestrictions:
       Novice: true
       SuperNovice: true
@@ -72,38 +103,27 @@ Body:
       Super_Novice_E: true
       Super_Baby_E: true
     Locations:
-      - Map: bat_a01
-        StartEvent: start#bat_a01::OnReadyCheck
+      - Map: rwc03
+        StartEvent: Hunter_TD::OnReady
         TeamA:
-          RespawnX: 50
-          RespawnY: 374
-          QuitEvent: start#bat_a01::OnGuillaumeQuit
-          ActiveEvent: start#bat_a01::OnGuillaumeActive
-          Variable: $@TierraBG1_id1
+          RespawnX: 12
+          RespawnY: 49
+          QuitEvent: Hunter_TD::OnTeam1Quit
+          ActiveEvent: Hunter_TD::OnGuillaumeActive
+          DeathEvent: Hunter_TD::OnTeam1Die
+          Variable: $@BG_TD_Team1
         TeamB:
-          RespawnX: 42
-          RespawnY: 16
-          QuitEvent: start#bat_a01::OnCroixQuit
-          ActiveEvent: start#bat_a01::OnCroixActive
-          Variable: $@TierraBG1_id2
-      - Map: bat_a02
-        StartEvent: start#bat_a02::OnReadyCheck
-        TeamA:
-          RespawnX: 50
-          RespawnY: 374
-          QuitEvent: start#bat_a02::OnGuillaumeQuit
-          ActiveEvent: start#bat_a02::OnGuillaumeActive
-          Variable: $@TierraBG2_id1
-        TeamB:
-          RespawnX: 42
-          RespawnY: 16
-          QuitEvent: start#bat_a02::OnCroixQuit
-          ActiveEvent: start#bat_a02::OnCroixActive
-          Variable: $@TierraBG2_id2
+          RespawnX: 88
+          RespawnY: 49
+          QuitEvent: Hunter_TD::OnTeam2Quit
+          ActiveEvent: Hunter_TD::OnCroixActive
+          DeathEvent: Hunter_TD::OnTeam2Die
+          Variable: $@BG_TD_Team2
   - Id: 2
-    Name: Flavius
-    MinPlayers: 6
+    Name: Conquest
+    MinPlayers: 3
     MinLevel: 80
+    Deserter: 10
     JobRestrictions:
       Novice: true
       SuperNovice: true
@@ -113,99 +133,142 @@ Body:
       Super_Novice_E: true
       Super_Baby_E: true
     Locations:
-      - Map: bat_b01
-        StartEvent: start#bat_b01::OnReadyCheck
+      - Map: schg_cas06
+        StartEvent: Conquest::OnReady
         TeamA:
-          RespawnX: 10
-          RespawnY: 290
-          QuitEvent: start#bat_b01::OnGuillaumeQuit
-          ActiveEvent: start#bat_b01::OnGuillaumeActive
-          Variable: $@FlaviusBG1_id1
+          QuitEvent: Conquest::OnTeam1Quit
+          ActiveEvent: Conquest::OnGuillaumeActive
+          DeathEvent: Conquest::OnGuillaumeDie
+          Variable: $@BG_CQ_Team1
+          RespawnX: 264
+          RespawnY: 379
         TeamB:
-          RespawnX: 390
-          RespawnY: 10
-          QuitEvent: start#bat_b01::OnCroixQuit
-          ActiveEvent: start#bat_b01::OnCroixActive
-          Variable: $@FlaviusBG1_id2
-      - Map: bat_b02
-        StartEvent: start#bat_b02::OnReadyCheck
-        TeamA:
-          RespawnX: 10
-          RespawnY: 290
-          QuitEvent: start#bat_b02::OnGuillaumeQuit
-          ActiveEvent: start#bat_b02::OnGuillaumeActive
-          Variable: $@FlaviusBG2_id1
-        TeamB:
-          RespawnX: 390
-          RespawnY: 10
-          QuitEvent: start#bat_b02::OnCroixQuit
-          ActiveEvent: start#bat_b02::OnCroixActive
-          Variable: $@FlaviusBG2_id2
+          QuitEvent: Conquest::OnTeam2Quit
+          ActiveEvent: Conquest::OnCroixActive
+          DeathEvent: Conquest::OnCroixDie
+          Variable: $@BG_CQ_Team2
+          RespawnX: 295
+          RespawnY: 379
   - Id: 3
-    Name: KVM (Level 80 and up)
-    MinPlayers: 5
+    Name: Rush
+    MinPlayers: 3
     MinLevel: 80
+    Deserter: 10
+    JobRestrictions:
+      Novice: true
+      SuperNovice: true
+      Novice_High: true
+      Baby: true
+      Super_Baby: true
+      Super_Novice_E: true
+      Super_Baby_E: true
     Locations:
-      - Map: bat_c01
-        StartEvent: KvM01_BG::OnStart
+      - Map: rush_cas01
+        StartEvent: Rush::OnReady
         TeamA:
-          RespawnX: 52
-          RespawnY: 129
-          DeathEvent: KvM01_BG::OnGuillaumeDie
-          QuitEvent: KvM01_BG::OnGuillaumeQuit
-          ActiveEvent: KvM01_BG::OnGuillaumeActive
-          Variable: $@KvM01BG_id1
+          QuitEvent: Rush::OnTeam1Quit
+          ActiveEvent: Rush::OnGuillaumeActive
+          DeathEvent: Rush::OnGuillaumeDie
+          Variable: $@BG_RU_Team1
+          RespawnX: 202
+          RespawnY: 230
         TeamB:
-          RespawnX: 147
-          RespawnY: 55
-          DeathEvent: KvM01_BG::OnCroixDie
-          QuitEvent: KvM01_BG::OnCroixQuit
-          ActiveEvent: KvM01_BG::OnCroixActive
-          Variable: $@KvM01BG_id2
+          QuitEvent: Rush::OnTeam2Quit
+          ActiveEvent: Rush::OnCroixActive
+          DeathEvent: Rush::OnCroixDie
+          Variable: $@BG_RU_Team2
+          RespawnX: 202
+          RespawnY: 226
   - Id: 4
-    Name: KVM (Level 60~79)
-    MinPlayers: 5
-    MinLevel: 60
-    MaxLevel: 79
+    Name: Eye of Storm
+    MinPlayers: 3
+    MinLevel: 80
+    Deserter: 10
+    JobRestrictions:
+      Novice: true
+      SuperNovice: true
+      Novice_High: true
+      Baby: true
+      Super_Baby: true
+      Super_Novice_E: true
+      Super_Baby_E: true
     Locations:
-      - Map: bat_c02
-        StartEvent: KvM02_BG::OnStart
+      - Map: bg_eoe
+        StartEvent: Tierra_EOS::OnReady
         TeamA:
-          RespawnX: 52
-          RespawnY: 129
-          DeathEvent: KvM02_BG::OnGuillaumeDie
-          QuitEvent: KvM02_BG::OnGuillaumeQuit
-          ActiveEvent: KvM02_BG::OnGuillaumeActive
-          Variable: $@KvM02BG_id1
+          RespawnX: 13
+          RespawnY: 14
+          QuitEvent: Tierra_EOS::OnTeam1Quit
+          ActiveEvent: Tierra_EOS::OnGuillaumeActive
+          DeathEvent: Tierra_EOS::OnGuillaumeDie
+          Variable: $@BG_EOS_Team1
         TeamB:
-          RespawnX: 147
-          RespawnY: 55
-          DeathEvent: KvM02_BG::OnCroixDie
-          QuitEvent: KvM02_BG::OnCroixQuit
-          ActiveEvent: KvM02_BG::OnCroixActive
-          Variable: $@KvM02BG_id2
+          RespawnX: 189
+          RespawnY: 159
+          QuitEvent: Tierra_EOS::OnTeam2Quit
+          ActiveEvent: Tierra_EOS::OnCroixActive
+          DeathEvent: Tierra_EOS::OnCroixDie
+          Variable: $@BG_EOS_Team2
   - Id: 5
-    Name: KVM (Level 59 and below
-    MinPlayers: 5
-    MaxLevel: 59
+    Name: Domination
+    MinPlayers: 3
+    MinLevel: 80
+    Deserter: 10
+    JobRestrictions:
+      Novice: true
+      SuperNovice: true
+      Novice_High: true
+      Baby: true
+      Super_Baby: true
+      Super_Novice_E: true
+      Super_Baby_E: true
     Locations:
-      - Map: bat_c03
-        StartEvent: KvM03_BG::OnStart
+      - Map: bg_dom
+        StartEvent: Tierra_DOM::OnReady
         TeamA:
-          RespawnX: 52
-          RespawnY: 129
-          DeathEvent: KvM03_BG::OnGuillaumeDie
-          QuitEvent: KvM03_BG::OnGuillaumeQuit
-          ActiveEvent: KvM03_BG::OnGuillaumeActive
-          Variable: $@KvM03BG_id1
+          RespawnX: 28
+          RespawnY: 59
+          QuitEvent: Tierra_DOM::OnTeam1Quit
+          ActiveEvent: Tierra_DOM::OnGuillaumeActive
+          DeathEvent: Tierra_DOM::OnDie
+          Variable: $@BG_DOM_Team1
         TeamB:
-          RespawnX: 147
-          RespawnY: 55
-          DeathEvent: KvM03_BG::OnCroixDie
-          QuitEvent: KvM03_BG::OnCroixQuit
-          ActiveEvent: KvM03_BG::OnCroixActive
-          Variable: $@KvM03BG_id2
-
+          RespawnX: 172
+          RespawnY: 123
+          QuitEvent: Tierra_DOM::OnTeam2Quit
+          ActiveEvent: Tierra_DOM::OnCroixActive
+          DeathEvent: Tierra_DOM::OnDie
+          Variable: $@BG_DOM_Team2
+  - Id: 6
+    Name: Stone Control
+    MinPlayers: 3
+    MinLevel: 80
+    Deserter: 10
+    JobRestrictions:
+      Novice: true
+      SuperNovice: true
+      Novice_High: true
+      Baby: true
+      Super_Baby: true
+      Super_Novice_E: true
+      Super_Baby_E: true
+    Locations:
+      - Map: bg_sc
+        StartEvent: Flavius_SC::OnReady
+        TeamA:
+          RespawnX: 28
+          RespawnY: 60
+          QuitEvent: Flavius_SC::OnTeam1Quit
+          ActiveEvent: Flavius_SC::OnGuillaumeActive
+          DeathEvent: Flavius_SC::OnGuillaumeDie
+          Variable: $@BG_SC_Team1
+        TeamB:
+          RespawnX: 172
+          RespawnY: 124
+          QuitEvent: Flavius_SC::OnTeam2Quit
+          ActiveEvent: Flavius_SC::OnCroixActive
+          DeathEvent: Flavius_SC::OnCroixDie
+          Variable: $@BG_SC_Team2
 Footer:
   Imports:
   - Path: db/import/battleground_db.yml

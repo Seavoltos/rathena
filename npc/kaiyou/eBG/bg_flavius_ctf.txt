@@ -1,0 +1,605 @@
+//===== rAthena Script =======================================
+//    Extended Battleground
+//= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+// Date:
+//  15-08-2020
+// By:
+//  Seavoltos         (Zephyrus, original author)
+//
+// Contact:
+//    - Discord:  Seavoltos#6302
+//= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+// Battleground Queue Engine
+// *********************************************************************
+-	script	Flavius_CTF	FAKE_NPC,{
+	end;
+
+OnInit:
+	mapwarp "ctf00","prontera",155,181;
+	end;
+
+OnTeam1Quit:
+	// Drop Flag
+	if ( $@BG_Status_CTF && getvariableofnpc(.Flag_Carrier,"Team2_Flag") == getcharid(0)) {
+		set getvariableofnpc(.Flag_Carrier,"Team2_Flag"), 0;
+		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
+		getmapxy .@m$, .@x, .@y, BL_PC;
+		movenpc "Team2_Flag", .@x, .@y;
+
+		mapannounce "ctf00","Meijing: Omega Crystal ha sido soltada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		
+		set getvariableofnpc(.Flag_Status,"Team2_Flag"), 1; // OnFloor
+		initnpctimer "Team2_Flag";
+		enablenpc "Team2_Flag";
+	}
+	if ($@BG_CTF_Team1 && bg_get_data($@BG_CTF_Team1,0) == 0)
+		donpcevent "Flavius_CTF::OnMatchEnd";
+	bg_desert;
+	end;
+
+OnTeam2Quit:
+	// Drop Flag
+	if ( $@BG_Status_CTF && getvariableofnpc(.Flag_Carrier,"Team1_Flag") == getcharid(0)) {
+		set getvariableofnpc(.Flag_Carrier,"Team1_Flag"), 0;
+		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
+		getmapxy .@m$, .@x, .@y, BL_PC;
+		movenpc "Team1_Flag", .@x, .@y;
+		
+		mapannounce "ctf00","Meijing: Alpha Crystal ha sido soltada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
+
+		set getvariableofnpc(.Flag_Status,"Team1_Flag"), 1; // OnFloor
+		initnpctimer "Team1_Flag";
+		enablenpc "Team1_Flag";
+	}
+	if ($@BG_CTF_Team2 && bg_get_data($@BG_CTF_Team2,0) == 0)
+		donpcevent "Flavius_CTF::OnMatchEnd";
+	bg_desert;
+	end;
+
+OnTeam1Die:
+	// Drop Flag
+	if ( $@BG_Status_CTF && getvariableofnpc(.Flag_Carrier,"Team2_Flag") == getcharid(0)) {
+		set getvariableofnpc(.Flag_Carrier,"Team2_Flag"), 0;
+		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
+		getmapxy .@m$, .@x, .@y, BL_PC;
+		movenpc "Team2_Flag", .@x, .@y;
+
+		mapannounce "ctf00","Meijing: Omega Crystal ha sido soltada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		
+		set getvariableofnpc(.Flag_Status,"Team2_Flag"), 1; // OnFloor
+		initnpctimer "Team2_Flag";
+		enablenpc "Team2_Flag";
+	}
+	end;
+
+OnTeam2Die:
+	// Drop Flag
+	if ( $@BG_Status_CTF && getvariableofnpc(.Flag_Carrier,"Team1_Flag") == getcharid(0)) {
+		set getvariableofnpc(.Flag_Carrier,"Team1_Flag"), 0;
+		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
+		getmapxy .@m$, .@x, .@y, BL_PC;
+		movenpc "Team1_Flag", .@x, .@y;
+		
+		mapannounce "ctf00","Meijing: Alpha Crystal ha sido soltada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
+
+		set getvariableofnpc(.Flag_Status,"Team1_Flag"), 1; // OnFloor
+		initnpctimer "Team1_Flag";
+		enablenpc "Team1_Flag";
+	}
+	end;
+
+OnReadyCheck:
+	if( $@BG_Status_CTF )
+		end;
+	
+	set $@BG_Status_CTF,1;
+	
+	set $@BG_CTF__Victory, 0;
+	set $@BG_CTF_Croix_Score, 0;
+	set $@BG_CTF_Guill_Score, 0;
+	bg_updatescore "ctf00",$@BG_CTF_Guill_Score,$@BG_CTF_Croix_Score;
+	
+	bgannounce "Meijing: El Battleground Capture the Flag ha iniciado!",$@BG_COLOR;
+	
+//	bg_warp $@BG_CTF_Team1,"ctf00",2,40;
+//	bg_warp $@BG_CTF_Team2,"ctf00",95,40;
+	
+	sleep 2100;
+	// Respawn NPC's
+	donpcevent "Battle Therapist#ctf00_a::OnBGStart";
+	donpcevent "Battle Therapist#ctf00_b::OnBGStart";
+	// Start Match!!
+	donpcevent "Flavius_CTF::OnMatchStart";
+	sleep 10000;
+	donpcevent "#ctf00_timer::OnEnable";
+	end;
+
+OnMatchStart:
+	donpcevent "#ctf00_timer::OnStop";
+	bg_warp $@BG_CTF_Team1,"ctf00",2,40;
+	bg_warp $@BG_CTF_Team2,"ctf00",95,40;
+	// Flags2Base
+	sleep 1000;
+	donpcevent "Team1_Flag::OnBase";
+	donpcevent "Team2_Flag::OnBase";
+	donpcevent "time#ctf00::OnEnable";
+	mapannounce "ctf00","Meijing: Captura el cristal enemigo!!",1,0x00FF00;
+	donpcevent "#ctf00_timer::OnEnable";
+	end;
+	
+OnTeam1Score:
+	set $@BG_CTF_Guill_Score, $@BG_CTF_Guill_Score + 1;
+	donpcevent "Flavius_CTF::OnMatchStop";
+	end;
+
+OnTeam2Score:
+	set $@BG_CTF_Croix_Score, $@BG_CTF_Croix_Score + 1;
+	donpcevent "Flavius_CTF::OnMatchStop";
+	end;
+	
+OnGuillaumeActive:
+	warp "ctf00",42,3;
+	end;
+
+OnCroixActive:
+	warp "ctf00",55,3;
+	end;
+	
+OnMatchStop:
+	disablenpc "Team1_Flag";
+	disablenpc "Team2_Flag";
+	bg_updatescore "ctf00",$@BG_CTF_Guill_Score,$@BG_CTF_Croix_Score;
+	
+	viewpointmap "ctf00",2, 0, 0, 1, 0x0000FF;
+	viewpointmap "ctf00",2, 0, 0, 2, 0xFF0000;
+	
+	// Team 1 Won
+	if ($@BG_CTF_Guill_Score > 2) {
+		mapannounce "ctf00","Meijing: El ejercito de Blue Team ha ganado la batalla!",1,0x0000FF;
+		donpcevent "Flavius_CTF::OnMatchEnd";
+	}
+	// Team 2 Won
+	else if ($@BG_CTF_Croix_Score > 2) {
+		mapannounce "ctf00","Meijing: El ejercito de Red Team ha ganado la batalla!",1,0xFF0000;
+		donpcevent "Flavius_CTF::OnMatchEnd";
+	}
+	// Keep Playing
+	else {
+		sleep 8000;
+		donpcevent "Flavius_CTF::OnMatchStart";
+	}
+	end;
+OnTimer600000:
+	mapannounce "ctf00","Meijing: La batalla finalizará en 5 minutos!!",1,0x00FF00;
+	end;
+
+OnTimer840000:
+	mapannounce "ctf00","Meijing: La batalla finalizará en 5 minutos!!",1,0x00FF00;
+	end;
+
+OnTimer900000:
+	disablenpc "Team1_Flag";
+	disablenpc "Team2_Flag";
+	
+	viewpointmap "ctf00",2, 0, 0, 1, 0x0000FF;
+	viewpointmap "ctf00",2, 0, 0, 2, 0xFF0000;
+	
+	if ( $@BG_CTF_Guill_Score > $@BG_CTF_Croix_Score)
+		mapannounce "ctf00","Meijing: El ejercito de Blue Team ha ganado la batalla!",1,0x0000FF;
+	else if ( $@BG_CTF_Guill_Score < $@BG_CTF_Croix_Score)
+		mapannounce "ctf00","Meijing: El ejercito de Red Team ha ganado la batalla!",1,0xFF0000;
+	else
+		mapannounce "ctf00","Meijing: La batalla ha finalizado en un empate...!",1,0x00FF00;
+	donpcevent "Flavius_CTF::OnMatchEnd";
+	end;
+
+OnStop:
+	stopnpctimer;
+	end;
+	
+OnMatchEnd:
+	stopnpctimer;
+	disablenpc "Team1_Flag";
+	disablenpc "Team2_Flag";
+	donpcevent "Battle Therapist#ctf00_a::OnBGStop";
+	donpcevent "Battle Therapist#ctf00_b::OnBGStop";
+	set $@BG_Status_CTF, 2;
+	
+	// =======================================================
+	// Team Rewards
+	// =======================================================
+	if ($@BG_CTF_Guill_Score || $@BG_CTF_Croix_Score) {
+		if ($@BG_CTF_Guill_Score > $@BG_CTF_Croix_Score) {
+			set $@BG_CTF__Victory,1;
+		} else if ($@BG_CTF_Croix_Score > $@BG_CTF_Guill_Score) {
+			set $@BG_CTF__Victory,2;
+		} else {
+			set $@BG_CTF__Victory,3;
+		}
+	}
+	bg_warp $@BG_CTF_Team1,"ctf00",42,3;
+	bg_warp $@BG_CTF_Team2,"ctf00",55,3;
+	
+	sleep 1000;
+	mapannounce "ctf00","Meijing: Reclama tus recompensas, tienes 15 segundos!!",1,0x00FF00;
+	enablenpc "Vintenar#ctf";
+	donpcevent "time#ctf00::OnStop";
+	
+	sleep 15000;
+	donpcevent "Flavius_CTF::OnStop";
+	if (getbattleflag("feature.bgqueue"))
+		bg_reserve "ctf00", true;
+	$@BG_Status_CTF = 0;
+	if( $@BG_CTF_Team1 ) { bg_destroy $@BG_CTF_Team1; $@BG_CTF_Team1 = 0; }
+	if( $@BG_CTF_Team2 ) { bg_destroy $@BG_CTF_Team2; $@BG_CTF_Team2 = 0; }
+	if (getbattleflag("feature.bgqueue"))
+		bg_unbook "ctf00";
+	disablenpc "Vintenar#ctf";
+	mapwarp "ctf00","prontera",155,181;
+	end;
+}
+
+ctf00,49,7,4	script	Vintenar#ctf	419,{
+	if (getcharid(4) == $@BG_CTF_Team1) {
+		if ($@BG_CTF__Victory == 1)
+			callfunc "F_BG_Badge",1,"Guillaume","CTF";
+		else
+			callfunc "F_BG_Badge",0,"Guillaume","CTF";
+	}
+	else if(getcharid(4) == $@BG_CTF_Team2) {
+		if ($@BG_CTF__Victory == 2)
+			callfunc "F_BG_Badge",1,"Croix","CTF";
+		else
+			callfunc "F_BG_Badge",0,"Croix","CTF";
+	}
+	bg_leave;
+	end;
+
+OnInit:
+	disablenpc "Vintenar#ctf";
+	end;
+}
+
+bat_room,2,151,3	script	#ctf00_timer	844,{
+	end;
+
+OnInit:
+	if (getbattleflag("feature.bgqueue"))
+		end;
+OnEnable:
+	initnpctimer;
+	end;
+
+OnStop:
+	stopnpctimer;
+	end;
+
+OnTimer1000:
+	stopnpctimer;
+	if (bg_get_data($@BG_CTF_Team1, 0) == 0 && bg_get_data($@BG_CTF_Team2, 0) == 0) {
+		donpcevent "Flavius_CTF::OnStop";
+		if (getbattleflag("feature.bgqueue"))
+			bg_reserve "ctf00", true;
+		$@BG_Status_CTF = 0;
+		if( $@BG_CTF_Team1 ) { bg_destroy $@BG_CTF_Team1; $@BG_CTF_Team1 = 0; }
+		if( $@BG_CTF_Team2 ) { bg_destroy $@BG_CTF_Team2; $@BG_CTF_Team2 = 0; }
+		if (getbattleflag("feature.bgqueue"))
+			bg_unbook "ctf00";
+		end;
+	}
+	initnpctimer;
+	end;
+}
+
+ctf00,1,1,1	script	time#ctf00	844,{
+OnEnable:
+	donpcevent "Battle Therapist#ctf00_a::OnBGStart";
+	donpcevent "Battle Therapist#ctf00_b::OnBGStart";
+	end;
+
+OnStop:
+	donpcevent "Battle Therapist#ctf00_a::OnBGStop";
+	donpcevent "Battle Therapist#ctf00_b::OnBGStop";
+	end;
+}
+
+// Battleground Therapist
+// *********************************************************************
+
+ctf00,42,2,5	script	Battle Therapist#ctf00_a	4_F_SISTER,10,10,{
+	sc_start 32, 600000, 10;  // Increase Agi
+	sc_start 30, 600000, 10; // Blessing
+	percentheal 100,100;
+	repairall;
+	sc_end SC_BERSERK;
+	sc_end SC_STRIPWEAPON;
+	sc_end SC_STRIPSHIELD;
+	sc_end SC_STRIPARMOR;
+	sc_end SC_STRIPHELM;
+	setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
+	specialeffect2 EF_HEAL;
+	end;
+
+OnInit:
+	setwall "ctf00",50,2,6,0,0,"ctf_wall2";
+	end;
+
+OnBGStart:
+	initnpctimer;
+	enablenpc "Battle Therapist#ctf00_a";
+	end;
+
+OnBGStop:
+	disablenpc "Battle Therapist#ctf00_a";
+	stopnpctimer;
+	end;
+
+OnTimer24000:
+	specialeffect EF_SANCTUARY;
+	end;
+
+OnTimer25000:
+	areapercentheal "ctf00",42,2,55,7,100,100;
+	areawarp "ctf00",42,2,47,7,"ctf00",2,40;
+	initnpctimer;
+	end;
+}
+
+ctf00,55,2,3	script	Battle Therapist#ctf00_b	4_F_SISTER,10,10,{
+	sc_start 32, 600000, 10;  // Increase Agi
+	sc_start 30, 600000, 10; // Blessing
+	percentheal 100,100;
+	repairall;
+	sc_end SC_BERSERK;
+	sc_end SC_STRIPWEAPON;
+	sc_end SC_STRIPSHIELD;
+	sc_end SC_STRIPARMOR;
+	sc_end SC_STRIPHELM;
+	setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
+	specialeffect2 EF_HEAL;
+	end;
+
+OnInit:
+	setwall "ctf00",47,2,6,0,0,"ctf_wall1";
+	end;
+
+OnBGStart:
+	initnpctimer;
+	enablenpc "Battle Therapist#ctf00_b";
+	end;
+
+OnBGStop:
+	disablenpc "Battle Therapist#ctf00_b";
+	stopnpctimer;
+	end;
+
+OnTimer24000:
+	specialeffect EF_SANCTUARY;
+	end;
+
+OnTimer25000:
+	areapercentheal "ctf00",42,2,55,7,100,100;
+	areawarp "ctf00",50,2,55,7,"ctf00",95,40;
+	initnpctimer;
+	end;
+
+}
+
+// ==============================================================================
+// BattleGround System - Flavius Capture the Flag
+// ==============================================================================
+
+// Battleground Flags
+// *********************************************************************
+-	script	Flavius_CTF_FLAG	FAKE_NPC,{
+	end;
+	
+OnAlphaFlash:
+	if (getvariableofnpc(.Flag_Carrier,"Team1_Flag") == getcharid(0) && $@BG_Status_CTF == 1)
+	{
+		getmapxy .@m$, .@x, .@y, BL_PC;
+		viewpointmap .@m$, 1, .@x, .@y, 1, 0x0000FF;
+		specialeffect 73;
+		emotion ET_HELP,getcharid(3);
+		percentheal -5,-5;
+		addtimer 2100, "Flavius_CTF_FLAG::OnAlphaFlash";
+	}
+	end;
+
+OnOmegaFlash:
+	if (getvariableofnpc(.Flag_Carrier,"Team2_Flag") == getcharid(0) && $@BG_Status_CTF == 1)
+	{
+		getmapxy .@m$, .@x, .@y, BL_PC;
+		viewpointmap .@m$, 1, .@x, .@y, 2, 0xFF0000;
+		specialeffect 73;
+		emotion ET_HELP,getcharid(3);
+		percentheal -5,-5;
+		addtimer 2100, "Flavius_CTF_FLAG::OnOmegaFlash";
+	}
+	end;
+}
+
+ctf00,5,40,0	script	Alpha Crystal::Team1_Flag	1914,1,1,{
+	end;
+
+OnTouch:
+	if ($@BG_Status_CTF != 1 || Hp < 1)
+		end;
+
+	// Flag Captured
+	if ((getcharid(4) == $@BG_Team2 || getcharid(4) == $@BG_CTF_Team2) && .Flag_Status < 2) {
+		set .Flag_Status, 2; // Taken
+		set .Flag_Carrier, getcharid(0);
+
+		sc_end SC_HIDING;
+		sc_end SC_CLOAKING;
+		sc_end SC_CHASEWALK;
+		// Renewal invisibility
+		sc_end SC_CLOAKINGEXCEED;
+		sc_end SC_CAMOUFLAGE;
+		sc_end SC__INVISIBILITY;
+
+		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
+
+		mapannounce "ctf00","Meijing: Alpha Crystal ha sido robado por [ " + strcharinfo(0) + " ]",1,0x0000FF;
+
+		disablenpc "Team1_Flag";
+		addtimer 2100, "Flavius_CTF_FLAG::OnAlphaFlash";
+		stopnpctimer;
+	} else if (getcharid(4) == $@BG_Team1 || getcharid(4) == $@BG_CTF_Team1) {
+		if (.Flag_Status == 0 && getvariableofnpc(.Flag_Carrier,"Team2_Flag") == getcharid(0)) {
+			set getvariableofnpc(.Flag_Carrier,"Team2_Flag"),0;
+			set .Flag_Carrier, 0;
+			mapannounce "ctf00","Meijing: Omega Crystal ha sido capturado por [ " + strcharinfo(0) + " ]!!",1,0xFF0000;
+			setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
+			stopnpctimer;
+			donpcevent "Flavius_CTF::OnTeam1Score";
+		} else if (.Flag_Status == 1) {
+			mapannounce "ctf00","Meijing: Alpha Crystal ha sido regresado por [ " + strcharinfo(0) + " ]!!",1,0x0000FF;
+			disablenpc "Team1_Flag";
+			sleep 2100;
+			movenpc "Team1_Flag",5,40; // Back to Base
+			set .Flag_Status, 0;
+			initnpctimer;
+			enablenpc "Team1_Flag";
+		}
+	}
+	end;
+
+OnTimer2000:
+	stopnpctimer;
+	if (.Flag_Status < 2) {
+		getmapxy .@m$, .@x, .@y, BL_NPC;
+		viewpointmap "ctf00",1, .@x, .@y, 1, 0x0000FF;
+		specialeffect 223;
+		initnpctimer;
+	}
+	end;
+
+OnBase:
+	movenpc "Team1_Flag",5,40;
+	set .Flag_Status, 0;
+	set .Flag_Carrier, 0;
+	initnpctimer;
+	enablenpc "Team1_Flag";
+	end;
+
+OnInit:
+	//setunitdata getnpcid(0), UNPC_GROUPID, 100;
+	end;
+}
+
+ctf00,92,40,0	script	Omega Crystal::Team2_Flag	1915,1,1,{
+	end;
+
+OnTouch:
+	if (getbattleflag("bg_queue_interface") && ($@BG_Status_CTF != 1 || Hp < 1))
+		end;
+
+	// Flag Captured
+	if (getcharid(4) == $@BG_CTF_Team1 && .Flag_Status < 2) {
+		set .Flag_Status, 2; // Taken
+		set .Flag_Carrier, getcharid(0);
+
+		sc_end SC_HIDING;
+		sc_end SC_CLOAKING;
+		sc_end SC_CHASEWALK;
+		// Renewal invisibility
+		sc_end SC_CLOAKINGEXCEED;
+		sc_end SC_CAMOUFLAGE;
+		sc_end SC__INVISIBILITY;
+
+		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
+
+		mapannounce "ctf00","Meijing: Omega Crystal ha sido robado por [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		disablenpc "Team2_Flag";
+		addtimer 2100, "Flavius_CTF_FLAG::OnOmegaFlash";
+		stopnpctimer;
+	} else if (getcharid(4) == $@BG_Team2 || getcharid(4) == $@BG_CTF_Team2) {
+		if (.Flag_Status == 0 && getvariableofnpc(.Flag_Carrier,"Team1_Flag") == getcharid(0)) {
+			set getvariableofnpc(.Flag_Carrier,"Team1_Flag"),0;
+			set .Flag_Carrier, 0;
+			mapannounce "ctf00","Meijing: Alpha Crystal ha sido capturado por [ " + strcharinfo(0) + " ]!!",1,0x0000FF;
+			setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
+			stopnpctimer;
+			donpcevent "Flavius_CTF::OnTeam2Score";
+		} else if (.Flag_Status == 1) {
+			mapannounce "ctf00","Meijing: Omega Crystal ha sido regresado por [ " + strcharinfo(0) + " ]!!",1,0xFF0000;
+			disablenpc "Team2_Flag";
+			sleep 2100;
+			movenpc "Team2_Flag",92,40; // Back to Base
+			set .Flag_Status, 0;
+			initnpctimer;
+			enablenpc "Team2_Flag";
+		}
+	}
+	end;
+
+OnTimer2000:
+	stopnpctimer;
+	if (.Flag_Status < 2) {
+		getmapxy .@m$, .@x, .@y, BL_NPC;
+		viewpointmap "ctf00",1, .@x, .@y, 2, 0xFF0000;
+		specialeffect 223;
+		initnpctimer;
+	}
+	end;
+
+OnBase:
+	movenpc "Team2_Flag",92,40;
+	set .Flag_Status, 0;
+	set .Flag_Carrier, 0;
+	initnpctimer;
+	enablenpc "Team2_Flag";
+	end;
+
+OnInit:
+	//setunitdata getnpcid(0), UNPC_GROUPID, 101;
+	end;
+}
+
+// Flags
+// *********************************************************************
+
+ctf00,43,6,1	duplicate(Base Flag#bg)	Alpha Base#bat23	1_FLAG_LION
+ctf00,3,62,1	duplicate(Base Flag#bg)	Alpha Base#bat24	1_FLAG_LION
+ctf00,24,62,1	duplicate(Base Flag#bg)	Alpha Base#bat25	1_FLAG_LION
+ctf00,24,17,1	duplicate(Base Flag#bg)	Alpha Base#bat26	1_FLAG_LION
+//ctf00,3,40,1	duplicate(Base Flag#bg)	Alpha Base#bat27	1_FLAG_LION
+ctf00,3,17,1	duplicate(Base Flag#bg)	Alpha Base#bat28	1_FLAG_LION
+//ctf00,335,142,1	duplicate(Base Flag#bg)	Alpha Base#bat29	1_FLAG_LION
+//ctf00,335,157,1	duplicate(Base Flag#bg)	Alpha Base#bat30	1_FLAG_LION
+//ctf00,390,16,1	duplicate(Base Flag#bg)	Alpha Base#bat31	1_FLAG_LION
+//ctf00,292,163,1	duplicate(Base Flag#bg)	Alpha Base#bat32	1_FLAG_LION
+//ctf00,292,136,1	duplicate(Base Flag#bg)	Alpha Base#bat33	1_FLAG_LION
+//ctf00,241,185,1	duplicate(Base Flag#bg)	Alpha Base#bat34	1_FLAG_LION
+//ctf00,247,179,1	duplicate(Base Flag#bg)	Alpha Base#bat35	1_FLAG_LION
+
+ctf00,54,6,1	duplicate(Base Flag#bg)	Omega Base#bat22	1_FLAG_EAGLE
+ctf00,94,62,1	duplicate(Base Flag#bg)	Omega Base#bat23	1_FLAG_EAGLE
+ctf00,73,62,1	duplicate(Base Flag#bg)	Omega Base#bat24	1_FLAG_EAGLE
+ctf00,73,17,1	duplicate(Base Flag#bg)	Omega Base#bat25	1_FLAG_EAGLE
+//ctf00,89,40,1	duplicate(Base Flag#bg)	Omega Base#bat26	1_FLAG_EAGLE
+ctf00,94,17,1	duplicate(Base Flag#bg)	Omega Base#bat27	1_FLAG_EAGLE
+//ctf00,59,164,1	duplicate(Base Flag#bg)	Omega Base#bat28	1_FLAG_EAGLE
+//ctf00,59,137,1	duplicate(Base Flag#bg)	Omega Base#bat29	1_FLAG_EAGLE
+//ctf00,10,296,1	duplicate(Base Flag#bg)	Omega Base#bat30	1_FLAG_EAGLE
+//ctf00,110,162,1	duplicate(Base Flag#bg)	Omega Base#bat31	1_FLAG_EAGLE
+//ctf00,110,137,1	duplicate(Base Flag#bg)	Omega Base#bat32	1_FLAG_EAGLE
+//ctf00,152,120,1	duplicate(Base Flag#bg)	Omega Base#bat33	1_FLAG_EAGLE
+//ctf00,158,114,1	duplicate(Base Flag#bg)	Omega Base#bat34	1_FLAG_EAGLE
+
+// MapFlags
+// *********************************************************************
+
+ctf00	mapflag	battleground	2
+ctf00	mapflag	nomemo
+ctf00	mapflag	nosave	SavePoint
+ctf00	mapflag	noteleport
+ctf00	mapflag	nowarp
+ctf00	mapflag	nowarpto
+ctf00	mapflag	noreturn
+ctf00	mapflag	nobranch
+ctf00	mapflag	nopenalty
+ctf00	mapflag	bg_consume

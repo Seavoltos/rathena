@@ -2083,7 +2083,7 @@ int map_quit(map_session_data *sd) {
 		npc_event_dequeue(sd);
 
 	if (sd->bg_id)
-		bg_team_leave(sd, true, true);
+		bg_team_leave(sd, true, true, 1);
 
 	if (sd->bg_queue_id > 0)
 		bg_queue_leave(sd, false);

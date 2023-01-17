@@ -230,6 +230,7 @@ enum send_target : uint8_t {
 	BG_SAMEMAP_WOS,
 	BG_AREA,
 	BG_AREA_WOS,
+	BG_LISTEN,
 
 	CLAN,				// Clan System
 };
