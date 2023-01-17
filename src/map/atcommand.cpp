@@ -2047,9 +2047,9 @@ ACMD_FUNC(go)
 		{ MAP_NIFLHEIM,     21, 153 }, // 13=Niflheim
 		{ MAP_LOUYANG,     217,  40 }, // 14=Louyang
 #ifdef RENEWAL
-		{ MAP_NOVICE,       18, 26  }, // 15=Training Grounds (Renewal)
+		{ MAP_NOVICE,       18,  26 }, // 15=Training Grounds (Renewal)
 #else
-		{ MAP_NOVICE,       53, 111 }, // 15=Training Grounds
+		{ MAP_NOVICE,       40,  29 }, // 15=Training Grounds
 #endif
 		{ MAP_JAIL,         23,  61 }, // 16=Prison
 		{ MAP_JAWAII,      249, 127 }, // 17=Jawaii
@@ -2072,6 +2072,8 @@ ACMD_FUNC(go)
 		{ MAP_MALAYA,      242, 211 }, // 34=Malaya Port
 		{ MAP_ECLAGE,      110,  39 }, // 35=Eclage
 		{ MAP_LASAGNA,     193, 182 }, // 36=Lasagna
+		{ MAP_BATT_OFF,     91,  39 }, // 37=Battle Office
+		{ MAP_MARKET,       99,  99 }, // 38=Market
 	};
 
 	nullpo_retr(-1, sd);
@@ -2193,6 +2195,10 @@ ACMD_FUNC(go)
 		town = 35;
 	} else if (strncmp(map_name, "lasagna", 2) == 0) {
 		town = 36;
+	} else if (strncmp(map_name, "battle office", 3) == 0) {
+		town = 37;
+	} else if (strncmp(map_name, "market", 2) == 0) {
+		town = 38;
 	}
 
 	if (town >= 0 && town < ARRAYLENGTH(data))

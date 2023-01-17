@@ -158,22 +158,17 @@ ACMD_FUNC(reportafk)
 		if( !bg )
 			return -1;
 
-		bg_team_leave(pl_sd, false, true, 2);
 		clif_displaymessage(pl_sd->fd, "You have been kicked from Battleground because of your AFK status.");
-		uint16 mapindex = mapindex_name2id( pl_sd->status.save_point.map );
-		pc_setpos( pl_sd, mapindex, pl_sd->status.save_point.x, pl_sd->status.save_point.y, CLR_TELEPORT );
-		clif_refresh(pl_sd);
-
 		sprintf(atcmd_output, "- AFK [%s] Kicked -", pl_sd->status.name);
 		
 		const char *fontColor = "0x6FA8DC";
-		int         fontType = 0x190; // default fontType (FW_NORMAL)
-		int         fontSize = 12;    // default fontSize
-		int         fontAlign = 0;     // default fontAlign
-		int         fontY = 0;     // default fontY
+		int         fontType = 0x190; 	// default fontType (FW_NORMAL)
+		int         fontSize = 12;    	// default fontSize
+		int         fontAlign = 0;     	// default fontAlign
+		int         fontY = 0;     		// default fontY
 
 		clif_broadcast2(NULL, atcmd_output , (int)strlen(atcmd_output) + 1, strtol(fontColor, (char **)NULL, 0), fontType, fontSize, fontAlign, fontY, BG_LISTEN);
-		
+		bg_team_leave(pl_sd, true, true, 2);
 		return 0;
 	}
 	return -1;
