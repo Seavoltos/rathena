@@ -1344,3 +1344,6 @@ pirate_in
 3@zod
 4@zod
 2@ds
+poring_s01
+poring_s02
+poring_s03
