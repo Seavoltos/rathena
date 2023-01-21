@@ -6788,6 +6788,12 @@
 	export_constant(IG_MF_NOTELEPORT);
 	export_constant(IG_MF_NORETURN);
 	export_constant(IG_GIANT_FLY_WING);
+	export_constant(IG_CLASS_SHADOW_WP_CUBE);
+	export_constant(IG_CLASS_SHADOW_AM_CUBE);
+	export_constant(IG_CLASS_SHADOW_SU_CUBE);
+	export_constant(IG_CLASS_SHADOW_SD_CUBE);
+	export_constant(IG_CLASS_SHADOW_PD_CUBE);
+	export_constant(IG_CLASS_SHADOW_EA_CUBE);
 
 	/* Custom box */
 	export_constant(IG_Box_99_70);
