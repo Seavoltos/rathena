@@ -2151,7 +2151,7 @@ int npc_globalmessage(const char* name, const char* mes)
 // MvP tomb [GreenBox]
 void run_tomb(map_session_data* sd, struct npc_data* nd)
 {
-	char buffer[200];
+	char buffer[300];
 	char time[10];
 
 	strftime(time, sizeof(time), "%H:%M", localtime(&nd->u.tomb.kill_time));
@@ -2165,10 +2165,25 @@ void run_tomb(map_session_data* sd, struct npc_data* nd)
 	snprintf( buffer, sizeof( buffer ), msg_txt( sd, 659 ), time ); // Time of death : ^EE0000%s^000000
 	clif_scriptmes( *sd, nd->bl.id, buffer );
 
-	clif_scriptmes( *sd, nd->bl.id, msg_txt( sd, 660 ) ); // Defeated by
+	snprintf(buffer, sizeof(buffer), msg_txt(sd, 660), nd->u.tomb.killer_name[0] ? nd->u.tomb.killer_name : "Unknown");
+	clif_scriptmes(*sd, nd->bl.id, buffer);
 
-	snprintf( buffer, sizeof( buffer ), msg_txt( sd, 661 ), nd->u.tomb.killer_name[0] ? nd->u.tomb.killer_name : "Unknown" ); // [^EE0000%s^000000]
+	clif_scriptmes(*sd, nd->bl.id, msg_txt(sd, 2550));
+
+	snprintf(buffer, sizeof(buffer), msg_txt(sd, 2551), nd->u.tomb.killer_name[0] ? nd->u.tomb.killer_name : "[Server]", std::to_string(nd->u.tomb.damage1).c_str());
 	clif_scriptmes( *sd, nd->bl.id, buffer );
+
+	if (nd->u.tomb.damage2 != NULL)
+	{
+		snprintf(buffer, sizeof(buffer), msg_txt(sd, 2552), nd->u.tomb.p2, std::to_string(nd->u.tomb.damage2).c_str());
+		clif_scriptmes(*sd, nd->bl.id, buffer);
+	}
+
+	if (nd->u.tomb.damage3 != NULL)
+	{
+		snprintf(buffer, sizeof(buffer), msg_txt(sd, 2553), nd->u.tomb.p3, std::to_string(nd->u.tomb.damage3).c_str());
+		clif_scriptmes(*sd, nd->bl.id, buffer);
+	}
 
 	clif_scriptclose(sd, nd->bl.id);
 }
