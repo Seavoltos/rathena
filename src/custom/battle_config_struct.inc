@@ -31,3 +31,17 @@
 	int item_zeny;
 	int item_cash;
 	int feature_attendance_close;
+	// MvP, Mini-Boss and Normal Card Ad and Log System [Bad]
+	int announcement_and_log_system;
+	int normal_card_announce_system;
+	int normal_card_announce;
+	int dropped_normal_card_log;
+	int set_normal_announce_color;
+	int mvp_card_announce_system;
+	int mvp_card_announce;
+	int dropped_mvp_card_log;
+	int set_mvp_announce_color;
+	int mini_boss_card_announce_system;
+	int mini_boss_card_announce;
+	int dropped_mini_boss_card_log;
+	int set_mini_boss_announce_color;
