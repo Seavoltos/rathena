@@ -286,6 +286,11 @@ struct quest {
 	e_quest_state state;             ///< Current quest state
 };
 
+enum bound_achievement {
+	PLAYER,    ///< Player achievement bound
+	ACCOUNT,   ///< Account achievement bound
+};
+
 /// Achievement log entry
 struct achievement {
 	int achievement_id;                    ///< Achievement ID
@@ -293,6 +298,7 @@ struct achievement {
 	time_t completed;                      ///< Date completed
 	time_t rewarded;                       ///< Received reward?
 	int score;                             ///< Amount of points achievement is worth
+	enum bound_achievement bound;          ///< Bound of achievement: 'Account' or 'Char'
 };
 
 // NetBSD 5 and Solaris don't like pragma pack but accept the packed attribute

@@ -42,7 +42,7 @@ struct achievement *mapif_achievements_fromsql(uint32 char_id, int *count)
 	StringBuf_AppendStr(&buf, "SELECT `id`, COALESCE(UNIX_TIMESTAMP(`completed`),0), COALESCE(UNIX_TIMESTAMP(`rewarded`),0)");
 	for (i = 0; i < MAX_ACHIEVEMENT_OBJECTIVES; ++i)
 		StringBuf_Printf(&buf, ", `count%d`", i + 1);
-	StringBuf_Printf(&buf, " FROM `%s` WHERE `char_id` = '%u'", schema_config.achievement_table, char_id);
+	StringBuf_Printf(&buf, " FROM `%s` WHERE `char_id` = '%u' OR (`char_id` = '0' AND `account_id` = (SELECT `account_id` FROM `char` WHERE `char_id` = '%u'))", schema_config.achievement_table, char_id, char_id);
 
 	stmt = SqlStmt_Malloc(sql_handle);
 	if( SQL_ERROR == SqlStmt_PrepareStr(stmt, StringBuf_Value(&buf))
@@ -110,6 +110,7 @@ bool mapif_achievement_delete(uint32 char_id, int achievement_id)
  */
 bool mapif_achievement_add(uint32 char_id, struct achievement* ad)
 {
+	enum bound_achievement bound = ad->bound;
 	StringBuf buf;
 	int i;
 
@@ -121,11 +122,15 @@ bool mapif_achievement_add(uint32 char_id, struct achievement* ad)
 	}
 
 	StringBuf_Init(&buf);
-	StringBuf_Printf(&buf, "INSERT INTO `%s` (`char_id`, `id`, `completed`, `rewarded`", schema_config.achievement_table);
+	StringBuf_Printf(&buf, "INSERT INTO `%s` (`char_id`, `account_id`, `id`, `completed`, `rewarded`", schema_config.achievement_table);
 	for (i = 0; i < MAX_ACHIEVEMENT_OBJECTIVES; ++i)
 		StringBuf_Printf(&buf, ", `count%d`", i + 1);
 	StringBuf_AppendStr(&buf, ")");
-	StringBuf_Printf(&buf, " VALUES ('%u', '%d',", char_id, ad->achievement_id, (uint32)ad->completed, (uint32)ad->rewarded);
+	if (bound == ACCOUNT)
+		StringBuf_Printf(&buf, " VALUES ('0', (SELECT `account_id` FROM `char` WHERE `char_id` = '%u'), '%d',", char_id, ad->achievement_id, (uint32)ad->completed, (uint32)ad->rewarded);
+	else
+		StringBuf_Printf(&buf, " VALUES ('%u', '0','%d',", char_id, ad->achievement_id, (uint32)ad->completed, (uint32)ad->rewarded);
+
 	if( ad->completed ){
 		StringBuf_Printf(&buf, "FROM_UNIXTIME('%u'),", (uint32)ad->completed);
 	}else{
@@ -309,7 +314,7 @@ int mapif_parse_achievement_reward(int fd){
 	uint32 char_id = RFIFOL(fd, 2);
 	int32 achievement_id = RFIFOL(fd, 6);
 
-	if( Sql_Query( sql_handle, "UPDATE `%s` SET `rewarded` = FROM_UNIXTIME('%u') WHERE `char_id`='%u' AND `id` = '%d' AND `completed` IS NOT NULL AND `rewarded` IS NULL", schema_config.achievement_table, (uint32)current, char_id, achievement_id ) == SQL_ERROR ||
+	if( Sql_Query( sql_handle, "UPDATE `%s` SET `rewarded` = FROM_UNIXTIME('%u') WHERE (`char_id`='%u' OR `account_id` = (SELECT `account_id` FROM `char` WHERE `char_id` = '%u')) AND `id` = '%d' AND `completed` IS NOT NULL AND `rewarded` IS NULL", schema_config.achievement_table, (uint32)current, char_id, char_id, achievement_id ) == SQL_ERROR ||
 		Sql_NumRowsAffected(sql_handle) <= 0 ){
 		current = 0;
 	}else if( RFIFOW(fd,10) > 0 ){ // Do not send a mail if no item reward

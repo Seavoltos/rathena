@@ -47,786 +47,917 @@ Header:
 
 Body:
   - Id: 120001
+    Bound: "Account"
     Group: Adventure
     Name: North Prontera Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120002
+    Bound: "Account"
     Group: Adventure
     Name: North Prontera Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120003
+    Bound: "Account"
     Group: Adventure
     Name: North Prontera Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120004
+    Bound: "Account"
     Group: Adventure
     Name: West Prontera Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120005
+    Bound: "Account"
     Group: Adventure
     Name: West Prontera Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120006
+    Bound: "Account"
     Group: Adventure
     Name: East Prontera Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120007
+    Bound: "Account"
     Group: Adventure
     Name: South Prontera Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120008
+    Bound: "Account"
     Group: Adventure
     Name: South Prontera Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120009
+    Bound: "Account"
     Group: Adventure
     Name: South Prontera Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120010
+    Bound: "Account"
     Group: Adventure
     Name: South Prontera Field Exploration(4)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120011
+    Bound: "Account"
     Group: Adventure
     Name: East Geffen Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120012
+    Bound: "Account"
     Group: Adventure
     Name: Southeast Geffen Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120013
+    Bound: "Account"
     Group: Adventure
     Name: Northwest Geffen Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120014
+    Bound: "Account"
     Group: Adventure
     Name: Northwest Geffen Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120015
+    Bound: "Account"
     Group: Adventure
     Name: Northwest Geffen Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120016
+    Bound: "Account"
     Group: Adventure
     Name: South Geffen Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120017
+    Bound: "Account"
     Group: Adventure
     Name: South Geffen Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120018
+    Bound: "Account"
     Group: Adventure
     Name: Sograt Desert Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120019
+    Bound: "Account"
     Group: Adventure
     Name: Sograt Desert Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120020
+    Bound: "Account"
     Group: Adventure
     Name: Sograt Desert Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120021
+    Bound: "Account"
     Group: Adventure
     Name: Sograt Desert Field Exploration(4)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120022
+    Bound: "Account"
     Group: Adventure
     Name: Sograt Desert Field Exploration(5)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120023
+    Bound: "Account"
     Group: Adventure
     Name: Sograt Desert Field Exploration(6)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120024
+    Bound: "Account"
     Group: Adventure
     Name: Southwest Payon Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120025
+    Bound: "Account"
     Group: Adventure
     Name: Southwest Payon Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120026
+    Bound: "Account"
     Group: Adventure
     Name: Southwest Payon Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120027
+    Bound: "Account"
     Group: Adventure
     Name: Southwest Payon Field Exploration(4)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120028
+    Bound: "Account"
     Group: Adventure
     Name: East Payon Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120029
+    Bound: "Account"
     Group: Adventure
     Name: East Payon Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120030
+    Bound: "Account"
     Group: Adventure
     Name: East Payon Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120031
+    Bound: "Account"
     Group: Adventure
     Name: East Payon Field Exploration(4)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120032
+    Bound: "Account"
     Group: Adventure
     Name: North Mjolnir Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120033
+    Bound: "Account"
     Group: Adventure
     Name: North Mjolnir Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120034
+    Bound: "Account"
     Group: Adventure
     Name: North Mjolnir Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120035
+    Bound: "Account"
     Group: Adventure
     Name: North Mjolnir Field Exploration(4)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120036
+    Bound: "Account"
     Group: Adventure
     Name: North Mjolnir Field Exploration(5)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120037
+    Bound: "Account"
     Group: Adventure
     Name: South Mjolnir Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120038
+    Bound: "Account"
     Group: Adventure
     Name: South Mjolnir Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120039
+    Bound: "Account"
     Group: Adventure
     Name: South Mjolnir Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120040
+    Bound: "Account"
     Group: Adventure
     Name: South Mjolnir Field Exploration(4)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120041
+    Bound: "Account"
     Group: Adventure
     Name: South Mjolnir Field Exploration(5)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120042
+    Bound: "Account"
     Group: Adventure
     Name: South Mjolnir Field Exploration(6)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120043
+    Bound: "Account"
     Group: Adventure
     Name: South Aldebaran Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120044
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120045
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120046
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120047
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Field Exploration(4)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120048
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Field Exploration(5)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120049
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Field Exploration(6)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120050
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Field Exploration(7)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120051
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Field Exploration(8)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120052
+    Bound: "Account"
     Group: Adventure
     Name: Border Checkpoint Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120053
+    Bound: "Account"
     Group: Adventure
     Name: Border Checkpoint Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120054
+    Bound: "Account"
     Group: Adventure
     Name: Kiel Hyre Mansion Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120055
+    Bound: "Account"
     Group: Adventure
     Name: El Mes Plateau Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120056
+    Bound: "Account"
     Group: Adventure
     Name: El Mes Plateau Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120057
+    Bound: "Account"
     Group: Adventure
     Name: El Mes Plateau Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120058
+    Bound: "Account"
     Group: Adventure
     Name: El Mes Gorge Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120059
+    Bound: "Account"
     Group: Adventure
     Name: Kiel Hyre Academy Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120060
+    Bound: "Account"
     Group: Adventure
     Name: Guard Camp Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120061
+    Bound: "Account"
     Group: Adventure
     Name: Juno Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120062
+    Bound: "Account"
     Group: Adventure
     Name: Front of Thanatos Tower Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120063
+    Bound: "Account"
     Group: Adventure
     Name: Hugel Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120064
+    Bound: "Account"
     Group: Adventure
     Name: Hugel Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120065
+    Bound: "Account"
     Group: Adventure
     Name: Hugel Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120066
+    Bound: "Account"
     Group: Adventure
     Name: Abyss Lake Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120067
+    Bound: "Account"
     Group: Adventure
     Name: Einbroch Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120068
+    Bound: "Account"
     Group: Adventure
     Name: Einbroch Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120069
+    Bound: "Account"
     Group: Adventure
     Name: Einbroch Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120070
+    Bound: "Account"
     Group: Adventure
     Name: Einbroch Field Exploration(4)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120071
+    Bound: "Account"
     Group: Adventure
     Name: Einbroch Field Exploration(5)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120072
+    Bound: "Account"
     Group: Adventure
     Name: Einbroch Field Exploration(6)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120073
+    Bound: "Account"
     Group: Adventure
     Name: Einbroch Field Exploration(7)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120074
+    Bound: "Account"
     Group: Adventure
     Name: Einbroch Field Exploration(8)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120075
+    Bound: "Account"
     Group: Adventure
     Name: Lighthalzen Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120076
+    Bound: "Account"
     Group: Adventure
     Name: Lighthalzen Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120077
+    Bound: "Account"
     Group: Adventure
     Name: Lighthalzen Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120078
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Audhumbla Plains Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120079
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Plains Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120080
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Plains Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120081
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Plains Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120082
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Audhumbla Grassland Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120083
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Audhumbla Grassland Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120084
+    Bound: "Account"
     Group: Adventure
     Name: Portus Luna Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120085
+    Bound: "Account"
     Group: Adventure
     Name: Veins Field Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120086
+    Bound: "Account"
     Group: Adventure
     Name: Veins Field Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120087
+    Bound: "Account"
     Group: Adventure
     Name: Veins Field Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120088
+    Bound: "Account"
     Group: Adventure
     Name: Veins Field Exploration(4)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120089
+    Bound: "Account"
     Group: Adventure
     Name: Veins Field Exploration(5)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120101
+    Bound: "Account"
     Group: Adventure
     Name: Amatsu Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120102
+    Bound: "Account"
     Group: Adventure
     Name: Kunlun Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120103
+    Bound: "Account"
     Group: Adventure
     Name: Kunlun Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120104
+    Bound: "Account"
     Group: Adventure
     Name: Ayothaya Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120105
+    Bound: "Account"
     Group: Adventure
     Name: Moscovia Field Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120110
+    Bound: "Account"
     Group: Adventure
     Name: Abbey Underground Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120111
+    Bound: "Account"
     Group: Adventure
     Name: Abyss Lake Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120112
+    Bound: "Account"
     Group: Adventure
     Name: Clock Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120113
+    Bound: "Account"
     Group: Adventure
     Name: Amatsu Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120114
+    Bound: "Account"
     Group: Adventure
     Name: Ant Hell Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120115
+    Bound: "Account"
     Group: Adventure
     Name: Ayothaya Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120116
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120117
+    Bound: "Account"
     Group: Adventure
     Name: Brasilis Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120118
+    Bound: "Account"
     Group: Adventure
     Name: Clock Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120119
+    Bound: "Account"
     Group: Adventure
     Name: Istana Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120120
+    Bound: "Account"
     Group: Adventure
     Name: Scaraba Hole Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120121
+    Bound: "Account"
     Group: Adventure
     Name: Bitfrost Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120122
+    Bound: "Account"
     Group: Adventure
     Name: Einbroch Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120123
+    Bound: "Account"
     Group: Adventure
     Name: Geffen Underground Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120124
+    Bound: "Account"
     Group: Adventure
     Name: Glastheim Dungeon Exploration(1)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120125
+    Bound: "Account"
     Group: Adventure
     Name: Glastheim Dungeon Exploration(2)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120126
+    Bound: "Account"
     Group: Adventure
     Name: Glastheim Dungeon Exploration(3)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120127
+    Bound: "Account"
     Group: Adventure
     Name: Glastheim Dungeon Exploration(4)
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120128
+    Bound: "Account"
     Group: Adventure
     Name: Kunlun Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120129
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120130
+    Bound: "Account"
     Group: Adventure
     Name: Sphinx Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120131
+    Bound: "Account"
     Group: Adventure
     Name: Izlude Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120132
+    Bound: "Account"
     Group: Adventure
     Name: Robot Factory Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120133
+    Bound: "Account"
     Group: Adventure
     Name: Bio Lab Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120134
+    Bound: "Account"
     Group: Adventure
     Name: Kunlun Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120135
+    Bound: "Account"
     Group: Adventure
     Name: Nogg Road Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120136
+    Bound: "Account"
     Group: Adventure
     Name: Coal Mine Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120137
+    Bound: "Account"
     Group: Adventure
     Name: Pyramid Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120138
+    Bound: "Account"
     Group: Adventure
     Name: Orc Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120139
+    Bound: "Account"
     Group: Adventure
     Name: Payon Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120140
+    Bound: "Account"
     Group: Adventure
     Name: Labyrinth Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120141
+    Bound: "Account"
     Group: Adventure
     Name: Undersea Tunnel Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120142
+    Bound: "Account"
     Group: Adventure
     Name: Thanatos Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120143
+    Bound: "Account"
     Group: Adventure
     Name: Thor Volcano Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120144
+    Bound: "Account"
     Group: Adventure
     Name: Sunken Ship Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120145
+    Bound: "Account"
     Group: Adventure
     Name: Turtle Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 120146
+    Bound: "Account"
     Group: Adventure
     Name: Toy Factory Dungeon Exploration
     Rewards:
@@ -856,6 +987,7 @@ Body:
         Count: 50
     Score: 50
   - Id: 129001
+    Bound: "Account"
     Group: Adventure
     Name: Prontera Explorer
     Dependents:
@@ -873,6 +1005,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129002
+    Bound: "Account"
     Group: Adventure
     Name: Geffen Explorer
     Dependents:
@@ -887,6 +1020,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129003
+    Bound: "Account"
     Group: Adventure
     Name: Sograt Desert Explorer
     Dependents:
@@ -900,6 +1034,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129004
+    Bound: "Account"
     Group: Adventure
     Name: Payon Explorer
     Dependents:
@@ -915,6 +1050,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129005
+    Bound: "Account"
     Group: Adventure
     Name: North Mjolnir Explorer
     Dependents:
@@ -927,6 +1063,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129006
+    Bound: "Account"
     Group: Adventure
     Name: South Mjolnir Explorer
     Dependents:
@@ -941,6 +1078,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129007
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Explorer
     Dependents:
@@ -956,6 +1094,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129008
+    Bound: "Account"
     Group: Adventure
     Name: Rune-Midgarts Explorer
     Dependents:
@@ -970,6 +1109,7 @@ Body:
       Item: Old_Violet_Box
     Score: 20
   - Id: 129009
+    Bound: "Account"
     Group: Adventure
     Name: Juno Explorer
     Dependents:
@@ -987,6 +1127,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129010
+    Bound: "Account"
     Group: Adventure
     Name: Hugel Explorer
     Dependents:
@@ -999,6 +1140,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129011
+    Bound: "Account"
     Group: Adventure
     Name: Einbroch Explorer
     Dependents:
@@ -1014,6 +1156,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129012
+    Bound: "Account"
     Group: Adventure
     Name: Lighthalzen Explorer
     Dependents:
@@ -1024,6 +1167,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129013
+    Bound: "Account"
     Group: Adventure
     Name: Schwarzwald Explorer
     Dependents:
@@ -1035,6 +1179,7 @@ Body:
       Item: Old_Violet_Box
     Score: 20
   - Id: 129014
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Explorer
     Dependents:
@@ -1049,6 +1194,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129015
+    Bound: "Account"
     Group: Adventure
     Name: Veins Explorer
     Dependents:
@@ -1061,6 +1207,7 @@ Body:
       Item: Gift_Box
     Score: 10
   - Id: 129016
+    Bound: "Account"
     Group: Adventure
     Name: Arunafeltz Explorer
     Dependents:
@@ -1070,6 +1217,7 @@ Body:
       Item: Old_Violet_Box
     Score: 20
   - Id: 129020
+    Bound: "Account"
     Group: Adventure
     Name: Localizing fields explorer
     Dependents:
@@ -1189,13 +1337,6 @@ Body:
     Name: Maximum Luck
     Condition: " readparam(bLuk) >= 90 "
     Score: 10
-  - Id: 200023
-    Group: Goal_Status
-    Name: Dragonlike Power!
-    Condition: " readparam(bStr) >= 125 "
-    Rewards:
-      Script: " sc_start SC_GIANTGROWTH,180000,1; "
-    Score: 20
   - Id: 200031
     Group: Job_Change
     Name: Reborn in Valhalla!
@@ -1688,6 +1829,7 @@ Body:
     Condition: " true "
     Score: 10
   - Id: 240001
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 1
     Condition: " AchievementLevel >= 1 "
@@ -1696,6 +1838,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240002
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 2
     Condition: " AchievementLevel >= 2 "
@@ -1706,6 +1849,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240003
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 3
     Condition: " AchievementLevel >= 3 "
@@ -1716,6 +1860,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240004
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 4
     Condition: " AchievementLevel >= 4 "
@@ -1726,6 +1871,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240005
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 5
     Condition: " AchievementLevel >= 5 "
@@ -1736,6 +1882,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240006
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 6
     Condition: " AchievementLevel >= 6 "
@@ -1746,6 +1893,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240007
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 7
     Condition: " AchievementLevel >= 7 "
@@ -1756,6 +1904,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240008
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 8
     Condition: " AchievementLevel >= 8 "
@@ -1766,6 +1915,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240009
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 9
     Condition: " AchievementLevel >= 9 "
@@ -1776,6 +1926,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240010
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 10
     Condition: " AchievementLevel >= 10 "
@@ -1787,6 +1938,7 @@ Body:
       TitleId: 1023
     Score: 10
   - Id: 240011
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 11
     Condition: " AchievementLevel >= 11 "
@@ -1797,6 +1949,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240012
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 12
     Condition: " AchievementLevel >= 12 "
@@ -1807,6 +1960,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240013
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 13
     Condition: " AchievementLevel >= 13 "
@@ -1817,6 +1971,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240014
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 14
     Condition: " AchievementLevel >= 14 "
@@ -1827,6 +1982,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240015
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 15
     Condition: " AchievementLevel >= 15 "
@@ -1837,6 +1993,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240016
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 16
     Condition: " AchievementLevel >= 16 "
@@ -1847,6 +2004,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240017
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 17
     Condition: " AchievementLevel >= 17 "
@@ -1857,6 +2015,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240018
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 18
     Condition: " AchievementLevel >= 18 "
@@ -1867,6 +2026,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240019
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 19
     Condition: " AchievementLevel >= 19 "
@@ -1877,6 +2037,7 @@ Body:
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240020
+    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 20
     Condition: " AchievementLevel >= 20 "
@@ -1888,522 +2049,609 @@ Body:
       TitleId: 1024
     Score: 10
   - Id: 150000
+    Bound: "Account"
     Group: Adventure
     Name: Abbey Underground Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150001
+    Bound: "Account"
     Group: Adventure
     Name: Abbey Underground Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150002
+    Bound: "Account"
     Group: Adventure
     Name: Abyss Lake Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150003
+    Bound: "Account"
     Group: Adventure
     Name: Abyss Lake Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150004
+    Bound: "Account"
     Group: Adventure
     Name: Amatsu Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150005
+    Bound: "Account"
     Group: Adventure
     Name: Amatsu Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150006
+    Bound: "Account"
     Group: Adventure
     Name: Ant Hell Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150007
+    Bound: "Account"
     Group: Adventure
     Name: Ayothaya Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150008
+    Bound: "Account"
     Group: Adventure
     Name: Izlude Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150009
+    Bound: "Account"
     Group: Adventure
     Name: Izlude Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150010
+    Bound: "Account"
     Group: Adventure
     Name: Izlude Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150011
+    Bound: "Account"
     Group: Adventure
     Name: Izlude Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150012
+    Bound: "Account"
     Group: Adventure
     Name: Izlude Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150013
+    Bound: "Account"
     Group: Adventure
     Name: Clock Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150014
+    Bound: "Account"
     Group: Adventure
     Name: Clock Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150015
+    Bound: "Account"
     Group: Adventure
     Name: Clock Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150016
+    Bound: "Account"
     Group: Adventure
     Name: Clock Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150017
+    Bound: "Account"
     Group: Adventure
     Name: Clock Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150018
+    Bound: "Account"
     Group: Adventure
     Name: Clock Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150019
+    Bound: "Account"
     Group: Adventure
     Name: Coal Mine Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150020
+    Bound: "Account"
     Group: Adventure
     Name: Coal Mine Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150021
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150022
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150023
+    Bound: "Account"
     Group: Adventure
     Name: Einbroch Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150024
+    Bound: "Account"
     Group: Adventure
     Name: Geffen Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150025
+    Bound: "Account"
     Group: Adventure
     Name: Glastheim Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150026
+    Bound: "Account"
     Group: Adventure
     Name: Glastheim Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150027
+    Bound: "Account"
     Group: Adventure
     Name: Glastheim Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150028
+    Bound: "Account"
     Group: Adventure
     Name: Glastheim Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150029
+    Bound: "Account"
     Group: Adventure
     Name: Glastheim Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150029
+    Bound: "Account"
     Group: Adventure
     Name: Glastheim Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150030
+    Bound: "Account"
     Group: Adventure
     Name: Glastheim Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150031
+    Bound: "Account"
     Group: Adventure
     Name: Kunlun Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150032
+    Bound: "Account"
     Group: Adventure
     Name: Kunlun Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150033
+    Bound: "Account"
     Group: Adventure
     Name: Labyrinth Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150034
+    Bound: "Account"
     Group: Adventure
     Name: Labyrinth Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150035
+    Bound: "Account"
     Group: Adventure
     Name: Kunlun Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150036
+    Bound: "Account"
     Group: Adventure
     Name: Kunlun Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150037
+    Bound: "Account"
     Group: Adventure
     Name: Nogg Road Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150038
+    Bound: "Account"
     Group: Adventure
     Name: Orc Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150039
+    Bound: "Account"
     Group: Adventure
     Name: Payon Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150040
+    Bound: "Account"
     Group: Adventure
     Name: Payon Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150041
+    Bound: "Account"
     Group: Adventure
     Name: Payon Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150042
+    Bound: "Account"
     Group: Adventure
     Name: Payon Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150043
+    Bound: "Account"
     Group: Adventure
     Name: Izlude Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150044
+    Bound: "Account"
     Group: Adventure
     Name: Izlude Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150045
+    Bound: "Account"
     Group: Adventure
     Name: Izlude Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150046
+    Bound: "Account"
     Group: Adventure
     Name: Pyramid Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150047
+    Bound: "Account"
     Group: Adventure
     Name: Pyramid Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150048
+    Bound: "Account"
     Group: Adventure
     Name: Pyramid Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150049
+    Bound: "Account"
     Group: Adventure
     Name: Pyramid Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150050
+    Bound: "Account"
     Group: Adventure
     Name: Pyramid Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150051
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150052
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150053
+    Bound: "Account"
     Group: Adventure
     Name: Robot Factory Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150054
+    Bound: "Account"
     Group: Adventure
     Name: Bio Lab Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150055
+    Bound: "Account"
     Group: Adventure
     Name: Bio Lab Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150056
+    Bound: "Account"
     Group: Adventure
     Name: Sphinx Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150057
+    Bound: "Account"
     Group: Adventure
     Name: Sphinx Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150058
+    Bound: "Account"
     Group: Adventure
     Name: Sphinx Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150059
+    Bound: "Account"
     Group: Adventure
     Name: Sphinx Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150060
+    Bound: "Account"
     Group: Adventure
     Name: Sunken Ship Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150061
+    Bound: "Account"
     Group: Adventure
     Name: Thanatos Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150062
+    Bound: "Account"
     Group: Adventure
     Name: Thanatos Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150063
+    Bound: "Account"
     Group: Adventure
     Name: Thanatos Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150064
+    Bound: "Account"
     Group: Adventure
     Name: Thanatos Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150065
+    Bound: "Account"
     Group: Adventure
     Name: Thanatos Tower Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150066
+    Bound: "Account"
     Group: Adventure
     Name: Thor Volcano Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150067
+    Bound: "Account"
     Group: Adventure
     Name: Thor Volcano Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150068
+    Bound: "Account"
     Group: Adventure
     Name: Toy Factory Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150069
+    Bound: "Account"
     Group: Adventure
     Name: Turtle Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150070
+    Bound: "Account"
     Group: Adventure
     Name: Turtle Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150071
+    Bound: "Account"
     Group: Adventure
     Name: Turtle Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150072
+    Bound: "Account"
     Group: Adventure
     Name: Odin Temple Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150073
+    Bound: "Account"
     Group: Adventure
     Name: Odin Temple Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150074
+    Bound: "Account"
     Group: Adventure
     Name: Odin Temple Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150075
+    Bound: "Account"
     Group: Adventure
     Name: Umbala Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150076
+    Bound: "Account"
     Group: Adventure
     Name: Umbala Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150077
+    Bound: "Account"
     Group: Adventure
     Name: Moscovia Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150078
+    Bound: "Account"
     Group: Adventure
     Name: Moscovia Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150079
+    Bound: "Account"
     Group: Adventure
     Name: Moscovia Dungeon Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150080
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Santuary Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150081
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Santuary Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150082
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Santuary Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150083
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Santuary Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 150084
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Santuary Exploration
     Rewards:
       Item: Shabby_Purse
     Score: 5
   - Id: 160000
+    Bound: "Account"
     Group: Adventure
     Name: Abbey Underground Complete
     Dependents:
@@ -2414,6 +2662,7 @@ Body:
     Rewards:
       Script: " set #abbey,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Abbey Underground\"; "
   - Id: 160001
+    Bound: "Account"
     Group: Adventure
     Name: Abyss Lake Complete
     Dependents:
@@ -2424,6 +2673,7 @@ Body:
     Rewards:
       Script: " set #abyss,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Abyss Lake\"; "
   - Id: 160002
+    Bound: "Account"
     Group: Adventure
     Name: Amatsu Dungeon Complete
     Dependents:
@@ -2434,6 +2684,7 @@ Body:
     Rewards:
       Script: " set #amatsud,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Amatsu Dungeon\"; "
   - Id: 160003
+    Bound: "Account"
     Group: Adventure
     Name: Ant Hell Complete
     Dependents:
@@ -2443,6 +2694,7 @@ Body:
     Rewards:
       Script: " set #anthell,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Ant Hell\"; "
   - Id: 160004
+    Bound: "Account"
     Group: Adventure
     Name: Ayothaya Dungeons Complete
     Dependents:
@@ -2452,6 +2704,7 @@ Body:
     Rewards:
       Script: " set #ayothayad,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Ayothaya Dungeon\"; "
   - Id: 160005
+    Bound: "Account"
     Group: Adventure
     Name: Byalan Dungeon Complete
     Dependents:
@@ -2464,6 +2717,7 @@ Body:
     Rewards:
       Script: " set #byalan,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Byalan Dungeon\"; "
   - Id: 160006
+    Bound: "Account"
     Group: Adventure
     Name: Clock Tower Complete
     Dependents:
@@ -2479,6 +2733,7 @@ Body:
     Rewards:
       Script: " set #clocktower,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Clock Tower\"; "
   - Id: 160007
+    Bound: "Account"
     Group: Adventure
     Name: Coal Mine Complete
     Dependents:
@@ -2489,6 +2744,7 @@ Body:
     Rewards:
       Script: " set #coalmine,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Coal Mine\"; "
   - Id: 160008
+    Bound: "Account"
     Group: Adventure
     Name: Comodo Dungeon Complete
     Dependents:
@@ -2497,6 +2753,7 @@ Body:
       150022: true
     Score: 10
   - Id: 160009
+    Bound: "Account"
     Group: Adventure
     Name: Einbech Complete
     Dependents:
@@ -2506,6 +2763,7 @@ Body:
     Rewards:
       Script: " set #einbechd,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Einbech\"; "
   - Id: 160010
+    Bound: "Account"
     Group: Adventure
     Name: Geffen Dungeon Complete
     Dependents:
@@ -2515,6 +2773,7 @@ Body:
     Rewards:
       Script: " set #geffend,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Geffen Dungeon\"; "
   - Id: 160011
+    Bound: "Account"
     Group: Adventure
     Name: Glastheim Complete
     Dependents:
@@ -2532,6 +2791,7 @@ Body:
     Rewards:
       Script: " set #glastheim,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Glastheim\"; "
   - Id: 160012
+    Bound: "Account"
     Group: Adventure
     Name: Kunlun Dungeon Complete
     Dependents:
@@ -2542,6 +2802,7 @@ Body:
     Rewards:
       Script: " set #kunlun,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Kunlun Dungeon\"; "
   - Id: 160013
+    Bound: "Account"
     Group: Adventure
     Name: Labyrinth Complete
     Dependents:
@@ -2552,6 +2813,7 @@ Body:
     Rewards:
       Script: " set #labyrinth,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Labyrinth\"; "
   - Id: 160014
+    Bound: "Account"
     Group: Adventure
     Name: Louyang Dungeon Complete
     Dependents:
@@ -2562,6 +2824,7 @@ Body:
     Rewards:
       Script: " set #louyangd,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Louyang Dungeon\"; "
   - Id: 160015
+    Bound: "Account"
     Group: Adventure
     Name: Nogg Road Complete
     Dependents:
@@ -2571,6 +2834,7 @@ Body:
     Rewards:
       Script: " set #noggroad,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Nogg Road\"; "
   - Id: 160016
+    Bound: "Account"
     Group: Adventure
     Name: Orc Dungeon Complete
     Dependents:
@@ -2580,6 +2844,7 @@ Body:
     Rewards:
       Script: " set #orcdung,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Orc Dungeon\"; "
   - Id: 160017
+    Bound: "Account"
     Group: Adventure
     Name: Payon Dungeon Complete
     Dependents:
@@ -2592,6 +2857,7 @@ Body:
     Rewards:
       Script: " set #payond,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Payon Dungeon\"; "
   - Id: 160018
+    Bound: "Account"
     Group: Adventure
     Name: Prontera Culvert Complete
     Dependents:
@@ -2603,6 +2869,7 @@ Body:
     Rewards:
       Script: " set #pronterag,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Prontera Culvert\"; "
   - Id: 160019
+    Bound: "Account"
     Group: Adventure
     Name: Pyramid Complete
     Dependents:
@@ -2616,6 +2883,7 @@ Body:
     Rewards:
       Script: " set #pyramid,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Pyramid\"; "
   - Id: 160020
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Dungeon Complete
     Dependents:
@@ -2626,6 +2894,7 @@ Body:
     Rewards:
       Script: " set #icedun,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Ice Dungeon\"; "
   - Id: 160021
+    Bound: "Account"
     Group: Adventure
     Name: Robot Factory Complete
     Dependents:
@@ -2635,6 +2904,7 @@ Body:
     Rewards:
       Script: " set #robotfact,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Robot Factory\"; "
   - Id: 160022
+    Bound: "Account"
     Group: Adventure
     Name: Somatology Lab Complete
     Dependents:
@@ -2645,6 +2915,7 @@ Body:
     Rewards:
       Script: " set #biolab,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Somatology Lab\"; "
   - Id: 160023
+    Bound: "Account"
     Group: Adventure
     Name: Sphinx Complete
     Dependents:
@@ -2657,6 +2928,7 @@ Body:
     Rewards:
       Script: " set #sphinx,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Sphinx\"; "
   - Id: 160024
+    Bound: "Account"
     Group: Adventure
     Name: Sunken Ship Complete
     Dependents:
@@ -2666,6 +2938,7 @@ Body:
     Rewards:
       Script: " set #sunked,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Sunken Ship\"; "
   - Id: 160025
+    Bound: "Account"
     Group: Adventure
     Name: Thanatos Tower Complete
     Dependents:
@@ -2679,6 +2952,7 @@ Body:
     Rewards:
       Script: " set #thanatos,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Thanatos Tower\"; "
   - Id: 160026
+    Bound: "Account"
     Group: Adventure
     Name: Odin Temple Complete
     Dependents:
@@ -2689,6 +2963,7 @@ Body:
     Rewards:
       Script: " set #odintemp,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Odin Temple\"; "
   - Id: 160027
+    Bound: "Account"
     Group: Adventure
     Name: Thors Volcano Complete
     Dependents:
@@ -2699,6 +2974,7 @@ Body:
     Rewards:
       Script: " set #thorv,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Thors Volcano\"; "
   - Id: 160028
+    Bound: "Account"
     Group: Adventure
     Name: Toy Factory Complete
     Dependents:
@@ -2708,6 +2984,7 @@ Body:
     Rewards:
       Script: " set #toyfact,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Toy Factory\"; "
   - Id: 160029
+    Bound: "Account"
     Group: Adventure
     Name: Turtle Island Dungeon Complete
     Dependents:
@@ -2719,6 +2996,7 @@ Body:
     Rewards:
       Script: " set #turtleisland,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Turtle Island Dungeon\"; "
   - Id: 160030
+    Bound: "Account"
     Group: Adventure
     Name: Moscovia Dungeon Complete
     Dependents:
@@ -2729,6 +3007,7 @@ Body:
     Rewards:
       Script: " set #moscoviad,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Moscovia Dungeon\"; "
   - Id: 160031
+    Bound: "Account"
     Group: Adventure
     Name: Umbala Dungeon Complete
     Dependents:
@@ -2738,6 +3017,7 @@ Body:
     Rewards:
       Script: " set #umbalad,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Umbala Dungeon\"; "
   - Id: 160032
+    Bound: "Account"
     Group: Adventure
     Name: Rachel Santuary Complete
     Dependents:
@@ -2750,108 +3030,126 @@ Body:
     Rewards:
       Script: " set #rachelsan,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste Rachel Santuary\"; "
   - Id: 170000
+    Bound: "Account"
     Group: Adventure
     Name: Aldebaran City
     Rewards:
       Script: " set #aldebaran,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Aldebaran\"; "
     Score: 5
   - Id: 170001
+    Bound: "Account"
     Group: Adventure
     Name: Amatsu City
     Rewards:
       Script: " set #amatsu,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Amatsu\"; "
     Score: 5
   - Id: 170002
+    Bound: "Account"
     Group: Adventure
     Name: Ayothaya City
     Rewards:
       Script: " set #ayothaya,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Ayothaya\"; "
     Score: 5
   - Id: 170003
+    Bound: "Account"
     Group: Adventure
     Name: Comodo City
     Rewards:
       Script: " set #comodo,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Comodo\"; "
     Score: 5
   - Id: 170004
+    Bound: "Account"
     Group: Adventure
     Name: Einbech City
     Rewards:
       Script: " set #einbech,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Einbech\"; "
     Score: 5
   - Id: 170005
+    Bound: "Account"
     Group: Adventure
     Name: Einbroch City
     Rewards:
       Script: " set #einbroch,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Einbroch\"; "
     Score: 5
   - Id: 170007
+    Bound: "Account"
     Group: Adventure
     Name: Gonryun City
     Rewards:
       Script: " set #gonryun,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Gonryun\"; "
     Score: 5
   - Id: 170008
+    Bound: "Account"
     Group: Adventure
     Name: Hugel City
     Rewards:
       Script: " set #hugel,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Hugel\"; "
     Score: 5
   - Id: 170009
+    Bound: "Account"
     Group: Adventure
     Name: Jawaii City
     Rewards:
       Script: " set #jawaii,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Jawaii\"; "
     Score: 5
   - Id: 170010
+    Bound: "Account"
     Group: Adventure
     Name: Lighthalzen City
     Rewards:
       Script: " set #lighthalzen,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Lighthalzen\"; "
     Score: 5
   - Id: 170011
+    Bound: "Account"
     Group: Adventure
     Name: Louyang City
     Rewards:
       Script: " set #louyang,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Louyang\"; "
     Score: 5
   - Id: 170012
+    Bound: "Account"
     Group: Adventure
     Name: Lutie City
     Rewards:
       Script: " set #lutie,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Lutie\"; "
     Score: 5
   - Id: 170013
+    Bound: "Account"
     Group: Adventure
     Name: Moscovia City
     Rewards:
       Script: " set #moscovia,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Moscovia\"; "
     Score: 5
   - Id: 170014
+    Bound: "Account"
     Group: Adventure
     Name: Niflheim City
     Rewards:
       Script: " set #niflheim,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Niflheim\"; "
     Score: 5
   - Id: 170015
+    Bound: "Account"
     Group: Adventure
     Name: Rachel City
     Rewards:
       Script: " set #rachel,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Rachel\"; "
     Score: 5
   - Id: 170016
+    Bound: "Account"
     Group: Adventure
     Name: Veins City
     Rewards:
       Script: " set #veins,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Veins\"; "
     Score: 5
   - Id: 170017
+    Bound: "Account"
     Group: Adventure
     Name: Yuno City
     Rewards:
       Script: " set #yuno,1; message strcharinfo(0), \"[Warper] Felicitaciones! Desbloqueaste la ciudad de Yuno\"; "
     Score: 5
   - Id: 170018
+    Bound: "Account"
     Group: Adventure
     Name: Umbala City
     Rewards:

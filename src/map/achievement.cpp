@@ -65,6 +65,15 @@ uint64 AchievementDatabase::parseBodyNode(const ryml::NodeRef& node){
 		achievement->achievement_id = achievement_id;
 	}
 
+	if (this->nodeExists( node, "Bound" )) {
+		std::string bound;
+		
+		if( !this->asString( node, "Bound", bound ) )
+			return 0;
+
+		achievement->bound = bound;
+	}
+
 	if( this->nodeExists( node, "Group" ) ){
 		std::string group_name;
 
@@ -473,6 +482,11 @@ struct achievement *achievement_add(map_session_data *sd, int achievement_id)
 	sd->achievement_data.achievements[index].achievement_id = achievement_id;
 	sd->achievement_data.achievements[index].score = adb->score;
 	sd->achievement_data.save = true;
+
+	if (adb->bound == "Account")
+		sd->achievement_data.achievements[index].bound = ACCOUNT;
+	else
+		sd->achievement_data.achievements[index].bound = PLAYER;
 
 	clif_achievement_update(sd, &sd->achievement_data.achievements[index], sd->achievement_data.count - sd->achievement_data.incompleteCount);
 
