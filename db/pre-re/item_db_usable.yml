@@ -8450,6 +8450,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 11573,200;
   - Id: 12550
     AegisName: Poison_Bottle_Box2
     Name: Poison Bottle Box2

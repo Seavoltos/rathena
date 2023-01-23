@@ -1342,7 +1342,7 @@ Body:
     Name: Reborn in Valhalla!
     Condition: " Class == JOB_NOVICE_HIGH "
     Rewards:
-    #  Item: Adventurer_Box_1
+      Item: Adventurer_Box_1
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 220000
@@ -1829,222 +1829,182 @@ Body:
     Condition: " true "
     Score: 10
   - Id: 240001
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 1
     Condition: " AchievementLevel >= 1 "
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240002
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 2
     Condition: " AchievementLevel >= 2 "
     Dependents:
       240001: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240003
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 3
     Condition: " AchievementLevel >= 3 "
     Dependents:
       240002: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240004
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 4
     Condition: " AchievementLevel >= 4 "
     Dependents:
       240003: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240005
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 5
     Condition: " AchievementLevel >= 5 "
     Dependents:
       240004: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240006
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 6
     Condition: " AchievementLevel >= 6 "
     Dependents:
       240005: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240007
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 7
     Condition: " AchievementLevel >= 7 "
     Dependents:
       240006: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240008
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 8
     Condition: " AchievementLevel >= 8 "
     Dependents:
       240007: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240009
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 9
     Condition: " AchievementLevel >= 9 "
     Dependents:
       240008: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240010
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 10
     Condition: " AchievementLevel >= 10 "
     Dependents:
       240009: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
       TitleId: 1023
     Score: 10
   - Id: 240011
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 11
     Condition: " AchievementLevel >= 11 "
     Dependents:
       240010: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240012
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 12
     Condition: " AchievementLevel >= 12 "
     Dependents:
       240011: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240013
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 13
     Condition: " AchievementLevel >= 13 "
     Dependents:
       240012: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240014
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 14
     Condition: " AchievementLevel >= 14 "
     Dependents:
       240013: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240015
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 15
     Condition: " AchievementLevel >= 15 "
     Dependents:
       240014: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240016
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 16
     Condition: " AchievementLevel >= 16 "
     Dependents:
       240015: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240017
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 17
     Condition: " AchievementLevel >= 17 "
     Dependents:
       240016: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240018
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 18
     Condition: " AchievementLevel >= 18 "
     Dependents:
       240017: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240019
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 19
     Condition: " AchievementLevel >= 19 "
     Dependents:
       240018: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 240020
-    Bound: "Account"
     Group: Goal_Achieve
     Name: Reaching Level 20
     Condition: " AchievementLevel >= 20 "
     Dependents:
       240019: true
     Rewards:
-      Item: Gift_Box
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
       TitleId: 1024
     Score: 10

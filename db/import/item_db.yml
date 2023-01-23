@@ -21040,3 +21040,310 @@ Body:
     Name: Cash
     Type: Etc
     Weight: 1
+###########################################################################
+#
+# Reborn
+#
+###########################################################################
+  - Id: 23575
+    AegisName: Adventurer_Box_1
+    Name: Adventurer Box (1)
+    Type: Usable
+    Weight: 0
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11567,100;
+      getitem 12265,5;
+      getitem 22979,5;
+      getitem 23338,50;
+      getitem 23576,1;
+  - Id: 11567
+    AegisName: Novice_Potion_B
+    Name: Novice Potion
+    Type: Healing
+    Buy: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      itemheal rand(44,66),0;
+  - Id: 12265
+    AegisName: Comp_Insurance
+    Name: Life Insurrance
+    Type: Usable
+    Buy: 2
+    Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      sc_start SC_LIFEINSURANCE,1800000,0;
+  - Id: 22979
+    AegisName: Comp_Battle_Bubble
+    Name: "[Sale] Battle Manual and Bubble Gum"
+    Type: Usable
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      sc_start SC_EXPBOOST,1800000,50;
+      sc_start SC_ITEMBOOST,1800000,100;
+  - Id: 23338
+    AegisName: Comp_Wing_Of_Fly
+    Name: Compressed Fly Wing
+    Type: Delayconsume
+    Weight: 0
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+       itemskill "AL_TELEPORT",1;
+  - Id: 23576
+    AegisName: Adventurer_Box_15
+    Name: Adventurer Box (15)
+    Type: Usable
+    EquipLevelMin: 15
+    Weight: 0
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11567,150;
+      getitem 23338,50;
+      getitem 23577,1;
+  - Id: 23577
+    AegisName: Adventurer_Box_30
+    Name: Adventurer Box (30)
+    Type: Usable
+    EquipLevelMin: 30
+    Weight: 0
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 23338,50;
+      getitem 23503,20;
+      getitem 23578,1;
+  - Id: 23503
+    AegisName: Red_Potion_B_20
+    Name: "[Not For Sale] Crate of 20 Red Potions"
+    Type: Usable
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11570,20;
+  - Id: 11570
+    AegisName: Red_Potion_B
+    Name: "[Not For Sale] Red Potion"
+    Type: Healing
+    Weight: 70
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      itemheal rand(45,65),0;
+  - Id: 23578
+    AegisName: Adventurer_Box_45
+    Name: Adventurer Box (45)
+    Type: Usable
+    EquipLevelMin: 45
+    Weight: 0
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 23338,50;
+      getitem 23503,25;
+      getitem 23579,1;
+  - Id: 23579
+    AegisName: Adventurer_Box_60
+    Name: Adventurer Box (60)
+    Type: Usable
+    EquipLevelMin: 60
+    Weight: 0
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 23338,50;
+      getitem 23504,20;
+      getitem 23580,1;
+  - Id: 23504
+    AegisName: Orange_Potion_B_20
+    Name: "[Not For Sale] Crate of 20 Orange Potions"
+    Type: Usable
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11569,20;
+  - Id: 11569
+    AegisName: Orange_Potion_B
+    Name: "[Not For Sale] Orange Potion"
+    Type: Healing
+    Weight: 100
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      itemheal rand(105,145),0;
+  - Id: 23580
+    AegisName: Adventurer_Box_75
+    Name: Adventurer Box (75)
+    Type: Usable
+    EquipLevelMin: 75
+    Weight: 0
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 23338,50;
+      getitem 23504,25;
+      getitem 23581,1;
+  - Id: 23581
+    AegisName: Adventurer_Box_90
+    Name: Adventurer Box (90)
+    Type: Usable
+    EquipLevelMin: 90
+    Weight: 0
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 23505,20;
+      getitem 23338,50;
+  - Id: 23505
+    AegisName: Yellow_Potion_B_20
+    Name: "[Not For Sale] Crate of 20 Yellow Potions"
+    Type: Usable
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoAuction: true
+    Script: |
+      getitem 11566,20;
+  - Id: 11566
+    AegisName: Yellow_Potion_B
+    Name: "[Not For Sale] Yellow Potion"
+    Type: Healing
+    Weight: 130
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      itemheal rand(175,235),0;
+  - Id: 23582
+    AegisName: E_Wing_Of_Fly_3Day_Box
+    Name: "[Gift] Unlimited Fly Wing 3 Day Box"
+    Type: Usable
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      rentitem 12887,259200;
+  - Id: 11573
+    AegisName: White_Slim_Potion_B
+    Name: White Slim Potion
+    Type: Healing
+    Buy: 10
+    Weight: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      itemheal rand(325,405),0;
