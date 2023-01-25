@@ -2924,7 +2924,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 					}
 
 					if (battle_config.dropped_normal_card_log) {
-						if ( SQL_ERROR == Sql_Query(logmysql_handle, "INSERT INTO dropped_normal_card_log (account_id, char_name, monster_id, monster_name, card_id, card_name, drop_map) VALUES ('%d', '%s', '%d', '%s', '%d', '%s', '%s')", mvp_sd->status.account_id, mvp_sd->status.name, md->mob_id, md->db->sprite.c_str(), it->nameid, it->name.c_str(),  mapindex_id2name(mvp_sd->mapindex))) // Log System [Bad]
+						if ( SQL_ERROR == Sql_Query(logmysql_handle, "INSERT INTO dropped_normal_card_log (account_id, char_name, monster_id, monster_name, card_id, card_name, drop_map) VALUES ('%d', '%s', '%d', '%s', '%d', '%s', '%s')", mvp_sd->status.account_id, mvp_sd->status.name, md->mob_id, md->name, it->nameid, it->ename.c_str(),  mapindex_id2name(mvp_sd->mapindex))) // Log System [Bad]
 						Sql_ShowDebug(logmysql_handle);
 					}
 				}
@@ -2938,7 +2938,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 					}
 
 					if (battle_config.dropped_mvp_card_log) {
-						if ( SQL_ERROR == Sql_Query(logmysql_handle, "INSERT INTO dropped_mvp_card_log (account_id, char_name, mvp_id, mvp_name, card_id, card_name, drop_map) VALUES ('%d', '%s', '%d', '%s', '%d', '%s', '%s')", mvp_sd->status.account_id, mvp_sd->status.name, md->mob_id, md->db->sprite.c_str(), it->nameid, it->name.c_str(),  mapindex_id2name(mvp_sd->mapindex))) // Log System [Bad]
+						if ( SQL_ERROR == Sql_Query(logmysql_handle, "INSERT INTO dropped_mvp_card_log (account_id, char_name, mvp_id, mvp_name, card_id, card_name, drop_map) VALUES ('%d', '%s', '%d', '%s', '%d', '%s', '%s')", mvp_sd->status.account_id, mvp_sd->status.name, md->mob_id, md->name, it->nameid, it->ename.c_str(),  mapindex_id2name(mvp_sd->mapindex))) // Log System [Bad]
 						Sql_ShowDebug(logmysql_handle);
 					}
 				}
@@ -2952,7 +2952,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 					}
 
 					if (battle_config.dropped_mini_boss_card_log) {
-						if ( SQL_ERROR == Sql_Query(logmysql_handle, "INSERT INTO dropped_mini_boss_card_log (account_id, char_name, mini_boss_id, mini_boss_name, card_id, card_name, drop_map) VALUES ('%d', '%s', '%d', '%s', '%d', '%s', '%s')", mvp_sd->status.account_id, mvp_sd->status.name, md->mob_id, md->db->sprite.c_str(), it->nameid, it->name.c_str(),  mapindex_id2name(mvp_sd->mapindex))) // Log System [Bad]
+						if ( SQL_ERROR == Sql_Query(logmysql_handle, "INSERT INTO dropped_mini_boss_card_log (account_id, char_name, mini_boss_id, mini_boss_name, card_id, card_name, drop_map) VALUES ('%d', '%s', '%d', '%s', '%d', '%s', '%s')", mvp_sd->status.account_id, mvp_sd->status.name, md->mob_id, md->name, it->nameid, it->ename.c_str(),  mapindex_id2name(mvp_sd->mapindex))) // Log System [Bad]
 						Sql_ShowDebug(logmysql_handle);
 					}
 				}
