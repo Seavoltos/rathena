@@ -13,7 +13,7 @@ vend_zone,99,104,5	script	Reglas Merchant	681,{
 	mes "Regla 2: No puedes abrir tiendas con nombres ofensivos.";
 	next;
 	mes .@nombre$;
-	mes "Regla 3: Coloca nombres representativos de acuerdo a lo que vendes, esto ayudara a que te compren m√°s r√°pido.";
+	mes "Regla 3: Coloca nombres representativos de acuerdo a lo que vendes, esto ayudara a que te compren m·s r·pido.";
 	next;
 	mes .@nombre$;
 	mes "Espero que respetes las reglas, o algun Gm tendra que sacarte.";
