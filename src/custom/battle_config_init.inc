@@ -44,3 +44,4 @@
 	{ "mini_boss_card_announce",            &battle_config.mini_boss_card_announce,         1,      0,      1,              },
 	{ "dropped_mini_boss_card_log",         &battle_config.dropped_mini_boss_card_log,      1,      0,      1,              },
 	{ "set_mini_boss_announce_color",       &battle_config.set_mini_boss_announce_color,    0xFFBB00,      0,INT_MAX,       },
+	{ "bg_extended_check_equip",			&battle_config.bg_extended_check_equip,         1,      0,      1,              },

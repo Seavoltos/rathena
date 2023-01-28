@@ -74,6 +74,10 @@ Body:
       accept: true
       changedress: true
       resurrect: true
+      woestats: true
+      bgstats: true
+      bgrank: true
+      woerank: true
     Permissions:
       # without this basic permissions regular players could not trade or party
       can_trade: true

@@ -36,6 +36,8 @@ ItemGroupDatabase itemdb_group;
 ItemVendingDatabase itemdb_vending;
 
 struct s_roulette_db rd;
+struct s_bg_reward bgr[MAX_FAME_LIST];
+struct s_woe_reward woer[MAX_FAME_LIST];
 
 static void itemdb_jobid2mapid(uint64 bclass[3], e_mapid jobmask, bool active);
 
@@ -3475,6 +3477,86 @@ static bool itemdb_read_noequip(char* str[], int columns, int current) {
 	return true;
 }
 
+/**
+* BG Reward read db [Easycore]
+**/
+static bool itemdb_read_bgreward(char* fields[], int columns, int current)
+{
+	unsigned short nameid, amount;
+	int zeny;
+
+	nameid = atoi(fields[0]);
+	amount = atoi(fields[1]);
+	zeny = atoi(fields[2]);
+
+	std::shared_ptr<item_data> id = item_db.find(nameid);
+
+	if( id == nullptr )
+	{
+		ShowWarning("itemdb_read_bgreward: Invalid item id %hu.\n", nameid);
+		return false;
+	}
+
+	if (amount <= 0)
+	{
+		ShowWarning("itemdb_read_bgreward: Invalid item amount %hu.\n", amount);
+		return false;
+	}
+
+	if (zeny < 0)
+	{
+		ShowWarning("itemdb_read_bgreward: Invalid zeny amount %hu.\n", zeny);
+		return false;
+	}
+		
+
+	bgr[current].nameid = nameid;
+	bgr[current].amount = amount;
+	bgr[current].zeny = zeny;
+
+	return true;
+}
+
+/**
+* WoE Reward read db
+**/
+static bool itemdb_read_woereward(char* fields[], int columns, int current)
+{
+	unsigned short nameid, amount;
+	int zeny;
+
+	nameid = atoi(fields[0]);
+	amount = atoi(fields[1]);
+	zeny = atoi(fields[2]);
+
+	std::shared_ptr<item_data> id = item_db.find(nameid);
+
+	if( id == nullptr )
+	{
+		ShowWarning("itemdb_read_woereward: Invalid item id %hu.\n", nameid);
+		return false;
+	}
+
+	if (amount <= 0)
+	{
+		ShowWarning("itemdb_read_woereward: Invalid item amount %hu.\n", amount);
+		return false;
+	}
+
+	if (zeny < 0)
+	{
+		ShowWarning("itemdb_read_woereward: Invalid zeny amount %hu.\n", zeny);
+		return false;
+	}
+		
+
+	woer[current].nameid = nameid;
+	woer[current].amount = amount;
+	woer[current].zeny = zeny;
+
+	return true;
+}
+
 const std::string ComboDatabase::getDefaultLocation() {
 	return std::string(db_path) + "/item_combos.yml";
 }
@@ -4623,6 +4705,8 @@ static void itemdb_read(void) {
 		}
 
 		sv_readdb(dbsubpath2, "item_noequip.txt",       ',', 2, 2, -1, &itemdb_read_noequip, i > 0);
+		sv_readdb(dbsubpath1, "bg_rewards.txt",			',', 3, 3, MAX_FAME_LIST, &itemdb_read_bgreward, i > 0);
+		sv_readdb(dbsubpath1, "woe_rewards.txt",		',', 3, 3, MAX_FAME_LIST, &itemdb_read_woereward, i > 0);
 		aFree(dbsubpath1);
 		aFree(dbsubpath2);
 	}
@@ -4702,6 +4786,8 @@ void itemdb_reload(void) {
 	// read new data
 	itemdb_read();
 	cashshop_reloaddb();
+	memset(bgr, 0, sizeof(bgr));
+	memset(woer, 0, sizeof(woer));
 
 	mob_reload_itemmob_data();
 

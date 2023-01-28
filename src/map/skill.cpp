@@ -7205,6 +7205,24 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 				heal = ~heal + 1;
 			t_exp heal_get_jobexp = status_heal(bl,heal,0,0);
 
+			// Extended Features BG
+			if (sd) {
+				if (map_getmapflag(src->m, MF_BATTLEGROUND) && sd->bg_id && dstsd->bg_id) {
+					if (sd->bg_id == dstsd->bg_id) {
+						achievement_update_objective(sd, AG_BG_HEAL, 1, heal_get_jobexp);
+						add2limit(sd->status.bgstats.healing_done, heal_get_jobexp, UINT_MAX);
+					} else
+						add2limit(sd->status.bgstats.wrong_healing_done, heal_get_jobexp, UINT_MAX);
+				}
+				else if (map_flag_gvg2(src->m) && sd->guild && dstsd->guild) {
+					if (sd->guild == dstsd->guild) {
+						achievement_update_objective(sd, AG_WOE_HEAL, 1, heal_get_jobexp);
+						add2limit(sd->status.wstats.healing_done, heal_get_jobexp, UINT_MAX);
+					} else
+						add2limit(sd->status.wstats.wrong_healing_done, heal_get_jobexp, UINT_MAX);
+				}
+			}
+
 			if(sd && dstsd && heal > 0 && sd != dstsd && battle_config.heal_exp > 0){
 				heal_get_jobexp = heal_get_jobexp * battle_config.heal_exp / 100;
 				if (heal_get_jobexp <= 0)
@@ -12734,6 +12752,21 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			status_change_end(src,SC_CURSEDCIRCLE_ATKER);
 	}
 
+	// Extended Features BG
+	if (skill_get_inf(skill_id)&INF_SUPPORT_SKILL && sd && dstsd && sd != dstsd) {
+		if (map_getmapflag(src->m, MF_BATTLEGROUND) && sd->bg_id && dstsd->bg_id) {
+			if( sd->bg_id == dstsd->bg_id )
+				add2limit(sd->status.bgstats.support_skills_used, 1, UINT_MAX);
+			else
+				add2limit(sd->status.bgstats.wrong_support_skills_used, 1, UINT_MAX);
+		} else if (map_flag_gvg2(src->m) && sd->guild && dstsd->guild) {
+			if( sd->guild == dstsd->guild )
+				add2limit(sd->status.wstats.support_skills_used, 1, UINT_MAX);
+			else
+				add2limit(sd->status.wstats.wrong_support_skills_used, 1, UINT_MAX);
+		}
+	}
+
 	if (dstmd) { //Mob skill event for no damage skills (damage ones are handled in battle_damage/skill_attack) [Skotlex]
 		mob_log_damage(dstmd, src, 0); //Log interaction (counts as 'attacker' for the exp bonus)
 		mobskill_event(dstmd, src, tick, MSC_SKILLUSED|(skill_id<<16));
@@ -18260,6 +18293,12 @@ void skill_consume_requirement(map_session_data *sd, uint16 skill_id, uint16 ski
 		if(require.hp || require.sp || require.ap)
 			status_zap(&sd->bl, require.hp, require.sp, require.ap);
 
+		//Extended Features BG
+		if (require.sp && sd->bg_id && map_getmapflag(sd->bl.m, MF_BATTLEGROUND))
+			add2limit(sd->status.bgstats.sp_used, require.sp, UINT_MAX);
+		else if (require.sp && map_flag_gvg2(sd->bl.m))
+			add2limit(sd->status.wstats.sp_used, require.sp, UINT_MAX);
+
 		if(require.spiritball > 0) { // Skills that require certain types of spheres to use
 			switch (skill_id) { // Skills that require soul spheres.
 				case SP_SOULGOLEM:
@@ -18298,6 +18337,12 @@ void skill_consume_requirement(map_session_data *sd, uint16 skill_id, uint16 ski
 			pc_delspiritball(sd,sd->spiritball,0);
 		}
 
+		//Extended Features BG
+		if(require.spiritball && sd->bg_id && map_getmapflag(sd->bl.m, MF_BATTLEGROUND))
+			add2limit(sd->status.bgstats.spiritb_used, require.spiritball, UINT_MAX);
+		else if(require.spiritball && map_flag_gvg2(sd->bl.m))
+			add2limit(sd->status.wstats.spiritb_used, require.spiritball, UINT_MAX);
+
 		if(require.zeny > 0)
 		{
 			if( skill_id == NJ_ZENYNAGE )
@@ -18305,6 +18350,13 @@ void skill_consume_requirement(map_session_data *sd, uint16 skill_id, uint16 ski
 			if( sd->status.zeny < require.zeny )
 				require.zeny = sd->status.zeny;
 			pc_payzeny(sd,require.zeny,LOG_TYPE_CONSUME,NULL);
+
+			//Extended Features BG
+			if (sd->bg_id && map_getmapflag(sd->bl.m, MF_BATTLEGROUND))
+				add2limit(sd->status.bgstats.zeny_used, require.zeny, UINT_MAX);
+			else if (map_flag_gvg2(sd->bl.m))
+				add2limit(sd->status.wstats.zeny_used, require.zeny, UINT_MAX);
+
 		}
 	}
 
@@ -18347,6 +18399,52 @@ void skill_consume_requirement(map_session_data *sd, uint16 skill_id, uint16 ski
 
 			if( (n = pc_search_inventory(sd,require.itemid[i])) >= 0 )
 				pc_delitem(sd,n,require.amount[i],0,1,LOG_TYPE_CONSUME);
+
+			// Extended Features BG
+			if (sd->bg_id && map_getmapflag(sd->bl.m, MF_BATTLEGROUND)) {
+				switch( require.itemid[i] ) {
+				case ITEMID_POISON_BOTTLE: 
+					add2limit(sd->status.bgstats.poison_bottles, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_FIRE_BOTTLE: 
+					add2limit(sd->status.bgstats.acid_demostration, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_ACID_BOTTLE: 
+					add2limit(sd->status.bgstats.acid_demostration_fail, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_YELLOW_GEMSTONE:
+					add2limit(sd->status.bgstats.yellow_gemstones, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_RED_GEMSTONE:
+					add2limit(sd->status.bgstats.red_gemstones, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_BLUE_GEMSTONE:
+					add2limit(sd->status.bgstats.blue_gemstones, require.amount[i], UINT_MAX);
+					break;
+				}
+			} else if (map_flag_gvg2(sd->bl.m)) {
+				switch( require.itemid[i] ) {
+				case ITEMID_POISON_BOTTLE: 
+					add2limit(sd->status.wstats.poison_bottles, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_FIRE_BOTTLE: 
+					add2limit(sd->status.wstats.acid_demostration, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_ACID_BOTTLE: 
+					add2limit(sd->status.wstats.acid_demostration_fail, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_YELLOW_GEMSTONE:
+					add2limit(sd->status.wstats.yellow_gemstones, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_RED_GEMSTONE:
+					add2limit(sd->status.wstats.red_gemstones, require.amount[i], UINT_MAX);
+					break;
+				case ITEMID_BLUE_GEMSTONE:
+					add2limit(sd->status.wstats.blue_gemstones, require.amount[i], UINT_MAX);
+					break;
+				}
+			}
+
 		}
 	}
 }

@@ -16,6 +16,7 @@
 #include "../common/utils.hpp"
 #include "../common/utilities.hpp"
 
+#include "achievement.hpp"
 #include "battle.hpp"
 #include "clif.hpp"
 #include "guild.hpp"
@@ -628,6 +629,7 @@ int bg_team_leave(map_session_data *sd, bool quit, bool deserter, int flag)
 
 			if (bg)
 				sc_start(nullptr, &sd->bl, SC_ENTRY_QUEUE_NOTIFY_ADMISSION_TIME_OUT, 100, 1, static_cast<t_tick>(bg->deserter_time) * 1000); // Deserter timer
+			add2limit(sd->status.bgstats.deserter,1,USHRT_MAX);
 		}
 
 		return bgteam->members.size();

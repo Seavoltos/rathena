@@ -2450,6 +2450,11 @@ void battle_consume_ammo(map_session_data*sd, int skill, int lv)
 	if (sd->equip_index[EQI_AMMO] >= 0) //Qty check should have been done in skill_check_condition
 		pc_delitem(sd,sd->equip_index[EQI_AMMO],qty,0,1,LOG_TYPE_CONSUME);
 
+	if (sd->bg_id && map_getmapflag(sd->bl.m, MF_BATTLEGROUND))
+		add2limit(sd->status.bgstats.ammo_used, 1, UINT_MAX);
+	else if (map_flag_gvg2(sd->bl.m))
+		add2limit(sd->status.wstats.ammo_used, 1, UINT_MAX);
+
 	sd->state.arrow_atk = 0;
 }
 

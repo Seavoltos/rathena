@@ -26,6 +26,8 @@ OnGuillaumeDie:
 		getmapxy .@m$, .@x, .@y, BL_PC;
 		movenpc "Neutral_Flag", .@x, .@y;
 		mapannounce "bg_eoe","Blue Team have droped the Flag",1,0xFFFFFF;
+		if (killerrid)
+			bg_rankpoints "fame",0,1,killerrid;
 		set getvariableofnpc(.Flag_Status,"Neutral_Flag"), 0; // OnFloor
 		set getvariableofnpc(.Flag_Carrier,"Neutral_Flag"), 0;
 		initnpctimer "Neutral_Flag";
@@ -44,6 +46,8 @@ OnCroixDie:
 		getmapxy .@m$, .@x, .@y, BL_PC;
 		movenpc "Neutral_Flag", .@x, .@y;
 		mapannounce "bg_eoe","Red Team have droped the Flag",1,0xFFFFFF;
+		if (killerrid)
+			bg_rankpoints "fame",0,1,killerrid;
 		set getvariableofnpc(.Flag_Status,"Neutral_Flag"), 0; // OnFloor
 		set getvariableofnpc(.Flag_Carrier,"Neutral_Flag"), 0;
 		initnpctimer "Neutral_Flag";
@@ -331,6 +335,7 @@ OnTouch:
 	set .Flag_Status, 1;
 	set .Flag_Carrier, getcharid(0);
 
+	bg_rankpoints "fame",0,1;
 	sc_end SC_HIDING;
 	sc_end SC_CLOAKING;
 	sc_end SC_CHASEWALK;
@@ -396,6 +401,7 @@ OnTouch:
 	if (.Owner == 0 || .Owner != getcharid(4) || getvariableofnpc(.Flag_Carrier,"Neutral_Flag") != getcharid(0))
 		end;
 
+	bg_rankpoints "eos_flags",1,$@eos_flag;
 	set getvariableofnpc(.Flag_Carrier,"Neutral_Flag"), 0;
 	setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 	if (.Owner == $@BG_EOS_Team1)
@@ -499,6 +505,7 @@ OnTouch:
 	if (.Owner == 0 || .Owner != getcharid(4) || getvariableofnpc(.Flag_Carrier,"Neutral_Flag") != getcharid(0))
 		end;
 
+	bg_rankpoints "eos_flags",1,$@eos_flag;
 	set getvariableofnpc(.Flag_Carrier,"Neutral_Flag"), 0;
 	setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 	if (.Owner == $@BG_EOS_Team1)

@@ -26,9 +26,8 @@ OnTeam1Quit:
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 		getmapxy .@m$, .@x, .@y, BL_PC;
 		movenpc "Team2_Flag", .@x, .@y;
-
 		mapannounce "ctf00","Meijing: Omega Crystal ha sido soltada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
-		
+		bg_rankpoints "ctf_droped",1,0;
 		set getvariableofnpc(.Flag_Status,"Team2_Flag"), 1; // OnFloor
 		initnpctimer "Team2_Flag";
 		enablenpc "Team2_Flag";
@@ -45,9 +44,8 @@ OnTeam2Quit:
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 		getmapxy .@m$, .@x, .@y, BL_PC;
 		movenpc "Team1_Flag", .@x, .@y;
-		
 		mapannounce "ctf00","Meijing: Alpha Crystal ha sido soltada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
-
+		bg_rankpoints "ctf_droped",1,0;
 		set getvariableofnpc(.Flag_Status,"Team1_Flag"), 1; // OnFloor
 		initnpctimer "Team1_Flag";
 		enablenpc "Team1_Flag";
@@ -64,9 +62,8 @@ OnTeam1Die:
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 		getmapxy .@m$, .@x, .@y, BL_PC;
 		movenpc "Team2_Flag", .@x, .@y;
-
 		mapannounce "ctf00","Meijing: Omega Crystal ha sido soltada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
-		
+		bg_rankpoints "ctf_droped",1,0;
 		set getvariableofnpc(.Flag_Status,"Team2_Flag"), 1; // OnFloor
 		initnpctimer "Team2_Flag";
 		enablenpc "Team2_Flag";
@@ -80,9 +77,8 @@ OnTeam2Die:
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 		getmapxy .@m$, .@x, .@y, BL_PC;
 		movenpc "Team1_Flag", .@x, .@y;
-		
 		mapannounce "ctf00","Meijing: Alpha Crystal ha sido soltada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
-
+		bg_rankpoints "ctf_droped",1,0;
 		set getvariableofnpc(.Flag_Status,"Team1_Flag"), 1; // OnFloor
 		initnpctimer "Team1_Flag";
 		enablenpc "Team1_Flag";
@@ -94,17 +90,11 @@ OnReadyCheck:
 		end;
 	
 	set $@BG_Status_CTF,1;
-	
 	set $@BG_CTF__Victory, 0;
 	set $@BG_CTF_Croix_Score, 0;
 	set $@BG_CTF_Guill_Score, 0;
 	bg_updatescore "ctf00",$@BG_CTF_Guill_Score,$@BG_CTF_Croix_Score;
-	
 	bgannounce "Meijing: El Battleground Capture the Flag ha iniciado!",$@BG_COLOR;
-	
-//	bg_warp $@BG_CTF_Team1,"ctf00",2,40;
-//	bg_warp $@BG_CTF_Team2,"ctf00",95,40;
-	
 	sleep 2100;
 	// Respawn NPC's
 	donpcevent "Battle Therapist#ctf00_a::OnBGStart";
@@ -231,6 +221,7 @@ OnMatchEnd:
 	if (getbattleflag("feature.bgqueue"))
 		bg_reserve "ctf00", true;
 	$@BG_Status_CTF = 0;
+	set $@BG_CTF__Victory,0;
 	if( $@BG_CTF_Team1 ) { bg_destroy $@BG_CTF_Team1; $@BG_CTF_Team1 = 0; }
 	if( $@BG_CTF_Team2 ) { bg_destroy $@BG_CTF_Team2; $@BG_CTF_Team2 = 0; }
 	if (getbattleflag("feature.bgqueue"))
@@ -244,14 +235,18 @@ ctf00,49,7,4	script	Vintenar#ctf	419,{
 	if (getcharid(4) == $@BG_CTF_Team1) {
 		if ($@BG_CTF__Victory == 1)
 			callfunc "F_BG_Badge",1,"Guillaume","CTF";
-		else
+		else if ($@BG_CTF__Victory == 2)
 			callfunc "F_BG_Badge",0,"Guillaume","CTF";
+		else
+			callfunc "F_BG_Badge",2,"Guillaume","CTF";
 	}
 	else if(getcharid(4) == $@BG_CTF_Team2) {
 		if ($@BG_CTF__Victory == 2)
 			callfunc "F_BG_Badge",1,"Croix","CTF";
-		else
+		else if ($@BG_CTF__Victory == 1)
 			callfunc "F_BG_Badge",0,"Croix","CTF";
+		else
+			callfunc "F_BG_Badge",2,"Croix","CTF";
 	}
 	bg_leave;
 	end;
@@ -443,7 +438,7 @@ OnTouch:
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
 		mapannounce "ctf00","Meijing: Alpha Crystal ha sido robado por [ " + strcharinfo(0) + " ]",1,0x0000FF;
-
+		bg_rankpoints "ctf_taken",1,$@ctf_taken;
 		disablenpc "Team1_Flag";
 		addtimer 2100, "Flavius_CTF_FLAG::OnAlphaFlash";
 		stopnpctimer;
@@ -453,10 +448,12 @@ OnTouch:
 			set .Flag_Carrier, 0;
 			mapannounce "ctf00","Meijing: Omega Crystal ha sido capturado por [ " + strcharinfo(0) + " ]!!",1,0xFF0000;
 			setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
+			bg_rankpoints "ctf_captured",1,$@ctf_captured;
 			stopnpctimer;
 			donpcevent "Flavius_CTF::OnTeam1Score";
 		} else if (.Flag_Status == 1) {
 			mapannounce "ctf00","Meijing: Alpha Crystal ha sido regresado por [ " + strcharinfo(0) + " ]!!",1,0x0000FF;
+			bg_rankpoints "ctf_return",1,$@ctf_return;
 			disablenpc "Team1_Flag";
 			sleep 2100;
 			movenpc "Team1_Flag",5,40; // Back to Base
@@ -513,6 +510,7 @@ OnTouch:
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
 		mapannounce "ctf00","Meijing: Omega Crystal ha sido robado por [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		bg_rankpoints "ctf_taken",1,$@ctf_taken;
 		disablenpc "Team2_Flag";
 		addtimer 2100, "Flavius_CTF_FLAG::OnOmegaFlash";
 		stopnpctimer;
@@ -522,10 +520,12 @@ OnTouch:
 			set .Flag_Carrier, 0;
 			mapannounce "ctf00","Meijing: Alpha Crystal ha sido capturado por [ " + strcharinfo(0) + " ]!!",1,0x0000FF;
 			setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
+			bg_rankpoints "ctf_captured",1,$@ctf_captured;
 			stopnpctimer;
 			donpcevent "Flavius_CTF::OnTeam2Score";
 		} else if (.Flag_Status == 1) {
 			mapannounce "ctf00","Meijing: Omega Crystal ha sido regresado por [ " + strcharinfo(0) + " ]!!",1,0xFF0000;
+			bg_rankpoints "ctf_return",1,$@ctf_return;
 			disablenpc "Team2_Flag";
 			sleep 2100;
 			movenpc "Team2_Flag",92,40; // Back to Base

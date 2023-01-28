@@ -458,6 +458,7 @@ public:
 		unsigned int bg_listen : 1;
 		unsigned int bg_afk : 1; // Moved here to reduce searchs
 		unsigned int block_action : 10;
+		bool check_equip_skill;
 		bool refineui_open;
 		t_itemid inventory_expansion_confirmation;
 		uint16 inventory_expansion_amount;
@@ -952,6 +953,8 @@ public:
 		bool claimPrize;
 		t_tick tick;
 	} roulette;
+
+	int ce_gid;
 
 	int instance_id;
 	e_instance_mode instance_mode; ///< Mode of instance player last leaves from (used for instance destruction button)
@@ -1697,6 +1700,8 @@ bool pc_set_hate_mob(map_session_data *sd, int pos, struct block_list *bl);
 extern struct fame_list smith_fame_list[MAX_FAME_LIST];
 extern struct fame_list chemist_fame_list[MAX_FAME_LIST];
 extern struct fame_list taekwon_fame_list[MAX_FAME_LIST];
+extern struct fame_list bg_fame_list[MAX_FAME_LIST];
+extern struct fame_list woe_fame_list[MAX_FAME_LIST];
 
 void pc_readdb(void);
 void do_init_pc(void);
@@ -1709,6 +1714,12 @@ TIMER_FUNC(map_day_timer); // by [yor]
 TIMER_FUNC(map_night_timer); // by [yor]
 
 int pc_update_last_action(map_session_data *sd, int type, enum idletime_option idle_option);
+void pc_rank_reset(int type, bool reward);
+void pc_record_damage(struct block_list *src, struct block_list *target, int damage);
+void pc_record_mobkills(struct map_session_data *sd, struct mob_data *md);
+void pc_addbgpoints(map_session_data &sd,int count);
+void pc_addwoepoints(map_session_data &sd,int count);
+void pc_battle_stats(map_session_data *sd, struct map_session_data *tsd, int flag);
 
 // Rental System
 void pc_inventory_rentals(map_session_data *sd);

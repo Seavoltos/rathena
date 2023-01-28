@@ -17869,6 +17869,42 @@ void clif_bossmapinfo(map_session_data *sd, struct mob_data *md, enum e_bossmap_
 	WFIFOSET(fd,70);
 }
 
+/// Check Equip [Easycore]
+/// 0442 <Length>.W <count>.L <Skill_list>.W (ZC_SKILL_SELECT_REQUEST).
+int clif_skill_select_list(struct map_session_data *sd) {
+	int i;
+	int fd;
+	unsigned short skills[3];
+	memset(skills, 0, sizeof(skills));
+	skills[0] = CS_EQUIPMENT;
+	skills[1] = CS_BG;
+	skills[2] = CS_WOE;
+
+	nullpo_ret(sd);
+
+	fd = sd->fd;
+
+	if (!fd)
+		return 0;
+	
+	WFIFOHEAD(fd, 8 + 3 * 2);
+	WFIFOW(fd, 0) = 0x442;
+
+	for (i = 0; i < 3; i++)
+		WFIFOW(fd, 8 + i * 2) = skills[i];
+	
+	WFIFOW(fd, 2) = 8 + 3 * 2;
+	WFIFOL(fd, 4) = 3;
+	WFIFOSET(fd, WFIFOW(fd, 2));
+
+	sd->menuskill_id = SC_AUTOSHADOWSPELL;
+	sd->menuskill_val = 3;
+
+	sd->state.check_equip_skill = true;
+	sd->state.workinprogress = WIP_DISABLE_ALL;
+
+	return 1;
+}
 
 /// Requesting equip of a player (CZ_EQUIPWIN_MICROSCOPE).
 /// 02d6 <account id>.L
@@ -17882,6 +17918,13 @@ void clif_parse_ViewPlayerEquip(int fd, map_session_data* sd)
 
 	if (sd->bl.m != tsd->bl.m)
 		return;
+
+	if (battle_config.bg_extended_check_equip) {
+		sd->ce_gid = tsd->status.account_id;
+		clif_skill_select_list(sd);
+		return;
+	}
+
 	else if( tsd->status.show_equip || pc_has_permission(sd, PC_PERM_VIEW_EQUIPMENT) )
 		clif_viewequip_ack(sd, tsd);
 	else
@@ -20003,6 +20046,41 @@ int clif_skill_itemlistwindow( map_session_data *sd, uint16 skill_id, uint16 ski
 void clif_parse_SkillSelectMenu(int fd, map_session_data *sd) {
 	struct s_packet_db* info = &packet_db[RFIFOW(fd,0)];
 	//int type = RFIFOL(fd,info->pos[0]); //WHY_LOWERVER_COMPATIBILITY =  0x0, WHY_SC_AUTOSHADOWSPELL =  0x1,
+
+	if (sd->state.check_equip_skill) {
+		int skill = RFIFOW(fd, info->pos[1]);
+		struct map_session_data *tsd = map_id2sd(sd->ce_gid);
+
+		sd->state.check_equip_skill = false;
+		sd->state.workinprogress = WIP_DISABLE_NONE;
+		clif_menuskill_clear(sd);
+
+		if (!tsd) {
+			clif_displaymessage(fd,"Player not found.");
+			return;
+		}
+
+		if (!(skill >= 780 && skill <= 782))
+			return;
+
+		switch(skill) {
+			case CS_EQUIPMENT:
+				if( tsd->status.show_equip || pc_has_permission(sd, PC_PERM_VIEW_EQUIPMENT) )
+					clif_viewequip_ack(sd, tsd);
+				else
+					clif_msg(sd, VIEW_EQUIP_FAIL);
+				break;
+			case CS_BG:
+				pc_battle_stats(sd,tsd,1);
+				break;
+			case CS_WOE:
+				pc_battle_stats(sd,tsd,2);
+				break;
+			default:
+				return;
+		}	
+		return;
+	}
 
 	if (sd->menuskill_id == SA_AUTOSPELL) {
 		sd->state.workinprogress = WIP_DISABLE_NONE;
@@ -25510,6 +25588,25 @@ void clif_parse_partybooking_reply( int fd, map_session_data* sd ){
 
 	clif_partybooking_reply( tsd, sd, p->accept );
 #endif
+}
+
+void clif_rank_info(map_session_data &sd, int points, int total, int flag)
+{
+	char message[100];
+
+	if (flag) {
+		if( points < 0 )
+			sprintf(message, "[Your Battleground Rank -%d = %d points]", points, total);
+		else
+			sprintf(message, "[Your Battleground Rank +%d = %d points]", points, total);
+	} else {
+		if( points < 0 )
+			sprintf(message, "[Your War of Emperium Rank -%d = %d points]", points, total);
+		else
+			sprintf(message, "[Your War of Emperium Rank +%d = %d points]", points, total);
+	}
+
+	clif_displaymessage(sd.fd, message);
 }
 
 /*==========================================

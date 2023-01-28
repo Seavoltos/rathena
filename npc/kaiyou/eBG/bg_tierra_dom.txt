@@ -29,6 +29,33 @@ OnCroixActive:
 	end;
 
 OnDie:
+	if (!killerrid || killerrid == getcharid(0))
+		end;
+	set .@Base, 0;
+	getmapxy .@m$, .@x, .@y, BL_PC;
+
+	if (.@x >= 138 && .@y >= 120 && .@x <= 149 && .@y <= 131)
+		set .@Base, getvariableofnpc(.Owner,"Dom_N_Base"); // North
+	else if (.@x >= 86 && .@y >= 82 && .@x <= 113 && .@y <= 101)
+		set .@Base, getvariableofnpc(.Owner,"Dom_C_Base"); // Center
+	else if (.@x >= 50 && .@y >= 52 && .@x <= 61 && .@y <= 63)
+		set .@Base, getvariableofnpc(.Owner,"Dom_S_Base"); // South
+	else end; // Not Killed on Base territory
+
+	if (.@Base == 1)
+	{ // Team 1
+		if (getcharid(4) == getd(.T1$) && killerrid)
+			bg_rankpoints "dom_off_kills",1,0,killerrid;
+		else if (killerrid)
+			bg_rankpoints "dom_def_kills",1,0,killerrid;
+	}
+	else if (.@Base == 2)
+	{ // Team 2
+		if (getcharid(4) == getd(.T2$) && killerrid)
+			bg_rankpoints "dom_off_kills",1,0,killerrid;
+		else if (killerrid)
+			bg_rankpoints "dom_def_kills",1,0,killerrid;
+	}
 	end;
 
 OnReady:

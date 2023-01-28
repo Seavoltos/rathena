@@ -178,10 +178,6 @@ OnInit:
 	set .Team2_Score, 0;
 	sleep 5000;
 	bg_updatescore "rwc03",0,0;
-	setwall "rwc03",16,47,6,0,0,"bg_hunter_td1";
-	setwall "rwc03",24,47,6,0,0,"bg_hunter_td2";
-	setwall "rwc03",77,47,6,0,0,"bg_hunter_td3";
-	setwall "rwc03",85,47,6,0,0,"bg_hunter_td4";
 	end;
 }
 
@@ -191,14 +187,18 @@ rwc03,8,49,5	script	Vintenar#td_a	419,{
 	if (getcharid(4) == $@BG_TD_Team1) {
 		if ($@BG_TD_Victory == 1)
 			callfunc "F_BG_Badge",1,"Guillaume","TD";
-		else
+		else if ($@BG_TD_Victory == 2)
 			callfunc "F_BG_Badge",0,"Guillaume","TD";
+		else
+			callfunc "F_BG_Badge",2,"Guillaume","TD";
 	}
 	else if(getcharid(4) == $@BG_TD_Team2) {
 		if ($@BG_TD_Victory == 2)
 			callfunc "F_BG_Badge",1,"Croix","TD";
-		else
+		else ($@BG_TD_Victory == 1)
 			callfunc "F_BG_Badge",0,"Croix","TD";
+		else
+			callfunc "F_BG_Badge",2,"Croix","TD";
 	}
 	bg_leave;
 	end;
@@ -212,14 +212,18 @@ rwc03,91,49,3	script	Vintenar#td_b	419,{
 	if (getcharid(4) == $@BG_TD_Team1) {
 		if ($@BG_TD_Victory == 1)
 			callfunc "F_BG_Badge",1,"Guillaume","TD";
-		else
+		else if ($@BG_TD_Victory == 2)
 			callfunc "F_BG_Badge",0,"Guillaume","TD";
+		else
+			callfunc "F_BG_Badge",2,"Guillaume","TD";
 	}
 	else if(getcharid(4) == $@BG_TD_Team2) {
 		if ($@BG_TD_Victory == 2)
 			callfunc "F_BG_Badge",1,"Croix","TD";
-		else
+		else ($@BG_TD_Victory == 1)
 			callfunc "F_BG_Badge",0,"Croix","TD";
+		else
+			callfunc "F_BG_Badge",2,"Croix","TD";
 	}
 	bg_leave;
 	end;

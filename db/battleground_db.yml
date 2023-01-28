@@ -91,7 +91,7 @@ Body:
           Variable: $@BG_CTF_Team2
   - Id: 1
     Name: Team DeathMatch
-    MinPlayers: 3
+    MinPlayers: 1
     MinLevel: 80
     Deserter: 10
     JobRestrictions:
@@ -121,7 +121,7 @@ Body:
           Variable: $@BG_TD_Team2
   - Id: 2
     Name: Conquest
-    MinPlayers: 3
+    MinPlayers: 1
     MinLevel: 80
     Deserter: 10
     JobRestrictions:
@@ -151,7 +151,7 @@ Body:
           RespawnY: 379
   - Id: 3
     Name: Rush
-    MinPlayers: 3
+    MinPlayers: 1
     MinLevel: 80
     Deserter: 10
     JobRestrictions:
@@ -181,7 +181,7 @@ Body:
           RespawnY: 226
   - Id: 4
     Name: Eye of Storm
-    MinPlayers: 3
+    MinPlayers: 1
     MinLevel: 80
     Deserter: 10
     JobRestrictions:
@@ -211,7 +211,7 @@ Body:
           Variable: $@BG_EOS_Team2
   - Id: 5
     Name: Domination
-    MinPlayers: 3
+    MinPlayers: 1
     MinLevel: 80
     Deserter: 10
     JobRestrictions:
@@ -241,7 +241,7 @@ Body:
           Variable: $@BG_DOM_Team2
   - Id: 6
     Name: Stone Control
-    MinPlayers: 3
+    MinPlayers: 1
     MinLevel: 80
     Deserter: 10
     JobRestrictions:

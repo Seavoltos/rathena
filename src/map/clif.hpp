@@ -1210,6 +1210,9 @@ void clif_equipswitch_add( map_session_data* sd,uint16 index, uint32 pos, uint8 
 void clif_equipswitch_remove( map_session_data* sd, uint16 index, uint32 pos, bool failed );
 void clif_equipswitch_reply( map_session_data* sd, bool failed );
 
+/// Extended Features BG
+void clif_rank_info(map_session_data &sd, int points, int total, int flag);
+
 /// Pet evolution
 void clif_pet_evolution_result( map_session_data* sd, e_pet_evolution_result result );
 

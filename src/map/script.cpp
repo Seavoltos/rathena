@@ -21290,6 +21290,195 @@ BUILDIN_FUNC(bgannounce)
 }
 
 /*==========================================
+ * Reset battle rank
+ * type :
+ *	1 : Battleground Rank
+ *	2 : War of Emperium Rank
+ * flag:
+ *  0 : No Reward
+ *  1 : Reward
+ *------------------------------------------*/
+BUILDIN_FUNC(battle_rank_reset)
+{
+	int type = script_getnum(st,2);
+	bool flag;
+
+	if (type < 1 && type > 2)
+		return SCRIPT_CMD_FAILURE;
+
+	if( script_hasdata(st,3) ){
+		flag = script_getnum(st,3) != 0;
+	}else{
+		flag = true;
+	}
+
+	if (type == 1)
+		type = RANK_BG;
+	else
+		type = RANK_WOE;
+
+	pc_rank_reset(type,flag);
+	return SCRIPT_CMD_SUCCESS;
+}
+
+/*==========================================
+ * Return fame rank position
+ * return by @num :
+ *	0 : Battleground Rank
+ *	1 : War of Emperium Rank
+ *------------------------------------------*/
+BUILDIN_FUNC(getcharrank)
+{
+	int num;
+	TBL_PC *sd;
+
+	num = script_getnum(st,2);
+
+	if( !script_charid2sd(3,sd) ){
+		script_pushint(st,-1); //return 0, according docs
+		return SCRIPT_CMD_SUCCESS;
+	}
+
+	switch( num ) {
+	case 0: script_pushint(st,pc_famerank(sd->status.char_id, -1)); break;
+	case 1: script_pushint(st,pc_famerank(sd->status.char_id, -2)); break;
+	default:
+		ShowError("buildin_getcharrank: invalid parameter (%d).\n", num);
+		script_pushint(st,0);
+		break;
+	}
+	return SCRIPT_CMD_SUCCESS;
+}
+
+// Extended Features BG [Easycore]
+// For now, only used to add statistics
+BUILDIN_FUNC(bg_rankpoints)
+{
+	struct map_session_data *sd;
+	struct battleground_data *bg;
+	const char *type;
+	int i, add_value, fame;
+
+	if( !script_accid2sd(5,sd) )
+		return SCRIPT_CMD_FAILURE;
+
+	if( sd == NULL )
+		return 0;
+
+	if( !sd->bg_id )
+		return 0;
+
+	type = script_getstr(st,2);
+	add_value = script_getnum(st,3);
+	fame = script_getnum(st,4);
+
+	if (fame)
+		pc_addbgpoints(*sd,fame);
+
+	if (!strcmpi(type,"fame"))
+		return SCRIPT_CMD_SUCCESS;
+
+	if (!strcmpi(type,"skulls"))
+		add2limit(sd->status.bgstats.skulls,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"eos_flags"))
+		add2limit(sd->status.bgstats.eos_flags,add_value,USHRT_MAX);
+	else if(!strcmpi(type,"sc_stole"))
+		add2limit(sd->status.bgstats.sc_stole,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"sc_captured"))
+		add2limit(sd->status.bgstats.sc_captured,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"sc_droped"))
+		add2limit(sd->status.bgstats.sc_droped,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"ctf_taken"))
+		add2limit(sd->status.bgstats.ctf_taken,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"ctf_captured"))
+		add2limit(sd->status.bgstats.ctf_captured,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"ctf_droped"))
+		add2limit(sd->status.bgstats.ctf_droped,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"dom_off_kills"))
+		add2limit(sd->status.bgstats.dom_off_kills,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"dom_def_kills"))
+		add2limit(sd->status.bgstats.dom_def_kills,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"barricade"))
+		add2limit(sd->status.bgstats.barricade_kill,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"emperium"))
+		add2limit(sd->status.bgstats.emperium_kill,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"gstone"))
+		add2limit(sd->status.bgstats.gstone_kill,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"ru_captures"))
+		add2limit(sd->status.bgstats.ru_captures,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"boss_flags"))
+		add2limit(sd->status.bgstats.boss_flags,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"boss_killed"))
+		add2limit(sd->status.bgstats.boss_killed,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"eos_bases"))
+		add2limit(sd->status.bgstats.eos_bases,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"dom_bases"))
+		add2limit(sd->status.bgstats.dom_bases,add_value,USHRT_MAX);
+	else if (!strcmpi(type,"win"))
+		add2limit(sd->status.bgstats.win,1,USHRT_MAX);
+	else if (!strcmpi(type,"tie"))
+		add2limit(sd->status.bgstats.tie,1,USHRT_MAX);
+	else if (!strcmpi(type,"lost"))
+		add2limit(sd->status.bgstats.lost,1,USHRT_MAX);
+	else if (!strcmpi(type,"deserter"))
+		add2limit(sd->status.bgstats.deserter,1,USHRT_MAX);
+	else if (!strcmpi(type,"eos_wins"))
+		add2limit(sd->status.bgstats.eos_wins,1,USHRT_MAX);
+	else if (!strcmpi(type,"eos_tie"))
+		add2limit(sd->status.bgstats.eos_tie,1,USHRT_MAX);
+	else if (!strcmpi(type,"eos_lost"))
+		add2limit(sd->status.bgstats.eos_lost,1,USHRT_MAX);
+	else if (!strcmpi(type,"boss_wins"))
+		add2limit(sd->status.bgstats.boss_wins,1,USHRT_MAX);
+	else if (!strcmpi(type,"boss_tie"))
+		add2limit(sd->status.bgstats.boss_tie,1,USHRT_MAX);
+	else if (!strcmpi(type,"boss_lost"))
+		add2limit(sd->status.bgstats.boss_lost,1,USHRT_MAX);
+	else if (!strcmpi(type,"ti_wins"))
+		add2limit(sd->status.bgstats.ti_wins,1,USHRT_MAX);
+	else if (!strcmpi(type,"ti_tie"))
+		add2limit(sd->status.bgstats.ti_tie,1,USHRT_MAX);
+	else if (!strcmpi(type,"ti_lost"))
+		add2limit(sd->status.bgstats.ti_lost,1,USHRT_MAX);
+	else if (!strcmpi(type,"ctf_wins"))
+		add2limit(sd->status.bgstats.ctf_wins,1,USHRT_MAX);
+	else if (!strcmpi(type,"ctf_tie"))
+		add2limit(sd->status.bgstats.ctf_tie,1,USHRT_MAX);
+	else if (!strcmpi(type,"ctf_lost"))
+		add2limit(sd->status.bgstats.ctf_lost,1,USHRT_MAX);
+	else if (!strcmpi(type,"td_wins"))
+		add2limit(sd->status.bgstats.td_wins,1,USHRT_MAX);
+	else if (!strcmpi(type,"td_tie"))
+		add2limit(sd->status.bgstats.td_tie,1,USHRT_MAX);
+	else if (!strcmpi(type,"td_lost"))
+		add2limit(sd->status.bgstats.td_lost,1,USHRT_MAX);
+	else if (!strcmpi(type,"sc_wins"))
+		add2limit(sd->status.bgstats.sc_wins,1,USHRT_MAX);
+	else if (!strcmpi(type,"sc_tie"))
+		add2limit(sd->status.bgstats.sc_tie,1,USHRT_MAX);
+	else if (!strcmpi(type,"sc_lost"))
+		add2limit(sd->status.bgstats.sc_lost,1,USHRT_MAX);
+	else if (!strcmpi(type,"cq_wins"))
+		add2limit(sd->status.bgstats.cq_wins,1,USHRT_MAX);
+	else if (!strcmpi(type,"cq_lost"))
+		add2limit(sd->status.bgstats.cq_lost,1,USHRT_MAX);
+	else if (!strcmpi(type,"ru_wins"))
+		add2limit(sd->status.bgstats.ru_wins,1,USHRT_MAX);
+	else if (!strcmpi(type,"ru_lost"))
+		add2limit(sd->status.bgstats.ru_lost,1,USHRT_MAX);
+	else if (!strcmpi(type,"dom_wins"))
+		add2limit(sd->status.bgstats.dom_wins,1,USHRT_MAX);
+	else if (!strcmpi(type,"dom_tie"))
+		add2limit(sd->status.bgstats.dom_tie,1,USHRT_MAX);
+	else if (!strcmpi(type,"dom_lost"))
+		add2limit(sd->status.bgstats.dom_lost,1,USHRT_MAX);
+	else
+		ShowDebug("bg_rankpoints: unknown string (%s)\n", (script_getstr(st,2)));
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
+/*==========================================
  * Instancing System
  *------------------------------------------*/
 /**
@@ -27616,6 +27805,9 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(bg_unbook,"s"),
 	BUILDIN_DEF(bg_info,"si"),
 	BUILDIN_DEF(bgannounce, "s?????"),
+	BUILDIN_DEF(battle_rank_reset,"ii"),
+	BUILDIN_DEF(getcharrank,"i?"),
+	BUILDIN_DEF(bg_rankpoints,"sii?"),
 
 	// Instancing
 	BUILDIN_DEF(instance_create,"s???"),

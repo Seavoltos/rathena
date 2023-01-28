@@ -45,3 +45,4 @@
 	int mini_boss_card_announce;
 	int dropped_mini_boss_card_log;
 	int set_mini_boss_announce_color;
+	int bg_extended_check_equip;
