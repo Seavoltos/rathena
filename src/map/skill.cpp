@@ -601,7 +601,7 @@ int skill_calc_heal(struct block_list *src, struct block_list *target, uint16 sk
 	}
 
 	if( (!heal || (target && target->type == BL_MER)) && skill_id != NPC_EVILLAND )
-		hp >>= 1;
+		hp /= 2;
 
 	if (sd) {
 		if (pc_checkskill(sd, SU_POWEROFSEA) > 0) {
@@ -1637,6 +1637,9 @@ int skill_additional_effect(struct block_list* src, struct block_list *bl, uint1
 	case NPC_BLEEDING:
 		sc_start(src,bl,SC_BLEEDING,(20*skill_lv),skill_lv,skill_get_time2(skill_id,skill_lv));
 		break;
+	case NPC_BLEEDING2:
+		sc_start(src,bl,SC_BLEEDING,(50+10*skill_lv),skill_lv,skill_get_time2(skill_id,skill_lv));
+		break;
 	case NPC_CHANGEUNDEAD:
 		sc_start(src, bl, SC_CHANGEUNDEAD, (10 * skill_lv), skill_lv, skill_get_time2(skill_id, skill_lv));
 		break;
@@ -1645,6 +1648,9 @@ int skill_additional_effect(struct block_list* src, struct block_list *bl, uint1
 		break;
 	case NPC_ICEBREATH:
 		sc_start(src,bl,SC_FREEZE,70,skill_lv,skill_get_time2(skill_id,skill_lv));
+		break;
+	case NPC_ICEBREATH2:
+		sc_start(src,bl,SC_FREEZE,100,skill_lv,skill_get_time2(skill_id,skill_lv));
 		break;
 	case NPC_MENTALBREAKER:
 		{	//Based on observations by Tharis, Mental Breaker should do SP damage
@@ -1774,6 +1780,28 @@ int skill_additional_effect(struct block_list* src, struct block_list *bl, uint1
 		break;
 	case NPC_HELLJUDGEMENT:
 		sc_start(src,bl,SC_CURSE,100,skill_lv,skill_get_time2(skill_id,skill_lv));
+		break;
+	case NPC_HELLJUDGEMENT2:
+		switch(rnd()%6) {
+		case 0:
+			sc_start(src,bl,SC_SLEEP,100,skill_lv,skill_get_time2(skill_id,skill_lv));
+			break;
+		case 1:
+			sc_start(src,bl,SC_CONFUSION,100,skill_lv,skill_get_time2(skill_id,skill_lv));
+			break;
+		case 2:
+			sc_start(src,bl,SC_HALLUCINATION,100,skill_lv,skill_get_time2(skill_id,skill_lv));
+			break;
+		case 3:
+			sc_start(src,bl,SC_STUN,100,skill_lv,skill_get_time2(skill_id,skill_lv));
+			break;
+		case 4:
+			sc_start(src,bl,SC_FEAR,100,skill_lv,skill_get_time2(skill_id,skill_lv));
+			break;
+		default:
+			sc_start(src,bl,SC_CURSE,100,skill_lv,skill_get_time2(skill_id,skill_lv));
+			break;
+		}
 		break;
 	case NPC_CRITICALWOUND:
 		sc_start(src,bl,SC_CRITICALWOUND,100,skill_lv,skill_get_time2(skill_id,skill_lv));
@@ -2693,7 +2721,7 @@ int skill_counter_additional_effect (struct block_list* src, struct block_list *
 
 			//Physical range attacks only trigger autospells half of the time
 			if ((attack_type&(BF_WEAPON|BF_LONG)) == (BF_WEAPON|BF_LONG))
-				 autospl_rate>>=1;
+				 autospl_rate /= 2;
 
 			dstsd->state.autocast = 1;
 			if ( skill_isNotOk(autospl_skill_id, dstsd) ) {
@@ -5147,6 +5175,7 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 	case HFLI_MOON:	//[orn]
 	case HFLI_SBR44:	//[orn]
 	case NPC_BLEEDING:
+	case NPC_BLEEDING2:
 	case NPC_CRITICALWOUND:
 	case NPC_HELLPOWER:
 	case RK_SONICWAVE:
@@ -5347,6 +5376,7 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 	case NPC_DARKNESSBREATH:
 	case NPC_FIREBREATH:
 	case NPC_ICEBREATH:
+	case NPC_ICEBREATH2:
 	case NPC_THUNDERBREATH:
 	case AG_STORM_CANNON:
 	case AG_CRIMSON_ARROW:
@@ -5525,6 +5555,7 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 	case NPC_PULSESTRIKE:
 	case NPC_PULSESTRIKE2:
 	case NPC_HELLJUDGEMENT:
+	case NPC_HELLJUDGEMENT2:
 	case NPC_VAMPIRE_GIFT:
 	case NPC_MAXPAIN_ATK:
 	case NPC_JACKFROST:
@@ -8512,6 +8543,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case NC_INFRAREDSCAN:
 	case NPC_VAMPIRE_GIFT:
 	case NPC_HELLJUDGEMENT:
+	case NPC_HELLJUDGEMENT2:
 	case NPC_PULSESTRIKE:
 	case LG_MOONSLASHER:
 		skill_castend_damage_id(src, src, skill_id, skill_lv, tick, flag);
@@ -9297,13 +9329,13 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 				} else {
 					if( potion_hp > 0 ) {
 						hp = potion_hp * (100 + pc_checkskill(sd,AM_POTIONPITCHER)*10 + pc_checkskill(sd,AM_LEARNINGPOTION)*5)*bonus/10000;
-						hp = hp * (100 + (tstatus->vit<<1)) / 100;
+						hp = hp * (100 + (tstatus->vit * 2)) / 100;
 						if( dstsd )
 							hp = hp * (100 + pc_checkskill(dstsd,SM_RECOVERY)*10) / 100;
 					}
 					if( potion_sp > 0 ) {
 						sp = potion_sp * (100 + pc_checkskill(sd,AM_POTIONPITCHER)*10 + pc_checkskill(sd,AM_LEARNINGPOTION)*5)*bonus/10000;
-						sp = sp * (100 + (tstatus->int_<<1)) / 100;
+						sp = sp * (100 + (tstatus->int_ * 2)) / 100;
 						if( dstsd )
 							sp = sp * (100 + pc_checkskill(dstsd,MG_SRECOVERY)*10) / 100;
 					}
@@ -9330,7 +9362,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 					default: hp = 325; break;
 				}
 				hp = (hp + rnd()%(skill_lv*20+1)) * (150 + skill_lv*10) / 100;
-				hp = hp * (100 + (tstatus->vit<<1)) / 100;
+				hp = hp * (100 + (tstatus->vit * 2)) / 100;
 				if( dstsd )
 					hp = hp * (100 + pc_checkskill(dstsd,SM_RECOVERY)*10) / 100;
 			}
@@ -9612,7 +9644,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 				status_zap(bl, hp, sp);
 
 				if (hp && skill_lv >= 5)
-					hp>>=1;	//Recover half damaged HP at level 5 [Skotlex]
+					hp /= 2;	//Recover half damaged HP at level 5 [Skotlex]
 				else
 					hp = 0;
 
@@ -10150,8 +10182,8 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			break;
 		if (potion_hp || potion_sp) {
 			int hp = potion_hp, sp = potion_sp;
-			hp = hp * (100 + (tstatus->vit<<1))/100;
-			sp = sp * (100 + (tstatus->int_<<1))/100;
+			hp = hp * (100 + (tstatus->vit * 2))/100;
+			sp = sp * (100 + (tstatus->int_ * 2))/100;
 			if (dstsd) {
 				if (hp)
 					hp = hp * (100 + pc_checkskill(dstsd,SM_RECOVERY)*10 + pc_skillheal2_bonus(dstsd, skill_id))/100;
@@ -10568,13 +10600,21 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			break;
 		}
 	case NPC_WIDEBLEEDING:
+	case NPC_WIDEBLEEDING2:
 	case NPC_WIDECONFUSE:
+	case NPC_WIDECONFUSE2:
 	case NPC_WIDECURSE:
+	case NPC_WIDECURSE2:
 	case NPC_WIDEFREEZE:
+	case NPC_WIDEFREEZE2:
 	case NPC_WIDESLEEP:
+	case NPC_WIDESLEEP2:
 	case NPC_WIDESILENCE:
+	case NPC_WIDESILENCE2:
 	case NPC_WIDESTONE:
+	case NPC_WIDESTONE2:
 	case NPC_WIDESTUN:
+	case NPC_WIDESTUN2:
 	case NPC_SLOWCAST:
 	case NPC_WIDEHELLDIGNITY:
 	case NPC_WIDEHEALTHFEAR:
@@ -19721,6 +19761,7 @@ int skill_attack_area(struct block_list *bl, va_list ap)
 		case NPC_DARKNESSBREATH:
 		case NPC_FIREBREATH:
 		case NPC_ICEBREATH:
+		case NPC_ICEBREATH2:
 		case NPC_THUNDERBREATH:
 			return (int)skill_attack(atk_type,src,dsrc,bl,skill_id,skill_lv,tick,flag);
 		default:
@@ -22244,6 +22285,7 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 			default:
 				if (skill_produce_db[idx].itemlv > 10 && skill_produce_db[idx].itemlv <= 20 ) { //Cooking items.
 					clif_specialeffect(&sd->bl, EF_COOKING_FAIL, AREA);
+					// todo: What in the world is this calculation
 					pc_setparam(sd, SP_COOKMASTERY, sd->cook_mastery - ( 1 << ((skill_produce_db[idx].itemlv - 11) / 2) ) - ( ( ( 1 << ((skill_produce_db[idx].itemlv - 11) / 2) ) >> 1 ) * 3 ));
 				}
 				break;

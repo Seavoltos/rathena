@@ -740,6 +740,7 @@ int chmapif_parse_regmapuser(int fd, int id){
 				}
 			}else{
 				character = std::make_shared<struct online_char_data>( aid );
+				char_get_onlinedb()[aid] = character;
 			}
 
 			character->server = id;
@@ -1015,6 +1016,7 @@ int chmapif_parse_reqchangemapserv(int fd){
 
 			if( data == nullptr ){
 				data = std::make_shared<struct online_char_data>( aid );
+				char_get_onlinedb()[aid] = data;
 			}
 
 			data->char_id = char_data->char_id;
