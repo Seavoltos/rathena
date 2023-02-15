@@ -2904,7 +2904,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 				if (!battle_config.feature_itemlink)
 					sprintf (message, msg_txt(NULL,541), mvp_sd->status.name, md->name, it->ename.c_str(), (float)drop_rate/100);
 				else
-					sprintf (message, msg_txt(NULL,541), mvp_sd->status.name, md->name, item_db.create_item_link( it->nameid ).c_str(), (float)drop_rate/100);
+					sprintf (message, msg_txt(NULL,541), mvp_sd->status.name, md->name, item_db.create_item_link( it ).c_str(), (float)drop_rate/100);
 				//MSG: "'%s' won %s's %s (chance: %0.02f%%)"
 				intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
 			}
@@ -3155,7 +3155,7 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 					if (!battle_config.feature_itemlink)
 						sprintf(message, msg_txt(NULL,541), mvp_sd->status.name, md->name, i_data->ename.c_str(), temp/100.);
 					else
-						sprintf(message, msg_txt(NULL,541), mvp_sd->status.name, md->name, item_db.create_item_link( i_data->nameid ).c_str(), temp/100.); // %s: %u
+						sprintf(message, msg_txt(NULL,541), mvp_sd->status.name, md->name, item_db.create_item_link( i_data ).c_str(), temp/100.); // %s: %u
 					//MSG: "'%s' won %s's %s (chance: %0.02f%%)"
 					intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
 				}
