@@ -5,12 +5,12 @@
 
 #include <stdlib.h> // atoi
 
-#include "../common/malloc.hpp" // aMalloc, aFree
-#include "../common/nullpo.hpp"
-#include "../common/showmsg.hpp" // ShowInfo
-#include "../common/strlib.hpp"
-#include "../common/timer.hpp"  // DIFF_TICK
-#include "../common/utils.hpp"
+#include <common/malloc.hpp> // aMalloc, aFree
+#include <common/nullpo.hpp>
+#include <common/showmsg.hpp> // ShowInfo
+#include <common/strlib.hpp>
+#include <common/timer.hpp>  // DIFF_TICK
+#include <common/utils.hpp>
 
 #include "achievement.hpp"
 #include "atcommand.hpp"
