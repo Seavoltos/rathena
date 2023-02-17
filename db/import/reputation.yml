@@ -42,28 +42,28 @@ Body:
   - Id: 2
     Name: Caza MvP
     Variable: RepPointsMvP
-    Minimum: -3000
-    Maximum: 3000
+    Minimum: -10000
+    Maximum: 10000
   - Id: 3
     Name: Player vs Player
     Variable: RepPointsPvP
-    Minimum: -5000
-    Maximum: 5000
+    Minimum: -10000
+    Maximum: 10000
   - Id: 4
     Name: Battleground
     Variable: RepPointsBG
-    Minimum: -5000
-    Maximum: 5000
+    Minimum: -10000
+    Maximum: 10000
   - Id: 5
     Name: War Of Emperium
     Variable: RepPointsWoE
-    Minimum: -5000
-    Maximum: 5000
+    Minimum: -10000
+    Maximum: 10000
   - Id: 6
     Name: Guild
     Variable: RepPointsGuild
-    Minimum: -5000
-    Maximum: 5000
+    Minimum: -10000
+    Maximum: 10000
     
 Footer:
   Imports:

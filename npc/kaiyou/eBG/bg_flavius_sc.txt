@@ -27,7 +27,7 @@ OnCroixDie:
 		set .Stone[.@Stone],0;
 		getmapxy .@m$, .@x, .@y, BL_PC;
 		movenpc "Neutral Stone#" + .@Stone, .@x, .@y;
-		mapannounce "bg_sc","Neutral Stone Dropped by [ " + strcharinfo(0) + " ]",1,0xFFFFFF;
+		mapannounce "bg_sc","[ " + strcharinfo(0) + " ] ha soltado una Neutral Stone",1,0xFFFFFF;
 		bg_rankpoints "sc_droped",1,0;
 		initnpctimer "Neutral Stone#" + .@Stone;
 		deltimer "Flavius_SC::OnFlash";
@@ -90,11 +90,11 @@ OnValidateScore:
 	end;
 
 OnTimer600000:
-	mapannounce "bg_sc","The Battle will end in 5 minutes!!",1,0x9ACD32;
+	mapannounce "bg_sc","La batalla terminará en 5 minutos!!",1,0x9ACD32;
 	end;
 
 OnTimer840000:
-	mapannounce "bg_sc","The Battle will end in 1 minute!!",1,0x9ACD32;
+	mapannounce "bg_sc","La batalla terminará en 1 minuto!!",1,0x9ACD32;
 	end;
 
 OnTimer900000:
@@ -108,13 +108,13 @@ OnMatchEnd:
 	// =======================================================
 	if (.guillaume_score > .croix_score) { // Guillaume Won
 		set $@BG_SC_Victory,1;
-		mapannounce "bg_sc","The Blue Team army has won the Battle of Flavius Stone Control!",1,0x0000FF;
+		mapannounce "bg_sc","El equipo Azul ha ganado la Batalla de Stone Control!",1,0x0000FF;
 	} else if (.guillaume_score < .croix_score) { // Croix Won
 		set $@BG_SC_Victory,2;
-		mapannounce "bg_sc","The Red Team army has won the Battle of Flavius Stone Control!",1,0xFF0000;
+		mapannounce "bg_sc","El equipo Rojo ha ganado la Batalla de Stone Control!",1,0xFF0000;
 	} else {
 		set $@BG_SC_Victory,3;
-		mapannounce "bg_sc","The battle is over. This is a Tie...!",1,0x9ACD32;
+		mapannounce "bg_sc","La batalla ha terminado. Y es un empate...!",1,0x9ACD32;
 	}
 	
 	bg_warp $@BG_SC_Team1,"bg_sc",28,60;
@@ -179,21 +179,24 @@ OnInit:
 // *********************************************************************
 
 bg_dom,33,59,4	script	Vintenar#SC_a	419,{
+	set .@min, getnpctimer(0,"Flavius_SC")/60000;
+	if( .@min <= 0 )
+		set .@min,1;
 	if (getcharid(4) == $@BG_SC_Team1) {
 		if ($@BG_SC_Victory == 1)
-			callfunc "F_BG_Badge",1,"Guillaume","SC";
+			callfunc "F_BG_Badge",1,"Guillaume","SC",.@min;
 		else if ($@BG_SC_Victory == 2)
-			callfunc "F_BG_Badge",0,"Guillaume","SC";
+			callfunc "F_BG_Badge",0,"Guillaume","SC",.@min;
 		else
-			callfunc "F_BG_Badge",2,"Guillaume","SC";
+			callfunc "F_BG_Badge",2,"Guillaume","SC",.@min;
 	}
 	else if(getcharid(4) == $@BG_SC_Team2) {
 		if ($@BG_SC_Victory == 2)
-			callfunc "F_BG_Badge",1,"Croix","SC";
+			callfunc "F_BG_Badge",1,"Croix","SC",.@min;
 		else if ($@BG_SC_Victory == 1)
-			callfunc "F_BG_Badge",0,"Croix","SC";
+			callfunc "F_BG_Badge",0,"Croix","SC",.@min;
 		else
-			callfunc "F_BG_Badge",2,"Croix","SC";
+			callfunc "F_BG_Badge",2,"Croix","SC",.@min;
 	}
 	bg_leave;
 	end;
@@ -204,21 +207,24 @@ OnInit:
 }
 
 bg_dom,166,123,5	script	Vintenar#SC_b	419,{
+	set .@min, getnpctimer(0,"Flavius_SC")/60000;
+	if( .@min <= 0 )
+		set .@min,1;
 	if (getcharid(4) == $@BG_SC_Team1) {
 		if ($@BG_SC_Victory == 1)
-			callfunc "F_BG_Badge",1,"Guillaume","SC";
+			callfunc "F_BG_Badge",1,"Guillaume","SC",.@min;
 		else if ($@BG_SC_Victory == 2)
-			callfunc "F_BG_Badge",0,"Guillaume","SC";
+			callfunc "F_BG_Badge",0,"Guillaume","SC",.@min;
 		else
-			callfunc "F_BG_Badge",2,"Guillaume","SC";
+			callfunc "F_BG_Badge",2,"Guillaume","SC",.@min;
 	}
 	else if(getcharid(4) == $@BG_SC_Team2) {
 		if ($@BG_SC_Victory == 2)
-			callfunc "F_BG_Badge",1,"Croix","SC";
+			callfunc "F_BG_Badge",1,"Croix","SC",.@min;
 		else if ($@BG_SC_Victory == 1)
-			callfunc "F_BG_Badge",0,"Croix","SC";
+			callfunc "F_BG_Badge",0,"Croix","SC",.@min;
 		else
-			callfunc "F_BG_Badge",2,"Croix","SC";
+			callfunc "F_BG_Badge",2,"Croix","SC",.@min;
 	}
 	bg_leave;
 	end;
@@ -320,7 +326,7 @@ OnTouch:
 		
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
-		mapannounce "bg_sc","Croix Stone has been stolen by [ " + strcharinfo(0) + " ]",1,0x0000FF;
+		mapannounce "bg_sc","Croix Stone ha sido robada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -334,7 +340,7 @@ OnTouch:
 		
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 
-		mapannounce "bg_sc","Croix Stone captured by [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		mapannounce "bg_sc","Croix Stone capturada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
 
 		setnpcdisplay strnpcinfo(3),"Croix Stone",1905;
 		set getvariableofnpc(.Stone[.Point],"Flavius_SC"),0;
@@ -386,7 +392,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
-		mapannounce "bg_sc","Croix Stone has been stolen by [ " + strcharinfo(0) + " ]",1,0x0000FF;
+		mapannounce "bg_sc","Croix Stone ha sido robada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -400,7 +406,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 
-		mapannounce "bg_sc","Croix Stone captured by [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		mapannounce "bg_sc","Croix Stone ha sido capturada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
 
 		setnpcdisplay strnpcinfo(3),"Croix Stone",1905;
 		set getvariableofnpc(.Stone[.Point],"Flavius_SC"),0;
@@ -452,7 +458,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
-		mapannounce "bg_sc","Croix Stone has been stolen by [ " + strcharinfo(0) + " ]",1,0x0000FF;
+		mapannounce "bg_sc","Croix Stone ha sido robada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -466,7 +472,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 
-		mapannounce "bg_sc","Croix Stone captured by [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		mapannounce "bg_sc","Croix Stone ha sido capturada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
 
 		setnpcdisplay strnpcinfo(3),"Croix Stone",1905;
 		set getvariableofnpc(.Stone[.Point],"Flavius_SC"),0;
@@ -518,7 +524,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
-		mapannounce "bg_sc","Croix Stone has been stolen by [ " + strcharinfo(0) + " ]",1,0x0000FF;
+		mapannounce "bg_sc","Croix Stone ha sido robada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -532,7 +538,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 
-		mapannounce "bg_sc","Croix Stone captured by [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		mapannounce "bg_sc","Croix Stone ha sido capturada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
 
 		setnpcdisplay strnpcinfo(3),"Croix Stone",1905;
 		set getvariableofnpc(.Stone[.Point],"Flavius_SC"),0;
@@ -584,7 +590,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
-		mapannounce "bg_sc","Croix Stone has been stolen by [ " + strcharinfo(0) + " ]",1,0x0000FF;
+		mapannounce "bg_sc","Croix Stone ha sido robada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -598,7 +604,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 
-		mapannounce "bg_sc","Croix Stone captured by [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		mapannounce "bg_sc","Croix Stone ha sido capturada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
 
 		setnpcdisplay strnpcinfo(3),"Croix Stone",1905;
 		set getvariableofnpc(.Stone[.Point],"Flavius_SC"),0;
@@ -650,7 +656,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
-		mapannounce "bg_sc","Croix Stone has been stolen by [ " + strcharinfo(0) + " ]",1,0x0000FF;
+		mapannounce "bg_sc","Croix Stone ha sido robada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -664,7 +670,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 
-		mapannounce "bg_sc","Croix Stone captured by [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		mapannounce "bg_sc","Croix Stone ha sido capturada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
 
 		setnpcdisplay strnpcinfo(3),"Croix Stone",1905;
 		set getvariableofnpc(.Stone[.Point],"Flavius_SC"),0;
@@ -719,7 +725,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
-		mapannounce "bg_sc","Guillaume Stone has been stolen by [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		mapannounce "bg_sc","Guillaume Stone ha sido robada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -733,7 +739,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 
-		mapannounce "bg_sc","Guillaume Stone captured by [ " + strcharinfo(0) + " ]",1,0x0000FF;
+		mapannounce "bg_sc","Guillaume Stone ha sido capturada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
 
 		setnpcdisplay strnpcinfo(3),"Guillaume Stone",1905;
 		set getvariableofnpc(.Stone[.Point],"Flavius_SC"),0;
@@ -785,7 +791,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
-		mapannounce "bg_sc","Guillaume Stone has been stolen by [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		mapannounce "bg_sc","Guillaume Stone ha sido robada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -799,7 +805,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 
-		mapannounce "bg_sc","Guillaume Stone captured by [ " + strcharinfo(0) + " ]",1,0x0000FF;
+		mapannounce "bg_sc","Guillaume Stone ha sido capturada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
 
 		setnpcdisplay strnpcinfo(3),"Guillaume Stone",1905;
 		set getvariableofnpc(.Stone[.Point],"Flavius_SC"),0;
@@ -851,7 +857,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
-		mapannounce "bg_sc","Guillaume Stone has been stolen by [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		mapannounce "bg_sc","Guillaume Stone ha sido robada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -865,7 +871,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 
-		mapannounce "bg_sc","Guillaume Stone captured by [ " + strcharinfo(0) + " ]",1,0x0000FF;
+		mapannounce "bg_sc","Guillaume Stone ha sido capturada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
 
 		setnpcdisplay strnpcinfo(3),"Guillaume Stone",1905;
 		set getvariableofnpc(.Stone[.Point],"Flavius_SC"),0;
@@ -917,7 +923,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
-		mapannounce "bg_sc","Guillaume Stone has been stolen by [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		mapannounce "bg_sc","Guillaume Stone ha sido robada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -931,7 +937,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 
-		mapannounce "bg_sc","Guillaume Stone captured by [ " + strcharinfo(0) + " ]",1,0x0000FF;
+		mapannounce "bg_sc","Guillaume Stone ha sido capturada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
 
 		setnpcdisplay strnpcinfo(3),"Guillaume Stone",1905;
 		set getvariableofnpc(.Stone[.Point],"Flavius_SC"),0;
@@ -983,7 +989,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
-		mapannounce "bg_sc","Guillaume Stone has been stolen by [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		mapannounce "bg_sc","Guillaume Stone ha sido robada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -997,7 +1003,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 
-		mapannounce "bg_sc","Guillaume Stone captured by [ " + strcharinfo(0) + " ]",1,0x0000FF;
+		mapannounce "bg_sc","Guillaume Stone ha sido capturada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
 
 		setnpcdisplay strnpcinfo(3),"Guillaume Stone",1905;
 		set getvariableofnpc(.Stone[.Point],"Flavius_SC"),0;
@@ -1049,7 +1055,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,true);
 
-		mapannounce "bg_sc","Guillaume Stone has been stolen by [ " + strcharinfo(0) + " ]",1,0xFF0000;
+		mapannounce "bg_sc","Guillaume Stone ha sido robada por [ " + strcharinfo(0) + " ]",1,0xFF0000;
 
 		addtimer 2000, "Flavius_SC::OnFlash";
 		set .Point,0;
@@ -1063,7 +1069,7 @@ OnTouch:
 
 		setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
 
-		mapannounce "bg_sc","Guillaume Stone captured by [ " + strcharinfo(0) + " ]",1,0x0000FF;
+		mapannounce "bg_sc","Guillaume Stone ha sido capturada por [ " + strcharinfo(0) + " ]",1,0x0000FF;
 
 		setnpcdisplay strnpcinfo(3),"Guillaume Stone",1905;
 		set getvariableofnpc(.Stone[.Point],"Flavius_SC"),0;
@@ -1096,35 +1102,8 @@ OnInit:
 // Battleground Therapist
 // *********************************************************************
 
-bg_sc,23,60,4	script	Therapist in battle#sc1	4_F_SISTER,10,10,{
-	sc_start 32, 600000, 10;  // Increase Agi
-	sc_start 30, 600000, 10; // Blessing
-	percentheal 100,100;
-	setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
-	repairall;
-	sc_end SC_BERSERK;
-	sc_end SC_STRIPWEAPON;
-	sc_end SC_STRIPSHIELD;
-	sc_end SC_STRIPARMOR;
-	sc_end SC_STRIPHELM;
-	specialeffect2 EF_HEAL;
-	end;
-}
-
-bg_sc,176,124,4	script	Therapist in battle#sc2	4_F_SISTER,10,10,{
-	sc_start 32, 600000, 10;  // Increase Agi
-	sc_start 30, 600000, 10; // Blessing
-	percentheal 100,100;
-	setpcblock(PCBLOCK_SKILL|PCBLOCK_USEITEM,false);
-	repairall;
-	sc_end SC_BERSERK;
-	sc_end SC_STRIPWEAPON;
-	sc_end SC_STRIPSHIELD;
-	sc_end SC_STRIPARMOR;
-	sc_end SC_STRIPHELM;
-	specialeffect2 EF_HEAL;
-	end;
-}
+bg_sc,23,60,4	duplicate(Battleground_Therapist)	Therapist#sc1	4_F_SISTER,10,10
+bg_sc,176,124,4	duplicate(Battleground_Therapist)	Therapist#sc2	4_F_SISTER,10,10
 
 // Battleground Respawn
 // *********************************************************************

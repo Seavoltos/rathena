@@ -291,35 +291,7 @@ Body:
     Class: Boss
     Modes:
       Mvp: true
-  - Id: 2105
-    AegisName: BARRICADE_BG
-    Name: Barricade
-    Level: 98
-    Hp: 60
-    Defense: 127
-    MagicDefense: 99
-    Agi: 17
-    Int: 80
-    Dex: 126
-    Luk: 20
-    AttackRange: 1
-    SkillRange: 10
-    ChaseRange: 12
-    Size: Large
-    Race: Formless
-    Element: Neutral
-    ElementLevel: 1
-    WalkSpeed: 300
-    AttackDelay: 1288
-    AttackMotion: 288
-    DamageMotion: 384
-    Class: Boss
-    Modes:
-      IgnoreMagic: true
-      IgnoreMelee: true
-      IgnoreMisc: true
-      IgnoreRanged: true
-  - Id: 20400
+  - Id: 30400
     AegisName: Guardian_Stone
     Name: Guardian Stone
     Level: 90
@@ -341,7 +313,7 @@ Body:
       IgnoreMelee: true
       IgnoreMisc: true
       IgnoreRanged: true
-  - Id: 20401
+  - Id: 30401
     AegisName: Guardian_Stone2
     Name: Guardian Stone
     Level: 90
@@ -363,7 +335,7 @@ Body:
       IgnoreMelee: true
       IgnoreMisc: true
       IgnoreRanged: true
-  - Id: 20402
+  - Id: 30402
     AegisName: Emperium_BG
     Name: Emperium
     Level: 90
@@ -391,122 +363,34 @@ Body:
     AttackMotion: 288
     DamageMotion: 384
     Class: Boss
-  - Id: 20403
-    AegisName: BomberMan_Mushroom
-    Name: BomberMan Mushroom
-    Level: 1
-    Hp: 2000
-    Attack: 1
-    Attack2: 1
-    Defense: 100
+  - Id: 30403
+    AegisName: BARRICADE_BG
+    Name: Barricade
+    Level: 98
+    Hp: 60
+    Defense: 127
     MagicDefense: 99
-    Luk: 90
+    Agi: 17
+    Int: 80
+    Dex: 126
+    Luk: 20
     AttackRange: 1
-    SkillRange: 7
+    SkillRange: 10
     ChaseRange: 12
-    Size: Small
-    Race: Plant
-    Element: Holy
+    Size: Large
+    Race: Formless
+    Element: Neutral
     ElementLevel: 1
-    WalkSpeed: 1000
-    AttackDelay: 1
-    AttackMotion: 1
-    DamageMotion: 1
+    WalkSpeed: 300
+    AttackDelay: 1288
+    AttackMotion: 288
+    DamageMotion: 384
+    Class: Boss
     Modes:
-      NoCast: true
-      Assist: true
       IgnoreMagic: true
       IgnoreMelee: true
       IgnoreMisc: true
       IgnoreRanged: true
-      KnockBackImmune: true
-  - Id: 20404
-    AegisName: BomberMan_Xmas
-    Name: BomberMan Xmas
-    Level: 1
-    Hp: 2000
-    Attack: 1
-    Attack2: 1
-    Defense: 100
-    MagicDefense: 99
-    Luk: 90
-    AttackRange: 1
-    SkillRange: 7
-    ChaseRange: 12
-    Size: Small
-    Race: Plant
-    Element: Holy
-    ElementLevel: 1
-    WalkSpeed: 1000
-    AttackDelay: 1
-    AttackMotion: 1
-    DamageMotion: 1
-    Modes:
-      NoCast: true
-      Assist: true
-      IgnoreMagic: true
-      IgnoreMelee: true
-      IgnoreMisc: true
-      IgnoreRanged: true
-      KnockBackImmune: true
-  - Id: 3293
-    AegisName: BomberMan_Mushroom2
-    Name: BomberMan Mushroom
-    Level: 1
-    Hp: 2000
-    Attack: 1
-    Attack2: 1
-    Defense: 100
-    MagicDefense: 99
-    Luk: 90
-    AttackRange: 1
-    SkillRange: 7
-    ChaseRange: 12
-    Size: Small
-    Race: Plant
-    Element: Holy
-    ElementLevel: 1
-    WalkSpeed: 1000
-    AttackDelay: 1
-    AttackMotion: 1
-    DamageMotion: 1
-    Modes:
-      NoCast: true
-      Assist: true
-      IgnoreMagic: true
-      IgnoreMelee: true
-      IgnoreMisc: true
-      IgnoreRanged: true
-      KnockBackImmune: true
-  - Id: 20405
-    AegisName: BomberMan_bug
-    Name: BomberMan bug
-    Level: 1
-    Hp: 2000
-    Attack: 1
-    Attack2: 1
-    Defense: 100
-    MagicDefense: 99
-    Luk: 90
-    AttackRange: 1
-    SkillRange: 7
-    ChaseRange: 12
-    Size: Small
-    Race: Plant
-    Element: Holy
-    ElementLevel: 1
-    WalkSpeed: 1000
-    AttackDelay: 1
-    AttackMotion: 1
-    DamageMotion: 1
-    Modes:
-      NoCast: true
-      Assist: true
-      IgnoreMagic: true
-      IgnoreMelee: true
-      IgnoreMisc: true
-      IgnoreRanged: true
-      KnockBackImmune: true
   - Id: 20574
     AegisName: MD_C_WHITEKNIGHT
     Name: White Knight

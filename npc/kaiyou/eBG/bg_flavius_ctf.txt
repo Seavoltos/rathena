@@ -165,7 +165,7 @@ OnTimer600000:
 	end;
 
 OnTimer840000:
-	mapannounce "ctf00","Meijing: La batalla finalizará en 5 minutos!!",1,0x00FF00;
+	mapannounce "ctf00","Meijing: La batalla finalizará en 1 minuto!!",1,0x00FF00;
 	end;
 
 OnTimer900000:
@@ -232,21 +232,24 @@ OnMatchEnd:
 }
 
 ctf00,49,7,4	script	Vintenar#ctf	419,{
+	set .@min, getnpctimer(0,"Flavius_CTF")/60000;
+	if( .@min <= 0 )
+		set .@min,1;
 	if (getcharid(4) == $@BG_CTF_Team1) {
 		if ($@BG_CTF__Victory == 1)
-			callfunc "F_BG_Badge",1,"Guillaume","CTF";
+			callfunc "F_BG_Badge",1,"Guillaume","CTF",.@min;
 		else if ($@BG_CTF__Victory == 2)
-			callfunc "F_BG_Badge",0,"Guillaume","CTF";
+			callfunc "F_BG_Badge",0,"Guillaume","CTF",.@min;
 		else
-			callfunc "F_BG_Badge",2,"Guillaume","CTF";
+			callfunc "F_BG_Badge",2,"Guillaume","CTF",.@min;
 	}
 	else if(getcharid(4) == $@BG_CTF_Team2) {
 		if ($@BG_CTF__Victory == 2)
-			callfunc "F_BG_Badge",1,"Croix","CTF";
+			callfunc "F_BG_Badge",1,"Croix","CTF",.@min;
 		else if ($@BG_CTF__Victory == 1)
-			callfunc "F_BG_Badge",0,"Croix","CTF";
+			callfunc "F_BG_Badge",0,"Croix","CTF",.@min;
 		else
-			callfunc "F_BG_Badge",2,"Croix","CTF";
+			callfunc "F_BG_Badge",2,"Croix","CTF",.@min;
 	}
 	bg_leave;
 	end;

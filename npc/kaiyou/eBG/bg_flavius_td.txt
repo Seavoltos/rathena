@@ -184,21 +184,24 @@ OnInit:
 // Battleground Rewards
 // *********************************************************************
 rwc03,8,49,5	script	Vintenar#td_a	419,{
+	set .@min, getnpctimer(0,"Hunter_TD")/60000;
+	if( .@min <= 0 )
+		set .@min,1;
 	if (getcharid(4) == $@BG_TD_Team1) {
 		if ($@BG_TD_Victory == 1)
-			callfunc "F_BG_Badge",1,"Guillaume","TD";
+			callfunc "F_BG_Badge",1,"Guillaume","TD",.@min;
 		else if ($@BG_TD_Victory == 2)
-			callfunc "F_BG_Badge",0,"Guillaume","TD";
+			callfunc "F_BG_Badge",0,"Guillaume","TD",.@min;
 		else
-			callfunc "F_BG_Badge",2,"Guillaume","TD";
+			callfunc "F_BG_Badge",2,"Guillaume","TD",.@min;
 	}
 	else if(getcharid(4) == $@BG_TD_Team2) {
 		if ($@BG_TD_Victory == 2)
-			callfunc "F_BG_Badge",1,"Croix","TD";
-		else ($@BG_TD_Victory == 1)
-			callfunc "F_BG_Badge",0,"Croix","TD";
+			callfunc "F_BG_Badge",1,"Croix","TD",.@min;
+		else if ($@BG_TD_Victory == 1)
+			callfunc "F_BG_Badge",0,"Croix","TD",.@min;
 		else
-			callfunc "F_BG_Badge",2,"Croix","TD";
+			callfunc "F_BG_Badge",2,"Croix","TD",.@min;
 	}
 	bg_leave;
 	end;
@@ -209,21 +212,24 @@ OnInit:
 }
 
 rwc03,91,49,3	script	Vintenar#td_b	419,{
+	set .@min, getnpctimer(0,"Hunter_TD")/60000;
+	if( .@min <= 0 )
+		set .@min,1;
 	if (getcharid(4) == $@BG_TD_Team1) {
 		if ($@BG_TD_Victory == 1)
-			callfunc "F_BG_Badge",1,"Guillaume","TD";
+			callfunc "F_BG_Badge",1,"Guillaume","TD",.@min;
 		else if ($@BG_TD_Victory == 2)
-			callfunc "F_BG_Badge",0,"Guillaume","TD";
+			callfunc "F_BG_Badge",0,"Guillaume","TD",.@min;
 		else
-			callfunc "F_BG_Badge",2,"Guillaume","TD";
+			callfunc "F_BG_Badge",2,"Guillaume","TD",.@min;
 	}
 	else if(getcharid(4) == $@BG_TD_Team2) {
 		if ($@BG_TD_Victory == 2)
-			callfunc "F_BG_Badge",1,"Croix","TD";
-		else ($@BG_TD_Victory == 1)
-			callfunc "F_BG_Badge",0,"Croix","TD";
+			callfunc "F_BG_Badge",1,"Croix","TD",.@min;
+		else if ($@BG_TD_Victory == 1)
+			callfunc "F_BG_Badge",0,"Croix","TD",.@min;
 		else
-			callfunc "F_BG_Badge",2,"Croix","TD";
+			callfunc "F_BG_Badge",2,"Croix","TD",.@min;
 	}
 	bg_leave;
 	end;
@@ -240,8 +246,6 @@ rwc03,8,49,5	script	Therapist in battle#htd1	4_F_SISTER,10,10,{
 	getmapxy(.@map$,.@x,.@y,BL_PC);
 	if(.@x < 16){
 		specialeffect2 EF_HEAL;
-		//sc_start 32, 600000, 10;  // Increase Agi
-		//sc_start 30, 600000, 10; // Blessing
 		percentheal 100,100;
 		repairall;
 		sc_end SC_BERSERK;
@@ -260,8 +264,6 @@ rwc03,91,49,3	script	Therapist in battle#htd2	4_F_SISTER,10,10,{
 	getmapxy(.@map$,.@x,.@y,BL_PC);
 	if(.@x > 85){
 		specialeffect2 EF_HEAL;
-		//sc_start 32, 600000, 10;  // Increase Agi
-		//sc_start 30, 600000, 10; // Blessing
 		percentheal 100,100;
 		sc_end SC_BERSERK;
 		sc_end SC_STRIPWEAPON;

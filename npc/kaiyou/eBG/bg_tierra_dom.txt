@@ -69,6 +69,7 @@ OnReady:
 	
 	bgannounce "Meijing: El Battleground Dominion ha iniciado!",$@BG_COLOR;
 	
+	initnpctimer "Domination_Timer";
 	sleep 2100;
 	bg_warp getd(.T1$),"bg_dom",28,59;
 	bg_warp getd(.T2$),"bg_dom",172,123;
@@ -136,19 +137,19 @@ OnMatchEnd:
 	// Team Rewards
 	// =======================================================
 	// Tie
-	if (.Team1_Score >= 60 && .Team2_Score >= 60) {
+	if (.Team1_Score >= 60 && .Team2_Score >= 60 || .Team1_Score == .Team2_Score) {
 		set $@BG_DOM_Victory,3;
-		mapannounce "bg_dom","The battle is over. This is a Tie...!",1,0x4169E1;
+		mapannounce "bg_dom","La batalla ha terminado. Y es un empate...!",1,0x4169E1;
 	}
 	// Team 1 Won
-	else if (.Team1_Score >= 60) {
+	else if (.Team1_Score >= 60 || .Team1_Score > .Team2_Score) {
 		set $@BG_DOM_Victory,1;
-		mapannounce "bg_dom","The Blue Team army has won the Battle of Tierra Domination!",1,0x0000FF;
+		mapannounce "bg_dom","El equipo Azul ha ganado la batalla de Domination!",1,0x0000FF;
 	}
 	// Team 2 Won
-	else if (.Team2_Score >= 60) {
+	else if (.Team2_Score >= 60 || .Team2_Score > .Team1_Score) {
 		set $@BG_DOM_Victory,2;
-		mapannounce "bg_dom","The Red Team army has won the Battle of Tierra Domination!",1,0xFF0000;
+		mapannounce "bg_dom","El equipo Rojo ha ganado la batalla de Domination!",1,0xFF0000;
 	}
 	bg_warp $@BG_DOM_Team1,"bg_dom",28,59;
 	bg_warp $@BG_DOM_Team2,"bg_dom",172,123;
@@ -170,6 +171,7 @@ OnMatchEnd:
 	disablenpc "Vintenar#DOM_a";
 	disablenpc "Vintenar#DOM_b";
 	mapwarp "bg_dom","prontera",155,181;
+	stopnpctimer "Domination_Timer";
 	
 	// =======================================================
 	set .Team1_Score, 0;
@@ -184,21 +186,45 @@ OnInit:
 	end;
 }
 
+// Battleground Timmer
+// *********************************************************************
+-	script	Domination_Timer	FAKE_NPC,{
+	end;
+OnTimer600000:
+	mapannounce "bg_dom","La batalla finalizará en 5 minutos.",1,0xDDA0DD;
+	end;
+
+OnTimer840000:
+	mapannounce "bg_dom","La batalla finalizará en 1 minuto.",1,0xDDA0DD;
+	end;
+	
+OnTimer900000:
+	donpcevent "Tierra_DOM::OnMatchEnd";
+	end;
+}
+
 // Battleground Rewards
 // *********************************************************************
 
 bg_dom,33,59,4	script	Vintenar#DOM_a	419,{
+	set .@min, getnpctimer(0,"Domination_Timer")/60000;
+	if( .@min <= 0 )
+		set .@min,1;
 	if (getcharid(4) == $@BG_DOM_Team1) {
 		if ($@BG_DOM_Victory == 1)
-			callfunc "F_BG_Badge",1,"Guillaume","DOM";
+			callfunc "F_BG_Badge",1,"Guillaume","DOM",.@min;
+		else  if ($@BG_DOM_Victory == 2)
+			callfunc "F_BG_Badge",0,"Guillaume","DOM",.@min;
 		else
-			callfunc "F_BG_Badge",0,"Guillaume","DOM";
+			callfunc "F_BG_Badge",2,"Guillaume","DOM",.@min;
 	}
 	else if(getcharid(4) == $@BG_DOM_Team2) {
 		if ($@BG_DOM_Victory == 2)
-			callfunc "F_BG_Badge",1,"Croix","DOM";
+			callfunc "F_BG_Badge",1,"Croix","DOM",.@min;
+		else if ($@BG_DOM_Victory == 1)
+			callfunc "F_BG_Badge",0,"Croix","DOM",.@min;
 		else
-			callfunc "F_BG_Badge",0,"Croix","DOM";
+			callfunc "F_BG_Badge",2,"Croix","DOM",.@min;
 	}
 	bg_leave;
 	end;
@@ -209,17 +235,24 @@ OnInit:
 }
 
 bg_dom,166,123,5	script	Vintenar#DOM_b	419,{
+	set .@min, getnpctimer(0,"Domination_Timer")/60000;
+	if( .@min <= 0 )
+		set .@min,1;
 	if (getcharid(4) == $@BG_DOM_Team1) {
 		if ($@BG_DOM_Victory == 1)
-			callfunc "F_BG_Badge",1,"Guillaume","DOM";
+			callfunc "F_BG_Badge",1,"Guillaume","DOM",.@min;
+		else  if ($@BG_DOM_Victory == 2)
+			callfunc "F_BG_Badge",0,"Guillaume","DOM",.@min;
 		else
-			callfunc "F_BG_Badge",0,"Guillaume","DOM";
+			callfunc "F_BG_Badge",2,"Guillaume","DOM",.@min;
 	}
 	else if(getcharid(4) == $@BG_DOM_Team2) {
 		if ($@BG_DOM_Victory == 2)
-			callfunc "F_BG_Badge",1,"Croix","DOM";
+			callfunc "F_BG_Badge",1,"Croix","DOM",.@min;
+		else if ($@BG_DOM_Victory == 1)
+			callfunc "F_BG_Badge",0,"Croix","DOM",.@min;
 		else
-			callfunc "F_BG_Badge",0,"Croix","DOM";
+			callfunc "F_BG_Badge",2,"Croix","DOM",.@min;
 	}
 	bg_leave;
 	end;
@@ -262,15 +295,15 @@ OnTimer1000:
 			if (.Balance == 50) {
 				set .Balance, 50;
 				set .Owner, 1; // Team 1
-				setnpcdisplay "Dom_N_Base","Blue Team Base",1912;
-				mapannounce "bg_dom","North Base captured by Blue Team",1,0x0000FF;
+				setnpcdisplay "Dom_N_Base","Azul North Base",1912;
+				mapannounce "bg_dom","North Base ha sido capturada por el equipo Azul",1,0x0000FF;
 				unittalk(getnpcid(0),"Captured by Blue Team!");
 			}
 			else if (.Balance == -50) {
 				set .Balance, -50;
 				set .Owner, 2; // Team 2
-				setnpcdisplay "Dom_N_Base","Red Team Base",1913;
-				mapannounce "bg_dom","North Base captured by Red Team",1,0xFF0000;
+				setnpcdisplay "Dom_N_Base","Rojo North Base",1913;
+				mapannounce "bg_dom","North Base ha sido capturada por el equipo Rojo",1,0xFF0000;
 				unittalk(getnpcid(0),"Captured by Red Team!");
 			}
 			break;
@@ -278,14 +311,14 @@ OnTimer1000:
 			if (.Balance <= 0) { // Team 1 lost Control
 				set .Owner, 0;
 				setnpcdisplay "Dom_N_Base","North Base",1911;
-				mapannounce "bg_dom","Blue Team lost control of the North Base",1,0x0000FF;
+				mapannounce "bg_dom","El equipo Azul perdió el control de la North Base",1,0x0000FF;
 			}
 			break;
 		case 2:
 			if (.Balance >= 0) { // Team 2 lost Control
 				set .Owner, 0;
 				setnpcdisplay "Dom_N_Base","North Base",1911;
-				mapannounce "bg_dom","Red Team lost control of the North Base",1,0xFF0000;
+				mapannounce "bg_dom","El equipo Rojo perdió el control de la North Base",1,0xFF0000;
 			}
 			break;
 	}
@@ -295,9 +328,9 @@ OnTimer1000:
 	}
 
 	if (.Balance > 0 && .Balance < 50 && .Owner == 0)
-		unittalk(getnpcid(0),"Blue Team: "+(.Balance*2)+"%");
+		unittalk(getnpcid(0),"Equipo Azul: "+(.Balance*2)+"%");
 	else if (.Balance < 0 && .Balance > -50 && .Owner == 0)
-		unittalk(getnpcid(0),"Red Team: "+(.@b*2)+"%");
+		unittalk(getnpcid(0),"Equipo Rojo: "+(.@b*2)+"%");
 
 	if (.@Balance > 0)
 		specialeffect 236;
@@ -361,30 +394,30 @@ OnTimer1000:
 			if (.Balance == 50) {
 				set .Balance, 50;
 				set .Owner, 1; // Team 1
-				setnpcdisplay "Dom_C_Base","Blue Team Base",1912;
-				mapannounce "bg_dom","Center Base captured by Blue Team",1,0x0000FF;
-				unittalk(getnpcid(0),"Captured by Blue Team!");
+				setnpcdisplay "Dom_C_Base","Azul Center Base",1912;
+				mapannounce "bg_dom","Center Base ha sido capturada por el equipo Azul",1,0x0000FF;
+				unittalk(getnpcid(0),"Capturada!!");
 			}
 			else if (.Balance == -50) {
 				set .Balance, -50;
 				set .Owner, 2; // Team 2
-				setnpcdisplay "Dom_C_Base","Red Team Base",1913;
-				mapannounce "bg_dom","Center Base captured by Red Team",1,0xFF0000;
-				unittalk(getnpcid(0),"Captured by Red Team!");
+				setnpcdisplay "Dom_C_Base","Rojo Center Base",1913;
+				mapannounce "bg_dom","Center Base ha sido capturada por el equipo Rojo",1,0xFF0000;
+				unittalk(getnpcid(0),"Capturada!!");
 			}
 			break;
 		case 1:
 			if (.Balance <= 0) { // Team 1 lost Control
 				set .Owner, 0;
 				setnpcdisplay "Dom_C_Base","Center Base",1911;
-				mapannounce "bg_dom","Blue Team lost control of the Center Base",1,0x0000FF;
+				mapannounce "bg_dom","El equipo Azul perdió el control de la Center Base",1,0x0000FF;
 			}
 			break;
 		case 2:
 			if (.Balance >= 0) { // Team 2 lost Control
 				set .Owner, 0;
 				setnpcdisplay "Dom_C_Base","Center Base",1911;
-				mapannounce "bg_dom","Red Team lost control of the Center Base",1,0xFF0000;
+				mapannounce "bg_dom","El equipo Rojo perdió el control de la Center Base",1,0xFF0000;
 			}
 			break;
 	}
@@ -394,9 +427,9 @@ OnTimer1000:
 	}
 
 	if (.Balance > 0 && .Balance < 50 && .Owner == 0)
-		unittalk(getnpcid(0),"Blue Team: "+(.Balance*2)+"%");
+		unittalk(getnpcid(0),"Equipo Azul: "+(.Balance*2)+"%");
 	else if (.Balance < 0 && .Balance > -50 && .Owner == 0)
-		unittalk(getnpcid(0),"Red Team: "+(.@b*2)+"%");
+		unittalk(getnpcid(0),"Equipo Rojo: "+(.@b*2)+"%");
 
 	if (.@Balance > 0)
 		specialeffect 236;
@@ -461,30 +494,30 @@ OnTimer1000:
 			if (.Balance == 50) {
 				set .Balance, 50;
 				set .Owner, 1; // Team 1
-				setnpcdisplay "Dom_S_Base","Blue Team Base",1912;
-				mapannounce "bg_dom","South Base captured by Blue Team",1,0x0000FF;
-				unittalk(getnpcid(0),"Captured by Blue Team!");
+				setnpcdisplay "Dom_S_Base","Azul South Base",1912;
+				mapannounce "bg_dom","South Base ha sido capturada por el equipo Azul",1,0x0000FF;
+				unittalk(getnpcid(0),"Capturada!!");
 			}
 			else if (.Balance == -50) {
 				set .Balance, -50;
 				set .Owner, 2; // Team 2
-				setnpcdisplay "Dom_S_Base","Red Team Base",1913;
-				mapannounce "bg_dom","South Base captured by Red Team",1,0xFF0000;
-				unittalk(getnpcid(0),"Captured by Red Team!");
+				setnpcdisplay "Dom_S_Base","Azul South Base",1913;
+				mapannounce "bg_dom","South Base ha sido capturada por el equipo Rojo",1,0xFF0000;
+				unittalk(getnpcid(0),"Capturada!!");
 			}
 			break;
 		case 1:
 			if (.Balance <= 0) { // Team 1 lost Control
 				set .Owner, 0;
 				setnpcdisplay "Dom_S_Base","North Base",1911;
-				mapannounce "bg_dom","Blue Team lost control of the South Base",1,0x0000FF;
+				mapannounce "bg_dom","El equipo Azul perdió el control de la South Base",1,0x0000FF;
 			}
 			break;
 		case 2:
 			if (.Balance >= 0) { // Team 2 lost Control
 				set .Owner, 0;
 				setnpcdisplay "Dom_S_Base","North Base",1911;
-				mapannounce "bg_dom","Red Team lost control of the South Base",1,0xFF0000;
+				mapannounce "bg_dom","El equipo Rojo perdió el control de la South Base",1,0xFF0000;
 			}
 			break;
 	}
@@ -494,9 +527,9 @@ OnTimer1000:
 	}
 
 	if (.Balance > 0 && .Balance < 50 && .Owner == 0)
-		unittalk(getnpcid(0),"Blue Team: "+(.Balance*2)+"%");
+		unittalk(getnpcid(0),"Equipo Azul: "+(.Balance*2)+"%");
 	else if (.Balance < 0 && .Balance > -50 && .Owner == 0)
-		unittalk(getnpcid(0),"Red Team: "+(.@b*2)+"%");
+		unittalk(getnpcid(0),"Equipo Rojo: "+(.@b*2)+"%");
 
 	if (.@Balance > 0)
 		specialeffect 236;

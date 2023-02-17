@@ -21178,6 +21178,7 @@ BUILDIN_FUNC(bg_get_data)
 {
 	int bg_id = script_getnum(st,2), type = script_getnum(st,3), i = 0;
 	std::shared_ptr<s_battleground_data> bg = util::umap_find(bg_team_db, bg_id);
+	int mapindex;
 
 	if (bg) {
 		switch (type) {
@@ -21189,6 +21190,10 @@ BUILDIN_FUNC(bg_get_data)
 				mapreg_setreg(reference_uid(add_str("$@arenamembers"), i++), member.sd->bl.id);
 			mapreg_setreg(add_str("$@arenamemberscount"), i);
 			script_pushint(st, i);
+			break;
+		case 2:
+			mapindex = bg->cemetery.map;
+			script_pushconststr(st, mapindex_id2name(mapindex));
 			break;
 		default:
 			ShowError("script:bg_get_data: unknown data identifier %d\n", type);

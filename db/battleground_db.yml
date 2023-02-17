@@ -149,6 +149,86 @@ Body:
           Variable: $@BG_CQ_Team2
           RespawnX: 295
           RespawnY: 379
+      - Map: schg_cas07
+        StartEvent: Conquest::OnReady
+        TeamA:
+          QuitEvent: Conquest::OnTeam1Quit
+          ActiveEvent: Conquest::OnGuillaumeActive
+          DeathEvent: Conquest::OnGuillaumeDie
+          Variable: $@BG_CQ_Team1
+          RespawnX: 90
+          RespawnY: 311
+        TeamB:
+          QuitEvent: Conquest::OnTeam2Quit
+          ActiveEvent: Conquest::OnCroixActive
+          DeathEvent: Conquest::OnCroixDie
+          Variable: $@BG_CQ_Team2
+          RespawnX: 113
+          RespawnY: 311
+      - Map: schg_cas08
+        StartEvent: Conquest::OnReady
+        TeamA:
+          QuitEvent: Conquest::OnTeam1Quit
+          ActiveEvent: Conquest::OnGuillaumeActive
+          DeathEvent: Conquest::OnGuillaumeDie
+          Variable: $@BG_CQ_Team1
+          RespawnX: 28
+          RespawnY: 50
+        TeamB:
+          QuitEvent: Conquest::OnTeam2Quit
+          ActiveEvent: Conquest::OnCroixActive
+          DeathEvent: Conquest::OnCroixDie
+          Variable: $@BG_CQ_Team2
+          RespawnX: 87
+          RespawnY: 50
+      - Map: arug_cas06
+        StartEvent: Conquest::OnReady
+        TeamA:
+          QuitEvent: Conquest::OnTeam1Quit
+          ActiveEvent: Conquest::OnGuillaumeActive
+          DeathEvent: Conquest::OnGuillaumeDie
+          Variable: $@BG_CQ_Team1
+          RespawnX: 30
+          RespawnY: 381
+        TeamB:
+          QuitEvent: Conquest::OnTeam2Quit
+          ActiveEvent: Conquest::OnCroixActive
+          DeathEvent: Conquest::OnCroixDie
+          Variable: $@BG_CQ_Team2
+          RespawnX: 126
+          RespawnY: 357
+      - Map: arug_cas07
+        StartEvent: Conquest::OnReady
+        TeamA:
+          QuitEvent: Conquest::OnTeam1Quit
+          ActiveEvent: Conquest::OnGuillaumeActive
+          DeathEvent: Conquest::OnGuillaumeDie
+          Variable: $@BG_CQ_Team1
+          RespawnX: 298
+          RespawnY: 339
+        TeamB:
+          QuitEvent: Conquest::OnTeam2Quit
+          ActiveEvent: Conquest::OnCroixActive
+          DeathEvent: Conquest::OnCroixDie
+          Variable: $@BG_CQ_Team2
+          RespawnX: 298
+          RespawnY: 308
+      - Map: arug_cas08
+        StartEvent: Conquest::OnReady
+        TeamA:
+          QuitEvent: Conquest::OnTeam1Quit
+          ActiveEvent: Conquest::OnGuillaumeActive
+          DeathEvent: Conquest::OnGuillaumeDie
+          Variable: $@BG_CQ_Team1
+          RespawnX: 313
+          RespawnY: 154
+        TeamB:
+          QuitEvent: Conquest::OnTeam2Quit
+          ActiveEvent: Conquest::OnCroixActive
+          DeathEvent: Conquest::OnCroixDie
+          Variable: $@BG_CQ_Team2
+          RespawnX: 330
+          RespawnY: 154
   - Id: 3
     Name: Rush
     MinPlayers: 1
@@ -179,6 +259,54 @@ Body:
           Variable: $@BG_RU_Team2
           RespawnX: 202
           RespawnY: 226
+      - Map: rush_cas02
+        StartEvent: Rush::OnReady
+        TeamA:
+          QuitEvent: Rush::OnTeam1Quit
+          ActiveEvent: Rush::OnGuillaumeActive
+          DeathEvent: Rush::OnGuillaumeDie
+          Variable: $@BG_RU_Team1
+          RespawnX: 146
+          RespawnY: 50
+        TeamB:
+          QuitEvent: Rush::OnTeam2Quit
+          ActiveEvent: Rush::OnCroixActive
+          DeathEvent: Rush::OnCroixDie
+          Variable: $@BG_RU_Team2
+          RespawnX: 146
+          RespawnY: 46
+      - Map: rush_cas03
+        StartEvent: Rush::OnReady
+        TeamA:
+          QuitEvent: Rush::OnTeam1Quit
+          ActiveEvent: Rush::OnGuillaumeActive
+          DeathEvent: Rush::OnGuillaumeDie
+          Variable: $@BG_RU_Team1
+          RespawnX: 60
+          RespawnY: 13
+        TeamB:
+          QuitEvent: Rush::OnTeam2Quit
+          ActiveEvent: Rush::OnCroixActive
+          DeathEvent: Rush::OnCroixDie
+          Variable: $@BG_RU_Team2
+          RespawnX: 64
+          RespawnY: 13
+      - Map: rush_cas04
+        StartEvent: Rush::OnReady
+        TeamA:
+          QuitEvent: Rush::OnTeam1Quit
+          ActiveEvent: Rush::OnGuillaumeActive
+          DeathEvent: Rush::OnGuillaumeDie
+          Variable: $@BG_RU_Team1
+          RespawnX: 270
+          RespawnY: 292
+        TeamB:
+          QuitEvent: Rush::OnTeam2Quit
+          ActiveEvent: Rush::OnCroixActive
+          DeathEvent: Rush::OnCroixDie
+          Variable: $@BG_RU_Team2
+          RespawnX: 270
+          RespawnY: 288
   - Id: 4
     Name: Eye of Storm
     MinPlayers: 1

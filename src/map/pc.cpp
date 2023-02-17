@@ -15507,17 +15507,17 @@ void pc_record_mobkills(struct map_session_data *sd, struct mob_data *md)
 	}
 	else if (sd->bg_id && map_getmapflag(sd->bl.m, MF_BATTLEGROUND)) {
 		switch(md->mob_id) {
-		case 20400:
-		case 20401:
+		case 30400:
+		case 30401:
 			add2limit(sd->status.bgstats.gstone_kill, 1, USHRT_MAX);
 			pc_addbgpoints(*sd,10);
 			break;
-		case 20402:
+		case 30402:
 			add2limit(sd->status.bgstats.ru_captures, 1, USHRT_MAX);
 			add2limit(sd->status.bgstats.emperium_kill, 1, USHRT_MAX);
 			pc_addbgpoints(*sd,30);
 			break;
-		case 1906:
+		case 30403:
 			add2limit(sd->status.bgstats.barricade_kill, 1, USHRT_MAX);
 			pc_addbgpoints(*sd,1);
 			break;
