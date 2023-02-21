@@ -369,3 +369,102 @@ ACMD_FUNC(woestats)
 	pc_battle_stats(sd,sd,2);
 	return 0;
 }
+
+ACMD_FUNC(gcash)
+{
+	map_session_data* tsd = nullptr;
+	int amount = 0, ret = 0;
+	char output[CHAT_SIZE_MAX];
+	nullpo_retr(-1,sd);
+
+	memset(atcmd_output, '\0', sizeof(atcmd_output));
+
+	if( sd->state.cashshop_open ){
+		clif_displaymessage(fd, msg_txt(sd, 1376)); // Please close the cashshop before using this command.
+		return -1;
+	}
+
+	if (!message || !*message || sscanf(message, "%11d %23[^\n]", &amount, atcmd_player_name) < 2) {
+		clif_displaymessage(fd, "Invalid value (@gcash <amount> <character name>");
+		return -1;
+	}
+	
+	if ((tsd = map_nick2sd(atcmd_player_name,false)) == NULL) {
+		clif_displaymessage(fd, msg_txt(sd,3)); // Character not found.
+		return -1;
+	}
+
+	if (sd->cashPoints < amount || amount < 0) {
+        clif_displaymessage(fd, "Not enough Cash Points.");
+        return -1;
+    }
+    
+    // Se realiza la transferencia de Cash Points.
+	if( (ret=pc_paycash(sd, amount, 0, LOG_TYPE_COMMAND)) >= 0)
+	{
+		sprintf(output, msg_txt(sd,410), ret, sd->cashPoints); // Removed %d cash points. Total %d points.
+		clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], output, false, SELF);
+	}
+		
+	if( (ret=pc_getcash(tsd, amount, 0, LOG_TYPE_COMMAND)) >= 0)
+	{
+		sprintf(output, msg_txt(sd,505), ret, tsd->cashPoints); // Gained %d cash points. Total %d points.
+		clif_messagecolor(&tsd->bl, color_table[COLOR_LIGHT_GREEN], output, false, SELF);
+	}
+
+    return 0;
+}
+
+ACMD_FUNC(myinfo)
+{
+	char output[CHAT_SIZE_MAX];
+	uint32 ip;
+	int i;
+	time_t now=time(NULL);
+
+	struct {
+		const char* format;
+		int value;
+	} output_table[] = {
+		{ "Cash Points - %d", 0 },
+		{ "Free/Kafra Points - %d", 0 },
+		{ "Vote Points - %d", 0 },
+		{ NULL, 0 },
+		{ NULL, 0 }
+	};
+
+	memset(output, '\0', sizeof(output));
+
+	//direct array initialization with variables is not standard C compliant.
+	output_table[0].value = sd->cashPoints;
+	output_table[1].value = sd->kafraPoints;
+	output_table[2].value = static_cast<int>(pc_readaccountreg(sd, add_str("#VOTEPOINTS")));
+
+	sprintf(output, "'%s' Info:", sd->status.name); // '%s' stats:
+	clif_displaymessage(fd,output);
+
+	for( i = 0; output_table[i].format != NULL; i++ )
+	{
+		sprintf(output,output_table[i].format,output_table[i].value);
+		clif_displaymessage(fd,output);
+	}
+
+	if ( pc_isvip(sd) )
+	{
+		int year,month,day,hour,minute,second;
+		char timestr[21];
+		
+		split_time((int)(sd->vip.time-now),&year,&month,&day,&hour,&minute,&second);
+		sprintf(atcmd_output,msg_txt(sd,705),year,month,day,hour,minute); // Your VIP status is valid for %d years, %d months, %d days, %d hours and %d minutes.
+		clif_displaymessage(sd->fd,atcmd_output);
+		timestamp2string(timestr,20,sd->vip.time,"%Y-%m-%d %H:%M");
+		sprintf(atcmd_output,msg_txt(sd,707),timestr); // You are VIP until : %s
+		clif_displaymessage(sd->fd,atcmd_output);
+	}
+
+	ip = session[sd->fd]->client_addr;
+	sprintf(output,"IP Address - %d.%d.%d.%d",CONVIP(ip));
+	clif_displaymessage(fd,output);
+
+	return 0;
+}
