@@ -2169,13 +2169,13 @@ void run_tomb(map_session_data* sd, struct npc_data* nd)
 	snprintf(buffer, sizeof(buffer), msg_txt(sd, 2551), nd->u.tomb.killer_name[0] ? nd->u.tomb.killer_name : "[Server]", std::to_string(nd->u.tomb.damage1).c_str());
 	clif_scriptmes( *sd, nd->bl.id, buffer );
 
-	if (nd->u.tomb.damage2 != NULL)
+	if (nd->u.tomb.damage2 != 0)
 	{
 		snprintf(buffer, sizeof(buffer), msg_txt(sd, 2552), nd->u.tomb.p2, std::to_string(nd->u.tomb.damage2).c_str());
 		clif_scriptmes(*sd, nd->bl.id, buffer);
 	}
 
-	if (nd->u.tomb.damage3 != NULL)
+	if (nd->u.tomb.damage3 != 0)
 	{
 		snprintf(buffer, sizeof(buffer), msg_txt(sd, 2553), nd->u.tomb.p3, std::to_string(nd->u.tomb.damage3).c_str());
 		clif_scriptmes(*sd, nd->bl.id, buffer);
