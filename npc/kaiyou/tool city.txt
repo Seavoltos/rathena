@@ -474,7 +474,7 @@ morocc,147,102,4	script	Tool Dealer#TDmoc1	93,{
 	end;
 }
 
-morocc,151,243,6	script	Tool Dealer#TDmoc1	93,{
+morocc,151,243,6	script	Tool Dealer#TDmoc2	93,{
 	
 	if( #ToolMorocc == 1)
 		callshop "Tool Dealer#moc2",0;

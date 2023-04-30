@@ -19,9 +19,9 @@
 -	script	FERSS	-1,{
 function F_ShowMob;
 OnInit:
-	setarray $@FURIOUS_ID[0],		   2606,       2611;
-	setarray $@FURIOUS_MID[0],		   1015,       1499;
-	setarray $@FURIOUS_MAP$[0],	"pay_dun00","um_fild02";
+	setarray .FERSS_MID[0],1735,1030,1206,1100,1107,1102,1692,1269,1110,1717,1509,1310,1242,1264,1249,1379,1023,1050,1161,1031,1002,1702,1012,1165,1401,1056,1584,1208,1261,1015;
+	setarray .FERSS_ID[0],2909,2904,2899,2890,2856,2885,2881,2871,2851,2832,2772,2767,2762,2757,2737,2732,2722,2712,2707,2702,2697,2684,2679,2674,2664,2654,2639,2620,2616,2606;
+	setarray .FERSS_MAP$[0],"kh_dun02","moc_fild13","cmd_fild03","mjolnir_10","moc_fild01","alde_dun04","hu_fild07","c_tower2","pay_fild10","abyss_01","niflheim","gl_dun02","xmas_fild01","iz_dun04","xmas_dun02","mag_dun02","gef_fild02","moc_fild12","iz_dun00","yuno_fild03","yuno_fild04","tha_t10","gef_fild01","moc_fild16","ama_dun03","pay_fild09","ayo_dun02","gl_cas02","gef_fild05","pay_dun00";
 	
 	.novend = true;
 	.nopub = true;
@@ -31,23 +31,23 @@ OnInit:
 OnNPCKillEvent:
 	getmapxy(.@map$,.@x,.@y,BL_PC);
 	
-	for( set .@i, 0; .@i < getarraysize($@FURIOUS_ID); set .@i, .@i + 1 )
+	for( set .@i, 0; .@i < getarraysize(.FERSS_ID); set .@i, .@i + 1 )
 	{
-		if( killedrid == $@FURIOUS_MID[.@i] && getd("$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocado") ==0 && .@map$ == $@FURIOUS_MAP$[.@i] )
+		if( killedrid == .FERSS_MID[.@i] && getd(".FERSS_ID" + .FERSS_ID[.@i] + "_invocado") == 0 && .@map$ == .FERSS_MAP$[.@i] )
 		{
-			setd "$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocar",getd("$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocar") + 1;
-			dispbottom "Han matado "+getd("$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocar")+"/200 "+strmobinfo(1,killedrid)+".";
-			if( getd("$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocar") == 200 )
+			setd ".FERSS_ID" + .FERSS_ID[.@i] + "_invocar",getd(".FERSS_ID" + .FERSS_ID[.@i] + "_invocar") + 1;
+			dispbottom "Han matado "+getd(".FERSS_ID" + .FERSS_ID[.@i] + "_invocar")+"/200 "+strmobinfo(1,killedrid)+".";
+			if( getd(".FERSS_ID" + .FERSS_ID[.@i] + "_invocar") == 200 )
 			{
 				//Invocar mob
-				setd "$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocado",1;
-				monster .@map$,0,0,strmobinfo(1,$@FURIOUS_ID[.@i]),$@FURIOUS_ID[.@i],1,"FERSS::OnFuriousDead";
+				setd ".FERSS_ID" + .FERSS_ID[.@i] + "_invocado",1;
+				monster .@map$,0,0,strmobinfo(1,.FERSS_ID[.@i]),.FERSS_ID[.@i],1,"FERSS::OnFERSSDead";
 				//Reset contador
-				setd "$@FURIOUS_ID" + $@FURIOUS_ID[.@i] + "_invocar",0;
+				setd ".FERSS_ID" + .FERSS_ID[.@i] + "_invocar",0;
 				//Anunciar
-				mapannounce .@map$," - - Apareció un "+strmobinfo(1,$@FURIOUS_ID[.@i])+" - - ",bc_all;
+				mapannounce .@map$," - - Apareció un "+strmobinfo(1,.FERSS_ID[.@i])+" - - ",bc_all;
 				addrid(1);
-				F_ShowMob;
+				F_ShowMob(.@i);
 				//Finalizar
 				end;
 			}
@@ -56,14 +56,14 @@ OnNPCKillEvent:
 	}
 	end;
 
-OnFuriousDead:
-	setd "$@FURIOUS_ID" + killedrid + "_invocar",0;
-	setd "$@FURIOUS_ID" + killedrid + "_invocado",0;
+OnFERSSDead:
+	setd ".FERSS_ID" + killedrid + "_invocar",0;
+	setd ".FERSS_ID" + killedrid + "_invocado",0;
 	end;
 	
 	function	F_ShowMob	{
 		if ( checkvending() && .novend || checkchatting() && .nopub || checkidle() > .idle_time ) end;
-		atcommand "@showmobs "+ $@FURIOUS_ID[.@i];
+		atcommand "@showmobs "+ .FERSS_ID[getarg(0)];
 		return;
 	}
 }

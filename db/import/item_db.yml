@@ -184,7 +184,7 @@ Body:
     Type: Usable
     Script: |
       specialeffect2 EF_STEAL;
-      Zeny += rand(100,1000);
+      Zeny += rand(1000,10000);
   - Id: 6707
     AegisName: J_Shop_Coupon
     Name: Cash Hair Coupon
@@ -446,6 +446,14 @@ Body:
       .@r = getrefine();
       if (.@r>4)
          bonus bLuk,.@r-4;
+  - Id: 400136
+    AegisName: C_Ancient_Gold_Deco_TW
+    Name: Costume Ancient Gold Deco    # !todo check english name
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    View: 739
 #ID CUSTOM
   - Id: 40000
     AegisName: Box_99_70
@@ -2548,6 +2556,2958 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 590
+  - Id: 61016
+    AegisName: C_Costume_2016
+    Name: GatesofNetherworld
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2016
+  - Id: 61017
+    AegisName: C_Costume_2017
+    Name: Cor_Core_Headset
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2017
+  - Id: 61018
+    AegisName: C_Costume_2018
+    Name: Vassalage_Necklace
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2018
+  - Id: 61019
+    AegisName: C_Costume_2019
+    Name: Rag_Origin_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2019
+  - Id: 61020
+    AegisName: C_Costume_2020
+    Name: Cons_Of_Darkness
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2020
+  - Id: 61021
+    AegisName: C_Costume_2021
+    Name: C_CAPOORING_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2021
+  - Id: 61022
+    AegisName: C_Costume_2022
+    Name: C_Gluttony_CAPOO_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2022
+  - Id: 61023
+    AegisName: C_Costume_2023
+    Name: C_OneEyedJack
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2023
+  - Id: 61024
+    AegisName: C_Costume_2024
+    Name: Hunters_Dinner
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2024
+  - Id: 61025
+    AegisName: C_Costume_2025
+    Name: C_Katashiro_Flying
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2025
+  - Id: 61026
+    AegisName: C_Costume_2026
+    Name: C_Onihime_Camellia
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2026
+  - Id: 61027
+    AegisName: C_Costume_2027
+    Name: C_Japanes_Hair
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2027
+  - Id: 61028
+    AegisName: C_Costume_2028
+    Name: C_Airy_Two_Side_Up_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2028
+  - Id: 61029
+    AegisName: C_Costume_2029
+    Name: C_Long_Wave_BD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2029
+  - Id: 61030
+    AegisName: C_Costume_2030
+    Name: C_Long_Wave_SV
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2030
+  - Id: 61031
+    AegisName: C_Costume_2031
+    Name: C_Fluffy_Semi_Long_LB
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2031
+  - Id: 61032
+    AegisName: C_Costume_2032
+    Name: C_Fluffy_Semi_Long_CB
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2032
+  - Id: 61033
+    AegisName: C_Costume_2033
+    Name: C_Fluffy_Semi_Long_YL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2033
+  - Id: 61034
+    AegisName: C_Costume_2034
+    Name: C_Fluffy_Semi_Long_BG
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2034
+  - Id: 61035
+    AegisName: C_Costume_2035
+    Name: C_Fluffy_Semi_Long_BG
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2035
+  - Id: 61036
+    AegisName: C_Costume_2036
+    Name: C_Fluffy_Semi_Long_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2036
+  - Id: 61037
+    AegisName: C_Costume_2037
+    Name: C_Fluffy_Semi_Long_OM
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2037
+  - Id: 61038
+    AegisName: C_Costume_2038
+    Name: C_Fluffy_Semi_Long_LPP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2038
+  - Id: 61039 #No funciona
+    AegisName: C_Costume_2039
+    Name: C_Country_Tail_BU
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61040 #No funciona
+    AegisName: C_Costume_2040
+    Name: C_Country_Tail_RD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61041 #No funciona
+    AegisName: C_Costume_2041
+    Name: C_Country_Tail_YL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61042 #No funciona
+    AegisName: C_Costume_2042
+    Name: C_Country_Tail_GN
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61043 #No funciona
+    AegisName: C_Costume_2043
+    Name: C_Country_Tail_BL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61044 #No funciona
+    AegisName: C_Costume_2044
+    Name: C_Country_Tail_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61045 #No funciona
+    AegisName: C_Costume_2045
+    Name: C_Country_Tail_OM
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61046 #No funciona
+    AegisName: C_Costume_2046
+    Name: C_Country_Tail_PP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61047
+    AegisName: C_Costume_2047
+    Name: C_Braid_Half_Up_BU
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2047
+  - Id: 61048
+    AegisName: C_Costume_2048
+    Name: C_Braid_Half_Up_RD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2048
+  - Id: 61049
+    AegisName: C_Costume_2049
+    Name: C_Braid_Half_Up_YL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2049
+  - Id: 61050
+    AegisName: C_Costume_2050
+    Name: C_Braid_Half_Up_GN
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2050
+  - Id: 61051
+    AegisName: C_Costume_2051
+    Name: C_Braid_Half_Up_BL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2051
+  - Id: 61052
+    AegisName: C_Costume_2052
+    Name: C_Braid_Half_Up_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2052
+  - Id: 61053
+    AegisName: C_Costume_2053
+    Name: C_Braid_Half_Up_OM
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2053
+  - Id: 61054
+    AegisName: C_Costume_2054
+    Name: C_Braid_Half_Up_PP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2054
+  - Id: 61055
+    AegisName: C_Costume_2055
+    Name: Wonder_Egg_Basket
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2055
+  - Id: 61056
+    AegisName: C_Costume_2056
+    Name: Imperial_Glory
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2056
+  - Id: 61057
+    AegisName: C_Costume_2057
+    Name: C_Artist_Silk_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2057
+  - Id: 61058
+    AegisName: C_Costume_2058
+    Name: C_Tiger
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2058
+  - Id: 61059
+    AegisName: C_Costume_2059
+    Name: C_H_Knight_Cloak
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2059
+  - Id: 61060
+    AegisName: C_Costume_2060
+    Name: C_Blink_Eyes_Golden
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2060
+  - Id: 61061
+    AegisName: C_Costume_2061
+    Name: Cons_Of_Poison
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2061
+  - Id: 61062
+    AegisName: C_Costume_2062
+    Name: C_RK_Hair_BL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2062
+  - Id: 61063
+    AegisName: C_Costume_2063
+    Name: C_RK_Hair_BU
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2063
+  - Id: 61064
+    AegisName: C_Costume_2064
+    Name: C_RK_Hair_GN
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2064
+  - Id: 61065
+    AegisName: C_Costume_2065
+    Name: C_RK_Hair_OM
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2065
+  - Id: 61066
+    AegisName: C_Costume_2066
+    Name: C_RK_Hair_PK
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2066
+  - Id: 61067
+    AegisName: C_Costume_2067
+    Name: C_RK_Hair_PP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2067
+  - Id: 61068
+    AegisName: C_Costume_2068
+    Name: C_RK_Hair_RD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2068
+  - Id: 61069
+    AegisName: C_Costume_2069
+    Name: C_RK_Hair_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2069
+  - Id: 61070
+    AegisName: C_Costume_2070
+    Name: C_RK_Hair_YL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2070
+  - Id: 61071
+    AegisName: C_Costume_2071
+    Name: C_AB_Hair_BL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2071
+  - Id: 61072
+    AegisName: C_Costume_2072
+    Name: C_AB_Hair_LPP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2072
+  - Id: 61073
+    AegisName: C_Costume_2073
+    Name: C_AB_Hair_OM
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2073
+  - Id: 61074
+    AegisName: C_Costume_2074
+    Name: C_AB_Hair_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2074
+  - Id: 61075
+    AegisName: C_Costume_2075
+    Name: C_Puriku_Pcha
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2075
+  - Id: 61076
+    AegisName: C_Costume_2076
+    Name: C_Puriku_Cap
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2076
+  - Id: 61077
+    AegisName: C_Costume_2077
+    Name: Ep18_Mini_Elly
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2077
+  - Id: 61078
+    AegisName: C_Costume_2078
+    Name: C_bullhead
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2078
+  - Id: 61079
+    AegisName: C_Costume_2079
+    Name: C_Phigasia_Scarf_EXE
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2079
+  - Id: 61080 #No funciona
+    AegisName: C_Costume_2080
+    Name: C_Falling_Snow
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61081
+    AegisName: C_Costume_2081
+    Name: C_White_Corone
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2081
+  - Id: 61082
+    AegisName: C_Costume_2082
+    Name: C_Floating_Parasol
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2082
+  - Id: 61083
+    AegisName: C_Costume_2083
+    Name: C_Long_Ribbon
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2083
+  - Id: 61084
+    AegisName: C_Costume_2084
+    Name: C_Hair_Bun_Wave
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2084
+  - Id: 61085
+    AegisName: C_Costume_2085
+    Name: C_P_blossom_Hairpin
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2085
+  - Id: 61086
+    AegisName: C_Costume_2086
+    Name: C_Poulet_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2086
+  - Id: 61087
+    AegisName: C_Costume_2087
+    Name: C_Choco_Banana
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2087
+  - Id: 61088
+    AegisName: C_Costume_2088
+    Name: YinYang_Earring_Y
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2088
+  - Id: 61089
+    AegisName: C_Costume_2089
+    Name: Thanos_Helm_2
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2089
+  - Id: 61090
+    AegisName: C_Costume_2090
+    Name: Thanos_Helm2_LT
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2090
+  - Id: 61091
+    AegisName: C_Costume_2091
+    Name: C_Rose_Crispinette
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2091
+  - Id: 61092
+    AegisName: C_Costume_2092
+    Name: C_ZoMask_Green_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2092
+  - Id: 61093
+    AegisName: C_Costume_2093
+    Name: C_Ghost_Bat_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2093
+  - Id: 61094
+    AegisName: C_Costume_2094
+    Name: C_Helm_Of_Ra
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2094
+  - Id: 61095
+    AegisName: C_Costume_2095
+    Name: C_Deviruchi_Apron
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2095
+  - Id: 61096
+    AegisName: C_Costume_2096
+    Name: C_Shadow_Devil
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2096
+  - Id: 61097
+    AegisName: C_Costume_2097
+    Name: C_Smokie_Muffler
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2097
+  - Id: 61098
+    AegisName: C_Costume_2098
+    Name: Mountain_Helmet
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2098
+  - Id: 61099
+    AegisName: C_Costume_2099
+    Name: Themis_Helm
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2099
+  - Id: 61100
+    AegisName: C_Costume_2100
+    Name: C_Asgard_Circlet_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2100
+  - Id: 61101
+    AegisName: C_Costume_2101
+    Name: C_Glory_Symbol_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2101
+  - Id: 61102
+    AegisName: C_Costume_2102
+    Name: Thanos_Helm3_LT
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2102
+  - Id: 61103
+    AegisName: C_Costume_2103
+    Name: Thanos_Helm_3
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2103
+  - Id: 61104
+    AegisName: C_Costume_2104
+    Name: Thanos_Helm4_LT
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2104
+  - Id: 61105
+    AegisName: C_Costume_2105
+    Name: Thanos_Helm_4
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2105
+  - Id: 61106
+    AegisName: C_Costume_2106
+    Name: C_AB_Hair_RD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2106
+  - Id: 61107
+    AegisName: C_Costume_2107
+    Name: C_AB_Hair_YL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2107
+  - Id: 61108
+    AegisName: C_Costume_2108
+    Name: C_AB_Hair_BU
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2108
+  - Id: 61109
+    AegisName: C_Costume_2109
+    Name: C_AB_Hair_GN
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2109
+  - Id: 61110
+    AegisName: C_Costume_2110
+    Name: C_AB_Hair_PK
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2110
+  - Id: 61111
+    AegisName: C_Costume_2111
+    Name: C_AB_Hair_PP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2111
+  - Id: 61112
+    AegisName: C_Costume_2112
+    Name: C_Cherry_Ribbon
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2112
+  - Id: 61113
+    AegisName: C_Costume_2113
+    Name: C_Carefree_Face
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2113
+  - Id: 61114
+    AegisName: C_Costume_2114
+    Name: Drooping_Betelgeuse
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2114
+  - Id: 61115
+    AegisName: C_Costume_2115
+    Name: Black_Dragon_Style
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2115
+  - Id: 61116
+    AegisName: C_Costume_2116
+    Name: Diving_Goggles
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2116
+  - Id: 61117
+    AegisName: C_Costume_2117
+    Name: Metal_Pick
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2117
+  - Id: 61118
+    AegisName: C_Costume_2118
+    Name: Professor_MiniGlass
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2118
+  - Id: 61119
+    AegisName: C_Costume_2119
+    Name: C_Blossom_Glasses
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2119
+  - Id: 61120
+    AegisName: C_Costume_2120
+    Name: Rebirth_Circlet
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2120
+  - Id: 61121
+    AegisName: C_Costume_2121
+    Name: Kings_Crown_A
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2121
+  - Id: 61122 #No funciona
+    AegisName: C_Costume_2122
+    Name: Noble_Hankie_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61123 #No funciona
+    AegisName: C_Costume_2123
+    Name: Angeling_Balloon_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61124
+    AegisName: C_Costume_2124
+    Name: C_Hopping_Twin_Pigtail
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2124
+  - Id: 61125
+    AegisName: C_Costume_2125
+    Name: C_Astrologer_T_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2125
+  - Id: 61126
+    AegisName: C_Costume_2126
+    Name: C_Fish_Marche
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2126
+  - Id: 61127
+    AegisName: C_Costume_2127
+    Name: Demons_Familiar
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2127
+  - Id: 61128
+    AegisName: C_Costume_2128
+    Name: Lord_of_Royals
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2128
+  - Id: 61129
+    AegisName: C_Costume_2129
+    Name: C_Melon_Headphone
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2129
+  - Id: 61130
+    AegisName: C_Costume_2130
+    Name: C_Feather_Stola
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2130
+  - Id: 61131
+    AegisName: C_Costume_2131
+    Name: C_L_Knitting_Low_Twin_W
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2131
+  - Id: 61132
+    AegisName: C_Costume_2132
+    Name: Northern_Cross
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2132
+  - Id: 61133
+    AegisName: C_Costume_2133
+    Name: 2021RTC_Wing_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2133
+  - Id: 61134
+    AegisName: C_Costume_2134
+    Name: C_2021RTC_Headset_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2134
+  - Id: 61135
+    AegisName: C_Costume_2135
+    Name: C_Demon_Crown
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2135
+  - Id: 61136
+    AegisName: C_Costume_2136
+    Name: C_Released_Ground
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2136
+  - Id: 61137
+    AegisName: C_Costume_2137
+    Name: C_BirthDay_Balloon_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2137
+  - Id: 61138
+    AegisName: C_Costume_2138
+    Name: Wave_Noodle
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2138
+  - Id: 61139
+    AegisName: C_Costume_2139
+    Name: C_Fishbone_Hair
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2139
+  - Id: 61140
+    AegisName: C_Costume_2140
+    Name: C_Whale_Cap
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2140
+  - Id: 61141
+    AegisName: C_Costume_2141
+    Name: C_Sailor_Collar_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2141
+  - Id: 61142
+    AegisName: C_Costume_2142
+    Name: C_Pet_Popcorn_Box
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2142
+  - Id: 61143
+    AegisName: C_Costume_2143
+    Name: C_Ep19_Iwin
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2143
+  - Id: 61144
+    AegisName: C_Costume_2144
+    Name: C_Ep19_Rgan
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2144
+  - Id: 61145
+    AegisName: C_Costume_2145
+    Name: C_Fishbowl_Parfait_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2145
+  - Id: 61146
+    AegisName: C_Costume_2146
+    Name: Black_Moon_Cat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2146
+  - Id: 61147
+    AegisName: C_Costume_2147
+    Name: C_Bear_Head
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2147
+  - Id: 61148
+    AegisName: C_Costume_2148
+    Name: Supplement_P_Income
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2148
+  - Id: 61149
+    AegisName: C_Costume_2149
+    Name: Fafnir_Helm
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2149
+  - Id: 61150
+    AegisName: C_Costume_2150
+    Name: C_Cat_Footprints
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2150
+  - Id: 61151
+    AegisName: C_Costume_2151
+    Name: C_White_Cat_On_Shoulder
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2151
+  - Id: 61152
+    AegisName: C_Costume_2152
+    Name: Pope_Ribbon_R
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2152
+  - Id: 61153
+    AegisName: C_Costume_2153
+    Name: Purple_Cat_Ears_Beret
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2153
+  - Id: 61154
+    AegisName: C_Costume_2154
+    Name: Sweet_Potato_In_Mouth
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2154
+  - Id: 61155
+    AegisName: C_Costume_2155
+    Name: C_Inner_Color_Long
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2155
+  - Id: 61156
+    AegisName: C_Costume_2156
+    Name: C_Avenger
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2156
+  - Id: 61157
+    AegisName: C_Costume_2157
+    Name: 2021RTC_Headset_1_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2157
+  - Id: 61158
+    AegisName: C_Costume_2158
+    Name: Viva_Adul_Hat_AB
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2158
+  - Id: 61159
+    AegisName: C_Costume_2159
+    Name: Viva_Adul_Hat_SC
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2159
+  - Id: 61160
+    AegisName: C_Costume_2160
+    Name: 2021RTC_Headset_2_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2160
+  - Id: 61161
+    AegisName: C_Costume_2161
+    Name: 2021RTC_Headset_3_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2161
+  - Id: 61162
+    AegisName: C_Costume_2162
+    Name: NostalgiaCherryBlossom
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2162
+  - Id: 61163
+    AegisName: C_Costume_2163
+    Name: C_Sweet_Chef_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2163
+  - Id: 61164
+    AegisName: C_Costume_2164
+    Name: C_WL_Hair_BU
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2164
+  - Id: 61165
+    AegisName: C_Costume_2165
+    Name: C_L_Ribbon_M_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2165
+  - Id: 61166
+    AegisName: C_Costume_2166
+    Name: C_Mermaid_Wig_Peach
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2166
+  - Id: 61167
+    AegisName: C_Costume_2167
+    Name: C_Kururinpa_Hair_BD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2167
+  - Id: 61168
+    AegisName: C_Costume_2168
+    Name: C_Long_Wave_LBW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2168
+  - Id: 61169
+    AegisName: C_Costume_2169
+    Name: C_B_Shiba_Inu_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2169
+  - Id: 61170
+    AegisName: C_Costume_2170
+    Name: C_Heart_Angel_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2170
+  - Id: 61171
+    AegisName: C_Costume_2171
+    Name: C_Silk_Of_Soul
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2171
+  - Id: 61172 #No funciona
+    AegisName: C_Costume_2172
+    Name: C_domovoi
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61173
+    AegisName: C_Costume_2173
+    Name: Viva_Adul_Hat_LG
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2173
+  - Id: 61174
+    AegisName: C_Costume_2174
+    Name: Viva_Adul_Hat_RA
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2174
+  - Id: 61175 #No funciona
+    AegisName: C_Costume_2175
+    Name: C_Black_Fairy_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61176 #No funciona
+    AegisName: C_Costume_2176
+    Name: C_Kuujaka_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61177
+    AegisName: C_Costume_2177
+    Name: Wolf_Officer_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2177
+  - Id: 61178
+    AegisName: C_Costume_2178
+    Name: Fluffy_Lovely_Fox
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2178
+  - Id: 61179
+    AegisName: C_Costume_2179
+    Name: C_Evt_RagFes_band
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2179
+  - Id: 61180 #No funciona
+    AegisName: C_Costume_2180
+    Name: C_Silky_Long_BD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61181
+    AegisName: C_Costume_2181
+    Name: C_Silky_Long_SV
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2181
+  - Id: 61182
+    AegisName: C_Costume_2182
+    Name: C_Intake_BU
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2182
+  - Id: 61183
+    AegisName: C_Costume_2183
+    Name: C_Intake_RD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2183
+  - Id: 61184
+    AegisName: C_Costume_2184
+    Name: C_Intake_YL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2184
+  - Id: 61185
+    AegisName: C_Costume_2185
+    Name: C_Intake_GN
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2185
+  - Id: 61186
+    AegisName: C_Costume_2186
+    Name: C_Intake_BL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2186
+  - Id: 61187
+    AegisName: C_Costume_2187
+    Name: C_Intake_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2187
+  - Id: 61188
+    AegisName: C_Costume_2188
+    Name: C_Intake_OM
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2188
+  - Id: 61189
+    AegisName: C_Costume_2189
+    Name: C_Intake_PP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2189
+  - Id: 61190
+    AegisName: C_Costume_2190
+    Name: C_Bun_Twin_Tail_BU
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2190
+  - Id: 61191
+    AegisName: C_Costume_2191
+    Name: C_Bun_Twin_Tail_RD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2191
+  - Id: 61192
+    AegisName: C_Costume_2192
+    Name: C_Bun_Twin_Tail_YL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2192
+  - Id: 61193
+    AegisName: C_Costume_2193
+    Name: C_Bun_Twin_Tail_GN
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2193
+  - Id: 61194
+    AegisName: C_Costume_2194
+    Name: C_Bun_Twin_Tail_BL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2194
+  - Id: 61195
+    AegisName: C_Costume_2195
+    Name: C_Bun_Twin_Tail_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2195
+  - Id: 61196
+    AegisName: C_Costume_2196
+    Name: C_Bun_Twin_Tail_OM
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2196
+  - Id: 61197
+    AegisName: C_Costume_2197
+    Name: C_Bun_Twin_Tail_PP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2197
+  - Id: 61198
+    AegisName: C_Costume_2198
+    Name: Faith_Of_Yggdrasil
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1 
+    ArmorLevel: 1
+    View: 2198
+  - Id: 61199
+    AegisName: C_Costume_2199
+    Name: Guardian_Helm
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2199
+  - Id: 61200
+    AegisName: C_Costume_2200
+    Name: Einherial_Mantle
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2200
+  - Id: 61201
+    AegisName: C_Costume_2201
+    Name: C_B_Thin_Eyes_B_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2201
+  - Id: 61202
+    AegisName: C_Costume_2202
+    Name: Viva_Adul_Hat_GC
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2202
+  - Id: 61203
+    AegisName: C_Costume_2203
+    Name: Viva_Adul_Hat_SO
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2203
+  - Id: 61204
+    AegisName: C_Costume_2204
+    Name: Crushed_Snow_Man
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2204
+  - Id: 61205
+    AegisName: C_Costume_2205
+    Name: C_Fluffy_Rabbit_Cape
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2205
+  - Id: 61206
+    AegisName: C_Costume_2206
+    Name: C_SR_Hair_SV
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2206
+  - Id: 61207
+    AegisName: C_Costume_2207
+    Name: Viva_Adul_Hat_RK
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2207
+  - Id: 61208
+    AegisName: C_Costume_2208
+    Name: Viva_Adul_Hat_WM
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2208
+  - Id: 61209
+    AegisName: C_Costume_2209
+    Name: Viva_Adul_Hat_NC
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2209
+  - Id: 61210
+    AegisName: C_Costume_2210
+    Name: Viva_Adul_Hat_GN
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2210
+  - Id: 61211 #No funciona
+    AegisName: C_Costume_2211
+    Name: Gemmed_Sallet
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61212
+    AegisName: C_Costume_2212
+    Name: Grisly_Soul
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2212
+  - Id: 61213
+    AegisName: C_Costume_2213
+    Name: RTC2021_Reward_1_TH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2213
+  - Id: 61214
+    AegisName: C_Costume_2214
+    Name: RTC2021_Reward_2_TH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2214
+  - Id: 61215
+    AegisName: C_Costume_2215
+    Name: RTC2021_Reward_3_TH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2215
+  - Id: 61216
+    AegisName: C_Costume_2216
+    Name: C_HwaHoJumJung
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2216
+  - Id: 61217
+    AegisName: C_Costume_2217
+    Name: Viva_Adul_Hat_KO
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2217
+  - Id: 61218
+    AegisName: C_Costume_2218
+    Name: Viva_Adul_Hat_RL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2218
+  - Id: 61219
+    AegisName: C_Costume_2219
+    Name: Viva_Adul_Hat_SP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2219
+  - Id: 61220
+    AegisName: C_Costume_2220
+    Name: Viva_Adul_Hat_SJ
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2220
+  - Id: 61221
+    AegisName: C_Costume_2221
+    Name: Viva_Adul_Hat_SU
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2221
+  - Id: 61222
+    AegisName: C_Costume_2222
+    Name: C_Twinkle_Twin
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2222
+  - Id: 61223
+    AegisName: C_Costume_2223
+    Name: C_Macaron_Bunny_Head
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2223
+  - Id: 61224
+    AegisName: C_Costume_2224
+    Name: C_Wanderer_Curl
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2224
+  - Id: 61225
+    AegisName: C_Costume_2225
+    Name: C_Rocking_Short
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2225
+  - Id: 61226
+    AegisName: C_Costume_2226
+    Name: Phantom_Ear
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2226
+  - Id: 61227
+    AegisName: C_Costume_2227
+    Name: Guardian_Claus
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2227
+  - Id: 61228
+    AegisName: C_Costume_2228
+    Name: C_WL_Hair_BL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2228
+  - Id: 61229
+    AegisName: C_Costume_2229
+    Name: C_WL_Hair_GN
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2229
+  - Id: 61230
+    AegisName: C_Costume_2230
+    Name: C_WL_Hair_OM
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2230
+  - Id: 61231
+    AegisName: C_Costume_2231
+    Name: C_WL_Hair_PK
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2231
+  - Id: 61232
+    AegisName: C_Costume_2232
+    Name: C_WL_Hair_PP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2232
+  - Id: 61233
+    AegisName: C_Costume_2233
+    Name: C_WL_Hair_RD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2233
+  - Id: 61234
+    AegisName: C_Costume_2234
+    Name: C_WL_Hair_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2234
+  - Id: 61235
+    AegisName: C_Costume_2235
+    Name: C_WL_Hair_YL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2235
+  - Id: 61236
+    AegisName: C_Costume_2236
+    Name: C_SR_Hair_BL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2236
+  - Id: 61237
+    AegisName: C_Costume_2237
+    Name: C_SR_Hair_GN
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2237
+  - Id: 61238
+    AegisName: C_Costume_2238
+    Name: C_SR_Hair_OM
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2238
+  - Id: 61239
+    AegisName: C_Costume_2239
+    Name: C_SR_Hair_PK
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2239
+  - Id: 61240
+    AegisName: C_Costume_2240
+    Name: C_SR_Hair_PP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2240
+  - Id: 61241
+    AegisName: C_Costume_2241
+    Name: C_SR_Hair_RD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2241
+  - Id: 61242
+    AegisName: C_Costume_2242
+    Name: C_SR_Hair_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2242
+  - Id: 61243
+    AegisName: C_Costume_2243
+    Name: C_SR_Hair_YL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2243
+  - Id: 61244
+    AegisName: C_Costume_2244
+    Name: C_Tiger_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2244
+  - Id: 61245
+    AegisName: C_Costume_2245
+    Name: C_Tiger_BL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2245
+  - Id: 61246
+    AegisName: C_Costume_2246
+    Name: Belka_Strelka
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2246
+  - Id: 61247
+    AegisName: C_Costume_2247
+    Name: C_Dreaming_Rose_Long
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2247
+  - Id: 61248
+    AegisName: C_Costume_2248
+    Name: C_Many_Flowers_Prayer
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2248
+  - Id: 61249
+    AegisName: C_Costume_2249
+    Name: Hairband_Of_Asmodeus
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2249
+  - Id: 61250
+    AegisName: C_Costume_2250
+    Name: GorgonCoronet
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2250
+  - Id: 61251
+    AegisName: C_Costume_2251
+    Name: C_Omega_Golf_Bag
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2251
+  - Id: 61252
+    AegisName: C_Costume_2252
+    Name: C_Drooping_Omega
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2252
+  - Id: 61253
+    AegisName: C_Costume_2253
+    Name: C_Alpha_Long_Pony
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2253
+  - Id: 61254
+    AegisName: C_Costume_2254
+    Name: C_Agnes_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2254
+  - Id: 61255
+    AegisName: C_Costume_2255
+    Name: C_Debris_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2255
+  - Id: 61256
+    AegisName: C_Costume_2256
+    Name: C_ElenaVolkova_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2256
+  - Id: 61257
+    AegisName: C_Costume_2257
+    Name: C_Elumina_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2257
+  - Id: 61258
+    AegisName: C_Costume_2258
+    Name: C_Berner_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2258
+  - Id: 61259
+    AegisName: C_Costume_2259
+    Name: C_AI_Nabi
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2259
+  - Id: 61260
+    AegisName: C_Costume_2260
+    Name: Legacy_of_Wise_One_J
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2260
+  - Id: 61261
+    AegisName: C_Costume_2261
+    Name: C_Flower_L_Knitting
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2261
+  - Id: 61262
+    AegisName: C_Costume_2262
+    Name: C_Happening_Clover
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2262
+  - Id: 61263
+    AegisName: C_Costume_2263
+    Name: C_Bouquet_Valletta
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2263
+  - Id: 61264
+    AegisName: C_Costume_2264
+    Name: Yesterday_Once_More
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2264
+  - Id: 61265
+    AegisName: C_Costume_2265
+    Name: Magic_Celestial_Globe
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2265
+  - Id: 61266
+    AegisName: C_Costume_2266
+    Name: SLEEPYCAT_HAT
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2266
+  - Id: 61267 #No funciona
+    AegisName: C_Costume_2267
+    Name: Jirant_Circlet_A
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61268
+    AegisName: C_Costume_2268
+    Name: Ally_of_the_Demons
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2268
+  - Id: 61269
+    AegisName: C_Costume_2269
+    Name: Exotic_traditional_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2269
+  - Id: 61270
+    AegisName: C_Costume_2270
+    Name: C_Starry_Ribbon_Twin
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2270
+  - Id: 61271
+    AegisName: C_Costume_2271
+    Name: C_Starry_Long_Wave
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2271
+  - Id: 61272
+    AegisName: C_Costume_2272
+    Name: C_Protect_Cloth_B
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2272
+  - Id: 61273
+    AegisName: C_Costume_2273
+    Name: C_Cons_Of_Light_Dark
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2273
+  - Id: 61274
+    AegisName: C_Costume_2274
+    Name: C_Twinkle_Twin_B
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2274
+  - Id: 61275
+    AegisName: C_Costume_2275
+    Name: Princess_Headphone
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2275
+  - Id: 61276
+    AegisName: C_Costume_2276
+    Name: Queen_Headphone
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2276
+  - Id: 61277
+    AegisName: C_Costume_2277
+    Name: Sleep_RedSheep
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2277
+  - Id: 61278
+    AegisName: C_Costume_2278
+    Name: C_RA_Hair_PK
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2278
+  - Id: 61279
+    AegisName: C_Costume_2279
+    Name: C_Tent
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2279
+  - Id: 61280
+    AegisName: C_Costume_2280
+    Name: C_Traveller_Oil_Lantern
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2280
+  - Id: 61281
+    AegisName: C_Costume_2281
+    Name: C_Reliance_Crown
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2281
+  - Id: 61282
+    AegisName: C_Costume_2282
+    Name: C_Guardian_Wing
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2282
+  - Id: 61283
+    AegisName: C_Costume_2283
+    Name: C_Indomitable_Crown
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2283
+  - Id: 61284
+    AegisName: C_Costume_2284
+    Name: C_20th_Anniversary_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2284
+  - Id: 61285
+    AegisName: C_Costume_2285
+    Name: C_2012RMSCNO4
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2285
+  - Id: 61286
+    AegisName: C_Costume_2286
+    Name: Feather_Beret_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2286
+  - Id: 61287
+    AegisName: C_Costume_2287
+    Name: Shine_Circlet
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2287
+  - Id: 61288
+    AegisName: C_Costume_2288
+    Name: Sin_Circlet
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2288
+  - Id: 61289
+    AegisName: C_Costume_2289
+    Name: Rebel_Pocket_Watch
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2289
+  - Id: 61290
+    AegisName: C_Costume_2290
+    Name: C_King_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2290
+  - Id: 61291
+    AegisName: C_Costume_2291
+    Name: C_Angeling_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2291
+  - Id: 61292
+    AegisName: C_Costume_2292
+    Name: C_Seyren_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2292
+  - Id: 61293
+    AegisName: C_Costume_2293
+    Name: C_Gulaling_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2293
+  - Id: 61294
+    AegisName: C_Costume_2294
+    Name: C_Fox_Bamboo_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2294
+  - Id: 61295
+    AegisName: C_Costume_2295
+    Name: C_Silky_Long_BL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2295
+  - Id: 61296
+    AegisName: C_Costume_2296
+    Name: C_15th_Nov_Helmet
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2296
+  - Id: 61297
+    AegisName: C_Costume_2297
+    Name: C_Wichienmaat_Bangkaew
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2297
+  - Id: 61298
+    AegisName: C_Costume_2298
+    Name: C_Somtam
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2298
+  - Id: 61299 #No funciona
+    AegisName: C_Costume_2299
+    Name: C_2022Cosutama_Imp_JP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61300 #No funciona
+    AegisName: C_Costume_2300
+    Name: C_Braid_Ring
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61301 #No funciona
+    AegisName: C_Costume_2301
+    Name: C_Midnight_Candle
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61302 #No funciona
+    AegisName: C_Costume_2302
+    Name: C_20Y_Anniv_Helmet
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61303 #No funciona
+    AegisName: C_Costume_2303
+    Name: C_ROROGO
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61304
+    AegisName: C_Costume_2304
+    Name: C_Evil_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2304
+  - Id: 61305
+    AegisName: C_Costume_2305
+    Name: C_Lehar_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2305
+  - Id: 61306
+    AegisName: C_Costume_2306
+    Name: C_Marlbron_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2306
+  - Id: 61307
+    AegisName: C_Costume_2307
+    Name: C_Spica_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2307
+  - Id: 61308
+    AegisName: C_Costume_2308
+    Name: C_Fire_Giant_Red
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2308
+  - Id: 61309
+    AegisName: C_Costume_2309
+    Name: C_Fire_Giant_Gold
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2309
+  - Id: 61310 #No funciona
+    AegisName: C_Costume_2310
+    Name: 20th_Scarf_J
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61311
+    AegisName: C_Costume_2311
+    Name: C_Valkyrie_Hair
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2311
+  - Id: 61312
+    AegisName: C_Costume_2312
+    Name: C_Vanargandr_Helm_GL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2312
+  - Id: 61313
+    AegisName: C_Costume_2313
+    Name: C_Balloon_Hat_Classical
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2313
+  - Id: 61314 #No funciona
+    AegisName: C_Costume_2314
+    Name: C_Ignis_Cap_BU
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61315
+    AegisName: C_Costume_2315
+    Name: C_spiding
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2315
+  - Id: 61316 #No funciona
+    AegisName: C_Costume_2316
+    Name: C_Little_Abyss_Dragon
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61317 #No funciona
+    AegisName: C_Costume_2317
+    Name: C_Eis_Spinne
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61318 #No funciona
+    AegisName: C_Costume_2318
+    Name: Ear_OF_Bloody
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61319
+    AegisName: C_Costume_2319
+    Name: Larva_Red
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2319
+  - Id: 61320
+    AegisName: C_Costume_2320
+    Name: Sausage
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2320
+  - Id: 61321
+    AegisName: C_Costume_2321
+    Name: Larva_Yellow_Mini
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2321
+  - Id: 61322 #No funciona
+    AegisName: C_Costume_2322
+    Name: Ear_OF_Abyss
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61323 #No funciona
+    AegisName: C_Costume_2323
+    Name: C_PU_EarWitchHat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61324
+    AegisName: C_Costume_2324
+    Name: Soccer_Ball
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2324
+  - Id: 61325
+    AegisName: C_Costume_2325
+    Name: Tiger_Glass
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2325
+  - Id: 61326 #No funciona
+    AegisName: C_Costume_2326
+    Name: 5th_Anniversary
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61327 #No funciona
+    AegisName: C_Costume_2327
+    Name: Book_of_Sorcery
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61328 #No funciona
+    AegisName: C_Costume_2328
+    Name: C_Angelic_Long_BD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61329 #No funciona
+    AegisName: C_Costume_2329
+    Name: C_Angelic_Long_RBD
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61330 #No funciona
+    AegisName: C_Costume_2330
+    Name: C_Angelic_Long_SV
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61331 #No funciona
+    AegisName: C_Costume_2331
+    Name: C_Angelic_Long_RSV
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61332
+    AegisName: C_Costume_2332
+    Name: GoodnEvil_Circlet
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2332
+  - Id: 61333 #No funciona
+    AegisName: C_Costume_2333
+    Name: C_Snow_Rabbit_Wig
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61334 #No funciona
+    AegisName: C_Costume_2334
+    Name: C_Jumbo_Rabbit
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61335 #No funciona
+    AegisName: C_Costume_2335
+    Name: C_Friendly_White_Fox
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61336 #No funciona
+    AegisName: C_Costume_2336
+    Name: C_Blink_Eyes_Frozen
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61337 #No funciona
+    AegisName: C_Costume_2337
+    Name: Sacred_Lapel
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61338 #No funciona
+    AegisName: C_Costume_2338
+    Name: Ghost_Whisper
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61339 #No funciona
+    AegisName: C_Costume_2339
+    Name: Red_Baby_Dragon_LT
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61340 #No funciona
+    AegisName: C_Costume_2340
+    Name: C_L_Ribbon_M_BU
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61341
+    AegisName: C_Costume_2341
+    Name: C_white_tteok
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2341
+  - Id: 61342
+    AegisName: C_Costume_2342
+    Name: C_blacksesame_tteok
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2342
+  - Id: 61343
+    AegisName: C_Costume_2343
+    Name: C_bean_tteok
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2343
 
   - Id: 100000
     AegisName: Instance_Airship
@@ -2631,7 +5591,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 6
-  - Id: 65007
+  - Id: 65007 #No funciona
     AegisName: C_Garment_7
     Name: Ribbon Piamat
     Type: Armor
@@ -2639,7 +5599,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 7
+    View: 1
   - Id: 65008
     AegisName: C_Garment_8
     Name: Rudra Wing
@@ -2811,7 +5771,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 26
-  - Id: 65027
+  - Id: 65027 #No funciona
     AegisName: C_Garment_27
     Name: Gerhard Von Devil Bag
     Type: Armor
@@ -2819,7 +5779,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 27
+    View: 1
   - Id: 65028
     AegisName: C_Garment_28
     Name: RTC Cape
@@ -2937,7 +5897,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 40
-  - Id: 65041
+  - Id: 65041 #No funciona
     AegisName: C_Garment_41
     Name: Snack Party
     Type: Armor
@@ -2945,7 +5905,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 41
+    View: 1
   - Id: 65042
     AegisName: C_Garment_42
     Name: Angel Ribbon Wing
@@ -2955,7 +5915,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 42
-  - Id: 65043
+  - Id: 65043 #No funciona
     AegisName: C_Garment_43
     Name: Black Bear Backpack
     Type: Armor
@@ -3013,7 +5973,7 @@ Body:
       hateffect HAT_EF_C_VALKYRIE_WING,true;
     UnEquipScript: |
       hateffect HAT_EF_C_VALKYRIE_WING,false;
-  - Id: 65049
+  - Id: 65049 #No funciona
     AegisName: C_Garment_49
     Name: Archangel Wing
     Type: Armor
@@ -3021,7 +5981,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 49
+    View: 1
   - Id: 65050
     AegisName: C_Garment_50
     Name: Wing of Heart
@@ -3238,7 +6198,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 73
-  - Id: 65074
+  - Id: 65074 #No funciona
     AegisName: C_Garment_74
     Name: Wing of Angel Move RB
     Type: Armor
@@ -3246,7 +6206,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 74
+    View: 1
   - Id: 65075
     AegisName: C_Garment_75
     Name: Wing of Angel Move GD
@@ -3265,7 +6225,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 76
-  - Id: 65077
+  - Id: 65077 #No funciona
     AegisName: C_Garment_77
     Name: Wing of Angel Move DG
     Type: Armor
@@ -3273,8 +6233,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 77
-  - Id: 65078
+    View: 1
+  - Id: 65078 #No funciona
     AegisName: C_Garment_78
     Name: Wing of Angel Move GR
     Type: Armor
@@ -3282,7 +6242,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 78
+    View: 1
   - Id: 65079
     AegisName: C_Garment_79
     Name: Evil Scythe
@@ -3364,7 +6324,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 87
-  - Id: 65088
+  - Id: 65088 #No funciona
     AegisName: C_Garment_88
     Name: Sandalphon wing TW
     Type: Armor
@@ -3372,8 +6332,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 88
-  - Id: 65089
+    View: 1
+  - Id: 65089 #No funciona
     AegisName: C_Garment_89
     Name: Capoo Bag TW
     Type: Armor
@@ -3381,8 +6341,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 89
-  - Id: 65090
+    View: 1
+  - Id: 65090 #No funciona
     AegisName: C_Garment_90
     Name: Ten G Shield
     Type: Armor
@@ -3390,7 +6350,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 90
+    View: 1
   - Id: 65091
     AegisName: C_Garment_91
     Name: Baldr Wing TW
@@ -3418,7 +6378,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 93
-  - Id: 65094
+  - Id: 65094 #No funciona
     AegisName: C_Garment_94
     Name: Rotating Gears
     Type: Armor
@@ -3426,8 +6386,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 94
-  - Id: 65095
+    View: 1
+  - Id: 65095 #No funciona
     AegisName: C_Garment_95
     Name: Fairy of Eden
     Type: Armor
@@ -3435,8 +6395,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 95
-  - Id: 65096
+    View: 1
+  - Id: 65096 #No funciona
     AegisName: C_Garment_96
     Name: Sudden Wealth
     Type: Armor
@@ -3444,7 +6404,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 96
+    View: 1
   - Id: 65097
     AegisName: C_Garment_97
     Name: Scepter
@@ -3472,7 +6432,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 99
-  - Id: 65100
+  - Id: 65100 #No funciona
     AegisName: C_Garment_100
     Name: Snow Powder
     Type: Armor
@@ -3480,7 +6440,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 100
+    View: 1
   - Id: 65101
     AegisName: C_Garment_101
     Name: Wing of Spider
@@ -3490,7 +6450,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 101
-  - Id: 65102
+  - Id: 65102 #No funciona
     AegisName: C_Garment_102
     Name: Kiek Hyre Ulti
     Type: Armor
@@ -3498,7 +6458,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 102
+    View: 1
   - Id: 65103
     AegisName: C_Garment_103
     Name: Poring Basket
@@ -3544,7 +6504,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 107
-  - Id: 65108
+  - Id: 65108 #No funciona
     AegisName: C_Garment_108
     Name: Elec Guitar of Phen
     Type: Armor
@@ -3552,7 +6512,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 108
+    View: 1
   - Id: 65109
     AegisName: C_Garment_109
     Name: Released Ground
@@ -3562,27 +6522,27 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 109
-  - Id: 65110
+  - Id: 65110 #No funciona
     AegisName: C_Garment_110
-    Name: Niflheim
+    Name: C Niflheim Key
     Type: Armor
     Locations:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 110
-  - Id: 65111
+    View: 1
+  - Id: 65111 #No funciona
     AegisName: C_Garment_111
-    Name: Niflheim
+    Name: Striking Mikoshi
     Type: Armor
     Locations:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 111
+    View: 1
   - Id: 65112
     AegisName: C_Garment_112
-    Name: Niflheim
+    Name: C Samba Carnival
     Type: Armor
     Locations:
       Costume_Garment: true
@@ -3591,13 +6551,436 @@ Body:
     View: 112
   - Id: 65113
     AegisName: C_Garment_113
-    Name: Niflheim
+    Name: C Nydhog Rumor
     Type: Armor
     Locations:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 113
+  - Id: 65114
+    AegisName: C_Garment_114
+    Name: C G DaeHyon Sword TW
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 114
+  - Id: 65115
+    AegisName: C_Garment_115
+    Name: C Hooked Straw Hat
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 115
+  - Id: 65116
+    AegisName: C_Garment_116
+    Name: C Triple Ice Cream
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 116
+  - Id: 65117
+    AegisName: C_Garment_117
+    Name: C Beer Server
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 117
+  - Id: 65118
+    AegisName: C_Garment_118
+    Name: C Filir Bag
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 118
+  - Id: 65119
+    AegisName: C_Garment_119
+    Name: C School Bag PU
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 119
+  - Id: 65120 #No funciona
+    AegisName: C_Garment_120
+    Name: C Wing Of Eutaxy
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65121
+    AegisName: C_Garment_121
+    Name: C Spoon Fork Set
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 121
+  - Id: 65122 #No funciona
+    AegisName: C_Garment_122
+    Name: C Vietnam flag hood
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65123 #No funciona
+    AegisName: C_Garment_123
+    Name: C Lunatic Bag
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 123
+  - Id: 65124
+    AegisName: C_Garment_124
+    Name: C Heart Stick Choco
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 124
+  - Id: 65125
+    AegisName: C_Garment_125
+    Name: C Diabolic Rock Guitar
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 125
+  - Id: 65126 #No funciona
+    AegisName: C_Garment_126
+    Name: C Melody Wing
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65127 #No funciona
+    AegisName: C_Garment_127
+    Name: C Blue Rose Garden
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65128
+    AegisName: C_Garment_128
+    Name: C Clutch Bouquet
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 128
+  - Id: 65129 #No funciona
+    AegisName: C_Garment_129
+    Name: C Pitaya G Bag
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65130 #No funciona
+    AegisName: C_Garment_130
+    Name: C Wedding Ribbon
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 130
+  - Id: 65131 #No funciona
+    AegisName: C_Garment_131
+    Name: Valkyrie Curse blight
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65132 #No funciona
+    AegisName: C_Garment_132
+    Name: C 2022RTC V Coat4
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65133 #No funciona
+    AegisName: C_Garment_133
+    Name: C Big B Rabbit
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65134 #No funciona
+    AegisName: C_Garment_134
+    Name: C Astra Blessing
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65135 #No funciona
+    AegisName: C_Garment_135
+    Name: C Back Ribbon Bell BU
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65136
+    AegisName: C_Garment_136
+    Name: 20th Anniversary Wing
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 136
+  - Id: 65137 #No funciona
+    AegisName: C_Garment_137
+    Name: C Traveller Bag
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 137
+  - Id: 65138
+    AegisName: C_Garment_138
+    Name: C Guardian Angelwing
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 138
+  - Id: 65139
+    AegisName: C_Garment_139
+    Name: C Guardian Wingdeco
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 139
+  - Id: 65140
+    AegisName: C_Garment_140
+    Name: C Guardian Butterwing
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 140
+  - Id: 65141 #No funciona
+    AegisName: C_Garment_141
+    Name: 2022RTC V Coat3
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65142 #No funciona
+    AegisName: C_Garment_142
+    Name: 2022RTC V Coat2
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65143 #No funciona
+    AegisName: C_Garment_143
+    Name: 2022RTC V Coat1
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65144 #No funciona
+    AegisName: C_Garment_144
+    Name: Whale Shark Float
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65145 #No funciona
+    AegisName: C_Garment_145
+    Name: C Ninetail Tail
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65146 #No funciona
+    AegisName: C_Garment_146
+    Name: C J Umbrella
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65147
+    AegisName: C_Garment_147
+    Name: C Muranyasa
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 147
+  - Id: 65148 #No funciona
+    AegisName: C_Garment_148
+    Name: C Diabolic Friend
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65149
+    AegisName: C_Garment_149
+    Name: C Big Magic Book
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 149
+  - Id: 65150 #No funciona
+    AegisName: C_Garment_150
+    Name: C Phaya Ploeng Suriyan
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65151 #No funciona
+    AegisName: C_Garment_151
+    Name: Tele WG Cape
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65152 #No funciona
+    AegisName: C_Garment_152
+    Name: C JP EV16
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65153 #No funciona
+    AegisName: C_Garment_153
+    Name: C JP EV17
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65154
+    AegisName: C_Garment_154
+    Name: C Valkyrie Spear
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 154
+  - Id: 65155 #No funciona
+    AegisName: C_Garment_155
+    Name: C Giant Angeling
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65156 #No funciona
+    AegisName: C_Garment_156
+    Name: C Mystical Wing
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65157
+    AegisName: C_Garment_157
+    Name: Rainbow Shell
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 157
+  - Id: 65158 #No funciona
+    AegisName: C_Garment_158
+    Name: C Katana TenguMaster
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65159 #No funciona
+    AegisName: C_Garment_159
+    Name: Day of the Dead
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 65160
+    AegisName: C_Garment_160
+    Name: Empty
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
 
 #ID COSTUME RENEWALL
   - Id: 5909

@@ -8,5 +8,5 @@ Header:
   Type: ITEM_VENDING_DB
   Version: 1
 
-Body:
- - Item: Medalla_Battleground
+#Body:
+# - Item: Medalla_Battleground

@@ -535,8 +535,8 @@ Body:
     Element: Undead
     ElementLevel: 1
     WalkSpeed: 400
-    AttackDelay: 2612
-    AttackMotion: 912
+    AttackDelay: 1306
+    AttackMotion: 456
     DamageMotion: 288
     Ai: 04
     Drops:
@@ -554,7 +554,7 @@ Body:
       - Item: White_Jewel
         Rate: 70
       - Item: Zombie_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2611
     AegisName: C4_WOOTAN_FIGHTER
@@ -581,8 +581,8 @@ Body:
     Element: Fire
     ElementLevel: 2
     WalkSpeed: 200
-    AttackDelay: 912
-    AttackMotion: 1344
+    AttackDelay: 456
+    AttackMotion: 672
     DamageMotion: 480
     Ai: 04
     Drops:
@@ -601,7 +601,7 @@ Body:
       - Item: Banana_Hat
         Rate: 5
       - Item: Wootan_Fighter_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2616
     AegisName: C4_WILD_ROSE
@@ -628,8 +628,8 @@ Body:
     Element: Wind
     ElementLevel: 1
     WalkSpeed: 100
-    AttackDelay: 964
-    AttackMotion: 864
+    AttackDelay: 482
+    AttackMotion: 432
     DamageMotion: 288
     Ai: 04
     Drops:
@@ -647,8 +647,11 @@ Body:
         Rate: 600
       - Item: Big_Sis'_Ribbon
         Rate: 2
+      - Item: C_Wild_Rose
+        Rate: 10
+        StealProtected: true
       - Item: Wild_Rose_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2620
     AegisName: C4_WANDER_MAN
@@ -675,8 +678,8 @@ Body:
     Element: Wind
     ElementLevel: 1
     WalkSpeed: 100
-    AttackDelay: 672
-    AttackMotion: 500
+    AttackDelay: 336
+    AttackMotion: 250
     DamageMotion: 192
     Ai: 04
     Modes:
@@ -696,8 +699,11 @@ Body:
         Rate: 217
       - Item: Muramasa
         Rate: 1
+      - Item: C_Wanderer_Sakkat
+        Rate: 10
+        StealProtected: true
       - Item: Wander_Man_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2625
     AegisName: C4_VENATU_1
@@ -724,8 +730,8 @@ Body:
     Element: Neutral
     ElementLevel: 2
     WalkSpeed: 150
-    AttackDelay: 504
-    AttackMotion: 1020
+    AttackDelay: 252
+    AttackMotion: 510
     DamageMotion: 360
     Ai: 04
     Drops:
@@ -744,7 +750,7 @@ Body:
       - Item: High_end_Cooking_Kits
         Rate: 100
       - Item: Venatu_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2634
     AegisName: C4_THIEF_BUG
@@ -770,8 +776,8 @@ Body:
     Element: Neutral
     ElementLevel: 3
     WalkSpeed: 150
-    AttackDelay: 1288
-    AttackMotion: 288
+    AttackDelay: 644
+    AttackMotion: 144
     DamageMotion: 768
     Ai: 04
     Modes:
@@ -790,7 +796,7 @@ Body:
       - Item: Iron_Ore
         Rate: 250
       - Item: Thief_Bug_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2639
     AegisName: C4_TAMRUAN
@@ -817,8 +823,8 @@ Body:
     Element: Dark
     ElementLevel: 3
     WalkSpeed: 140
-    AttackDelay: 512
-    AttackMotion: 1152
+    AttackDelay: 256
+    AttackMotion: 576
     DamageMotion: 672
     Ai: 04
     Modes:
@@ -834,8 +840,11 @@ Body:
         Rate: 8
       - Item: Chain_Mail_
         Rate: 3
+      - Item: C_Dokkebi_Mask
+        Rate: 10
+        StealProtected: true
       - Item: Tamruan_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2644
     AegisName: C4_STALACTIC_GOLEM
@@ -863,8 +872,8 @@ Body:
     Element: Neutral
     ElementLevel: 4
     WalkSpeed: 200
-    AttackDelay: 1264
-    AttackMotion: 864
+    AttackDelay: 632
+    AttackMotion: 432
     DamageMotion: 288
     Ai: 04
     Drops:
@@ -881,7 +890,7 @@ Body:
       - Item: Elunium
         Rate: 163
       - Item: Stalactic_Golem_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2649
     AegisName: C4_SOLDIER_SKELETON
@@ -908,8 +917,8 @@ Body:
     Element: Undead
     ElementLevel: 1
     WalkSpeed: 200
-    AttackDelay: 2276
-    AttackMotion: 576
+    AttackDelay: 1138
+    AttackMotion: 288
     DamageMotion: 432
     Ai: 04
     Drops:
@@ -928,7 +937,7 @@ Body:
       - Item: Stiletto
         Rate: 50
       - Item: Soldier_Skeleton_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2654
     AegisName: C4_SMOKIE
@@ -955,8 +964,8 @@ Body:
     Element: Earth
     ElementLevel: 1
     WalkSpeed: 200
-    AttackDelay: 1576
-    AttackMotion: 576
+    AttackDelay: 788
+    AttackMotion: 288
     DamageMotion: 420
     Ai: 04
     Drops:
@@ -974,8 +983,11 @@ Body:
         Rate: 5
       - Item: Bluish_Green_Jewel
         Rate: 2
+      - Item: C_Lazy_Raccoon
+        Rate: 10
+        StealProtected: true
       - Item: Smokie_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2664
     AegisName: C4_SHINOBI
@@ -1004,8 +1016,8 @@ Body:
     Element: Dark
     ElementLevel: 3
     WalkSpeed: 150
-    AttackDelay: 1003
-    AttackMotion: 1152
+    AttackDelay: 501
+    AttackMotion: 576
     DamageMotion: 336
     Ai: 04
     Drops:
@@ -1023,8 +1035,11 @@ Body:
         Rate: 2000
       - Item: Murasame_
         Rate: 5
+      - Item: C_Ninja_Scroll
+        Rate: 10
+        StealProtected: true
       - Item: Shinobi_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2674
     AegisName: C4_SAND_MAN
@@ -1051,8 +1066,8 @@ Body:
     Element: Earth
     ElementLevel: 3
     WalkSpeed: 250
-    AttackDelay: 1672
-    AttackMotion: 720
+    AttackDelay: 836
+    AttackMotion: 360
     DamageMotion: 288
     Ai: 04
     Drops:
@@ -1070,8 +1085,11 @@ Body:
         Rate: 1
       - Item: Hypnotist's_Staff_
         Rate: 5
+      - Item: C_Sandman_Hat
+        Rate: 10
+        StealProtected: true
       - Item: Sand_Man_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2679
     AegisName: C4_RODA_FROG
@@ -1097,8 +1115,8 @@ Body:
     Element: Water
     ElementLevel: 1
     WalkSpeed: 200
-    AttackDelay: 2016
-    AttackMotion: 816
+    AttackDelay: 1008
+    AttackMotion: 408
     DamageMotion: 288
     Ai: 04
     Drops:
@@ -1112,8 +1130,11 @@ Body:
         Rate: 7
       - Item: Empty_Bottle
         Rate: 2000
+      - Item: C_Frog_Cap
+        Rate: 10
+        StealProtected: true
       - Item: Roda_Frog_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2684
     AegisName: C4_RETRIBUTION
@@ -1140,8 +1161,8 @@ Body:
     Element: Dark
     ElementLevel: 3
     WalkSpeed: 120
-    AttackDelay: 360
-    AttackMotion: 480
+    AttackDelay: 180
+    AttackMotion: 240
     DamageMotion: 360
     Ai: 04
     Class: Boss
@@ -1160,8 +1181,11 @@ Body:
         Rate: 10
       - Item: Cursed_Seal
         Rate: 50
+      - Item: C_Cap_Of_Blindness
+        Rate: 10
+        StealProtected: true
       - Item: Retribution_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2697
     AegisName: C4_PORING
@@ -1185,9 +1209,9 @@ Body:
     Element: Water
     ElementLevel: 1
     WalkSpeed: 400
-    AttackDelay: 1872
+    AttackDelay: 936
     AttackMotion: 672
-    DamageMotion: 480
+    DamageMotion: 336
     Ai: 04
     Drops:
       - Item: Jellopy
@@ -1204,8 +1228,11 @@ Body:
         Rate: 150
       - Item: Unripe_Apple
         Rate: 20
+      - Item: C_Poring_Mascot_Costume
+        Rate: 10
+        StealProtected: true
       - Item: Poring_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2702
     AegisName: C4_POPORING
@@ -1232,8 +1259,8 @@ Body:
     Element: Poison
     ElementLevel: 1
     WalkSpeed: 300
-    AttackDelay: 1672
-    AttackMotion: 672
+    AttackDelay: 836
+    AttackMotion: 336
     DamageMotion: 480
     Ai: 04
     Drops:
@@ -1251,8 +1278,11 @@ Body:
         Rate: 5
       - Item: Apple
         Rate: 250
+      - Item: C_Poporing_Mascot_Head
+        Rate: 10
+        StealProtected: true
       - Item: Poporing_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2707
     AegisName: C4_PLANKTON
@@ -1279,8 +1309,8 @@ Body:
     Element: Water
     ElementLevel: 3
     WalkSpeed: 400
-    AttackDelay: 2208
-    AttackMotion: 1008
+    AttackDelay: 1104
+    AttackMotion: 504
     DamageMotion: 324
     Ai: 04
     Drops:
@@ -1298,8 +1328,11 @@ Body:
         Rate: 20
       - Item: Center_Potion
         Rate: 50
+      - Item: C_Hermose_Cap
+        Rate: 10
+        StealProtected: true
       - Item: Plankton_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2712
     AegisName: C4_PICKY_
@@ -1326,8 +1359,8 @@ Body:
     Element: Fire
     ElementLevel: 1
     WalkSpeed: 200
-    AttackDelay: 988
-    AttackMotion: 288
+    AttackDelay: 494
+    AttackMotion: 144
     DamageMotion: 168
     Ai: 04
     Drops:
@@ -1345,8 +1378,11 @@ Body:
         Rate: 50
       - Item: Tiny_Egg_Shell
         Rate: 10
+      - Item: C_Picky_Egg_Shell
+        Rate: 10
+        StealProtected: true
       - Item: Picky__Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2717
     AegisName: C4_PENOMENA
@@ -1373,8 +1409,8 @@ Body:
     Element: Poison
     ElementLevel: 1
     WalkSpeed: 400
-    AttackDelay: 832
-    AttackMotion: 500
+    AttackDelay: 416
+    AttackMotion: 250
     DamageMotion: 600
     Ai: 04
     Drops:
@@ -1393,7 +1429,7 @@ Body:
       - Item: Red_Gemstone
         Rate: 550
       - Item: Penomena_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2722
     AegisName: C4_ORK_WARRIOR
@@ -1422,8 +1458,8 @@ Body:
     Element: Earth
     ElementLevel: 1
     WalkSpeed: 200
-    AttackDelay: 1864
-    AttackMotion: 864
+    AttackDelay: 932
+    AttackMotion: 432
     DamageMotion: 288
     Ai: 04
     Drops:
@@ -1441,8 +1477,11 @@ Body:
         Rate: 5
       - Item: Axe
         Rate: 100
+      - Item: C_Orc_Helm
+        Rate: 10
+        StealProtected: true
       - Item: Orc_Warrior_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2727
     AegisName: C4_NOXIOUS
@@ -1469,8 +1508,8 @@ Body:
     Element: Ghost
     ElementLevel: 3
     WalkSpeed: 350
-    AttackDelay: 768
-    AttackMotion: 1440
+    AttackDelay: 384
+    AttackMotion: 720
     DamageMotion: 672
     Ai: 04
     Drops:
@@ -1485,7 +1524,7 @@ Body:
       - Item: Old_Blue_Box
         Rate: 1
       - Item: Noxious_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2732
     AegisName: C4_NIGHTMARE_TERROR
@@ -1512,8 +1551,8 @@ Body:
     Element: Dark
     ElementLevel: 3
     WalkSpeed: 165
-    AttackDelay: 1216
-    AttackMotion: 816
+    AttackDelay: 608
+    AttackMotion: 408
     DamageMotion: 432
     Ai: 04
     Modes:
@@ -1533,8 +1572,11 @@ Body:
         Rate: 100
       - Item: Infiltrator
         Rate: 1
+      - Item: C_Horse_Hairpin
+        Rate: 10
+        StealProtected: true
       - Item: Nightmare_Terror_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2737
     AegisName: C4_MYSTCASE
@@ -1561,8 +1603,8 @@ Body:
     Element: Neutral
     ElementLevel: 3
     WalkSpeed: 400
-    AttackDelay: 1248
-    AttackMotion: 1248
+    AttackDelay: 624
+    AttackMotion: 624
     DamageMotion: 432
     Ai: 04
     Drops:
@@ -1580,8 +1622,11 @@ Body:
         Rate: 5
       - Item: Candy
         Rate: 340
+      - Item: C_Wrapping_Ribbon
+        Rate: 10
+        StealProtected: true
       - Item: Mystcase_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2742
     AegisName: C4_MOROCC_1
@@ -1608,26 +1653,11 @@ Body:
     Element: Dark
     ElementLevel: 1
     WalkSpeed: 110
-    AttackDelay: 576
-    AttackMotion: 540
+    AttackDelay: 288
+    AttackMotion: 270
     DamageMotion: 432
     Ai: 04
     Class: Boss
-    Drops:
-      - Item: Herald_Of_GOD
-        Rate: 10
-      - Item: Dark_Crystal
-        Rate: 1000
-      - Item: Dark_Debris
-        Rate: 3000
-      - Item: Elunium
-        Rate: 160
-      - Item: Brigan
-        Rate: 4850
-      - Item: Diabolus_Manteau
-        Rate: 3
-      - Item: Nemesis
-        Rate: 20
   - Id: 2747
     AegisName: C4_MINOROUS
     Name: Furious Minorous
@@ -1653,8 +1683,8 @@ Body:
     Element: Fire
     ElementLevel: 2
     WalkSpeed: 200
-    AttackDelay: 1360
-    AttackMotion: 960
+    AttackDelay: 680
+    AttackMotion: 480
     DamageMotion: 432
     Ai: 04
     Drops:
@@ -1673,7 +1703,7 @@ Body:
       - Item: Lemon
         Rate: 300
       - Item: Minorous_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2752
     AegisName: C4_MIMIC
@@ -1699,8 +1729,8 @@ Body:
     Element: Neutral
     ElementLevel: 3
     WalkSpeed: 100
-    AttackDelay: 972
-    AttackMotion: 500
+    AttackDelay: 486
+    AttackMotion: 250
     DamageMotion: 288
     Ai: 04
     Drops:
@@ -1719,7 +1749,7 @@ Body:
       - Item: Elunium_Stone
         Rate: 270
       - Item: Mimic_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2757
     AegisName: C4_MERMAN
@@ -1746,8 +1776,8 @@ Body:
     Element: Water
     ElementLevel: 3
     WalkSpeed: 220
-    AttackDelay: 916
-    AttackMotion: 816
+    AttackDelay: 458
+    AttackMotion: 408
     DamageMotion: 336
     Ai: 04
     Drops:
@@ -1765,8 +1795,11 @@ Body:
         Rate: 3
       - Item: Oridecon_Stone
         Rate: 203
+      - Item: C_Mermaid_Headphone
+        Rate: 10
+        StealProtected: true
       - Item: Merman_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2762
     AegisName: C4_MARIN
@@ -1793,8 +1826,8 @@ Body:
     Element: Water
     ElementLevel: 2
     WalkSpeed: 400
-    AttackDelay: 1872
-    AttackMotion: 672
+    AttackDelay: 936
+    AttackMotion: 336
     DamageMotion: 480
     Ai: 04
     Drops:
@@ -1812,8 +1845,11 @@ Body:
         Rate: 350
       - Item: Poring_Hat
         Rate: 1
+      - Item: C_Marin_Hat
+        Rate: 10
+        StealProtected: true
       - Item: Marin_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2767
     AegisName: C4_MAJORUROS
@@ -1840,8 +1876,8 @@ Body:
     Element: Fire
     ElementLevel: 2
     WalkSpeed: 250
-    AttackDelay: 1100
-    AttackMotion: 960
+    AttackDelay: 550
+    AttackMotion: 480
     DamageMotion: 780
     Ai: 04
     Drops:
@@ -1859,8 +1895,11 @@ Body:
         Rate: 160
       - Item: Star_Crumb
         Rate: 250
+      - Item: Costume_Majorous_Horns
+        Rate: 10
+        StealProtected: true
       - Item: Majoruros_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2772
     AegisName: C4_LUDE
@@ -1887,8 +1926,8 @@ Body:
     Element: Undead
     ElementLevel: 1
     WalkSpeed: 150
-    AttackDelay: 890
-    AttackMotion: 960
+    AttackDelay: 445
+    AttackMotion: 480
     DamageMotion: 480
     Ai: 04
     Drops:
@@ -1904,8 +1943,11 @@ Body:
         Rate: 10
       - Item: Holy_Scroll_1_3
         Rate: 100
+      - Item: C_Lude_Hood
+        Rate: 10
+        StealProtected: true
       - Item: Lude_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2787
     AegisName: C4_KIND_OF_BEETLE
@@ -1930,8 +1972,8 @@ Body:
     Element: Earth
     ElementLevel: 1
     WalkSpeed: 165
-    AttackDelay: 1247
-    AttackMotion: 768
+    AttackDelay: 623
+    AttackMotion: 384
     DamageMotion: 576
     Ai: 04
     Modes:
@@ -1948,7 +1990,7 @@ Body:
       - Item: Guard_
         Rate: 1
       - Item: Kind_Of_Beetle_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2792
     AegisName: C4_INJUSTICE
@@ -1975,8 +2017,8 @@ Body:
     Element: Dark
     ElementLevel: 2
     WalkSpeed: 400
-    AttackDelay: 770
-    AttackMotion: 720
+    AttackDelay: 385
+    AttackMotion: 360
     DamageMotion: 336
     Ai: 04
     Drops:
@@ -1995,7 +2037,7 @@ Body:
       - Item: Jamadhar_
         Rate: 2
       - Item: Injustice_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2797
     AegisName: C4_HUNTER_FLY
@@ -2022,8 +2064,8 @@ Body:
     Element: Wind
     ElementLevel: 2
     WalkSpeed: 150
-    AttackDelay: 676
-    AttackMotion: 576
+    AttackDelay: 338
+    AttackMotion: 288
     DamageMotion: 480
     Ai: 04
     Modes:
@@ -2044,7 +2086,7 @@ Body:
       - Item: Damascus_
         Rate: 2
       - Item: Hunter_Fly_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2802
     AegisName: C4_HODE
@@ -2071,8 +2113,8 @@ Body:
     Element: Earth
     ElementLevel: 2
     WalkSpeed: 200
-    AttackDelay: 1480
-    AttackMotion: 480
+    AttackDelay: 740
+    AttackMotion: 240
     DamageMotion: 720
     Ai: 04
     Drops:
@@ -2091,7 +2133,7 @@ Body:
       - Item: Fatty_Chubby_Earthworm
         Rate: 20
       - Item: Hode_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2807
     AegisName: C4_HARPY
@@ -2118,8 +2160,8 @@ Body:
     Element: Wind
     ElementLevel: 3
     WalkSpeed: 155
-    AttackDelay: 972
-    AttackMotion: 672
+    AttackDelay: 486
+    AttackMotion: 336
     DamageMotion: 470
     Ai: 04
     Modes:
@@ -2138,7 +2180,7 @@ Body:
       - Item: Electric_Fist
         Rate: 20
       - Item: Harpy_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2812
     AegisName: C4_GOLEM
@@ -2167,8 +2209,8 @@ Body:
     Element: Neutral
     ElementLevel: 3
     WalkSpeed: 300
-    AttackDelay: 1608
-    AttackMotion: 816
+    AttackDelay: 804
+    AttackMotion: 408
     DamageMotion: 396
     Ai: 04
     Drops:
@@ -2187,7 +2229,7 @@ Body:
       - Item: Iron
         Rate: 350
       - Item: Golem_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2822
     AegisName: C4_GHOUL
@@ -2214,8 +2256,8 @@ Body:
     Element: Undead
     ElementLevel: 2
     WalkSpeed: 250
-    AttackDelay: 2456
-    AttackMotion: 912
+    AttackDelay: 1228
+    AttackMotion: 456
     DamageMotion: 504
     Ai: 04
     Drops:
@@ -2234,12 +2276,12 @@ Body:
       - Item: Ghoul_Leg
         Rate: 1
       - Item: Ghoul_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2827
     AegisName: C4_GARGOYLE
     Name: Furious Gargoyle
-    Level: 100
+    Level: 99
     Hp: 43860
     BaseExp: 5700
     JobExp: 12810
@@ -2261,8 +2303,8 @@ Body:
     Element: Wind
     ElementLevel: 3
     WalkSpeed: 200
-    AttackDelay: 1020
-    AttackMotion: 720
+    AttackDelay: 520
+    AttackMotion: 360
     DamageMotion: 384
     Ai: 04
     Modes:
@@ -2279,12 +2321,12 @@ Body:
       - Item: Elunium_Stone
         Rate: 238
       - Item: Gargoyle_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2832
     AegisName: C4_FERUS_
     Name: Furious Ferus
-    Level: 126
+    Level: 99
     Hp: 195270
     BaseExp: 13600
     JobExp: 26880
@@ -2306,8 +2348,8 @@ Body:
     Element: Earth
     ElementLevel: 2
     WalkSpeed: 120
-    AttackDelay: 108
-    AttackMotion: 576
+    AttackDelay: 54
+    AttackMotion: 288
     DamageMotion: 432
     Ai: 04
     Drops:
@@ -2323,13 +2365,16 @@ Body:
         Rate: 20
       - Item: Dragonball_Green
         Rate: 100
+      - Item: C_Dragon_Skull
+        Rate: 10
+        StealProtected: true
       - Item: Ferus__Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2837
     AegisName: C4_EXPLOSION
     Name: Furious Explosion
-    Level: 100
+    Level: 99
     Hp: 39065
     BaseExp: 4750
     JobExp: 12810
@@ -2351,8 +2396,8 @@ Body:
     Element: Fire
     ElementLevel: 3
     WalkSpeed: 165
-    AttackDelay: 1260
-    AttackMotion: 960
+    AttackDelay: 630
+    AttackMotion: 480
     DamageMotion: 336
     Ai: 04
     Drops:
@@ -2367,7 +2412,7 @@ Body:
       - Item: Fruit_Of_Mastela
         Rate: 400
       - Item: Explosion_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2842
     AegisName: C4_DUSTINESS
@@ -2394,8 +2439,8 @@ Body:
     Element: Wind
     ElementLevel: 2
     WalkSpeed: 150
-    AttackDelay: 1004
-    AttackMotion: 504
+    AttackDelay: 502
+    AttackMotion: 252
     DamageMotion: 384
     Ai: 04
     Modes:
@@ -2414,7 +2459,7 @@ Body:
       - Item: Red_Herb
         Rate: 1200
       - Item: Dustiness_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2846
     AegisName: C4_DRILLER
@@ -2441,8 +2486,8 @@ Body:
     Element: Earth
     ElementLevel: 1
     WalkSpeed: 165
-    AttackDelay: 1300
-    AttackMotion: 900
+    AttackDelay: 650
+    AttackMotion: 450
     DamageMotion: 336
     Ai: 04
     Drops:
@@ -2453,7 +2498,7 @@ Body:
       - Item: Red_Gemstone
         Rate: 3500
       - Item: Driller_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2851
     AegisName: C4_DOKEBI
@@ -2480,8 +2525,8 @@ Body:
     Element: Dark
     ElementLevel: 1
     WalkSpeed: 250
-    AttackDelay: 1156
-    AttackMotion: 456
+    AttackDelay: 578
+    AttackMotion: 228
     DamageMotion: 384
     Ai: 04
     Modes:
@@ -2501,8 +2546,11 @@ Body:
         Rate: 300
       - Item: Hammer_Of_Blacksmith
         Rate: 5
+      - Item: C_Bogy_Cap_TW
+        Rate: 10
+        StealProtected: true
       - Item: Dokebi_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2856
     AegisName: C4_DESERT_WOLF_B
@@ -2529,8 +2577,8 @@ Body:
     Element: Fire
     ElementLevel: 1
     WalkSpeed: 300
-    AttackDelay: 1600
-    AttackMotion: 900
+    AttackDelay: 800
+    AttackMotion: 450
     DamageMotion: 240
     Ai: 04
     Drops:
@@ -2548,8 +2596,11 @@ Body:
         Rate: 5
       - Item: Orange
         Rate: 1000
+      - Item: Costume_Desert_Wolf_Baby
+        Rate: 10
+        StealProtected: true
       - Item: Desert_Wolf_Babe_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2871
     AegisName: C4_CLOCK
@@ -2576,8 +2627,8 @@ Body:
     Element: Earth
     ElementLevel: 2
     WalkSpeed: 200
-    AttackDelay: 1092
-    AttackMotion: 792
+    AttackDelay: 546
+    AttackMotion: 396
     DamageMotion: 480
     Ai: 04
     Drops:
@@ -2595,8 +2646,11 @@ Body:
         Rate: 30
       - Item: Elunium
         Rate: 163
+      - Item: C_C_Tower_Manager_Incom
+        Rate: 10
+        StealProtected: true
       - Item: Clock_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2881
     AegisName: C4_BREEZE
@@ -2605,8 +2659,8 @@ Body:
     Hp: 33775
     BaseExp: 4795
     JobExp: 13470
-    Attack: 590
-    Attack2: 680
+    Attack: 295
+    Attack2: 340
     Defense: 10
     MagicDefense: 10
     Str: 75
@@ -2642,8 +2696,11 @@ Body:
         Rate: 10
       - Item: Rough_Wind
         Rate: 10
+      - Item: C_Wind_Fan
+        Rate: 10
+        StealProtected: true
       - Item: Breeze_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2885
     AegisName: C4_BATHORY
@@ -2670,8 +2727,8 @@ Body:
     Element: Dark
     ElementLevel: 1
     WalkSpeed: 100
-    AttackDelay: 1504
-    AttackMotion: 840
+    AttackDelay: 752
+    AttackMotion: 420
     DamageMotion: 900
     Ai: 04
     Drops:
@@ -2689,8 +2746,11 @@ Body:
         Rate: 15
       - Item: Old_Broom
         Rate: 20
+      - Item: C_Witchs_Hat
+        Rate: 10
+        StealProtected: true
       - Item: Bathory_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2890
     AegisName: C4_ARGOS
@@ -2717,8 +2777,8 @@ Body:
     Element: Poison
     ElementLevel: 1
     WalkSpeed: 300
-    AttackDelay: 1468
-    AttackMotion: 468
+    AttackDelay: 734
+    AttackMotion: 234
     DamageMotion: 768
     Ai: 04
     Modes:
@@ -2738,8 +2798,11 @@ Body:
         Rate: 250
       - Item: Bark_Shorts
         Rate: 15
+      - Item: C_Spider_Seduction
+        Rate: 10
+        StealProtected: true
       - Item: Argos_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2895
     AegisName: C4_APOCALIPS
@@ -2766,8 +2829,8 @@ Body:
     Element: Neutral
     ElementLevel: 3
     WalkSpeed: 400
-    AttackDelay: 1840
-    AttackMotion: 1440
+    AttackDelay: 820
+    AttackMotion: 720
     DamageMotion: 384
     Ai: 04
     Drops:
@@ -2786,7 +2849,7 @@ Body:
       - Item: Steel
         Rate: 2500
       - Item: Apocalips_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2899
     AegisName: C4_ANOLIAN
@@ -2813,8 +2876,8 @@ Body:
     Element: Water
     ElementLevel: 2
     WalkSpeed: 190
-    AttackDelay: 900
-    AttackMotion: 500
+    AttackDelay: 450
+    AttackMotion: 250
     DamageMotion: 864
     Ai: 04
     Drops:
@@ -2832,8 +2895,11 @@ Body:
         Rate: 1
       - Item: Oridecon
         Rate: 134
+      - Item: C_Gang_Scarf
+        Rate: 10
+        StealProtected: true
       - Item: Anolian_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2904
     AegisName: C4_ANACONDAQ
@@ -2860,8 +2926,8 @@ Body:
     Element: Poison
     ElementLevel: 1
     WalkSpeed: 200
-    AttackDelay: 1576
-    AttackMotion: 576
+    AttackDelay: 788
+    AttackMotion: 288
     DamageMotion: 576
     Ai: 04
     Drops:
@@ -2879,8 +2945,11 @@ Body:
         Rate: 150
       - Item: Oridecon_Stone
         Rate: 50
+      - Item: C_Coiledup_Snake
+        Rate: 10
+        StealProtected: true
       - Item: Anacondaq_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
   - Id: 2909
     AegisName: C4_ALICEL
@@ -2908,8 +2977,8 @@ Body:
     Element: Neutral
     ElementLevel: 3
     WalkSpeed: 250
-    AttackDelay: 1080
-    AttackMotion: 480
+    AttackDelay: 540
+    AttackMotion: 240
     DamageMotion: 504
     Ai: 04
     Modes:
@@ -2929,8 +2998,11 @@ Body:
         Rate: 10
       - Item: Vali's_Manteau
         Rate: 20
+      - Item: C_Droopy_Alice_Doll
+        Rate: 10
+        StealProtected: true
       - Item: Alicel_Card
-        Rate: 1
+        Rate: 5
         StealProtected: true
 ###########################################################################
 #

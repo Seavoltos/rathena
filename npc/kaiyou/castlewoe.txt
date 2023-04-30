@@ -58,4 +58,74 @@ schg_cas04,119,12,4	duplicate(Guardia#woe)	Guardia#schcas04	56,15,15
 schg_cas05,119,12,4	duplicate(Guardia#woe)	Guardia#schcas05	56,15,15
 
 
+prtg_cas01	mapflag	norodex
+prtg_cas02	mapflag	norodex
+prtg_cas03	mapflag	norodex
+prtg_cas04	mapflag	norodex
+prtg_cas05	mapflag	norodex
+
+payg_cas01	mapflag	norodex
+payg_cas02	mapflag	norodex
+payg_cas03	mapflag	norodex
+payg_cas04	mapflag	norodex
+payg_cas05	mapflag	norodex
+
+gefg_cas01	mapflag	norodex
+gefg_cas02	mapflag	norodex
+gefg_cas03	mapflag	norodex
+gefg_cas04	mapflag	norodex
+gefg_cas05	mapflag	norodex
+
+aldeg_cas01	mapflag	norodex
+aldeg_cas02	mapflag	norodex
+aldeg_cas03	mapflag	norodex
+aldeg_cas04	mapflag	norodex
+aldeg_cas05	mapflag	norodex
+
+arug_cas01	mapflag	norodex
+arug_cas02	mapflag	norodex
+arug_cas03	mapflag	norodex
+arug_cas04	mapflag	norodex
+arug_cas05	mapflag	norodex
+
 schg_cas01	mapflag	norodex
+schg_cas02	mapflag	norodex
+schg_cas03	mapflag	norodex
+schg_cas04	mapflag	norodex
+schg_cas05	mapflag	norodex
+
+prtg_cas01	mapflag	woe_consume
+prtg_cas02	mapflag	woe_consume
+prtg_cas03	mapflag	woe_consume
+prtg_cas04	mapflag	woe_consume
+prtg_cas05	mapflag	woe_consume
+
+payg_cas01	mapflag	woe_consume
+payg_cas02	mapflag	woe_consume
+payg_cas03	mapflag	woe_consume
+payg_cas04	mapflag	woe_consume
+payg_cas05	mapflag	woe_consume
+
+gefg_cas01	mapflag	woe_consume
+gefg_cas02	mapflag	woe_consume
+gefg_cas03	mapflag	woe_consume
+gefg_cas04	mapflag	woe_consume
+gefg_cas05	mapflag	woe_consume
+
+aldeg_cas01	mapflag	woe_consume
+aldeg_cas02	mapflag	woe_consume
+aldeg_cas03	mapflag	woe_consume
+aldeg_cas04	mapflag	woe_consume
+aldeg_cas05	mapflag	woe_consume
+
+arug_cas01	mapflag	woe_consume
+arug_cas02	mapflag	woe_consume
+arug_cas03	mapflag	woe_consume
+arug_cas04	mapflag	woe_consume
+arug_cas05	mapflag	woe_consume
+
+schg_cas01	mapflag	woe_consume
+schg_cas02	mapflag	woe_consume
+schg_cas03	mapflag	woe_consume
+schg_cas04	mapflag	woe_consume
+schg_cas05	mapflag	woe_consume
