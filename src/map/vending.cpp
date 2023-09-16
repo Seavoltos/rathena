@@ -288,10 +288,10 @@ void vending_purchasereq(map_session_data* sd, int aid, int uid, const uint8* da
 
 	if (battle_config.extended_vending) {
 		if (vsd->vend_loot == battle_config.item_zeny || !vsd->vend_loot) {
-			pc_payzeny(sd, (int)z, LOG_TYPE_VENDING, vsd);
+			pc_payzeny(sd, (int)z, LOG_TYPE_VENDING, vsd->status.char_id);
 			achievement_update_objective(sd, AG_SPEND_ZENY, 1, (int)z);
 			z = vending_calc_tax(sd, z);
-			pc_getzeny(vsd, (int)z, LOG_TYPE_VENDING, sd);
+			pc_getzeny(vsd, (int)z, LOG_TYPE_VENDING, sd->status.char_id);
 		}
 		else if (vsd->vend_loot == battle_config.item_cash) {
 			pc_paycash(sd, (int)z, 0, LOG_TYPE_VENDING);
