@@ -1918,6 +1918,7 @@
 	export_constant(SC_RUSH_QUAKE1);
 	export_constant(SC_RUSH_QUAKE2);
 	export_constant(SC_G_LIFEPOTION);
+	export_constant(SC_VIPSTATE);
 
 #ifdef RENEWAL
 	export_constant(SC_EXTREMITYFIST2);
@@ -4166,6 +4167,7 @@
 	export_constant(EFST_II_SPEED);
 	export_constant(EFST_II_ATK);
 	export_constant(EFST_II_MATK);
+	export_constant(EFST_VIPSTATE);
 	export_constant(EFST_CHANGE_SIZE);
 	export_constant(EFST_CHANGE_SIZE_MONSTER);
 	export_constant(EFST_SHOW_EFFECT1);

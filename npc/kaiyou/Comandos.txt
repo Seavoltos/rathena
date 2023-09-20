@@ -12,7 +12,8 @@ prontera,150,193,5	script	Configuraciones::menu_vip	641,{
 					( #NOASK )?" [ ^10B2D2ON^000000 ] No ask":" [ ^ff1919OFF^000000 ] No ask",
 					( #NOKS )?" [ ^10B2D2ON^000000 ] No KS":" [ ^ff1919OFF^000000 ] No KS",
 					( #LISTENBG )?" [ ^10B2D2ON^000000 ] Escuchar BG":" [ ^ff1919OFF^000000 ] Escuchar BG",
-					( #Efectos_Acc )?" [ ^10B2D2OFF^000000 ] Efectos Healer y Warper":" [ ^ff1919ON^000000 ] Efectos Healer y Warper"
+					( #Efectos_Acc )?" [ ^10B2D2OFF^000000 ] Efectos Healer y Warper":" [ ^ff1919ON^000000 ] Efectos Healer y Warper",
+					( #ICONVIP )?" [ ^10B2D2OFF^000000 ] Activar icono VIP":" [ ^ff1919ON^000000 ] Desactivar icono VIP"
 					))
 		{
 			next;
@@ -89,6 +90,15 @@ prontera,150,193,5	script	Configuraciones::menu_vip	641,{
 					set #Efectos_Acc, 1;
 				}
 				break;
+			case 8:
+				if(#ICONVIP == 1){
+					message strcharinfo(0), "[ KaiyouRO] El ícono ha sido activado";
+					set #ICONVIP, 0;
+				} else {
+					message strcharinfo(0), "[ KaiyouRO] El ícono ha sido desactivados";
+					set #ICONVIP, 1;
+				}
+				break;
 		}
 	}
 
@@ -107,6 +117,8 @@ OnPCLoginEvent:
 		atcommand "@noks";
 	if(#LISTENBG == 1)
 		atcommand "@listenbg";
+	if(vip_status(1) && !#ICONVIP)
+		bonus_script "{}",(vip_status(2)-gettimetick(2)),8,0,EFST_VIPSTATE;
 	end;
 }
 
