@@ -2011,6 +2011,11 @@ bool pc_lastpoint_special( map_session_data& sd ){
 		return true;
 	}
 
+	if (strcmpi(sd.status.last_point.map, MAP_JAIL) == 0) {
+		// Don't return jailed player to save point.
+		return false;
+	}
+
 	// Maybe since the player's logout the nosave mapflag was added to the map
 	if( mapdata->getMapFlag(MF_NOSAVE) ){
 		// The map has a specific return point
@@ -6709,17 +6714,17 @@ int pc_cartitem_amount(map_session_data* sd, int idx, int amount)
 /*==========================================
  * Retrieve an item at index idx from cart.
  *------------------------------------------*/
-void pc_getitemfromcart(map_session_data *sd,int idx,int amount)
+bool pc_getitemfromcart(map_session_data *sd,int idx,int amount)
 {
-	nullpo_retv(sd);
+	nullpo_retr(1, sd);
 
 	if (idx < 0 || idx >= MAX_CART) //Invalid index check [Skotlex]
-		return;
+		return false;
 
 	struct item *item_data=&sd->cart.u.items_cart[idx];
 
 	if (item_data->nameid == 0 || amount < 1 || item_data->amount < amount || sd->state.vending || sd->state.prevend)
-		return;
+		return false;
 
 	enum e_additem_result flag = pc_additem(sd, item_data, amount, LOG_TYPE_NONE);
 
@@ -6730,6 +6735,7 @@ void pc_getitemfromcart(map_session_data *sd,int idx,int amount)
 		clif_additem(sd, idx, amount, flag);
 		clif_cart_additem(sd, idx, amount);
 	}
+	return true;
 }
 
 /*==========================================

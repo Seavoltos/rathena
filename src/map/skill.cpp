@@ -1813,6 +1813,7 @@ int skill_additional_effect( struct block_list* src, struct block_list *bl, uint
 		}
 		break;
 	case NPC_CRITICALWOUND:
+	case NPC_WIDECRITICALWOUND:
 		sc_start(src,bl,SC_CRITICALWOUND,100,skill_lv,skill_get_time2(skill_id,skill_lv));
 		break;
 	case NPC_FIRESTORM:
@@ -5224,6 +5225,7 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 	case ABR_BATTLE_BUSTER:
 	case ABR_DUAL_CANNON_FIRE:
 	case ABR_INFINITY_BUSTER:
+	case MT_TRIPLE_LASER:
 		skill_attack(BF_WEAPON,src,src,bl,skill_id,skill_lv,tick,flag);
 		break;
 
@@ -5632,6 +5634,7 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 	case DK_SERVANT_W_DEMOL:
 	case DK_MADNESS_CRUSHER:
 	case DK_HACKANDSLASHER:
+	case DK_DRAGONIC_BREATH:
 	case AG_CRIMSON_ARROW_ATK:
 	case AG_DESTRUCTIVE_HURRICANE:
 	case AG_SOUL_VC_STRIKE:
@@ -5658,8 +5661,10 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 	case SHC_IMPACT_CRATER:
 	case SHC_FATAL_SHADOW_CROW:
 	case MT_AXE_STOMP:
+	case MT_MIGHTY_SMASH:
 	case MT_RUSH_QUAKE:
 	case MT_A_MACHINE:
+	case MT_SPARK_BLASTER:
 	case ABC_ABYSS_DAGGER:
 	case ABC_CHAIN_REACTION_SHOT:
 	case ABC_DEFT_STAB:
@@ -5680,6 +5685,9 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 	case EM_EL_STORM_WIND:
 	case EM_EL_AVALANCHE:
 	case EM_EL_DEADLY_POISON:
+	case BO_EXPLOSIVE_POWDER:
+	case BO_MAYHEMIC_THORNS:
+	case NPC_WIDECRITICALWOUND:
 		if( flag&1 ) {//Recursive invocation
 			int sflag = skill_area_temp[0] & 0xFFF;
 			int heal = 0;
@@ -5746,7 +5754,10 @@ int skill_castend_damage_id (struct block_list* src, struct block_list *bl, uint
 				case LG_EARTHDRIVE:
 				case GN_CARTCANNON:
 				case SU_SCRATCH:
+				case BO_MAYHEMIC_THORNS:
+				case DK_DRAGONIC_BREATH:
 				case DK_HACKANDSLASHER:
+				case MT_SPARK_BLASTER:
 					clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
 					break;
 #ifdef RENEWAL
@@ -8521,7 +8532,9 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case IQ_EXPOSION_BLASTER:
 	case SHC_IMPACT_CRATER:
 	case MT_AXE_STOMP:
+	case MT_MIGHTY_SMASH:
 	case ABC_ABYSS_DAGGER:
+	case BO_EXPLOSIVE_POWDER:
 	{
 		status_change *sc = status_get_sc(src);
 		int starget = BL_CHAR|BL_SKILL;
@@ -8656,6 +8669,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 	case NPC_HELLJUDGEMENT2:
 	case NPC_PULSESTRIKE:
 	case LG_MOONSLASHER:
+	case NPC_WIDECRITICALWOUND:
 		skill_castend_damage_id(src, src, skill_id, skill_lv, tick, flag);
 		break;
 

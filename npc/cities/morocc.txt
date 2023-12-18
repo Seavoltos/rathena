@@ -231,6 +231,7 @@ morocc,208,85,0	script	Towner#2moc	83,{
 	close;
 }
 
+
 morocc,150,50,0	script	Towner#3moc	99,{
 	mes "[Lapidary]";
 	mes "The undisputed queen of jewels has to be the Diamond. After looking at it just once, no one can deny its beauty.";
