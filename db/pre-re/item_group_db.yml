@@ -1779,7 +1779,8 @@ Body:
           - Index: 523
             Item: Claw
             Rate: 3
-          - Item: Finger
+          - Index: 524
+            Item: Finger
             Rate: 3
           - Index: 526
             Item: Finger_
@@ -4326,24 +4327,30 @@ Body:
           - Index: 333
             Item: Agav_Card
             Rate: 1
-          - Item: Vanberk_Card
+          - Index: 335
+            Item: Vanberk_Card
             Rate: 1
           - Index: 336
             Item: Isilla_Card
             Rate: 1
-          - Item: Seeker_Card
+          - Index: 337
+            Item: Seeker_Card
             Rate: 1
-          - Item: Siroma_Card
+          - Index: 338
+            Item: Siroma_Card
             Rate: 1
-          - Index: 341
+          - Index: 339
+            Index: 341
             Item: Ice_Titan_Card
             Rate: 1
-          - Item: Muscipular_Card
+          - Index: 340
+            Item: Muscipular_Card
             Rate: 1
           - Index: 344
             Item: Drosera_Card
             Rate: 2
-          - Item: Magmaring_Card
+          - Index: 345
+            Item: Magmaring_Card
             Rate: 2
   - Group: CASH_FOOD
     SubGroups:
@@ -9976,7 +9983,8 @@ Body:
           - Index: 631
             Item: Diamond_Ring
             Rate: 7
-          - Item: Safety_Ring
+          - Index: 633
+            Item: Safety_Ring
             Rate: 1
           - Index: 634
             Item: Critical_Ring
