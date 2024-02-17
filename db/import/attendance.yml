@@ -34,8 +34,8 @@ Header:
   Version: 1
 
 Body:
-  - Start: 20230101
-    End: 20240101
+  - Start: 20240101
+    End: 20250101
     Rewards:
       - Day: 1
         ItemId: 14532

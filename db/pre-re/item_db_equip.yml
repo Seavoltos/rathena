@@ -19591,15 +19591,6 @@ Body:
       bonus bSPrecovRate,10;
       bonus3 bAutoSpellWhenHit,"WZ_QUAGMIRE",3,20;
       bonus bMdef,1;
-  - Id: 2443
-    AegisName: Fish_Shoes
-    Name: Fisher's Boots
-    Type: Armor
-    Buy: 10
-    Weight: 250
-    Locations:
-      Shoes: true
-    ArmorLevel: 1
   - Id: 2444
     AegisName: Krieger_Shoes1
     Name: Glorious Shoes
@@ -20769,16 +20760,6 @@ Body:
       bonus bMaxHPRate,5;
       bonus2 bSubRace,RC_DemiHuman,5;
       bonus2 bSubRace,RC_Player_Human,5;
-  - Id: 2550
-    AegisName: Fisher's_Muffler
-    Name: Fisher's Muffler
-    Type: Armor
-    Buy: 20
-    Weight: 200
-    Locations:
-      Garment: true
-    ArmorLevel: 1
-    Refineable: true
   - Id: 2551
     AegisName: Rider_Insignia_M
     Name: Crest of the Rider

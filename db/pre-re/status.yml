@@ -1504,7 +1504,6 @@ Body:
     DurationLookup: TK_READYSTORM
     Flags:
       NoRemoveOnDead: true
-      NoSave: true
       NoDispell: true
       NoBanishingBuster: true
       NoClearance: true
@@ -1513,7 +1512,6 @@ Body:
     DurationLookup: TK_READYDOWN
     Flags:
       NoRemoveOnDead: true
-      NoSave: true
       NoDispell: true
       NoBanishingBuster: true
       NoClearance: true
@@ -1522,7 +1520,6 @@ Body:
     DurationLookup: TK_READYTURN
     Flags:
       NoRemoveOnDead: true
-      NoSave: true
       NoDispell: true
       NoBanishingBuster: true
       NoClearance: true
@@ -1531,7 +1528,6 @@ Body:
     DurationLookup: TK_READYCOUNTER
     Flags:
       NoRemoveOnDead: true
-      NoSave: true
       NoDispell: true
       NoBanishingBuster: true
       NoClearance: true
@@ -1543,7 +1539,6 @@ Body:
       NoDispell: true
       NoBanishingBuster: true
       NoClearance: true
-      NoSave: true
   - Status: Run
     Icon: EFST_RUN
     DurationLookup: TK_RUN
@@ -1854,7 +1849,6 @@ Body:
       Flee: true
       Flee2: true
     Flags:
-      NoRemoveOnDead: true
       NoClearance: true
   - Status: Assncros
     Icon: EFST_ASSASSINCROSS
@@ -1862,7 +1856,6 @@ Body:
     CalcFlags:
       Aspd: true
     Flags:
-      NoRemoveOnDead: true
       FailedMado: true
       NoClearance: true
     Fail:
@@ -1871,7 +1864,6 @@ Body:
     Icon: EFST_POEMBRAGI
     DurationLookup: BA_POEMBRAGI
     Flags:
-      NoRemoveOnDead: true
       NoClearance: true
   - Status: Appleidun
     Icon: EFST_APPLEIDUN
@@ -1879,7 +1871,6 @@ Body:
     CalcFlags:
       MaxHp: true
     Flags:
-      NoRemoveOnDead: true
       NoClearance: true
   - Status: Modechange
     DurationLookup: NPC_EMOTION
@@ -1891,7 +1882,6 @@ Body:
     CalcFlags:
       Hit: true
     Flags:
-      NoRemoveOnDead: true
       NoClearance: true
   - Status: Dontforgetme
     Icon: EFST_DONTFORGETME
@@ -1900,7 +1890,6 @@ Body:
       Speed: true
       Aspd: true
     Flags:
-      NoRemoveOnDead: true
       NoClearance: true
     Fail:
       Speedup1: true
@@ -1919,7 +1908,6 @@ Body:
     CalcFlags:
       All: true
     Flags:
-      NoRemoveOnDead: true
       NoClearance: true
   - Status: Service4u
     Icon: EFST_SERVICEFORYOU
@@ -1927,7 +1915,6 @@ Body:
     CalcFlags:
       All: true
     Flags:
-      NoRemoveOnDead: true
       NoClearance: true
   - Status: Stop
     Icon: EFST_STOP

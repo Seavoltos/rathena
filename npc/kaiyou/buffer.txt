@@ -4,7 +4,10 @@ prontera,164,175,4	script	Healer	677,{
 		.@precio_z = 2000;
 	else
 		.@precio_z = 5000;
-
+	if (isequipped(18929) || isequipped(18930) || isequipped(18931) || isequipped(18932) )
+	{
+		.@precio_z = 0;
+	}
 	mes .@npc_name$;
 	mes "Bienvenido aventurero,";
 	mes "¿Cómo puedo ayudarte?";

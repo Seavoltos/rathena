@@ -34,8 +34,7 @@ do{
 	set .@menu,select("^10B2D2 [ > ] ^000000ROTD Información",
 				"^10B2D2 [ > ] ^000000Misiones",
 				( .@gmlevel < .gm_level )?"":"^FF0000 [ > ] ^000000Configurar Nueva raza",
-				( .@gmlevel < .gm_level )?"":"^FF0000 [ > ] ^000000Configurar EXP Bonus",		
-				( .@gmlevel < .gm_level )?"":"^FF0000 [ > ] ^000000Configurar Item / Zeny Bonus"
+				( .@gmlevel < .gm_level )?"":"^FF0000 [ > ] ^000000Configurar EXP Bonus"
 			);
 				
 	switch( .@menu ) {
@@ -230,32 +229,6 @@ do{
 			input .rotd_exp_bonus,0,100;
 			if ( .rotd_exp_bonus ) mes "ROTD EXP : "+.rotd_exp_bonus+" %";
 			break;
-		Case 5:
-			mes "Configurar Rotd bonus";
-			mes "Configurar Zeny Bonus";
-			input .@zeny;
-			mes "Configurar Item ID";
-			do{
-				input .@item,0,32767; 
-				if ( !.@item ) close3;
-			}while( getitemname( .@item ) == "null" );
-			mes "Ingresa monto.";
-			input .@amount,0,30000;
-			mes "Ingresa porcentaje.";
-			input .@rate,0,100;
-			if ( .@amount && .@rate ) {
-				next;
-				mes "Actualizado item bonus : ( "+.@rate+"% )";
-				mes "^777777"+.@amount+" x "+getitemname( .@item )+"^000000";
-				mes "^777777"+.@zeny+" Zeny^000000";
-				if ( select( "Confirmar","Cancelar" ) == 1 ) {
-					set .rotd_item_id,.@item;	
-					set .rotd_item_amount,.@amount;
-					set .rotd_item_rate,.@rate;
-					set .rotd_zeny,.@zeny;
-					mes "Actualizado.";
-				}
-			}
 		default: close3;
 	}
 	next;

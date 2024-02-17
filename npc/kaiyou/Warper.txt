@@ -16,7 +16,7 @@ prontera,159,188,4	script	Warper::Warper	669,{
 	mes "Buen día ^7900f9"+ strcharinfo(0) +"^000000.";
 	mes "Entonces, hacia donde deseas ir?";
 	
-	menu	( lastmap$ == "" )?"":"[ > ] Último Warp",warptolast,"[ > ] Ciudades",city,"[ > ] Dungeon",dungeon,"[ > ] Battle Office",wbattleground,( BaseLevel < 50 )?"":"[ > ] PvP",wpvp,( !#payond )?"":"[ > ] Tienda",tienda,"[ > ] Mercado",mercado;
+	menu	( lastmap$ == "" )?"":"[ > ] Último Warp",warptolast,"[ > ] Ciudades",city,"[ > ] Dungeon",dungeon,"[ > ] Battle Office",wbattleground,( BaseLevel < 50 )?"":"[ > ] PvP",wpvp,"[ > ] Mercado",mercado;
 	
 tienda:
 menu

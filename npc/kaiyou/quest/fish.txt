@@ -676,7 +676,7 @@ OnInit:
 	setarray $@Spot_Name$[0],	"Banco peces","Banco peces","Banco peces","Banco peces","Banco peces","Banco peces","Banco peces","Banco peces","Banco peces"; // * Nombre spot
 	setarray $@Spot_Lvl[0],		            0,            0,           0,             0,            0,            0,            0,            0,            0; // * Nivel necesario
 	setarray $@Spote_Sprite[0],	        10065,        10065,       10065,         10065,        10065,        10065,        10065,        10065,        10065; // * Sprite
-	setarray $@Spot_SpawnMin[0],	        5,           15,           5,             5,            5,            5,            5,            5,            5; // * Minimum Spawn Time
+	setarray $@Spot_SpawnMin[0],	        5,            5,           5,             5,            5,            5,            5,            5,            5; // * Minimum Spawn Time
 	setarray $@Spot_SpawnMax[0],	       15,           15,          15,            15,           15,           15,           15,           15,           15; // * Maximum Spawn Time
 	setarray $@Spot_Exp[0],		          200,          200,         200,           200,          200,          200,          200,          200,          200; // * Experience
 
@@ -697,31 +697,31 @@ OnInit:
 
 	// Unique Moscovia
 	setarray $@Fish_0_ID[0],	 46032,46035,46041;
-	setarray $@Fish_0_RT[0],	   500,  500,   50;
+	setarray $@Fish_0_RT[0],	   500,  500,   10;
 	// Unique Nameless
 	setarray $@Fish_1_ID[0],	 46036,46050,46033;
-	setarray $@Fish_1_RT[0],	   500,  500,    1;
+	setarray $@Fish_1_RT[0],	   500,  500,   10;
 	// Unique Undersea Tunnel
 	setarray $@Fish_2_ID[0],	 46034,46026,46040;
-	setarray $@Fish_2_RT[0],	   500,  500,   50;
+	setarray $@Fish_2_RT[0],	   500,  500,   10;
 	// Unique Sunked Ship
 	setarray $@Fish_3_ID[0],	 46039,46028,46048,46023;
-	setarray $@Fish_3_RT[0],	   500,  500,  100,    1;
+	setarray $@Fish_3_RT[0],	   500,  500,  100,   10;
 	// Unique Komodo Beach
 	setarray $@Fish_4_ID[0],	 46045,46025,46051;
-	setarray $@Fish_4_RT[0],	   500,  500,   50;
+	setarray $@Fish_4_RT[0],	   500,  500,   10;
 	// Unique Jawaii
 	setarray $@Fish_5_ID[0],	 46021,46024,46020;
-	setarray $@Fish_5_RT[0],	   500,  500,   50;
+	setarray $@Fish_5_RT[0],	   500,  500,   10;
 	// Unique Abyss Lake
 	setarray $@Fish_6_ID[0],	 46029,46038,46049,46022;
-	setarray $@Fish_6_RT[0],	     5,  500,  100,    1;
+	setarray $@Fish_6_RT[0],	     5,  500,  100,   10;
 	// Unique Veins Field
 	setarray $@Fish_7_ID[0],	 46042,46044,46046;
-	setarray $@Fish_7_RT[0],	   500,  500,   50;
+	setarray $@Fish_7_RT[0],	   500,  500,   10;
 	// Unique Amatsu Field
 	setarray $@Fish_8_ID[0],	 46043,46037,46047;
-	setarray $@Fish_8_RT[0],	   500,  500,   50;
+	setarray $@Fish_8_RT[0],	   500,  500,   10;
 	
 	set $@FishingReady,1;
 	end;
@@ -795,6 +795,330 @@ OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
 }
 
 mosk_dun03,160,92,0	script	Banco de peces#0::FMOS10	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+// *****************
+// * Shark *
+// *****************
+nameless_n,203,278,0	script	Banco de peces#1::FNAM00	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+nameless_n,210,271,0	script	Banco de peces#1::FNAM01	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+nameless_n,181,294,0	script	Banco de peces#1::FNAM02	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+nameless_n,170,278,0	script	Banco de peces#1::FNAM03	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+nameless_n,134,117,0	script	Banco de peces#1::FNAM04	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+nameless_n,256,69,0	script	Banco de peces#1::FNAM05	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+nameless_n,218,45,0	script	Banco de peces#1::FNAM06	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+abbey03,45,234,0	script	Banco de peces#1::FNAM07	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+abbey03,16,231,0	script	Banco de peces#1::FNAM08	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+// *****************
+// * King Shrimp *
+// *****************
+iz_dun00,249,176,0	script	Banco de peces#2::FUTU00	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+iz_dun00,211,123,0	script	Banco de peces#2::FUTU01	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+iz_dun01,251,54,0	script	Banco de peces#2::FUTU02	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+iz_dun01,35,252,0	script	Banco de peces#2::FUTU03	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+iz_dun02,235,72,0	script	Banco de peces#2::FUTU04	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+iz_dun02,126,311,0	script	Banco de peces#2::FUTU05	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+iz_dun03,97,260,0	script	Banco de peces#2::FUTU06	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+iz_dun03,150,68,0	script	Banco de peces#2::FUTU07	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+iz_dun04,232,239,0	script	Banco de peces#2::FUTU08	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+iz_dun04,239,39,0	script	Banco de peces#2::FUTU09	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+// *****************
+// * Giant Squid *
+// *****************
+treasure01,163,42,0	script	Banco de peces#3::FSSH00	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+treasure01,49,149,0	script	Banco de peces#3::FSSH01	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+treasure01,21,164,0	script	Banco de peces#3::FSSH02	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+alb2trea,115,89,0	script	Banco de peces#3::FSSH03	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+alb2trea,94,100,0	script	Banco de peces#3::FSSH04	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+treasure02,163,73,0	script	Banco de peces#3::FSSH05	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+treasure02,21,164,0	script	Banco de peces#3::FSSH06	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+// *****************
+// * Blue Whale *
+// *****************
+beach_dun,52,75,0	script	Banco de peces#4::FBDN00	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+beach_dun,59,255,0	script	Banco de peces#4::FBDN01	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+beach_dun,24,213,0	script	Banco de peces#4::FBDN03	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+beach_dun3,74,153,0	script	Banco de peces#4::FBDN04	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+beach_dun3,129,55,0	script	Banco de peces#4::FBDN05	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+beach_dun3,36,129,0	script	Banco de peces#4::FBDN06	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+// *****************
+// * Whale *
+// *****************
+jawaii,224,253,0	script	Banco de peces#5::FJWA00	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+jawaii,269,205,0	script	Banco de peces#5::FJWA01	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+jawaii,283,162,0	script	Banco de peces#5::FJWA02	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+jawaii,168,277,0	script	Banco de peces#5::FJWA03	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+jawaii,106,283,0	script	Banco de peces#5::FJWA04	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+// *****************
+// * Giant Octopus *
+// *****************
+abyss_01,148,177,0	script	Banco de peces#6::FABY00	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+abyss_01,206,149,0	script	Banco de peces#6::FABY01	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+abyss_01,139,111,0	script	Banco de peces#6::FABY02	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+abyss_03,163,114,0	script	Banco de peces#6::FABY03	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+abyss_03,86,168,0	script	Banco de peces#6::FABY04	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+abyss_03,31,105,0	script	Banco de peces#6::FABY05	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+// *****************
+// * Sturgeon *
+// *****************
+ve_fild01,280,81,0	script	Banco de peces#7::FVEI00	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+ve_fild07,54,59,0	script	Banco de peces#7::FVEI01	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+ve_fild07,130,111,0	script	Banco de peces#7::FVEI02	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+// *****************
+// * Spearfish *
+// *****************
+ama_fild01,159,297,0	script	Banco de peces#8::FAMA00	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+ama_fild01,196,292,0	script	Banco de peces#8::FAMA01	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+ama_fild01,174,244,0	script	Banco de peces#8::FAMA02	844,{
+	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
+OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
+OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;
+}
+
+ama_fild01,247,269,0	script	Banco de peces#8::FAMA03	844,{
 	callfunc "Fishing_Work",strnpcinfo(3),strnpcinfo(2); end;
 OnInit:		callfunc "Fishing_Init",strnpcinfo(3),strnpcinfo(2); end;
 OnTimer60000: 	callfunc "Fishing_Tick",strnpcinfo(3); end;

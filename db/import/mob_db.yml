@@ -1854,14 +1854,14 @@ Body:
   - Id: 2767
     AegisName: C4_MAJORUROS
     Name: Furious Majoruros
-    Level: 107
-    Hp: 59005
-    BaseExp: 9270
-    JobExp: 19800
+    Level: 70
+    Hp: 115982
+    BaseExp: 25575
+    JobExp: 11397
     Attack: 1020
     Attack2: 1400
     Defense: 10
-    MagicDefense: 10
+    MagicDefense: 25
     Str: 112
     Agi: 75
     Vit: 65
@@ -1876,7 +1876,7 @@ Body:
     Element: Fire
     ElementLevel: 2
     WalkSpeed: 250
-    AttackDelay: 550
+    AttackDelay: 660
     AttackMotion: 480
     DamageMotion: 780
     Ai: 04

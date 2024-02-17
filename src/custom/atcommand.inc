@@ -429,7 +429,7 @@ ACMD_FUNC(myinfo)
 		{ "Cash Points - %d", 0 },
 		{ "Free/Kafra Points - %d", 0 },
 		{ "Vote Points - %d", 0 },
-		{ NULL, 0 },
+		{ "MvP - %d", 0 },
 		{ NULL, 0 }
 	};
 
@@ -439,6 +439,7 @@ ACMD_FUNC(myinfo)
 	output_table[0].value = sd->cashPoints;
 	output_table[1].value = sd->kafraPoints;
 	output_table[2].value = static_cast<int>(pc_readaccountreg(sd, add_str("#VOTEPOINTS")));
+	output_table[3].value = static_cast<int>(pc_readaccountreg(sd, add_str("#MVPRank")));
 
 	sprintf(output, "'%s' Info:", sd->status.name); // '%s' stats:
 	clif_displaymessage(fd,output);

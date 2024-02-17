@@ -18649,11 +18649,6 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
-  - Id: 7803
-    AegisName: Battle_Manual_TW
-    Name: Beginner's Field Manual
-    Type: Etc
-    Weight: 10
   - Id: 7805
     AegisName: Brown_Ring
     Name: Brown Jenoss's Family Ring

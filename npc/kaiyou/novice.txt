@@ -113,14 +113,14 @@ OnTimer10000:
 
 startermap,40,30,4	script	Tiago	10396,{
 	set .@name$,"[^008040Tiago^000000]";
-	if( JobLevel < 10) 
+	if( BaseLevel < 5) 
 	{
 		mes .@name$;
 		mes "Bienvenido a ^ff0000KaiyouRO^000000";
 		mes "Debes probar tu valor en el campo de batalla.";
 		next;
 		mes .@name$;
-		mes "Llega hasta nivel 10 de clase para poder enviarte a viajar por Midgard.";
+		mes "Llega hasta nivel 5 para poder enviarte a viajar por Midgard.";
 		close;	
 	}
 	mes .@name$;
@@ -198,7 +198,7 @@ startermap,43,56,3	script	Eeta#Quest	10402,{
 	{
 		case 1:
 			mes .@name$;
-			mes "Pon atención, ya que no volveré a repetir esto una segunda vez";
+			mes "Pon atención, ya que iré pidiendo algunas acciones por recompensas adicionales.";
 			next;
 			mes .@name$;
 			mes "Lo primero, es posible mover cada ventana en tu pantalla, sólo debes mantener presionada el botón de tu mouse y arrastrarlo.";
@@ -448,7 +448,7 @@ startermap,34,56,5	script	Elena#Starter	10400,{
 	next;
 	switch(select(
 				( getd("$starterpack" + get_unique_id() + "") == 0 && #FirstWeek == 0 )?"^10B2D2 [ > ] ^000000Pedir Pack Inicio":"",
-				//( #FirstWeek == 0 )?"^10B2D2 [ > ] ^000000Pedir Pack Inicio":"",
+				( getd("$starterpack" + get_unique_id() + "") == 2 && #FirstWeek == 0 )?"^10B2D2 [ > ] ^000000Pedir Pack Inicio":"",
 				( JobItem == 0 )?"^10B2D2 [ > ] ^000000Test de JOB":"",					
 				"Información del servidor"
 				))
@@ -456,6 +456,7 @@ startermap,34,56,5	script	Elena#Starter	10400,{
 		case 1:
 			mes .@name$;
 			mes "Te recomiendo leer todas las instrucciones, esto te lo diré ^FF0000solo 1 vez^000000, por lo que te recomiendo poner atención.";
+			setd "$starterpack" + get_unique_id() + "",2;
 			next;
 			mes .@name$;
 			mes "KaiyouRO fue creado para satisfacer la necesidad de todos los usuarios que buscaban un ^0000A0servidor transparente^000000, ^004000sin servicios exclusivos para los donadores^000000 y ^008000sin lag^000000.";
@@ -472,7 +473,7 @@ startermap,34,56,5	script	Elena#Starter	10400,{
 			mes "i)Hunting Mision: Sistema de cazeria de Mob normales.";
 			mes "ii)Mineria: Todo lo necesario para refinar tu equipamiento.";
 			mes "iii)Battleground: Sistemas que se acomodan a la experiencia del usuario.";
-			mes "iv) Ranking MvP: Gana premios por tus acciones.";
+			mes "iv)Ranking MvP: Gana premios por tus acciones.";
 			next;
 	FAIL1:
 			mes .@name$;
@@ -487,7 +488,7 @@ startermap,34,56,5	script	Elena#Starter	10400,{
 			{
 				mes .@name$;
 				mes "Muy bien!";
-				getexp 37,0;
+				getexp 25,0;
 				next;
 			}
 			else
@@ -507,8 +508,8 @@ startermap,34,56,5	script	Elena#Starter	10400,{
 			mes "Ejemplo Detardeurus, Kiel D-01 o Vesper.";
 			next;
 			mes .@name$;
-			mes "Y por último los de nivel alto: Estos te otorgarán entre 10 y 20 puntos.";
-			mes "Ejemplo Fallen Bishop Hibram, Lord Knight o Wounded Morroc.";
+			mes "Y por último los de nivel alto: Estos te otorgarán entre 10 y 30 puntos.";
+			mes "Ejemplo Fallen Bishop Hibram, Lord Knight o Valkyrie Randgris.";
 			next;
 			mes .@name$;
 			mes "Estos puntos les servirán para ir avanzando en el Ranking.";
@@ -526,7 +527,7 @@ startermap,34,56,5	script	Elena#Starter	10400,{
 			{
 				mes .@name$;
 				mes "Muy bien!";
-				getexp 37,0;
+				getexp 50,0;
 				next;
 			}
 			else
@@ -544,12 +545,13 @@ startermap,34,56,5	script	Elena#Starter	10400,{
 			mes "- Rush";
 			mes "- Conquest";
 			mes "- Eye of Storm";
-			mes "- War of Element";
+			mes "- Entre otros.";
+			next;
 			mes .@name$;
 			mes "Todos ellos puedes acceder desde la interface de battleground.";
 			next;
 			mes .@name$;
-			mes "El cash point dentro del servidor es accesible por diferentes medios, como por ejemplo cazando MvP, realizando misiones de cacería o donando, pero el principal es por medio de Battleground.";
+			mes "El cash point dentro del servidor es accesible por diferentes medios, por ejemplo, realizando misiones de cacería o donando, pero el principal es por medio de Battleground.";
 			next;
 			mes .@name$;
 			mes "Para realizar un donativo debes realizar un depósito en la cuenta indicada en la página web.";
@@ -557,10 +559,10 @@ startermap,34,56,5	script	Elena#Starter	10400,{
 			next;
 			mes .@name$;
 			mes "En la misma casa donde refinas y sacas las cartas se encuentra ^008040Issan^000000.";
-			mes "^008040Issan^000000 te dará misiones todos los días, que te darán zenny, puntos de misión, medallas y cash point!";
+			mes "^008040Issan^000000 te dará misiones todos los días, que te darán zenny, puntos de misión y medallas!";
 			next;
 			mes .@name$;
-			mes "En esta misma habitación podrás cambiar tus puntos y medallas por valiosos objetos.";
+			mes "Ahí mismo podrás cambiar tus puntos y medallas por valiosos objetos.";
 			mes "Y por si no fuera poco, si te encuentras en el primer lugar de puntos, adquiriras Cash Point extra todos los días, mientras mantengas el primer lugar!";
 			next;
 			mes .@name$;
@@ -582,15 +584,12 @@ startermap,34,56,5	script	Elena#Starter	10400,{
 			{
 				mes .@name$;
 				mes "Muy bien! Con esto ya te podemos dar la bienvenida oficial al servidor!";
-				getexp 37,0;
+				getexp 100,0;
 			}
 			else
 			{
 				mes .@name$;
-				mes "Si deseas recibir las recompensas debes responder a las preguntas que se vayan haciendo.";
-				next;
-				//goto FAIL3;
-				close;
+				mes "Te perdiste la última recompensa.";
 			}
 			close2;
 			getitem 7803,2;		//2 Libros exp
@@ -600,6 +599,15 @@ startermap,34,56,5	script	Elena#Starter	10400,{
 			setd "$starterpack" + get_unique_id() + "",1;
 			end;
 		case 2:
+			mes .@name$;
+			mes "Muy bien! Con esto ya te podemos dar la bienvenida oficial al servidor!";
+			getitem 7803,2;		//2 Libros exp
+			getitem 41001,1;	//3 dias premium 
+			getitem 65107,1;	//1 Costume
+			set #FirstWeek,1;
+			setd "$starterpack" + get_unique_id() + "",1;
+			end;
+		case 3:
 			mes .@name$;
 			mes "^A62A2A" + strcharinfo(0) + "^000000.";
 			mes "Para poder definir cual job se adecúa a tu personalidad, debes responder una breve encuesta,";
@@ -1447,9 +1455,9 @@ startermap,34,56,5	script	Elena#Starter	10400,{
 				close2;
 				end;
 			}
-		case 3:
+		case 4:
 			mes .@name$;
-			mes "Información";
+			mes "Te recomendamos revisar la Wiki o realizar preguntas en discord ante cualquier problema o dudas que tengas.";
 			close2;
 			end;
 	}
@@ -1519,7 +1527,7 @@ S_UserJobchoice:
 	return;
 
 OnPCLoadMapEvent:
-	if( getd("$starterpack" + get_unique_id() + "") == 0 && #FirstWeek == 0 || JobItem == 0)
+	if( getd("$starterpack" + get_unique_id() + "") == 0 || getd("$starterpack" + get_unique_id() + "") == 2 && #FirstWeek == 0 || JobItem == 0)
 	//if(#FirstWeek == 0 || JobItem == 0)
 		showevent QTYPE_EVENT,0; // Show the icon to Novice
 	end;
@@ -1542,8 +1550,8 @@ startermap2	mapflag	nomemo
 startermap2,135,34,80,40	monster	Baby Poring	1002,20,20000
 startermap2,135,34,80,40	monster	Baby Drops	1113,10,20000
 startermap2,135,34,80,40	monster	Baby Lunatic	1063,10,20000
-//startermap2,135,34,50,20	monster	ChonChon	1011,10
-//startermap2,135,34,50,20	monster	Fabre	1184,5
+startermap2	monster	ChonChon	1011,10
+startermap2	monster	Fabre	1184,5
 
 //Medio
 startermap2,123,105,50,5	monster	Baby Condor	1009,10,20000

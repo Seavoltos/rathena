@@ -31,3 +31,127 @@
 Header:
   Type: ITEM_CASH_DB
   Version: 1
+
+Body:
+  - Tab: New            #Temporada
+    Items:
+      - Item: Box_Mes_3
+        Price: 390
+  - Tab: Hot            #Populares
+    Items:
+      - Item: Box_Sorpresa
+        Price: 390
+      - Item: Box_Sorpresa_Gold
+        Price: 1200
+      - Item: Box_Sorpresa_Platino
+        Price: 2000
+      - Item: C_Garment_23
+        Price: 2000
+      - Item: C_Garment_25
+        Price: 2000
+      - Item: C_Garment_87
+        Price: 2000
+      - Item: C_Garment_90
+        Price: 2000
+      - Item: C_Garment_97
+        Price: 2000
+      - Item: C_Garment_123
+        Price: 2000
+      - Item: C_Hair_Of_The_Strong
+        Price: 1100
+      - Item: Mini_Crown1
+        Price: 900
+      - Item: C_Tare_Neko_Cru
+        Price: 1100
+      - Item: C_Boys_Cap
+        Price: 900
+      - Item: C_Blush
+        Price: 900
+      - Item: C_Lord_of_Death
+        Price: 900
+      - Item: VIP_7D
+        Price: 600
+      - Item: Gold_Key_MvP
+        Price: 90
+      - Item: New_Insurance
+        Price: 300
+      - Item: Fish_Shoes
+        Price: 500
+      - Item: L_Fishing_Rod
+        Price: 300
+      - Item: Large_Lure
+        Price: 200
+  - Tab: Limited        #Costume Garment
+    Items:
+      - Item: Kafra_Card
+        Price: 1
+  - Tab: Rental         #Costume Top
+    Items:
+      - Item: Kafra_Card
+        Price: 1
+  - Tab: Permanent      #Costume Mid
+    Items:
+      - Item: Kafra_Card
+        Price: 1
+  - Tab: Scrolls        #Costume Low
+    Items:
+      - Item: Kafra_Card
+        Price: 1
+  - Tab: Consumables    #Consumibles
+    Items:
+      - Item: VIP_1D
+        Price: 150
+      - Item: VIP_3D
+        Price: 300
+      - Item: VIP_7D
+        Price: 600
+      - Item: VIP_28D
+        Price: 2000
+      - Item: Silver_Key_MvP
+        Price: 70
+      - Item: Gold_Key_MvP
+        Price: 90
+      - Item: Token_Of_Siegfried
+        Price: 90
+      - Item: New_Insurance
+        Price: 300
+      - Item: Insurance
+        Price: 100
+      - Item: Inventory_Ex
+        Price: 150
+      - Item: Neuralizer
+        Price: 1000
+      - Item: Change_Name_Card
+        Price: 1000
+      - Item: Oktoberfest_Bag
+        Price: 100
+      - Item: Hanbok_bag
+        Price: 100
+      - Item: Memory_Of_Wedding
+        Price: 100
+      - Item: Red_Bag
+        Price: 100
+      - Item: Fire_Cracker_Bday
+        Price: 10
+      - Item: Fire_Cracker_Love
+        Price: 10
+      - Item: J_Firecracker
+        Price: 10
+      - Item: Fire_Cracker_Vday
+        Price: 10
+      - Item: Fire_Cracker_Wday
+        Price: 10
+      - Item: Fire_Cracker_Xmas
+        Price: 10
+  - Tab: Other          #Otros
+    Items:
+      - Item: Fish_Shoes
+        Price: 500
+      - Item: Fisher's_Muffler
+        Price: 500
+      - Item: M_Fishing_Rod
+        Price: 200
+      - Item: L_Fishing_Rod
+        Price: 300
+      - Item: Large_Lure
+        Price: 200

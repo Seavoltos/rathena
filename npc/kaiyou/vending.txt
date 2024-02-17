@@ -23,6 +23,8 @@ vend_zone,99,104,5	script	Reglas Merchant	681,{
 		getitem 6377,5; //Buy_Stall_Permit
 		skill "ALL_BUYING_STORE",1,SKILL_PERM_GRANT;
 	}
+	if( countitem(6377) == 0 && getskilllv(2535) )
+		getitem 6377,1; //Buy_Stall_Permit
 	close;
 
 }

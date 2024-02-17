@@ -801,7 +801,8 @@ OnTimer80000:
 	npctalk "La carrera comenzara en breve, ultimas apuestas.";
 	end;
 OnTimer90000:
-	stopnpctimer;
+	set $@PoringRace,0;
+	delwaitingroom "Elizabeth";
 	.start = 1;
 	mapannounce "p_track01","Porings, en sus marcas...",1,$ColorEventos;
 	sleep 2500;
@@ -815,6 +816,7 @@ OnTimer90000:
 	mapannounce "p_track01","Adelanteeee!!!",1,$ColorEventos;
 	end;
 OnTimer320000:
+	stopnpctimer;
 	.prace_winner$ = "";
 	.start = .prace_bets = 0;
 	donpcevent strnpcinfo(0) +"::OnReturnRace";

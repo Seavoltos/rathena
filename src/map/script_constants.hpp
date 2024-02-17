@@ -7071,6 +7071,16 @@
 	export_constant(IG_MES_11);
 	export_constant(IG_MES_12);
 	export_constant(IG_KACHUA_KEY);
+	export_constant(IG_BOX_SORPRESA);
+	export_constant(IG_BOX_SORPRESA_SILVER);
+	export_constant(IG_BOX_SORPRESA_GOLD);
+	export_constant(IG_BOX_SORPRESA_PLATINO);
+	export_constant(IG_BOX_SORPRESA_DIAMANTE);
+	export_constant(IG_VIP1);
+	export_constant(IG_VIP2);
+	export_constant(IG_VIP3);
+	export_constant(IG_VIP4);
+	export_constant(IG_VIP5);
 
 	/* unit stop walking */
 	export_constant(USW_NONE);
