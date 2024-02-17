@@ -807,19 +807,11 @@ void LoginServer::finalize(){
 		aFree(tmp);
 	}
 
-// (^~_~^) Gepard Shield Start
-/*
-// (^~_~^) Gepard Shield End
+
 	login_log(0, "login server", 100, "login server shutdown");
-// (^~_~^) Gepard Shield Start
-*/
-// (^~_~^) Gepard Shield End
 
-// (^~_~^) Gepard Shield Start
 
-	login_gepard_log(0, 0, "login server", 100, "login server shutdown");
 
-// (^~_~^) Gepard Shield End
 
 	ShowStatus("Terminating...\n");
 
@@ -913,19 +905,11 @@ bool LoginServer::initialize( int argc, char* argv[] ){
 	do_init_logincnslif();
 
 	ShowStatus("The login-server is " CL_GREEN "ready" CL_RESET " (Server is listening on the port %u).\n\n", login_config.login_port);
-// (^~_~^) Gepard Shield Start
-/*
-// (^~_~^) Gepard Shield End
+
 	login_log(0, "login server", 100, "login server started");
-// (^~_~^) Gepard Shield Start
-*/
-// (^~_~^) Gepard Shield End
 
-// (^~_~^) Gepard Shield Start
 
-	login_gepard_log(0, 0, "login server", 100, "login server started");
 
-// (^~_~^) Gepard Shield End
 
 	return true;
 }

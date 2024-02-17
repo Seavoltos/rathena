@@ -213,7 +213,6 @@ struct Script_Config {
 	const char* instance_init_event_name;
 	const char* instance_destroy_event_name;
 
-	const char* update_auras_event_name;
 
 	// Navigation related
 	const char* navi_generate_name;

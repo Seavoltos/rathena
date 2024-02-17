@@ -14905,11 +14905,7 @@ static int skill_dance_overlap_sub(struct block_list* bl, va_list ap)
 int skill_dance_overlap(struct skill_unit* unit, int flag)
 {
 
-// (^~_~^) LGP Start
 
-	return 0;
-
-// (^~_~^) LGP End
 
 	if (!unit || !unit->group || !(unit->group->state.song_dance&0x1))
 		return 0;
@@ -21860,9 +21856,7 @@ void skill_unit_move_unit_group(std::shared_ptr<s_skill_unit_group> group, int16
 			case 0:
 			//Cell moves independently, safely move it.
 
-				// (^~_~^) LGP Start
-				clif_skill_delunit(unit1);
-				// (^~_~^) LGP End
+
 
 				map_foreachinmovearea(clif_outsight, &unit1->bl, AREA_SIZE, dx, dy, BL_PC, &unit1->bl);
 				map_moveblock(&unit1->bl, unit1->bl.x+dx, unit1->bl.y+dy, tick);
@@ -21876,9 +21870,7 @@ void skill_unit_move_unit_group(std::shared_ptr<s_skill_unit_group> group, int16
 						continue;
 					//Move to where this cell would had moved.
 
-					// (^~_~^) LGP Start
-					clif_skill_delunit(unit1);
-					// (^~_~^) LGP End
+
 
 					unit2 = &group->unit[j];
 					dx2 = unit2->bl.x + dx - unit1->bl.x;
