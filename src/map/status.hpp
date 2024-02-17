@@ -1303,6 +1303,15 @@ enum sc_type : int16 {
 	
 	SC_G_LIFEPOTION,
 	SC_VIPSTATE,
+
+	// Hyper Novice
+	SC_HNNOWEAPON,
+	SC_SHIELDCHAINRUSH,
+	SC_MISTYFROST,
+	SC_GROUNDGRAVITY,
+	SC_BREAKINGLIMIT,
+	SC_RULEBREAK,
+
 #ifdef RENEWAL
 	SC_EXTREMITYFIST2, //! NOTE: This SC should be right before SC_MAX, so it doesn't disturb if RENEWAL is disabled
 #endif
