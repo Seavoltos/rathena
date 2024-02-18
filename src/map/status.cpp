@@ -10175,7 +10175,14 @@ int status_change_start(struct block_list* src, struct block_list* bl,enum sc_ty
 
 	undead_flag = battle_check_undead(status->race,status->def_ele);
 
+// (^~_~^) Auras Start
 
+	if (sd && sd->aura_data > 0x1000000 && (type == SC_HIDING || type == SC_CLOAKING || type == SC_CHASEWALK))
+	{
+		clif_send_aura(&sd->bl, 0x1000000, AREA);
+	}
+
+// (^~_~^) Auras End
 
 	// Check for immunities / sc fails
 	switch (type) {
@@ -13931,7 +13938,14 @@ int status_change_end(struct block_list* bl, enum sc_type type, int tid)
 	if (scdb->look)
 		sc->option &= ~scdb->look;
 
+// (^~_~^) Auras Start
 
+	if (sd && sd->aura_data > 0x1000000 && (type == SC_HIDING || type == SC_CLOAKING || type == SC_CHASEWALK))
+	{
+		clif_send_aura(&sd->bl, sd->aura_data, AREA);
+	}
+
+// (^~_~^) Auras End
 
 	if (calc_flag[SCB_DYE]) { // Restore DYE color
 		if (vd && !vd->cloth_color && sce->val4)

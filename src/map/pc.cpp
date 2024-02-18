@@ -2392,7 +2392,14 @@ void pc_reg_received(map_session_data *sd)
 	if (msg_checklangtype(sd->langtype,true) < 0)
 		sd->langtype = 0; //invalid langtype reset to default
 
+// (^~_~^) LGP Start
 
+	if (is_gepard_active == true)
+	{
+		clif_gepard_send_lgp_settings(sd);
+	}
+
+// (^~_~^) LGP End
 
 	// Cash shop
 	sd->cashPoints = static_cast<int>(pc_readaccountreg(sd, add_str(CASHPOINT_VAR)));
@@ -2401,7 +2408,12 @@ void pc_reg_received(map_session_data *sd)
 	// Cooking Exp
 	sd->cook_mastery = static_cast<short>(pc_readglobalreg(sd, add_str(COOKMASTERY_VAR)));
 
+// (^~_~^) Auras Start
 
+	sd->aura_data = static_cast<unsigned int>(pc_readglobalreg(sd, add_str("AURA_DATA")));
+	sd->state.show_auras = static_cast<unsigned int>(pc_readglobalreg(sd, add_str("SHOW_AURAS_MODE")));
+
+// (^~_~^) Auras End
 
 	if( (sd->class_&MAPID_BASEMASK) == MAPID_TAEKWON )
 	{ // Better check for class rather than skill to prevent "skill resets" from unsetting this
@@ -8255,6 +8267,11 @@ int pc_checkbaselevelup(map_session_data *sd) {
 	clif_misceffect(&sd->bl,0);
 	npc_script_event(sd, NPCE_BASELVUP); //LORDALFA - LVLUPEVENT
 
+// (^~_~^) Auras Start
+
+	npc_script_event(sd, NPCE_UPDATE_AURAS);
+
+// (^~_~^) Auras End
 
 	if(sd->status.party_id)
 		party_send_levelup(sd);

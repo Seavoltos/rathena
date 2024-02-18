@@ -1165,7 +1165,12 @@ void clif_dressing_room(map_session_data *sd, int flag);
 void clif_navigateTo(map_session_data *sd, const char* mapname, uint16 x, uint16 y, uint8 flag, bool hideWindow, uint16 mob_id );
 void clif_SelectCart(map_session_data *sd);
 
+// (^~_~^) Auras Start
 
+void clif_send_aura_single(struct block_list * bl, int type, int fd);
+void clif_send_aura(struct block_list * bl, int type, enum send_target target);
+
+// (^~_~^) Auras End
 
 /// Achievement System
 void clif_achievement_list_all(map_session_data *sd);
@@ -1244,8 +1249,6 @@ void clif_enchantingshadow_spirit(unit_data &ud);
 
 void clif_broadcast_refine_result(map_session_data& sd, t_itemid itemId, int8 level, bool success);
 
-
-
 // Captcha Register
 void clif_captcha_upload_request(map_session_data &sd);
 void clif_captcha_upload_end(map_session_data &sd);
@@ -1263,5 +1266,11 @@ void clif_macro_reporter_select(map_session_data &sd, const std::vector<uint32> 
 void clif_macro_reporter_status(map_session_data &sd, e_macro_report_status stype);
 
 void clif_dynamicnpc_result( map_session_data& sd, e_dynamicnpc_result result );
+
+// (^~_~^) LGP Start
+
+void clif_gepard_send_lgp_settings(map_session_data * sd);
+
+// (^~_~^) LGP End
 
 #endif /* CLIF_HPP */

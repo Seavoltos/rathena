@@ -108,11 +108,20 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 		}
 	}
 
-
+// (^~_~^) Gepard Shield Start
+/*
+// (^~_~^) Gepard Shield End
 	login_log(ip, sd->userid, 100, "login ok");
+// (^~_~^) Gepard Shield Start
+*/
+// (^~_~^) Gepard Shield End
 
+// (^~_~^) Gepard Shield Start
 
+	account_gepard_update_last_unique_id(sd->account_id, session[fd]->gepard_info.unique_id);
+	login_gepard_log(fd, ip, sd->userid, 100, "login ok");
 
+// (^~_~^) Gepard Shield End
 
 	ShowStatus("Connection of the account '%s' accepted.\n", sd->userid);
 
@@ -216,7 +225,9 @@ static void logclif_auth_failed(struct login_session_data* sd, int result) {
 
 	if (login_config.log_login)
 	{
-
+// (^~_~^) Gepard Shield Start
+/*
+// (^~_~^) Gepard Shield End
 		if(result >= 0 && result <= 15)
 		    login_log(ip, sd->userid, result, msg_txt(result));
 		else if(result >= 99 && result <= 104)
@@ -224,8 +235,20 @@ static void logclif_auth_failed(struct login_session_data* sd, int result) {
 		else
 		    login_log(ip, sd->userid, result, msg_txt(22)); //unknow error
 
+// (^~_~^) Gepard Shield Start
+*/
+// (^~_~^) Gepard Shield End
 
+// (^~_~^) Gepard Shield Start
 
+		if (result >= 0 && result <= 15)
+		    login_gepard_log(fd, ip, sd->userid, result, msg_txt(result));
+		else if (result >= 99 && result <= 104)
+		    login_gepard_log(fd, ip, sd->userid, result, msg_txt(result-83)); //-83 offset
+		else
+		    login_gepard_log(fd, ip, sd->userid, result, msg_txt(22)); //unknow error
+
+// (^~_~^) Gepard Shield End
 
 	}
 
@@ -293,8 +316,6 @@ int logclif_parse_reqauth_raw( int fd, login_session_data& sd, char* ip ){
 		return 0;
 	}
 
-
-
 	safestrncpy( sd.userid, p->username, sizeof( sd.userid ) );
 	sd.clienttype = p->clienttype;
 
@@ -310,6 +331,16 @@ int logclif_parse_reqauth_raw( int fd, login_session_data& sd, char* ip ){
 	RFIFOSKIP( fd, sizeof( *p ) );
 
 	int result = login_mmo_auth( &sd, false );
+	
+
+// (^~_~^) Gepard Shield Start
+
+		if (account_gepard_check_license_version(session[fd], fd, sd.group_id))
+		{
+			return 0;
+		}
+
+// (^~_~^) Gepard Shield End
 
 	if( result == -1 ){
 		logclif_auth_ok( &sd );
@@ -344,6 +375,15 @@ int logclif_parse_reqauth_md5( int fd, login_session_data& sd, char* ip ){
 	}
 
 	int result = login_mmo_auth( &sd, false );
+
+// (^~_~^) Gepard Shield Start
+
+		if (account_gepard_check_license_version(session[fd], fd, sd.group_id))
+		{
+			return 0;
+		}
+
+// (^~_~^) Gepard Shield End
 
 	if( result == -1 ){
 		logclif_auth_ok( &sd );
@@ -384,6 +424,15 @@ int logclif_parse_reqauth_sso( int fd, login_session_data& sd, char* ip ){
 	RFIFOSKIP( fd, p->packetLength );
 
 	int result = login_mmo_auth( &sd, false );
+
+// (^~_~^) Gepard Shield Start
+
+		if (account_gepard_check_license_version(session[fd], fd, sd.group_id))
+		{
+			return 0;
+		}
+
+// (^~_~^) Gepard Shield End
 
 	if( result == -1 ){
 		logclif_auth_ok( &sd );
@@ -458,10 +507,19 @@ static int logclif_parse_reqcharconnec(int fd, struct login_session_data *sd, ch
 		ShowInfo("Connection request of the char-server '%s' @ %u.%u.%u.%u:%u (account: '%s', ip: '%s')\n", server_name, CONVIP(server_ip), server_port, sd->userid, ip);
 		sprintf(message, "charserver - %s@%u.%u.%u.%u:%u", server_name, CONVIP(server_ip), server_port);
 
+// (^~_~^) Gepard Shield Start
+/*
+// (^~_~^) Gepard Shield End
 		login_log(session[fd]->client_addr, sd->userid, 100, message);
+// (^~_~^) Gepard Shield Start
+*/
+// (^~_~^) Gepard Shield End
 
+// (^~_~^) Gepard Shield Start
 
+		login_gepard_log(fd, session[fd]->client_addr, sd->userid, 100, message);
 
+// (^~_~^) Gepard Shield End
 
 		result = login_mmo_auth(sd, true);
 		if( global_core->is_running() &&
@@ -549,11 +607,19 @@ int logclif_parse(int fd) {
 		{
 			ShowStatus("Connection refused: IP isn't authorised (deny/allow, ip: %s).\n", ip);
 
+// (^~_~^) Gepard Shield Start
+/*
+// (^~_~^) Gepard Shield End
 			login_log(ipl, "unknown", -3, "ip banned");
+// (^~_~^) Gepard Shield Start
+*/
+// (^~_~^) Gepard Shield End
 
+// (^~_~^) Gepard Shield Start
 
+	login_gepard_log(fd, ipl, "unknown", -3, "ip banned");
 
-
+// (^~_~^) Gepard Shield End
 
 			logclif_auth_failed( fd, 3 ); // 3 = Rejected from Server
 
@@ -571,7 +637,24 @@ int logclif_parse(int fd) {
 		uint16 command = RFIFOW(fd,0);
 		int next=1;
 
+// (^~_~^) Gepard Shield Start
 
+		if (is_gepard_active == true)
+		{
+			bool is_processed = gepard_process_cs_packet(fd, session[fd], 0);
+
+			if (is_processed == true)
+			{
+				if (command == CS_GEPARD_INIT_ACK)
+				{
+					account_gepard_check_unique_id(fd, session[fd]);
+				}
+
+				return 0;
+			}
+		}
+
+// (^~_~^) Gepard Shield End
 
 		switch( command ){
 			// New alive packet: used to verify if client is always alive.

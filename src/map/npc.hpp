@@ -1507,6 +1507,12 @@ enum npce_event : uint8 {
 	NPCE_KILLPC,
 	NPCE_KILLNPC,
 
+// (^~_~^) Auras Start
+
+	NPCE_UPDATE_AURAS,
+
+// (^~_~^) Auras End
+
 	NPCE_MAX
 };
 
