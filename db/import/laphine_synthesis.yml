@@ -35,3 +35,13 @@
 Header:
   Type: LAPHINE_SYNTHESIS_DB
   Version: 1
+
+Body:
+  - Item: AirshipAssaultReform
+    RewardGroup: PORINGSPRECIOUSBOX
+    RequiredRequirementsCount: 3
+    Requirements:
+      - Item: Airship_Boots
+      - Item: Airship_Cape
+      - Item: Airship_Armor
+                   

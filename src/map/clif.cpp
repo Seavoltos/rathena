@@ -706,6 +706,7 @@ int clif_send(const void* buf, int len, struct block_list* bl, enum send_target 
 	case PARTY_WOS:
 	case PARTY_SAMEMAP:
 	case PARTY_SAMEMAP_WOS:
+	case PARTY_BUFF_INFO:
 		if (sd && sd->status.party_id)
 			p = party_search(sd->status.party_id);
 
@@ -720,10 +721,13 @@ int clif_send(const void* buf, int len, struct block_list* bl, enum send_target 
 				if( sd->bl.id == bl->id && (type == PARTY_WOS || type == PARTY_SAMEMAP_WOS || type == PARTY_AREA_WOS) )
 					continue;
 
-				if( type != PARTY && type != PARTY_WOS && bl->m != sd->bl.m )
+				if( type != PARTY_BUFF_INFO && type != PARTY && type != PARTY_WOS && bl->m != sd->bl.m )
 					continue;
 
 				if( (type == PARTY_AREA || type == PARTY_AREA_WOS) && (sd->bl.x < x0 || sd->bl.y < y0 || sd->bl.x > x1 || sd->bl.y > y1) )
+					continue;
+				
+				if( type == PARTY_BUFF_INFO && !sd->state.spb )
 					continue;
 
 				WFIFOHEAD(fd, len);
@@ -8178,6 +8182,8 @@ void clif_party_member_info( struct party_data& party, map_session_data& sd ){
 /// 0a44 <packet len>.W <party name>.24B { <account id>.L <nick>.24B <map name>.16B <role>.B <state>.B <class>.W <base level>.W }* <item pickup rule>.B <item share rule>.B <unknown>.L
 void clif_party_info( struct party_data& party, map_session_data* sd ){
 	send_target target;
+	char output[NAME_LENGTH+10];
+	status_change *sc = NULL;
 
 	if( sd == nullptr ){
 		sd = party_getavailablesd( &party );
@@ -8207,13 +8213,30 @@ void clif_party_info( struct party_data& party, map_session_data* sd ){
 			continue;
 		}
 
+		strcpy(output, "[");
+		if( sc->getSCE(SC_BLESSING) ) strcat(output,"B");
+			else strcat(output,"_");
+		if( sc->getSCE(SC_INCREASEAGI) ) strcat(output,"A");
+			else strcat(output,"_");
+		if( sc->getSCE(SC_CP_WEAPON) && sc->getSCE(SC_CP_SHIELD) && sc->getSCE(SC_CP_ARMOR) && sc->getSCE(SC_CP_HELM) ) strcat(output,"F");
+			else strcat(output,"_");
+		if( sc->getSCE(SC_SPIRIT) ) strcat(output,"S");
+			else strcat(output,"_");
+		if(sc->getSCE(SC_DEVOTION) ) strcat(output,"+");
+			else strcat(output,"_");
+		strcat(output, "]");
+
 		struct PACKET_ZC_GROUP_LIST_SUB& member = p->members[c];
 
 		member.AID = m.account_id;
 #if PACKETVER >= 20171207
 		member.GID = m.char_id;
 #endif
-		safestrncpy( member.playerName, m.name, sizeof( member.playerName ) );
+
+		if( sd->state.spb )
+			safestrncpy( member.playerName, output, sizeof( output ) );
+		else
+			safestrncpy( member.playerName, m.name, sizeof( member.playerName ) );
 		mapindex_getmapname_ext( m.map, member.mapName );
 		member.leader = ( m.leader ) ? 0 : 1;
 		member.offline = ( m.online ) ? 0 : 1;
