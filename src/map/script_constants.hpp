@@ -7087,6 +7087,36 @@
 	export_constant(IG_VIP3);
 	export_constant(IG_VIP4);
 	export_constant(IG_VIP5);
+	export_constant(IG_HAIR1);
+	export_constant(IG_HAIR2);
+	export_constant(IG_HAIR3);
+	export_constant(IG_HAIR4);
+	export_constant(IG_HAIR5);
+	export_constant(IG_HAIR6);
+	export_constant(IG_CBTOP1);
+	export_constant(IG_CBTOP2);
+	export_constant(IG_CBTOP3);
+	export_constant(IG_CBTOP4);
+	export_constant(IG_CBTOP5);
+	export_constant(IG_CBTOP6);
+	export_constant(IG_CBMID1);
+	export_constant(IG_CBMID2);
+	export_constant(IG_CBMID3);
+	export_constant(IG_CBMID4);
+	export_constant(IG_CBMID5);
+	export_constant(IG_CBMID6);
+	export_constant(IG_CBLOW1);
+	export_constant(IG_CBLOW2);
+	export_constant(IG_CBLOW3);
+	export_constant(IG_CBLOW4);
+	export_constant(IG_CBLOW5);
+	export_constant(IG_CBLOW6);
+	export_constant(IG_CBGAR1);
+	export_constant(IG_CBGAR2);
+	export_constant(IG_CBGAR3);
+	export_constant(IG_CBGAR4);
+	export_constant(IG_CBGAR5);
+	export_constant(IG_CBGAR6);
 
 	/* unit stop walking */
 	export_constant(USW_NONE);
