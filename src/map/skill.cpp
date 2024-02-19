@@ -9665,6 +9665,14 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			skill_produce_mix(sd, skill_id, ITEMID_FIRE_BOTTLE, 0, 0, 0, 50, fire_idx-1);
 		}
 		break;
+	case AM_TWILIGHT4:
+		if (sd) {
+			clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
+			//Prepare 200 Blue Potions.
+			if (!skill_produce_mix(sd, skill_id, ITEMID_BLUE_POTION, 0, 0, 0, 200, -1))
+				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
+		}
+		break;
 	case SA_DISPELL:
 		if (flag&1 || (i = skill_get_splash(skill_id, skill_lv)) < 1) {
 			if (sd && dstsd && !map_flag_vs(sd->bl.m) && (!sd->duel_group || sd->duel_group != dstsd->duel_group) && (!sd->status.party_id || sd->status.party_id != dstsd->status.party_id))
@@ -17402,6 +17410,7 @@ bool skill_check_condition_castbegin(map_session_data* sd, uint16 skill_id, uint
 				case AM_TWILIGHT1:
 				case AM_TWILIGHT2:
 				case AM_TWILIGHT3:
+				case AM_TWILIGHT4:
 					return false;
 			}
 			break;
@@ -18447,6 +18456,7 @@ bool skill_check_condition_castend(map_session_data* sd, uint16 skill_id, uint16
 				case AM_TWILIGHT1:
 				case AM_TWILIGHT2:
 				case AM_TWILIGHT3:
+				case AM_TWILIGHT4:
 					return false;
 			}
 			break;
@@ -22112,6 +22122,7 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 			case AM_TWILIGHT1:
 			case AM_TWILIGHT2:
 			case AM_TWILIGHT3:
+			case AM_TWILIGHT4:
 				make_per = pc_checkskill(sd,AM_LEARNINGPOTION)*50
 					+ pc_checkskill(sd,AM_PHARMACY)*300 + sd->status.job_level*20
 					+ (status->int_/2)*10 + status->dex*10+status->luk*10;
@@ -22136,6 +22147,7 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 						make_per += (1+rnd()%100)*10;
 						break;
 					case ITEMID_YELLOW_SLIM_POTION:
+					case ITEMID_BLUE_POTION:
 						make_per -= (1+rnd()%50)*10;
 						break;
 					case ITEMID_WHITE_SLIM_POTION:
@@ -22143,7 +22155,7 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 						make_per -= (1+rnd()%100)*10;
 						break;
 					//Common items, receive no bonus or penalty, listed just because they are commonly produced
-					case ITEMID_BLUE_POTION:
+					//case ITEMID_BLUE_POTION:
 					case ITEMID_RED_SLIM_POTION:
 					case ITEMID_ANODYNE:
 					case ITEMID_ALOEBERA:
@@ -22401,6 +22413,7 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 				case AM_TWILIGHT1:
 				case AM_TWILIGHT2:
 				case AM_TWILIGHT3:
+				case AM_TWILIGHT4:
 					flag = battle_config.produce_item_name_input&0x2;
 					break;
 				case AL_HOLYWATER:
@@ -22447,6 +22460,7 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 					if (skill_id != AM_PHARMACY &&
 						skill_id != AM_TWILIGHT1 &&
 						skill_id != AM_TWILIGHT2 &&
+						skill_id != AM_TWILIGHT4 &&
 						skill_id != AM_TWILIGHT3)
 						continue;
 					//Add fame as needed.
@@ -22477,6 +22491,7 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 				case AM_TWILIGHT1:
 				case AM_TWILIGHT2:
 				case AM_TWILIGHT3:
+				case AM_TWILIGHT4:
 				case ASC_CDP:
 				case GC_CREATENEWPOISON:
 					clif_produceeffect(sd,2,nameid);
@@ -22578,6 +22593,7 @@ bool skill_produce_mix(map_session_data *sd, uint16 skill_id, t_itemid nameid, i
 			case AM_TWILIGHT1:
 			case AM_TWILIGHT2:
 			case AM_TWILIGHT3:
+			case AM_TWILIGHT4:
 			case GC_CREATENEWPOISON:
 				clif_produceeffect(sd,3,nameid);
 				clif_misceffect(&sd->bl,6);
