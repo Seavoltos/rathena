@@ -27,6 +27,10 @@
 #     - Item                Item name.
 #       Price               Item cost in cash points (#CASHPOINTS).
 ###########################################################################
+# 1800 Garment
+# 900 Top
+# 750 Mid
+# 525 Low
 
 Header:
   Type: ITEM_CASH_DB
@@ -37,6 +41,38 @@ Body:
     Items:
       - Item: Box_Mes_3
         Price: 390
+      - Item: C_Garment_2
+        Price: 1800
+      - Item: C_Garment_4
+        Price: 1800
+      - Item: C_Garment_16
+        Price: 1800
+      - Item: C_Garment_22
+        Price: 1800
+      - Item: C_Garment_58
+        Price: 1800
+      - Item: C_Garment_59
+        Price: 1800
+      - Item: C_Garment_105
+        Price: 1800
+      - Item: C_Garment_52
+        Price: 1800
+      - Item: C_Garment_119
+        Price: 1800
+      - Item: C_Garment_105
+        Price: 1800
+      - Item: C_Garment_51
+        Price: 1800
+      - Item: C_Cryptura_Hair_Cap
+        Price: 200
+      - Item: C_Book_File_Hat
+        Price: 300
+      - Item: C_Blue_Pencil_In_Mouth
+        Price: 390
+      - Item: C_Well-Chewed_Pencil
+        Price: 390
+      - Item: C_Red_Pencil_In_Mouth
+        Price: 390
   - Tab: Hot            #Populares
     Items:
       - Item: Box_Sorpresa
@@ -46,27 +82,27 @@ Body:
       - Item: Box_Sorpresa_Platino
         Price: 2000
       - Item: C_Garment_23
-        Price: 2000
+        Price: 1800
       - Item: C_Garment_25
-        Price: 2000
+        Price: 1800
       - Item: C_Garment_87
-        Price: 2000
+        Price: 1800
       - Item: C_Garment_90
-        Price: 2000
+        Price: 1800
       - Item: C_Garment_97
-        Price: 2000
+        Price: 1800
       - Item: C_Garment_123
-        Price: 2000
+        Price: 1800
       - Item: C_Hair_Of_The_Strong
-        Price: 1100
+        Price: 900
       - Item: Mini_Crown1
         Price: 900
       - Item: C_Tare_Neko_Cru
-        Price: 1100
+        Price: 900
       - Item: C_Boys_Cap
         Price: 900
       - Item: C_Blush
-        Price: 900
+        Price: 750
       - Item: C_Lord_of_Death
         Price: 900
       - Item: VIP_7D
@@ -83,20 +119,534 @@ Body:
         Price: 200
   - Tab: Limited        #Costume Garment
     Items:
-      - Item: Kafra_Card
-        Price: 1
+      - Item: Box_CBGAR1
+        Price: 1200
+      - Item: Box_CBGAR2
+        Price: 1200
+      - Item: Box_CBGAR3
+        Price: 1200
+      - Item: Box_CBGAR4
+        Price: 1200
+      - Item: Box_CBGAR5
+        Price: 1200
+      - Item: Box_CBGAR6
+        Price: 1200
+      - Item: C_Garment_1
+        Price: 1800
+      - Item: C_Garment_3
+        Price: 1800
+      - Item: C_Garment_5
+        Price: 1800
+      - Item: C_Garment_6
+        Price: 1800
+      - Item: C_Garment_8
+        Price: 1800
+      - Item: C_Garment_9
+        Price: 1800
+      - Item: C_Garment_10
+        Price: 1800
+      - Item: C_Garment_11
+        Price: 1800
+      - Item: C_Garment_12
+        Price: 1800
+      - Item: C_Garment_14
+        Price: 1800
+      - Item: C_Garment_15
+        Price: 1800
+      - Item: C_Garment_2
+        Price: 1800
+      - Item: C_Garment_18
+        Price: 1800
+      - Item: C_Garment_33
+        Price: 1800
+      - Item: C_Garment_19
+        Price: 1800
+      - Item: C_Garment_34
+        Price: 1800
+      - Item: C_Garment_42
+        Price: 1800
+      - Item: C_Garment_46
+        Price: 1800
+      - Item: C_Garment_48
+        Price: 1800
+      - Item: C_Garment_54
+        Price: 1800
+      - Item: C_Garment_16
+        Price: 1800
+      - Item: C_Garment_4
+        Price: 1800
+      - Item: C_Garment_25
+        Price: 1800
+      - Item: C_Garment_26
+        Price: 1800
+      - Item: C_Garment_27
+        Price: 1800
+      - Item: C_Garment_60
+        Price: 1800
+      - Item: C_Garment_63
+        Price: 1800
+      - Item: C_Garment_80
+        Price: 1800
+      - Item: C_Garment_81
+        Price: 1800
+      - Item: C_Garment_98
+        Price: 1800
+      - Item: C_Garment_17
+        Price: 1800
+      - Item: C_Garment_24
+        Price: 1800
+      - Item: C_Garment_37
+        Price: 1800
+      - Item: C_Garment_55
+        Price: 1800
+      - Item: C_Garment_56
+        Price: 1800
+      - Item: C_Garment_57
+        Price: 1800
+      - Item: C_Garment_88
+        Price: 1800
+      - Item: C_Garment_139
+        Price: 1800
+      - Item: C_Garment_155
+        Price: 1800
+      - Item: C_Garment_154
+        Price: 1800
+      - Item: C_Garment_23
+        Price: 1800
+      - Item: C_Garment_53
+        Price: 1800
+      - Item: C_Garment_68
+        Price: 1800
+      - Item: C_Garment_79
+        Price: 1800
+      - Item: C_Garment_97
+        Price: 1800
+      - Item: C_Garment_108
+        Price: 1800
+      - Item: C_Garment_114
+        Price: 1800
+      - Item: C_Garment_125
+        Price: 1800
+      - Item: C_Garment_127
+        Price: 1800
+      - Item: C_Garment_146
+        Price: 1800
+      - Item: C_Garment_62
+        Price: 1800
+      - Item: C_Garment_64
+        Price: 1800
+      - Item: C_Garment_65
+        Price: 1800
+      - Item: C_Garment_67
+        Price: 1800
+      - Item: C_Garment_69
+        Price: 1800
+      - Item: C_Garment_87
+        Price: 1800
+      - Item: C_Garment_90
+        Price: 1800
+      - Item: C_Garment_92
+        Price: 1800
+      - Item: C_Garment_117
+        Price: 1800
+      - Item: C_Garment_123
+        Price: 1800
   - Tab: Rental         #Costume Top
     Items:
-      - Item: Kafra_Card
-        Price: 1
+      - Item: Box_CBTOP1
+        Price: 600
+      - Item: Box_CBTOP2
+        Price: 600
+      - Item: Box_CBTOP3
+        Price: 600
+      - Item: Box_CBTOP4
+        Price: 600
+      - Item: Box_CBTOP5
+        Price: 600
+      - Item: Box_CBTOP6
+        Price: 600
+      - Item: C_Invisible_Cap
+        Price: 200
+      - Item: C_Valkyrie_Circlet
+        Price: 900
+      - Item: C_Classical_Fhat
+        Price: 900
+      - Item: C_Hair_Of_The_Strong
+        Price: 900
+      - Item: C_CatEars_Cyber_HeadP_R
+        Price: 900
+      - Item: C_Melon_Cap
+        Price: 900
+      - Item: C_S_Circlet_Of_Time
+        Price: 900
+      - Item: C_Tare_Neko_Cru
+        Price: 900
+      - Item: C_Lord_of_Death
+        Price: 900
+      - Item: C_Holy_Marching_Hat_J
+        Price: 900
+      - Item: C_Elder_Crown
+        Price: 900
+      - Item: Yellow_Hat
+        Price: 900
+      - Item: Singing_Bird
+        Price: 900
+      - Item: Rainbow
+        Price: 900
+      - Item: Lightning_Cloud
+        Price: 900
+      - Item: Rain_Cloud
+        Price: 900
+      - Item: C_Ancient_Horns
+        Price: 900
+      - Item: C_Coppola
+        Price: 900
+      - Item: C_Saint_Frill_Ribbon
+        Price: 900
+      - Item: C_Honeybee_Hat
+        Price: 900
+      - Item: C_Aura_Quartz_Crown
+        Price: 900
+      - Item: Charlie_Hat
+        Price: 900
+      - Item: Mini_Crown1
+        Price: 900
+      - Item: C_Gryphon_Hat
+        Price: 900
+      - Item: C_Reginleif_Hairband
+        Price: 900
+      - Item: C_Heart_Wing_Hairband
+        Price: 900
+      - Item: C_Poring_Fedora_Hat
+        Price: 900
+      - Item: C_Tiraya_Bonnet
+        Price: 900
+      - Item: C_Minstrel_Hat
+        Price: 900
+      - Item: C_Vacation_Hat
+        Price: 900
+      - Item: C_Gothic_Head_Dress
+        Price: 900
+      - Item: C_Sacred_Torch_Coronet
+        Price: 900
+      - Item: C_Rabbit_Ear_Knit_Hat
+        Price: 900
+      - Item: C_Cowboy_Hat_J
+        Price: 900
+      - Item: C_Lolita_Ten_Gallon_Hat
+        Price: 900
+      - Item: C_Pecopeco_Cap
+        Price: 900
+      - Item: C_Yellow_Doogun
+        Price: 900
+      - Item: C_Flying_Angel
+        Price: 900
+      - Item: C_Knit_Cap_Of_Water
+        Price: 900
+      - Item: C_Silk_Hat_Of_Earth
+        Price: 900
+      - Item: C_Snow_Rabbit_Knit_Hat
+        Price: 900
+      - Item: C_Beer_Hat
+        Price: 900
+      - Item: C_Hunting_Cap_Of_Gust
+        Price: 900
+      - Item: C_Dragon_Turtle_Hat
+        Price: 900
+      - Item: C_Bullock_Helm_J
+        Price: 900
+      - Item: C_Dragon_Skull
+        Price: 900
+      - Item: C_Sword_Master_Crown
+        Price: 900
+      - Item: C_Alpaca_Hood
+        Price: 900
+      - Item: C_12_Anniversary_Crown_Of_Saint
+        Price: 900
+      - Item: C_Husky_Hat
+        Price: 900
+      - Item: C_Fate_Of_Black_Hand
+        Price: 900
+      - Item: C_Firinto_Scarf
+        Price: 900
+      - Item: C_Buddhist_Priest_Crown
+        Price: 900
+      - Item: C_Pray_Cherry_Blossom
+        Price: 900
+      - Item: C_Wind_Of_The_Prairie
+        Price: 900
+      - Item: C_AFK_Hat
+        Price: 900
+      - Item: C_Sales_Signboard
+        Price: 900
+      - Item: C_Black_Rabbit_Bonnet
+        Price: 900
+      - Item: C_Fox_Ears_Bell_Ribbon
+        Price: 900
+      - Item: C_Penguin_Cap
+        Price: 900
+      - Item: C_Soft_Sheep_Hat
+        Price: 900
   - Tab: Permanent      #Costume Mid
     Items:
-      - Item: Kafra_Card
-        Price: 1
+      - Item: Box_CBMID1
+        Price: 500
+      - Item: Box_CBMID2
+        Price: 500
+      - Item: Box_CBMID3
+        Price: 500
+      - Item: Box_CBMID4
+        Price: 500
+      - Item: Box_CBMID5
+        Price: 500
+      - Item: Box_CBMID6
+        Price: 500
+      - Item: C_Invisible_Sunglasses
+        Price: 200
+      - Item: C_Moon_Eyepatch
+        Price: 750
+      - Item: Butterfly_Wing_Ear
+        Price: 750
+      - Item: Nut_On_Head
+        Price: 750
+      - Item: C_Devil_Whisper
+        Price: 750
+      - Item: C_Tomboy_Fairy
+        Price: 750
+      - Item: C_Observer
+        Price: 750
+      - Item: C_Machoman_Glasses
+        Price: 750
+      - Item: C_Ancient_Elven_Ear
+        Price: 750
+      - Item: Heart_Eye_Patch1
+        Price: 750
+      - Item: C_Red_Glasses
+        Price: 750
+      - Item: C_Peco_Ears
+        Price: 750
+      - Item: C_Round_Eyes
+        Price: 750
+      - Item: C_Under_Rim_Glasses
+        Price: 750
+      - Item: C_Mermaid_Headphone
+        Price: 750
+      - Item: C_Eagle_Eyes
+        Price: 750
+      - Item: C_C_Tower_Manager_Incom
+        Price: 750
+      - Item: Heart_Eye_Patch2
+        Price: 750
+      - Item: C_Blush
+        Price: 750
+      - Item: C_Takius_Blindfold
+        Price: 750
+      - Item: C_Wings_Of_Victory
+        Price: 750
+      - Item: C_Black_Glasses
+        Price: 750
+      - Item: C_Filir_Wing_Ears
+        Price: 750
+      - Item: C_Cat_Eye
+        Price: 750
+      - Item: C_Blind_Glasses
+        Price: 750
+      - Item: C_Fin_Helm
+        Price: 750
+      - Item: C_Small_Golden_Wings
+        Price: 750
+      - Item: C_Shelter_Wing_Ears
+        Price: 750
+      - Item: C_YinYang_Earring
+        Price: 750
+      - Item: C_Elf_Ears
+        Price: 750
+      - Item: C_Heart_Eyebandage
+        Price: 750
+      - Item: C_Ifrit_Ear
+        Price: 750
+      - Item: C_Ice_Wing_Ear
+        Price: 750
+      - Item: C_One_Eyed_Glasses
+        Price: 750
+      - Item: C_3D_Glasses
+        Price: 750
+      - Item: C_Mouton_Life
+        Price: 750
+      - Item: C_Rainbow_Wing_Ears
+        Price: 750
+      - Item: C_Wing_Form_Spectacle
+        Price: 750
+      - Item: C_Robo_Eye
+        Price: 750
+      - Item: C_Angel_Spirit
+        Price: 750
+      - Item: C_Bell_Pigeon
+        Price: 750
+      - Item: C_Hexagon_Spectacles
+        Price: 750
+      - Item: C_There_Is_Something
+        Price: 750
+      - Item: C_Scratching_Cat
+        Price: 750
+      - Item: C_Black_Devil_Mask
+        Price: 750
+      - Item: C_Eyes_Of_Ifrit
+        Price: 750
+      - Item: C_Love_Cheek
+        Price: 750
+      - Item: C_Gryphon_Wing_Ears
+        Price: 750
+      - Item: C_Under_Rim_Glasses_Red
+        Price: 750
+      - Item: C_Poring_Sunglasses
+        Price: 750
+      - Item: C_Happy_Lunatic_Ear
+        Price: 750
+      - Item: C_Face_Crusher
+        Price: 750
+      - Item: C_Magical_Booster
+        Price: 750
+      - Item: C_Barons_Evil_Eye
+        Price: 750
+      - Item: C_New_Wave_Sunglasses
+        Price: 750
   - Tab: Scrolls        #Costume Low
     Items:
-      - Item: Kafra_Card
-        Price: 1
+      - Item: Box_CBLOW1
+        Price: 350
+      - Item: Box_CBLOW2
+        Price: 350
+      - Item: Box_CBLOW3
+        Price: 350
+      - Item: Box_CBLOW4
+        Price: 350
+      - Item: Box_CBLOW5
+        Price: 350
+      - Item: Box_CBLOW6
+        Price: 350
+      - Item: C_Invisible_Mask
+        Price: 200
+      - Item: C_Luna_On_Shoulder
+        Price: 525
+      - Item: Chicken_Beak
+        Price: 525
+      - Item: Charlie_Beard
+        Price: 525
+      - Item: C_Romantic_White_Flower
+        Price: 525
+      - Item: C_Samurai_Mask
+        Price: 525
+      - Item: C_Pirate_Dagger
+        Price: 525
+      - Item: C_Gang_Scarf
+        Price: 525
+      - Item: C_Ninja_Scroll
+        Price: 525
+      - Item: C_Poring_Letter
+        Price: 525
+      - Item: C_Sweet_Candy
+        Price: 525
+      - Item: C_Lucky_Clover
+        Price: 525
+      - Item: C_Scarlet_Rose
+        Price: 525
+      - Item: C_Monster_Card
+        Price: 525
+      - Item: C_Sake
+        Price: 525
+      - Item: C_Granpa_Beard
+        Price: 525
+      - Item: C_Taboo_Curse_Scroll
+        Price: 525
+      - Item: C_Ifrits_Breath
+        Price: 525
+      - Item: C_Bubble_Gum_in_Mouth
+        Price: 525
+      - Item: C_Chilly_Breath
+        Price: 525
+      - Item: Lincoln_Beard
+        Price: 525
+      - Item: C_Love_Piece
+        Price: 525
+      - Item: C_Donut_in_Mouth
+        Price: 525
+      - Item: C_Choco_Donut_in_Mouth
+        Price: 525
+      - Item: C_Jack_Castle_Bat
+        Price: 525
+      - Item: C_Miracle_Blue_Rose
+        Price: 525
+      - Item: C_Red_Cherry_Blossom
+        Price: 525
+      - Item: C_Worg_In_Mouth
+        Price: 525
+      - Item: C_Fish_In_Mouth
+        Price: 525
+      - Item: C_Subject_Aura
+        Price: 525
+      - Item: C_Wind_Fan
+        Price: 525
+      - Item: C_Fan_in_Mouth
+        Price: 525
+      - Item: C_Long_Tongue
+        Price: 525
+      - Item: C_Green_Foxtail
+        Price: 525
+      - Item: C_Foxtail
+        Price: 525
+      - Item: C_Frozen_Land_Rose
+        Price: 525
+      - Item: C_Large_Ribbon_Muffler
+        Price: 525
+      - Item: C_Pink_Clover
+        Price: 525
+      - Item: C_Blood_Sucker
+        Price: 525
+      - Item: C_Cheering_Whistle
+        Price: 525
+      - Item: C_Well-Chewed_Pencil
+        Price: 525
+      - Item: C_NettyHeart_BalloonGum
+        Price: 525
+      - Item: C_CD_in_Mouth
+        Price: 525
+      - Item: C_Sailor_Collar
+        Price: 525
+      - Item: C_Piamette_BowTie_Red
+        Price: 525
+      - Item: C_Silent_Executor
+        Price: 525
+      - Item: C_Ichthys_Rosario
+        Price: 525
+      - Item: C_Eremes_Scarf
+        Price: 525
+      - Item: C_Subject_Aura_Red
+        Price: 525
+      - Item: C_Abacus_In_Mouth
+        Price: 525
+      - Item: C_Tone_of_Gold
+        Price: 525
+      - Item: C_Large_Ribbon_Muffler_Red
+        Price: 525
+      - Item: C_Cat_Ears_Cape
+        Price: 525
+      - Item: C_Umbala_Spirit
+        Price: 525
+      - Item: C_Pig_Nose
+        Price: 525
+      - Item: C_Blue_Rear_Ribbon
+        Price: 525
+      - Item: C_Poring_Soap_Pipe
+        Price: 525
+      - Item: C_Eremes_Scarf_Black
+        Price: 525
+      - Item: C_Dwarf_Beard
+        Price: 525
+      - Item: C_Under_Lamp
+        Price: 525
+      - Item: C_Stall_Of_Bat
+        Price: 525
   - Tab: Consumables    #Consumibles
     Items:
       - Item: VIP_1D
@@ -155,3 +705,35 @@ Body:
         Price: 300
       - Item: Large_Lure
         Price: 200
+      - Item: Coin_Aura_1
+        Price: 1500
+      - Item: Coin_Aura_2
+        Price: 1500
+      - Item: Coin_Aura_3
+        Price: 1500
+      - Item: S_Champ_Armor
+        Price: 4000
+      - Item: S_HP_Armor
+        Price: 4000
+      - Item: S_AC_Armor
+        Price: 4000
+      - Item: S_Stalker_Armor
+        Price: 4000
+      - Item: S_LK_Armor
+        Price: 4000
+      - Item: S_Paladin_Armor
+        Price: 4000
+      - Item: S_WS_Armor
+        Price: 4000
+      - Item: S_Creator_Armor
+        Price: 4000
+      - Item: S_Professor_Armor
+        Price: 4000
+      - Item: S_HW_Armor
+        Price: 4000
+      - Item: S_Gypsy_Armor
+        Price: 4000
+      - Item: S_Clown_Armor
+        Price: 4000
+      - Item: S_Sniper_Armor
+        Price: 4000

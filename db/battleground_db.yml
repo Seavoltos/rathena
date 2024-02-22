@@ -61,7 +61,7 @@ Header:
 Body:
   - Id: 0
     Name: Capture the Flag
-    MinPlayers: 1
+    MinPlayers: 3
     MinLevel: 80
     Deserter: 10
     JobRestrictions:
@@ -91,7 +91,7 @@ Body:
           Variable: $@BG_CTF_Team2
   - Id: 1
     Name: Team DeathMatch
-    MinPlayers: 1
+    MinPlayers: 3
     MinLevel: 80
     Deserter: 10
     JobRestrictions:
@@ -121,7 +121,7 @@ Body:
           Variable: $@BG_TD_Team2
   - Id: 2
     Name: Conquest
-    MinPlayers: 1
+    MinPlayers: 5
     MinLevel: 80
     Deserter: 10
     JobRestrictions:
@@ -231,7 +231,7 @@ Body:
           RespawnY: 154
   - Id: 3
     Name: Rush
-    MinPlayers: 1
+    MinPlayers: 5
     MinLevel: 80
     Deserter: 10
     JobRestrictions:
@@ -309,7 +309,7 @@ Body:
           RespawnY: 288
   - Id: 4
     Name: Eye of Storm
-    MinPlayers: 1
+    MinPlayers: 3
     MinLevel: 80
     Deserter: 10
     JobRestrictions:
@@ -339,7 +339,7 @@ Body:
           Variable: $@BG_EOS_Team2
   - Id: 5
     Name: Domination
-    MinPlayers: 1
+    MinPlayers: 3
     MinLevel: 80
     Deserter: 10
     JobRestrictions:
@@ -369,7 +369,7 @@ Body:
           Variable: $@BG_DOM_Team2
   - Id: 6
     Name: Stone Control
-    MinPlayers: 1
+    MinPlayers: 3
     MinLevel: 80
     Deserter: 10
     JobRestrictions:

@@ -178,6 +178,24 @@ Body:
       sc_start SC_INCFLEE,600000,20;
       specialeffect2 220;
 #ID RENEWALL
+  - Id: 25464
+    AegisName: World_Tour_Ticket
+    Name: World Tour Ticket
+    Type: Etc
+    Buy: 20
+  - Id: 6909
+    AegisName: Nyangvine_Fruit
+    Name: Actinidia Cat Fruit
+    Type: Etc
+    Buy: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
   - Id: 12790
     AegisName: Change_Name_Card
     Name: Character Name Change Coupon
@@ -947,6 +965,547 @@ Body:
       Container: true
     Script: |
       getrandgroupitem(IG_VIP3 ),1;
+  - Id: 40059
+    AegisName: Box_HAIR1
+    Name: Hair Costume Box 1
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_HAIR1 ),1;
+  - Id: 40060
+    AegisName: Box_HAIR2
+    Name: Hair Costume Box 2
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_HAIR2 ),1;
+  - Id: 40061
+    AegisName: Box_HAIR3
+    Name: Hair Costume Box 3
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_HAIR3 ),1;
+  - Id: 40062
+    AegisName: Box_HAIR4
+    Name: Hair Costume Box 4
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_HAIR4 ),1;
+  - Id: 40063
+    AegisName: Box_HAIR5
+    Name: Hair Costume Box 5
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_HAIR5 ),1;
+  - Id: 40064
+    AegisName: Box_HAIR6
+    Name: Hair Costume Box 6
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_HAIR6 ),1;
+  - Id: 40065
+    AegisName: Box_CBTOP1
+    Name: Top Costume Box 1
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBTOP1 ),1;
+  - Id: 40066
+    AegisName: Box_CBTOP2
+    Name: Top Costume Box 2
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBTOP2 ),1;
+  - Id: 40067
+    AegisName: Box_CBTOP3
+    Name: Top Costume Box 3
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBTOP3 ),1;
+  - Id: 40068
+    AegisName: Box_CBTOP4
+    Name: Top Costume Box 4
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBTOP4 ),1;
+  - Id: 40069
+    AegisName: Box_CBTOP5
+    Name: Top Costume Box 5
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBTOP5 ),1;
+  - Id: 40070
+    AegisName: Box_CBTOP6
+    Name: Top Costume Box 6
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBTOP6 ),1;
+  - Id: 40071
+    AegisName: Box_CBMID1
+    Name: Mid Costume Box 1
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBMID1 ),1;
+  - Id: 40072
+    AegisName: Box_CBMID2
+    Name: Mid Costume Box 2
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBMID2 ),1;
+  - Id: 40073
+    AegisName: Box_CBMID3
+    Name: Mid Costume Box 3
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBMID3 ),1;
+  - Id: 40074
+    AegisName: Box_CBMID4
+    Name: Mid Costume Box 4
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBMID4 ),1;
+  - Id: 40075
+    AegisName: Box_CBMID5
+    Name: Mid Costume Box 5
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBMID5 ),1;
+  - Id: 40076
+    AegisName: Box_CBMID6
+    Name: Mid Costume Box 6
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBMID6 ),1;
+  - Id: 40077
+    AegisName: Box_CBLOW1
+    Name: Low Costume Box 1
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBLOW1 ),1;
+  - Id: 40078
+    AegisName: Box_CBLOW2
+    Name: Low Costume Box 2
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBLOW2 ),1;
+  - Id: 40079
+    AegisName: Box_CBLOW3
+    Name: Low Costume Box 3
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBLOW3 ),1;
+  - Id: 40080
+    AegisName: Box_CBLOW4
+    Name: Low Costume Box 4
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBLOW4 ),1;
+  - Id: 40081
+    AegisName: Box_CBLOW5
+    Name: Low Costume Box 5
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBLOW5 ),1;
+  - Id: 40082
+    AegisName: Box_CBLOW6
+    Name: Low Costume Box 6
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBLOW6 ),1;
+  - Id: 40083
+    AegisName: Box_CBGAR1
+    Name: Garment Costume Box 1
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBGAR1 ),1;
+  - Id: 40084
+    AegisName: Box_CBGAR2
+    Name: Garment Costume Box 2
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBGAR2 ),1;
+  - Id: 40085
+    AegisName: Box_CBGAR3
+    Name: Garment Costume Box 3
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBGAR3 ),1;
+  - Id: 40086
+    AegisName: Box_CBGAR4
+    Name: Garment Costume Box 4
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBGAR4 ),1;
+  - Id: 40087
+    AegisName: Box_CBGAR5
+    Name: Garment Costume Box 5
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBGAR5 ),1;
+  - Id: 40088
+    AegisName: Box_CBGAR6
+    Name: Garment Costume Box 6
+    Type: Usable
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_CBGAR6 ),1;
+
 #ID ITEM NO PLAYER
   - Id: 40100
     AegisName: Warper_Unblock
@@ -1438,6 +1997,51 @@ Body:
         statusup2 bLuk, -1;
         StatusPoint += needed_status_point(bLuk, 1);
       }
+  - Id: 41046
+    AegisName: Coin_Aura_1
+    Name: Aura Coin 1
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41047
+    AegisName: Coin_Aura_2
+    Name: Aura Coin 1
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 41048
+    AegisName: Coin_Aura_3
+    Name: Aura Coin 1
+    Type: Etc
+    Buy: 100
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
   - Id: 41051
     AegisName: Kachua_box_1
     Name: Red Potion Box
@@ -2102,7 +2706,7 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
-#ID RING CLASS
+#ID ARMOR CLASS
   - Id: 45000
     AegisName: S_Champ_Armor
     Name: Champ Armor
@@ -2664,7 +3268,7 @@ Body:
     Buy: 10
     Weight: 10
 
-#ID COSTUME OCEAN
+#ID COSTUME Kaiyou
   - Id: 60000
     AegisName: C_Orc_Helm
     Name: Costume Orc Helm
@@ -7445,7 +8049,7 @@ Body:
     ArmorLevel: 1
     View: 39
   - Id: 65040
-    AegisName: C_Garment_40
+    AegisName: C_Garment_40 #No funciona
     Name: Cherry Festival Ribbon
     Type: Armor
     Locations:
@@ -7638,14 +8242,14 @@ Body:
     ArmorLevel: 1
     View: 60
   - Id: 65061
-    AegisName: C_Garment_61
+    AegisName: C_Garment_61 #No funciona
     Name: Wing of Angel Move
     Type: Armor
     Locations:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 61
+    View: 1
   - Id: 65062
     AegisName: C_Garment_62
     Name: Big Foxtail
@@ -7737,7 +8341,7 @@ Body:
     ArmorLevel: 1
     View: 71
   - Id: 65072
-    AegisName: C_Garment_72
+    AegisName: C_Garment_72 #No funciona
     Name: Wing of Angel Move RD
     Type: Armor
     Locations:
@@ -7746,7 +8350,7 @@ Body:
     ArmorLevel: 1
     View: 72
   - Id: 65073
-    AegisName: C_Garment_73
+    AegisName: C_Garment_73 #No funciona
     Name: Wing of Angel Move BK
     Type: Armor
     Locations:
@@ -7764,7 +8368,7 @@ Body:
     ArmorLevel: 1
     View: 1
   - Id: 65075
-    AegisName: C_Garment_75
+    AegisName: C_Garment_75 #No funciona
     Name: Wing of Angel Move GD
     Type: Armor
     Locations:
@@ -9891,7 +10495,6 @@ Body:
     ArmorLevel: 1
     Locations:
       Costume_Head_Top: true
-      Costume_Head_Mid: true
     View: 742
     Trade:
       Override: 99
@@ -11027,7 +11630,6 @@ Body:
     Type: Armor
     Buy: 10
     Locations:
-      Costume_Head_Top: true
       Costume_Head_Mid: true
     EquipLevelMin: 1
     ArmorLevel: 1
@@ -11562,15 +12164,6 @@ Body:
     Locations:
       Costume_Head_Low: true
     View: 526
-    Trade:
-      Override: 99
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 19765
     AegisName: C_Wing_Angels_Ears
     Name: Costume Wing Angels Ears
@@ -12416,16 +13009,6 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 595
-    Trade:
-      Override: 99
-      NoDrop: true
-      NoTrade: true
-      NoSell: true
-      NoCart: true
-      NoStorage: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 19854
     AegisName: C_Ear_Of_Black_Cat_
     Name: Costume Black Cat Ears
@@ -13362,14 +13945,6 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1193
-    Trade:
-      Override: 99
-      NoDrop: true
-      NoTrade: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 20000
     AegisName: C_Mouse_Hat2
     Name: Costume Mouse Hat 2
@@ -13380,14 +13955,6 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1194
-    Trade:
-      Override: 99
-      NoDrop: true
-      NoTrade: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 20001
     AegisName: C_Mouse_Hat3
     Name: Costume Mouse Hat 3
@@ -13398,14 +13965,6 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1195
-    Trade:
-      Override: 99
-      NoDrop: true
-      NoTrade: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 20002
     AegisName: C_Mouse_Hat4
     Name: Costume Mouse Hat 4
@@ -13416,14 +13975,6 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1196
-    Trade:
-      Override: 99
-      NoDrop: true
-      NoTrade: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 20003
     AegisName: C_Mouse_Hat5
     Name: Costume Mouse Hat 5
@@ -13434,14 +13985,6 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1197
-    Trade:
-      Override: 99
-      NoDrop: true
-      NoTrade: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 20004
     AegisName: C_Big_Golden_Bell
     Name: Costume Big Golden Bell
@@ -13642,14 +14185,6 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1211
-    Trade:
-      Override: 99
-      NoDrop: true
-      NoTrade: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 20026
     AegisName: C_Cow_Hat2
     Name: Costume Cow Hat 2
@@ -13660,14 +14195,6 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1212
-    Trade:
-      Override: 99
-      NoDrop: true
-      NoTrade: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 20027
     AegisName: C_Cow_Hat3
     Name: Costume Cow Hat 3
@@ -13678,14 +14205,6 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1213
-    Trade:
-      Override: 99
-      NoDrop: true
-      NoTrade: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 20028
     AegisName: C_Cow_Hat4
     Name: Costume Cow Hat 4
@@ -13696,14 +14215,6 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1214
-    Trade:
-      Override: 99
-      NoDrop: true
-      NoTrade: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 20029
     AegisName: C_Donut_in_Mouth
     Name: Costume Donut in Mouth
@@ -15267,7 +15778,6 @@ Body:
     Name: Costume There's..Something..
     Type: Armor
     Locations:
-      Costume_Head_Top: true
       Costume_Head_Mid: true
     EquipLevelMin: 1
     ArmorLevel: 1
@@ -15378,7 +15888,6 @@ Body:
     Type: Armor
     Locations:
       Costume_Head_Mid: true
-      Costume_Head_Low: true
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1292
@@ -15509,7 +16018,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 443
-  - Id: 20209
+  - Id: 20209 #No funciona
     AegisName: C_Mermaid_Longing
     Name: Costume Mermaid Bubbles
     Type: Armor
@@ -15700,14 +16209,6 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1016
-    Trade:
-      Override: 99
-      NoDrop: true
-      NoTrade: true
-      NoCart: true
-      NoGuildStorage: true
-      NoMail: true
-      NoAuction: true
   - Id: 20228
     AegisName: C_Pig_MoneyBox
     Name: Costume Pig MoneyBox
@@ -16331,7 +16832,6 @@ Body:
     Type: Armor
     Locations:
       Costume_Head_Mid: true
-      Costume_Head_Low: true
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1341
@@ -17065,7 +17565,6 @@ Body:
     Name: Costume Silent Executor
     Type: Armor
     Locations:
-      Costume_Head_Mid: true
       Costume_Head_Low: true
     EquipLevelMin: 1
     ArmorLevel: 1

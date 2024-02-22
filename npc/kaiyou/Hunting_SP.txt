@@ -699,43 +699,126 @@ prt_in,0,0,1	itemshop	NanasShop2	111,44000,41030:3,41000:5,41010:5,41011:5,41012
 prt_in,0,0,1	itemshop	NanasShop3	111,44000,505:1
 
 prt_in,85,61,6	script	Yosi::HuntingRewards	725,{
-	mes "[^400040Yosi^000000]";
+	set .@name$,"[^400040Yosi^000000]";
+	mes .@name$;
 	mes "Buenas, soy Yosi la esposa de Issan.";
 	mes "Cambiaré tus puntos de misión y medallas por artículos.";
 	next;
-	mes "[^400040Yosi^000000]";
+	mes .@name$;
 	mes "Tus estadísticas:";
 	mes "- Misiones Completas: ^0000FF" + Mission_Completed + "^000000";
 	mes "- Puntos de Misiones: ^0000FF" + Mission_Points + "^000000";
 	mes "- Medallas de Misión: ^0000FF" + countitem(44000) + "^000000";
+	mes "¿Qué quieres hacer?";
 	next;
-	if (select("[ > ] Invertir Puntos:[ > ] Cambiar Medallas") == 1 )
-	{
-		mes "[^400040Yosi^000000]";
-		mes "Estos artículos solo se pueden conseguir con Puntos de Misiones, dime que deseas conseguir.";
-
-		close2;
+	switch(select("[ > ] Invertir Puntos:[ > ] Cambiar Medallas:[ > ] Cambiar aura")){
+		case 1:
+			mes .@name$;
+			mes "Estos artículos solo se pueden conseguir con Puntos de Misiones.";
+			close2;
 			callshop "NanasShop";
-		end;	
-	}
-	else
-	{
-		mes "[^400040Yosi^000000]";
-		mes "Estos artículos solo se pueden conseguir con Medallas de Misiones, dime que deseas conseguir.";
-		next;
-		switch(select("Consumibles"))
-		{
-			case 1:
-				mes "Cierra esta ventana para continuar";
-				close2;
-				callshop "NanasShop2";
-				end;
-			case 2:
-				mes "Cierra esta ventana para continuar";
-				close2;
-				callshop "NanasShop3";
-				end;
-		}
+			end;
+		case 2:
+			mes .@name$;
+			mes "Estos artículos solo se pueden conseguir con Medallas de Misiones.";
+			close2;
+			callshop "NanasShop2";
+			end;
+		case 3:
+			setarray .@auras_max[1], 152, 117, 35;
+			mes .@name$;
+			mes "que parte del aura deseas desbloquear o cambiar?";
+			next;
+			set .@s, select(
+			( aura1 )?"^10B2D2 [ > ] ^000000 Aura 1":"^ff1919 [ > ] ^000000 Aura 1 ( 5 ^ff0000"+getitemname(44000)+"^000000)",
+			( aura2 )?"^10B2D2 [ > ] ^000000 Aura 2":"^ff1919 [ > ] ^000000 Aura 2 ( 5 ^ff0000"+getitemname(44000)+"^000000)",
+			( aura3 )?"^10B2D2 [ > ] ^000000 Aura 3":"^ff1919 [ > ] ^000000 Aura 3 ( 5 ^ff0000"+getitemname(44000)+"^000000)"
+			);
+			set .@revert, get_aura_part(.@s);
+			set .@current, 0;
+			switch( .@s  )
+			{
+				case 1:
+					if( aura1 == 0)
+					{
+						if(countitem(44000) < 5 && countitem(41046) < 1)
+						{
+							mes .@name$;
+							mes "Desbloquear esta parte cuesta 5 ^ff0000"+getitemname(44000)+"^000000.";
+							close;
+						}
+						if(countitem(41046) < 1)
+							delitem 44000,5;
+						else
+							delitem 41046,1;
+						set aura1,1;
+						
+					}
+					break;
+				case 2:
+					if( aura2 == 0)
+					{
+						if(countitem(44000) < 5 && countitem(41047) < 1)
+						{
+							mes .@name$;
+							mes "Desbloquear esta parte cuesta 5 ^ff0000"+getitemname(44000)+"^000000.";
+							close;
+						}
+						if(countitem(41047) < 1)
+							delitem 44000,5;
+						else
+							delitem 41047,1;
+						set aura2,1;
+					}
+					break;
+				case 3:
+					if( aura3 == 0)
+					{
+						if(countitem(44000) < 5 && countitem(41048) < 1)
+						{
+							mes .@name$;
+							mes "Desbloquear esta parte cuesta 5 ^ff0000"+getitemname(44000)+"^000000.";
+							close;
+						}
+						if(countitem(41048) < 1)
+							delitem 44000,5;
+						else
+							delitem 41048,1;
+						set aura3,1;
+					}
+					break;
+			}
+			mes .@name$;
+			mes "Selecciona el aura que te guste y pulsa ^0000ffCancel^000000 o ^0000ffElegir esta aura^000000.";
+			next;
+			while(1)
+			{
+				set_aura_part(.@s, .@current);
+				message strcharinfo(0),"Aura "+ .@s +" part == " + .@current;
+				set .@menu$, "Siguiente (^0055FF"+((.@current!=.@auras_max[.@s])?.@current+1:1)+"^000000):Anterior (^0055FF"+((.@current!=1 && .@current!=0)?.@current-1:.@auras_max[.@s])+"^000000):Ir a...:Elegir esta aura:Elegir la que tenía";
+				switch (select(.@menu$)) 
+				{
+					case 1: 
+						set .@current, ((.@current!=.@auras_max[.@s])?.@current+1:1);
+						break;
+					case 2:
+						set .@current, ((.@current!=1 && .@current!=0)?.@current-1:.@auras_max[.@s]); 
+						break;
+					case 3: 
+						message strcharinfo(0),"Elige un número entre 1 - "+.@auras_max[.@s]+".";
+						input .@current, 0, .@auras_max[.@s];
+						break;
+					case 4:
+						close2;
+						end;
+					case 5: 
+						set .@current, .@revert; set_aura_part(.@s, .@revert);
+						close2;
+						end;
+				}
+			}
+			end;
+			close;
 	}
 }
 
