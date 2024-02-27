@@ -1273,4 +1273,9 @@ void clif_gepard_send_lgp_settings(map_session_data * sd);
 
 // (^~_~^) LGP End
 
+void clif_set_dialog_align(map_session_data& sd, int npcid, e_say_dialog_align align);
+void clif_set_npc_window_size(map_session_data& sd, int width, int height);
+void clif_set_npc_window_pos(map_session_data& sd, int x, int y);
+void clif_set_npc_window_pos_percent(map_session_data& sd, int x, int y);
+
 #endif /* CLIF_HPP */
