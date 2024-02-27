@@ -238,6 +238,14 @@ Body:
     Weight: 10
     Script: |
       sc_start SC_HANBOK,600000,0;
+  - Id: 22822
+    AegisName: SW_Wear2014
+    Name: Summer Vacation Costumes
+    Type: Usable
+    Weight: 100
+    EquipLevelMin: 1
+    Script: |
+      sc_start SC_DRESSUP,600000,1;
   - Id: 22876
     AegisName: Shabby_Purse
     Name: Old Money Pocket

@@ -679,6 +679,8 @@ Body:
         Price: 100
       - Item: Memory_Of_Wedding
         Price: 100
+      - Item: SW_Wear2014
+        Price: 100
       - Item: Red_Bag
         Price: 100
       - Item: Fire_Cracker_Bday
