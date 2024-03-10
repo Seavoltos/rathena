@@ -20939,9 +20939,9 @@ void roulette_generate_bonus( map_session_data& sd ){
 
 		if( sd.roulette_point.bronze > 0 ){
 			next_stage = 0;
-		}else if( sd.roulette_point.silver > 9 ){
+		}else if( sd.roulette_point.silver > 1 ){
 			next_stage = 2;
-		}else if( sd.roulette_point.gold > 9 ){
+		}else if( sd.roulette_point.gold > 2 ){
 			next_stage = 4;
 		}
 
@@ -21165,19 +21165,19 @@ void clif_parse_roulette_generate( int fd, map_session_data* sd ){
 		sd->roulette.prizeIdx = -1;
 	}
 
-	if( !sd->roulette.stage && sd->roulette_point.bronze <= 0 && sd->roulette_point.silver < 10 && sd->roulette_point.gold < 10 ){
+	if( !sd->roulette.stage && sd->roulette_point.bronze <= 0 && sd->roulette_point.silver < 2 && sd->roulette_point.gold < 3 ){
 		result = GENERATE_ROULETTE_NO_ENOUGH_POINT;
 	}else{
 		if (!sd->roulette.stage) {
 			if (sd->roulette_point.bronze > 0) {
 				sd->roulette_point.bronze -= 1;
 				pc_setreg2(sd, ROULETTE_BRONZE_VAR, sd->roulette_point.bronze);
-			} else if (sd->roulette_point.silver > 9) {
-				sd->roulette_point.silver -= 10;
+			} else if (sd->roulette_point.silver > 1) {
+				sd->roulette_point.silver -= 2;
 				sd->roulette.stage = 2;
 				pc_setreg2(sd, ROULETTE_SILVER_VAR, sd->roulette_point.silver);
-			} else if (sd->roulette_point.gold > 9) {
-				sd->roulette_point.gold -= 10;
+			} else if (sd->roulette_point.gold > 2) {
+				sd->roulette_point.gold -= 3;
 				sd->roulette.stage = 4;
 				pc_setreg2(sd, ROULETTE_GOLD_VAR, sd->roulette_point.gold);
 			}
