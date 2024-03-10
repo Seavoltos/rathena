@@ -3521,6 +3521,14 @@ Body:
     Type: Usable
     Buy: 10000
     Weight: 200
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
     Flags:
       BuyingStore: true
       DeadBranch: true
@@ -8275,6 +8283,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 504,100;
   - Id: 12532
     AegisName: Royal_Jelly_Box2
     Name: Royal Jelly Box2
@@ -8287,6 +8297,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 526,100;
   - Id: 12533
     AegisName: Blue_Herb_Box2
     Name: Blue Herb Box2
@@ -8299,6 +8311,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 510,100;
   - Id: 12534
     AegisName: Yggdrasil_Seed_Box
     Name: Yggdrasil Seed Box
@@ -8464,6 +8478,8 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+    Script: |
+      getitem 678,30;
   - Id: 12551
     AegisName: MVP_Tele_Scroll
     Name: MVP Tele Scroll

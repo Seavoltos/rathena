@@ -28,3 +28,16 @@
 // 519,322  // Milk can't be consumed in PVP and maps marked as 'restricted zone 2' or 'restricted zone 4' (256+64+2)
 // 519,-2   // Unset `restricted in PVP` flag from Milk. Making it usable in PVP again.
 
+2483,1		// Siege_Greave
+2484,1		// Siege_Boots
+2485,1		// Siege_Shoes
+2586,1		// Siege_Manteau
+2587,1		// Siege_Muffler
+15046,1		// Siege_Plate
+15047,1		// Siege_Suits
+15048,1		// Siege_Robe
+1776,1		// Siege_Arrow_S
+1775,1		// Siege_Arrow_A
+11548,1		// Woe_White_Potion
+11549,1		// Woe_Blue_Potion
+11547,1		// Woe_Violet_Potion

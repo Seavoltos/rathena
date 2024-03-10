@@ -6,18 +6,24 @@ prontera,164,165,1	script	Busca Empleo?::MissionSign	837,{
 	mes "* Tiene habilidades para cazar criaturas?";
 	mes "* Quiere ganar artículos y dinero?^000000";
 	mes "...";
+	if( BaseLevel < 50 )
+	{
+		mes "Sólo falta que te hagas más fuerte!";
+		close;
+	}
 	mes "Busque a Issan en la sala derecha donde se encuentra el refine de prontera y no pierda más tiempo!";
 
 	set .@Time_Left, Mission_Tick - gettimetick(2);
 
-	if( Mission_Ended == 0 || .@Time_Left < 0 )
+	if( (Mission_Ended == 0 || .@Time_Left < 0 ) && BaseLevel > 49 )
 		navigateto "prt_in",90,72;
 	close;
+	end;
 
 OnPCLoadMapEvent:
 	set .@Time_Left, Mission_Tick - gettimetick(2);
 	
-	if(Mission_ID1 != 0 && .@Time_Left > 0)
+	if(Mission_ID1 != 0 && .@Time_Left > 0 || BaseLevel < 50)
 		end;
 	else
 		if( .@Time_Left > 0 )
@@ -52,7 +58,7 @@ OnClock0030:
 			break;
 		case 2:
 			//Comodo
-			setarray .@mob[0],1271,1067,1073,1074,1254,1391,1206,1256,1266,1323,1119,1215,1258,1282,1037,1165,1215,1009,1030,1042,1148,1255,1274,1278,1279,1034,1064;
+			setarray .@mob[0],1271,1067,1073,1074,1254,1391,1206,1256,1266,1323,1119,1258,1282,1037,1165,1215,1009,1030,1042,1148,1255,1274,1278,1279,1034,1064;
 			setarray .@mobMvP[0], 1583;
 			set $WarperFree,3;
 			break;
@@ -124,13 +130,13 @@ OnClock0030:
 			break;
 		case 14:
 			//Payon
-			setarray .@mob[0],1002,1010,1014,1031,1013,1025,1008,1063,1113,1242,1077,1024,1053,1033,1060,1116,1056,1060,1110,1277,1321,1005,1015,1076,1016,1028,1111,1068,1188,1026,1170;
+			setarray .@mob[0],1002,1010,1014,1031,1013,1025,1008,1063,1113,1242,1077,1024,1053,1033,1060,1116,1056,1110,1277,1321,1005,1015,1076,1016,1028,1111,1068,1188,1026,1170;
 			setarray .@mobMvP[0], 1115,1150;
 			set $WarperFree,15;
 			break;
 		case 15:
 			//Prontera
-			setarray .@mob[0],1002,1004,1007,1008,1018,1063,1051,1020,1056,1057,1052,1048,1051,1009,1047,1049,1107,1167,1166,1258,1005,1175,1014,1053,1161,1054,1077,1209;
+			setarray .@mob[0],1002,1004,1007,1008,1018,1063,1051,1020,1056,1057,1052,1048,1009,1047,1049,1107,1167,1166,1258,1005,1175,1014,1053,1161,1054,1077,1209;
 			setarray .@mobMvP[0], 1086;
 			set $WarperFree,16;
 			break;
@@ -142,7 +148,7 @@ OnClock0030:
 			break;
 		case 17:
 			//Umbala / Laberynth
-			setarray .@mob[0],1114,1215,1376,1493,1499,1104,1118,1214,1494,1495,1499,1321,1500,1271,1128,1380,1035,1037,1101,1139;
+			setarray .@mob[0],1114,1215,1376,1493,1499,1104,1118,1214,1494,1495,1321,1500,1271,1128,1380,1035,1037,1101,1139;
 			setarray .@mobMvP[0], 1039;
 			set $WarperFree,18;
 			break;
@@ -177,7 +183,7 @@ OnClock0030:
 			set $WarperFree,23;
 			break;
 		case 23:
-			//Kiel
+			//Robot Factory
 			setarray .@mob[0],1275,1735,1736,1737,1738,1745;
 			setarray .@mobMvP[0], 1734;
 			set $WarperFree,24;
@@ -343,6 +349,11 @@ prt_in,94,73,0	script	Contratos	111,{
 
 prt_in,90,72,4	script	Issan::HuntingSystem	732,{
 	mes "[^004000Issan^000000]";
+	if ( BaseLevel < 50 )
+	{
+		mes "Vuelve cuando seas al menos nivel 50!";
+		close;
+	}
 	if( Mission_Tick < gettimetick(2) )
 	{
 		if( Mission_Tick == 0 )
@@ -355,7 +366,7 @@ prt_in,90,72,4	script	Issan::HuntingSystem	732,{
 			mes "Las misiones constan de eliminar criaturas que te asignaré.";
 			next;
 			mes "[^004000Issan^000000]";
-			mes "Estas criaturas serán acorde a tu nivel.";
+			mes "Estas criaturas serán para todo el servidor.";
 			mes "Pero no te preocupes, puedes realizar el trabajo en grupos de amigos, y cualquiera del equipo puede ser quien elimine y a ti se te cuenta.";
 			next;
 			mes "[^004000Issan^000000]";

@@ -16,7 +16,8 @@
 -	script	Agit2_Event	-1,{
 	end;
 
-OnClock1600:	//start time for Tuesday and Thursday
+OnClock1600:	//start time for SUNDAY
+OnClock1800:	//end time for SUNDAY
 OnAgitInit2:
 	// starting time checks
 	if((gettime(DT_DAYOFWEEK)==SUNDAY) && (gettime(DT_HOUR)>=16 && gettime(DT_HOUR)<18)) {

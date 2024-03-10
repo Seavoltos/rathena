@@ -41,3 +41,31 @@ Body:
     Script: |
       bonus bDex,2;
       bonus bDef,2;
+  - Combos:
+      - Combo:
+          - Siege_Greave
+          - Siege_Manteau
+          - Siege_Plate
+    Script: |
+      bonus bVit,5;
+      bonus2 bSubRace,RC_Player_Human,15;
+      bonus2 bSubRace,RC_Player_Doram,15;
+  - Combos:
+      - Combo:
+          - Siege_Boots
+          - Siege_Manteau
+          - Siege_Suits
+    Script: |
+      bonus bDex,5;
+      bonus2 bSubRace,RC_Player_Doram,15;
+      bonus2 bSubRace,RC_Player_Human,15;
+  - Combos:
+      - Combo:
+          - Siege_Shoes
+          - Siege_Muffler
+          - Siege_Robe
+    Script: |
+      bonus bInt,5;
+      bonus bMaxHPrate,15;
+      bonus2 bSubRace,RC_Player_Doram,15;
+      bonus2 bSubRace,RC_Player_Human,15;

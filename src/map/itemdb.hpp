@@ -2115,6 +2115,7 @@ enum e_random_item_group {
 	IG_CBGAR4,
 	IG_CBGAR5,
 	IG_CBGAR6,
+	IG_WoE_Support_Box,
 	IG_MAX,
 };
 

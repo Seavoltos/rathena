@@ -522,6 +522,620 @@ Body:
       Costume_Head_Top: true
     ArmorLevel: 1
     View: 739
+#ID WOE ITEM
+  - Id: 6615
+    AegisName: Siege_Guild_Coin
+    Name: Siege Guild Coin
+    Type: Etc
+    Weight: 10
+    Flags:
+      BuyingStore: true
+  - Id: 6488
+    AegisName: Thanks_Invest_Ticket
+    Name: Thanks Invest Ticket
+    Type: Etc
+    Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 6489
+    AegisName: Cats_Invest_Certif
+    Name: Cats Invest Certificate
+    Type: Etc
+    Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 12888
+    AegisName: Siege_Kit_Box
+    Name: Siege Kit Box
+    Type: Cash
+    Weight: 100
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Flags:
+      Container: true
+    Script: |
+      getrandgroupitem(IG_WoE_Support_Box),1;
+  - Id: 11548
+    AegisName: Woe_White_Potion
+    Name: Siege White Potion
+    Type: Healing
+    Weight: 80
+    Flags:
+      BuyingStore: true
+    Script: |
+      percentheal 10,0;
+  - Id: 11549
+    AegisName: Woe_Blue_Potion
+    Name: Siege Blue Potion
+    Type: Healing
+    Weight: 80
+    Flags:
+      BuyingStore: true
+    Script: |
+      percentheal 0,10;
+  - Id: 12676
+    AegisName: Sg_Violet_Potion_Box
+    Name: Siege Violet Potion Box
+    Type: Usable
+    Buy: 20
+    Weight: 200
+    Flags:
+      BuyingStore: true
+    Script: |
+      getitem 11547,50;
+  - Id: 12677
+    AegisName: Siege_Arrow_Quiver_S
+    Name: Siege Arrow Quiver S
+    Type: Usable
+    Buy: 2
+    Sell: 0
+    Weight: 100
+    EquipLevelMin: 95
+    Flags:
+      BuyingStore: true
+    Script: |
+      getitem 1775,200;
+  - Id: 12678
+    AegisName: Siege_Arrow_Quiver_A
+    Name: Siege Arrow Quiver A
+    Type: Usable
+    Buy: 2
+    Sell: 0
+    Weight: 100
+    EquipLevelMin: 95
+    Flags:
+      BuyingStore: true
+    Script: |
+      getitem 1776,200;
+  - Id: 12679
+    AegisName: Sg_White_Potion_Box
+    Name: Siege White Potion Box
+    Type: Usable
+    Buy: 20
+    Weight: 200
+    Flags:
+      BuyingStore: true
+    Script: |
+      getitem 11548,30;
+  - Id: 12680
+    AegisName: Sg_Blue_Potion_Box
+    Name: Siege Blue Potion Box
+    Type: Usable
+    Buy: 20
+    Weight: 200
+    Flags:
+      BuyingStore: true
+    Script: |
+      getitem 11549,10;
+  - Id: 1775
+    AegisName: Siege_Arrow_S
+    Name: Siege Arrow S
+    Type: Ammo
+    SubType: Arrow
+    Buy: 10
+    Sell: 0
+    Weight: 1
+    Attack: 55
+    Jobs:
+      Archer: true
+      Assassin: true
+      BardDancer: true
+      Hunter: true
+      Rogue: true
+      Thief: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 95
+  - Id: 1776
+    AegisName: Siege_Arrow_A
+    Name: Siege Arrow A
+    Type: Ammo
+    SubType: Arrow
+    Buy: 10
+    Sell: 0
+    Weight: 1
+    Attack: 52
+    Jobs:
+      Archer: true
+      Assassin: true
+      BardDancer: true
+      Hunter: true
+      Rogue: true
+      Thief: true
+    Locations:
+      Ammo: true
+    EquipLevelMin: 95
+  - Id: 2483
+    AegisName: Siege_Greave
+    Name: Siege Greaves
+    Type: Armor
+    Buy: 10
+    Weight: 750
+    Defense: 4
+    Slots: 1
+    Jobs:
+      Alchemist: true
+      Blacksmith: true
+      Crusader: true
+      Knight: true
+      Merchant: true
+      Swordman: true
+    Locations:
+      Shoes: true
+    ArmorLevel: 1
+    EquipLevelMin: 95
+    Refineable: true
+    Script: |
+      bonus bMdef,1;
+      bonus2 bSubRace,RC_Player_Human,2;
+      bonus2 bSubRace,RC_Player_Doram,2;
+  - Id: 2484
+    AegisName: Siege_Boots
+    Name: Siege Boots
+    Type: Armor
+    Buy: 10
+    Weight: 500
+    Defense: 3
+    Slots: 1
+    Jobs:
+      Alchemist: true
+      Archer: true
+      Assassin: true
+      BardDancer: true
+      Blacksmith: true
+      Crusader: true
+      Gunslinger: true
+      Hunter: true
+      KagerouOboro: true
+      Knight: true
+      Merchant: true
+      Ninja: true
+      Rebellion: true
+      Rogue: true
+      StarGladiator: true
+      Swordman: true
+      Taekwon: true
+      Thief: true
+    Locations:
+      Shoes: true
+    ArmorLevel: 1
+    EquipLevelMin: 95
+    Refineable: true
+    Script: |
+      bonus bMdef,3;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_Player_Doram,1;
+  - Id: 2485
+    AegisName: Siege_Shoes
+    Name: Siege Shoes
+    Type: Armor
+    Buy: 10
+    Weight: 350
+    Defense: 2
+    Slots: 1
+    Jobs:
+      Acolyte: true
+      Mage: true
+      Monk: true
+      Novice: true
+      Priest: true
+      Sage: true
+      SoulLinker: true
+      SuperNovice: true
+      Wizard: true
+    Locations:
+      Shoes: true
+    ArmorLevel: 1
+    EquipLevelMin: 95
+    Refineable: true
+    Script: |
+      bonus bMdef,5;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_Player_Doram,1;
+  - Id: 2586
+    AegisName: Siege_Manteau
+    Name: Siege Manteau
+    Type: Armor
+    Buy: 10
+    Weight: 600
+    Defense: 3
+    Slots: 1
+    Jobs:
+      All: true
+      Novice: false
+      SuperNovice: false
+    Locations:
+      Garment: true
+    ArmorLevel: 1
+    EquipLevelMin: 95
+    Refineable: true
+    Script: |
+      bonus bMdef,1;
+      bonus2 bSubRace,RC_Player_Human,2;
+      bonus2 bSubRace,RC_Player_Doram,2;
+  - Id: 2587
+    AegisName: Siege_Muffler
+    Name: Siege Muffler
+    Type: Armor
+    Buy: 10
+    Weight: 400
+    Defense: 2
+    Slots: 1
+    Locations:
+      Garment: true
+    ArmorLevel: 1
+    EquipLevelMin: 95
+    Refineable: true
+    Script: |
+      bonus bMdef,5;
+      bonus2 bSubRace,RC_Player_Human,1;
+      bonus2 bSubRace,RC_Player_Doram,1;
+  - Id: 15046
+    AegisName: Siege_Plate
+    Name: Siege Plate
+    Type: Armor
+    Weight: 3300
+    Defense: 7
+    Slots: 1
+    Jobs:
+      Alchemist: true
+      Blacksmith: true
+      Crusader: true
+      Knight: true
+      Merchant: true
+      StarGladiator: true
+      Swordman: true
+      Taekwon: true
+    Locations:
+      Armor: true
+    ArmorLevel: 1
+    EquipLevelMin: 95
+    Refineable: true
+    Script: |
+      bonus bMdef,3;
+      bonus2 bSubRace,RC_Player_Doram,2;
+      bonus2 bSubRace,RC_Player_Human,2;
+      .@r = getrefine();
+      if (.@r>5) {
+         bonus bHealPower2,12;
+         bonus bAddItemHealRate,12;
+      }
+      if (.@r>8) {
+         bonus bMaxHPrate,20;
+      }
+  - Id: 15047
+    AegisName: Siege_Suits
+    Name: Siege Suit
+    Type: Armor
+    Weight: 750
+    Defense: 3
+    Slots: 1
+    Jobs:
+      Alchemist: true
+      Archer: true
+      Assassin: true
+      BardDancer: true
+      Blacksmith: true
+      Crusader: true
+      Gunslinger: true
+      Hunter: true
+      KagerouOboro: true
+      Knight: true
+      Merchant: true
+      Ninja: true
+      Rebellion: true
+      Rogue: true
+      StarGladiator: true
+      Swordman: true
+      Taekwon: true
+      Thief: true
+    Locations:
+      Armor: true
+    ArmorLevel: 1
+    EquipLevelMin: 95
+    Refineable: true
+    Script: |
+      bonus bMdef,3;
+      bonus2 bSubRace,RC_Player_Doram,2;
+      bonus2 bSubRace,RC_Player_Human,2;
+      .@r = getrefine();
+      if (.@r>5) {
+         bonus2 bResEff,Eff_Stone,2000;
+         bonus bLongAtkDef,10;
+      }
+      if (.@r>8) {
+         bonus bMaxHPrate,15;
+      }
+  - Id: 15048
+    AegisName: Siege_Robe
+    Name: Siege Robe
+    Type: Armor
+    Weight: 500
+    Defense: 3
+    Slots: 1
+    Jobs:
+      Acolyte: true
+      Mage: true
+      Monk: true
+      Novice: true
+      Priest: true
+      Sage: true
+      SoulLinker: true
+      SuperNovice: true
+      Wizard: true
+    Locations:
+      Armor: true
+    ArmorLevel: 1
+    EquipLevelMin: 95
+    Refineable: true
+    Script: |
+      bonus bMdef,5;
+      bonus2 bSubRace,RC_Player_Doram,2;
+      bonus2 bSubRace,RC_Player_Human,2;
+      .@r = getrefine();
+      if (.@r>5) {
+         bonus2 bResEff,Eff_Stun,2000;
+         bonus bLongAtkDef,5;
+      }
+      if (.@r>8) {
+         bonus bMaxHP,1000;
+         bonus bMaxSP,100;
+      }
+  - Id: 18755
+    AegisName: Feather_Beret_
+    Name: Feather Beret
+    Type: Armor
+    Weight: 600
+    Defense: 1
+    Slots: 1
+    Jobs:
+      All: true
+      Novice: false
+      SuperNovice: false
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Refineable: true
+    View: 224
+    Script: |
+      bonus bMdef,1;
+      bonus2 bSubRace,RC_DemiHuman,10;
+      bonus2 bSubRace,RC_Player_Human,10;
+  - Id: 12812
+    AegisName: Snow_Flip
+    Name: Snow Flip
+    Type: DelayConsume
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Delay:
+      Duration: 5000
+      Status: Reuse_Limit_Ecl
+    Script: |
+      itemskill "ECL_SNOWFLIP",1;
+  - Id: 12813
+    AegisName: Peony_Mommy
+    Name: Peony Mamy
+    Type: DelayConsume
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Delay:
+      Duration: 5000
+      Status: Reuse_Limit_Ecl
+    Script: |
+      itemskill "ECL_PEONYMAMY",1;
+  - Id: 12814
+    AegisName: Slapping_Herb
+    Name: Slapping Herb
+    Type: DelayConsume
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Delay:
+      Duration: 5000
+      Status: Reuse_Limit_Ecl
+    Script: |
+      itemskill "ECL_SADAGUI",1;
+  - Id: 12815
+    AegisName: Yggdrasil_Dust
+    Name: Yggdrasil Dust
+    Type: DelayConsume
+    Weight: 10
+    Flags:
+      BuyingStore: true
+    Delay:
+      Duration: 5000
+      Status: Reuse_Limit_Ecl
+    Script: |
+      itemskill "ECL_SEQUOIADUST",1;
+  - Id: 2951
+    AegisName: Kvasir_Ring_Blue
+    Name: Kvasir Ring Blue
+    Type: Armor
+    Weight: 100
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Script: |
+      bonus bMaxSP,30;
+      skill "ECL_SNOWFLIP",1;
+  - Id: 2952
+    AegisName: Kvasir_Ring_Red
+    Name: Kvasir Ring Red
+    Type: Armor
+    Weight: 100
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Script: |
+      bonus bMaxSP,30;
+      skill "ECL_PEONYMAMY",1;
+  - Id: 2953
+    AegisName: Kvasir_Ring_Green
+    Name: Kvasir Ring Green
+    Type: Armor
+    Weight: 100
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Script: |
+      bonus bMaxHP,100;
+      skill "ECL_SADAGUI",1;
+  - Id: 2954
+    AegisName: Kvasir_Ring_Brown
+    Name: Kvasir Ring Brown
+    Type: Armor
+    Buy: 10
+    Weight: 100
+    Locations:
+      Both_Accessory: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    Script: |
+      skill "ECL_SEQUOIADUST",1;
+      bonus bMaxHP,100;
+  - Id: 11547
+    AegisName: Woe_Violet_Potion
+    Name: Siege Purple Potion
+    Type: Healing
+    Weight: 80
+    Flags:
+      BuyingStore: true
+    Script: |
+      itemheal rand(500,700),rand(60,85);
+  - Id: 12874
+    AegisName: Frost_Giant_Blood
+    Name: Frost Giant Blood
+    Type: Usable
+    Weight: 100
+    Delay:
+      Duration: 30000
+      Status: Reuse_Limit_Ecl
+    Script: |
+      specialeffect2 EF_POTION_CON;
+      sc_start4 SC_GVG_GIANT,30000,3000,0,20,20;
+  - Id: 12875
+    AegisName: Golem_Stone
+    Name: Golem Stone
+    Type: Usable
+    Weight: 10
+    Delay:
+      Duration: 30000
+      Status: Reuse_Limit_Ecl
+    Script: |
+      specialeffect2 EF_POTION_CON;
+      sc_start4 SC_GVG_GOLEM,30000,0,200,10,10;
+  - Id: 12876
+    AegisName: Elf_Tear_Stun
+    Name: Elf Tear Stun
+    Type: Usable
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Ecl
+    Script: |
+      sc_start2 SC_GVG_STUN,10000,3000,0;
+  - Id: 12877
+    AegisName: Elf_Tear_Stone_Curse
+    Name: Elf Tear Stone Curse
+    Type: Usable
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Ecl
+    Script: |
+      sc_start2 SC_GVG_STONE,10000,3000,0;
+  - Id: 12878
+    AegisName: Elf_Tear_Freezing
+    Name: Elf Tear Freezing
+    Type: Usable
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Ecl
+    Script: |
+      sc_start2 SC_GVG_FREEZ,10000,3000,0;
+  - Id: 12879
+    AegisName: Elf_Tear_Sleep
+    Name: Elf Tear Sleep
+    Type: Usable
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Ecl
+    Script: |
+      sc_start2 SC_GVG_SLEEP,10000,3000,0;
+  - Id: 12880
+    AegisName: Elf_Tear_Curse
+    Name: Elf Tear Curse
+    Type: Usable
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Ecl
+    Script: |
+      sc_start2 SC_GVG_CURSE,10000,3000,0;
+  - Id: 12881
+    AegisName: Elf_Tear_Silence
+    Name: Elf Tear Silence
+    Type: Usable
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Ecl
+    Script: |
+      sc_start2 SC_GVG_SILENCE,10000,3000,0;
+  - Id: 12882
+    AegisName: Elf_Tear_Blind
+    Name: Elf Tear Blind
+    Type: Usable
+    Weight: 10
+    Delay:
+      Duration: 10000
+    Script: |
+      sc_start2 SC_GVG_BLIND,10000,3000,0;
 #ID CUSTOM
   - Id: 40000
     AegisName: Box_99_70
@@ -543,7 +1157,7 @@ Body:
       getrandgroupitem(IG_Box_99_70),1;
   - Id: 40001
     AegisName: Box_Costume1
-    Name: Special Costume Box
+    Name: Special Costume Box I
     Type: Usable
     Buy: 10
     Weight: 200
@@ -561,7 +1175,7 @@ Body:
       getrandgroupitem(IG_COSTUME1),1;
   - Id: 40002
     AegisName: Box_Costume2
-    Name: Special Costume Box
+    Name: Special Costume Box II
     Type: Usable
     Buy: 10
     Weight: 200
@@ -579,7 +1193,7 @@ Body:
       getrandgroupitem(IG_COSTUME2),1;
   - Id: 40003
     AegisName: Box_Costume3
-    Name: Special Costume Box
+    Name: Special Costume Box III
     Type: Usable
     Buy: 10
     Weight: 200

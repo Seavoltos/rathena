@@ -7117,6 +7117,7 @@
 	export_constant(IG_CBGAR4);
 	export_constant(IG_CBGAR5);
 	export_constant(IG_CBGAR6);
+	export_constant(IG_WoE_Support_Box);
 
 	/* unit stop walking */
 	export_constant(USW_NONE);

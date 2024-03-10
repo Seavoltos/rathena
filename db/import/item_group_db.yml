@@ -3071,3 +3071,70 @@ Body:
           - Index: 10
             Item: C_Garment_123
             Rate: 10
+  - Group: WoE_Support_Box
+    SubGroups:
+      - SubGroup: 1
+        List:
+          - Index: 1
+            Item: Old_Card_Album
+            Rate: 48
+          - Index: 2
+            Item: Union_Of_Tribe
+            Rate: 48
+          - Index: 3
+            Item: Bloody_Dead_Branch
+            Rate: 48
+          - Index: 4
+            Item: Frost_Giant_Blood
+            Rate: 48
+          - Index: 5
+            Item: Golem_Stone
+            Rate: 48
+          - Index: 6
+            Item: Elf_Tear_Stun
+            Rate: 195
+          - Index: 7
+            Item: Elf_Tear_Stone_Curse
+            Rate: 195
+          - Index: 8
+            Item: Elf_Tear_Freezing
+            Rate: 195
+          - Index: 9
+            Item: Elf_Tear_Sleep
+            Rate: 195
+          - Index: 10
+            Item: Elf_Tear_Curse
+            Rate: 195
+          - Index: 11
+            Item: Elf_Tear_Silence
+            Rate: 195
+          - Index: 12
+            Item: Elf_Tear_Blind
+            Rate: 195
+          - Index: 13
+            Item: Snow_Flip
+            Rate: 341
+          - Index: 14
+            Item: Peony_Mommy
+            Rate: 341
+          - Index: 15
+            Item: Slapping_Herb
+            Rate: 341
+          - Index: 16
+            Item: Yggdrasil_Dust
+            Rate: 341
+          - Index: 17
+            Item: Sg_Violet_Potion_Box
+            Rate: 1365
+          - Index: 18
+            Item: Sg_White_Potion_Box
+            Rate: 1365
+          - Index: 19
+            Item: Sg_Blue_Potion_Box
+            Rate: 1365
+          - Index: 20
+            Item: Old_Blue_Box
+            Rate: 1463
+          - Index: 21
+            Item: Old_Violet_Box
+            Rate: 1463

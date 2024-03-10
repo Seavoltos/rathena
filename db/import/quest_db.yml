@@ -493,3 +493,247 @@ Body:
     TimeLimit: 1h
   - Id: 12418
     Title: First visit to Poring Village
+  - Id: 7349
+    Title: Vote
+    TimeLimit: +30mn
+  - Id: 7517
+    Title: Occupy Valkyrie Realm
+    TimeLimit: +1h
+  - Id: 7518
+    Title: Occupy Luina
+    TimeLimit: +1h
+  - Id: 7519
+    Title: Occupy Britoniah
+    TimeLimit: +1h
+  - Id: 7520
+    Title: Occupy Greenwood Lake
+    TimeLimit: +1h
+  - Id: 7521
+    Title: Occupy Nidabehl
+    TimeLimit: +1h
+  - Id: 7522
+    Title: Occupy Valfreyja
+    TimeLimit: +1h
+  - Id: 7523
+    Title: Occupy Gloria
+    TimeLimit: +1h
+  - Id: 7524
+    Title: Occupy Kafragaten
+    TimeLimit: +1h
+  - Id: 7525
+    Title: Valkyrie Realm Challenge 1
+    Targets:
+      - Id: 1
+        Count: 150
+        Location: gld_dun03
+        MapMobTargets:
+          CATERPILLAR: true
+          CREMY_FEAR: true
+          GULLINBURSTI: true
+          LEIB_OLMAI: true
+  - Id: 7526
+    Title: Valkyrie Realm Challenge 2
+    Targets:
+      - Id: 1
+        Count: 150
+        Location: gld_dun03_2
+        MapMobTargets:
+          KOBOLD_1: true
+          KOBOLD_2: true
+          KOBOLD_3: true
+      - Id: 2
+        Count: 1
+        Location: gld_dun03_2
+        MapMobTargets:
+          ATROCE: true
+  - Id: 7527
+    Title: Valkyrie Realm Challenge 3
+    Targets:
+      - Id: 1
+        Count: 1
+        Location: gld2_prt
+        MapMobTargets:
+          ILL_BAPHOMET: true
+  - Id: 7528
+    Title: Luina Challenge 1
+    Targets:
+      - Id: 1
+        Count: 150
+        Location: gld_dun02
+        MapMobTargets:
+          ANCIENT_WORM: true
+          GIANT_HONET: true
+          OWL_BARON: true
+          KILLER_MANTIS: true
+          GIANT_SPIDER: true
+  - Id: 7529
+    Title: Luina Challenge 2
+    Targets:
+      - Id: 1
+        Count: 150
+        Location: gld_dun02_2
+        MapMobTargets:
+          KILLER_MANTIS: true
+          CATERPILLAR: true
+          OWL_BARON: true
+      - Id: 2
+        Count: 1
+        Location: gld_dun02_2
+        MapMobTargets:
+          MAYA: true
+  - Id: 7530
+    Title: Luina Challenge 3
+    Targets:
+      - Id: 1
+        Count: 1
+        Location: gld2_ald
+        MapMobTargets:
+          ILL_DRACULA: true
+  - Id: 7531
+    Title: Britoniah Challenge 1
+    Targets:
+      - Id: 1
+        Count: 150
+        Location: gld_dun04
+        MapMobTargets:
+          ZOMBIE_MASTER: true
+          WRAITH_DEAD: true
+          MINI_DEMON: true
+  - Id: 7532
+    Title: Britoniah Challenge 2
+    Targets:
+      - Id: 1
+        Count: 150
+        Location: gld_dun04_2
+        MapMobTargets:
+          DARK_FRAME: true
+          PHENDARK: true
+      - Id: 2
+        Count: 1
+        Location: gld_dun04_2
+        MapMobTargets:
+          DOPPELGANGER: true
+  - Id: 7533
+    Title: Britoniah Challenge 3
+    Targets:
+      - Id: 1
+        Count: 1
+        Location: gld2_gef
+        MapMobTargets:
+          ILL_TURTLE_GENERAL: true
+  - Id: 7534
+    Title: Greenwood Lake Challenge 1
+    Targets:
+      - Id: 1
+        Count: 150
+        Location: gld_dun01
+        MapMobTargets:
+          SKELETON_GENERAL: true
+          AM_MUT: true
+          GAJOMART: true
+  - Id: 7535
+    Title: Greenwood Lake Challenge 2
+    Targets:
+      - Id: 1
+        Count: 150
+        Location: gld_dun01_2
+        MapMobTargets:
+          LEIB_OLMAI: true
+          GULLINBURSTI: true
+      - Id: 2
+        Count: 1
+        Location: gld_dun01_2
+        MapMobTargets:
+          MOONLIGHT: true
+  - Id: 7536
+    Title: Greenwood Lake Challenge 3
+    Targets:
+      - Id: 1
+        Count: 1
+        Location: gld2_gef
+        MapMobTargets:
+          ILL_MOONLIGHT: true
+  - Id: 7537
+    Title: Nidabehl Challenge 1
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: schg_dun01
+        MapMobTargets:
+          ZAKUDAM: true
+          HELL_APOCALIPS: true
+  - Id: 7538
+    Title: Nidabehl Challenge 2
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: schg_dun01
+        MapMobTargets:
+          HEAVY_METALING: true
+          COBALT_MINERAL: true
+  - Id: 7539
+    Title: Valfreyja Challenge 1
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: arug_dun01
+        MapMobTargets:
+          BANSHEE_MASTER: true
+          BEHOLDER_MASTER: true
+  - Id: 7540
+    Title: Valfreyja Challenge 2
+    Targets:
+      - Id: 1
+        Count: 100
+        Location: arug_dun01
+        MapMobTargets:
+          AUNOE: true
+          FANAT: true
+  - Id: 7543
+    Title: Standby for Valkyrie Realm Challenge 1
+    TimeLimit: 4h
+  - Id: 7544
+    Title: Standby for Valkyrie Realm Challenge 2
+    TimeLimit: 4h
+  - Id: 7545
+    Title: Standby for Valkyrie Realm Challenge 3
+    TimeLimit: 7d 4h
+  - Id: 7546
+    Title: Standby for Luina Challenge 1
+    TimeLimit: 4h
+  - Id: 7547
+    Title: Standby for Luina Challenge 2
+    TimeLimit: 4h
+  - Id: 7548
+    Title: Standby for Luina Challenge 3
+    TimeLimit: 7d 4h
+  - Id: 7549
+    Title: Standby for Britoniah Challenge 1
+    TimeLimit: 4h
+  - Id: 7550
+    Title: Standby for Britoniah Challenge 2
+    TimeLimit: 4h
+  - Id: 7551
+    Title: Standby for Britoniah Challenge 3
+    TimeLimit: 7d 4h
+  - Id: 7552
+    Title: Standby for Greenwood Lake Challenge 1
+    TimeLimit: 4h
+  - Id: 7553
+    Title: Standby for Greenwood Lake Challenge 2
+    TimeLimit: 4h
+  - Id: 7554
+    Title: Standby for Greenwood Lake Challenge 3
+    TimeLimit: 7d 4h
+  - Id: 7555
+    Title: Standby for Nidabehl Challenge 1
+    TimeLimit: 4h
+  - Id: 7556
+    Title: Standby for Nidabehl Challenge 2
+    TimeLimit: 4h
+  - Id: 7557
+    Title: Standby for Valfreyja Challenge 1
+    TimeLimit: 4h
+  - Id: 7558
+    Title: Standby for Valfreyja Challenge 2
+    TimeLimit: 4h

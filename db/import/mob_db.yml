@@ -6532,6 +6532,239 @@ Body:
       IgnoreMisc: true
       IgnoreRanged: true
       Detector: true
+##Castillos WoE
+  - Id: 3758
+    AegisName: ILL_MOONLIGHT
+    Name: Angry Moonlight Flower
+    Level: 118
+    Hp: 4287803
+    BaseExp: 1403238
+    JobExp: 962759
+    MvpExp: 701619
+    Attack: 4878
+    Attack2: 2797
+    Defense: 60
+    MagicDefense: 60
+    Str: 166
+    Agi: 205
+    Vit: 30
+    Int: 167
+    Dex: 290
+    Luk: 240
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Demon
+    Element: Fire
+    ElementLevel: 3
+    WalkSpeed: 150
+    AttackDelay: 1276
+    AttackMotion: 576
+    DamageMotion: 288
+    Ai: 19
+    Class: Boss
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Siege_Guild_Coin
+        Rate: 5000
+      - Item: Yggdrasilberry
+        Rate: 2000
+      - Item: Siege_Guild_Coin
+        Rate: 500
+    Drops:
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Moonlight_Sword
+        Rate: 100
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+  - Id: 3757
+    AegisName: ILL_DRACULA
+    Name: Dracula of Rage
+    Level: 139
+    Hp: 6909690
+    BaseExp: 2682753
+    JobExp: 1817882
+    MvpExp: 1341376
+    Attack: 6396
+    Attack2: 2765
+    Defense: 60
+    MagicDefense: 60
+    Str: 195
+    Agi: 239
+    Vit: 30
+    Int: 201
+    Dex: 270
+    Luk: 195
+    AttackRange: 3
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    RaceGroups:
+      Illusion_Vampire: true
+    Element: Dark
+    ElementLevel: 4
+    WalkSpeed: 145
+    AttackDelay: 1290
+    AttackMotion: 1140
+    DamageMotion: 576
+    Ai: 19
+    Class: Boss
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Siege_Guild_Coin
+        Rate: 5000
+      - Item: Yggdrasilberry
+        Rate: 2000
+      - Item: Siege_Guild_Coin
+        Rate: 500
+    Drops:
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Book_Of_The_Apocalypse
+        Rate: 80
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+  - Id: 20520
+    AegisName: ILL_BAPHOMET
+    Name: Baphomet
+    Level: 139
+    Hp: 6680000
+    BaseExp: 2682753
+    JobExp: 1817882
+    MvpExp: 1341376
+    Attack: 6396
+    Attack2: 2765
+    Defense: 60
+    MagicDefense: 60
+    Str: 195
+    Agi: 239
+    Vit: 30
+    Int: 201
+    Dex: 270
+    Luk: 195
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Demon
+    Element: Dark
+    ElementLevel: 3
+    WalkSpeed: 100
+    AttackDelay: 768
+    AttackMotion: 768
+    DamageMotion: 576
+    DamageTaken: 10
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Siege_Guild_Coin
+        Rate: 5000
+      - Item: Yggdrasilberry
+        Rate: 2000
+      - Item: Siege_Guild_Coin
+        Rate: 500
+    Drops:
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Magestic_Goat_
+        Rate: 80
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+  - Id: 3804
+    AegisName: ILL_TURTLE_GENERAL
+    Name: Ominous Turtle General
+    Level: 165
+    Hp: 11628549
+    BaseExp: 3431854
+    JobExp: 2146800
+    Attack: 6394
+    Attack2: 2808
+    Defense: 60
+    MagicDefense: 60
+    Str: 232
+    Agi: 246
+    Vit: 302
+    Int: 189
+    Dex: 424
+    Luk: 180
+    AttackRange: 2
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Large
+    Race: Brute
+    RaceGroups:
+      Illusion_Turtle: true
+    Element: Earth
+    ElementLevel: 2
+    WalkSpeed: 200
+    AttackDelay: 900
+    AttackMotion: 1000
+    DamageMotion: 500
+    Ai: 21
+    Class: Boss
+    Modes:
+      Mvp: true
+    MvpDrops:
+      - Item: Siege_Guild_Coin
+        Rate: 5000
+      - Item: Yggdrasilberry
+        Rate: 2000
+      - Item: Siege_Guild_Coin
+        Rate: 500
+    Drops:
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Siege_Guild_Coin
+        Rate: 10000
+      - Item: Immaterial_Sword
+        Rate: 80
+      - Item: Siege_Guild_Coin
+        Rate: 10000
 
 ##Eventos
   - Id: 2142

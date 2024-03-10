@@ -18,8 +18,18 @@ gld_dun01,0,0	monster	Skeleton General	1290,10
 gld_dun01,0,0	monster	Am Mut	1301,20
 gld_dun01,0,0	monster	Cat o' Nine Tails	1307,3,1200000,0,0
 gld_dun01,0,0	monster	Gajomart	1309,10
-gld_dun01,0,0,0,0	boss_monster	Eddga	1115,1,28800000,600000,1
+gld_dun01,0,0	boss_monster	Eddga	1115,1,28800000,600000,1
 gld_dun01,0,0	monster	Vagabond Wolf	1092,1,14400000,7200000
+
+gld_dun01_2,0,0	monster	Gullinbursti	1311,30,5000
+gld_dun01_2,0,0	monster	Leib Olmai	1306,55,5000
+gld_dun01_2,0,0	monster	Cat O' Nine Tails	1307,3,1200000,0,0
+gld_dun01_2,0,0	boss_monster	Moonlight Flower	1150,1,28800000,600000,1
+
+gld2_pay,0,0	monster	Skeleton General	1290,60,5000
+gld2_pay,0,0	monster	Am Mut	1301,25,5000
+gld2_pay,0,0	monster	Gajomart	1309,30,5000
+gld2_pay,0,0	boss_monster	Moonlight Flower	3758,1,28800000,600000,1
 
 //==================================================
 // gld_dun02 - Luina Guild Dungeon
@@ -29,7 +39,17 @@ gld_dun02,0,0	monster	Giant Spider	1304,10,240000,120000
 gld_dun02,0,0	monster	Ancient Worm	1305,5,120000,60000
 gld_dun02,0,0	monster	Killer Mantis	1294,5,120000,60000
 gld_dun02,0,0	monster	Giant Hornet	1303,10,120000,60000
-gld_dun02,0,0,0,0	boss_monster	Doppelganger	1046,1,28800000,600000,1
+gld_dun02,0,0	boss_monster	Doppelganger	1046,1,28800000,600000,1
+
+gld_dun02_2,0,0	monster	Killer Mantis	1294,40,5000
+gld_dun02_2,0,0	monster	Caterpillar	1300,20
+gld_dun02_2,0,0	monster	Owl Baron	1295,3
+gld_dun02_2,0,0	boss_monster	Maya	1147,1,28800000,600000,1
+
+gld2_ald,0,0	monster	Killer Mantis	1294,60,5000
+gld2_ald,0,0	monster	Caterpillar	1300,70
+gld2_ald,0,0	monster	Owl Baron	1295,3
+gld2_ald,0,0	boss_monster	Dracula	3757,1,28800000,600000,1
 
 //==================================================
 // gld_dun03 - Valkyrie Guild Dungeon
@@ -39,7 +59,22 @@ gld_dun03,0,0	monster	Caterpillar	1300,20
 gld_dun03,0,0	monster	Gullinbursti	1311,10
 gld_dun03,0,0	monster	Creamy Fear	1293,20
 gld_dun03,0,0	monster	Leib Olmai	1306,20
-gld_dun03,0,0,0,0	boss_monster	Maya	1147,1,28800000,600000,1
+gld_dun03,0,0	boss_monster	Maya	1147,1,28800000,600000,1
+
+gld_dun03_2,0,0	monster	Axe Kobold	1133,26,5000
+gld_dun03_2,0,0	monster	Hammer Kobold	1134,46,5000
+gld_dun03_2,0,0	monster	Mace Kobold	1135,46,5000
+gld_dun03_2,0,0	monster	Kobold Archer	1282,46,5000
+gld_dun03_2,0,0	monster	Kobold Leader	1296,1,14400000,7200000
+gld_dun03_2,0,0	boss_monster	Atroce	1785,1,28800000,600000,1
+
+gld2_prt,0,0	monster	Axe Kobold	1133,50,5000
+gld2_prt,0,0	monster	Hammer Kobold	1134,70,5000
+gld2_prt,0,0	monster	Mace Kobold	1135,70,5000
+gld2_prt,0,0	monster	Kobold Archer	1282,70,5000
+gld2_prt,0,0	monster	Kobold Leader	1296,1,14400000,7200000
+gld2_prt,0,0	boss_monster	Baphomet	20520,1,28800000,600000,1
+
 
 //==================================================
 // gld_dun04 - Britoniah Guild Dungeon
@@ -48,5 +83,15 @@ gld_dun04,0,0	monster	Wraith Dead	1291,20
 gld_dun04,0,0	monster	Mini Demon	1292,20
 gld_dun04,0,0	monster	Zombie Master	1298,20
 gld_dun04,0,0	monster	Dark Illusion	1302,1,1200000
-gld_dun04,0,0,0,0	boss_monster	Dark Lord	1272,1,28800000,600000,1
+gld_dun04,0,0	boss_monster	Dark Lord	1272,1,28800000,600000,1
 gld_dun04,0,0	monster	Ghostring	1120,1,14400000,7200000
+
+gld_dun04_2,0,0	monster	Dark Frame	1260,30,5000
+gld_dun04_2,0,0	monster	Phendark	1202,45,5000
+gld_dun04_2,0,0	monster	Dark Illusion	1302,1,1200000
+gld_dun04_2,0,0	boss_monster	Doppelganger	1046,1,28800000,600000,1
+
+gld2_gef,0,0	monster	Dark Frame	1260,40,5000
+gld2_gef,0,0	monster	Phendark	1202,80,5000
+gld2_gef,0,0	monster	Dark Illusion	1302,1,1200000
+gld2_gef,0,0	boss_monster	Turtle General	3804,1,28800000,600000,1
