@@ -3583,7 +3583,7 @@ static bool itemdb_read_noequip( char* str[], size_t columns, size_t current ){
 /**
 * BG Reward read db [Easycore]
 **/
-static bool itemdb_read_bgreward(char* fields[], int columns, int current)
+static bool itemdb_read_bgreward(char* fields[], size_t columns, size_t current)
 {
 	unsigned short nameid, amount;
 	int zeny;
@@ -3623,7 +3623,7 @@ static bool itemdb_read_bgreward(char* fields[], int columns, int current)
 /**
 * WoE Reward read db
 **/
-static bool itemdb_read_woereward(char* fields[], int columns, int current)
+static bool itemdb_read_woereward(char* fields[], size_t columns, size_t current)
 {
 	unsigned short nameid, amount;
 	int zeny;
