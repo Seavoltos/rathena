@@ -3841,6 +3841,25 @@ Body:
     Weight: 10
 #ID INSTANCE ITEM
 #Dragon Nest
+  - Id: 5467
+    AegisName: Helm_Of_Dragoon
+    Name: Helm Of Dragon
+    Type: Armor
+    Buy: 20
+    Weight: 1000
+    Defense: 5
+    Slots: 1
+    Locations:
+      Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 50
+    Refineable: true
+    View: 464
+    Trade:
+      NoDrop: true
+    Script: |
+      bonus2 bAddRace,RC_Dragon,20;
+      bonus3 bAutoSpell,"NPC_DRAGONFEAR",1,30;
   - Id: 47000
     AegisName: DN_Dragon_Bone_Head
     Name: Dragon Bone Head

@@ -151,6 +151,7 @@ instance,37,35,7	script	Magic Scholar	4_M_SAGE_C,{
 			mes "Aún persisten los efectos del nido, no puedes ingresar hasta ^FFA500" + .@dun_h + "^000000 ^3950ffhora(s)^000000 ^FFA500" + .@dun_m + "^000000 ^3950ffminuto(s)^000000 ^FFA500" + .@dun_s + "^000000 ^3950ffsegundo(s)^000000.";
 			close;
 		}
+		end;
 	case 2:
 		set dragon_timer,0;
 		erasequest 12325;
@@ -321,10 +322,10 @@ OnStart:
 	.@mob_c = getmapusers('map_name$) + 1;
 	.@event$ = instance_npcname("#dragoncontrol1") + "::OnMyMobDead";
 	killmonster 'map_name$, .@event$;
-	areamonster 'map_name$,147,28,168,37,"Dragon",20487, (.@mob_c*2), .@event$;
-	areamonster 'map_name$,147,28,168,37,"Dragon",20488, (.@mob_c*2), .@event$;
-	areamonster 'map_name$,198,35,214,48,"Dragon",20487, (.@mob_c*2), .@event$;
-	areamonster 'map_name$,198,35,214,48,"Dragon",20488, (.@mob_c*2), .@event$;
+	areamonster 'map_name$,147,28,168,37,"Dragon",21899, (.@mob_c*2), .@event$;
+	areamonster 'map_name$,147,28,168,37,"Dragon",21900, (.@mob_c*2), .@event$;
+	areamonster 'map_name$,198,35,214,48,"Dragon",21899, (.@mob_c*2), .@event$;
+	areamonster 'map_name$,198,35,214,48,"Dragon",21900, (.@mob_c*2), .@event$;
 	end;
 OnMyMobDead:
 	.@mob_dead_num = mobcount( 'map_name$, instance_npcname("#dragoncontrol1") +"::OnMyMobDead" );
@@ -346,7 +347,7 @@ OnInstanceInit:
 abyss_04,1,4,3	script	#dragonboss1	CLEAR_NPC,{
 	end;
 OnStart:
-	areamonster 'map_name$,170,28,191,53,"Dark Dragon",20504,1,instance_npcname("#dragonboss1") + "::OnMyMobDead";
+	areamonster 'map_name$,170,28,191,53,"Dark Dragon",20614,1,instance_npcname("#dragonboss1") + "::OnMyMobDead";
 	'BOSS[1] = $@mobid[0];
 	.@dfacehp = ( 15 - getmapusers('map_name$) ) * 20500;
 	.@MOB_HP = 616460 - .@dfacehp;
@@ -558,10 +559,10 @@ abyss_04,2,5,3	script	#dragoncontrol2	CLEAR_NPC,{
 OnStart:
 	.@mob_c = getmapusers('map_name$) + 1;
 	.@event$ = instance_npcname("#dragoncontrol2") + "::OnMyMobDead";
-	areamonster 'map_name$,50,90,77,128,"Dragon",20487, (.@mob_c*4), .@event$;
-	areamonster 'map_name$,50,90,77,128,"Dragon",20488, (.@mob_c*4), .@event$;
-	areamonster 'map_name$,50,90,77,128,"Dragon",20485, (.@mob_c*2), .@event$;
-	areamonster 'map_name$,50,90,77,128,"Dragon",20486, (.@mob_c*2), .@event$;
+	areamonster 'map_name$,50,90,77,128,"Dragon",21899, (.@mob_c*4), .@event$;
+	areamonster 'map_name$,50,90,77,128,"Dragon",21900, (.@mob_c*4), .@event$;
+	areamonster 'map_name$,50,90,77,128,"Dragon",3185, (.@mob_c*2), .@event$;
+	areamonster 'map_name$,50,90,77,128,"Dragon",3186, (.@mob_c*2), .@event$;
 	end;
 OnMyMobDead:
 	.@mob_dead_num = mobcount( 'map_name$,instance_npcname("#dragoncontrol2") +"::OnMyMobDead" );
@@ -583,7 +584,7 @@ OnInstanceInit:
 abyss_04,2,5,3	script	#dragonboss2	CLEAR_NPC,{
 	end;
 OnStart:
-	areamonster 'map_name$,50,90,77,128,"Frost Dragon",20505,1,instance_npcname("#dragonboss2") + "::OnMyMobDead";
+	areamonster 'map_name$,50,90,77,128,"Frost Dragon",20615,1,instance_npcname("#dragonboss2") + "::OnMyMobDead";
 	'BOSS[2] = $@mobid[0];
 	.@dfacehp = ( 15 - getmapusers('map_name$) ) * 30000;
 	.@MOB_HP = 924690 - .@dfacehp;
@@ -748,10 +749,10 @@ abyss_04,2,5,3	script	#dragoncontrol3	CLEAR_NPC,{
 	end;
 OnStart:
 	.@mon_num = ( getmapusers('map_name$) + 1 );
-	areamonster 'map_name$,194,266,222,297,"Dragon",20487,.@mon_num * 4,instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
-	areamonster 'map_name$,194,266,222,297,"Dragon",20488,.@mon_num * 4,instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
-	areamonster 'map_name$,194,266,222,297,"Dragon",20485,.@mon_num * 3,instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
-	areamonster 'map_name$,194,266,222,297,"Dragon",20486,.@mon_num * 3,instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
+	areamonster 'map_name$,194,266,222,297,"Dragon",21899,.@mon_num * 4,instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
+	areamonster 'map_name$,194,266,222,297,"Dragon",21900,.@mon_num * 4,instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
+	areamonster 'map_name$,194,266,222,297,"Dragon",3185,.@mon_num * 3,instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
+	areamonster 'map_name$,194,266,222,297,"Dragon",3186,.@mon_num * 3,instance_npcname("#dragoncontrol3") + "::OnMyMobDead";
 	end;
 OnMyMobDead:
 	.@mob_dead_num = mobcount('map_name$,instance_npcname("#dragoncontrol3") + "::OnMyMobDead");
@@ -773,7 +774,7 @@ OnInstanceInit:
 abyss_04,2,5,3	script	#dragonboss3	CLEAR_NPC,{
 	end;
 OnStart:
-	areamonster 'map_name$,194,266,222,297,"Dragon Veneno",20506,1,instance_npcname("#dragonboss3") + "::OnMyMobDead";
+	areamonster 'map_name$,194,266,222,297,"Dragon Veneno",21901,1,instance_npcname("#dragonboss3") + "::OnMyMobDead";
 	'BOSS[3] = $@mobid[0];
 	.@MOB_HP = 924690 - ( (15 - getmapusers('map_name$)) * 30000 );
 	if (.@MOB_HP < 462345)
@@ -913,9 +914,9 @@ abyss_04,2,5,3	script	#dragoncontrol4	CLEAR_NPC,{
 OnStart:
 	.@mob_c = getmapusers('map_name$) + 1;
 	.@mon_num = .@mob_c * 6;
-	areamonster 'map_name$,246,118,300,152,"Dragon",20485,.@mon_num,instance_npcname("#dragoncontrol4") + "::OnMyMobDead";
+	areamonster 'map_name$,246,118,300,152,"Dragon",3185,.@mon_num,instance_npcname("#dragoncontrol4") + "::OnMyMobDead";
 	.@mon_num = .@mob_c * 5;
-	areamonster 'map_name$,246,118,300,152,"Dragon",20486,.@mon_num,instance_npcname("#dragoncontrol4") + "::OnMyMobDead";
+	areamonster 'map_name$,246,118,300,152,"Dragon",3186,.@mon_num,instance_npcname("#dragoncontrol4") + "::OnMyMobDead";
 	end;
 OnMyMobDead:
 	.@mob_dead_num = mobcount('map_name$,instance_npcname("#dragoncontrol4") + "::OnMyMobDead");
@@ -953,7 +954,7 @@ OnInstanceInit:
 abyss_04,2,5,3	script	#dragonboss4	CLEAR_NPC,{
 	end;
 OnStart:
-	areamonster 'map_name$,246,118,300,152,"Undead Dragon",20507+rand(0,1),1,instance_npcname("#dragonboss4") + "::OnMyMobDead";
+	areamonster 'map_name$,246,118,300,152,"Undead Dragon",20516+rand(0,1),1,instance_npcname("#dragonboss4") + "::OnMyMobDead";
 	'BOSS[4] = $@mobid[0];
 	.@dfacehp = ( 15 - getmapusers('map_name$) ) * 41000;
 	.@MOB_HP = 1232920 - .@dfacehp;
@@ -1219,7 +1220,7 @@ OnBerserk2:
 	.@MOB_HP2 = (('BOSS_HP - .@arr[UMOB_HP]) / 100 ) * 20;
 	'BOSS_HP = .@arr[UMOB_HP] + .@MOB_HP2;
 	killmonster 'map_name$, instance_npcname("#dragonboss5") + "::OnMyMobDead";
-	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y],"Lider del Nido",20509,1,instance_npcname("#dragonboss5") + "::OnMyMobDead";
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y],"Lider del Nido",20618,1,instance_npcname("#dragonboss5") + "::OnMyMobDead";
 	'BOSS[5] = $@mobid[0];
 	setunitdata 'BOSS[5], UMOB_HP, 'BOSS_HP;
 	mapannounce 'map_name$, "El lider del nido se ha recuperado " + .@MOB_HP2 + " y su poder se ha incrementado.",bc_map,"0xff8888",FW_NORMAL,13;
@@ -1228,7 +1229,7 @@ OnBerserk:
 	getunitdata 'BOSS[5],.@arr;
 	if (.@arr[UMOB_X] < 108 || .@arr[UMOB_X] > 210 || .@arr[UMOB_Y] < 141 || .@arr[UMOB_Y] > 221) {
 		killmonster 'map_name$, instance_npcname("#dragonboss5") + "::OnMyMobDead";
-		monster 'map_name$,.@arr[UMOB_X],.@arr[UMOB_Y],"Lider del nido",20618,1,instance_npcname("#dragonboss5") + "::OnMyMobDead";
+		monster 'map_name$,.@arr[UMOB_X],.@arr[UMOB_Y],"Lider del nido",21815,1,instance_npcname("#dragonboss5") + "::OnMyMobDead";
 		'BOSS[5] = $@mobid[0];
 		setunitdata 'BOSS[5], UMOB_HP, .@arr[UMOB_HP];
 		'BOSS_HP = .@arr[UMOB_HP];
@@ -1239,7 +1240,7 @@ OnBerserk:
 OnCalm:
 	getunitdata 'BOSS[5],.@arr;
 	killmonster 'map_name$, instance_npcname("#dragonboss5") + "::OnMyMobDead";
-	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y],"Lider del nido",20509,1,instance_npcname("#dragonboss5") + "::OnMyMobDead";
+	monster 'map_name$, .@arr[UMOB_X], .@arr[UMOB_Y],"Lider del nido",20618,1,instance_npcname("#dragonboss5") + "::OnMyMobDead";
 	'BOSS[5] = $@mobid[0];
 	setunitdata 'BOSS[5], UMOB_HP, .@arr[UMOB_HP];
 	'BOSS_HP = .@arr[UMOB_HP];
@@ -1251,19 +1252,19 @@ OnChange:
 		end;
 	if (.@chan_f > 0 && .@chan_f < 3) {
 		.@element$ = "holy";
-		.@mob_id = 20485;
+		.@mob_id = 3185;
 	}
 	else if (.@chan_f > 2 && .@chan_f < 5) {
 		.@element$ = "wind";
-		.@mob_id = 20486;
+		.@mob_id = 3186;
 	}
 	else if (.@chan_f > 4 && .@chan_f < 7) {
 		.@element$ = "earth";
-		.@mob_id = 20488;
+		.@mob_id = 21900;
 	}
 	else if (.@chan_f > 6 && .@chan_f < 10) {
 		.@element$ = "fire";
-		.@mob_id = 20487;
+		.@mob_id = 21899;
 	}
 	mapannounce 'map_name$, "El lider ha traído refuerzos del tipo " + .@element$ + ".",bc_map,"0xffffff";
 	sleep 1000;
@@ -1285,7 +1286,7 @@ OnEnd:
 	stopnpctimer;
 	end;
 OnStart:
-	monster 'map_name$,165,164,"Lider del nido",20509,1,instance_npcname("#dragonboss5") + "::OnMyMobDead";
+	monster 'map_name$,165,164,"Lider del nido",20618,1,instance_npcname("#dragonboss5") + "::OnMyMobDead";
 	'BOSS[5] = $@mobid[0];
 	getunitdata 'BOSS[5],.@arr;
 	.@dfacehp = ( 15- getmapusers('map_name$) ) * 2000000;
@@ -1830,7 +1831,7 @@ OnInstanceInit:
 
 // Instance Traps ::
 //============================================================
-abyss_04,192,32,5	script	Suspicious Mound#1	4_SOIL,5,5,{
+abyss_04,192,32,5	script	Dragon Egg#Trap1	FACEWORM_EGG,5,5,{
 	end;
 OnTouch_:
 	setarray .@num[1],
@@ -1856,61 +1857,59 @@ OnMyMobDead:
 	end;
 }
 
-abyss_04,172,41,5	duplicate(Suspicious Mound#1)	Suspicious Mound#2	4_SOIL,5,5
-abyss_04,147,31,5	duplicate(Suspicious Mound#1)	Suspicious Mound#3	4_SOIL,5,5
-abyss_04,169,60,5	duplicate(Suspicious Mound#1)	Suspicious Mound#4	4_SOIL,5,5
-abyss_04,245,73,5	duplicate(Suspicious Mound#1)	Suspicious Mound#5	4_SOIL,5,5
-abyss_04,279,106,5	duplicate(Suspicious Mound#1)	Suspicious Mound#6	4_SOIL,5,5
-abyss_04,296,115,5	duplicate(Suspicious Mound#1)	Suspicious Mound#7	4_SOIL,5,5
-abyss_04,308,154,5	duplicate(Suspicious Mound#1)	Suspicious Mound#8	4_SOIL,5,5
-abyss_04,283,135,5	duplicate(Suspicious Mound#1)	Suspicious Mound#9	4_SOIL,5,5
-abyss_04,51,113,5	duplicate(Suspicious Mound#1)	Suspicious Mound#10	4_SOIL,5,5
-abyss_04,59,140,5	duplicate(Suspicious Mound#1)	Suspicious Mound#11	4_SOIL,5,5
-abyss_04,59,156,5	duplicate(Suspicious Mound#1)	Suspicious Mound#12	4_SOIL,5,5
-abyss_04,30,149,5	duplicate(Suspicious Mound#1)	Suspicious Mound#13	4_SOIL,5,5
-abyss_04,42,178,5	duplicate(Suspicious Mound#1)	Suspicious Mound#14	4_SOIL,5,5
-abyss_04,60,101,5	duplicate(Suspicious Mound#1)	Suspicious Mound#15	4_SOIL,5,5
-abyss_04,160,297,5	duplicate(Suspicious Mound#1)	Suspicious Mound#16	4_SOIL,5,5
-abyss_04,172,295,5	duplicate(Suspicious Mound#1)	Suspicious Mound#17	4_SOIL,5,5
-abyss_04,195,281,5	duplicate(Suspicious Mound#1)	Suspicious Mound#18	4_SOIL,5,5
-abyss_04,161,281,5	duplicate(Suspicious Mound#1)	Suspicious Mound#19	4_SOIL,5,5
-abyss_04,191,311,5	duplicate(Suspicious Mound#1)	Suspicious Mound#20	4_SOIL,5,5
-abyss_04,215,300,5	duplicate(Suspicious Mound#1)	Suspicious Mound#21	4_SOIL,5,5
-abyss_04,228,282,5	duplicate(Suspicious Mound#1)	Suspicious Mound#22	4_SOIL,5,5
-abyss_04,223,266,5	duplicate(Suspicious Mound#1)	Suspicious Mound#23	4_SOIL,5,5
-abyss_04,238,251,5	duplicate(Suspicious Mound#1)	Suspicious Mound#24	4_SOIL,5,5
-abyss_04,260,273,5	duplicate(Suspicious Mound#1)	Suspicious Mound#25	4_SOIL,5,5
-abyss_04,280,247,5	duplicate(Suspicious Mound#1)	Suspicious Mound#26	4_SOIL,5,5
-abyss_04,269,228,5	duplicate(Suspicious Mound#1)	Suspicious Mound#27	4_SOIL,5,5
-abyss_04,226,246,5	duplicate(Suspicious Mound#1)	Suspicious Mound#28	4_SOIL,5,5
-abyss_04,86,60,5	duplicate(Suspicious Mound#1)	Suspicious Mound#29	4_SOIL,5,5
-abyss_04,87,81,5	duplicate(Suspicious Mound#1)	Suspicious Mound#30	4_SOIL,5,5
-abyss_04,111,95,5	duplicate(Suspicious Mound#1)	Suspicious Mound#31	4_SOIL,5,5
-abyss_04,63,84,5	duplicate(Suspicious Mound#1)	Suspicious Mound#32	4_SOIL,5,5
-abyss_04,39,131,5	duplicate(Suspicious Mound#1)	Suspicious Mound#33	4_SOIL,5,5
-abyss_04,59,184,5	duplicate(Suspicious Mound#1)	Suspicious Mound#34	4_SOIL,5,5
-abyss_04,86,111,5	duplicate(Suspicious Mound#1)	Suspicious Mound#35	4_SOIL,5,5
-abyss_04,100,105,5	duplicate(Suspicious Mound#1)	Suspicious Mound#36	4_SOIL,5,5
-abyss_04,118,292,5	duplicate(Suspicious Mound#1)	Suspicious Mound#37	4_SOIL,5,5
-abyss_04,242,133,5	duplicate(Suspicious Mound#1)	Suspicious Mound#38	4_SOIL,5,5
-abyss_04,287,91,5	duplicate(Suspicious Mound#1)	Suspicious Mound#39	4_SOIL,5,5
-abyss_04,286,152,5	duplicate(Suspicious Mound#1)	Suspicious Mound#40	4_SOIL,5,5
-abyss_04,239,167,5	duplicate(Suspicious Mound#1)	Suspicious Mound#41	4_SOIL,5,5
-abyss_04,225,154,5	duplicate(Suspicious Mound#1)	Suspicious Mound#42	4_SOIL,5,5
-abyss_04,263,138,5	duplicate(Suspicious Mound#1)	Suspicious Mound#43	4_SOIL,5,5
-abyss_04,168,144,5	duplicate(Suspicious Mound#1)	Suspicious Mound#44	4_SOIL,5,5
-abyss_04,134,167,5	duplicate(Suspicious Mound#1)	Suspicious Mound#45	4_SOIL,5,5
-abyss_04,114,164,5	duplicate(Suspicious Mound#1)	Suspicious Mound#46	4_SOIL,5,5
-abyss_04,117,188,5	duplicate(Suspicious Mound#1)	Suspicious Mound#47	4_SOIL,5,5
-abyss_04,134,200,5	duplicate(Suspicious Mound#1)	Suspicious Mound#48	4_SOIL,5,5
-abyss_04,159,203,5	duplicate(Suspicious Mound#1)	Suspicious Mound#49	4_SOIL,5,5
-abyss_04,194,199,5	duplicate(Suspicious Mound#1)	Suspicious Mound#50	4_SOIL,5,5
-abyss_04,208,210,5	duplicate(Suspicious Mound#1)	Suspicious Mound#51	4_SOIL,5,5
-abyss_04,222,199,5	duplicate(Suspicious Mound#1)	Suspicious Mound#52	4_SOIL,5,5
-abyss_04,157,152,5	duplicate(Suspicious Mound#1)	Suspicious Mound#53	4_SOIL,5,5
-abyss_04,170,182,5	duplicate(Suspicious Mound#1)	Suspicious Mound#54	4_SOIL,5,5
-
-
+abyss_04,172,41,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap2	FACEWORM_EGG,5,5
+abyss_04,147,31,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap3	FACEWORM_EGG,5,5
+abyss_04,169,60,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap4	FACEWORM_EGG,5,5
+abyss_04,245,73,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap5	FACEWORM_EGG,5,5
+abyss_04,279,106,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap6	FACEWORM_EGG,5,5
+abyss_04,296,115,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap7	FACEWORM_EGG,5,5
+abyss_04,308,154,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap8	FACEWORM_EGG,5,5
+abyss_04,283,135,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap9	FACEWORM_EGG,5,5
+abyss_04,51,113,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap10	FACEWORM_EGG,5,5
+abyss_04,59,140,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap11	FACEWORM_EGG,5,5
+abyss_04,59,156,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap12	FACEWORM_EGG,5,5
+abyss_04,30,149,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap13	FACEWORM_EGG,5,5
+abyss_04,42,178,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap14	FACEWORM_EGG,5,5
+abyss_04,60,101,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap15	FACEWORM_EGG,5,5
+abyss_04,160,297,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap16	FACEWORM_EGG,5,5
+abyss_04,172,295,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap17	FACEWORM_EGG,5,5
+abyss_04,195,281,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap18	FACEWORM_EGG,5,5
+abyss_04,161,281,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap19	FACEWORM_EGG,5,5
+abyss_04,191,311,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap20	FACEWORM_EGG,5,5
+abyss_04,215,300,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap21	FACEWORM_EGG,5,5
+abyss_04,228,282,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap22	FACEWORM_EGG,5,5
+abyss_04,223,266,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap23	FACEWORM_EGG,5,5
+abyss_04,238,251,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap24	FACEWORM_EGG,5,5
+abyss_04,260,273,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap25	FACEWORM_EGG,5,5
+abyss_04,280,247,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap26	FACEWORM_EGG,5,5
+abyss_04,269,228,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap27	FACEWORM_EGG,5,5
+abyss_04,226,246,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap28	FACEWORM_EGG,5,5
+abyss_04,86,60,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap29	FACEWORM_EGG,5,5
+abyss_04,87,81,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap30	FACEWORM_EGG,5,5
+abyss_04,111,95,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap31	FACEWORM_EGG,5,5
+abyss_04,63,84,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap32	FACEWORM_EGG,5,5
+abyss_04,39,131,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap33	FACEWORM_EGG,5,5
+abyss_04,59,184,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap34	FACEWORM_EGG,5,5
+abyss_04,86,111,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap35	FACEWORM_EGG,5,5
+abyss_04,100,105,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap36	FACEWORM_EGG,5,5
+abyss_04,118,292,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap37	FACEWORM_EGG,5,5
+abyss_04,242,133,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap38	FACEWORM_EGG,5,5
+abyss_04,287,91,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap39	FACEWORM_EGG,5,5
+abyss_04,286,152,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap40	FACEWORM_EGG,5,5
+abyss_04,239,167,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap41	FACEWORM_EGG,5,5
+abyss_04,225,154,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap42	FACEWORM_EGG,5,5
+abyss_04,263,138,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap43	FACEWORM_EGG,5,5
+abyss_04,168,144,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap44	FACEWORM_EGG,5,5
+abyss_04,134,167,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap45	FACEWORM_EGG,5,5
+abyss_04,114,164,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap46	FACEWORM_EGG,5,5
+abyss_04,117,188,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap47	FACEWORM_EGG,5,5
+abyss_04,134,200,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap48	FACEWORM_EGG,5,5
+abyss_04,159,203,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap49	FACEWORM_EGG,5,5
+abyss_04,194,199,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap50	FACEWORM_EGG,5,5
+abyss_04,208,210,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap51	FACEWORM_EGG,5,5
+abyss_04,222,199,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap52	FACEWORM_EGG,5,5
+abyss_04,157,152,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap53	FACEWORM_EGG,5,5
+abyss_04,170,182,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap54	FACEWORM_EGG,5,5
 
 // Instance Venom ::
 //============================================================
@@ -2090,11 +2089,13 @@ abyss_04,163,65,3	script	Dragon Treasure#1	4_TREASURE_BOX,{
 		break;
 	}
 	mapannounce 'map_name$, "["+ strcharinfo(1) +"] El jugador " + strcharinfo(0) + " ha encontrado un Dragon Treasure.",bc_map,"0xffff33";
+	if (rand(1,1000) > 900)
+		makeitem 47002+rand(0,5),1,'map_name$,.@xy[0]+1,.@xy[1]+1;	// Orbe
 	if (rand(1,1000) > 200)
 		makeitem 2610+rand(0,1),1,'map_name$,.@xy[0],.@xy[1];	// Ring
 	if (rand(1,1000) > 400)
 		makeitem 7754,1,'map_name$,.@xy[0]+1,.@xy[1]+2;	// Crown
-	if (rand(1,1000) > 700)
+	if (rand(1,1000) > 800)
 		makeitem 969,1,'map_name$,.@xy[0]+2,.@xy[1]+2;	// Gold
 	if (rand(1,1000) > 900)
 		makeitem 7444,1,'map_name$,.@xy[0]+3,.@xy[1]+2;	// Treasure Chest

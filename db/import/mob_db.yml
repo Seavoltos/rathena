@@ -3645,8 +3645,8 @@ Body:
 # Instance Dragon's Nest
 #
 ###########################################################################
-  - Id: 20485
-    AegisName: AB_MOB_131
+  - Id: 3185    #20485
+    AegisName: E2_ACIDUS
     Name: Nest Gold Acidus
     Level: 80
     Hp: 51112
@@ -3691,8 +3691,8 @@ Body:
       - Item: Acidus_Card
         Rate: 1
         StealProtected: true
-  - Id: 20486
-    AegisName: AB_MOB_132
+  - Id: 3186    #20486
+    AegisName: E2_ACIDUS_
     Name: Nest Blue Acidus
     Level: 76
     Hp: 39111
@@ -3737,8 +3737,8 @@ Body:
       - Item: Acidus__Card
         Rate: 1
         StealProtected: true
-  - Id: 20487
-    AegisName: AB_MOB_133
+  - Id: 21899   #20487
+    AegisName: HEROS_R_FERUS
     Name: Nest Red Ferus
     Level: 70
     Hp: 29218
@@ -3783,8 +3783,8 @@ Body:
       - Item: Ferus_Card
         Rate: 1
         StealProtected: true
-  - Id: 20488
-    AegisName: AB_MOB_134
+  - Id: 21900   #20488
+    AegisName: HEROS_G_FERUS
     Name: Nest Green Ferus
     Level: 69
     Hp: 21182
@@ -3827,8 +3827,8 @@ Body:
       - Item: Ferus__Card
         Rate: 1
         StealProtected: true
-  - Id: 20504
-    AegisName: ACIDUS_B_MJ
+  - Id: 20614   #20504
+    AegisName: ACIDUS_B
     Name: Nest Dark Acidus
     Level: 89
     Hp: 616460
@@ -3874,8 +3874,8 @@ Body:
       - Item: C_Darkness_Helm
         Rate: 1
         StealProtected: true
-  - Id: 20505
-    AegisName: ACIDUS_S_MJ
+  - Id: 20615   #20505
+    AegisName: ACIDUS_S
     Name: Nest Frost Acidus
     Level: 89
     Hp: 924690
@@ -3921,8 +3921,8 @@ Body:
       - Item: C_Opera_Ghost_Mask
         Rate: 1
         StealProtected: true
-  - Id: 20506
-    AegisName: FERUS_P_MJ
+  - Id: 21901   #20506
+    AegisName: HEROS_P_FERUS
     Name: Nest Poison Ferus
     Level: 89
     Hp: 1232920
@@ -3968,8 +3968,8 @@ Body:
       - Item: C_Dragonhelm_Copper
         Rate: 1
         StealProtected: true
-  - Id: 20507
-    AegisName: BONE_FERUS_MJ
+  - Id: 20516   #20507
+    AegisName: G_BONE_FERUS
     Name: Nest Bone Ferus
     Level: 89
     Hp: 1232920
@@ -4015,8 +4015,8 @@ Body:
       - Item: C_Dragon_Skull
         Rate: 1
         StealProtected: true
-  - Id: 20508
-    AegisName: BONE_ACIDUS_MJ
+  - Id: 20517   #20508
+    AegisName: G_BONE_ACIDUS
     Name: Nest Bone Acidus
     Level: 89
     Hp: 924690
@@ -4062,8 +4062,8 @@ Body:
       - Item: C_Dragon_Skull
         Rate: 1
         StealProtected: true
-  - Id: 20509
-    AegisName: BONE_DETALE_MJ
+  - Id: 20618   #20509
+    AegisName: BONE_DETALE
     Name: Nest Bone Detardeurus
     JapaneseName: Lider del Nido
     Level: 90
@@ -4099,7 +4099,7 @@ Body:
         Rate: 1000
       - Item: Vit_Dish09
         Rate: 1000
-      - Item: Treasure_Box
+      - Item: DN_Dragon_Bone_Head
         Rate: 5000
       - Item: Scale_Of_Red_Dragon
         Rate: 3589
@@ -4112,8 +4112,8 @@ Body:
       - Item: C_General_Helmet
         Rate: 10
         StealProtected: true
-  - Id: 20516
-    AegisName: G_BONE_FERUS
+  - Id: 20616   #20516
+    AegisName: BONE_FERUS
     Name: Nest Bone Ferus
     Level: 69
     Hp: 21182
@@ -4140,8 +4140,8 @@ Body:
     AttackMotion: 576
     DamageMotion: 432
     Ai: 09
-  - Id: 20517
-    AegisName: G_BONE_ACIDUS
+  - Id: 20617   #20517
+    AegisName: BONE_ACIDUS
     Name: Nest Bone Acidus
     Level: 80
     Hp: 51112
@@ -4243,8 +4243,8 @@ Body:
       - Item: Ancient_Mimic_Card
         Rate: 1
         StealProtected: true
-  - Id: 20618
-    AegisName: BONE_DETALE
+  - Id: 21815   #20618
+    AegisName: VH_BONE_DETALE
     Name: Nest Bone Detardeurus
     JapaneseName: Lider del Nido
     Level: 90
@@ -4270,8 +4270,8 @@ Body:
     Element: Undead
     ElementLevel: 3
     WalkSpeed: 250
-    AttackDelay: 432
-    AttackMotion: 936
+    AttackDelay: 332
+    AttackMotion: 736
     DamageMotion: 360
     Ai: 21
     Class: Boss
@@ -4289,7 +4289,7 @@ Body:
         Rate: 1000
       - Item: Vit_Dish09
         Rate: 1000
-      - Item: Treasure_Box
+      - Item: DN_Dragon_Bone_Head
         Rate: 5000
       - Item: Scale_Of_Red_Dragon
         Rate: 3589
@@ -6643,12 +6643,8 @@ Body:
         Rate: 10000
       - Item: Siege_Guild_Coin
         Rate: 10000
-      - Item: Siege_Guild_Coin
-        Rate: 10000
       - Item: Book_Of_The_Apocalypse
         Rate: 80
-      - Item: Siege_Guild_Coin
-        Rate: 10000
   - Id: 20520
     AegisName: ILL_BAPHOMET
     Name: Baphomet
@@ -6701,12 +6697,8 @@ Body:
         Rate: 10000
       - Item: Siege_Guild_Coin
         Rate: 10000
-      - Item: Siege_Guild_Coin
-        Rate: 10000
       - Item: Magestic_Goat_
         Rate: 80
-      - Item: Siege_Guild_Coin
-        Rate: 10000
   - Id: 3804
     AegisName: ILL_TURTLE_GENERAL
     Name: Ominous Turtle General
@@ -6759,12 +6751,8 @@ Body:
         Rate: 10000
       - Item: Siege_Guild_Coin
         Rate: 10000
-      - Item: Siege_Guild_Coin
-        Rate: 10000
       - Item: Immaterial_Sword
         Rate: 80
-      - Item: Siege_Guild_Coin
-        Rate: 10000
 
 ##Eventos
   - Id: 2142
