@@ -36,6 +36,12 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 					set .@mem_1$, "$120903_num_AAsault";
 					set .@time,3600;
 					break;
+				case 3:
+					set .@str_1$, "$120719_str_dragon";
+					set .@num_1$, "$120719_num_dragon";
+					set .@mem_1$, "$120903_num_dragon";
+					set .@time,3600;
+					break;
 				case 5:
 					set .@str_1$, "$8_str_FallenAngel";
 					set .@num_1$, "$8_num_FallenAngel";
@@ -72,6 +78,19 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 				case 1:
 					mes .@name$;
 					mes "No hay problema!";
+					close;
+				case 3:
+					mes .@name$;
+					mes "Deseas activar el reset de la instancia ^ff0000Dragon Nest^000000?";
+					next;
+					if(select("No:Si") == 1 ){
+						mes .@name$;
+						mes "No hay problema";
+						close;
+					}
+					enablenpc "Purification Stone#DN";
+					mes .@name$;
+					mes "La purification Stone ha sido activada.";
 					close;
 				case 5:
 					mes .@name$;
@@ -114,6 +133,19 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 				case 1:
 					mes .@name$;
 					mes "No hay problema";
+					close;
+				case 3:
+					mes .@name$;
+					mes "Deseas desactivar el reset de la instancia ^ff0000Dragon Nest^000000?";
+					next;
+					if(select("No:Si") == 1 ){
+						mes .@name$;
+						mes "No hay problema";
+						close;
+					}
+					disablenpc "Purification Stone#DN";
+					mes .@name$;
+					mes "La purification Stone ha sido desactivada.";
 					close;
 				case 5:
 					mes .@name$;
@@ -214,5 +246,37 @@ OnTimer1740000:
 
 OnTimer1800000:
 	disablenpc "Purification Stone#FA";
+	end;
+}
+
+instance,41,42,4	script	Purification Stone#DN	406,{
+	set dragon_timer,0;
+	erasequest 12325;
+	mes "^0000ffEl registro y efectos relacionados con Dragon Nest ha desaparecido. Puedes volver a ingresar nuevamente.^000000";
+	close;
+
+OnInit:
+	disablenpc "Purification Stone#DN";
+	end;
+
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	disablenpc "Purification Stone#DN";
+	end;
+
+OnTimer1000:
+	enablenpc "Purification Stone#DN";
+	end;
+
+OnTimer1740000:
+	mapannounce "instance", "La Purification Stone se destruirá en 1 minuto.",bc_map,"0x00ff99";
+	end;
+
+OnTimer1800000:
+	disablenpc "Purification Stone#DN";
 	end;
 }

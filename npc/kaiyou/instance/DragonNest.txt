@@ -241,6 +241,8 @@ abyss_04,190,53,3	script	Chaos#0	4_M_CHAOS,{
 	}
 	.@account_id = getcharid(3);
 	.@player_name$ = strcharinfo(0);
+	'120903_str_dragonDif = instance_getdifficulty(instance_id(IM_PARTY));
+	'120903_str_dragon$ = strcharinfo(1);	
 	mes "[Chaos]";
 	mes "Enserio? No sabía que la liga de cazadores viniera hasta acá.";
 	npctalk "Chaos: Enserio? No sabía que la liga de cazadores viniera hasta acá.";
@@ -1769,7 +1771,6 @@ OnStart:
 	donpcevent instance_npcname("Chaos#south") + "::OnEnd";
 	donpcevent instance_npcname("Chaos#north") + "::OnEnd";
 	//Custom
-	'120903_str_dragonDif = instance_getdifficulty(instance_id(IM_PARTY));
 	donpcevent instance_npcname("#globaltimer22") + "::OnT_s2";
 	donpcevent instance_npcname("#globaltimer22") + "::OnT_s3";
 	//
@@ -1831,7 +1832,7 @@ OnInstanceInit:
 
 // Instance Traps ::
 //============================================================
-abyss_04,192,32,5	script	Dragon Egg#Trap1	FACEWORM_EGG,5,5,{
+abyss_04,192,32,5	script	Dragon Eggs#1	FACEWORM_EGG,5,5,{
 	end;
 OnTouch_:
 	setarray .@num[1],
@@ -1857,59 +1858,59 @@ OnMyMobDead:
 	end;
 }
 
-abyss_04,172,41,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap2	FACEWORM_EGG,5,5
-abyss_04,147,31,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap3	FACEWORM_EGG,5,5
-abyss_04,169,60,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap4	FACEWORM_EGG,5,5
-abyss_04,245,73,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap5	FACEWORM_EGG,5,5
-abyss_04,279,106,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap6	FACEWORM_EGG,5,5
-abyss_04,296,115,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap7	FACEWORM_EGG,5,5
-abyss_04,308,154,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap8	FACEWORM_EGG,5,5
-abyss_04,283,135,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap9	FACEWORM_EGG,5,5
-abyss_04,51,113,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap10	FACEWORM_EGG,5,5
-abyss_04,59,140,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap11	FACEWORM_EGG,5,5
-abyss_04,59,156,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap12	FACEWORM_EGG,5,5
-abyss_04,30,149,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap13	FACEWORM_EGG,5,5
-abyss_04,42,178,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap14	FACEWORM_EGG,5,5
-abyss_04,60,101,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap15	FACEWORM_EGG,5,5
-abyss_04,160,297,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap16	FACEWORM_EGG,5,5
-abyss_04,172,295,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap17	FACEWORM_EGG,5,5
-abyss_04,195,281,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap18	FACEWORM_EGG,5,5
-abyss_04,161,281,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap19	FACEWORM_EGG,5,5
-abyss_04,191,311,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap20	FACEWORM_EGG,5,5
-abyss_04,215,300,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap21	FACEWORM_EGG,5,5
-abyss_04,228,282,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap22	FACEWORM_EGG,5,5
-abyss_04,223,266,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap23	FACEWORM_EGG,5,5
-abyss_04,238,251,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap24	FACEWORM_EGG,5,5
-abyss_04,260,273,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap25	FACEWORM_EGG,5,5
-abyss_04,280,247,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap26	FACEWORM_EGG,5,5
-abyss_04,269,228,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap27	FACEWORM_EGG,5,5
-abyss_04,226,246,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap28	FACEWORM_EGG,5,5
-abyss_04,86,60,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap29	FACEWORM_EGG,5,5
-abyss_04,87,81,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap30	FACEWORM_EGG,5,5
-abyss_04,111,95,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap31	FACEWORM_EGG,5,5
-abyss_04,63,84,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap32	FACEWORM_EGG,5,5
-abyss_04,39,131,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap33	FACEWORM_EGG,5,5
-abyss_04,59,184,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap34	FACEWORM_EGG,5,5
-abyss_04,86,111,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap35	FACEWORM_EGG,5,5
-abyss_04,100,105,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap36	FACEWORM_EGG,5,5
-abyss_04,118,292,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap37	FACEWORM_EGG,5,5
-abyss_04,242,133,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap38	FACEWORM_EGG,5,5
-abyss_04,287,91,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap39	FACEWORM_EGG,5,5
-abyss_04,286,152,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap40	FACEWORM_EGG,5,5
-abyss_04,239,167,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap41	FACEWORM_EGG,5,5
-abyss_04,225,154,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap42	FACEWORM_EGG,5,5
-abyss_04,263,138,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap43	FACEWORM_EGG,5,5
-abyss_04,168,144,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap44	FACEWORM_EGG,5,5
-abyss_04,134,167,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap45	FACEWORM_EGG,5,5
-abyss_04,114,164,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap46	FACEWORM_EGG,5,5
-abyss_04,117,188,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap47	FACEWORM_EGG,5,5
-abyss_04,134,200,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap48	FACEWORM_EGG,5,5
-abyss_04,159,203,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap49	FACEWORM_EGG,5,5
-abyss_04,194,199,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap50	FACEWORM_EGG,5,5
-abyss_04,208,210,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap51	FACEWORM_EGG,5,5
-abyss_04,222,199,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap52	FACEWORM_EGG,5,5
-abyss_04,157,152,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap53	FACEWORM_EGG,5,5
-abyss_04,170,182,5	duplicate(Dragon Egg#Trap1)	Dragon Egg#Trap54	FACEWORM_EGG,5,5
+abyss_04,172,41,5	duplicate(Dragon Eggs#1)	Dragon Eggs#2	FACEWORM_EGG,5,5
+abyss_04,147,31,5	duplicate(Dragon Eggs#1)	Dragon Eggs#3	FACEWORM_EGG,5,5
+abyss_04,169,60,5	duplicate(Dragon Eggs#1)	Dragon Eggs#4	FACEWORM_EGG,5,5
+abyss_04,245,73,5	duplicate(Dragon Eggs#1)	Dragon Eggs#5	FACEWORM_EGG,5,5
+abyss_04,279,106,5	duplicate(Dragon Eggs#1)	Dragon Eggs#6	FACEWORM_EGG,5,5
+abyss_04,296,115,5	duplicate(Dragon Eggs#1)	Dragon Eggs#7	FACEWORM_EGG,5,5
+abyss_04,308,154,5	duplicate(Dragon Eggs#1)	Dragon Eggs#8	FACEWORM_EGG,5,5
+abyss_04,283,135,5	duplicate(Dragon Eggs#1)	Dragon Eggs#9	FACEWORM_EGG,5,5
+abyss_04,51,113,5	duplicate(Dragon Eggs#1)	Dragon Eggs#10	FACEWORM_EGG,5,5
+abyss_04,59,140,5	duplicate(Dragon Eggs#1)	Dragon Eggs#11	FACEWORM_EGG,5,5
+abyss_04,59,156,5	duplicate(Dragon Eggs#1)	Dragon Eggs#12	FACEWORM_EGG,5,5
+abyss_04,30,149,5	duplicate(Dragon Eggs#1)	Dragon Eggs#13	FACEWORM_EGG,5,5
+abyss_04,42,178,5	duplicate(Dragon Eggs#1)	Dragon Eggs#14	FACEWORM_EGG,5,5
+abyss_04,60,101,5	duplicate(Dragon Eggs#1)	Dragon Eggs#15	FACEWORM_EGG,5,5
+abyss_04,160,297,5	duplicate(Dragon Eggs#1)	Dragon Eggs#16	FACEWORM_EGG,5,5
+abyss_04,172,295,5	duplicate(Dragon Eggs#1)	Dragon Eggs#17	FACEWORM_EGG,5,5
+abyss_04,195,281,5	duplicate(Dragon Eggs#1)	Dragon Eggs#18	FACEWORM_EGG,5,5
+abyss_04,161,281,5	duplicate(Dragon Eggs#1)	Dragon Eggs#19	FACEWORM_EGG,5,5
+abyss_04,191,311,5	duplicate(Dragon Eggs#1)	Dragon Eggs#20	FACEWORM_EGG,5,5
+abyss_04,215,300,5	duplicate(Dragon Eggs#1)	Dragon Eggs#21	FACEWORM_EGG,5,5
+abyss_04,228,282,5	duplicate(Dragon Eggs#1)	Dragon Eggs#22	FACEWORM_EGG,5,5
+abyss_04,223,266,5	duplicate(Dragon Eggs#1)	Dragon Eggs#23	FACEWORM_EGG,5,5
+abyss_04,238,251,5	duplicate(Dragon Eggs#1)	Dragon Eggs#24	FACEWORM_EGG,5,5
+abyss_04,260,273,5	duplicate(Dragon Eggs#1)	Dragon Eggs#25	FACEWORM_EGG,5,5
+abyss_04,280,247,5	duplicate(Dragon Eggs#1)	Dragon Eggs#26	FACEWORM_EGG,5,5
+abyss_04,269,228,5	duplicate(Dragon Eggs#1)	Dragon Eggs#27	FACEWORM_EGG,5,5
+abyss_04,226,246,5	duplicate(Dragon Eggs#1)	Dragon Eggs#28	FACEWORM_EGG,5,5
+abyss_04,86,60,5	duplicate(Dragon Eggs#1)	Dragon Eggs#29	FACEWORM_EGG,5,5
+abyss_04,87,81,5	duplicate(Dragon Eggs#1)	Dragon Eggs#30	FACEWORM_EGG,5,5
+abyss_04,111,95,5	duplicate(Dragon Eggs#1)	Dragon Eggs#31	FACEWORM_EGG,5,5
+abyss_04,63,84,5	duplicate(Dragon Eggs#1)	Dragon Eggs#32	FACEWORM_EGG,5,5
+abyss_04,39,131,5	duplicate(Dragon Eggs#1)	Dragon Eggs#33	FACEWORM_EGG,5,5
+abyss_04,59,184,5	duplicate(Dragon Eggs#1)	Dragon Eggs#34	FACEWORM_EGG,5,5
+abyss_04,86,111,5	duplicate(Dragon Eggs#1)	Dragon Eggs#35	FACEWORM_EGG,5,5
+abyss_04,100,105,5	duplicate(Dragon Eggs#1)	Dragon Eggs#36	FACEWORM_EGG,5,5
+abyss_04,118,292,5	duplicate(Dragon Eggs#1)	Dragon Eggs#37	FACEWORM_EGG,5,5
+abyss_04,242,133,5	duplicate(Dragon Eggs#1)	Dragon Eggs#38	FACEWORM_EGG,5,5
+abyss_04,287,91,5	duplicate(Dragon Eggs#1)	Dragon Eggs#39	FACEWORM_EGG,5,5
+abyss_04,286,152,5	duplicate(Dragon Eggs#1)	Dragon Eggs#40	FACEWORM_EGG,5,5
+abyss_04,239,167,5	duplicate(Dragon Eggs#1)	Dragon Eggs#41	FACEWORM_EGG,5,5
+abyss_04,225,154,5	duplicate(Dragon Eggs#1)	Dragon Eggs#42	FACEWORM_EGG,5,5
+abyss_04,263,138,5	duplicate(Dragon Eggs#1)	Dragon Eggs#43	FACEWORM_EGG,5,5
+abyss_04,168,144,5	duplicate(Dragon Eggs#1)	Dragon Eggs#44	FACEWORM_EGG,5,5
+abyss_04,134,167,5	duplicate(Dragon Eggs#1)	Dragon Eggs#45	FACEWORM_EGG,5,5
+abyss_04,114,164,5	duplicate(Dragon Eggs#1)	Dragon Eggs#46	FACEWORM_EGG,5,5
+abyss_04,117,188,5	duplicate(Dragon Eggs#1)	Dragon Eggs#47	FACEWORM_EGG,5,5
+abyss_04,134,200,5	duplicate(Dragon Eggs#1)	Dragon Eggs#48	FACEWORM_EGG,5,5
+abyss_04,159,203,5	duplicate(Dragon Eggs#1)	Dragon Eggs#49	FACEWORM_EGG,5,5
+abyss_04,194,199,5	duplicate(Dragon Eggs#1)	Dragon Eggs#50	FACEWORM_EGG,5,5
+abyss_04,208,210,5	duplicate(Dragon Eggs#1)	Dragon Eggs#51	FACEWORM_EGG,5,5
+abyss_04,222,199,5	duplicate(Dragon Eggs#1)	Dragon Eggs#52	FACEWORM_EGG,5,5
+abyss_04,157,152,5	duplicate(Dragon Eggs#1)	Dragon Eggs#53	FACEWORM_EGG,5,5
+abyss_04,170,182,5	duplicate(Dragon Eggs#1)	Dragon Eggs#54	FACEWORM_EGG,5,5
 
 // Instance Venom ::
 //============================================================
