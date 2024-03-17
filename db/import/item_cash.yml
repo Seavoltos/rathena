@@ -81,7 +81,7 @@ Body:
         Price: 1200
       - Item: Box_Sorpresa_Platino
         Price: 2000
-      - Item: C_Garment_23
+      - Item: C_Garment_79
         Price: 1800
       - Item: C_Garment_25
         Price: 1800
@@ -211,7 +211,7 @@ Body:
         Price: 1800
       - Item: C_Garment_154
         Price: 1800
-      - Item: C_Garment_23
+      - Item: C_Garment_149
         Price: 1800
       - Item: C_Garment_53
         Price: 1800

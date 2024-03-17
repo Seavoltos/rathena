@@ -64,7 +64,7 @@ instance,37,35,7	script	Magic Scholar	4_M_SAGE_C,{
 	switch( .@dragon_timer ) {
 	case -1:
 		if (is_party_leader() == true) {
-			mes "^00B2EE[Dragon's Nest]^000000";
+			mes "[Magic Scholar]";
 			mes "Confirmado, la Party se ha creado, ¿te gustaría acceder al Dragon's Nest?";
 			next;
 			switch(select("Generar dungeon "+.@md_name$+":Entrar al dungeon:Cancelar")) {
@@ -113,45 +113,26 @@ instance,37,35,7	script	Magic Scholar	4_M_SAGE_C,{
 					instance_setbuff(instance_id(IM_PARTY),SC_II_MAXSP,5);
 					instance_setbuff(instance_id(IM_PARTY),SC_II_ALLSTATS,5);
 				}
-				mes "^FFA500[Dragon's Nest]^000000";
+				mes "[Magic Scholar]";
 				mes "^0000ff"+.@md_name$+"^000000 - Reserva confirmada";
-				mes "Luego de la reserva, debes volver a hablar y seleccionar 'Entrar al Dungeon' para ingresar.";
+				mes "Ahora debes hablar con el Interdimensional Device para poder acceder.";
 				close;
 			case 2:
-				callsub L_Enter,0,1;
+				mes "[Magic Scholar]";
+				mes "Debes crear un registro y luego hablar con el Interdimensional Device para poder ir al nido.";
+				close;
 			case 3:
 				close;
 			}
 		}
-		switch(select("Entrar a "+.@md_name$+":Cancelar")) {
-		case 1:
-			callsub L_Enter,1,1;
-		case 2:
-			end;
-		}
+		mes "[Magic Scholar]";
+		mes "Espera que tu lider solicite primero el acceso a al nido.";
+		close;
 	case 0:
 	case 1:
-		if (.@dragon_timer < 2 && getcharid(1) == dragon_partyid) {
-			mes "Si tienes la instancia generada puedes ingresar. ";
-			next;
-			switch(select("Entrar a "+.@md_name$+":Cancelar")) {
-			case 1:
-				callsub L_Enter,0,0;
-			case 2:
-				close;
-			}
-		} else {
-			set .@dun_lim_time,dragon_timer+82800; // 23h
-			set .@dun_cur_time,gettimetick(2);
-			set .@dun_ent_t,(.@dun_lim_time - .@dun_cur_time);
-			set .@dun_h,(.@dun_ent_t / 3600);
-			set .@dun_m,(.@dun_ent_t - (.@dun_h * 3600)) / 60;
-			set .@dun_s,.@dun_ent_t - ((.@dun_h * 3600) + (.@dun_m * 60));
-			mes "^00B2EE[Dragon's Nest]^000000";
-			mes "Aún persisten los efectos del nido, no puedes ingresar hasta ^FFA500" + .@dun_h + "^000000 ^3950ffhora(s)^000000 ^FFA500" + .@dun_m + "^000000 ^3950ffminuto(s)^000000 ^FFA500" + .@dun_s + "^000000 ^3950ffsegundo(s)^000000.";
-			close;
-		}
-		end;
+		mes "[Magic Scholar]";
+		mes "Ahora habla con el Interdimensional Device para poder ir al nido.";
+		close;
 	case 2:
 		set dragon_timer,0;
 		erasequest 12325;
