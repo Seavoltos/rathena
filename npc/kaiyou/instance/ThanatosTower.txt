@@ -1933,7 +1933,7 @@ OnT_s2:
 		
 		setd "$120719_str_TTower"+'120903_str_TTowerDif+"$" , .@winner_name$;
 		setd "$120719_num_TTower"+'120903_str_TTowerDif , .@current_timer;
-		setd "$120903_num_TTower"+'120903_str_TTowerDif , .@EndlessTower_member;
+		setd "$120903_num_TTower"+'120903_str_TTowerDif , .@TTower_member;
 	}
 	end;
 

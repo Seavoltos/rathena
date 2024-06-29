@@ -1,0 +1,353 @@
+//===== rAthena Script =======================================
+//= Kami's Lookout
+//===== Description: =========================================
+//= Kami's Lookout Instance
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Seavoltos]
+//============================================================
+//============================================================
+
+// Piso 0
+//============================================================
+
+instance,58,64,3	script	Old Sign#KL	4_BOARD3,{
+	mes "-- Kami's Lookout --";
+	mes "Selecciona la dificultad";
+	next;
+	set .@j,select(" > Normal"," > ^BA7100Hard^000000"," > ^ff0000Insane^000000");
+	set .@j,.@j+1;
+	next;
+	mes "-- Kami's Lookout -- ";
+	for (set .@i, 1; .@i <= 39; set .@i, .@i + 1) {
+		set .@t,getd("$120719_Kami_Lookout"+.@i+"_"+.@j);
+		.@time_m = .@t / 60;
+		.@time_s = .@t - (.@time_m * 60);
+		set .@n$,getd("$120719_Kami_Lookout"+.@i+"_"+.@j+"$");
+		if (.@t == 14400)
+			mes getmonsterinfo(.MvP[.@i],MOB_NAME)+": No hay registros";
+		else
+		{
+			if (.@t < 60)
+				.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+			else
+				.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "Minuto" ) + " " + callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+			mes getmonsterinfo(.MvP[.@i],MOB_NAME)+": "+.@n$+" tiene el mejor tiempo ("+.@time_txt$+")";
+		}
+		if( .@i % 5 == 0 )
+		{
+			next;
+			mes "-- Kami's Lookout --";
+		}
+	}
+	close;
+
+OnInit:
+	setarray .MvP[1],1511,1785,1039,1874,1272,1719,1046,1389,1112,1115,1658,1418,1871,1768,1086,1885,1252,1832,1734,1779,1688,1373,1147,1059,1150,1087,1190,1038,1157,1159,1623,1492,1251,1583,1312,1751,1685,1630,1708;
+	for (set .@i, 1; .@i <= 39; set .@i, .@i + 1) {
+		for (set .@j, 2; .@j <= 4; set .@j, .@j + 1) {
+			if (!getd("$120719_Kami_Lookout"+.@i+"_"+.@j))
+				setd "$120719_Kami_Lookout"+.@i+"_"+.@j,14400;
+		}
+	}
+	setarray .dificultad$,"","","Normal","^BA7100Hard^000000","^ff0000Insane^000000";
+	end;
+}
+
+instance,61,68,3	script	Kamisama	4_M_CACTUSMAN3,{
+	set .@name$,strcharinfo(0);
+	if (BaseLevel < 70) {
+		mes "[Kamisama]";
+		mes "Tu nivel de poder no es el suficientemente alto para poder viajar. Vuelve cuando seas al menos nivel 70.";
+		close;
+	}
+	mes "[Kamisama]";
+	mes "Todo sea por entrenar!! Puedes obtener un montón de ^00ff00exp^000000 pero no tendrás ningún ^ff0000drop^000000.";
+	next;
+	.@party_id = getcharid(1);
+	.@md_name$ = "Kami's Lookout";
+	if (.@party_id < 1) {
+		mes "[Kamisama]";
+		mes "Entrenar sin party? Vuelve cuando hayas creado una, ni pensarlo en hacerlo solo.";
+		close;
+	}
+	
+	set .@kami_timer,checkquest(12329,PLAYTIME);
+	switch( .@kami_timer ) {
+	case -1:
+		if (is_party_leader() == true) {
+			mes "[Kamisama]";
+			mes "Confirmado, la Party se ha creado, ¿te gustaría acceder al entrenamiento?";
+			next;
+			switch(select("Generar dungeon "+.@md_name$+":¿Qué voy a necesitar?:Cancelar")) {
+			case 1:
+				switch(select("^3CB371[»]^000000 Modo Normal","^3CB371[»]^000000 ^BA7100Modo Hard^000000","^3CB371[»]^000000 ^ff0000Modo Insane^000000")){
+				case 1:
+					set .@level$,ID_NORMAL;
+					break;
+				case 2:
+					set .@level$,ID_HARD;
+					break;
+				case 3:
+					set .@level$,ID_INSANE;
+					break;
+				}
+				if (instance_create(.@md_name$,IM_PARTY,.@party_id,.@level$) < 0) {
+					mes "Nombre de la Party: "+ getpartyname(.@party_id);
+					mes "Lider de la Party: "+strcharinfo(0);
+					mes "^0000ff"+.@md_name$+" ^000000- La reserva ha fallado!";
+					close;
+				}
+				set .@instanceid,instance_id(IM_PARTY);
+				if (instance_getdifficulty(.@instanceid) == 4){
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXHP,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MATK,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_CAST,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ASPD,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXSP,20);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ALLSTATS,20);
+				}
+				if (instance_getdifficulty(.@instanceid) == 3){
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXHP,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_MATK,10);
+					instance_setpenalty(instance_id(IM_PARTY),SC_ID_CAST,10);
+				}
+				mes "[Kamisama]";
+				mes "^0000ff"+.@md_name$+"^000000 - Reserva confirmada";
+				mes "Ahora habla con el Kamisama Device para poder ir al entrenamiento.";
+				close;
+			case 2:
+				setarray .@MvP[1],1511,1785,1039,1874,1272,1719,1046,1389,1112,1115,1658,1418,1871,1768,1086,1885,1252,1832,1734,1779,1688,1373,1147,1059,1150,1087,1190,1038,1157,1159,1623,1492,1251,1583,1312,1751,1685,1630,1708;
+				setarray .@id1[1],930,7564,923,7117,957,7448,944,7006,938,948,7345,553,7752,7563,955,7762,7066,7097,7317,7561,7301,7218,955,1036,1022,7002,931,930,7110,1055,7318,7156,1098,1000,967,7511,7356,7262,731;
+				setarray .@ct1[1],50,75,50,50,50,20,50,50,50,50,50,30,30,50,50,20,70,50,50,75,50,20,50,50,50,50,50,75,50,50,50,30,20,20,50,50,20,20,30;
+				setarray .@id2[1],934,1002,626,742,731,7445,1038,913,932,919,7347,7166,7753,7567,928,747,700,7122,7054,749,7069,7209,993,1042,953,922,7002,934,919,1001,7323,7159,539,1048,7070,7063,7357,7038,732;
+				setarray .@ct2[1],50,20,1,3,5,50,20,50,50,50,50,30,30,20,50,20,5,20,30,1,30,30,10,20,20,30,20,20,30,50,20,20,50,30,20,20,20,20,15;
+				setarray .@id3[1],1625,2531,1464,2532,1615,7443,1520,2609,2287,2289,12040,1918,13107,7340,746,1573,720,2344,637,1731,634,7019,2286,13006,638,1358,2267,2611,2617,632,603,2336,2236,720,2270,7510,7358,5042,7450;
+				setarray .@ct3[1],1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,20,1,1;
+				setarray .@card$[1],"¾Æ¸ó¶óÄ«µå","¾ÆÆ®·Î½ºÄ«µå","¹ÙÆ÷¸ÞÆ®Ä«µå","º£¸£Á¦ºêºêÄ«µå","´ÙÅ©·ÎµåÄ«µå","µðÅ¸¸£µ¥¿ì¸£½ºÄ«µå","µµÇÃ°»¾îÄ«µå","µå¶óÅ¥¶óÄ«µå","µå·¹ÀÌÅ©Ä«µå","¿¡µå°¡Ä«µå","º¸½ºÀÌ±×´ÏÁªÄ«µå","Èæ»ç¿ÕÄ«µå","Å¸¶ôÇÑ´ë½Å°üÄ«µå","±Û·ë¾ð´õ³ªÀÌÆ®Ä«µå","±ÝµµµÏ¹ú·¹Ä«µå","Gopinich_Card","ÇÏÆ¼Ä«µå","ÀÌÇÁ¸®Æ®Ä«µå","Å°¿¤Ä«µå","Å©Åø¶ó³«½ºÄ«µå","Å¸´Ï¾Æ°¡¾¾","Á×ÀºÀÚÀÇÁÖÀÎÄ«µå","¸¶¾ßÄ«µå","¹Ì½ºÆ®·¹½ºÄ«µå","¿ù¾ßÈ­Ä«µå","¿ÀÅ©È÷¾î·ÎÄ«µå","¿ÀÅ©·ÎµåÄ«µå","¿À½Ã¸®½ºÄ«µå","ÆÄ¶ó¿ÀÄ«µå","ÇÁ¸®¿À´ÏÄ«µå","rsx0806Ä«µå","¿ø·É¹«»çÄ«µå","ÆøÇ³ÀÇ±â»çÄ«µå","Å¸¿À±ºÄ«Ä«µå","ÅÍÆ²Á¦³×·²Ä«µå","¶õµå±×¸®½º","º£½ºÆÛÄ«µå","¹é¼ÒÁø","Å¸³ªÅä½ºÀÇ±â¾ïÄ«µå";	
+				while (1)
+				{
+					mes "[Kamisama]";
+					mes "Selecciona el MvP con el que deseas entrenar";
+					next;
+					set .@num, select(" [ > ] Amon Ra: [ > ] Atroce: [ > ] Baphomet: [ > ] Beelzebub: [ > ] Dark Lord: [ > ] Detale: [ > ] Doppelganger: [ > ] Dracula: [ > ] Drake: [ > ] Eddga: [ > ] Egnigem Cenia: [ > ] Evil Snake Lord: [ > ] Fallen Bishop: [ > ] Gloom Under Night: [ > ] Golden Thief Bug: [ > ] Gopinich: [ > ] Hatti: [ > ] Ifrit: [ > ] Kiel D-01: [ > ] Ktullanux: [ > ] Lady Tanee: [ > ] Lord of Death: [ > ] Maya: [ > ] Mistress: [ > ] Moonlight Flower: [ > ] Orc Hero: [ > ] Orc Lord: [ > ] Osiris: [ > ] Pharaoh: [ > ] Phreeoni: [ > ] RSX-0806: [ > ] Samurai Specter: [ > ] Stormy Knight: [ > ] Tao Gunka: [ > ] Turtle General: [ > ] Valkyrie Randgris: [ > ] Vesper: [ > ] White Lady: [ > ] Thanatos: [ > ] Cerrar");
+					if( .@num == 40 )
+						close3;
+					mes "[Kamisama]";
+					cutin .@card$[.@num],2;
+					mes "Para invocar un "+ getmonsterinfo(.@MvP[.@num],MOB_NAME)+" necesitarás:\n";
+					mes " - "+.@ct1[.@num] + " " + getitemname(.@id1[.@num])+" (#"+.@id1[.@num]+").\n";
+					mes " - "+.@ct2[.@num] + " " + getitemname(.@id2[.@num])+" (#"+.@id2[.@num]+").\n";
+					mes " - "+.@ct3[.@num] + " " + getitemname(.@id3[.@num])+" (#"+.@id3[.@num]+").\n";
+					next;
+					cutin "",255;
+				}
+				close3;
+			case 3:
+				close;
+			}
+		}
+		mes "[Kamisama]";
+		mes "Espera que tu lider solicite primero el acceso al entrenamiento.";
+		close;
+	case 0:
+	case 1:
+		mes "[Kamisama]";
+		mes "Ahora habla con el Kamisama Device para poder ir al entrenamiento.";
+		close;
+	case 2:
+		set kami_timer,0;
+		erasequest 12329;
+		mes "^0000ffLos registros y los efectos han desaparecido. Puedes volver a ingresar a Kami's Lookout nuevamente.^000000";
+		close;
+	}
+}
+
+instance,62,74,4	script	Kamisama Device	PORTAL,{
+	if (BaseLevel < 70) {
+		mes "[Kamisama Device]";
+		mes "Tu nivel de poder no es el suficientemente alto para poder viajar. Vuelve cuando seas al menos nivel 70.";
+		close;
+	}
+	.@party_id = getcharid(1);
+	.@md_name$ = "Kami's Lookout";
+	if (.@party_id < 1) {
+		mes "[Kamisama Device]";
+		mes "Entrenar sin party? Vuelve cuando hayas creado una, ni pensarlo en hacerlo solo.";
+		close;
+	}
+	switch( checkquest(12329,PLAYTIME) ) {
+	case -1:
+		switch( instance_enter(.@md_name$) ) {
+		case IE_OTHER:
+			mes "[Kamisama Device]";
+			mes "Un error desconocido ha ocurrido.";
+			close;
+		case IE_NOINSTANCE:
+			mes "[Kamisama Device]";
+			mes "El pasaje para viajar entre dimensiones aún no se ha activado.";
+			close;
+		case IE_NOMEMBER:// Custom text
+			mes "[Kamisama Device]";
+			mes "No tienes permitido acceder a este dispositivo.";
+			close;
+		case IE_OK:
+			mapannounce "instance", "[" + getpartyname(.@party_id) + "] " + strcharinfo(0) + " ha entrado a " + .@md_name$ + ".",bc_map,"0x00ff99";
+			setquest 12329;// Kamisama after-effects
+			end;
+		}
+	case 0:
+	case 1:
+		mes "[Kamisama Device]";
+		mes "Aún quedan restos de tu último viaje. Acceso denegado.";
+		close;
+	case 2:
+		mes "^0000ffLos restos de tu último viaje han desaparecido. Ahora puedes volver a moverte entre dimensiones.^000000";
+		erasequest 12329;
+		close;
+	}
+}
+
+// Kami_inn
+//============================================================
+
+kami_inn,200,206,4	script	Kamisama#INN	4_M_CACTUSMAN3,{
+	set .@name$,"[Kamisama]";
+	if (is_party_leader() == false) {
+		mes .@name$;
+		mes "Si deseas comenzar a entrenar dile a tu lider que me avise.";
+		close3;
+	}
+	setarray .@MvP[1],1511,1785,1039,1874,1272,1719,1046,1389,1112,1115,1658,1418,1871,1768,1086,1885,1252,1832,1734,1779,1688,1373,1147,1059,1150,1087,1190,1038,1157,1159,1623,1492,1251,1583,1312,1751,1685,1630,1708;
+	setarray .@id1[1],930,7564,923,7117,957,7448,944,7006,938,948,7345,553,7752,7563,955,7762,7066,7097,7317,7561,7301,7218,955,1036,1022,7002,931,930,7110,1055,7318,7156,1098,1000,967,7511,7356,7262,731;
+	setarray .@ct1[1],50,75,50,50,50,20,50,50,50,50,50,30,30,50,50,20,70,50,50,75,50,20,50,50,50,50,50,75,50,50,50,30,20,20,50,50,20,20,30;
+	setarray .@id2[1],934,1002,626,742,731,7445,1038,913,932,919,7347,7166,7753,7567,928,747,700,7122,7054,749,7069,7209,993,1042,953,922,7002,934,919,1001,7323,7159,539,1048,7070,7063,7357,7038,732;
+	setarray .@ct2[1],50,20,1,3,5,50,20,50,50,50,50,30,30,20,50,20,5,20,30,1,30,30,10,20,20,30,20,20,30,50,20,20,50,30,20,20,20,20,15;
+	setarray .@id3[1],1625,2531,1464,2532,1615,7443,1520,2609,2287,2289,12040,1918,13107,7340,746,1573,720,2344,637,1731,634,7019,2286,13006,638,1358,2267,2611,2617,632,603,2336,2236,720,2270,7510,7358,5042,7450;
+	setarray .@ct3[1],1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,20,1,1;
+	setarray .@card$[1],"¾Æ¸ó¶óÄ«µå","¾ÆÆ®·Î½ºÄ«µå","¹ÙÆ÷¸ÞÆ®Ä«µå","º£¸£Á¦ºêºêÄ«µå","´ÙÅ©·ÎµåÄ«µå","µðÅ¸¸£µ¥¿ì¸£½ºÄ«µå","µµÇÃ°»¾îÄ«µå","µå¶óÅ¥¶óÄ«µå","µå·¹ÀÌÅ©Ä«µå","¿¡µå°¡Ä«µå","º¸½ºÀÌ±×´ÏÁªÄ«µå","Èæ»ç¿ÕÄ«µå","Å¸¶ôÇÑ´ë½Å°üÄ«µå","±Û·ë¾ð´õ³ªÀÌÆ®Ä«µå","±ÝµµµÏ¹ú·¹Ä«µå","Gopinich_Card","ÇÏÆ¼Ä«µå","ÀÌÇÁ¸®Æ®Ä«µå","Å°¿¤Ä«µå","Å©Åø¶ó³«½ºÄ«µå","Å¸´Ï¾Æ°¡¾¾","Á×ÀºÀÚÀÇÁÖÀÎÄ«µå","¸¶¾ßÄ«µå","¹Ì½ºÆ®·¹½ºÄ«µå","¿ù¾ßÈ­Ä«µå","¿ÀÅ©È÷¾î·ÎÄ«µå","¿ÀÅ©·ÎµåÄ«µå","¿À½Ã¸®½ºÄ«µå","ÆÄ¶ó¿ÀÄ«µå","ÇÁ¸®¿À´ÏÄ«µå","rsx0806Ä«µå","¿ø·É¹«»çÄ«µå","ÆøÇ³ÀÇ±â»çÄ«µå","Å¸¿À±ºÄ«Ä«µå","ÅÍÆ²Á¦³×·²Ä«µå","¶õµå±×¸®½º","º£½ºÆÛÄ«µå","¹é¼ÒÁø","Å¸³ªÅä½ºÀÇ±â¾ïÄ«µå";	
+	mes .@name$;
+	mes "El día de hoy contra quíen deseas entrenar?";
+	mes "Recuerda que deberás pagar un pequeño precio";
+	next;
+	mes .@name$;
+	mes "Selecciona el MvP con el que deseas entrenar";
+	next;
+	set .@num, select(" [ > ] Amon Ra: [ > ] Atroce: [ > ] Baphomet: [ > ] Beelzebub: [ > ] Dark Lord: [ > ] Detale: [ > ] Doppelganger: [ > ] Dracula: [ > ] Drake: [ > ] Eddga: [ > ] Egnigem Cenia: [ > ] Evil Snake Lord: [ > ] Fallen Bishop: [ > ] Gloom Under Night: [ > ] Golden Thief Bug: [ > ] Gopinich: [ > ] Hatti: [ > ] Ifrit: [ > ] Kiel D-01: [ > ] Ktullanux: [ > ] Lady Tanee: [ > ] Lord of Death: [ > ] Maya: [ > ] Mistress: [ > ] Moonlight Flower: [ > ] Orc Hero: [ > ] Orc Lord: [ > ] Osiris: [ > ] Pharaoh: [ > ] Phreeoni: [ > ] RSX-0806: [ > ] Samurai Specter: [ > ] Stormy Knight: [ > ] Tao Gunka: [ > ] Turtle General: [ > ] Valkyrie Randgris: [ > ] Vesper: [ > ] White Lady: [ > ] Thanatos");
+	mes .@name$;
+	cutin .@card$[.@num],2;
+	mes "WoW, para invocar un "+ getmonsterinfo(.@MvP[.@num],MOB_NAME)+" voy a necesitar:\n";
+	mes " - "+.@ct1[.@num] + " " + getitemname(.@id1[.@num])+" (#"+.@id1[.@num]+").\n";
+	mes " - "+.@ct2[.@num] + " " + getitemname(.@id2[.@num])+" (#"+.@id2[.@num]+").\n";
+	mes " - "+.@ct3[.@num] + " " + getitemname(.@id3[.@num])+" (#"+.@id3[.@num]+").\n";
+	mes "supongo que tienes todos los objetos para invocarlo";
+	next;
+	switch(select("Invocarlo:Paso")){
+		case 1:
+			if(countitem(.@id1[.@num])<.@ct1[.@num] || countitem(.@id2[.@num])<.@ct2[.@num] || countitem(.@id3[.@num])<.@ct3[.@num])
+			{
+				mes .@name$;
+				mes "No tienes todo lo necesario";
+				close;
+			}
+			delitem .@id1[.@num],.@ct1[.@num];
+			delitem .@id2[.@num],.@ct2[.@num];
+			delitem .@id3[.@num],.@ct3[.@num];
+			set 'mvp,.@MvP[.@num];
+			set 'num, .@num;
+			mes .@name$;
+			mes "Prepárate que viene en camino";
+			donpcevent instance_npcname("#Kamisamacontrol") + "::OnStart";
+			hideonnpc instance_npcname("Kamisama#INN"); 
+			close3;
+		case 2:
+			mes .@name$;
+			mes "Si deseas invocarlo me avisas";
+			close3;
+	}
+	close3;
+}
+
+
+kami_inn,1,1,3	script	#Kamisamacontrol	CLEAR_NPC,{
+	end;
+OnStart:
+	
+	donpcevent instance_npcname("#globaltimerKS") + "::OnT_s";
+	.@event$ = instance_npcname("#Kamisamacontrol") + "::OnMyMobDead";
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	killmonster 'map_name$, .@event$;
+	areamonster 'map_name$,153,183,240,238,getmonsterinfo('mvp,MOB_NAME),'mvp, 1, .@event$;
+	mapannounce 'map_name$, "[Kami's Lookout] Acaba de aparecer un "+getmonsterinfo('mvp,MOB_NAME)+"",bc_map,"0xffffff";
+	end;
+OnMyMobDead:
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	'120903_str_Kamisama$ = strcharinfo(1);
+	'120903_num_KamisamaDif = instance_getdifficulty(instance_id(IM_PARTY));
+	mapannounce 'map_name$, "[Kami's Lookout] Ya puedes volver",bc_map,"0xffffff";
+	donpcevent instance_npcname("#globaltimerKS") + "::OnT_s2";
+	hideoffnpc instance_npcname("Dimensional Device#KS");
+	end;
+}
+
+kami_inn,200,196,4	script	Dimensional Device#KS	PORTAL,{
+	mes "[Dimensional Device]";
+	mes "Tu tiempo acá ha finalizado. Puedes seguir mirando los alrededores o volver. ¿Qué deseas hacer?";
+	next;
+	if (select("Dar unas vueltas:Volver") == 2)
+		warp "instance",48,43;
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname("Dimensional Device#KS");
+	end;
+}
+
+// Instance Timer :: in_ttowertimer
+//============================================================
+kami_inn,3,1,5	script	#globaltimerKS	CLEAR_NPC,{
+	end;
+OnT_s:
+	initnpctimer;
+	end;
+OnT_s2:
+	.@kami_timer = getd("$120719_Kami_Lookout"+'num+"_"+'120903_num_KamisamaDif);
+	if (!.@kami_timer)
+		.@kami_timer = 14400;
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	.@Kamisama_member = getmapusers('map_name$);
+	.@winner_name$ = '120903_str_Kamisama$;
+	.@current_timer = getnpctimer(0) / 1000;
+	if (.@current_timer < 1)
+		end;
+	.@time_m = .@current_timer / 60;
+	.@time_s = .@current_timer % 60;
+	if (.@current_timer < 60)
+		.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "segundo" );
+	else
+		.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "minuto" ) + " " + callfunc( "F_InsertPlural", .@time_s, "segundo" );
+	if (.@current_timer >= .@kami_timer)
+		mapannounce 'map_name$, "El tiempo de " + .@time_txt$ + " ha sido guardado. Pero no ha roto la marca.",bc_map,"0xffff33";
+	else {
+		announce "La party "+.@winner_name$ + " con " + .@Kamisama_member + " miembro(s) han mejorado el tiempo en Kami's Lookout["+getmonsterinfo('mvp,MOB_NAME)+"] (" + .@time_txt$ + ").",bc_all,"0xffff33",FW_NORMAL,15;
+		
+		setd "$120719_Kami_Lookout"+'num+"_"+'120903_num_KamisamaDif+"$", .@winner_name$;
+		setd "$120719_Kami_Lookout"+'num+"_"+'120903_num_KamisamaDif, .@current_timer;
+		setd "$120719_Kami_Lookoutmem"+'num+"_"+'120903_num_KamisamaDif, .@Kamisama_member;
+	}
+	end;
+
+OnTimer3600000:
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#globaltimer50");
+	end;
+}
+
+kami_inn	mapflag	restricted	6
+kami_inn	mapflag	noloot
+kamizama	mapflag	restricted	6

@@ -24,7 +24,7 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 			mes .@name$;
 			mes "¿Qué tiempo deseas reiniciar?";
 			next;
-			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower"))
+			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower:Kami's Lookout"))
 			{
 				case 1:
 					mes .@name$;
@@ -61,6 +61,13 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 					set .@mem_1$, "$120903_num_ttower";
 					set .@time,36000;
 					break;
+				case 11:
+					for (set .@i, 1; .@i <= 39; set .@i, .@i + 1) {
+						for (set .@j, 2; .@j <= 4; set .@j, .@j + 1) {
+								setd "$120719_Kami_Lookout"+.@i+"_"+.@j,14400;
+						}
+					}
+					end;
 				default:
 					mes .@name$;
 					mes "En construcción";
@@ -79,7 +86,7 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 			mes .@name$;
 			mes "¿Qué instancia deseas reiniciar?";
 			next;
-			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower"))
+			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower:Kami's Lookout"))
 			{
 				case 1:
 					mes .@name$;
@@ -137,6 +144,19 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 					mes .@name$;
 					mes "La purification Stone ha sido activada.";
 					close;
+				case 11:
+					mes .@name$;
+					mes "Deseas activar el reset de la instancia ^ff0000Kami's Lookout^000000?";
+					next;
+					if(select("No:Si") == 1 ){
+						mes .@name$;
+						mes "No hay problema";
+						close;
+					}
+					enablenpc "Purification Stone#KS";
+					mes .@name$;
+					mes "La purification Stone ha sido activada.";
+					close;
 				default:
 					mes .@name$;
 					mes "En construcción";
@@ -147,7 +167,7 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 			mes .@name$;
 			mes "¿Qué instancia deseas desactivar?";
 			next;
-			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower"))
+			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower:Kami's Lookout"))
 			{
 				case 1:
 					mes .@name$;
@@ -202,6 +222,19 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 						close;
 					}
 					disablenpc "Purification Stone#TT";
+					mes .@name$;
+					mes "La purification Stone ha sido desactivada.";
+					close;
+				case 11:
+					mes .@name$;
+					mes "Deseas desactivar el reset de la instancia ^ff0000Kami's Lookout^000000?";
+					next;
+					if(select("No:Si") == 1 ){
+						mes .@name$;
+						mes "No hay problema";
+						close;
+					}
+					disablenpc "Purification Stone#KS";
 					mes .@name$;
 					mes "La purification Stone ha sido desactivada.";
 					close;
@@ -342,5 +375,37 @@ OnTimer1740000:
 
 OnTimer1800000:
 	disablenpc "Purification Stone#TT";
+	end;
+}
+
+instance,55,64,4	script	Purification Stone#KS	406,{
+	set ttower_timer,0;
+	erasequest 12329;
+	mes "^0000ffEl registro y efectos relacionados con Kami's Lookout ha desaparecido. Puedes volver a ingresar nuevamente.^000000";
+	close;
+
+OnInit:
+	disablenpc "Purification Stone#KS";
+	end;
+
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	disablenpc "Purification Stone#KS";
+	end;
+
+OnTimer1000:
+	enablenpc "Purification Stone#KS";
+	end;
+
+OnTimer1740000:
+	mapannounce "instance", "La Purification Stone se destruirá en 1 minuto.",bc_map,"0x00ff99";
+	end;
+
+OnTimer1800000:
+	disablenpc "Purification Stone#KS";
 	end;
 }

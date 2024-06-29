@@ -486,6 +486,9 @@ Body:
   - Id: 12328
     Title: Pirate Ship after-effects
     TimeLimit: +23h
+  - Id: 12329
+    Title: Kami's Lookout after-effects
+    TimeLimit: +23h
   - Id: 12416
     Title: Contract with Emily
   - Id: 12417
@@ -498,28 +501,28 @@ Body:
     TimeLimit: +30mn
   - Id: 7517
     Title: Occupy Valkyrie Realm
-    TimeLimit: +1h
+    TimeLimit: +1d
   - Id: 7518
     Title: Occupy Luina
-    TimeLimit: +1h
+    TimeLimit: +1d
   - Id: 7519
     Title: Occupy Britoniah
-    TimeLimit: +1h
+    TimeLimit: +1d
   - Id: 7520
     Title: Occupy Greenwood Lake
-    TimeLimit: +1h
+    TimeLimit: +1d
   - Id: 7521
     Title: Occupy Nidabehl
-    TimeLimit: +1h
+    TimeLimit: +1d
   - Id: 7522
     Title: Occupy Valfreyja
-    TimeLimit: +1h
+    TimeLimit: +1d
   - Id: 7523
     Title: Occupy Gloria
-    TimeLimit: +1h
+    TimeLimit: +1d
   - Id: 7524
     Title: Occupy Kafragaten
-    TimeLimit: +1h
+    TimeLimit: +1d
   - Id: 7525
     Title: Valkyrie Realm Challenge 1
     Targets:
@@ -697,7 +700,7 @@ Body:
     TimeLimit: 4h
   - Id: 7545
     Title: Standby for Valkyrie Realm Challenge 3
-    TimeLimit: 7d 4h
+    TimeLimit: +1d
   - Id: 7546
     Title: Standby for Luina Challenge 1
     TimeLimit: 4h
@@ -706,7 +709,7 @@ Body:
     TimeLimit: 4h
   - Id: 7548
     Title: Standby for Luina Challenge 3
-    TimeLimit: 7d 4h
+    TimeLimit: +1d
   - Id: 7549
     Title: Standby for Britoniah Challenge 1
     TimeLimit: 4h
@@ -715,7 +718,7 @@ Body:
     TimeLimit: 4h
   - Id: 7551
     Title: Standby for Britoniah Challenge 3
-    TimeLimit: 7d 4h
+    TimeLimit: +1d
   - Id: 7552
     Title: Standby for Greenwood Lake Challenge 1
     TimeLimit: 4h
@@ -724,7 +727,7 @@ Body:
     TimeLimit: 4h
   - Id: 7554
     Title: Standby for Greenwood Lake Challenge 3
-    TimeLimit: 7d 4h
+    TimeLimit: +1d
   - Id: 7555
     Title: Standby for Nidabehl Challenge 1
     TimeLimit: 4h
