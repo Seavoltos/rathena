@@ -632,7 +632,7 @@ int bg_team_leave(map_session_data *sd, bool quit, bool deserter, int flag)
 			add2limit(sd->status.bgstats.deserter,1,USHRT_MAX);
 		}
 
-		return bgteam->members.size();
+		return static_cast<int>( bgteam->members.size() );
 	}
 
 	return -1;
@@ -740,7 +740,7 @@ int bg_team_get_id(struct block_list *bl)
  * @param mes: Message
  * @param len: Message length
  */
-void bg_send_message(map_session_data *sd, const char *mes, int len)
+void bg_send_message(map_session_data *sd, const char *mes, size_t len)
 {
 	nullpo_retv(sd);
 
