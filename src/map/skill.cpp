@@ -938,7 +938,7 @@ bool skill_isNotOk( uint16 skill_id, map_session_data& sd ){
 				return true;
 			}
 			if( !map_getcell(sd.bl.m,sd.bl.x,sd.bl.y,CELL_CHKNOBUYINGSTORE) ) {
-				clif_displaymessage (sd.fd, msg_txt(sd,204)); // "You can't open a shop on this cell."
+				clif_displaymessage (sd.fd, msg_txt(&sd,204)); // "You can't open a shop on this cell."
 				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
 				return true;
 			}
@@ -9403,11 +9403,11 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 							sd->vend_loot = item->nameid;
 							sprintf(output, msg_txt(sd, 1596), itemdb_name(sd->vend_loot));
 							clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], output, false, SELF);
-							clif_openvendingreq(sd, 2 + sd->vend_lvl);
+							clif_openvendingreq( *sd, 2+skill_lv );
 						}
 						else {
 							sd->vend_loot = 0;
-							clif_openvendingreq(sd, 2 + sd->vend_lvl);
+							clif_openvendingreq( *sd, 2+skill_lv );
 						}
 					}
 				}
@@ -9728,7 +9728,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 			clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
 			//Prepare 200 Blue Potions.
 			if (!skill_produce_mix(sd, skill_id, ITEMID_BLUE_POTION, 0, 0, 0, 200, -1))
-				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
+				clif_skill_fail( *sd, skill_id );
 		}
 		break;
 	case SA_DISPELL:
@@ -19937,12 +19937,12 @@ int skill_vending(struct map_session_data *sd, t_itemid nameid) {
 		sd->state.prevend = 0;
 		sd->vend_loot = 0;
 		sd->state.workinprogress = WIP_DISABLE_NONE;
-		clif_skill_fail(sd, MC_VENDING, USESKILL_FAIL_LEVEL, 0);
+		clif_skill_fail( *sd, MC_VENDING);
 	}
 	else {
 		sd->vend_loot = nameid;
 		sd->state.prevend = 1;
-		clif_openvendingreq(sd, 2 + sd->vend_lvl);
+		clif_openvendingreq(*sd, 2 + sd->vend_lvl);
 		sprintf(output, msg_txt(sd, 1594), item->ename.c_str());
 		clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], output, false, SELF);
 	}
@@ -22060,7 +22060,7 @@ void skill_unit_move_unit_group(std::shared_ptr<s_skill_unit_group> group, int16
 			//Cell moves independently, safely move it.
 
 				// (^~_~^) LGP Start
-				clif_skill_delunit(unit1);
+				clif_skill_delunit( *unit1 );
 				// (^~_~^) LGP End
 
 				map_foreachinmovearea(clif_outsight, &unit1->bl, AREA_SIZE, dx, dy, BL_PC, &unit1->bl);
@@ -22076,7 +22076,7 @@ void skill_unit_move_unit_group(std::shared_ptr<s_skill_unit_group> group, int16
 					//Move to where this cell would had moved.
 
 					// (^~_~^) LGP Start
-					clif_skill_delunit(unit1);
+					clif_skill_delunit( *unit1 );
 					// (^~_~^) LGP End
 
 					unit2 = &group->unit[j];

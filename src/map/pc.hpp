@@ -459,12 +459,9 @@ public:
 		bool enchantgrade_open; // Whether the enchantgrade window is open or not
 		unsigned int bg_listen : 1;
 		unsigned int bg_afk : 1; // Moved here to reduce searchs
-		unsigned int block_action : 10;
 		bool check_equip_skill;
-
 		// Bitmask of e_pcblock_action_flag values
 		uint16 block_action;
-
 		bool refineui_open;
 		t_itemid inventory_expansion_confirmation;
 		uint16 inventory_expansion_amount;

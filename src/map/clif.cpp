@@ -7750,16 +7750,10 @@ void clif_openvendingreq( map_session_data& sd, uint16 num ){
 	packet.num = num;
 
 	// Vending shouldn't open if vend_loot is 0 and extended vending is enabled
-	if (battle_config.extended_vending && sd->vend_loot == 0) {
-		sd->state.prevend = 0;
+	if (battle_config.extended_vending && sd.vend_loot == 0) {
+		sd.state.prevend = 0;
 		return;
 	}
-
-	fd = sd->fd;
-	WFIFOHEAD(fd,packet_len(0x12d));
-	WFIFOW(fd,0) = 0x12d;
-	WFIFOW(fd,2) = num;
-	WFIFOSET(fd,packet_len(0x12d));
 
 	clif_send( &packet, sizeof( packet ), &sd.bl, SELF );
 
@@ -11112,7 +11106,7 @@ void clif_parse_LoadEndAck(int fd,map_session_data *sd)
 
 // (^~_~^) Auras Start
 
-			npc_script_event(sd, NPCE_UPDATE_AURAS);
+			npc_script_event( *sd, NPCE_UPDATE_AURAS);
 
 // (^~_~^) Auras End
 
@@ -11879,7 +11873,7 @@ void clif_parse_ActionRequest_sub( map_session_data& sd, int action_type, int ta
 		if (battle_config.mer_idle_no_share && sd.md && battle_config.idletime_mer_option&IDLE_ATTACK)
 			sd.idletime_mer = last_tick;
 		
-		if( !pc_update_last_action(sd,2,IDLE_ATTACK) )
+		if( !pc_update_last_action(&sd,2,IDLE_ATTACK) )
 			return;
 		
 		unit_attack(&sd.bl, target_id, action_type != 0);
@@ -11917,7 +11911,7 @@ void clif_parse_ActionRequest_sub( map_session_data& sd, int action_type, int ta
 		if (battle_config.mer_idle_no_share && sd.md && battle_config.idletime_mer_option&IDLE_SIT)
 			sd.idletime_mer = last_tick;
 
-		if( !pc_update_last_action(sd,1,IDLE_SIT) )
+		if( !pc_update_last_action(&sd,1,IDLE_SIT) )
 			break;
 
 		pc_setsit(&sd);
@@ -11947,7 +11941,7 @@ void clif_parse_ActionRequest_sub( map_session_data& sd, int action_type, int ta
 			if (battle_config.mer_idle_no_share && sd.md && battle_config.idletime_mer_option&IDLE_SIT)
 				sd.idletime_mer = last_tick;
 
-			if( !pc_update_last_action(sd,1,IDLE_SIT) )
+			if( !pc_update_last_action(&sd,1,IDLE_SIT) )
 				break;
 
 			skill_sit(&sd, false);
@@ -13199,7 +13193,7 @@ static void clif_parse_UseSkillToPosSub( int fd, map_session_data& sd, uint16 sk
 	if (battle_config.mer_idle_no_share && sd.md && battle_config.idletime_mer_option&IDLE_USESKILLTOPOS)
 		sd.idletime_mer = last_tick;
 
-	if( !pc_update_last_action(sd,3,IDLE_USESKILLTOPOS) )
+	if( !pc_update_last_action(&sd,3,IDLE_USESKILLTOPOS) )
 		return;
 
 	if( skill_isNotOk(skill_id, sd) )
@@ -14373,7 +14367,7 @@ void clif_parse_OpenVending(int fd, map_session_data* sd){
 		return;
 
 	if (battle_config.extended_vending && battle_config.show_item_vending && sd->vend_loot)
-		vending_openvending(sd, out_msg, data, len/8, nullptr);
+		vending_openvending(*sd, out_msg, data, len/8, nullptr);
 	else
 		vending_openvending(*sd, message, data, len/8, nullptr);
 
@@ -19914,6 +19908,7 @@ void clif_parse_SkillSelectMenu(int fd, map_session_data *sd) {
 	const PACKET_CZ_SKILL_SELECT_RESPONSE* p = reinterpret_cast<PACKET_CZ_SKILL_SELECT_RESPONSE*>( RFIFOP( fd, 0 ) );
 
 	if (sd->state.check_equip_skill) {
+		struct s_packet_db* info = &packet_db[RFIFOW(fd,0)];
 		int skill = RFIFOW(fd, info->pos[1]);
 		struct map_session_data *tsd = map_id2sd(sd->ce_gid);
 
@@ -19932,9 +19927,9 @@ void clif_parse_SkillSelectMenu(int fd, map_session_data *sd) {
 		switch(skill) {
 			case CS_EQUIPMENT:
 				if( tsd->status.show_equip || pc_has_permission(sd, PC_PERM_VIEW_EQUIPMENT) )
-					clif_viewequip_ack(sd, tsd);
+					clif_viewequip_ack(*sd, *tsd);
 				else
-					clif_msg(sd, VIEW_EQUIP_FAIL);
+					clif_msg(sd, MSI_OPEN_EQUIPEDITEM_REFUSED);
 				break;
 			case CS_BG:
 				pc_battle_stats(sd,tsd,1);
@@ -24241,7 +24236,7 @@ int clif_vend(struct map_session_data *sd, int skill_lv) {
 		sd->menuskill_val = skill_lv;
 	}
 	else {
-		clif_skill_fail(sd, MC_VENDING, USESKILL_FAIL_LEVEL, 0);
+		clif_skill_fail( *sd, MC_VENDING );
 		return 0;
 	}
 	return 1;

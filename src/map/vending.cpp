@@ -186,12 +186,12 @@ void vending_purchasereq(map_session_data* sd, int aid, int uid, const uint8* da
 			if (vsd->vend_loot == battle_config.item_zeny || !vsd->vend_loot) {
 				if (z > (double)sd->status.zeny || z < 0. || z >(double)MAX_ZENY)
 				{
-					//clif_buyvending(sd, idx, amount, 1); // you don't have enough zeny
+					//clif_buyvending( *sd, idx, amount, PURCHASEMC_NO_ZENY); // you don't have enough zeny
 					return;
 				}
 				if (z + (double)vsd->status.zeny > (double)MAX_ZENY && !battle_config.vending_over_max)
 				{
-					clif_buyvending(sd, idx, vsd->vending[j].amount, 4); // too much zeny = overflow
+					clif_buyvending( *sd, idx, vsd->vending[j].amount, PURCHASEMC_OUT_OF_STOCK); // too much zeny = overflow
 					return;
 				}
 			}
@@ -480,11 +480,11 @@ int8 vending_openvending( map_session_data& sd, const char* message, const uint8
 		if( index < 0 || index >= MAX_CART // invalid position
 		||  pc_cartitem_amount(&sd, index, amount) < 0 // invalid item or insufficient quantity
 		//NOTE: official server does not do any of the following checks!
-		||  !sd->cart.u.items_cart[index].identify // unidentified item
-		||  sd->cart.u.items_cart[index].attribute == 1 // broken item
-		||  sd->cart.u.items_cart[index].expire_time // It should not be in the cart but just in case
-		||  (sd->cart.u.items_cart[index].bound && !pc_can_give_bounded_items(&sd)) // can't trade account bound items and has no permission
-		||  (sd->cart.u.items_cart[index].card[0]==CARD0_CREATE && (MakeDWord(&sd.cart.u.items_cart[index].card[2],&sd.cart.u.items_cart[index].card[3]) == 
+		||  !sd.cart.u.items_cart[index].identify // unidentified item
+		||  sd.cart.u.items_cart[index].attribute == 1 // broken item
+		||  sd.cart.u.items_cart[index].expire_time // It should not be in the cart but just in case
+		||  (sd.cart.u.items_cart[index].bound && !pc_can_give_bounded_items(&sd)) // can't trade account bound items and has no permission
+		||  (sd.cart.u.items_cart[index].card[0]==CARD0_CREATE && (MakeDWord(sd.cart.u.items_cart[index].card[2],sd.cart.u.items_cart[index].card[3]) == 
 		(battle_config.bg_reserved_char_id || battle_config.woe_reserved_char_id || battle_config.instance_reserved_char_id) && !battle_config.bg_can_trade))
 		||  !itemdb_cantrade(&sd.cart.u.items_cart[index], pc_get_group_level(&sd), pc_get_group_level(&sd)) ) // untradeable item
 			continue;
@@ -692,7 +692,7 @@ void vending_reopen( map_session_data& sd )
 			}
 
 			// Extended Vending system 
-			sd->vend_loot = at->vend_loot;
+			sd.vend_loot = at->vend_loot;
 			// Immediate save
 			chrif_save(&sd, CSAVE_AUTOTRADE);
 

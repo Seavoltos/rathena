@@ -2981,90 +2981,6 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 		dlist->first_charid = (mvp_sd ? mvp_sd->status.char_id : 0);
 		dlist->second_charid = (second_sd ? second_sd->status.char_id : 0);
 		dlist->third_charid = (third_sd ? third_sd->status.char_id : 0);
-		dlist->item = NULL;
-
-		for (i = 0; i < MAX_MOB_DROP_TOTAL; i++) {
-			if (md->db->dropitem[i].nameid == 0)
-				continue;
-
-			std::shared_ptr<item_data> it = item_db.find(md->db->dropitem[i].nameid);
-
-			if ( it == nullptr )
-				continue;
-			
-			drop_rate = mob_getdroprate(src, md->db, md->db->dropitem[i].rate, drop_modifier, md);
-
-			// attempt to drop the item
-			if (rnd() % 10000 >= drop_rate)
-				continue;
-
-			if( mvp_sd && it->type == IT_PETEGG ) {
-				pet_create_egg(mvp_sd, md->db->dropitem[i].nameid);
-				continue;
-			}
-
-			ditem = mob_setdropitem(&md->db->dropitem[i], 1, md->mob_id);
-
-			//A Rare Drop Global Announce by Lupus
-			if( mvp_sd && md->db->dropitem[i].rate <= battle_config.rare_drop_announce && ( it->type == IT_CARD ) ) {
-				char message[128];
-				if (!battle_config.feature_itemlink)
-					sprintf (message, msg_txt(NULL,541), mvp_sd->status.name, md->name, it->ename.c_str(), (float)drop_rate/100);
-				else
-					sprintf (message, msg_txt(NULL,541), mvp_sd->status.name, md->name, item_db.create_item_link( it ).c_str(), (float)drop_rate/100);
-				//MSG: "'%s' won %s's %s (chance: %0.02f%%)"
-				intif_broadcast(message,strlen(message)+1,BC_DEFAULT);
-			}
-			// Announce first, or else ditem will be freed. [Lance]
-			// By popular demand, use base drop rate for autoloot code. [Skotlex]
-			mob_item_drop(md, dlist, ditem, 0, battle_config.autoloot_adjust ? drop_rate : md->db->dropitem[i].rate, homkillonly || merckillonly);
-
-			// MvP, Mini-Boss and Normal Card Ad and Log System [Bad]
-			if (mvp_sd && battle_config.announcement_and_log_system) {
-
-				if (it->type == IT_CARD && !(md->get_bosstype() == BOSSTYPE_MINIBOSS) && !(md->get_bosstype() == BOSSTYPE_MVP) && battle_config.normal_card_announce_system) {
-
-					if (battle_config.normal_card_announce) {
-						char message[128];
-						sprintf (message, msg_txt(sd,452), mvp_sd->status.name, md->name, mapindex_id2name(mvp_sd->mapindex), it->ename.c_str(), (float)drop_rate/100);
-						intif_broadcast2(message, strlen(message) + 1, battle_config.set_normal_announce_color, 0x190, 12, 0, 0);
-					}
-
-					if (battle_config.dropped_normal_card_log) {
-						if ( SQL_ERROR == Sql_Query(logmysql_handle, "INSERT INTO dropped_normal_card_log (account_id, char_name, monster_id, monster_name, card_id, card_name, drop_map) VALUES ('%d', '%s', '%d', '%s', '%d', '%s', '%s')", mvp_sd->status.account_id, mvp_sd->status.name, md->mob_id, md->name, it->nameid, it->ename.c_str(),  mapindex_id2name(mvp_sd->mapindex))) // Log System [Bad]
-						Sql_ShowDebug(logmysql_handle);
-					}
-				}
-
-				if (it->type == IT_CARD && md->get_bosstype() == BOSSTYPE_MVP && battle_config.mvp_card_announce_system) {
-
-					if (battle_config.mvp_card_announce) {
-						char message[128];
-						sprintf (message, msg_txt(sd,452), mvp_sd->status.name, md->name, mapindex_id2name(mvp_sd->mapindex), it->ename.c_str(), (float)drop_rate/100);
-						intif_broadcast2(message, strlen(message) + 1, battle_config.set_mvp_announce_color, 0x190, 12, 0, 0);
-					}
-
-					if (battle_config.dropped_mvp_card_log) {
-						if ( SQL_ERROR == Sql_Query(logmysql_handle, "INSERT INTO dropped_mvp_card_log (account_id, char_name, mvp_id, mvp_name, card_id, card_name, drop_map) VALUES ('%d', '%s', '%d', '%s', '%d', '%s', '%s')", mvp_sd->status.account_id, mvp_sd->status.name, md->mob_id, md->name, it->nameid, it->ename.c_str(),  mapindex_id2name(mvp_sd->mapindex))) // Log System [Bad]
-						Sql_ShowDebug(logmysql_handle);
-					}
-				}
-
-				if (it->type == IT_CARD && md->get_bosstype() == BOSSTYPE_MINIBOSS && battle_config.mini_boss_card_announce_system) {
-
-					if (battle_config.mini_boss_card_announce) {
-						char message[128];
-						sprintf (message, msg_txt(sd,452), mvp_sd->status.name, md->name, mapindex_id2name(mvp_sd->mapindex), it->ename.c_str(), (float)drop_rate/100);
-						intif_broadcast2(message, strlen(message) + 1, battle_config.set_mini_boss_announce_color, 0x190, 12, 0, 0);
-					}
-
-					if (battle_config.dropped_mini_boss_card_log) {
-						if ( SQL_ERROR == Sql_Query(logmysql_handle, "INSERT INTO dropped_mini_boss_card_log (account_id, char_name, mini_boss_id, mini_boss_name, card_id, card_name, drop_map) VALUES ('%d', '%s', '%d', '%s', '%d', '%s', '%s')", mvp_sd->status.account_id, mvp_sd->status.name, md->mob_id, md->name, it->nameid, it->ename.c_str(),  mapindex_id2name(mvp_sd->mapindex))) // Log System [Bad]
-						Sql_ShowDebug(logmysql_handle);
-					}
-				}
-			}
-		}
 
 		// Ore Discovery [Celest]
 		if (sd == mvp_sd && pc_checkskill(sd,BS_FINDINGORE)>0 && battle_config.finding_ore_rate/10 >= rnd()%10000) {
@@ -3143,6 +3059,52 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 			}
 
 			std::shared_ptr<s_item_drop> ditem = mob_setdropitem(md->db->dropitem[i], 1, md->mob_id);
+
+			// MvP, Mini-Boss and Normal Card Ad and Log System [Bad]
+			if (mvp_sd && battle_config.announcement_and_log_system) {
+
+				if (it->type == IT_CARD && !(md->get_bosstype() == BOSSTYPE_MINIBOSS) && !(md->get_bosstype() == BOSSTYPE_MVP) && battle_config.normal_card_announce_system) {
+
+					if (battle_config.normal_card_announce) {
+						char message[128];
+						sprintf (message, msg_txt(sd,452), mvp_sd->status.name, md->name, mapindex_id2name(mvp_sd->mapindex), it->ename.c_str(), (float)drop_rate/100);
+						intif_broadcast2(message, strlen(message) + 1, battle_config.set_normal_announce_color, 0x190, 12, 0, 0);
+					}
+
+					if (battle_config.dropped_normal_card_log) {
+						if ( SQL_ERROR == Sql_Query(logmysql_handle, "INSERT INTO dropped_normal_card_log (account_id, char_name, monster_id, monster_name, card_id, card_name, drop_map) VALUES ('%d', '%s', '%d', '%s', '%d', '%s', '%s')", mvp_sd->status.account_id, mvp_sd->status.name, md->mob_id, md->name, it->nameid, it->ename.c_str(),  mapindex_id2name(mvp_sd->mapindex))) // Log System [Bad]
+						Sql_ShowDebug(logmysql_handle);
+					}
+				}
+
+				if (it->type == IT_CARD && md->get_bosstype() == BOSSTYPE_MVP && battle_config.mvp_card_announce_system) {
+
+					if (battle_config.mvp_card_announce) {
+						char message[128];
+						sprintf (message, msg_txt(sd,452), mvp_sd->status.name, md->name, mapindex_id2name(mvp_sd->mapindex), it->ename.c_str(), (float)drop_rate/100);
+						intif_broadcast2(message, strlen(message) + 1, battle_config.set_mvp_announce_color, 0x190, 12, 0, 0);
+					}
+
+					if (battle_config.dropped_mvp_card_log) {
+						if ( SQL_ERROR == Sql_Query(logmysql_handle, "INSERT INTO dropped_mvp_card_log (account_id, char_name, mvp_id, mvp_name, card_id, card_name, drop_map) VALUES ('%d', '%s', '%d', '%s', '%d', '%s', '%s')", mvp_sd->status.account_id, mvp_sd->status.name, md->mob_id, md->name, it->nameid, it->ename.c_str(),  mapindex_id2name(mvp_sd->mapindex))) // Log System [Bad]
+						Sql_ShowDebug(logmysql_handle);
+					}
+				}
+
+				if (it->type == IT_CARD && md->get_bosstype() == BOSSTYPE_MINIBOSS && battle_config.mini_boss_card_announce_system) {
+
+					if (battle_config.mini_boss_card_announce) {
+						char message[128];
+						sprintf (message, msg_txt(sd,452), mvp_sd->status.name, md->name, mapindex_id2name(mvp_sd->mapindex), it->ename.c_str(), (float)drop_rate/100);
+						intif_broadcast2(message, strlen(message) + 1, battle_config.set_mini_boss_announce_color, 0x190, 12, 0, 0);
+					}
+
+					if (battle_config.dropped_mini_boss_card_log) {
+						if ( SQL_ERROR == Sql_Query(logmysql_handle, "INSERT INTO dropped_mini_boss_card_log (account_id, char_name, mini_boss_id, mini_boss_name, card_id, card_name, drop_map) VALUES ('%d', '%s', '%d', '%s', '%d', '%s', '%s')", mvp_sd->status.account_id, mvp_sd->status.name, md->mob_id, md->name, it->nameid, it->ename.c_str(),  mapindex_id2name(mvp_sd->mapindex))) // Log System [Bad]
+						Sql_ShowDebug(logmysql_handle);
+					}
+				}
+			}
 
 			//A Rare Drop Global Announce by Lupus
 			if (mvp_sd && md->db->dropitem[i].rate <= battle_config.rare_drop_announce) {

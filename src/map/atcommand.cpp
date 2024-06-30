@@ -1674,7 +1674,7 @@ ACMD_FUNC(baselevelup)
 
 // (^~_~^) Auras Start
 
-	npc_script_event(sd, NPCE_UPDATE_AURAS);
+	npc_script_event( *sd, NPCE_UPDATE_AURAS );
 
 // (^~_~^) Auras End
 

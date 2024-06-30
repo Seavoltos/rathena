@@ -8298,7 +8298,7 @@ int pc_checkbaselevelup(map_session_data *sd) {
 
 // (^~_~^) Auras Start
 
-	npc_script_event(sd, NPCE_UPDATE_AURAS);
+	npc_script_event( *sd, NPCE_UPDATE_AURAS );
 
 // (^~_~^) Auras End
 

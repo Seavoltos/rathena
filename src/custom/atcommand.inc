@@ -303,7 +303,7 @@ ACMD_FUNC(whosell){
 				flag = 1;
 			}
 			if (flag && pl_sd->mapindex == sd->mapindex) {
-				clif_viewpoint(sd, 1, 1, pl_sd->bl.x, pl_sd->bl.y, ++sat_num, 0xFFFFFF);
+				clif_viewpoint( *sd, 1, 1, pl_sd->bl.x, pl_sd->bl.y, ++sat_num, 0xFFFFFF);
 				flag = 0;
 			}
 		}
