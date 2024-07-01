@@ -3,6 +3,7 @@
 // For more information, see LICENCE in the main folder
 
 #include "clif.hpp"
+#include "disif.hpp"
 
 #include <cstdarg>
 #include <cstdio>
@@ -12077,7 +12078,11 @@ void clif_parse_WisMessage(int fd, map_session_data* sd)
 			}
 			return;
 		}
-	}
+	} else if (strcmpi(target, "@discord") == 0) {
+        disif_discord_wis(*sd, target, message);
+        clif_wis_end( *sd, ACKWHISPER_SUCCESS );  // 0: success to send whisper
+        return;
+    }
 
 	// searching destination character
 	dstsd = map_nick2sd(target,false);

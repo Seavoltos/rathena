@@ -274,7 +274,8 @@ extern bool session_isActive(int fd);
 // Function prototype declaration
 
 int make_listen_bind(uint32 ip, uint16 port);
-int make_connection(uint32 ip, uint16 port, bool silent, int timeout);
+int make_connection(uint32 ip, uint16 port, bool silent, int timeout, bool nonblocking=false);
+int add_readfd(int fd, uint32 ip);
 #define realloc_fifo( fd, rfifo_size, wfifo_size ) _realloc_fifo( ( fd ), ( rfifo_size ), ( wfifo_size ), ALC_MARK )
 #define realloc_writefifo( fd, addition ) _realloc_writefifo( ( fd ), ( addition ), ALC_MARK )
 int _realloc_fifo( int fd, unsigned int rfifo_size, unsigned int wfifo_size, const char* file, int line, const char* func );
@@ -339,6 +340,10 @@ void set_eof(int fd);
 void send_shortlist_add_fd(int fd);
 // Do pending network sends (and eof handling) from the shortlist.
 void send_shortlist_do_sends();
+// Only for windows
+#ifdef WIN32
+SOCKET fd2sock_ext(int fd);
+#endif
 #endif
 
 // Reuseable global packet buffer to prevent too many allocations

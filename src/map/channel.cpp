@@ -2,6 +2,7 @@
 // For more information, see LICENCE in the main folder
 
 #include "channel.hpp"
+#include "disif.hpp"
 
 #include <cstdlib>
 
@@ -460,6 +461,10 @@ int channel_send(struct Channel *channel, map_session_data *sd, const char *msg)
 			color = channel_config.colors[sd->fontcolor];
 		safesnprintf(output, CHAT_SIZE_MAX, "%s %s : %s", channel->alias, sd->status.name, msg);
 		clif_channel_msg(channel,output,color);
+		if (channel->discord_id) {
+			safesnprintf(output, CHAT_SIZE_MAX, "%s : %s", sd->status.name, msg);
+			disif_send_message_to_disc(channel, output);
+		}
 		sd->channel_tick[idx] = gettick();
 	}
 	return 0;

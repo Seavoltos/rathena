@@ -7,6 +7,7 @@
 //#define DEBUG_HASH
 //#define DEBUG_DUMP_STACK
 
+#include "disif.hpp"
 #include "script.hpp"
 
 #include <cerrno>
@@ -25426,6 +25427,10 @@ BUILDIN_FUNC(channel_chat) {
 
 	safesnprintf(output, CHAT_SIZE_MAX, "%s %s", ch->alias, msg);
 	clif_channel_msg(ch,output,color);
+
+	if (ch->discord_id)
+		disif_send_message_to_disc(ch, output);
+
 	script_pushint(st,1);
 	return SCRIPT_CMD_SUCCESS;
 }

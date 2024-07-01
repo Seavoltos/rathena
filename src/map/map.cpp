@@ -1,6 +1,7 @@
 // Copyright (c) rAthena Dev Teams - Licensed under GNU GPL
 // For more information, see LICENCE in the main folder
 
+#include "disif.hpp"
 #include "map.hpp"
 
 #include <cstdlib>
@@ -4930,6 +4931,7 @@ void MapServer::finalize(){
 	do_final_clan();
 #ifndef MAP_GENERATOR
 	do_final_clif();
+	do_final_disif();
 #endif
 	do_final_npc();
 	do_final_quest();
@@ -5339,7 +5341,9 @@ bool MapServer::initialize( int argc, char *argv[] ){
 	do_init_duel();
 	do_init_vending();
 	do_init_buyingstore();
-
+#ifndef MAP_GENERATOR
+    do_init_disif();
+#endif
 	npc_event_do_oninit();	// Init npcs (OnInit)
 
 	if (battle_config.pk_mode)

@@ -589,7 +589,7 @@ OnInit:
 //Buscar Hongo
 -	script	Find the Mushroom	-1,{
 OnWatingRoom:
-   announce "Elizabeth: Es hora de encontrar hongos!",0,$ColorEventos;
+   channel_chat("#evento","Elizabeth: Es hora de encontrar hongos!");
    sleep 1000;
    switch( rand(1,3) )
    {
@@ -606,7 +606,7 @@ OnWatingRoom:
    sleep 1000;
    set $@Hongo,rand(3,5);
    sleep 10000;
-   announce "Elizabeth: " + $@Hongo + " hongo(s) han aparecido en "+ $@HongoMap$ +"!",0,$ColorEventos;
+   channel_chat("#evento","Elizabeth: " + $@Hongo + " hongo(s) han aparecido en "+ $@HongoMap$ +"!");
    sleep 10000;
    monster $@HongoMap$,0,0,"Trufa",3970,$@Hongo,"Find the Mushroom::OnMobKilled";
    initnpctimer;
@@ -642,19 +642,19 @@ OnMobKilled:
 -	script	announce_nvz	-1,{
 
 OnWatingRoom:
-announce "Elizabeth: Escapa del Zombie comenzara en 2 minutos",0,$ColorEventos;
+channel_chat("#evento","Elizabeth: Escapa del Zombie comenzara en 2 minutos");
 killmonsterall "quiz_01";
 set .numzom, 0;
 sleep 5000; //5 s
 
-announce "Elizabeth: Con un novice nivel 1 utiliza @joinevent para enviarte a 'Escapa del Zombie'!",0,$ColorEventos;
+channel_chat("#evento","Elizabeth: Con un novice nivel 1 utiliza @joinevent para enviarte a 'Escapa del Zombie'!");
 set $@Zombie,1;
 sleep 55000; //55 s
-announce "Elizabeth: 'Escapa del Zombie' comenzara en 1 minuto!",0,$ColorEventos;
+mapannounce "quiz_01","'Escapa del Zombie' comenzara en 1 minuto!",1,$ColorEventos;
 sleep 30000; //30 s
 mapannounce "quiz_01","'Escapa del Zombie' comenzara en 30 segundos!",1,$ColorEventos;
 sleep 30000; //25 s
-announce "Elizabeth: 'Escapa del Zombie' ya comenzó!!",0,$ColorEventos;;
+channel_chat("#evento","Elizabeth: 'Escapa del Zombie' ya comenzó!!");
 set $@Zombie,0;
 delwaitingroom "Elizabeth";
 sleep 3000;
@@ -715,7 +715,7 @@ OnPCDieEvent:
 
 //===========================================================
 quiz_01,42,369,3	script	Prize	72,{
-	announce "Elizabeth: " + strcharinfo (0) + " ha ganado el evento 'Escapa del Zombie', Felicidades!",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: " + strcharinfo (0) + " ha ganado el evento 'Escapa del Zombie', Felicidades!");
 	getitem $Premioeventos,$Premiounico;
 	set #EVENTOUNICO,#EVENTOUNICO+1;
 	warp @mapname$,@mapx,@mapy;
@@ -732,12 +732,11 @@ OnInit:
 //PoringRace
 -	script	Poring Race	-1,{
 OnWatingRoom:
-	announce "Elizabeth: La 'Carrera de Poring' iniciará en 2 minutos",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: La 'Carrera de Poring' iniciará en 2 minutos");
 	sleep 5000; //5 s
 	set $@PoringRace,1;
-	announce "Elizabeth: Usa @joinevent para enviarte a la 'Carrera de Poring'!",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Usa @joinevent para enviarte a la 'Carrera de Poring'!");
 	sleep 60000; //60 s
-	announce "Elizabeth: Usa @joinevent para enviarte a la 'Carrera de Poring'!",0,$ColorEventos;
 	set .access_Prace, 1;
 //	setnpctimer 100000,"Bidder#prace0";
 	startnpctimer "Bidder#prace0";
@@ -954,13 +953,12 @@ OnTouch:
 OnWatingRoom:
 	set $@AtrapaPoring,1;
 	killmonsterall "gare";
-	announce "Elizabeth: El evento Atrapa al poring ha iniciado, usa @joinevent para poder enviarte!",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: El evento Atrapa al poring ha iniciado, usa @joinevent para poder enviarte!");
 	sleep 10000;
-	announce "Elizabeth: Dejaré ingresar por 1 minuto al evento!",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Dejaré ingresar por 1 minuto al evento!");
 	sleep 30000;
-	announce "Elizabeth: Últimos 30 segundos!",0,$ColorEventos;
 	sleep 30000;
-	announce "Elizabeth: Tiempo!",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Tiempo!");
 	set $@AtrapaPoring,0;
 	delwaitingroom "Elizabeth";
 	monster "gare",0,0,"Porings",1725,15,"AtrapaPoring#Funcion::OnFakePoringDeath";
@@ -992,7 +990,7 @@ OnFakePoringDeath:
 OnRealPoringDeath:
 	getitem $Premioeventos,$Premiounico;
 	set #EVENTOUNICO,#EVENTOUNICO+1;
-	announce "El usuario "+strcharinfo(0)+" ha ganado el evento.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: El usuario "+strcharinfo(0)+" ha ganado el evento.");
 	killmonsterall "gare";
 	addrid(5,0,"gare");
 	warp @mapname$,@mapx,@mapy;
@@ -1187,22 +1185,21 @@ winround:
 OnGMStart:
 	if ($@guessactive) end;
 	set $@guessactive, 1;
-	announce "Elizabeth: Se está dando inicio al evento de Disguise!",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Se está dando inicio al evento de Disguise! Si te deseas unir puedes usar @joinevent");
 	set $@guessbegin, 0;
-	sleep 3000;
+	sleep 1000;
 	if (!$@guessactive) end;
-	announce "Elizabeth: Si te deseas unir puedes usar @joinevent.",0,$ColorEventos;
 	set $@Disguise,1;
 	enablenpc "Disguise NPC";
 	sleep 3000;
-	announce "Número de rondas: "+$@guessrounds,0,$ColorEventos;
+	//announce "Número de rondas: "+$@guessrounds,0,$ColorEventos;
 	sleep 2000;
 	sleep 2000;
 	if (!$@guessactive) {set $@Disguise,0; disablenpc "Disguise NPC"; end;}
-	announce "Elizabeth: Dejaré entrar gente por un minuto más.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Dejaré entrar gente por un minuto más.");
 	sleep 60000;
 	if (!$@guessactive) {set $@Disguise,0; disablenpc "Disguise NPC"; end;}
-	announce "Elizabeth: Listo, no se aceptan más personas.",0,$ColorEventos;
+	//announce "Elizabeth: Listo, no se aceptan más personas.",0,$ColorEventos;
 	set $@Disguise,0;
 	delwaitingroom "Elizabeth";
 	set $@DisguiseRound, 0;
@@ -1225,7 +1222,7 @@ OnGMStop:
 	if ($@guessactive)
 	{
 		set $@guessactive, 0;
-		announce "The disguise event has been stopped.",0,$ColorEventos;
+		channel_chat("#evento","The disguise event has been stopped.");
 		set $@DisguiseRound, 0;
 		mapwarp "quiz_map.gat","prontera.gat",155,181;
 		setnpcdisplay "Disguise NPC",933;
@@ -1238,20 +1235,19 @@ OnWatingRoom:
 //OnClock2305:
 	if ($@guessactive) end;
 	set $@guessactive, 1;
-	announce "Elizabeth: Se está dando inicio al evento de Disguise!",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Se está dando inicio al evento de Disguise! Si te deseas unir usa @joinevent.");
 	set $@guessbegin, 0;
-	sleep 3000;
+	sleep 1000;
 	if (!$@guessactive) end;
-	announce "Elizabeth: Si te deseas unir usa @joinevent.",0,$ColorEventos;
 	set $@Disguise,1;
 	enablenpc "Disguise NPC";
 	sleep 2000;
 	sleep 2000;
 	if (!$@guessactive)  {set $@Disguise,0; disablenpc "Disguise NPC"; end;}
-	announce "Elizabeth: Dejaré entrar gente por un minuto más.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Dejaré entrar gente por un minuto más.");
 	sleep 60000;
 	if (!$@guessactive)  {set $@Disguise,0; disablenpc "Disguise NPC"; end;}
-	announce "Elizabeth: Listo, no se aceptan más personas.",0,$ColorEventos;
+	//announce "Elizabeth: Listo, no se aceptan más personas.",0,$ColorEventos;
 	set $@Disguise,0;
 	delwaitingroom "Elizabeth";
 	sleep 5000;
@@ -1286,17 +1282,17 @@ cluckcluck:
 	close;
 OnWatingRoom:
 		enablenpc "Cluckers";
-		announce "Elizabeth: Cluck! Cluck! Boom! Esta a punto de iniciar en Prontera!",0,$ColorEventos;
+		channel_chat("#evento","Elizabeth: Cluck! Cluck! Boom! Esta a punto de iniciar en Prontera!");
 		initnpctimer;
 		end;
 OnTimer20000:
-		announce "Elizabeth: Cluckers se ha comido uno de mis item! Estoy muy asustada para quitarselo!",0,$ColorEventos;
+		channel_chat("#evento","Elizabeth: Cluckers se ha comido uno de mis item! Estoy muy asustada para quitarselo!");
 		end;
 OnTimer30000:
-		announce "Elizabeth: Clickea la gallina loca, y trata de quitarle mi item, si tu tienes suerte quizas ganes! Estas listo?",0,$ColorEventos;
+		channel_chat("#evento","Elizabeth: Clickea la gallina loca, y trata de quitarle mi item, si tu tienes suerte quizas ganes! Estas listo?");
 		end;
 OnTimer40000:
-		announce "Elizabeth: ANDA! Click la gallina para obtener el premio!",0,$ColorEventos;
+		channel_chat("#evento","Elizabeth: ANDA! Click la gallina para obtener el premio!");
 		set $@startcluck,1;
 		end;
 OnTimer600000:
@@ -1367,7 +1363,7 @@ L_playcluck:
 			if( rand(50) < 15 ) {
 				npctalk "WOOF!...........";
 				specialeffect2 72;
-				announce "[Cluck! Cluck! Boom!] " + strcharinfo(0) + " obtuvo el premio! Bien hecho!",0,$ColorEventos;
+				channel_chat("#evento","Elizabeth: " + strcharinfo(0) + " obtuvo el premio! Bien hecho!");
 				getitem $Premioeventos,$Premiounico;
 				set #EVENTOUNICO,#EVENTOUNICO+1;
 				set $@startcluck,0;
@@ -1398,30 +1394,22 @@ OnInit:
 
 OnDiceStart:
 	disablenpc "Mr Dice";
-	announce "Elizabeth: Vamos a comenzar el evento de Dice.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Vamos a comenzar el evento de Dice.");
 	sleep 10000;
 	set $@EVENTODICE,1;
-	announce "Elizabeth: Para quienes deseen participar, por favor usa @joinevent.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Para quienes deseen participar, por favor usa @joinevent.");
 	sleep 10000;
-	announce "Elizabeth: Por un minuto dejaré ingresar personas.",0,$ColorEventos;
-	sleep 10000;
-	announce "Elizabeth: Por favor, si deseas participar usa @joinevent.",0,$ColorEventos;
-	
+	channel_chat("#evento","Elizabeth: Por un minuto dejaré ingresar personas.");
+	sleep 10000;	
 	initnpctimer;
 	end;
 
 OnTimer30000:
-	announce "Elizabeth: Últimos 30 segundos.",0,$ColorEventos;
-	sleep 5000;
-	announce "Elizabeth: Si deseas unirte, por favor usa @joinevent.",0,$ColorEventos;
-	end;
-	
-OnTimer50000:
-	announce "Elizabeth: Últimos 10 segundos.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Últimos 30 segundos.");
 	end;
 
 OnTimer60000:
-	announce "Elizabeth: Tiempo.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Tiempo.");
 	set $@EVENTODICE,0;
 	delwaitingroom "Elizabeth";
 	end;
@@ -1442,7 +1430,7 @@ quiz_01,204,93,6	script	Mr Dice	874,{
 	mes "[Dice]";
 	mes "Felicitaciones! Tu ganaste.";
 	close2;
-	announce "Elizabeth: Tenemos un ganador, "+strcharinfo(0)+".",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Tenemos un ganador, "+strcharinfo(0)+".");
 	getitem $Premioeventos,$Premiounico;
 	set #EVENTOUNICO,#EVENTOUNICO+1;
 	warp @mapname$,@mapx,@mapy;
@@ -1587,15 +1575,13 @@ OnSpaceStart:
 	query_sql("DELETE FROM `char_reg_num` WHERE `key` = 'fabre'");
 	mapwarp "space","prontera",155,181;
 	set $@EVENTOESPACIO,1;
-	announce "Elizabeth: Vamos a comenzar el evento de Espacio.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Vamos a comenzar el evento de Espacio.");
 	sleep 10000;
-	announce "Elizabeth: Para quienes deseen participar, por favor usa @joinevent.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Para quienes deseen participar, por favor usa @joinevent.");
 	sleep 10000;
-	announce "Elizabeth: Dejaré ingresar personas por un minuto.",0,$ColorEventos;
-	sleep 50000;
-	announce "Elizabeth: Quedan 10 segundos apresurate!",0,$ColorEventos;
-	sleep 10000;
-	announce "Elizabeth: Tiempo.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Dejaré ingresar personas por un minuto.");
+	sleep 60000;
+	channel_chat("#evento","Elizabeth: Tiempo.");
 	set $@EVENTOESPACIO,0;
 	delwaitingroom "Elizabeth";
 	
@@ -1681,24 +1667,15 @@ OnLastTime:
 	goto startlmsevent;
 
 startlmsevent:
-	announce "Elizabeth: El evento Last Man Standing comenzará pronto.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: El evento Last Man Standing comenzará pronto.");
 	sleep 8000;
-	announce "Elizabeth: Todos los que deseen participar, registrarse conmigo.",0,$ColorEventos;
-	sleep 8000;
-	announce "Elizabeth: Luego de un minuto cerraré el registro.",0,$ColorEventos;
-	sleep 8000;
-	announce "Elizabeth: Por favor, usa @joinevent para registrarse si deseas participar.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Por favor, usa @joinevent para registrarse si deseas participar. Tienen 1 minuto!");
 	set $@EVENTOLASTMAN,1;
 	pvpoff "cell_game";
 	initnpctimer;
 	end;
-
-OnTimer30000:
-	announce "Elizabeth: Últimos 30 segundos.",0,$ColorEventos;
-	end;
-
 OnTimer60000:
-	announce "Elizabeth: Tiempo!.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Tiempo!.");
 	set $@EVENTOLASTMAN,2;
 	delwaitingroom "Elizabeth";
 	end;
@@ -1715,7 +1692,7 @@ cell_game,150,143,4	script	Dario	56,{
 	mes "[Premiador]";
 	mes "Felicidades. Tenemos un ganador.";
 	next;
-	announce "Elizabeth: Tenemos un ganador! Bien hecho "+strcharinfo(0)+"!.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Tenemos un ganador! Bien hecho "+strcharinfo(0)+"!.");
 	getitem $Premioeventos,$Premiounico;
 	set #EVENTOUNICO,#EVENTOUNICO+1;
 	warp "prontera",155,181;
@@ -1811,18 +1788,18 @@ OnPCDieEvent:
 	end;
 OnWatingRoom:
 		enablenpc "Lydia Clar#2";
-		announce "Elizabeth: La gran Tarotista Lydia Clar ha llegado a prontera!",0,$ColorEventos;
+		channel_chat("#evento","Elizabeth: La gran Tarotista Lydia Clar ha llegado a prontera!");
 		initnpctimer;
 		initnpctimer "Lydia Clar#2";
 		end;
 OnTimer20000:
-		announce "Elizabeth: ¿Que estás esperando para ver tu suerte el día de hoy?",0,$ColorEventos;
+		channel_chat("#evento","Elizabeth: ¿Que estás esperando para ver tu suerte el día de hoy?");
 		end;
 OnTimer30000:
-		announce "Elizabeth: Dale 10z a la tarotista para que lea tu carta del día!",0,$ColorEventos;
+		channel_chat("#evento","Elizabeth: Dale 10z a la tarotista para que lea tu carta del día!");
 		end;
 OnTimer40000:
-		announce "Elizabeth: ANDA! ¿Serás la próxima afortunada o afortunado?",0,$ColorEventos;
+		channel_chat("#evento","Elizabeth: ANDA! ¿Serás la próxima afortunada o afortunado?");
 		set $@starttarot,1;
 		end;
 OnTimer600000:
@@ -2117,7 +2094,7 @@ L_playtarot:
 					case 0:
 						npctalk strcharinfo(0)+", Buena suerte en el juego, mala suerte en el amor.";
 						if ( gettime(6) == 6 && gettime(5) >= 19)	set #WETRIPANTU3,#WETRIPANTU3+1;
-						announce "Elizabeth: " + strcharinfo(0) + " obtuvo el premio! Buena suerte en el juego, mala suerte en el amor!",0,$ColorEventos;
+						channel_chat("#evento","Elizabeth: " + strcharinfo(0) + " obtuvo el premio! Buena suerte en el juego, mala suerte en el amor!");
 						if( getequipid(EQI_HEAD_LOW) == 40142 )
 							getitem $Premioeventos,$Premiounico+5*$Premiounico/10;
 						else
@@ -2184,16 +2161,13 @@ function	script	move_XY	{
 OnWatingRoom:
 	set $@BombRing,1;
 	setmapflag "cell_game",mf_noskill;
-	announce "Elizabeth: El evento de escapa del poring está por comenzar!",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: El evento de escapa del poring está por comenzar!");
 	sleep 5000;
 	
-	announce "Elizabeth: Acercate o usa @joinevent para poder ingresar al evento!",0,$ColorEventos;
-	sleep 30000;
+	channel_chat("#evento","Elizabeth: Acercate o usa @joinevent para poder ingresar al evento! Tienes 1 minuto!");
+	sleep 60000;
 	
-	announce "Elizabeth: Últimos 30 segundos!",0,$ColorEventos;
-	sleep 30000;
-	
-	announce "Elizabeth: Tiempo!",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Tiempo!");
 	set $@BombRing,2;
 	delwaitingroom "Elizabeth";
 	initnpctimer;
@@ -2455,50 +2429,19 @@ OnWhisperGlobal:
 	if(getgmlevel()<60) end;
 OnDiceStart:
 	disablenpc "Mr Dice Dice";
-	mapannounce "evt_isld01","Elizabeth: Iniciando Evento Test!!.",1,$ColorEventos;
-	announce "Elizabeth: Vamos a comenzar el evento de Doble Dice.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Vamos a comenzar el evento de Doble Dice.");
 	sleep 10000;
 	set $@EVENTODOBLEDICE,1;
-	announce "Elizabeth: Para quienes deseen participar, por favor usa @joinevent.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Para quienes deseen participar, por favor usa @joinevent.");
 	sleep 10000;
-	announce "Elizabeth: Por un minuto dejaré ingresar personas.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Por un minuto dejaré ingresar personas.");
 	sleep 10000;
-	announce "Elizabeth: Por favor, si deseas participar usa @joinevent.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Por favor, si deseas participar usa @joinevent.");
 	initnpctimer;
 	end;
 
-OnTimer30000:
-	announce "Elizabeth: Últimos 30 segundos.",0,$ColorEventos;
-	sleep 5000;
-	announce "Elizabeth: Si deseas unirte, por favor usa @joinevent.",0,$ColorEventos;
-	end;
-	
-OnTimer50000:
-	announce "Elizabeth: Últimos 10 segundos.",0,$ColorEventos;
-	end;
-/*	
-OnTimer55000:
-	announce "Elizabeth: 5.",0,$ColorEventos;
-	end;
-	
-OnTimer56000:
-	announce "Elizabeth: 4.",0,$ColorEventos;
-	end;
-	
-OnTimer57000:
-	announce "Elizabeth: 3.",0,$ColorEventos;
-	end;
-	
-OnTimer58000:
-	announce "Elizabeth: 2.",0,$ColorEventos;
-	end;
-	
-OnTimer59000:
-	announce "Elizabeth: 1.",0,$ColorEventos;
-	end;
-*/
 OnTimer60000:
-	announce "Elizabeth: Tiempo.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Tiempo.");
 	set $@EVENTODOBLEDICE,0;
 	delwaitingroom "Elizabeth";
 	end;
@@ -2600,7 +2543,7 @@ OnNPCKillEvent:
 	}
 	end;
 OnTimer600000:
-	announce "Elizabeth: Tiempo! Espero hayan logrado cumplir con la misión.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Tiempo! Espero hayan logrado cumplir con la misión.");
 	delwaitingroom "Elizabeth";
 	stopnpctimer;
 OnInit:
@@ -2644,9 +2587,9 @@ OnHuntingStart:
 			set $@HuntingEventAmount,rand(30,45);
 			break;
 	}
-	announce "Elizabeth: Vamos a iniciar el evento de cacería, ve a hablar con Issac para que te diga cuál es la misión de ahora.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Vamos a iniciar el evento de cacería, ve a hablar con Issac para que te diga cuál es la misión de ahora.");
 	sleep 10000;
-	announce "Elizabeth: Lo puedes encontrar al costado del refine de Prontera.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Lo puedes encontrar al costado del refine de Prontera.");
 	initnpctimer;
 	end;
 }
@@ -2673,7 +2616,7 @@ OnEventReload:
 		set $@RondaMvP, 0;
 		set $@mobvsmob, 0;
 		set $@GanadorMvM, 0;
-		announce "Elizabeth: El evento ha terminado! gracias por participar.",0,$ColorEventos;
+		channel_chat("#evento","Elizabeth: El evento ha terminado! gracias por participar.");
 		killmonsterall "pvp_2v2",2;
 		end;
 	}
@@ -2713,16 +2656,16 @@ OnWatingRoom:
 	);
 	
 	if ( $@RondaMvP == 0 )
-		announce "Elizabeth: El evento Mob Vs Mob comenzará pronto! ["+.MobName1$+"] vs ["+.MobName2$+"]",0,$ColorEventos;
+		channel_chat("#evento","Elizabeth: El evento Mob Vs Mob comenzará pronto! ["+.MobName1$+"] vs ["+.MobName2$+"]");
 	else
-		announce "Elizabeth: El Round "+($@RondaMvP+1)+" está por comenzar ["+.MobName1$+"] vs ["+.MobName2$+"]",0,$ColorEventos;
+		channel_chat("#evento","Elizabeth: El Round "+($@RondaMvP+1)+" está por comenzar ["+.MobName1$+"] vs ["+.MobName2$+"]");
 	set $@mobvsmob,1;
 	delwaitingroom;
 	waitingroom "[Evento]: Torneo MvP ["+.MobName1$+"] vs ["+.MobName2$+"]",0;
 	set $@GanadorMvM, 0;
 	sleep 60000;
 	//sleep 10000;
-	announce "Elizabeth: En 1 minuto se deshabilitaran las apuestas acercate o usa @joinevent...",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: En 1 minuto se deshabilitaran las apuestas acercate o usa @joinevent...");
 	sleep 60000;
 	//sleep 10000;
 	donpcevent "MobVsMob::OnStart";
@@ -2730,7 +2673,7 @@ OnWatingRoom:
 
 OnStart:
 	delwaitingroom "Elizabeth";
-	announce "Elizabeth: Se cerraron las puertas.",0,$ColorEventos;
+	channel_chat("#evento","Elizabeth: Se cerraron las puertas.");
 	set $@mobvsmob,2;
 	monster "pvp_2v2",47,46,"[1] "+ .MobName1$,.MobID1,1,"MobVsMob::OnEquip2Win",0,0;
 	.GID[0] = $@mobid[0];

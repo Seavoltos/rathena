@@ -2,6 +2,7 @@
 // For more information, see LICENCE in the main folder
 
 #include "atcommand.hpp"
+#include "disif.hpp"
 
 #include <cmath>
 #include <cstdlib>
@@ -4528,6 +4529,8 @@ ACMD_FUNC(reload) {
 	} else if (strstr(command, "attendancedb") || strncmp(message, "attendancedb", 4) == 0) {
 		attendance_db.reload();
 		clif_displaymessage(fd, msg_txt(sd, 795)); // Attendance database has been reloaded.
+	} else if (strstr(command, "discordconf") || strncmp(message, "discordconf", 4) == 0) {
+		reload_disif();
 	}else if( strstr( command, "barterdb" ) || strncmp( message, "barterdb", 4 ) == 0 ){
 		barter_db.reload();
 		clif_displaymessage(fd, msg_txt(sd, 830)); // Barter database has been reloaded.
@@ -4535,6 +4538,12 @@ ACMD_FUNC(reload) {
 
 	return 0;
 }
+
+ACMD_FUNC(disablediscord) {
+	stop_disif();
+	return 0;
+}
+
 /*==========================================
  * @partysharelvl <share_range> [Akinari]
  * Updates char server party share level range in runtime
@@ -9427,6 +9436,7 @@ ACMD_FUNC(request)
 	intif_wis_message_to_gm(sd->status.name, PC_PERM_RECEIVE_REQUESTS, atcmd_output);
 	clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], atcmd_output, false, SELF);
 	clif_displaymessage(sd->fd,msg_txt(sd,279));	// @request sent.
+	disif_send_request_to_disc(*sd, message);
 	return 0;
 }
 
@@ -11829,6 +11839,8 @@ void atcommand_basecommands(void) {
 		ACMD_DEF2("evilclone", clone),
 		ACMD_DEF(tonpc),
 		ACMD_DEF(commands),
+		ACMD_DEF2("reloaddiscordconf", reload),
+		ACMD_DEF(disablediscord),
 		ACMD_DEF(noask),
 		ACMD_DEF(request),
 		ACMD_DEF(homlevel),
