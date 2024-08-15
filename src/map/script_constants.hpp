@@ -544,6 +544,7 @@
 	export_constant(MF_INSTANCECONSUME);
 	export_constant(MF_NODYNAMICNPC);
 	export_constant(MF_NOBANK);
+	export_constant(MF_SPECIALPOPUP);
 
 	/* setcell types */
 	export_constant(CELL_WALKABLE);
@@ -11445,6 +11446,8 @@
 	export_constant(SCF_REMOVEONUNEQUIPARMOR);
 	export_constant(SCF_REMOVEONHERMODE);
 	export_constant(SCF_REQUIRENOWEAPON);
+	export_constant(SCF_REMOVEFROMHOMONWARP);
+	export_constant(SCF_REMOVEFROMHOMONMAPWARP);
 
 	/* enchantgrades */
 	export_constant(ENCHANTGRADE_NONE);
