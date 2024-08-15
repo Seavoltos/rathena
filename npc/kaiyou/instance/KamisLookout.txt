@@ -344,7 +344,7 @@ OnTimer3600000:
 	stopnpctimer;
 	end;
 OnInstanceInit:
-	hideonnpc instance_npcname("#globaltimer50");
+	hideonnpc instance_npcname("#globaltimerKS");
 	end;
 }
 

@@ -8,6 +8,45 @@
 //============================================================
 
 // Instance
+startermap2,116,39,5	script	Old Sign#PV	4_BOARD3,{
+	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
+		mes "-- Poring Village Records --";
+		.@PVillage_name$ = getd("$120719_str_PVillage"+.@i+"$");
+		.@PVillage_timer  = getd("$120719_num_PVillage"+.@i);
+		.@PVillage_member = getd("$120903_num_PVillage"+.@i);
+		
+		.@time_m = .@PVillage_timer / 60;
+		.@time_s = .@PVillage_timer - (.@time_m * 60);
+		if (.@PVillage_name$ == "") {
+			mes "Aún no hay registros de esta instancia.";
+		}
+		else {
+			if (.@PVillage_timer < 60)
+				.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+			else
+				.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "Minuto" ) + " " + callfunc( "F_InsertPlural", .@time_s, "Segundo" );
+			if (.@PVillage_member > 0)
+				.@string$ =  " con ^ff0044" + .@PVillage_member + " miembros^000000";
+			mes "Mejor tiempo para ^ff0044" + .@PVillage_name$ + "^000000" + .@string$ + ".";
+			mes "Con el tiempo de ^0000ff" + .@time_txt$ + "^000000.";
+		}
+		mes "Dificultad " + .dificultad$[.@i];
+		if( .@i == 4 )
+			close;
+		else
+			next;
+	}
+	close;
+
+OnInit:
+	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
+		if (!getd("$120719_num_PVillage"+.@i))
+			setd "$120719_num_PVillage"+.@i,14400;
+	}
+	setarray .dificultad$,"","^008000Easy^000000","Normal","^BA7100Hard^000000","^ff0000Insane^000000";
+	end;
+}
+
 startermap2,120,32,5	script	Emily#0	4_GEFFEN_03,4,4,{
 	if (isbegin_quest(12417) != 0)
 		erasequest 12417;
@@ -26,7 +65,7 @@ startermap2,120,32,5	script	Emily#0	4_GEFFEN_03,4,4,{
 		next;
 		select("¿Quién dijo que iriamos de aventura contigo?");
 		mes "[Emily]";
-		mes "Vamos, no seas así. Escucha mi historia y luego toma una decisión, te prometo que obtendras una adecuada recompensa.";
+		mes "Vamos, no seas así. Escucha mi historia y luego toma una decisión, te prometo que obtendras una recompensa.";
 		next;
 		if (select( "¿Adecuada recompensa?", "No estoy interesado." ) == 2) {
 			mes "[Emily]";
@@ -96,8 +135,9 @@ startermap2,120,32,5	script	Emily#0	4_GEFFEN_03,4,4,{
 		close;
 	}
 	.@md_name$ = "Poring Village";
+	.@party_id = getcharid(1);
 
-	if (is_party_leader())
+	if (is_party_leader() && instance_live_info(ILI_NAME, instance_id(IM_PARTY)) != .@md_name$ )
 		.@menu$[0] = "Crear la instancia";
 	if (instance_live_info(ILI_NAME, instance_id(IM_PARTY)) == .@md_name$)
 		.@menu$[1] = "Ir a la Villa";
@@ -105,8 +145,54 @@ startermap2,120,32,5	script	Emily#0	4_GEFFEN_03,4,4,{
 	switch( select( .@menu$[0], .@menu$[1], "Cancelar" ) ) {
 	case 1:
 		mes "[Emily]";
-		mes "Ahora estoy buscando como llegar, por favor vuelve a hablarme para ir.";
-		instance_create(.@md_name$);
+		if (!instance_check_party(getcharid(1),3)) {
+			mes "Creo que te faltan personas, necesitas al menos 3 jugadores para iniciar.";
+			close;
+		}
+		mes "Ahora estoy buscando como llegar, por favor selecciona la dificultad para ordenar todo.";
+		switch(select("^3CB371[»]^000000 Modo Normal","^3CB371[»]^000000 ^008000Modo Easy^000000","^3CB371[»]^000000 ^BA7100Modo Hard^000000","^3CB371[»]^000000 ^ff0000Modo Insane^000000")){
+			case 1:
+				set .@level$,ID_NORMAL;
+				break;
+			case 2:
+				set .@level$,ID_EASY;
+				break;
+			case 3:
+				set .@level$,ID_HARD;
+				break;
+			case 4:
+				set .@level$,ID_INSANE;
+				break;
+		}
+		if (instance_create(.@md_name$,IM_PARTY,.@party_id,.@level$) < 0) {
+			mes "Nombre de la Party: "+ getpartyname(.@party_id);
+			mes "Lider de la Party: "+strcharinfo(0);
+			mes "^0000ff"+.@md_name$+" ^000000- La reserva ha fallado!";
+			close;
+		}
+		set .@instanceid,instance_id(IM_PARTY);
+		if (instance_getdifficulty(.@instanceid) == 4){
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXHP,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_MATK,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_CAST,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_ASPD,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXSP,20);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_ALLSTATS,20);
+		}
+		if (instance_getdifficulty(.@instanceid) == 3){
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_ATK,10);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_MAXHP,10);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_SPEED,10);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_MATK,10);
+			instance_setpenalty(instance_id(IM_PARTY),SC_ID_CAST,10);
+		}
+		if (instance_getdifficulty(.@instanceid) == 1){
+			instance_setbuff(instance_id(IM_PARTY),SC_II_MAXHP,5);
+			instance_setbuff(instance_id(IM_PARTY),SC_II_MAXSP,5);
+			instance_setbuff(instance_id(IM_PARTY),SC_II_ALLSTATS,5);
+		}
 		close;
 	case 2:
 		switch( instance_enter(.@md_name$) ) {
@@ -130,13 +216,56 @@ startermap2,120,32,5	script	Emily#0	4_GEFFEN_03,4,4,{
 	}
 	end;
 
-OnTouch:
-	if (isbegin_quest(12416) == 0 && BaseLevel <= 20)
+OnTouch_:
+	if (isbegin_quest(12416) == 0 && BaseLevel <= 20 && @PVspam == 0)
+	{
 		npctalk "Emily: Hey, tienes tiempo para hablar un minuto?";
+		set @PVspam,1;
+	}
 	end;
 
 OnInit:
 	questinfo( QTYPE_JUMPING_PORING, QMARK_YELLOW , "isbegin_quest(12416) == 0 && BaseLevel <= 20" );
+	end;
+}
+
+1@begi,1,1,5	script	#globaltimerPV	CLEAR_NPC,{
+	end;
+OnT_s:
+	initnpctimer;
+	end;
+OnT_s2:
+	.@PVillage_timer = getd("$120719_num_PVillage"+'PVillageDif);
+	if (!.@PVillage_timer)
+		.@PVillage_timer = 14400;
+	getmapxy 'map_name$, .@x, .@y, BL_NPC;
+	.@PVillage_member = getmapusers('map_name$);
+	.@winner_name$ = '120903_str_PVillage$;
+	.@current_timer = getnpctimer(0) / 1000;
+	if (.@current_timer < 1)
+		end;
+	.@time_m = .@current_timer / 60;
+	.@time_s = .@current_timer % 60;
+	if (.@current_timer < 60)
+		.@time_txt$ = callfunc( "F_InsertPlural", .@time_s, "segundo" );
+	else
+		.@time_txt$ = callfunc( "F_InsertPlural", .@time_m, "minuto" ) + " " + callfunc( "F_InsertPlural", .@time_s, "segundo" );
+	if (.@current_timer >= .@PVillage_timer)
+		mapannounce 'map_name$, "El tiempo de " + .@time_txt$ + " ha sido guardado. Pero no ha roto la marca.",bc_map,"0xffff33";
+	else {
+		announce "La party "+.@winner_name$ + " con " + .@PVillage_member + " miembro(s) han mejorado el tiempo en Poring Village (" + .@time_txt$ + ").",bc_all,"0xffff33",FW_NORMAL,15;
+		
+		setd "$120719_str_PVillage"+'PVillageDif+"$", .@winner_name$;
+		setd "$120719_num_PVillage"+'PVillageDif, .@current_timer;
+		setd "$120903_num_PVillage"+'PVillageDif, .@PVillage_member;
+	}
+	end;
+
+OnTimer3600000:
+	stopnpctimer;
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname("#globaltimerPV");
 	end;
 }
 
@@ -156,6 +285,8 @@ OnInstanceInit:
 
 	disablenpc instance_npcname("#start_wp1_2");
 	disablenpc instance_npcname("#gift");
+	disablenpc instance_npcname("#PVweapon");
+	disablenpc instance_npcname("#PVjobmaster");
 	end;
 }
 
@@ -175,7 +306,7 @@ OnStart:
 	end;
 }
 
-1@begi,140,37,5	script	#start_wp1_2	4_GEFFEN_03,{
+1@begi,140,37,5	script	#start_wp1_2	4_GEFFEN_03,5,5,{
 	mes "[Emily]";
 	mes "Voy a empezar de a poco ahora...";
 	close;
@@ -216,6 +347,17 @@ OnStart:
 	disablenpc instance_npcname("#poring_wl20");
 	disablenpc instance_npcname("#poring_wl21");
 	setcell 'map_begi$,146,35,146,41,cell_walkable,1;
+	donpcevent instance_npcname("#globaltimerPV") + "::OnT_s";
+	end;
+
+OnTouch_:
+	if( @dopas == 0 )
+	{
+		npctalk "Emily: "+strcharinfo(0)+" ten estos pergaminos con dopas!";
+		sc_start 32, 1800000, 10; // Increase Agi
+		sc_start 30, 1800000, 10; // Blessing
+		set @dopas,1;
+	}
 	end;
 }
 
@@ -328,6 +470,7 @@ OnBossDead:
 	disablenpc instance_npcname("#poring_wl6");
 	disablenpc instance_npcname("#poring_wl7");
 	disablenpc instance_npcname("#poring_wl8");
+	enablenpc instance_npcname("#PVweapon");
 	setcell 'map_begi$,154,100,154,107,cell_walkable,1;
 	end;
 }
@@ -438,6 +581,7 @@ OnBossDead:
 	disablenpc instance_npcname("#poring_wl11");
 	disablenpc instance_npcname("#poring_wl12");
 	disablenpc instance_npcname("#poring_wl14");
+	enablenpc instance_npcname("#PVjobmaster");
 	setcell 'map_begi$,59,187,59,197,cell_walkable,1;
 	end;
 }
@@ -511,6 +655,9 @@ OnBossDead:
 	if (mobcount( 'map_begi$, instance_npcname("poring_village_3") + "::OnBossDead" ) > 0)
 		end;
 	killmonster 'map_begi$, instance_npcname("poring_village_3") + "::OnBossDead";
+	'120903_str_PVillage$ = strcharinfo(1);
+	'PVillageDif = instance_getdifficulty(instance_id(IM_PARTY));
+	donpcevent instance_npcname("#globaltimerPV") + "::OnT_s2";
 	enablenpc instance_npcname("#gift");
 	end;
 }
@@ -556,6 +703,161 @@ OnTouch:
 	mes "No necesito esta caja de novatos. Puedes tomarlo. Ahora, vamos a salir!";
 	close2;
 	getitem 23302,1;	// PoringsPreciousBox
-	warp "startermap2",100,22;
+	warp "startermap",40,29;
+	end;
+}
+
+1@begi,152,103,5	script	#PVweapon	4_GEFFEN_03,4,4,{
+	
+	if( rentalcountitem(23310) > 0 || rentalcountitem(23311) > 0 || rentalcountitem(23312) > 0 || rentalcountitem(23313) > 0 || rentalcountitem(23314) > 0 || rentalcountitem(23315) > 0 )
+	{
+		mes "[Emily]";
+		mes "Ve a ver que puedes lograr con esa arma!";
+		close;
+	}
+	mes "[Emily]";
+	mes "Puedes tener todos los artículos que encuentres en esta mazmorra. ya tengo algunos.";
+	next;
+	mes "[Emily]";
+	mes "Mira encontré algunas armas! Elije sólo una:";
+	next;
+	switch(select("[ > ] Elijo la Espada:[ > ] Elijo el Báculo:[ > ] Elijo el Arco y Flechas:[ > ] Elijo la Cruz:[ > ] Elijo el Hacha:[ > ] Elijo el Cuchillo"))
+	{
+		case 1:
+			mes "[Emily]";
+			mes "Interesante elección";
+			mes "Ten cuidado que luego de un rato al parecer se rompe.";
+			close2;
+			rentitem 23310,7200;
+			end;
+		case 2:
+			mes "[Emily]";
+			mes "Interesante elección";
+			mes "Ten cuidado que luego de un rato al parecer se rompe.";
+			close2;
+			rentitem 23311,7200;
+			end;
+		case 3:
+			mes "[Emily]";
+			mes "Interesante elección";
+			mes "Ten cuidado que luego de un rato al parecer se rompe.";
+			close2;
+			rentitem 23312,7200;
+			getitem 23316,1000;
+			end;
+		case 4:
+			mes "[Emily]";
+			mes "Interesante elección";
+			mes "Ten cuidado que luego de un rato al parecer se rompe.";
+			close2;
+			rentitem 23313,7200;
+			end;
+		case 5:
+			mes "[Emily]";
+			mes "Interesante elección";
+			mes "Ten cuidado que luego de un rato al parecer se rompe.";
+			close2;
+			rentitem 23314,7200;
+			end;
+		case 6:
+			mes "[Emily]";
+			mes "Interesante elección";
+			mes "Ten cuidado que luego de un rato al parecer se rompe.";
+			close2;
+			rentitem 23315,7200;
+			end;
+	}
+	end;
+OnTouch:
+	if ( ( rentalcountitem(23310) + rentalcountitem(23311) + rentalcountitem(23312) + rentalcountitem(23313) + rentalcountitem(23314) + rentalcountitem(23315) ) == 0 )
+		npctalk "Emily: Hey, encontré unas armas, quieres alguna?";
+	end;
+
+OnInit:
+	questinfo( QTYPE_JUMPING_PORING, QMARK_YELLOW , "BaseLevel <= 40" );
+	end;
+}
+
+1@begi,56,191,5	script	#PVjobmaster	4_GEFFEN_03,4,4,{
+	mes "[Emily]";
+	if( Class != Job_Novice )
+	{
+		mes "Te queda genial esta clase.";
+		close;
+	}
+	mes "Encontré dos de estos items que son muy valiosos, te puedo dar uno.";
+	mes "Yo usé este orbe para cambiar de oficio";
+	if( JobLevel < 10 || SkillPoint )
+	{
+		mes "Pero primero usa todos tus puntos o sube de nivel";
+		close;
+	}
+	mes "¿dime a cual quieres cambiar?";
+	next;
+	switch(select("[ > ] Sigo como ^ff0000Novice^000000:[ > ] Quiero ser un ^0000ffSwordman^000000:[ > ] Quiero ser un ^0000ffMage^000000:[ > ] Quiero ser un ^0000ffArcher^000000:[ > ] Quiero ser un ^0000ffAcolyte^000000:[ > ] Quiero ser un ^0000ffMerchant^000000:[ > ] Quiero ser un ^0000ffThief^000000"))
+	{
+		case 1:
+			mes "[Emily]";
+			mes "No te preocupes es una dificil elección";
+			close;
+		case 2:
+			set .@job,Job_Swordman;
+			set .@item, 23310;
+			break;
+		case 3:
+			set .@job,Job_Mage;
+			set .@item, 23311;
+			break;
+		case 4:
+			set .@job,Job_Archer;
+			set .@item, 23312;
+			break;
+		case 5:
+			set .@job,Job_Acolyte;
+			set .@item, 23313;
+			break;
+		case 6:
+			set .@job,Job_Merchant;
+			set .@item, 23314;
+			break;
+		case 7:
+			set .@job,Job_Thief;
+			set .@item, 23315;
+			break;
+	}
+	mes "[Emily]";
+	mes "¿Seguro que te deseas transformar en un ^0000ff"+jobname(.@job)+"^000000?, no se puede revertir.";
+	next;
+	if( select("Dejame pensarlo:Adelante!") == 1 )
+	{
+		mes "[Emily]";
+		mes "No te preocupes, es una dificil elección.";
+		close;
+	}
+	mes "[Emily]";
+	mes "Di aaaahh....";
+	close2;
+	delitem 23310,rentalcountitem(23310);
+	delitem 23311,rentalcountitem(23311);
+	delitem 23312,rentalcountitem(23312);
+	delitem 23313,rentalcountitem(23313);
+	delitem 23314,rentalcountitem(23314);
+	delitem 23315,rentalcountitem(23315);
+	delitem 23316,countitem(23316);
+	rentitem .@item,7200;
+	if( .@item == 23312 )
+		getitem 23316,2000;
+	specialeffect2 EF_ANGEL2;
+	specialeffect2 EF_ELECTRIC;
+	callfunc "Job_Change",.@job;
+	callfunc "F_ClearJobVar";
+	end;
+OnTouch:
+	if ( Class == Job_Novice )
+		npctalk "Emily: Hey, encontré algo interesante!";
+	end;
+
+OnInit:
+	questinfo( QTYPE_JUMPING_PORING, QMARK_YELLOW , "Class == Job_Novice" );
 	end;
 }

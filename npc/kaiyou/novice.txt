@@ -193,7 +193,8 @@ startermap,43,56,3	script	Eeta#Quest	10402,{
 	next;
 	switch(select(
 				( QuestNovice == 0 )?"^10B2D2 [ > ] ^000000Información del juego":"",
-				( QuestNovice != 0 )?"^10B2D2 [ > ] ^000000Ir a la zona de entrenamiento":""
+				( QuestNovice != 0 && Class == Job_Novice )?"^10B2D2 [ > ] ^000000Ir a la zona de entrenamiento":"",
+				( Class != Job_Novice )?"^10B2D2 [ > ] ^000000Despedirse":""
 				))
 	{
 		case 1:
@@ -258,7 +259,7 @@ startermap,43,56,3	script	Eeta#Quest	10402,{
 			mes "Las opciones '^3355FFSend to Party^000000' y '^3355FFSend to Guild^000000' te dejan enviar mensajes sólo a los miembros de tu party o guild, aunque te encuentres lejos de ellos.";
 			next;
 			mes .@name$;
-			mes "ahora puedes desplazar la rueda del mouse sobre esta ventana y podrás observar el historial de conversaciones desde que estuvieste activo, espero que no tengas problemas con ningún otro jugador.";
+			mes "Ahora puedes desplazar la rueda del mouse sobre esta ventana y podrás observar el historial de conversaciones desde que estuvieste activo, espero que no tengas problemas con ningún otro jugador.";
 			next;
 			mes .@name$;
 			mes "Ahora, uno de los más importantes, el ^3355FFMini-Mapa^000000, ubicado arriba a la derecha de tu pantalla.";
@@ -428,6 +429,10 @@ startermap,43,56,3	script	Eeta#Quest	10402,{
 			sleep2 3000;
 			message strcharinfo(0), "[Novice] Recuerda que tienes una "+ getitemname(12324) + " para que puedas volver.";
 			end;
+		case 3:
+			mes .@name$;
+			mes "Que te vaya bien en tu viaje por Midgard";
+			close;
 			
 	}
 	end;

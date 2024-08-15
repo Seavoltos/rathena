@@ -24,7 +24,7 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 			mes .@name$;
 			mes "¿Qué tiempo deseas reiniciar?";
 			next;
-			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower:Kami's Lookout"))
+			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower:Kami's Lookout:Poring Village"))
 			{
 				case 1:
 					mes .@name$;
@@ -68,6 +68,12 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 						}
 					}
 					end;
+				case 12:
+					set .@str_1$, "$120719_str_PVillage";
+					set .@num_1$, "$120719_num_PVillage";
+					set .@mem_1$, "$120903_num_PVillage";
+					set .@time,14400;
+					break;
 				default:
 					mes .@name$;
 					mes "En construcción";
@@ -86,7 +92,7 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 			mes .@name$;
 			mes "¿Qué instancia deseas reiniciar?";
 			next;
-			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower:Kami's Lookout"))
+			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower:Kami's Lookout:Poring Village"))
 			{
 				case 1:
 					mes .@name$;
@@ -157,6 +163,19 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 					mes .@name$;
 					mes "La purification Stone ha sido activada.";
 					close;
+				case 12:
+					mes .@name$;
+					mes "Deseas activar el reset de la instancia ^ff0000Poring Village^000000?";
+					next;
+					if(select("No:Si") == 1 ){
+						mes .@name$;
+						mes "No hay problema";
+						close;
+					}
+					enablenpc "Purification Stone#PV";
+					mes .@name$;
+					mes "La purification Stone ha sido activada.";
+					close;
 				default:
 					mes .@name$;
 					mes "En construcción";
@@ -167,7 +186,7 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 			mes .@name$;
 			mes "¿Qué instancia deseas desactivar?";
 			next;
-			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower:Kami's Lookout"))
+			switch(select("Ninguno:Airship Assault:Dragon Nest:Endless Tower:Fallen Angel:Nydhoggs Nest:Orcs Memory:Pirate Ship:Sealed Shrine:Thanatos Tower:Kami's Lookout:Poring Village"))
 			{
 				case 1:
 					mes .@name$;
@@ -235,6 +254,19 @@ instance,48,52,4	script	#Controller_Instance	CLEAR_NPC,{
 						close;
 					}
 					disablenpc "Purification Stone#KS";
+					mes .@name$;
+					mes "La purification Stone ha sido desactivada.";
+					close;
+				case 12:
+					mes .@name$;
+					mes "Deseas desactivar el reset de la instancia ^ff0000Kami's Lookout^000000?";
+					next;
+					if(select("No:Si") == 1 ){
+						mes .@name$;
+						mes "No hay problema";
+						close;
+					}
+					disablenpc "Purification Stone#PV";
 					mes .@name$;
 					mes "La purification Stone ha sido desactivada.";
 					close;
@@ -379,7 +411,6 @@ OnTimer1800000:
 }
 
 instance,55,64,4	script	Purification Stone#KS	406,{
-	set ttower_timer,0;
 	erasequest 12329;
 	mes "^0000ffEl registro y efectos relacionados con Kami's Lookout ha desaparecido. Puedes volver a ingresar nuevamente.^000000";
 	close;
@@ -407,5 +438,38 @@ OnTimer1740000:
 
 OnTimer1800000:
 	disablenpc "Purification Stone#KS";
+	end;
+}
+
+startermap2,125,27,4	script	Purification Stone#PV	406,{
+	erasequest 12416;
+	erasequest 12417;
+	erasequest 12418;
+	mes "^0000ffEl registro y efectos relacionados con Poring Village ha desaparecido. Puedes volver a ingresar nuevamente.^000000";
+	close;
+
+OnInit:
+	disablenpc "Purification Stone#PV";
+	end;
+
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	disablenpc "Purification Stone#PV";
+	end;
+
+OnTimer1000:
+	enablenpc "Purification Stone#PV";
+	end;
+
+OnTimer1740000:
+	mapannounce "startermap2", "La Purification Stone se destruirá en 1 minuto.",bc_map,"0x00ff99";
+	end;
+
+OnTimer1800000:
+	disablenpc "Purification Stone#PV";
 	end;
 }

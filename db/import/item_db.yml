@@ -19491,7 +19491,7 @@ Body:
     ArmorLevel: 1
     Locations:
       Costume_Garment: true
-    View: 112
+    View: 109
   - Id: 20602
     AegisName: Wing_Of_Spider
     Name: costume Wing of Spider    # !todo check english name
@@ -26209,7 +26209,7 @@ Body:
     ArmorLevel: 1
     EquipLevelMin: 20
     Script: |
-      autobonus "{ bonus bSpeedRate,25; }",50,5000,BF_NORMAL,"{ showscript \"Transformaci󮭥n-Smokie!\"; active_transform 1056,5000; /*SMOKIE*/ }";
+      autobonus "{ bonus bSpeedRate,25; }",50,5000,BF_NORMAL,"{ showscript \"Transformacion-Smokie!\"; active_transform 1056,5000; /*SMOKIE*/ }";
   - Id: 19239
     AegisName: PoringTownCarrot
     Name: Poring Village Carrot
@@ -26222,13 +26222,13 @@ Body:
     ArmorLevel: 1
     EquipLevelMin: 20
     Script: |
-      autobonus "{ bonus bSpeedRate,25; }",50,5000,BF_NORMAL,"{ showscript \"Transformaci󮭥n-Lunatic!\"; active_transform 1063,5000; /*LUNATIC*/ }";
+      autobonus "{ bonus bSpeedRate,25; }",50,5000,BF_NORMAL,"{ showscript \"Transformacion-Lunatic!\"; active_transform 1063,5000; /*LUNATIC*/ }";
   - Id: 23302
     AegisName: PoringsPreciousBox
     Name: Poring Treasure Box
     Type: Usable
     Weight: 200
-    EquipLevelMin: 30
+    EquipLevelMin: 10
     Flags:
       Container: true
     Script: |
@@ -26238,9 +26238,9 @@ Body:
     Name: Sword
     Type: Weapon
     SubType: 2hSword
-    Buy: 115
+    Buy: 50
     Weight: 1
-    Attack: 115
+    Attack: 110
     Range: 1
     Jobs:
       Novice: true
@@ -26249,7 +26249,7 @@ Body:
       Both_Hand: true
     WeaponLevel: 1
     EquipLevelMin: 1
-    EquipLevelMax: 40
+    EquipLevelMax: 70
     Refineable: false
     Trade:
       NoDrop: true
@@ -26264,6 +26264,10 @@ Body:
       skill 5,10;
       skill 6,10;
       skill 7,10;
+      bonus bMaxHP,200;
+      bonus bMaxSP,200;
+      bonus bUseSPrate,-90;
+      if (Class == Job_Novice) bonus bAspd,100;
   - Id: 23311
     AegisName: Poring_Book
     Name: Book
@@ -26271,7 +26275,7 @@ Body:
     SubType: Book
     Buy: 50
     Weight: 1
-    Attack: 80
+    Attack: 10
     Range: 1
     Jobs:
       Novice: true
@@ -26280,7 +26284,7 @@ Body:
       Right_Hand: true
     WeaponLevel: 1
     EquipLevelMin: 1
-    EquipLevelMax: 40
+    EquipLevelMax: 70
     Refineable: false
     Trade:
       NoDrop: true
@@ -26295,6 +26299,9 @@ Body:
       skill 11,10;
       skill 15,10;
       skill 19,10;
+      bonus bMaxHP,200;
+      bonus bMaxSP,200;
+      bonus bUseSPrate,-90;
   - Id: 23312
     AegisName: Poring_Bow
     Name: Bow
@@ -26302,7 +26309,7 @@ Body:
     SubType: Bow
     Buy: 50
     Weight: 1
-    Attack: 20
+    Attack: 30
     Range: 1
     Jobs:
       Novice: true
@@ -26311,7 +26318,7 @@ Body:
       Both_Hand: true
     WeaponLevel: 1
     EquipLevelMin: 1
-    EquipLevelMax: 40
+    EquipLevelMax: 70
     Refineable: false
     Trade:
       NoDrop: true
@@ -26326,6 +26333,9 @@ Body:
       skill 45,10;
       skill 44,10;
       skill 46,10;
+      bonus bMaxHP,200;
+      bonus bMaxSP,200;
+      bonus bUseSPrate,-90;
   - Id: 23313
     AegisName: Poring_Cross
     Name: Cross
@@ -26333,7 +26343,7 @@ Body:
     SubType: Mace
     Buy: 50
     Weight: 1
-    Attack: 80
+    Attack: 10
     Range: 1
     Jobs:
       Novice: true
@@ -26342,7 +26352,7 @@ Body:
       Right_Hand: true
     WeaponLevel: 1
     EquipLevelMin: 1
-    EquipLevelMax: 40
+    EquipLevelMax: 70
     Refineable: false
     Trade:
       NoDrop: true
@@ -26357,6 +26367,9 @@ Body:
       skill 28,10;
       skill 29,10;
       skill 34,10;
+      bonus bMaxHP,200;
+      bonus bMaxSP,200;
+      bonus bUseSPrate,-90;
   - Id: 23314
     AegisName: Poring_Axe
     Name: Axe
@@ -26373,7 +26386,7 @@ Body:
       Both_Hand: true
     WeaponLevel: 1
     EquipLevelMin: 1
-    EquipLevelMax: 40
+    EquipLevelMax: 70
     Refineable: false
     Trade:
       NoDrop: true
@@ -26388,6 +26401,10 @@ Body:
       skill 42,10;
       skill 155,1;
       bonus bMammoniteDiscount,1000;
+      bonus bMaxHP,200;
+      bonus bMaxSP,200;
+      bonus bUseSPrate,-90;
+      if (Class == Job_Novice) bonus bAspd,100;
   - Id: 23315
     AegisName: Poring_Knife
     Name: Knife
@@ -26395,7 +26412,7 @@ Body:
     SubType: Dagger
     Buy: 50
     Weight: 1
-    Attack: 17
+    Attack: 60
     Range: 1
     Jobs:
       Novice: true
@@ -26404,7 +26421,7 @@ Body:
       Right_Hand: true
     WeaponLevel: 1
     EquipLevelMin: 1
-    EquipLevelMax: 40
+    EquipLevelMax: 70
     Refineable: false
     Trade:
       NoDrop: true
@@ -26419,25 +26436,28 @@ Body:
       skill 48,10;
       skill 49,10;
       skill 52,10;
+      bonus bMaxHP,200;
+      bonus bMaxSP,200;
+      bonus bUseSPrate,-90;
+      if (Class == Job_Novice) bonus bAspd,20;
   - Id: 23316
     AegisName: Poring_Arrow
     Name: Arrow
     Type: Ammo
     SubType: Arrow
     Buy: 1
-    Weight: 1
-    Attack: 25
+    Weight: 0
+    Attack: 20
     Jobs:
       Archer: true
       Novice: true
     Locations:
       Ammo: true
     EquipLevelMin: 1
-    EquipLevelMax: 40
+    EquipLevelMax: 70
     Trade:
       NoDrop: true
       NoTrade: true
-      NoSell: true
       NoCart: true
       NoStorage: true
       NoGuildStorage: true

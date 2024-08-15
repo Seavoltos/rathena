@@ -113,7 +113,6 @@
 2664,Furious Shinobi@AS_CLOAKING,idle,135,1,500,200,5000,yes,self,always,,,,,,,,
 2664,Furious Shinobi@HT_CLAYMORETRAP,idle,123,5,500,0,300000,yes,around2,always,,,,,,,9,
 2664,Furious Shinobi@MO_BODYRELOCATION,chase,264,1,2000,500,5000,no,target,myhpltmaxrate,10,,,,,,,
-2664,Furious Shinobi@NPC_REBIRTH,dead,208,2,5000,0,0,yes,self,always,,,,,,,29,
 2664,Furious Shinobi@SM_BASH,attack,5,5,500,0,5000,yes,target,always,,,,,,,,
 2664,Furious Shinobi@TF_BACKSLIDING,attack,150,1,10000,500,3600000,no,self,myhpltmaxrate,10,,,,,,,
 2674,Furious Sandman@AS_CLOAKING,angry,135,1,2000,200,5000,yes,self,always,,,,,,,,
