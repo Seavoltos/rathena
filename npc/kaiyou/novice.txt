@@ -404,17 +404,23 @@ startermap,43,56,3	script	Eeta#Quest	10402,{
 				mes "recuerdalo, okay?";
 			}
 			next;
+			opentips 70;
+			mes .@name$;
+			mes "Lo último es relacionado con los Achievements o logros, en el servidor los utilizamos mucho, puedes cobrar un conjunto de pociones ahora si los revisas!";
+			if (!achievementexists(200001))
+				achievementcomplete(200001);
+			next;
 			mes .@name$;
 			mes "Bueno creo que ya estás listo para ir a la ^00ff00zona de entrenamiento^000000, recorre lo último y me avisas.";
 			close2;
-			getitem 569,100; //Novice_Potion
+			getitem 11570,100; //Novice_Potion_B
 			getitem 1243,1; //Novice_Knife
 			getitem 2352,1; //Novice_Plate
 			getitem 2112,1; //Novice_Guard
-			getitem 601,20; //Wing_Of_Fly
+			getitem 23575,1; //Adventurer_Box_10
 			getitem 7059,10; //Free Ticket for Kafra Storage
 			getitem 7060,10; //Free Ticket for Kafra Transportation
-			getitem 611,20;
+			getitem 12325,20; //N_Magnifier
 			end;
 			
 		case 2:

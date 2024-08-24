@@ -673,6 +673,8 @@ Body:
         Price: 1000
       - Item: Change_Name_Card
         Price: 1000
+      - Item: MvP_Ticket_Kami_Vip
+        Price: 200
       - Item: Oktoberfest_Bag
         Price: 100
       - Item: Hanbok_bag

@@ -8308,7 +8308,664 @@ Body:
       Costume_Head_Top: true
     EquipLevelMin: 1
     ArmorLevel: 1
+    View: 2496
+  - Id: 61497
+    AegisName: C_Costume_2497 #No funciona
+    Name: Twin_Canon_LT_TW
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2497
+  - Id: 61498
+    AegisName: C_Costume_2498 #No funciona
+    Name: C_Petit_Choco_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2498
+  - Id: 61499
+    AegisName: C_Costume_2499 #No funciona
+    Name: C_White_Rabbit_Hair
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2499
+  - Id: 61500
+    AegisName: C_Costume_2500 #No funciona
+    Name: Poenetentia_P_Crown
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2500
+  - Id: 61501
+    AegisName: C_Costume_2501 #No funciona
+    Name: C_Merlion_Hat_MSP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2501
+  - Id: 61502
+    AegisName: C_Costume_2502 #No funciona
+    Name: C_GGH_Numbawan_MSP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2502
+  - Id: 61503
+    AegisName: C_Costume_2503 #No funciona
+    Name: Wisdom_Core_Headphones
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2503
+  - Id: 61504
+    AegisName: C_Costume_2504 #No funciona
+    Name: Steamroller
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2504
+  - Id: 61505
+    AegisName: C_Costume_2505 #No funciona
+    Name: White_Fox_Bamboo_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2505
+  - Id: 61506
+    AegisName: C_Costume_2506 #No funciona
+    Name: Poenetentia_S_Crown
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2506
+  - Id: 61507
+    AegisName: C_Costume_2507
+    Name: C_Ribbon_Beret_B
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2507
+  - Id: 61508
+    AegisName: C_Costume_2508 #No funciona
+    Name: C_Neon_Half_Long
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2508
+  - Id: 61509
+    AegisName: C_Costume_2509 #No funciona
+    Name: White_Cat_Witch_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2509
+  - Id: 61510
+    AegisName: C_Costume_2510 #No funciona
+    Name: CharmOfAnywhere
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2510
+  - Id: 61511
+    AegisName: C_Costume_2511 #No funciona
+    Name: Poenetentia_M_Crown
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2511
+  - Id: 61512
+    AegisName: C_Costume_2512
+    Name: C_Heine_Tab_1
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2512
+  - Id: 61513
+    AegisName: C_Costume_2513
+    Name: C_Heine_Tab_2
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2513
+  - Id: 61514
+    AegisName: C_Costume_2514
+    Name: C_Heine_Tab_3
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2514
+  - Id: 61515
+    AegisName: C_Costume_2515
+    Name: C_Clover_Hairpin
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2515
+  - Id: 61516
+    AegisName: C_Costume_2516 #No funciona
+    Name: C_Flower_S_Knit_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2516
+  - Id: 61517
+    AegisName: C_Costume_2517 #No funciona
+    Name: C_Chewy_Low_Twin
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2517
+  - Id: 61518
+    AegisName: C_Costume_2518
+    Name: C_Consecrate_Aureola_M
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2518
+  - Id: 61519
+    AegisName: C_Costume_2519 #No funciona
+    Name: Soul_Mastery_Crown
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2519
+  - Id: 61520
+    AegisName: C_Costume_2520 #No funciona
+    Name: Bear_Candy_Cart
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2520
+  - Id: 61521
+    AegisName: C_Costume_2521 #No funciona
+    Name: Garden_Of_Heaven
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2521
+  - Id: 61522
+    AegisName: C_Costume_2522 #No funciona
+    Name: Cat_Ears_Cape_Blue
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2522
+  - Id: 61523
+    AegisName: C_Costume_2523 #No funciona
+    Name: Satanic_Crown
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2523
+  - Id: 61524
+    AegisName: C_Costume_2524 #No funciona
+    Name: C_Eye_Mask
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2524
+  - Id: 61525
+    AegisName: C_Costume_2525 #No funciona
+    Name: Undead_Seal_Rose
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2525
+  - Id: 61526
+    AegisName: C_Costume_2526 #No funciona
+    Name: Ground_Seal_Rose
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2526
+  - Id: 61527
+    AegisName: C_Costume_2527 #No funciona
+    Name: C_Randgris_Hair
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2527
+  - Id: 61528
+    AegisName: C_Costume_2528 #No funciona
+    Name: C_Blink_Eyes_D_Freyja
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2528
+  - Id: 61529
+    AegisName: C_Costume_2529 #No funciona
+    Name: Interdimensional_Rift
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2529
+  - Id: 61530
+    AegisName: C_Costume_2530 #No funciona
+    Name: Queen_of_Calamity
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2530
+  - Id: 61531
+    AegisName: C_Costume_2531 #No funciona
+    Name: C_CLB_SS_DF
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2531
+  - Id: 61532
+    AegisName: C_Costume_2532 #No funciona
+    Name: C_CLB_SS_EA
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2532
+  - Id: 61533
+    AegisName: C_Costume_2533 #No funciona
+    Name: C_CLB_SS_LL
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2533
+  - Id: 61534
+    AegisName: C_Costume_2534 #No funciona
+    Name: C_Kitchen_Car
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2534
+  - Id: 61535
+    AegisName: C_Costume_2535 #No funciona
+    Name: C_Signon_Loop
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2535
+  - Id: 61536
+    AegisName: C_Costume_2536 #No funciona
+    Name: C_Fluffy_Bakery
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2536
+  - Id: 61537
+    AegisName: C_Costume_2537 #No funciona
+    Name: C_Yellow_Head_Dress
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2537
+  - Id: 61538
+    AegisName: C_Costume_2538 #No funciona
+    Name: C_CatCoffeeCup_WH
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2538
+  - Id: 61539
+    AegisName: C_Costume_2539 #No funciona
+    Name: C_Dragon_Green_Aura
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2539
+  - Id: 61540
+    AegisName: C_Costume_2540 #No funciona
+    Name: C_Dragon_Red_Aura
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2540
+  - Id: 61541
+    AegisName: C_Costume_2541 #No funciona
+    Name: C_Dragon_Yellow_Aura
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2541
+  - Id: 61542
+    AegisName: C_Costume_2542 #No funciona
+    Name: C_Broken_Egg
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2542
+  - Id: 61543
+    AegisName: C_Costume_2543 #No funciona
+    Name: Marin_Pattern_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2543
+  - Id: 61544
+    AegisName: C_Costume_2544 #No funciona
+    Name: Handiness_Telescope_LT
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2544
+  - Id: 61545
+    AegisName: C_Costume_2545 #No funciona
+    Name: Rescue_whistle_LT
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2545
+  - Id: 61546
+    AegisName: C_Costume_2546 #No funciona
+    Name: C_Guardian_Of_Abyss
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2546
+  - Id: 61547
+    AegisName: C_Costume_2547 #No funciona
+    Name: C_Ribbon_Braid_Hair
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2547
+  - Id: 61548
+    AegisName: C_Costume_2548 #No funciona
+    Name: C_Jerboa_Headband
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2548
+  - Id: 61549
+    AegisName: C_Costume_2549 #No funciona
+    Name: C_Angel_Berry_Wig
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2549
+  - Id: 61550
+    AegisName: C_Costume_2550 #No funciona
+    Name: C_Bell_Flower_Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2550
+  - Id: 61551
+    AegisName: C_Costume_2551 #No funciona
+    Name: C_2024ROS_Hat_1st
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2551
+  - Id: 61552
+    AegisName: C_Costume_2552 #No funciona
+    Name: C_2024ROS_Hat_2nd
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2552
+  - Id: 61553
+    AegisName: C_Costume_2553 #No funciona
+    Name: C_2024ROS_Hat_3rd
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2553
+  - Id: 61554
+    AegisName: C_Costume_2554 #No funciona
+    Name: C_2024ROS_Hat_4th
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2554
+  - Id: 61555
+    AegisName: C_Costume_2555 #No funciona
+    Name: C_Helm_Of_Ra_KR
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2555
+  - Id: 61556
+    AegisName: C_Costume_2556 #No funciona
+    Name: Magma_Ignis_Cap
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2556
+  - Id: 61557
+    AegisName: C_Costume_2557 #No funciona
+    Name: C_Carabao_MSP
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2557
+  - Id: 61558
+    AegisName: C_Costume_2558 #No funciona
+    Name: C_Gold_Paeonia
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2558
+  - Id: 61559
+    AegisName: C_Costume_2559 #No funciona
+    Name: C_Red_Paeonia
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2559
+  - Id: 61560
+    AegisName: C_Costume_2560
+    Name: C_Buoyant_Parasol_B
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2560
+  - Id: 61561
+    AegisName: C_Costume_2561
+    Name: C_Buoyant_Parasol_R
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2561
+  - Id: 61562
+    AegisName: C_Costume_2562
+    Name: C_Blue_Sunbed
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2562
+  - Id: 61563
+    AegisName: C_Costume_2563
+    Name: C_Green_Sunbed
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2563
+  - Id: 61564
+    AegisName: C_Costume_2564 #No funciona
+    Name: C_Auspicloud
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
     View: 1
+  - Id: 61565
+    AegisName: C_Costume_2565 #No funciona
+    Name: Astraea_Helm_LT
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61566
+    AegisName: C_Costume_2566 #No funciona
+    Name: C_Pool
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61567
+    AegisName: C_Costume_2567 #No funciona
+    Name: C_Cha_Ex_Twin
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61568
+    AegisName: C_Costume_2568 #No funciona
+    Name: C_Eyes_Phen
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 1
+  - Id: 61569
+    AegisName: C_Costume_2569
+    Name: C_Candle_Set
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 2569
 
   - Id: 100000
     AegisName: Instance_Airship
@@ -8400,7 +9057,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 7
   - Id: 65008
     AegisName: C_Garment_8
     Name: Rudra Wing
@@ -8706,7 +9363,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 41
   - Id: 65042
     AegisName: C_Garment_42
     Name: Angel Ribbon Wing
@@ -8724,7 +9381,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 43
   - Id: 65044
     AegisName: C_Garment_44
     Name: Halloween Poring Bag
@@ -8782,7 +9439,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 49
   - Id: 65050
     AegisName: C_Garment_50
     Name: Wing of Heart
@@ -8890,7 +9547,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 61
   - Id: 65062
     AegisName: C_Garment_62
     Name: Big Foxtail
@@ -9187,7 +9844,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 94
   - Id: 65095
     AegisName: C_Garment_95
     Name: Fairy of Eden
@@ -9205,7 +9862,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 96
   - Id: 65097
     AegisName: C_Garment_97
     Name: Scepter
@@ -9316,7 +9973,7 @@ Body:
     View: 108
   - Id: 65109
     AegisName: C_Garment_109
-    Name: Released Ground
+    Name: C Giant Shark
     Type: Armor
     Locations:
       Costume_Garment: true
@@ -9413,7 +10070,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 119
-  - Id: 65120 #No funciona
+  - Id: 65120
     AegisName: C_Garment_120
     Name: C Wing Of Eutaxy
     Type: Armor
@@ -9421,7 +10078,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 120
   - Id: 65121
     AegisName: C_Garment_121
     Name: C Spoon Fork Set
@@ -10136,7 +10793,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 198
-  - Id: 65199 #No funciona
+  - Id: 65199
     AegisName: C_Garment_199
     Name: C Loli Ruri Moon B
     Type: Armor
@@ -10144,7 +10801,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 199
   - Id: 65200 #No funciona
     AegisName: C_Garment_200
     Name: C Big Usagi Bag
@@ -10190,6 +10847,294 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 204
+  - Id: 65205 #No funciona
+    AegisName: C_Garment_205
+    Name: S G Manteau LT TW
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 205
+  - Id: 65206 #No funciona
+    AegisName: C_Garment_206
+    Name: C Rabbit Tail
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 206
+  - Id: 65207 #No funciona
+    AegisName: C_Garment_207
+    Name: C Cyber Sword
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 207
+  - Id: 65208 #No funciona
+    AegisName: C_Garment_208
+    Name: C Cyber Rifle
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 208
+  - Id: 65209 #No funciona
+    AegisName: C_Garment_209
+    Name: C Defense Shield
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 209
+  - Id: 65210 #No funciona
+    AegisName: C_Garment_210
+    Name: C Power Cable
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 210
+  - Id: 65211
+    AegisName: C_Garment_211
+    Name: C_Unicorn_Fan_trav
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 211
+  - Id: 65212
+    AegisName: C_Garment_212
+    Name: C_Cat_Donut_TW
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 212
+  - Id: 65213
+    AegisName: C_Garment_213
+    Name: C_Sakura_Rod
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 213
+  - Id: 65214
+    AegisName: C_Garment_214
+    Name: C_Sweet_Flower_Garden
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 214
+  - Id: 65215
+    AegisName: C_Garment_215
+    Name: C_Glass_Rose_Garden
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 215
+  - Id: 65216
+    AegisName: C_Garment_216
+    Name: C_Twin_Edge
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 216
+  - Id: 65217
+    AegisName: C_Garment_217
+    Name: C_Baphomet_Scythe
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 217
+  - Id: 65218
+    AegisName: C_Garment_218
+    Name: C_Hemel_Sword
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 218
+  - Id: 65219
+    AegisName: C_Garment_219
+    Name: C_Big_Treasure_Chest
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 219
+  - Id: 65220
+    AegisName: C_Garment_220
+    Name: Guardian_Of_Abyss
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 220
+  - Id: 65221
+    AegisName: C_Garment_221
+    Name: C_CLB_SS_LT
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 221
+  - Id: 65222
+    AegisName: C_Garment_222
+    Name: C_Honey_Dipper
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 222
+  - Id: 65223
+    AegisName: C_Garment_223
+    Name: C_Plant_Outing_Set
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 223
+  - Id: 65224
+    AegisName: C_Garment_224
+    Name: C_Galapago_Aquarium
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 224
+  - Id: 65225
+    AegisName: C_Garment_225
+    Name: C_FH_Lostwing
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 225
+  - Id: 65226
+    AegisName: C_Garment_226
+    Name: C_Archmage_Wand
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 226
+  - Id: 65227
+    AegisName: C_Garment_227
+    Name: C_Rose_Gothic_Ribbon
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 227
+  - Id: 65228
+    AegisName: C_Garment_228
+    Name: C_Ragdoll_Face_Bag
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 228
+  - Id: 65229
+    AegisName: C_Garment_229
+    Name: Hanwha_Pool_Ring
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 229
+  - Id: 65230
+    AegisName: C_Garment_230
+    Name: C_Bolo_MSP
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 230
+  - Id: 65231
+    AegisName: C_Garment_231
+    Name: Olympus_Wing_LT
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 231
+  - Id: 65232
+    AegisName: C_Garment_232
+    Name: C_Ribbon_R_Bag
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 232
+  - Id: 65233
+    AegisName: C_Garment_233
+    Name: C_FB_EvilSprit
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 233
+  - Id: 65234
+    AegisName: C_Garment_234
+    Name: C_Poring_Cream_Soda
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 234
+  - Id: 65235
+    AegisName: C_Garment_235
+    Name: C_Poring_Swim_Ring
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 235
+  - Id: 65236
+    AegisName: C_Garment_236
+    Name: Poporing_Pool_Ring
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 236
 #ID COSTUME RENEWALL
   - Id: 5909
     AegisName: C_Valkyrie_Circlet
@@ -24855,6 +25800,15 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1880
+  - Id: 31700
+    AegisName: C_ScarfOfHero_TW
+    Name: Costume Hunter Scarf
+    Type: Armor
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    View: 1882
   - Id: 31702
     AegisName: Costume_Moon_Cat_Hat
     Name: C Moon Cat Hat
@@ -25440,6 +26394,14 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1927
+  - Id: 31818
+    AegisName: C_TopPlayer_TW
+    Name: Costume Top Player
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    View: 1930
   - Id: 31819
     AegisName: Costume_Dullahan_Mask
     Name: C Dullahan Mask
@@ -25449,6 +26411,14 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1931
+  - Id: 31820
+    AegisName: C_Golden_Baseball_Cap
+    Name: Costume Golden Baseball Cap
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    View: 263
   - Id: 31823
     AegisName: Costume_Nose_Glasses
     Name: C Nose Glasses
@@ -25521,6 +26491,24 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 1940
+  - Id: 31835
+    AegisName: C_2019_D10_Muffler_TW
+    Name: Costume 10th October National Day Scarf
+    Type: Armor
+    Locations:
+      Costume_Head_Low: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    View: 1941
+  - Id: 31836
+    AegisName: C_Aviator_Hat
+    Name: Costume Aviator's Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    EquipLevelMin: 1
+    View: 972
   - Id: 31837
     AegisName: Costume_Shark_Head
     Name: C Shark Head
@@ -25777,6 +26765,14 @@ Body:
     View: 1982
     Locations:
       Costume_Head_Low: true
+  - Id: 31886
+    AegisName: C_Pierced_Apple_E
+    Name: Costume Pierced Apple Hat
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    ArmorLevel: 1
+    View: 1952
   - Id: 31887
     AegisName: aegis_31887
     Name: Costume Pure Scarf
@@ -26192,6 +27188,28 @@ Body:
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
+###########################################################################
+#
+# Instance Kami's Lookout
+#
+###########################################################################
+  - Id: 42021
+    AegisName: MvP_Ticket_Kami
+    Name: Kami's Lookout Ticket
+    Type: Etc
+    Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+  - Id: 42022
+    AegisName: MvP_Ticket_Kami_Vip
+    Name: Kami's Lookout Ticket
+    Type: Etc
+    Weight: 10
 ###########################################################################
 #
 # Instance Poring Village
@@ -27575,15 +28593,17 @@ Body:
       NoTrade: true
       NoSell: true
       NoCart: true
+      NoStorage: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
     Script: |
       sc_start SC_EXPBOOST,1800000,300;
   - Id: 23575
-    AegisName: Adventurer_Box_1
-    Name: Adventurer Box (1)
+    AegisName: Adventurer_Box_10
+    Name: Adventurer Box (10)
     Type: Usable
+    EquipLevelMin: 10
     Weight: 0
     Trade:
       NoDrop: true
@@ -27596,7 +28616,6 @@ Body:
     Script: |
       getitem 11567,100;
       getitem 12265,5;
-      getitem 22979,5;
       getitem 23338,50;
       getitem 23576,1;
   - Id: 11567
@@ -27609,6 +28628,7 @@ Body:
       NoTrade: true
       NoSell: true
       NoCart: true
+      NoStorage: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -27625,6 +28645,7 @@ Body:
       NoTrade: true
       NoSell: true
       NoCart: true
+      NoStorage: true
       NoGuildStorage: true
       NoMail: true
       NoAuction: true
@@ -27660,10 +28681,10 @@ Body:
     Script: |
        itemskill "AL_TELEPORT",1;
   - Id: 23576
-    AegisName: Adventurer_Box_15
-    Name: Adventurer Box (15)
+    AegisName: Adventurer_Box_20
+    Name: Adventurer Box (20)
     Type: Usable
-    EquipLevelMin: 15
+    EquipLevelMin: 20
     Weight: 0
     Trade:
       NoDrop: true
@@ -27675,6 +28696,7 @@ Body:
       NoAuction: true
     Script: |
       getitem 11567,150;
+      getitem 7803,1;
       getitem 23338,50;
       getitem 23577,1;
   - Id: 23577
@@ -27741,6 +28763,7 @@ Body:
     Script: |
       getitem 23338,50;
       getitem 23503,25;
+      getitem 14585,4;
       getitem 23579,1;
   - Id: 23579
     AegisName: Adventurer_Box_60
@@ -27759,6 +28782,7 @@ Body:
     Script: |
       getitem 23338,50;
       getitem 23504,20;
+      getitem 14583,4;
       getitem 23580,1;
   - Id: 23504
     AegisName: Orange_Potion_B_20
@@ -27806,6 +28830,7 @@ Body:
     Script: |
       getitem 23338,50;
       getitem 23504,25;
+      getitem 14584,4;
       getitem 23581,1;
   - Id: 23581
     AegisName: Adventurer_Box_90
@@ -27823,6 +28848,8 @@ Body:
       NoAuction: true
     Script: |
       getitem 23505,20;
+      getitem 41020,1;
+      getitem 41023,5;
       getitem 23338,50;
   - Id: 23505
     AegisName: Yellow_Potion_B_20
@@ -27882,3 +28909,505 @@ Body:
       NoAuction: true
     Script: |
       itemheal rand(325,405),0;
+  - Id: 23484
+    AegisName: Firstaid_Box_5
+    Name: First aid Box (5)
+    Type: Usable
+    EquipLevelMin: 5
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11518,10;
+      getitem 11614,20;
+      getitem 12325,15;
+      getitem 22542,1;
+      getitem 23485,1;
+  - Id: 23485
+    AegisName: Firstaid_Box_10
+    Name: First aid Box (10)
+    Type: Usable
+    EquipLevelMin: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11518,15;
+      getitem 11614,40;
+      getitem 12325,15;
+      getitem 22542,1;
+      getitem 23486,1;
+  - Id: 23486
+    AegisName: Firstaid_Box_15
+    Name: First aid Box (15)
+    Type: Usable
+    EquipLevelMin: 15
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11518,20;
+      getitem 11614,60;
+      getitem 12325,10;
+      getitem 22542,2;
+      getitem 23487,1;
+  - Id: 23487
+    AegisName: Firstaid_Box_20
+    Name: First aid Box (20)
+    Type: Usable
+    EquipLevelMin: 20
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11518,15;
+      getitem 11615,80;
+      getitem 12325,10;
+      getitem 22542,2;
+      getitem 23488,1;
+  - Id: 23488
+    AegisName: Firstaid_Box_25
+    Name: First aid Box (25)
+    Type: Usable
+    EquipLevelMin: 25
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11518,20;
+      getitem 11615,100;
+      getitem 12325,5;
+      getitem 22542,3;
+      getitem 23489,1;
+  - Id: 23489
+    AegisName: Firstaid_Box_30
+    Name: First aid Box (30)
+    Type: Usable
+    EquipLevelMin: 30
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11518,25;
+      getitem 11615,120;
+      getitem 12325,5;
+      getitem 22542,3;
+      getitem 23490,1;
+  - Id: 23490
+    AegisName: Firstaid_Box_35
+    Name: First aid Box (35)
+    Type: Usable
+    EquipLevelMin: 35
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,15;
+      getitem 22542,3;
+      getitem 23491,1;
+      getitem 23503,5;
+  - Id: 23491
+    AegisName: Firstaid_Box_40
+    Name: First aid Box (40)
+    Type: Usable
+    EquipLevelMin: 40
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,15;
+      getitem 22544,2;
+      getitem 23492,1;
+      getitem 23503,6;
+  - Id: 23492
+    AegisName: Firstaid_Box_45
+    Name: First aid Box (45)
+    Type: Usable
+    EquipLevelMin: 45
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,20;
+      getitem 22544,2;
+      getitem 23493,1;
+      getitem 23503,7;
+  - Id: 23493
+    AegisName: Firstaid_Box_50
+    Name: First aid Box (50)
+    Type: Usable
+    EquipLevelMin: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,20;
+      getitem 22544,2;
+      getitem 23494,1;
+      getitem 23504,7;
+  - Id: 23494
+    AegisName: Firstaid_Box_55
+    Name: First aid Box (55)
+    Type: Usable
+    EquipLevelMin: 55
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,25;
+      getitem 22544,2;
+      getitem 23495,1;
+      getitem 23504,8;
+  - Id: 23495
+    AegisName: Firstaid_Box_60
+    Name: First aid Box (60)
+    Type: Usable
+    EquipLevelMin: 60
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,25;
+      getitem 23496,1;
+      getitem 23504,9;
+  - Id: 23496
+    AegisName: Firstaid_Box_65
+    Name: First aid Box (65)
+    Type: Usable
+    EquipLevelMin: 65
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,30;
+      getitem 23497,1;
+      getitem 23505,5;
+  - Id: 23497
+    AegisName: Firstaid_Box_70
+    Name: First aid Box (70)
+    Type: Usable
+    EquipLevelMin: 70
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,30;
+      getitem 23498,1;
+      getitem 23505,6;
+  - Id: 23498
+    AegisName: Firstaid_Box_75
+    Name: First aid Box (75)
+    Type: Usable
+    EquipLevelMin: 75
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,35;
+      getitem 23499,1;
+      getitem 23505,7;
+  - Id: 23499
+    AegisName: Firstaid_Box_80
+    Name: First aid Box (80)
+    Type: Usable
+    EquipLevelMin: 80
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,35;
+      getitem 23500,1;
+      getitem 23505,8;
+  - Id: 23500
+    AegisName: Firstaid_Box_85
+    Name: First aid Box (85)
+    Type: Usable
+    EquipLevelMin: 85
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,40;
+      getitem 22543,2;
+      getitem 23501,1;
+      getitem 23506,7;
+  - Id: 23501
+    AegisName: Firstaid_Box_90
+    Name: First aid Box (90)
+    Type: Usable
+    EquipLevelMin: 90
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,40;
+      getitem 22543,2;
+      getitem 23502,1;
+      getitem 23506,8;
+  - Id: 23502
+    AegisName: Firstaid_Box_95
+    Name: First aid Box (95)
+    Type: Usable
+    EquipLevelMin: 95
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 11572,45;
+      getitem 22543,2;
+      getitem 23506,8;
+  - Id: 11518
+    AegisName: N_Blue_Potion
+    Name: Blue Potion
+    Type: Healing
+    Weight: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      itemheal 0,5;
+  - Id: 11614
+    AegisName: Fresh_Milk
+    Name: Fresh Milk
+    Type: Healing
+    Weight: 30
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      itemheal rand(27,37),0;
+  - Id: 12325
+    AegisName: N_Magnifier
+    Name: Novice Magnifier
+    Type: DelayConsume
+    NoUse:
+      Sitting: true
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      itemskill "MC_IDENTIFY",1;
+  - Id: 22542
+    AegisName: Center_Potion_B
+    Name: "[Not For Sale] Concentration Potion"
+    Type: Usable
+    Weight: 100
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      sc_start SC_ASPDPOTION0,1800000,4;
+  - Id: 11615
+    AegisName: Sweet_Potato_
+    Name: Sweet Potato
+    Type: Healing
+    Weight: 20
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      itemheal rand(15,23),0;
+  - Id: 11572
+    AegisName: Blue_Potion_B
+    Name: "[Not For Sale] Blue Potion"
+    Type: Healing
+    Weight: 150
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      itemheal 0,rand(40,60);
+  - Id: 22544
+    AegisName: Awakening_Potion_B
+    Name: "[Not For Sale] Awakening Potion"
+    Type: Usable
+    Weight: 150
+    Jobs:
+      Alchemist: true
+      Archer: true
+      Assassin: true
+      Blacksmith: true
+      Crusader: true
+      Gunslinger: true
+      Hunter: true
+      KagerouOboro: true
+      Knight: true
+      Mage: true
+      Merchant: true
+      Monk: true
+      Ninja: true
+      Novice: true
+      Rebellion: true
+      Rogue: true
+      Sage: true
+      SoulLinker: true
+      StarGladiator: true
+      Summoner: true
+      SuperNovice: true
+      Swordman: true
+      Taekwon: true
+      Thief: true
+      Wizard: true
+    EquipLevelMin: 40
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      sc_start SC_ASPDPOTION1,1800000,6;
+  - Id: 22543
+    AegisName: Berserk_Potion_B
+    Name: "[Not For Sale] Berserk Potion"
+    Type: Usable
+    Weight: 200
+    Jobs:
+      Alchemist: true
+      Blacksmith: true
+      Crusader: true
+      Gunslinger: true
+      Knight: true
+      Mage: true
+      Merchant: true
+      Rebellion: true
+      Rogue: true
+      SoulLinker: true
+      StarGladiator: true
+      Swordman: true
+      Taekwon: true
+      Wizard: true
+    EquipLevelMin: 85
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      sc_start SC_ASPDPOTION2,1800000,9;

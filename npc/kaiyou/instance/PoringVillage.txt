@@ -427,7 +427,7 @@ OnStart:
 	monster 'map_begi$,101,68, "--en--","MD_PORING",1, .@event$;
 	end;
 OnMobDead:
-	if (mobcount( 'map_begi$, instance_npcname("poring_village_1") + "::OnMobDead" ) > 3)
+	if (mobcount( 'map_begi$, instance_npcname("poring_village_1") + "::OnMobDead" ) > 10)
 		end;
 	killmonster 'map_begi$, instance_npcname("poring_village_1") + "::OnMobDead";
 	mapannounce 'map_begi$, "Emily: Wow~ Ustedes son muy fuerte! Derrotaron a todos esos Porings!", bc_map, 0xFFFF00;
@@ -546,7 +546,7 @@ OnStart:
 	monster 'map_begi$,51,143,"--en--","MD_PORING",1, .@event$;
 	end;
 OnMobDead:
-	if (mobcount( 'map_begi$, instance_npcname("poring_village_2") + "::OnMobDead" ) > 4)
+	if (mobcount( 'map_begi$, instance_npcname("poring_village_2") + "::OnMobDead" ) > 10)
 		end;
 	killmonster 'map_begi$, instance_npcname("poring_village_2") + "::OnMobDead";
 	mapannounce 'map_begi$, "Emily: Hmm.. Mira ahi hay otro Jefe... Este se ve fuerte...", bc_map, 0xFFFF00;
@@ -683,6 +683,7 @@ OnTouch:
 }
 1@begi,37,165,5	duplicate(Blue Light Column#1)	Blue Light Column#2	4_ENERGY_BLUE,4,4
 1@begi,175,199,5	duplicate(Blue Light Column#1)	Blue Light Column#3	4_ENERGY_BLUE,4,4
+1@begi,122,35,5	duplicate(Blue Light Column#1)	Blue Light Column#4	4_ENERGY_BLUE,4,4
 
 
 1@begi,199,186,5	script	#gift	4_GEFFEN_03,{
@@ -850,6 +851,7 @@ OnInit:
 	specialeffect2 EF_ANGEL2;
 	specialeffect2 EF_ELECTRIC;
 	callfunc "Job_Change",.@job;
+	ResetStatus;
 	callfunc "F_ClearJobVar";
 	end;
 OnTouch:

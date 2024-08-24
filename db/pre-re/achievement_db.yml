@@ -976,7 +976,7 @@ Body:
     Targets:
       - Id: 0
         Mob: NAGHT_SIEGER
-        Count: 10
+        Count: 5
     Score: 20
   - Id: 128049
     Group: Battle
@@ -984,8 +984,135 @@ Body:
     Targets:
       - Id: 0
         Mob: NAGHT_SIEGER
-        Count: 50
-    Score: 50
+        Count: 10
+    Rewards:
+      Item: C_Garment_216
+    Score: 30
+  - Id: 128050
+    Group: Battle
+    Name: Sealed Shrine challenger
+    Targets:
+      - Id: 0
+        Mob: BAPHOMET_I
+    Score: 10
+  - Id: 128051
+    Group: Battle
+    Name: Sealed Shrine Slayer
+    Targets:
+      - Id: 0
+        Mob: BAPHOMET_I
+        Count: 5
+    Score: 20
+  - Id: 128052
+    Group: Battle
+    Name: Lord of the Baphomet
+    Targets:
+      - Id: 0
+        Mob: BAPHOMET_I
+        Count: 10
+    Rewards:
+      Item: C_Garment_217
+    Score: 30
+  - Id: 128053
+    Group: Battle
+    Name: Dragon Nest challenger
+    Targets:
+      - Id: 0
+        Mob: BONE_DETALE
+    Score: 10
+  - Id: 128054
+    Group: Battle
+    Name: Dragon Nest Slayer
+    Targets:
+      - Id: 0
+        Mob: BONE_DETALE
+        Count: 5
+    Score: 20
+  - Id: 128055
+    Group: Battle
+    Name: Lord of the Dragon
+    Targets:
+      - Id: 0
+        Mob: BONE_DETALE
+        Count: 10
+    Rewards:
+      Item: C_Garment_219
+    Score: 30
+  - Id: 128056
+    Group: Battle
+    Name: Pirate Ship challenger
+    Targets:
+      - Id: 0
+        Mob: KRAKEN
+    Score: 10
+  - Id: 128057
+    Group: Battle
+    Name: Pirate Ship Slayer
+    Targets:
+      - Id: 0
+        Mob: KRAKEN
+        Count: 5
+    Score: 20
+  - Id: 128058
+    Group: Battle
+    Name: Lord of the Pirates
+    Targets:
+      - Id: 0
+        Mob: KRAKEN
+        Count: 10
+    Rewards:
+      Item: C_Garment_236
+    Score: 30
+  - Id: 128059
+    Group: Battle
+    Name: Thanatos Tower challenger
+    Targets:
+      - Id: 0
+        Mob: MD_BROKEN_THANATOS
+    Score: 10
+  - Id: 128060
+    Group: Battle
+    Name: Thanatos Tower Slayer
+    Targets:
+      - Id: 0
+        Mob: MD_BROKEN_THANATOS
+        Count: 5
+    Score: 20
+  - Id: 128061
+    Group: Battle
+    Name: Lord of the Thanatos
+    Targets:
+      - Id: 0
+        Mob: MD_BROKEN_THANATOS
+        Count: 10
+    Rewards:
+      Item: C_Garment_23
+    Score: 30
+  - Id: 128062
+    Group: Battle
+    Name: Airship Assault challenger
+    Targets:
+      - Id: 0
+        Mob: E1_FELOCK
+    Score: 10
+  - Id: 128063
+    Group: Battle
+    Name: Airship Assault Slayer
+    Targets:
+      - Id: 0
+        Mob: E1_FELOCK
+        Count: 5
+    Score: 20
+  - Id: 128064
+    Group: Battle
+    Name: Lord of the Airship
+    Targets:
+      - Id: 0
+        Mob: E1_FELOCK
+        Count: 10
+    Rewards:
+      Item: C_Garment_188
+    Score: 30
   - Id: 129001
     Bound: "Account"
     Group: Adventure
@@ -1238,6 +1365,11 @@ Body:
       Script: " specialeffect2 EF_BLESSING; sc_start SC_BLESSING,30000,10; "
       TitleId: 1000
     Score: 50
+  - Id: 200001
+    Name: Achievement Reading!
+    Rewards:
+      Item: Firstaid_Box_5
+    Score: 1
   - Id: 200003
     Group: Goal_Level
     Name: Master Job level!
@@ -1342,7 +1474,7 @@ Body:
     Name: Reborn in Valhalla!
     Condition: " Class == JOB_NOVICE_HIGH "
     Rewards:
-      Item: Adventurer_Box_1
+      Item: Firstaid_Box_5
       Script: " specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,30000,10; "
     Score: 10
   - Id: 220000

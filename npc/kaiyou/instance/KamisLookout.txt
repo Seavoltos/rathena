@@ -251,11 +251,42 @@ kami_inn,200,206,4	script	Kamisama#INN	4_M_CACTUSMAN3,{
 			{
 				mes .@name$;
 				mes "No tienes todo lo necesario";
-				close;
+				if( countitem(42021) > 0 || countitem(42022) > 0 )
+				{
+					mes "WoW! pero veo que tienes un ticket! ¿Quieres usarlo?";
+					next;
+					if(select("Usar ticket:No gracias") == 2 )
+					{
+						mes .@name$;
+						mes "Ok, no hay problema.";
+						close;
+					}
+					if( countitem(42021) > 0 )
+					{
+						delitem 42021,1;
+						set .@pago,1;
+					}
+					else if (countitem (42022) > 0 )
+					{
+						delitem 42022,1;
+						set .@pago,1;
+					}
+					else
+					{
+						mes .@name$;
+						mes "Creo que hubo un problema, no encuentro los tickets";
+						close;
+					}
+				}
+				else
+					close;
 			}
-			delitem .@id1[.@num],.@ct1[.@num];
-			delitem .@id2[.@num],.@ct2[.@num];
-			delitem .@id3[.@num],.@ct3[.@num];
+			if( .@pago == 0 )
+			{
+				delitem .@id1[.@num],.@ct1[.@num];
+				delitem .@id2[.@num],.@ct2[.@num];
+				delitem .@id3[.@num],.@ct3[.@num];
+			}
 			set 'mvp,.@MvP[.@num];
 			set 'num, .@num;
 			mes .@name$;
