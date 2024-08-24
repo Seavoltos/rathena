@@ -1946,7 +1946,6 @@ REPLACE INTO `item_db` (`id`,`name_aegis`,`name_english`,`type`,`price_buy`,`wei
 REPLACE INTO `item_db` (`id`,`name_aegis`,`name_english`,`type`,`trade_nodrop`,`trade_notrade`,`trade_nosell`,`trade_nocart`,`trade_noguildstorage`,`trade_nomail`,`trade_noauction`) VALUES (7800,'Golden_Apple_','Golden Charm Apple','Etc',true,true,true,true,true,true,true);
 REPLACE INTO `item_db` (`id`,`name_aegis`,`name_english`,`type`,`trade_nodrop`,`trade_notrade`,`trade_nocart`,`trade_nostorage`,`trade_noguildstorage`,`trade_nomail`,`trade_noauction`) VALUES (7801,'Girl_Fan_Letter','Girl\'s Letter','Etc',true,true,true,true,true,true,true);
 REPLACE INTO `item_db` (`id`,`name_aegis`,`name_english`,`type`,`trade_nodrop`,`trade_notrade`,`trade_nocart`,`trade_nostorage`,`trade_noguildstorage`,`trade_nomail`,`trade_noauction`) VALUES (7802,'Autograph_Book','Signature Notebook','Etc',true,true,true,true,true,true,true);
-REPLACE INTO `item_db` (`id`,`name_aegis`,`name_english`,`type`,`weight`) VALUES (7803,'Battle_Manual_TW','Beginner\'s Field Manual','Etc',10);
 REPLACE INTO `item_db` (`id`,`name_aegis`,`name_english`,`type`,`weight`) VALUES (7805,'Brown_Ring','Brown Jenoss\'s Family Ring','Etc',10);
 REPLACE INTO `item_db` (`id`,`name_aegis`,`name_english`,`type`,`weight`) VALUES (7806,'Black_Anvil','God Anvil','Etc',10);
 REPLACE INTO `item_db` (`id`,`name_aegis`,`name_english`,`type`,`weight`) VALUES (7807,'Ore','God Mineral','Etc',10);
