@@ -9730,7 +9730,7 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 		break;
 	case AM_TWILIGHT4:
 		if (sd) {
-			clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
+			clif_skill_nodamage(src,*bl,skill_id,skill_lv,1);
 			//Prepare 200 Blue Potions.
 			if (!skill_produce_mix(sd, skill_id, ITEMID_BLUE_POTION, 0, 0, 0, 200, -1))
 				clif_skill_fail( *sd, skill_id );
