@@ -15351,7 +15351,7 @@ static inline void script_skill_effect( block_list& bl, uint16 skill_id, uint16 
 			clif_skill_poseffect(&bl, skill_id, skill_lv, x, y, gettick());
 			break;
 		case CAST_NODAMAGE:
-			clif_skill_nodamage(&bl, &bl, skill_id, skill_lv, 1);
+			clif_skill_nodamage(&bl, bl, skill_id, skill_lv);
 			break;
 		case CAST_DAMAGE:
 			clif_skill_damage(&bl, &bl, gettick(), status_get_amotion(&bl), status_get_dmotion(&bl), 0, 1, skill_id, skill_lv, skill_get_hit(skill_id));
@@ -15397,7 +15397,7 @@ BUILDIN_FUNC(skilleffect)
 
 		if (pc_issit(sd) && pc_setstand(sd, false)) {
 			skill_sit(sd, 0);
-			clif_standing(&sd->bl);
+			clif_standing(sd->bl);
 		}
 	}
 
@@ -19918,7 +19918,7 @@ BUILDIN_FUNC(unitattack)
 		case BL_PC: {
 			map_session_data* sd = (map_session_data*)unit_bl;
 
-			clif_parse_ActionRequest_sub( *sd, actiontype > 0 ? 0x07 : 0x00, target_bl->id, gettick() );
+			clif_parse_ActionRequest_sub( *sd, actiontype > 0 ? DMG_REPEAT : DMG_NORMAL, target_bl->id, gettick() );
 			script_pushint(st, sd->ud.target == target_bl->id);
 			return SCRIPT_CMD_SUCCESS;
 		}
@@ -23369,7 +23369,7 @@ BUILDIN_FUNC(sit)
 	if( !pc_issit(sd) ) {
 		pc_setsit(sd);
 		skill_sit(sd, 1);
-		clif_sitting(&sd->bl);
+		clif_sitting(sd->bl);
 	}
 	return SCRIPT_CMD_SUCCESS;
 }
@@ -23386,7 +23386,7 @@ BUILDIN_FUNC(stand)
 
 	if( pc_issit(sd) && pc_setstand(sd, false)) {
 		skill_sit(sd, 0);
-		clif_standing(&sd->bl);
+		clif_standing(sd->bl);
 	}
 
 	return SCRIPT_CMD_SUCCESS;
