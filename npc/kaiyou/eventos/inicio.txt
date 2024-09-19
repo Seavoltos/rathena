@@ -1,0 +1,452 @@
+ //===== Seavoltos Scripts ==================================
+//= Auto Event Inicio
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Evento automático de inicio servidor
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+startermap3,137,41,4	script	Elara#controller	10509,{
+	set .@name$,"[^39cd77Elara^000000]";
+	mes .@name$;
+	mes "Bienvenido! Espera a que inicie el evento!";
+	if ( getgmlevel() < 60) 
+		close;
+	next;
+	switch(select("Salir:Iniciar evento")){
+		case 1:
+			mes .@name$;
+			mes "En caso que desees volver puedes usar tu Butterfly Wing";
+			close;
+			end;
+		case 2:
+			initnpctimer;
+			mapannounce "startermap3","Elara: Acercate! El evento comenzará pronto!",1,$ColorEventos;
+			end;
+	}
+OnInit:
+	setcell "startermap3",146,35,146,41,cell_walkable,0;
+	setcell "startermap3",154,100,154,107,cell_walkable,0;
+	setcell "startermap3",59,187,59,197,cell_walkable,0;
+	end;
+
+OnTimer1000:
+	hideonnpc "#event_i004";
+	disablenpc "Red Book#44501";
+	disablenpc "Blue Book#44502";
+	disablenpc "Yellow Book#44503";
+	disablenpc "Green Book#44504";
+	disablenpc "White Book#44505";
+	disablenpc "Elara#Fin";
+	donpcevent "event_inicio1::OnStart";
+	specialeffect EF_METEORSTORM,AREA, "#event_i004";
+	sleep 500;
+	// disablenpc instance_npcname("#poring_wl19");
+	hideonnpc "#event_i002";
+	specialeffect EF_METEORSTORM,AREA, "#event_i002";
+	sleep 500;
+	disablenpc "#event_i001";
+	sleep 500;
+	disablenpc "#event_i007";
+	specialeffect EF_METEORSTORM,AREA, "#event_i002";
+	sleep 500;
+	disablenpc "#event_i006";
+	disablenpc "#event_i005";
+	specialeffect EF_METEORSTORM,AREA, "#event_i002";
+	sleep 500;
+	disablenpc "#event_i003";
+	setcell "startermap3",146,35,146,41,cell_walkable,1;
+	set $EventoInicio,0;
+	end;
+}
+
+-	script	dummy_npc	-1,{
+	end;
+}
+
+-	script	dummy_cloaked_npc	-1,{
+	end;
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+// First wall
+startermap3,146,35,6	duplicate(dummy_npc)	#event_i001	4_WOODPILE,1,0
+startermap3,146,36,6	duplicate(dummy_npc)	#event_i002	4_WOODPILE,1,0
+startermap3,146,37,6	duplicate(dummy_npc)	#event_i003	4_WOODPILE,1,0
+startermap3,146,38,6	duplicate(dummy_npc)	#event_i004	4_WOODPILE,1,0
+startermap3,146,39,6	duplicate(dummy_npc)	#event_i005	4_WOODPILE,1,0
+startermap3,146,40,6	duplicate(dummy_npc)	#event_i006	4_WOODPILE,1,0
+startermap3,146,41,6	duplicate(dummy_npc)	#event_i007	4_WOODPILE,1,0
+
+// Second wall
+startermap3,154,100,6	duplicate(dummy_npc)	#event_i008	4_WOODPILE,1,0
+startermap3,154,101,6	duplicate(dummy_npc)	#event_i009	4_WOODPILE,1,0
+startermap3,154,102,6	duplicate(dummy_npc)	#event_i010	4_WOODPILE,1,0
+startermap3,154,103,6	duplicate(dummy_npc)	#event_i011	4_WOODPILE,1,0
+startermap3,154,104,6	duplicate(dummy_npc)	#event_i012	4_WOODPILE,1,0
+startermap3,154,105,6	duplicate(dummy_npc)	#event_i013	4_WOODPILE,1,0
+startermap3,154,106,6	duplicate(dummy_npc)	#event_i014	4_WOODPILE,1,0
+startermap3,154,107,6	duplicate(dummy_npc)	#event_i015	4_WOODPILE,1,0
+
+
+startermap3,1,1,5	script	event_inicio1	-1,{
+	function F_EventoInicio;
+	function F_EventoDopas;
+	end;
+
+OnStart:
+	.@event$ = "event_inicio1::OnMobDead";
+	.@event2$ = "event_inicio1::OnMobDead2";
+
+	areamonster "startermap3", 153,32, 171,32, "--en--", "E_PORING_20",7, .@event$;
+	areamonster "startermap3", 48,54, 71,57, "--en--", "E_PORING_20",8, .@event$;
+	areamonster "startermap3", 170,38, 189,38, "--en--", "E_PORING_2023",8, .@event$;
+	areamonster "startermap3", 24,72, 28,92, "--en--", "E_PORING_2023",8, .@event$;
+	areamonster "startermap3", 188,42, 191,58, "--en--", "E_PORING_20",8, .@event$;
+	areamonster "startermap3", 158,67, 174,68, "--en--", "E_PORING_20",3, .@event$;
+	areamonster "startermap3", 117,68, 131,68, "--en--", "E_LUNATIC_2023",4, .@event$;
+
+	monster "startermap3",101,66, "--en--","E_LUNATIC_2023",1, .@event$;
+	monster "startermap3",57,113, "--en--","E_LUNATIC_2023",1, .@event$;
+	monster "startermap3",68,113, "--en--","E_LUNATIC_2023",1, .@event$;
+	monster "startermap3",176,66, "--en--","SWEETS_DROPS",1, .@event$;
+	monster "startermap3",158,68, "--en--","SWEETS_DROPS",1, .@event$;
+	monster "startermap3",157,67, "--en--","SWEETS_DROPS",1, .@event$;
+	monster "startermap3",149,66, "--en--","SWEETS_DROPS",1, .@event$;
+	monster "startermap3",125,67, "--en--","SWEETS_DROPS",1, .@event$;
+	monster "startermap3",121,67, "--en--","SWEETS_DROPS",1, .@event$;
+	monster "startermap3",102,67, "--en--","SWEETS_DROPS",1, .@event$;
+	monster "startermap3",101,68, "--en--","SWEETS_DROPS",1, .@event$;
+
+	areamonster "startermap3", 153,32, 171,32, "--en--", "ELEPHANT",7, .@event2$;
+	areamonster "startermap3", 48,54, 71,57, "--en--", "GORILLA",8, .@event2$;
+	areamonster "startermap3", 170,38, 189,38, "--en--", "LION",8, .@event2$;
+	areamonster "startermap3", 24,72, 28,92, "--en--", "RHINO",8, .@event2$;
+	areamonster "startermap3", 188,42, 191,58, "--en--", "ELEPHANT",8, .@event2$;
+	areamonster "startermap3", 158,67, 174,68, "--en--", "GORILLA",3, .@event2$;
+	areamonster "startermap3", 117,68, 131,68, "--en--", "LION",4, .@event2$;
+
+	monster "startermap3",101,66, "--en--","ELEPHANT",1, .@event2$;
+	monster "startermap3",57,113, "--en--","GORILLA",1, .@event2$;
+	monster "startermap3",68,113, "--en--","LION",1, .@event2$;
+	monster "startermap3",176,66, "--en--","RHINO",1, .@event2$;
+	monster "startermap3",158,68, "--en--","RHINO",1, .@event2$;
+	monster "startermap3",157,67, "--en--","RHINO",1, .@event2$;
+	monster "startermap3",149,66, "--en--","ELEPHANT",1, .@event2$;
+	monster "startermap3",125,67, "--en--","GORILLA",1, .@event2$;
+	monster "startermap3",121,67, "--en--","LION",1, .@event2$;
+	monster "startermap3",102,67, "--en--","RHINO",1, .@event2$;
+	monster "startermap3",101,68, "--en--","RHINO",1, .@event2$;
+	end;
+OnMobDead:
+	if (mobcount( "startermap3", "event_inicio1::OnMobDead" ) > 0)
+	{
+		.@area = getbattleflag("area_size");
+		getmapxy(@map$, @x, @y, BL_PC);
+		addrid(4,0,@x+.@area, @y+.@area, @x-.@area, @y-.@area);
+		F_EventoInicio;
+	} else {
+		killmonster "startermap3", "event_inicio1::OnMobDead";
+		killmonster "startermap3", "event_inicio1::OnMobDead2";
+		mapannounce "startermap3", "Elara: Wow~ Ustedes son muy fuerte! Momento de darle a la PIÑATA!!", bc_map, 0xFFFF00;
+		sleep 2000;
+		monster "startermap3",117,106,"--en--","E_KING_PORING",1, "event_inicio1::OnBossDead";
+		viewpointmap "startermap3", 0, 117, 106, 1, 0xc0392b;
+		.@mobid = $@mobid[0];
+		getunitdata .@mobid,.@arr;
+		.@dfacehp = ( getmapusers("startermap3") ) * 30;
+		.@MOB_HP2 = .@dfacehp;
+		if (.@MOB_HP2 < 300)
+			.@MOB_HP2 = 300;
+		if (.@MOB_HP2 > 1000)
+			.@MOB_HP2 = 1000;
+		setunitdata .@mobid, UMOB_HP, .@MOB_HP2;
+		initnpctimer;
+		end;
+	}
+	end;
+OnMobDead2:
+	.@area = getbattleflag("area_size");
+	getmapxy(@map$, @x, @y, BL_PC);
+	addrid(4,0,@x+.@area, @y+.@area, @x-.@area, @y-.@area);
+	F_EventoDopas;
+	end;
+OnBossDead:
+	if (mobcount( "startermap3", "event_inicio1::OnBossDead" ) > 0)
+		end;
+	killmonster "startermap3", "event_inicio1::OnBossDead";
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "startermap3", "Elara: Han terminado con la PIÑATA!! Ahora elijan uno de los libros!", bc_map, 0xFFFF00;
+	enablenpc "Red Book#44501";
+	enablenpc "Blue Book#44502";
+	enablenpc "Yellow Book#44503";
+	enablenpc "Green Book#44504";
+	enablenpc "White Book#44505";
+	sleep 2000;
+	mapannounce "startermap3", "Elara: Tendrán 5 minutos para elegir su recompensa antes de que se retiren del mapa!", bc_map, 0xFFFF00;
+	enablenpc "Elara#Fin";
+	end;
+
+OnTimer240000:
+	mapannounce "startermap3", "Elara: Queda 1 minuto, reclama tu recompensa!", bc_map, 0xFFFF00;
+	end;
+
+OnTimer300000:
+	mapannounce "startermap3", "Elara: Tiempo!", bc_map, 0xFFFF00;
+	disablenpc "Red Book#44501";
+	disablenpc "Blue Book#44502";
+	disablenpc "Yellow Book#44503";
+	disablenpc "Green Book#44504";
+	disablenpc "White Book#44505";
+	sleep 1000;
+	mapwarp "startermap3","startermap",40,28;
+	end;
+
+	function	F_EventoInicio	{
+		if ( checkidle() > 60 ) end;
+		switch(rand(0,4))
+		{
+			case 0:
+				specialeffect2 EF_VALLENTINE;
+				break;
+			case 1:
+				specialeffect2 EF_VALLENTINE2;
+				break;
+			case 2:
+				specialeffect2 EF_HEARTASURA;
+				break;
+			case 3:
+				specialeffect2 EF_05VAL;
+				break;
+			case 4:
+				specialeffect2 EF_ITEMPOKJUK;
+				break;
+		}
+		//Revisar Doble login
+		query_sql("SELECT last_unique_id FROM login WHERE account_id = '"+getcharid(3)+"'", .@mylasip$);
+		set .@size, query_sql("SELECT account_id FROM login WHERE last_unique_id = '"+.@mylasip$+"'", .@account_id);
+		set .@result,0;
+		if(!.@size)	end;
+		for(set .@i, 0; .@i < .@size; set .@i, .@i + 1) {
+			query_sql("SELECT name FROM `char` WHERE `char`.account_id = "+.@account_id[.@i]+" AND `char`.`online` = 1", .@name$ );
+			if(.@name2$ != .@name$)
+			{
+				getmapxy(@mapname$, @mapx, @mapy, BL_PC,""+.@name$+"");
+				
+				if( @mapname$ == "startermap3" )
+				{
+					set .@result, .@result + 1;
+					set .@name2$,.@name$;
+				}
+			}
+		}
+		if ( .@result != 1 )
+			return;
+		set .@rand, rand(0,1000);
+		if( .@rand > 950)
+		{
+			switch( rand(0,3) ) //Ticket VIP
+			{
+				case 0:
+					getitem 41000,1;
+					break;
+				case 1:
+					getitem 41001,1;
+					break;
+				case 2:
+					getitem 41002,1;
+					break;
+				case 3:
+					getitem 41003,1;
+					break;
+			}
+		}
+		else if( .@rand > 890 )
+		{
+			switch( rand(0,2) ) //Costume Box
+			{
+				case 0:
+					getitem 40059,1;
+					break;
+				case 1:
+					getitem 40071,1;
+					break;
+				case 2:
+					getitem 40077,1;
+					break;
+			}
+		}
+		else if( .@rand > 880 )
+			getitem 40083,1;	//Costume Box Garment
+		else
+		{
+			switch( rand(0,8) ) //Consumibles
+			{
+				case 0:
+					getitem 41020,1;
+					break;
+				case 1:
+					getitem 41030,1;
+					break;
+				case 2:
+					getitem 41051,1;
+					break;
+				case 3:
+					getitem 41052,1;
+					break;
+				case 4:
+					getitem 41053,1;
+					break;
+				case 5:
+					getitem 41054,1;
+					break;
+				case 6:
+					getitem 41056,1;
+					break;
+				case 7:
+					getitem 41057,1;
+					break;
+				case 8:
+					getitem 41058,1;
+					break;
+			}
+		}
+		return;
+	}
+	function	F_EventoDopas	{
+		if ( checkidle() > 60 ) end;
+		switch(rand(0,12))
+		{
+			case 0:
+				specialeffect2 EF_VALLENTINE;
+				sc_start SC_ANGELUS, 600000, 10;
+				break;
+			case 1:
+				specialeffect2 EF_VALLENTINE2;
+				sc_start SC_BLESSING, 600000, 10;
+				break;
+			case 2:
+				specialeffect2 EF_HEARTASURA;
+				sc_start SC_INCREASEAGI, 600000, 10;
+				break;
+			case 3:
+				specialeffect2 EF_05VAL;
+				sc_start SC_IMPOSITIO, 600000, 10;
+				break;
+			case 4:
+				specialeffect2 EF_ITEMPOKJUK;
+				sc_start SC_MAGNIFICAT, 600000, 10;
+				break;
+			case 5:
+				specialeffect2 EF_ITEMPOKJUK;
+				sc_start SC_GLORIA, 600000, 10;
+				break;
+			case 6:
+				specialeffect2 EF_ITEMPOKJUK;
+				sc_start SC_ADRENALINE, 600000, 10;
+				break;
+			case 7:
+				specialeffect2 EF_ITEMPOKJUK;
+				sc_start SC_LOUD, 600000, 1;
+				break;
+			case 8:
+				specialeffect2 EF_ITEMPOKJUK;
+				sc_start SC_PROVIDENCE, 600000, 10;
+				break;
+			case 9:
+				specialeffect2 EF_ITEMPOKJUK;
+				sc_start SC_CONCENTRATION, 600000, 10;
+				break;
+			case 10:
+				specialeffect2 EF_ITEMPOKJUK;
+				sc_start SC_WINDWALK, 600000, 10;
+				break;
+			case 11:
+				specialeffect2 EF_ITEMPOKJUK;
+				sc_start SC_EXPBOOST,1800000,50;
+				break;
+			case 12:
+				specialeffect2 EF_ITEMPOKJUK;
+				sc_start SC_ITEMBOOST,1800000,200;
+				break;
+		}
+		return;
+	}
+}
+
+startermap3,110,101,4	script	Red Book#44501	10515,{
+	set .@name$,"[^39cd77Elara^000000]";
+	if ( getd("$eventoinicio" + get_unique_id() + "") == 0 )
+	{
+		mes .@name$;
+		mes "¿Estas seguro que deseas escoger el ^ff0000"+strnpcinfo(1)+"^000000?\n\n\n";
+		mes "^ff0000 - - Sólo podrás escoger uno - - ^000000";
+		next;
+		if(select("Mejor lo pensaré:Adelante!") == 1)
+		{
+			mes .@name$;
+			mes "Todo a su tiempo!";
+			close;
+		}
+		mes .@name$;
+		mes "Aquí tienes";
+		set .@item, strnpcinfo(2);
+		getitem .@item,1;
+		setd "$eventoinicio" + get_unique_id() + "",1;
+		close;
+	}
+	mes .@name$;
+	mes "Ya puedes viajar tranquilamente por midgard acercate o usa tu Butterfly Wing";
+	viewpointmap "startermap3", 0, 150, 103, 1, 0xc0392b;
+	close;
+}
+
+startermap3,109,107,4	duplicate(Red Book#44501)	Blue Book#44502	10516
+startermap3,117,113,4	duplicate(Red Book#44501)	Yellow Book#44503	10517
+startermap3,125,109,4	duplicate(Red Book#44501)	Green Book#44504	10518
+startermap3,126,101,4	duplicate(Red Book#44501)	White Book#44505	10519
+
+startermap3,150,103,4	script	Elara#Fin	10509,{
+	set .@name$,"[^39cd77Elara^000000]";
+	mes .@name$;
+	mes "Veo que llegaste hasta el final, deseas volver?";
+	next;
+	if(select("Volver a la zona segura:Deseo seguir cazando") == 1)
+	{
+		mes .@name$;
+		mes "Allá vamos";
+		close2;
+		getitem 569,100; //Novice_Potion
+		warp "startermap",40,28;
+		end;
+	}
+	mes .@name$;
+	mes "Veo que lo estas pasando bien, no hay problema";
+	close;
+}
+
+//mapflag
+startermap3	mapflag	nobranch
+startermap3	mapflag	nomemo
+startermap3	mapflag	nopenalty
+startermap3	mapflag	nosave	SavePoint
+startermap3	mapflag	noteleport
+startermap3	mapflag	nowarpto

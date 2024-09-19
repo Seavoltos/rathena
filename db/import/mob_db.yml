@@ -5995,135 +5995,135 @@ Body:
   - Id: 3162
     AegisName: ELEPHANT
     Name: Elephant
-    Level: 1
-    Hp: 50
-    BaseExp: 2
-    JobExp: 1
-    Attack: 7
+    Level: 14
+    Hp: 10
+    BaseExp: 81
+    JobExp: 44
+    Attack: 1
     Attack2: 10
-    MagicDefense: 5
-    Dex: 6
-    Luk: 30
+    MagicDefense: 10
+    Agi: 1
+    Vit: 14
+    Int: 0
+    Dex: 19
+    Luk: 15
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
     Size: Medium
     Race: Plant
-    Element: Water
+    Element: Poison
     ElementLevel: 1
-    WalkSpeed: 400
-    AttackDelay: 1872
+    WalkSpeed: 300
+    AttackDelay: 1672
     AttackMotion: 672
-    ClientAttackMotion: 672
+    ClientAttackMotion: 288
     DamageMotion: 480
+    Ai: 02
     Modes:
-      CanMove: true
-    Drops:
-      - Item: Knife_
-        Rate: 100
-      - Item: Apple
-        Rate: 1000
-      - Item: Apple
-        Rate: 150
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
   - Id: 3163
     AegisName: GORILLA
     Name: Gorilla
-    Level: 1
-    Hp: 50
-    BaseExp: 2
-    JobExp: 1
-    Attack: 7
+    Level: 14
+    Hp: 10
+    BaseExp: 81
+    JobExp: 44
+    Attack: 1
     Attack2: 10
-    MagicDefense: 5
-    Dex: 6
-    Luk: 30
+    MagicDefense: 10
+    Agi: 1
+    Vit: 14
+    Int: 0
+    Dex: 19
+    Luk: 15
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
     Size: Medium
     Race: Plant
-    Element: Water
+    Element: Poison
     ElementLevel: 1
-    WalkSpeed: 400
-    AttackDelay: 1872
+    WalkSpeed: 300
+    AttackDelay: 1672
     AttackMotion: 672
-    ClientAttackMotion: 672
+    ClientAttackMotion: 288
     DamageMotion: 480
+    Ai: 02
     Modes:
-      CanMove: true
-    Drops:
-      - Item: Club
-        Rate: 100
-      - Item: Apple
-        Rate: 1000
-      - Item: Apple
-        Rate: 150
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
   - Id: 3164
     AegisName: LION
     Name: Lion
-    Level: 1
-    Hp: 50
-    BaseExp: 2
-    JobExp: 1
-    Attack: 7
+    Level: 14
+    Hp: 10
+    BaseExp: 81
+    JobExp: 44
+    Attack: 1
     Attack2: 10
-    MagicDefense: 5
-    Dex: 6
-    Luk: 30
+    MagicDefense: 10
+    Agi: 1
+    Vit: 14
+    Int: 0
+    Dex: 19
+    Luk: 15
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
     Size: Medium
     Race: Plant
-    Element: Water
+    Element: Poison
     ElementLevel: 1
-    WalkSpeed: 400
-    AttackDelay: 1872
+    WalkSpeed: 300
+    AttackDelay: 1672
     AttackMotion: 672
-    ClientAttackMotion: 672
+    ClientAttackMotion: 288
     DamageMotion: 480
+    Ai: 02
     Modes:
-      CanMove: true
-    Drops:
-      - Item: Rod_
-        Rate: 100
-      - Item: Apple
-        Rate: 1000
-      - Item: Apple
-        Rate: 150
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
   - Id: 3165
     AegisName: RHINO
     Name: Rhino
-    Level: 1
-    Hp: 50
-    BaseExp: 2
-    JobExp: 1
-    Attack: 7
+    Level: 14
+    Hp: 10
+    BaseExp: 81
+    JobExp: 44
+    Attack: 1
     Attack2: 10
-    MagicDefense: 5
-    Dex: 6
-    Luk: 30
+    MagicDefense: 10
+    Agi: 1
+    Vit: 14
+    Int: 0
+    Dex: 19
+    Luk: 15
     AttackRange: 1
     SkillRange: 10
     ChaseRange: 12
     Size: Medium
     Race: Plant
-    Element: Water
+    Element: Poison
     ElementLevel: 1
-    WalkSpeed: 400
-    AttackDelay: 1872
+    WalkSpeed: 300
+    AttackDelay: 1672
     AttackMotion: 672
-    ClientAttackMotion: 672
+    ClientAttackMotion: 288
     DamageMotion: 480
+    Ai: 02
     Modes:
-      CanMove: true
-    Drops:
-      - Item: Axe
-        Rate: 100
-      - Item: Apple
-        Rate: 1000
-      - Item: Apple
-        Rate: 150
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
 ###########################################################################
 #
 #  Hidden Mobs
@@ -6710,6 +6710,170 @@ Body:
     ClientAttackMotion: 1056
     DamageMotion: 432
     Ai: 01
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+  - Id: 2538
+    AegisName: E_KING_PORING
+    Name: King Poring
+    JapaneseName: King Poring
+    Level: 1
+    Hp: 1000
+    BaseExp: 1
+    JobExp: 1
+    Attack: 1
+    Attack2: 2
+    Defense: 1
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Small
+    Race: Formless
+    Element: Neutral
+    ElementLevel: 1
+    WalkSpeed: 100
+    AttackDelay: 972
+    AttackMotion: 500
+    ClientAttackMotion: 480
+    DamageMotion: 432
+    Ai: 01
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+  - Id: 21842
+    AegisName: E_PORING_20
+    Name: Party Poring
+    JapaneseName: Party Poring
+    Level: 14
+    Hp: 30
+    BaseExp: 81
+    JobExp: 44
+    Attack: 1
+    Attack2: 10
+    MagicDefense: 10
+    Agi: 1
+    Vit: 14
+    Int: 0
+    Dex: 19
+    Luk: 15
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Plant
+    Element: Poison
+    ElementLevel: 1
+    WalkSpeed: 300
+    AttackDelay: 1672
+    AttackMotion: 672
+    ClientAttackMotion: 288
+    DamageMotion: 480
+    Ai: 02
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+  - Id: 21944
+    AegisName: E_PORING_2023
+    Name: Rabbit Poring
+    JapaneseName: Rabbit Poring
+    Level: 14
+    Hp: 30
+    BaseExp: 81
+    JobExp: 44
+    Attack: 1
+    Attack2: 10
+    MagicDefense: 10
+    Agi: 1
+    Vit: 14
+    Int: 0
+    Dex: 19
+    Luk: 15
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Plant
+    Element: Poison
+    ElementLevel: 1
+    WalkSpeed: 300
+    AttackDelay: 1672
+    AttackMotion: 672
+    ClientAttackMotion: 288
+    DamageMotion: 480
+    Ai: 02
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+  - Id: 21945
+    AegisName: E_LUNATIC_2023
+    Name: Lunatic
+    JapaneseName: Lunatic
+    Level: 14
+    Hp: 30
+    BaseExp: 81
+    JobExp: 44
+    Attack: 1
+    Attack2: 10
+    MagicDefense: 10
+    Agi: 1
+    Vit: 14
+    Int: 0
+    Dex: 19
+    Luk: 15
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Plant
+    Element: Poison
+    ElementLevel: 1
+    WalkSpeed: 300
+    AttackDelay: 1672
+    AttackMotion: 672
+    ClientAttackMotion: 288
+    DamageMotion: 480
+    Ai: 02
+    Modes:
+      IgnoreMagic: true
+      IgnoreMelee: true
+      IgnoreMisc: true
+      IgnoreRanged: true
+  - Id: 3790
+    AegisName: SWEETS_DROPS
+    Name: Sweets Drops
+    Level: 14
+    Hp: 30
+    BaseExp: 81
+    JobExp: 44
+    Attack: 1
+    Attack2: 10
+    MagicDefense: 10
+    Agi: 1
+    Vit: 14
+    Int: 0
+    Dex: 19
+    Luk: 15
+    AttackRange: 1
+    SkillRange: 10
+    ChaseRange: 12
+    Size: Medium
+    Race: Plant
+    Element: Poison
+    ElementLevel: 1
+    WalkSpeed: 300
+    AttackDelay: 1672
+    AttackMotion: 672
+    ClientAttackMotion: 288
+    DamageMotion: 480
+    Ai: 02
     Modes:
       IgnoreMagic: true
       IgnoreMelee: true

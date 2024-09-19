@@ -187,14 +187,17 @@ startermap,43,56,3	script	Eeta#Quest	10402,{
 	set .@name$,"[^400040Eeta^000000]";
 	mes .@name$;
 	set @Sexo$,"Bienvenido";
+	set .@gmlvl, getgmlevel();
 	if(Sex==0) set @Sexo$,"Bienvenida";
 	mes @Sexo$ + " a ^ff0000KaiyouRO^000000";
 	mes "Soy Eeta y me han encargado entrenar a los novatos en el servidor.";
 	next;
 	switch(select(
 				( QuestNovice == 0 )?"^10B2D2 [ > ] ^000000Información del juego":"",
-				( QuestNovice != 0 && Class == Job_Novice )?"^10B2D2 [ > ] ^000000Ir a la zona de entrenamiento":"",
-				( Class != Job_Novice )?"^10B2D2 [ > ] ^000000Despedirse":""
+				( QuestNovice != 0 && Class == Job_Novice && $EventoInicio == 0 )?"^10B2D2 [ > ] ^000000Ir a la zona de entrenamiento":"",
+				( $EventoInicio == 1 )?"^10B2D2 [ > ] ^000000Participar del evento":"",
+				( Class != Job_Novice )?"^10B2D2 [ > ] ^000000Despedirse":"",
+				( .@gmlvl == 99 )?"^10B2D2 [ > ] ^000000Iniciar evento inicio":""
 				))
 	{
 		case 1:
@@ -437,9 +440,38 @@ startermap,43,56,3	script	Eeta#Quest	10402,{
 			end;
 		case 3:
 			mes .@name$;
+			mes "Cierra esta ventana para ir.";
+			close2;
+			if(countitem(12324) == 0)
+				getitem 12324,1;
+			if(countitem(569) == 0)
+				getitem 569,100;
+			warp "startermap3",102,24;
+			sleep2 3000;
+			message strcharinfo(0), "[Novice] Recuerda que tienes una "+ getitemname(12324) + " para que puedas volver.";
+			end;
+		case 4:
+			mes .@name$;
 			mes "Que te vaya bien en tu viaje por Midgard";
 			close;
-			
+		case 5:
+			mes .@name$;
+			mes "¿Qué deseas hacer?";
+			next;
+			switch(select("Empezar evento:Detener evento"))
+			{
+				case 1:
+					mes .@name$;
+					mes "Evento iniciado";
+					set $EventoInicio,1;
+					close;
+				case 2:
+					mes .@name$;
+					mes "Evento finalizado";
+					set $EventoInicio,0;
+					close;
+			}
+			close;
 	}
 	end;
 OnPCLoadMapEvent:

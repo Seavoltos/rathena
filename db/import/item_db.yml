@@ -9431,7 +9431,7 @@ Body:
       hateffect HAT_EF_C_VALKYRIE_WING,true;
     UnEquipScript: |
       hateffect HAT_EF_C_VALKYRIE_WING,false;
-  - Id: 65049 #No funciona
+  - Id: 65049
     AegisName: C_Garment_49
     Name: Archangel Wing
     Type: Armor
@@ -9540,7 +9540,7 @@ Body:
     ArmorLevel: 1
     View: 60
   - Id: 65061
-    AegisName: C_Garment_61 #No funciona
+    AegisName: C_Garment_61
     Name: Wing of Angel Move
     Type: Armor
     Locations:
@@ -9639,7 +9639,7 @@ Body:
     ArmorLevel: 1
     View: 71
   - Id: 65072
-    AegisName: C_Garment_72 #No funciona
+    AegisName: C_Garment_72
     Name: Wing of Angel Move RD
     Type: Armor
     Locations:
@@ -9648,7 +9648,7 @@ Body:
     ArmorLevel: 1
     View: 72
   - Id: 65073
-    AegisName: C_Garment_73 #No funciona
+    AegisName: C_Garment_73
     Name: Wing of Angel Move BK
     Type: Armor
     Locations:
@@ -9656,7 +9656,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 73
-  - Id: 65074 #No funciona
+  - Id: 65074
     AegisName: C_Garment_74
     Name: Wing of Angel Move RB
     Type: Armor
@@ -9664,9 +9664,9 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 74
   - Id: 65075
-    AegisName: C_Garment_75 #No funciona
+    AegisName: C_Garment_75
     Name: Wing of Angel Move GD
     Type: Armor
     Locations:
@@ -9683,7 +9683,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 76
-  - Id: 65077 #No funciona
+  - Id: 65077
     AegisName: C_Garment_77
     Name: Wing of Angel Move DG
     Type: Armor
@@ -9691,8 +9691,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65078 #No funciona
+    View: 77
+  - Id: 65078
     AegisName: C_Garment_78
     Name: Wing of Angel Move GR
     Type: Armor
@@ -9700,7 +9700,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 78
   - Id: 65079
     AegisName: C_Garment_79
     Name: Evil Scythe
@@ -9836,7 +9836,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 93
-  - Id: 65094 #No funciona
+  - Id: 65094
     AegisName: C_Garment_94
     Name: Rotating Gears
     Type: Armor
@@ -9845,6 +9845,10 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 94
+    Script: |
+      hateffect HAT_EF_GearWheel,true;
+    UnEquipScript: |
+      hateffect HAT_EF_GearWheel,false;
   - Id: 65095
     AegisName: C_Garment_95
     Name: Fairy of Eden
@@ -9854,7 +9858,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 95
-  - Id: 65096 #No funciona
+  - Id: 65096
     AegisName: C_Garment_96
     Name: Sudden Wealth
     Type: Armor
@@ -9863,6 +9867,10 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 96
+    Script: |
+      hateffect HAT_EF_C_Sudden_Wealth_TW,true;
+    UnEquipScript: |
+      hateffect HAT_EF_C_Sudden_Wealth_TW,false;
   - Id: 65097
     AegisName: C_Garment_97
     Name: Scepter
@@ -9890,7 +9898,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 99
-  - Id: 65100 #No funciona
+  - Id: 65100
     AegisName: C_Garment_100
     Name: Snow Powder
     Type: Armor
@@ -9898,7 +9906,11 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 100
+    Script: |
+      hateffect HAT_EF_Snow_Powder,true;
+    UnEquipScript: |
+      hateffect HAT_EF_Snow_Powder,false;
   - Id: 65101
     AegisName: C_Garment_101
     Name: Wing of Spider
@@ -10151,7 +10163,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 128
-  - Id: 65129 #No funciona
+  - Id: 65129
     AegisName: C_Garment_129
     Name: C Pitaya G Bag
     Type: Armor
@@ -10159,8 +10171,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65130 #No funciona
+    View: 129
+  - Id: 65130
     AegisName: C_Garment_130
     Name: C Wedding Ribbon
     Type: Armor
@@ -10168,8 +10180,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65131 #No funciona
+    View: 130
+  - Id: 65131
     AegisName: C_Garment_131
     Name: Valkyrie Curse blight
     Type: Armor
@@ -10177,8 +10189,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65132 #No funciona
+    View: 131
+  - Id: 65132
     AegisName: C_Garment_132
     Name: C 2022RTC V Coat4
     Type: Armor
@@ -10186,8 +10198,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65133 #No funciona
+    View: 132
+  - Id: 65133
     AegisName: C_Garment_133
     Name: C Big B Rabbit
     Type: Armor
@@ -10195,8 +10207,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65134 #No funciona
+    View: 133
+  - Id: 65134
     AegisName: C_Garment_134
     Name: C Astra Blessing
     Type: Armor
@@ -10204,8 +10216,12 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65135 #No funciona
+    View: 134
+    Script: |
+      hateffect HAT_EF_C_Astra_Blessing,true;
+    UnEquipScript: |
+      hateffect HAT_EF_C_Astra_Blessing,false;
+  - Id: 65135
     AegisName: C_Garment_135
     Name: C Back Ribbon Bell BU
     Type: Armor
@@ -10213,7 +10229,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 135
   - Id: 65136
     AegisName: C_Garment_136
     Name: 20th Anniversary Wing
@@ -10223,7 +10239,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 136
-  - Id: 65137 #No funciona
+  - Id: 65137
     AegisName: C_Garment_137
     Name: C Traveller Bag
     Type: Armor
@@ -10231,7 +10247,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 137
   - Id: 65138
     AegisName: C_Garment_138
     Name: C Guardian Angelwing
@@ -10294,7 +10310,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 144
   - Id: 65145
     AegisName: C_Garment_145
     Name: C Ninetail Tail
@@ -10357,7 +10373,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 151
   - Id: 65152
     AegisName: C_Garment_152
     Name: C JP EV16
@@ -10429,7 +10445,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 159
   - Id: 65160
     AegisName: C_Garment_160
     Name: Huse Luk R Wing
@@ -10520,7 +10536,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 169
-  - Id: 65170 #No funciona
+  - Id: 65170
     AegisName: C_Garment_170
     Name: C Skia Doll
     Type: Armor
@@ -10528,8 +10544,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65171 #No funciona
+    View: 170
+  - Id: 65171
     AegisName: C_Garment_171
     Name: C Pope Doll
     Type: Armor
@@ -10537,7 +10553,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 171
   - Id: 65172
     AegisName: C_Garment_172
     Name: C Giant Mad Bunny
@@ -10556,7 +10572,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 173
-  - Id: 65174 #No funciona
+  - Id: 65174
     AegisName: C_Garment_174
     Name: C Songkran Watergun
     Type: Armor
@@ -10564,7 +10580,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 174
   - Id: 65175
     AegisName: C_Garment_175
     Name: C Dark Lord Manteau
@@ -10592,15 +10608,15 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 177
-  - Id: 65178 #No funciona
+  - Id: 65178
     AegisName: C Divine Phoenix
-    Name: Poring
+    Name: Divine Phoenix
     Type: Armor
     Locations:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 178
   - Id: 65179
     AegisName: C_Garment_179
     Name: C Aqua Fin Decoration
@@ -10685,7 +10701,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 186
-  - Id: 65187 #No funciona
+  - Id: 65187
     AegisName: C_Garment_187
     Name: C Forest S Vacation
     Type: Armor
@@ -10693,7 +10709,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 187
   - Id: 65188
     AegisName: C_Garment_188
     Name: C Rifle
@@ -10703,7 +10719,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 188
-  - Id: 65189 #No funciona
+  - Id: 65189
     AegisName: C_Garment_189
     Name: C HDP Scythe
     Type: Armor
@@ -10711,8 +10727,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65190 #No funciona
+    View: 189
+  - Id: 65190
     AegisName: C_Garment_190
     Name: C Big Shuriken
     Type: Armor
@@ -10720,7 +10736,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 190
   - Id: 65191
     AegisName: C_Garment_191
     Name: C Evil Double Edged
@@ -10739,7 +10755,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 192
-  - Id: 65193 #No funciona
+  - Id: 65193
     AegisName: C_Garment_193
     Name: C Big Hosangto
     Type: Armor
@@ -10747,8 +10763,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65194 #No funciona
+    View: 193
+  - Id: 65194
     AegisName: C_Garment_194
     Name: C Big Lollipop
     Type: Armor
@@ -10756,8 +10772,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65195 #No funciona
+    View: 194
+  - Id: 65195
     AegisName: C_Garment_195
     Name: C Rata Tail
     Type: Armor
@@ -10765,8 +10781,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65196 #No funciona
+    View: 195
+  - Id: 65196
     AegisName: C_Garment_196
     Name: C Cat Doll WH
     Type: Armor
@@ -10774,8 +10790,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65197 #No funciona
+    View: 196
+  - Id: 65197
     AegisName: C_Garment_197
     Name: C ROS2023 Cape 1
     Type: Armor
@@ -10783,7 +10799,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 197
   - Id: 65198
     AegisName: C_Garment_198
     Name: C ROS2023 Cape 2
@@ -10802,7 +10818,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 199
-  - Id: 65200 #No funciona
+  - Id: 65200
     AegisName: C_Garment_200
     Name: C Big Usagi Bag
     Type: Armor
@@ -10810,8 +10826,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
-  - Id: 65201 #No funciona
+    View: 200
+  - Id: 65201
     AegisName: C_Garment_201
     Name: C Big Piske Bag
     Type: Armor
@@ -10819,7 +10835,7 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 201
   - Id: 65202
     AegisName: C_Garment_202
     Name: Santa Teddy Bear
@@ -10829,15 +10845,15 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 202
-  - Id: 65203 #No funciona
+  - Id: 65203
     AegisName: C_Garment_203
-    Name: C Leticia
+    Name: C Leticia Wing
     Type: Armor
     Locations:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 1
+    View: 203
   - Id: 65204
     AegisName: C_Garment_204
     Name: Great Devil Wing 2
@@ -10855,8 +10871,8 @@ Body:
       Costume_Garment: true
     EquipLevelMin: 1
     ArmorLevel: 1
-    View: 205
-  - Id: 65206 #No funciona
+    View: 1
+  - Id: 65206
     AegisName: C_Garment_206
     Name: C Rabbit Tail
     Type: Armor
@@ -10865,7 +10881,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 206
-  - Id: 65207 #No funciona
+  - Id: 65207
     AegisName: C_Garment_207
     Name: C Cyber Sword
     Type: Armor
@@ -10874,7 +10890,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 207
-  - Id: 65208 #No funciona
+  - Id: 65208
     AegisName: C_Garment_208
     Name: C Cyber Rifle
     Type: Armor
@@ -10883,7 +10899,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 208
-  - Id: 65209 #No funciona
+  - Id: 65209
     AegisName: C_Garment_209
     Name: C Defense Shield
     Type: Armor
@@ -10892,7 +10908,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 209
-  - Id: 65210 #No funciona
+  - Id: 65210
     AegisName: C_Garment_210
     Name: C Power Cable
     Type: Armor
@@ -10982,7 +10998,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 219
-  - Id: 65220
+  - Id: 65220 #No funciona
     AegisName: C_Garment_220
     Name: Guardian_Of_Abyss
     Type: Armor
@@ -11009,7 +11025,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 222
-  - Id: 65223
+  - Id: 65223 #No funciona
     AegisName: C_Garment_223
     Name: C_Plant_Outing_Set
     Type: Armor
@@ -11018,7 +11034,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 223
-  - Id: 65224
+  - Id: 65224 #No funciona
     AegisName: C_Garment_224
     Name: C_Galapago_Aquarium
     Type: Armor
@@ -11027,7 +11043,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 224
-  - Id: 65225
+  - Id: 65225 #No funciona
     AegisName: C_Garment_225
     Name: C_FH_Lostwing
     Type: Armor
@@ -11036,7 +11052,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 225
-  - Id: 65226
+  - Id: 65226 #No funciona
     AegisName: C_Garment_226
     Name: C_Archmage_Wand
     Type: Armor
@@ -11045,7 +11061,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 226
-  - Id: 65227
+  - Id: 65227 #No funciona
     AegisName: C_Garment_227
     Name: C_Rose_Gothic_Ribbon
     Type: Armor
@@ -11054,7 +11070,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 227
-  - Id: 65228
+  - Id: 65228 #No funciona
     AegisName: C_Garment_228
     Name: C_Ragdoll_Face_Bag
     Type: Armor
@@ -11072,7 +11088,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 229
-  - Id: 65230
+  - Id: 65230 #No funciona
     AegisName: C_Garment_230
     Name: C_Bolo_MSP
     Type: Armor
@@ -11081,7 +11097,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 230
-  - Id: 65231
+  - Id: 65231 #No funciona
     AegisName: C_Garment_231
     Name: Olympus_Wing_LT
     Type: Armor
@@ -11090,7 +11106,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 231
-  - Id: 65232
+  - Id: 65232 #No funciona
     AegisName: C_Garment_232
     Name: C_Ribbon_R_Bag
     Type: Armor
@@ -11099,7 +11115,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 232
-  - Id: 65233
+  - Id: 65233 #No funciona
     AegisName: C_Garment_233
     Name: C_FB_EvilSprit
     Type: Armor
@@ -11108,7 +11124,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 233
-  - Id: 65234
+  - Id: 65234 #No funciona
     AegisName: C_Garment_234
     Name: C_Poring_Cream_Soda
     Type: Armor
@@ -11117,7 +11133,7 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 234
-  - Id: 65235
+  - Id: 65235 #No funciona
     AegisName: C_Garment_235
     Name: C_Poring_Swim_Ring
     Type: Armor
@@ -28598,7 +28614,7 @@ Body:
       NoMail: true
       NoAuction: true
     Script: |
-      sc_start SC_EXPBOOST,1800000,300;
+      sc_start SC_EXPBOOST,1800000,200;
   - Id: 23575
     AegisName: Adventurer_Box_10
     Name: Adventurer Box (10)
@@ -29411,3 +29427,128 @@ Body:
       NoAuction: true
     Script: |
       sc_start SC_ASPDPOTION2,1800000,9;
+###########################################################################
+#
+# Evento Inicio
+#
+###########################################################################
+  - Id: 44501
+    AegisName: Event_Inicio_Red
+    Name: Old Red Box Inicio
+    Type: Usable
+    EquipLevelMin: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 44506,1;
+  - Id: 44502
+    AegisName: Event_Inicio_Blue
+    Name: Old Blue Box Inicio
+    Type: Usable
+    EquipLevelMin: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 44507,1;
+  - Id: 44503
+    AegisName: Event_Inicio_Yellow
+    Name: Old Yellow Box Inicio
+    Type: Usable
+    EquipLevelMin: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 44508,1;
+  - Id: 44504
+    AegisName: Event_Inicio_Green
+    Name: Old Green Box Inicio
+    Type: Usable
+    EquipLevelMin: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 44509,1;
+  - Id: 44505
+    AegisName: Event_Inicio_White
+    Name: Old White Box Inicio
+    Type: Usable
+    EquipLevelMin: 50
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      getitem 44510,1;
+  - Id: 44506
+    AegisName: C_Garment_Event1
+    Name: Leaf Umbrella Red
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 237
+  - Id: 44507
+    AegisName: C_Garment_Event2
+    Name: Leaf Umbrella Blue
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 238
+  - Id: 44508
+    AegisName: C_Garment_Event3
+    Name: Leaf Umbrella Yellow
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 239
+  - Id: 44509
+    AegisName: C_Garment_Event4
+    Name: Leaf Umbrella Green
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 240
+  - Id: 44510
+    AegisName: C_Garment_Event5
+    Name: Leaf Umbrella White
+    Type: Armor
+    Locations:
+      Costume_Garment: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 241

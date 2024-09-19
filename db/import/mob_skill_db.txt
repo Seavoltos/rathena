@@ -62,6 +62,10 @@
 2058,Cache Me@NPC_RUN,chase,354,1,10000,0,0,yes,self,always,0,,,,,,26,
 //2058,Cache Me@NPC_EMOTION,idle,197,1,2000,0,5000,yes,self,always,0,22,0x308D,,,,,
 
+//Evento King Poring
+2538,King Poring@NPC_RUN,attack,354,1,10000,0,0,yes,self,always,0,,,,,,26,
+2538,King Poring@NPC_RUN,chase,354,1,10000,0,0,yes,self,always,0,,,,,,26,
+
 //Furious Mob
 2606,Furious Zombie@NPC_POISON,angry,176,1,500,800,5000,no,target,always,,,,,,,,
 2606,Furious Zombie@NPC_POISON,attack,176,1,500,800,5000,no,target,always,,,,,,,,
