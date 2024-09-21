@@ -345,7 +345,29 @@ vend_zone,105,101,4	script	Kafra Employee::kaf_24	115,{
 	callfunc "F_KafEnd",0,1,"en la zona de ventas";
 }
 
+deadbranch,49,43,4	script	Kafra Employee::kaf_25	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,2,0,30,750;
+	callfunc "F_KafEnd",0,1,"en el evento de Halloween";
+}
 
+bomberman,29,18,4	script	Kafra Employee::kaf_25	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,2,0,30,750;
+	callfunc "F_KafEnd",0,1,"en el cementerio";
+}
 /*
 // Fogatas
 //============================================================

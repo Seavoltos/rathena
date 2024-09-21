@@ -1,0 +1,1297 @@
+
+s_room,67,66,5	script	Jakk#GM	3662,{
+	mes "[^3DAB2CJakk^000000]";
+	close;
+	end;
+
+OnPCLoginEvent:
+	
+	if ( gettime(6) == 10 ) {
+		dispbottom "Recuerda ir a encontrar dulces!",0x4B0082;
+	}
+	end;
+
+}
+
+prontera,156,152,3	script	Jakk#Halloweenprt	3662,{
+	
+	set .@name$, "[^3DAB2CJakk^000000]";
+	cutin "jakk",2;
+	if ( gettime(6) == 10 ) {
+		mes .@name$;
+		mes "Estoy demasiado nervioso no sé si alcance a juntar todos los caramelos necesarios";
+		mes "Quizas tu me puedas vender algunos de los tuyos!";
+		next;
+		switch(select(
+		( countitem(44530) > 0 || countitem(44531) > 0 || countitem(44532) > 0 )?"^10B2D2 [ > ] ^000000Entregar Calabazas":"^a30d0d [ > ] ^000000Entregar Calabazas",
+		"Información",
+		"Cerrar"
+		))
+		{
+			case 1:
+				mes .@name$;
+				mes "Recuerda que sólo contaré hasta ^ff000050 Puntos^000000";
+				mes " - Candy Holder (5 puntos)";
+				mes " - Pumpkin Candy Holder (2 puntos)";
+				mes " - Pumpkin Holder (1 punto)";
+				next;
+				if(select("Dejame contar primero:Entregar todas las calabazas")==1)
+				{
+					mes .@name$;
+					mes "Cuenta rápido tus calabazas";
+					close2;
+					cutin "jakk",255;
+					end;
+				}
+				set .@puntos,countitem(44532)+countitem(44531)*2+countitem(44530)*5;
+				if( .@puntos > 50 )
+					set .@puntos,50;
+				mes .@name$;
+				if( countitem(44532) > 0 || countitem(44531) > 0 || countitem(44530) > 0 )
+				{
+					mes "Tenias en tus manos:";
+					mes " - Candy Holder ("+countitem(44530)+")";
+					mes " - Pumpkin Candy Holder ("+countitem(44531)+")";
+					mes " - Pumpkin Holder ("+countitem(44532)+")";
+					mes "Total en esta entrega: "+.@puntos+".";
+				}
+				mes "Total: "+HalloweenPuntos+ " puntos";
+				set HalloweenPuntos,HalloweenPuntos+.@puntos;
+				set $JAKKPTO,$JAKKPTO+.@puntos;
+				delitem 44530,countitem(44530);
+				delitem 44531,countitem(44531);
+				delitem 44532,countitem(44532);
+				close2;
+				cutin "jakk",255;
+				end;
+			case 2:
+				mes .@name$;
+				mes "El evento de Halloween ha comenzado! Ahora sólo nos queda recolectar dulces";
+				next;
+				mes .@name$;
+				mes "En esta ocasión por todos los mapas donde aparece Cofres podrás encontrar diferentes ^3DAB2CJakk^000000, algunos se parecen a mi.";
+				next;
+				mes .@name$;
+				mes "Estos ^3DAB2CJakk^000000 te podrán dar tres diferentes tipos de Calabazas que contienen diferentes tipos de dulces";
+				next;
+				mes .@name$;
+				mes " - Candy Holder (5 puntos)";
+				mes " - Pumpkin Candy Holder (2 puntos)";
+				mes " - Pumpkin Holder (1 punto)";
+				next;
+				mes .@name$;
+				mes "Por un tema de validación de dulces, sólo puedo sumar hasta 50 puntos, por lo que intenta no pasarte, si sumas más de 50 puntos puedes quedarte los dulces restantes.";
+				close2;
+				cutin "jakk",255;
+				end;
+			default:
+				mes .@name$;
+				mes "Por favor! AYUDAME!!!";
+				close2;
+				cutin "jakk",255;
+				end;
+		}
+	}
+	mes .@name$;
+	mes "No me hables ahora estoy demasiado ocupado!";
+	close2;
+	cutin "jakk",255;
+	end;
+OnInit: 
+	npcspeed 100;
+	initnpctimer;
+	end;
+
+OnTimer10000:
+	emotion ET_CRY;
+	getmapxy .@map$, .@x, .@y,BL_NPC;
+	set .@curX, callfunc("move_XY",.@x,148,163);
+	set .@curY, callfunc("move_XY",.@y,142,168);
+	npcwalkto .@curX, .@curY;
+	initnpctimer;
+	end;
+
+}
+
+deadbranch,51,43,3	script	Jakk#Halloween	3662,{
+	function F_EventoHalloween;
+	set .@name$, "[^3DAB2CJakk^000000]";
+	cutin "jakk",2;
+	if ( gettime(6) == 10 ) {
+		mes .@name$;
+		mes "Estoy demasiado nervioso no sé si alcance a juntar todos los caramelos necesarios";
+		mes "Quizas tu me puedas vender algunos de los tuyos!";
+		next;
+		switch(select(
+		( HalloweenPuntos >= 100 )?"^10B2D2 [ > ] ^000000Comprar "+getitemname(31562)+"":"^a30d0d [ > ] ^000000Comprar "+getitemname(31562)+"",
+		( HalloweenPuntos >= 100 )?"^10B2D2 [ > ] ^000000Comprar "+getitemname(20329)+"":"^a30d0d [ > ] ^000000Comprar "+getitemname(20329)+"",
+		( HalloweenPuntos >= 200 )?"^10B2D2 [ > ] ^000000Comprar "+getitemname(20395)+"":"^a30d0d [ > ] ^000000Comprar "+getitemname(20395)+"",
+		( HalloweenPuntos >= 500 )?"^10B2D2 [ > ] ^000000Comprar "+getitemname(44529)+"":"^a30d0d [ > ] ^000000Comprar "+getitemname(44529)+"",
+		( HalloweenPuntos >= 600 )?"^10B2D2 [ > ] ^000000Comprar "+getitemname(61377)+"":"^a30d0d [ > ] ^000000Comprar "+getitemname(61377)+"",
+		( HalloweenPuntos >= 600 )?"^10B2D2 [ > ] ^000000Comprar "+getitemname(20430)+"":"^a30d0d [ > ] ^000000Comprar "+getitemname(20430)+"",
+		( HalloweenPuntos >= 800 )?"^10B2D2 [ > ] ^000000Comprar "+getitemname(61020)+"":"^a30d0d [ > ] ^000000Comprar "+getitemname(61020)+"",
+		( HalloweenPuntos >= 2500 )?"^10B2D2 [ > ] ^000000Comprar "+getitemname(65102)+"":"^a30d0d [ > ] ^000000Comprar "+getitemname(65102)+"",
+		"Cerrar"
+		))
+		{
+			case 1:
+				set .@iditem,31562;
+				set .@price,100;
+				break;
+			case 2:
+				set .@iditem,20329;
+				set .@price,100;
+				break;
+			case 3:
+				set .@iditem,20395;
+				set .@price,200;
+				break;
+			case 4:
+				set .@iditem,44529;
+				set .@price,500;
+				break;
+			case 5:
+				set .@iditem,61377;
+				set .@price,600;
+				break;
+			case 6:
+				set .@iditem,20430;
+				set .@price,600;
+				break;
+			case 7:
+				set .@iditem,61020;
+				set .@price,800;
+				break;
+			case 8:
+				set .@iditem,65102;
+				set .@price,2500;
+				break;
+			default:
+				mes .@name$;
+				mes "Por favor! AYUDAME!!!";
+				close2;
+				cutin "jakk",255;
+				end;
+		}
+		mes .@name$;
+		mes "Comprar un ^0000ff"+getitemname(.@iditem)+"^000000 te va a costar ^ff0000"+.@price+"^000000 dulces.";
+		mes "En este momento tienes :";
+		mes "     ^0000ff"+HalloweenPuntos +"^000000 dulces.";
+		next;
+		if( HalloweenPuntos < .@price)
+		{
+			mes .@name$;
+			mes "En prontera puedes obtener más puntos para comprarlo.";
+			close2;
+			cutin "jakk",255;
+			end;
+		}
+		if(select("Comprar "+getitemname(.@iditem)+":No, gracias") == 2)
+		{
+			mes .@name$;
+			mes "Por favor ayudame!";
+			close2;
+			cutin "jakk",255;
+			end;
+		}
+		set HalloweenPuntos, HalloweenPuntos - .@price;
+		getitem .@iditem,1;
+		mes .@name$;
+		mes "Ten tu "+getitemname(.@iditem)+", espero que lo disfrutes.";
+		close2;
+		cutin "jakk",255;
+		end;
+	}
+	mes .@name$;
+	mes "No me hables ahora estoy demasiado ocupado!";
+	close2;
+	cutin "jakk",255;
+	end;
+OnInit: 
+	npcspeed 100;
+	initnpctimer;
+
+	if ( gettime(6) == 10 ) {
+	setarray $@Map_Jakk$[0],"abyss_01","abyss_02","abyss_03","abbey01","abbey02","abbey03","ama_dun01","ama_dun02","ama_dun03","anthell01","anthell02","ayo_dun01","ayo_dun02","beach_dun","beach_dun2","beach_dun3","lhz_dun01","lhz_dun02","lhz_dun03","iz_dun00","iz_dun01","iz_dun02","iz_dun03","iz_dun04","c_tower1","c_tower2","c_tower3","c_tower4","mjo_dun01","mjo_dun02","mjo_dun03","prt_sewb1","prt_sewb2","prt_sewb3","prt_sewb4","ein_dun01","ein_dun02","gef_dun00","gef_dun01","gef_dun02","glast_01","gl_church","gl_chyard","gl_cas01","gl_cas02","gl_prison","gl_prison1","gl_knt01","gl_knt02","gl_in01","gl_step","gl_sew01","gl_sew02","gl_sew03","gl_sew04","gon_dun01","gon_dun02","gon_dun03","prt_maze01","prt_maze02","prt_maze03","ice_dun01","ice_dun02","ice_dun03","juperos_01","juperos_02","jupe_core","kh_dun01","kh_dun02","lou_dun01","lou_dun02","lou_dun03","mag_dun01","mag_dun02","mosk_dun01","mosk_dun02","mosk_dun03","pay_dun00","pay_dun01","pay_dun02","pay_dun03","orcsdun01","orcsdun02","moc_pryd01","moc_pryd02","moc_pryd03","moc_pryd04","moc_pryd05","moc_pryd06","ra_san01","ra_san02","ra_san03","ra_san04","ra_san05","in_sphinx1","in_sphinx2","in_sphinx3","in_sphinx4","in_sphinx5","treasure01","treasure02","tha_t01","tha_t02","tha_t03","tha_t04","tha_t05","tha_t06","thor_v01","thor_v02","thor_v03","xmas_dun01","xmas_dun02","tur_dun01","tur_dun02","tur_dun03","tur_dun04","um_dun01","um_dun02","odin_tem01","odin_tem02","odin_tem03";
+
+		for ( set .@i , 0 ; .@i < 20 ; set .@i , .@i + 1 )
+		{
+			set .@random$, $@Map_Jakk$[rand(0,getarraysize($@Map_Jakk$)-1)];
+			set $@mapjakk1$,.@random$;
+			monster .@random$,0,0,"Jakk",3662,1,strnpcinfo(3)+"::OnJakkDie1";
+			set .@random$, $@Map_Jakk$[rand(0,getarraysize($@Map_Jakk$)-1)];
+			set $@mapjakk2$,.@random$;
+			monster .@random$,0,0,"Jakk",3663,1,strnpcinfo(3)+"::OnJakkDie2";
+		}
+	}
+	end;
+
+OnTimer10000:
+	emotion ET_CRY;
+	getmapxy .@map$, .@x, .@y,BL_NPC;
+	set .@curX, callfunc("move_XY",.@x,32,66);
+	set .@curY, callfunc("move_XY",.@y,32,66);
+	npcwalkto .@curX, .@curY;
+	initnpctimer;
+	end;
+
+OnJakkDie1:
+	if ( gettime(6) == 10 )
+	{
+		set .@random$, $@Map_Jakk$[rand(0,getarraysize($@Map_Jakk$)-1)];
+		set $@mapjakk1$,.@random$;
+		monster .@random$,0,0,"Jakk",3662,1,strnpcinfo(3)+"::OnJakkDie1";
+		set $JAKK,$JAKK+1;
+		set #JAKK,#JAKK+1;
+		.@area = getbattleflag("area_size");
+		getmapxy(@map$, @x, @y, BL_PC);
+		addrid(4,0,@x+.@area, @y+.@area, @x-.@area, @y-.@area);
+		F_EventoHalloween;
+		end;
+	}
+	else
+		dispbottom "[Jakk] El evento no está disponible.";
+	end;
+
+OnJakkDie2:
+	if ( gettime(6) == 10 )
+	{
+		set .@random$, $@Map_Jakk$[rand(0,getarraysize($@Map_Jakk$)-1)];
+		set $@mapjakk2$,.@random$;
+		monster .@random$,0,0,"Jakk",3663,1,strnpcinfo(3)+"::OnJakkDie2";
+		set $JAKK,$JAKK+1;
+		set #JAKK,#JAKK+1;
+		.@area = getbattleflag("area_size");
+		getmapxy(@map$, @x, @y, BL_PC);
+		addrid(4,0,@x+.@area, @y+.@area, @x-.@area, @y-.@area);
+		F_EventoHalloween;
+	}
+	else
+		dispbottom "[Jakk] El evento no está disponible.";
+	end;
+
+	function	F_EventoHalloween	{
+		if ( checkidle() > 60 ) end;
+		getitem 44536,2;
+		return;
+	}
+}
+
+deadbranch,69,65,3	script	Lucas#Halloween	10038,{
+	set .@name$,"[^0000ffLucas^000000]";
+	cutin "morocc_kid",2;
+	mes .@name$;
+	mes "Buenas, estamos preparando el ^ff0000Halloween^000000 para todas las personas del servidor, y como recompensa por cada ^3DAB2CJakk^000000 que cazen irán sumando a un pozo entre todos!";
+	next;
+	switch(select(
+		( $JAKK >= 100 && #JAKKCAZA == 0)?"^10B2D2 [ > ] ^000000Cobrar recompensa":"",
+		( $JAKK >= 300 && #JAKKCAZA == 1)?"^10B2D2 [ > ] ^000000Cobrar recompensa":"",
+		( $JAKK >= 600 && #JAKKCAZA == 2)?"^10B2D2 [ > ] ^000000Cobrar recompensa":"",
+		( $JAKK >= 1200 && #JAKKCAZA == 3)?"^10B2D2 [ > ] ^000000Cobrar recompensa":"",
+		( $JAKK >= 2400 && #JAKKCAZA == 4)?"^10B2D2 [ > ] ^000000Cobrar recompensa":"",
+		"¿Cuantos ^3DAB2CJakk^000000 llevamos?",
+		"Cerrar"
+		))
+	{
+		case 1:
+			set .@id,20456;
+			break;
+		case 2:
+			set .@id,31833;
+			break;
+		case 3:
+			set .@id,31121;
+			break;
+		case 4:
+			set .@id,31387;
+			break;
+		case 5:
+			set .@id,20397;
+			break;
+		case 6:
+			mes .@name$;
+			mes "Hasta el momento llevan ^0000ff"+ $JAKK +"^000000 ^3DAB2CJakk^000000. Recuerda que será durante todo Octubre!";
+			next;
+		default:
+			mes .@name$;
+			mes "Bueno, recuerda cazar muchos ^3DAB2CJakk^000000!";
+			close2;
+			cutin "morocc_kid",255;
+			end;
+	}
+	set #JAKKCAZA,#JAKKCAZA+1;
+	getitem .@id,1;
+	mes .@name$;
+	mes "Ten tu "+getitemname(.@id)+" como recompensa!.";
+	close2;
+	cutin "morocc_kid",255;
+	end;
+}
+
+deadbranch,34,66,5	script	Shalosh#Halloween	10041,{
+	set .@name$,"[^0000ffShalosh^000000]";
+	cutin "shaloshi01",2;
+	mes .@name$;
+	mes "Bienvenido a este lugar secreto del ^ff0000Halloween^000000!";
+	mes "En mi caso yo otorgaré recompensas por los ^0000ffpuntos^000000 que juntemos entre todos!";
+	next;
+	switch(select(
+		( $JAKKPTO >= 3000 && #JAKKPTO == 0)?"^10B2D2 [ > ] ^000000Cobrar recompensa":"",
+		( $JAKKPTO >= 6000 && #JAKKPTO == 1)?"^10B2D2 [ > ] ^000000Cobrar recompensa":"",
+		( $JAKKPTO >= 12000 && #JAKKPTO == 2)?"^10B2D2 [ > ] ^000000Cobrar recompensa":"",
+		( $JAKKPTO >= 24000 && #JAKKPTO == 3)?"^10B2D2 [ > ] ^000000Cobrar recompensa":"",
+		( $JAKKPTO >= 48000 && #JAKKPTO == 4)?"^10B2D2 [ > ] ^000000Cobrar recompensa":"",
+		"¿Cuantos ^0000ffpuntos^000000 llevamos?",
+		"Cerrar"
+		))
+	{
+		case 1:
+			set .@id,61093;
+			break;
+		case 2:
+			set .@id,31834;
+			break;
+		case 3:
+			set .@id,20034;
+			break;
+		case 4:
+			set .@id,19910;
+			break;
+		case 5:
+			set .@id,65065;
+			break;
+		case 6:
+			mes .@name$;
+			mes "Hasta el momento llevan ^0000ff"+ $JAKKPTO +"^000000 ^0000ffpuntos^000000. Recuerda que será durante todo Octubre!";
+			next;
+		default:
+			mes .@name$;
+			mes "Bueno, recuerda cazar muchos ^3DAB2CJakk^000000 y entregar sus dulces en Prontera!";
+			close2;
+			cutin "shaloshi01",255;
+			end;
+	}
+	set #JAKKPTO,#JAKKPTO+1;
+	getitem .@id,1;
+	mes .@name$;
+	mes "Ten tu "+getitemname(.@id)+" como recompensa!.";
+	close2;
+	cutin "shaloshi01",255;
+	end;
+}
+
+deadbranch,27,50,6	script	Lola Ruri#2	10017,{
+	set .@name$,"^000000[^6300ffLola Ruri^000000]";
+	mes .@name$;
+	mes "Te puedo llevar a un lugar muy especial, pero ^ff0000no podrás volver^000000 acá";
+	next;
+	if(select("No, gracias:Vamos")==1)
+	{
+		mes .@name$;
+		mes "No te preocupes ese cementerio es muy particular.";
+		close;
+	}
+	mes .@name$;
+	mes "Estas seguro? no podrás regresar si te llevo, necesitarás otra invitación.";
+	next;
+	if(select("No, gracias:Vamos")==1)
+	{
+		mes .@name$;
+		mes "No te preocupes ese cementerio es muy particular.";
+		close;
+	}
+	mes .@name$;
+	mes "Como tu digas, vamos al cementerio!";
+	close2;
+	warp "bomberman",31,20;
+	end;
+}
+
+deadbranch,77,46,2	shop	Pumpinks	10039,535:15,1062:500,12192:10000,12060:50000,5134:100000,18656:10000000
+
+
+deadbranch,77,39,3	script	Alma#1	802,{
+	set .@name$,"^000000[^270790Alma^000000]";
+	mes .@name$;
+	mes "Veo que no estás muerto, aún así puedes pisar este lugar, de seguro entraste con una ^6300ffInvitación a la Oscuridad^000000.";
+	close;
+}
+
+deadbranch,66,24,3	script	Alma#2	802,{
+	set .@name$,"^000000[^270790Alma^000000]";
+	mes .@name$;
+	mes "Existen 11 diferentes tipos de dulces, dicen que en el laberinto de Halloween existe alguien que ^6300ffvende^000000 estos dulces.";
+	close;
+}
+
+deadbranch,43,24,3	script	Alma#3	802,{
+	set .@name$,"^000000[^270790Alma^000000]";
+	mes .@name$;
+	mes "En el laberinto vive una bruja que puede encantar gratis tu ^6300ff"+getitemname(44529)+"^000000 sólo debes llevarle el encantamiento.";
+	close;
+}
+
+deadbranch,24,37,3	script	Alma#4	802,{
+	set .@name$,"^000000[^270790Alma^000000]";
+	mes .@name$;
+	mes "Mientras más gente hay en el  ^6300fflaberinto^000000 es más dificil poder completarlo.";
+	close;
+}
+
+deadbranch,30,58,3	script	Alma#5	802,{
+	set .@name$,"^000000[^270790Alma^000000]";
+	mes .@name$;
+	mes "Sólo podras volver si encuentras otra ^6300ffInvitación a la Oscuridad^000000.";
+	close;
+}
+
+niffmap2,209,288,8	script	Zombie#Halloween	796,{
+	set .@name$,"^000000[^270790Zombie^000000]";
+	
+	mes .@name$;
+	mes "No veo muchas personas como tu, si me traes algunos dulces podríamos hacer un cambio";
+	next;
+	switch(select("^10B2D2 [ > ] ^000000Darle 1 dulce:^10B2D2 [ > ] ^000000Darle 3 dulces:^10B2D2 [ > ] ^000000Darle 5 dulces"))
+	{
+		case 1:
+			set .@porcentaje,20;
+			set .@i, 1;
+			break;
+		case 2:
+			set .@porcentaje,60;
+			set .@i, 3;
+			break;
+		case 3:
+			set .@porcentaje,100;
+			set .@i, 5;
+			break;
+	}	
+	set .@dulces, countitem(11592) + countitem(11593) + countitem(11594) + countitem(11595) + countitem(11596) + countitem(12658) + countitem(12659) + countitem(12660) + countitem(12661) + countitem(12662) + countitem(12663) + countitem(12664);
+	if( .@dulces < .@i )
+	{
+		mes .@name$;
+		mes "No tienes tantos dulces, una pena.";
+		close;
+	}
+	setarray .@candy[0],11592,11593,11594,11595,11596,12658,12659,12660,12661,12662,12663,12664;
+	while ( .@i > 0 )
+	{
+		for ( set .@j , 0 ; .@j < getarraysize(.@candy) ; set .@j , .@j + 1 )
+			if(countitem(.@candy[.@j]) > 0 && .@i > 0 )
+			{
+				delitem .@candy[.@j],1;
+				set .@i, .@i -1;
+			}
+	}
+	if(rand(0,99) < .@porcentaje )
+	{
+		mes .@name$;
+		mes "Ñam ñam ñam ";
+		mes "Estaban muy deliciosos gracias.";
+		close;
+	}
+	mes .@name$;
+	mes "Son los mejores dulces que he probado en mi vida!";
+	mes "Ten esta recompensa!";
+	getitem 20173,1;
+	close;
+}
+
+-	cashshop	Cash_Dulces	-1,11592:5000,11593:5000,11594:5000,11595:5000,12658:5000,12659:5000,12660:5000,12661:5000,12662:5000,12663:5000,12664:5000
+
+niffmap2,248,92,3	script	Zombie#Halloween2	792,{
+	set .@name$,"^000000[^270790Zombie^000000]";
+	
+	mes .@name$;
+	if( countitem(20173) < 1 )
+	{
+		mes "Si tan sólo tuvieras una ^6300ff"+getitemname(20173)+"^000000 podríamos hablar.";
+		close;
+	}
+	mes "Te puedo vender muchos dulces diferentes!";
+	mes "Sólo cierra esta ventana para poder acceder.";
+	close2;
+	callshop "Cash_Dulces",0;
+	end;
+}
+
+niffmap2,220,251,3	script	Bruja#Halloween	3332,{
+	set .@name$,"^000000[^270790Bruja^000000]";
+	
+	mes .@name$;
+	if( getequipid(EQI_GARMENT) != 44529 || countitem(44529) > 1 )
+	{
+		mes "Si tuvieras sólo un ^6300ff"+getitemname(44529)+"^000000 podríamos hablar.";
+		close;
+	}
+	mes "Veo que tienes un ^6300ff"+getitemname(44529)+"^000000";
+	next;
+	switch(select(
+		( countitem(44521) > 0 || countitem(44525) > 0 )?"^10B2D2 [ > ] ^000000Encantar Pumpink Mojo":"",
+		( countitem(44524) > 0 || countitem(44528) > 0 )?"^10B2D2 [ > ] ^000000Encantar Red Tail":"",
+		( countitem(44522) > 0 || countitem(44523) > 0 || countitem(44526) > 0 || countitem(44527) > 0 )?"^10B2D2 [ > ] ^000000Encantar Skull Izquierda":"",
+		( countitem(44522) > 0 || countitem(44523) > 0 || countitem(44526) > 0 || countitem(44527) > 0 )?"^10B2D2 [ > ] ^000000Encantar Skull Derecha":"",
+		"Información encantamientos",
+		"Cerrar"
+		))
+	{
+		case 1:
+			set .@slot,2;
+			set .@slot$,"Pumpink Mojo";
+			break;
+		case 2:
+			set .@slot,3;
+			set .@slot$,"Red Tail";
+			break;
+		case 3:
+			set .@slot,1;
+			set .@slot$,"Skull Izquierda";
+			break;
+		case 4:
+			set .@slot,4;
+			set .@slot$,"Skull Derecha";
+			break;
+		case 5:
+			mes .@name$;
+			mes "Existen 3 tipos diferentes de encantamiento, pero al colocarlos dentro de una calabaza estos no se pueden repetir o podría generar un problema";
+			next;
+			mes .@name$;
+			mes "Los encantamientos posibles son:";
+			mes " - Pumpink Mojo";
+			mes " - Red Tail";
+			mes " - Skull";
+			next;
+			mes .@name$;
+			mes "Todos estos encantamientos los tienen los ^3DAB2CJakk^000000 en el evento, por lo que al cazarlos puedes obtener alguno.";
+			close;
+		default:
+			mes .@name$;
+			mes "Bueno, cuando puedas volver de seguro podrás encantar tu ^6300ff"+getitemname(44529)+"^000000";
+			close;
+	}
+	mes .@name$;
+	mes "Por lo que veo deseas encantar tu ^0000ff"+ .@slot$ + "^000000, para esto necesitarás tener al menos 1 posible encantamiento.";
+	next;
+	switch( .@slot )
+	{
+		case 1:
+			switch(select(
+				( countitem(44522) > 0 )?"^10B2D2 [ > ] ^000000Encantar con esta ^6300ffSkull 1^000000":"",
+				( countitem(44523) > 0 )?"^10B2D2 [ > ] ^000000Encantar con esta ^6300ffSkull 2^000000":"",
+				( countitem(44526) > 0 )?"^10B2D2 [ > ] ^000000Encantar con esta ^6300ffSkull 3^000000":"",
+				( countitem(44527) > 0 )?"^10B2D2 [ > ] ^000000Encantar con esta ^6300ffSkull 4^000000":""
+				))
+			{
+				case 1:
+					set .@enchant, 44522;
+					break;
+				case 2:
+					set .@enchant, 44523;
+					break;
+				case 3:
+					set .@enchant, 44526;
+					break;
+				case 4:
+					set .@enchant, 44527;
+					break;
+			}
+			break;
+		case 2:
+			switch(select(
+				( countitem(44521) > 0 )?"^10B2D2 [ > ] ^000000Encantar con esta ^6300ffPumkin Mojo 1^000000":"",
+				( countitem(44525) > 0 )?"^10B2D2 [ > ] ^000000Encantar con esta ^6300ffPumkin Mojo 2^000000":""
+				))
+			{
+				case 1:
+					set .@enchant, 44521;
+					break;
+				case 2:
+					set .@enchant, 44525;
+					break;
+			}
+			break;
+		case 3:
+			switch(select(
+				( countitem(44524) > 0 )?"^10B2D2 [ > ] ^000000Encantar con esta ^6300ffRed Tail 1^000000":"",
+				( countitem(44528) > 0 )?"^10B2D2 [ > ] ^000000Encantar con esta ^6300ffRed Tail 2^000000":""
+				))
+			{
+				case 1:
+					set .@enchant, 44524;
+					break;
+				case 2:
+					set .@enchant, 44528;
+					break;
+			}
+			break;
+		case 4:
+			switch(select(
+				( countitem(44522) > 0 )?"^10B2D2 [ > ] ^000000Encantar con esta ^6300ffSkull 1^000000":"",
+				( countitem(44523) > 0 )?"^10B2D2 [ > ] ^000000Encantar con esta ^6300ffSkull 2^000000":"",
+				( countitem(44526) > 0 )?"^10B2D2 [ > ] ^000000Encantar con esta ^6300ffSkull 3^000000":"",
+				( countitem(44527) > 0 )?"^10B2D2 [ > ] ^000000Encantar con esta ^6300ffSkull 4^000000":""
+				))
+			{
+				case 1:
+					set .@enchant, 44522;
+					break;
+				case 2:
+					set .@enchant, 44523;
+					break;
+				case 3:
+					set .@enchant, 44526;
+					break;
+				case 4:
+					set .@enchant, 44527;
+					break;
+			}
+			break;
+	}
+	
+	mes .@name$;
+	mes "Actualmente ya tienes encantado los siguientes espacios en tu ^6300ff"+getitemname(44529)+"^000000";
+	set .@Slot1, getequipcardid(EQI_GARMENT,0);
+	set .@Slot2, getequipcardid(EQI_GARMENT,1);
+	set .@Slot3, getequipcardid(EQI_GARMENT,2);
+	set .@Slot4, getequipcardid(EQI_GARMENT,3);
+	
+	mes ( .@Slot1 > 0 )?" - ^10B2D2Skull Izquierda^000000":" - ^a30d0dSkull Izquierda^000000";
+	mes ( .@Slot2 > 0 )?" - ^10B2D2Pumkin Mojo^000000":" - ^a30d0dPumkin Mojo^000000";
+	mes ( .@Slot3 > 0 )?" - ^10B2D2Red Tail^000000":" - ^a30d0dRed Tail^000000";
+	mes ( .@Slot4 > 0 )?" - ^10B2D2Skull Derecha^000000":" - ^a30d0dSkull Derecha^000000";
+	next;
+	if(select("Encantar!:Mejor me lo pienso")==2)
+	{
+		mes .@name$;
+		mes "No te preocupes, estaré aquí mismo esperando si cambias de opinión.";
+		close;
+	}
+	switch(.@slot)
+	{
+		case 1:
+			if( .@slot4 != .@enchant )
+				set .@slot1,.@enchant;
+			else	
+			{
+				mes .@name$;
+				mes "Lo siento, pero no puedo colocar dos veces el mismo encantamiento.";
+				close;
+			}
+			break;
+		case 2:
+			set .@slot2,.@enchant;
+			break;
+		case 3:
+			set .@slot3,.@enchant;
+			break;
+		case 4:
+			if( .@slot1 != .@enchant )
+				set .@slot4,.@enchant;
+			else	
+			{
+				mes .@name$;
+				mes "Lo siento, pero no puedo colocar dos veces el mismo encantamiento.";
+				close;
+			}
+			break;
+	}
+	
+	delitem .@enchant,1;
+	delitem 44529,1;
+	getitem2 44529, 1, 1, 0, 0, .@slot1, .@slot2, .@slot3, .@slot4;
+	close;
+	end;
+
+}
+
+prontera,139,173,5	script	Slot Machine#Halloween	562,{
+	set .@name$,"^000000[^270790Halloween Machine^000000]";
+	
+	mes .@name$;
+	mes "Cada intento cuesta 5 "+getitemname(44536)+"!";
+	next;
+	switch(select(
+		( countitem(44536) > 4 )?"^10B2D2 [ > ] ^000000Jugar^000000":"^a30d0d [ > ] ^000000Jugar^000000",
+		"^10B2D2 [ > ] ^000000Quest Ticket Invitación Oscuridad^000000",
+		"^10B2D2 [ > ] ^000000Instrucciones^000000"
+	))
+	{
+		case 1:
+			if( countitem(44536) < 5 )
+			{
+				mes .@name$;
+				mes "No tienes suficientes "+getitemname(44536)+"!";
+				close;
+			}
+			delitem 44536,5;
+			mes .@name$;
+			mes "Elige una dirección";
+			next;
+			set .@i, 0;
+			while ( .@i != 5 )
+				set .@i, select("^10B2D2 [ > ] ^000000Izquierda:^10B2D2 [ > ] ^000000Derecha:^10B2D2 [ > ] ^000000Arriba:^10B2D2 [ > ] ^000000Abajo:^10B2D2 [ > ] ^000000Pulsar Botón");
+			
+			set .@premio, rand(0,100);
+			
+			if( .@premio == 0 )
+			{
+				mes .@name$;
+				mes "Felicitaciones! Obtuviste un encantamiento!";
+				getitem 44521 + rand(0,7),1;
+				close;
+			}
+			if( .@premio < 10 )
+			{
+				mes .@name$;
+				mes "Felicitaciones! Obtuviste una calabaza!";
+				getitem 44530 + rand(0,2),1;
+				close;
+			}
+			if( .@premio < 15 )
+			{
+				mes .@name$;
+				mes "Felicitaciones! Obtuviste una Invitación a la oscuridad!";
+				getitem 44520,1;
+				close;
+			}
+			if( .@premio < 16 )
+			{
+				mes .@name$;
+				mes "Felicitaciones! Obtuviste un encantamiento aleatorio!";
+				getitem 44533,1;
+				close;
+			}
+			if( .@premio < 40 )
+			{
+				mes .@name$;
+				mes "Felicitaciones! Obtuviste un dulce!";
+				getitem 12658 + rand(0,6),1;
+				close;
+			}
+			if( .@premio < 60 )
+			{
+				mes .@name$;
+				mes "Felicitaciones! Obtuviste un dulce!";
+				getitem 11592 + rand(0,3),1;
+				close;
+			}
+			if( .@premio < 80 )
+			{
+				mes .@name$;
+				mes "Felicitaciones! Obtuviste un Detector de Jakk!";
+				getitem 44534,1;
+				close;
+			} else
+			{
+				mes .@name$;
+				mes "Felicitaciones! Obtuviste un Detector de Jakk!";
+				getitem 44535,1;
+				close;
+			}
+			close;
+		case 2:
+			mes .@name$;
+			mes "Si me traes los siguientes materiales te puedo fabricar una valiosa invitación a la oscuridad!";
+			mes ( countitem(44536) > 9 )?" ^10B2D2 [ > ] ^00000010 Halloween Coin":" ^^a30d0d [ > ] ^00000010 Halloween Coin";
+			mes ( countitem(7023) > 4 )?" ^10B2D2 [ > ] ^0000005 Blade of Lost in Darkness":" ^^a30d0d [ > ] ^0000005 Blade of Lost in Darkness";
+			mes ( countitem(12020) > 19 )?" ^10B2D2 [ > ] ^00000020 Cursed Water":" ^^a30d0d [ > ] ^00000020 Cursed Water";
+			mes ( countitem(718) > 2 )?" ^10B2D2 [ > ] ^0000003 Garnet":" ^^a30d0d [ > ] ^0000003 Garnet";
+			mes ( countitem(7566) > 0 )?" ^10B2D2 [ > ] ^0000001 Will of Red Darkness":" ^^a30d0d [ > ] ^0000001 Will of Red Darkness";
+			next;
+			if( countitem(7566) < 1 || countitem(718) < 3 || countitem(12020) < 20 || countitem(7023) < 5 || countitem(44536) < 10 )
+			{
+				mes .@name$;
+				mes "Aún te faltan materiales";
+				close;
+			}
+			delitem 7566,1;
+			delitem 718,3;
+			delitem 12020,20;
+			delitem 7023,5;
+			delitem 44536,10;
+			getitem 44520,1;
+			mes .@name$;
+			mes "Felicitaciones! Aquí tienes tu invitación.";
+			close;
+		case 3:
+			mes .@name$;
+			mes "El juego es muy sencillo, partiras al medio de la máquina, y deberás ir moviendo la palanca en la dirección que desees, luego pulsar el botón, bajará el gancho magnético que afirmará un premio y te lo lanzará por el costado, no es tán dificil.";
+			close;
+	}
+	close;
+	end;
+}
+//Laberinto
+-	script	Halloween_Portal	-1,{
+OnTouch:
+	set .@win_chance, 25*(getmapusers("niffmap2"));
+    if ( rand(1,.@win_chance) == .@win_chance ) {
+        warp "deadbranch",52,69;
+		dispbottom "[Jakk] "+strcharinfo(0)+" Entraste en el portal correcto";
+		end;
+	}
+	warp "niffmap2",0,0;
+    end;
+}
+
+niffmap2,18,387,0	duplicate(Halloween_Portal)	Halloween_Portal#1	45,2,2
+niffmap2,17,327,0	duplicate(Halloween_Portal)	Halloween_Portal#2	45,2,2
+niffmap2,18,309,0	duplicate(Halloween_Portal)	Halloween_Portal#3	45,2,2
+niffmap2,26,253,0	duplicate(Halloween_Portal)	Halloween_Portal#4	45,2,2
+niffmap2,8,209,0	duplicate(Halloween_Portal)	Halloween_Portal#5	45,2,2
+niffmap2,7,192,0	duplicate(Halloween_Portal)	Halloween_Portal#6	45,2,2
+niffmap2,31,128,0	duplicate(Halloween_Portal)	Halloween_Portal#7	45,2,2
+niffmap2,21,93,0	duplicate(Halloween_Portal)	Halloween_Portal#8	45,2,2
+niffmap2,30,47,0	duplicate(Halloween_Portal)	Halloween_Portal#9	45,2,2
+niffmap2,27,11,0	duplicate(Halloween_Portal)	Halloween_Portal#10	45,2,2
+
+niffmap2,66,374,0	duplicate(Halloween_Portal)	Halloween_Portal#11	45,2,2
+niffmap2,58,350,0	duplicate(Halloween_Portal)	Halloween_Portal#12	45,2,2
+niffmap2,51,290,0	duplicate(Halloween_Portal)	Halloween_Portal#13	45,2,2
+niffmap2,59,268,0	duplicate(Halloween_Portal)	Halloween_Portal#14	45,2,2
+niffmap2,69,211,0	duplicate(Halloween_Portal)	Halloween_Portal#15	45,2,2
+niffmap2,46,193,0	duplicate(Halloween_Portal)	Halloween_Portal#16	45,2,2
+niffmap2,59,130,0	duplicate(Halloween_Portal)	Halloween_Portal#17	45,2,2
+niffmap2,46,86,0	duplicate(Halloween_Portal)	Halloween_Portal#18	45,2,2
+niffmap2,50,47,0	duplicate(Halloween_Portal)	Halloween_Portal#19	45,2,2
+niffmap2,72,7,0	duplicate(Halloween_Portal)	Halloween_Portal#20	45,2,2
+
+niffmap2,89,387,0	duplicate(Halloween_Portal)	Halloween_Portal#21	45,2,2
+niffmap2,110,327,0	duplicate(Halloween_Portal)	Halloween_Portal#22	45,2,2
+niffmap2,100,299,0	duplicate(Halloween_Portal)	Halloween_Portal#23	45,2,2
+niffmap2,99,262,0	duplicate(Halloween_Portal)	Halloween_Portal#24	45,2,2
+niffmap2,111,219,0	duplicate(Halloween_Portal)	Halloween_Portal#25	45,2,2
+niffmap2,106,170,0	duplicate(Halloween_Portal)	Halloween_Portal#26	45,2,2
+niffmap2,94,137,0	duplicate(Halloween_Portal)	Halloween_Portal#27	45,2,2
+niffmap2,101,89,0	duplicate(Halloween_Portal)	Halloween_Portal#28	45,2,2
+niffmap2,99,69,0	duplicate(Halloween_Portal)	Halloween_Portal#29	45,2,2
+niffmap2,111,8,0	duplicate(Halloween_Portal)	Halloween_Portal#30	45,2,2
+
+niffmap2,150,372,0	duplicate(Halloween_Portal)	Halloween_Portal#31	45,2,2
+niffmap2,127,352,0	duplicate(Halloween_Portal)	Halloween_Portal#32	45,2,2
+niffmap2,129,290,0	duplicate(Halloween_Portal)	Halloween_Portal#33	45,2,2
+niffmap2,152,249,0	duplicate(Halloween_Portal)	Halloween_Portal#34	45,2,2
+niffmap2,137,207,0	duplicate(Halloween_Portal)	Halloween_Portal#35	45,2,2
+niffmap2,127,167,0	duplicate(Halloween_Portal)	Halloween_Portal#36	45,2,2
+niffmap2,132,132,0	duplicate(Halloween_Portal)	Halloween_Portal#37	45,2,2
+niffmap2,132,94,0	duplicate(Halloween_Portal)	Halloween_Portal#38	45,2,2
+niffmap2,127,70,0	duplicate(Halloween_Portal)	Halloween_Portal#39	45,2,2
+niffmap2,139,20,0	duplicate(Halloween_Portal)	Halloween_Portal#40	45,2,2
+
+niffmap2,180,381,0	duplicate(Halloween_Portal)	Halloween_Portal#41	45,2,2
+niffmap2,187,347,0	duplicate(Halloween_Portal)	Halloween_Portal#42	45,2,2
+niffmap2,190,312,0	duplicate(Halloween_Portal)	Halloween_Portal#43	45,2,2
+niffmap2,185,250,0	duplicate(Halloween_Portal)	Halloween_Portal#44	45,2,2
+niffmap2,180,220,0	duplicate(Halloween_Portal)	Halloween_Portal#45	45,2,2
+niffmap2,180,174,0	duplicate(Halloween_Portal)	Halloween_Portal#46	45,2,2
+niffmap2,168,137,0	duplicate(Halloween_Portal)	Halloween_Portal#47	45,2,2
+niffmap2,187,94,0	duplicate(Halloween_Portal)	Halloween_Portal#48	45,2,2
+niffmap2,188,50,0	duplicate(Halloween_Portal)	Halloween_Portal#49	45,2,2
+niffmap2,186,10,0	duplicate(Halloween_Portal)	Halloween_Portal#50	45,2,2
+
+niffmap2,228,371,0	duplicate(Halloween_Portal)	Halloween_Portal#51	45,2,2
+niffmap2,230,330,0	duplicate(Halloween_Portal)	Halloween_Portal#52	45,2,2
+niffmap2,228,292,0	duplicate(Halloween_Portal)	Halloween_Portal#53	45,2,2
+niffmap2,223,257,0	duplicate(Halloween_Portal)	Halloween_Portal#54	45,2,2//Bruja
+niffmap2,232,207,0	duplicate(Halloween_Portal)	Halloween_Portal#55	45,2,2
+niffmap2,220,179,0	duplicate(Halloween_Portal)	Halloween_Portal#56	45,2,2
+niffmap2,224,135,0	duplicate(Halloween_Portal)	Halloween_Portal#57	45,2,2
+niffmap2,219,93,0	duplicate(Halloween_Portal)	Halloween_Portal#58	45,2,2
+niffmap2,228,59,0	duplicate(Halloween_Portal)	Halloween_Portal#59	45,2,2
+niffmap2,211,27,0	duplicate(Halloween_Portal)	Halloween_Portal#60	45,2,2
+
+niffmap2,259,381,0	duplicate(Halloween_Portal)	Halloween_Portal#61	45,2,2
+niffmap2,255,345,0	duplicate(Halloween_Portal)	Halloween_Portal#62	45,2,2
+niffmap2,252,309,0	duplicate(Halloween_Portal)	Halloween_Portal#63	45,2,2
+niffmap2,253,255,0	duplicate(Halloween_Portal)	Halloween_Portal#64	45,2,2
+niffmap2,253,216,0	duplicate(Halloween_Portal)	Halloween_Portal#65	45,2,2
+niffmap2,266,182,0	duplicate(Halloween_Portal)	Halloween_Portal#66	45,2,2
+niffmap2,266,135,0	duplicate(Halloween_Portal)	Halloween_Portal#67	45,2,2
+niffmap2,272,112,0	duplicate(Halloween_Portal)	Halloween_Portal#68	45,2,2
+niffmap2,247,56,0	duplicate(Halloween_Portal)	Halloween_Portal#69	45,2,2
+niffmap2,258,28,0	duplicate(Halloween_Portal)	Halloween_Portal#70	45,2,2
+
+niffmap2,300,388,0	duplicate(Halloween_Portal)	Halloween_Portal#71	45,2,2
+niffmap2,290,329,0	duplicate(Halloween_Portal)	Halloween_Portal#72	45,2,2
+niffmap2,287,287,0	duplicate(Halloween_Portal)	Halloween_Portal#73	45,2,2
+niffmap2,287,251,0	duplicate(Halloween_Portal)	Halloween_Portal#74	45,2,2
+niffmap2,310,207,0	duplicate(Halloween_Portal)	Halloween_Portal#75	45,2,2
+niffmap2,311,179,0	duplicate(Halloween_Portal)	Halloween_Portal#76	45,2,2
+niffmap2,300,141,0	duplicate(Halloween_Portal)	Halloween_Portal#77	45,2,2
+niffmap2,291,91,0	duplicate(Halloween_Portal)	Halloween_Portal#78	45,2,2
+niffmap2,310,64,0	duplicate(Halloween_Portal)	Halloween_Portal#79	45,2,2
+niffmap2,299,19,0	duplicate(Halloween_Portal)	Halloween_Portal#80	45,2,2
+
+niffmap2,346,390,0	duplicate(Halloween_Portal)	Halloween_Portal#81	45,2,2
+niffmap2,341,351,0	duplicate(Halloween_Portal)	Halloween_Portal#82	45,2,2
+niffmap2,353,293,0	duplicate(Halloween_Portal)	Halloween_Portal#83	45,2,2
+niffmap2,351,249,0	duplicate(Halloween_Portal)	Halloween_Portal#84	45,2,2
+niffmap2,339,219,0	duplicate(Halloween_Portal)	Halloween_Portal#85	45,2,2
+niffmap2,340,178,0	duplicate(Halloween_Portal)	Halloween_Portal#86	45,2,2
+niffmap2,341,137,0	duplicate(Halloween_Portal)	Halloween_Portal#87	45,2,2
+niffmap2,348,90,0	duplicate(Halloween_Portal)	Halloween_Portal#88	45,2,2
+niffmap2,350,61,0	duplicate(Halloween_Portal)	Halloween_Portal#89	45,2,2
+niffmap2,340,19,0	duplicate(Halloween_Portal)	Halloween_Portal#90	45,2,2
+
+niffmap2,372,372,0	duplicate(Halloween_Portal)	Halloween_Portal#91	45,2,2
+niffmap2,386,335,0	duplicate(Halloween_Portal)	Halloween_Portal#92	45,2,2
+niffmap2,390,288,0	duplicate(Halloween_Portal)	Halloween_Portal#93	45,2,2
+niffmap2,367,247,0	duplicate(Halloween_Portal)	Halloween_Portal#94	45,2,2
+niffmap2,370,215,0	duplicate(Halloween_Portal)	Halloween_Portal#95	45,2,2
+niffmap2,388,166,0	duplicate(Halloween_Portal)	Halloween_Portal#96	45,2,2
+niffmap2,377,136,0	duplicate(Halloween_Portal)	Halloween_Portal#97	45,2,2
+niffmap2,389,87,0	duplicate(Halloween_Portal)	Halloween_Portal#98	45,2,2
+niffmap2,389,61,0	duplicate(Halloween_Portal)	Halloween_Portal#99	45,2,2
+niffmap2,381,22,0	duplicate(Halloween_Portal)	Halloween_Portal#100	45,2,2
+
+//Mapflag
+niffmap2	mapflag	nightenabled
+niffmap2	mapflag	clouds
+niffmap2	mapflag	clouds2
+niffmap2	mapflag	fog
+niffmap2	mapflag	noloot
+niffmap2	mapflag	nosave	SavePoint
+niffmap2	mapflag	nobranch
+niffmap2	mapflag	noicewall
+niffmap2	mapflag	nomemo
+
+deadbranch	mapflag	nightenabled
+deadbranch	mapflag	noloot
+deadbranch	mapflag	nosave	SavePoint
+deadbranch	mapflag	nobranch
+deadbranch	mapflag	noicewall
+deadbranch	mapflag	noitemconsumption
+deadbranch	mapflag	nomemo
+deadbranch	mapflag	clouds
+deadbranch	mapflag	clouds2
+
+//Monster
+niffmap2,0,0	monster	Lude	1509,30
+niffmap2,0,0	monster	Bloody Murderer	1507,30
+niffmap2,0,0	monster	Loli Ruri	1505,30
+niffmap2,0,0	monster	Heirozoist	1510,30
+niffmap2,0,0	monster	Dullahan	1504,30
+niffmap2,0,0	monster	Gibbet	1503,30
+niffmap2,0,0	monster	Quve	1508,30
+niffmap2,0,0	monster	Disguise	1506,30
+niffmap2,0,0	monster	Ancient Mummy	1297,30
+niffmap2,0,0	monster	Drake	1112,1
+niffmap2,0,0	monster	Evil Druid	1117,30
+niffmap2,0,0	monster	Injustice	1257,30
+niffmap2,0,0	monster	Orc Skeleton 	1152,30
+niffmap2,0,0	monster	Orc Zombie 	1153,30
+niffmap2,0,0	monster	Osiris	1038,1
+niffmap2,0,0	monster	Tristan III	1875,1
+niffmap2,0,0	monster	Giant Whisper	1186,80
+niffmap2,0,0	monster	Whisper	1179,80
+
+bomberman,31,23,4	script	Lola Ruri	10017,{
+	set .@name$,"^000000[^6300ffLola Ruri^000000]";
+	mes .@name$;
+	if( $@TUMBAS$ == strcharinfo(0) ){
+		if( $@TUMBAi == 3 )
+		{
+			mes "Veamos si obtuviste algún premio.";
+			next;
+			if( $@TUMBA0 == $@TUMBA1 && $@TUMBA0 == $@TUMBA2)
+			{
+				switch( $@TUMBA0 )
+				{
+					case 1:
+						set .@reward,65199;
+						break;
+					case 2:
+						set .@reward,65064;
+						break;
+					case 3:
+						set .@reward,61366;
+						break;
+					case 4:
+						set .@reward,61353;
+						break;
+					case 5:
+						set .@reward,61332;
+						break;
+					case 6:
+						set .@reward,61322;
+						break;
+					case 7:
+						set .@reward,61318;
+						break;
+					case 8:
+						set .@reward,61280;
+						break;
+					case 9:
+						set .@reward,61338;
+						break;
+				}
+				mes .@name$;
+				mes "Felicidades! Obtuviste 3 iguales. Tu recompensa es un ^0000ff"+getitemname(.@reward)+"^000000.";
+				getitem .@reward,1;
+				close2;
+				goto OnFinalizar;
+				end;
+			} else if( $@TUMBA0 == 1 || $@TUMBA1 == 1 || $@TUMBA2 == 1 )
+			{
+				set .@reward,40451;
+				mes .@name$;
+				mes "Wow! Encontraste un Tristan III, eso realmente merece una recompensa!. Tu recompensa es un ^0000ff"+getitemname(.@reward)+"^000000.";
+				getitem .@reward,1;
+				close2;
+				goto OnFinalizar;
+				end;
+			}
+			else if( $@TUMBA0 == $@TUMBA1 || $@TUMBA0 == $@TUMBA2 || $@TUMBA1 == $@TUMBA2)
+			{
+				set .@reward,12103;
+				mes .@name$;
+				mes "Estuviste muy cerca! Sólo obtuviste dos iguales. Tu recompensa es una ^0000ff"+getitemname(.@reward)+"^000000.";
+				getitem .@reward,1;
+				close2;
+				goto OnFinalizar;
+				end;
+			}
+			else
+			{
+				mes .@name$;
+				mes "Quizas para la próxima tengas más suerte.";
+				close2;
+				goto OnFinalizar;
+				end;
+			}
+		}
+		else
+		{
+			mes "Aún te queda por desenterrar "+ ( 3 - $@TUMBAi ) + ".";
+			close;
+		}
+	}
+	mes "Este cementerio es muy especial, si escarbas un poco puedes encontrar zombies.";
+	next;
+	mes .@name$;
+	mes "Juguemos a algo, traeme:\n";
+	mes " - 5 Halloween Coin (#44536)\n";
+	mes " - 5 Old Pick (#7318)\n";
+	mes " - 5 Flashlight (#7327)\n";
+	mes "^000000Además equipate un ^FF0000" + getitemname(5009) + "^000000 o un ^FF0000" + getitemname(5031) + " ^000000.";
+	next;
+	mes .@name$;
+	mes "^000000Entonces jugamos?";
+	next;
+	switch(select("Si:No:Explicame las reglas"))
+	{
+		case 1:
+			mes .@name$;
+			if( getequipid(EQI_HEAD_TOP) != 5009 && getequipid(EQI_HEAD_TOP) != 5031 ) {
+				mes "^000000Por mi seguridad, antes de jugar mejor^000000 me equipo un ^FF0000" + getitemname(5009) + "^000000 o un ^FF0000" + getitemname(5031) + "^000000.";
+				close;
+			}
+			if(countitem(7318) < 5 || countitem(7327) < 5 || countitem(44536) < 5 )
+			{
+				mes "^000000Lo siento, pero parece que no cuentas con los materiales necesarios para excavar.";
+				close;
+			}
+			if( $@TUMBAS$ != "" && $@TUMBAS$ != strcharinfo(0) )
+			{
+				mes "^000000Espera que alguien está excavando en este momento.";
+				close;
+			}
+			mes "^000000Anda y escava las tres tumbas que tu quieras.";
+			delitem 7318,5;
+			delitem 7327,5;
+			delitem 44536,5;
+			set $@TUMBAS$,strcharinfo(0);
+			initnpctimer;
+			close;
+		case 2:
+			mes .@name$;
+			mes "Cuando desees participar puedes hablarme.";
+			close;
+		case 3:
+			mes .@name$;
+			mes "El juego consiste en que debes excavar tres diferentes tumbas, de cada una de ellas aparecerá un No-Muerto, si al finalizar el juego las tres son iguales recibirás una recompensa, esta recompensa cambia dependiendo del No-Muerto que encuentres.";
+			next;
+			mes .@name$;
+			mes "Además si sólo encuentras dos iguales, te daré 1 Bloody Branch, ¿Qué estas esperando? Vamos a jugar!";
+			close;
+	}
+
+OnTimer120000:
+	if( $@TUMBAS$ != "")
+	{
+		mapannounce "bomberman","Lola Ruri: Estamos listos! Acercate, tienes un minuto para cobrar tu recompensa!",1;
+	}
+	end;
+OnFinalizar:
+OnTimer180000:
+	stopnpctimer;
+	if( $@TUMBAS$ != "")
+	{
+		mapannounce "bomberman","Lola Ruri: Siguiente participante!",1;
+		set $@TUMBAS$, "";
+		set $@TUMBA0,0;
+		set $@TUMBA1,0;
+		set $@TUMBA2,0;
+		set $@TUMBAi,0;
+		set $@TUMBAid0,0;
+		set $@TUMBAid1,0;
+		set $@TUMBAid2,0;
+		setnpcdisplay "Tumba", "Tumba", 557;
+		for( set .@h, 2; .@h < 26; set .@h, .@h + 1 )
+		{
+			setnpcdisplay "Tumba#"+.@h, "Tumba", 557;
+		}
+	}
+	end;
+}
+
+bomberman,26,40,3	script	Tumba	557,{
+	set .@name$,"[Tumba]";
+	if( $@TUMBAS$ != strcharinfo(0) )
+	{
+		mes .@name$;
+		mes "No tienes permiso para excavar aquí";
+		close;
+	}
+	if( $@TUMBAi == 3)
+	{
+		mes .@name$;
+		mes "Acercate a ver si ganaste algo.";
+		close;
+	}
+	if( $@TUMBAid0 == getnpcid(0) || $@TUMBAid1 == getnpcid(0) || $@TUMBAid2 == getnpcid(0) )
+	{
+		mes .@name$;
+		mes "Aquí ya encontraste un No-Muerto.";
+		close;
+	}	
+	if( getequipid(EQI_HEAD_TOP) != 5009 && getequipid(EQI_HEAD_TOP) != 5031 ) {
+		mes .@name$;
+		mes "Por mi seguridad, antes de jugar mejor me equipo un ^FF0000" + getitemname(5009) + "^000000 o un ^FF0000" + getitemname(5031) + " ^000000.";
+		close;
+	}
+	mes .@name$;
+	mes "Deseas excavar en esta tumba?";
+	next;
+	if( select("Si, excavar!:No, deja buscar otra") == 2 )
+	{
+		mes .@name$;
+		mes "Mejor busco otra.";
+		close;
+	}
+	
+	set .@rand, rand(0,440);
+	
+	if( .@rand < 2 )
+	{
+		//Tristan III 1875
+		progressbar "ff0000",3;
+		setnpcdisplay strnpcinfo(3), "Tristan III", 1875;
+		setd "$@TUMBA"+$@TUMBAi, 1;
+		set $@TUMBAi,$@TUMBAi+1;
+		
+	} else	if ( .@rand < 20 )
+	{
+		//Dead Kafra 791
+		progressbar "ff0000",3;
+		setnpcdisplay strnpcinfo(3), "Dead Kafra", 791;
+		setd "$@TUMBA"+$@TUMBAi, 2;
+		set $@TUMBAi,$@TUMBAi+1;
+	} else	if ( .@rand < 50 )
+	{
+		//Drake 1112
+		progressbar "ff0000",3;
+		setnpcdisplay strnpcinfo(3), "Drake", 1112;
+		setd "$@TUMBA"+$@TUMBAi, 3;
+		set $@TUMBAi,$@TUMBAi+1;
+	} else	if ( .@rand < 90 )
+	{
+		//Ragged Zombie 1865
+		progressbar "ff0000",3;
+		setnpcdisplay strnpcinfo(3), "Ragged Zombie", 1865;
+		setd "$@TUMBA"+$@TUMBAi, 4;
+		set $@TUMBAi,$@TUMBAi+1;
+	} else	if ( .@rand < 140 )
+	{
+		//Zombie Master 1298
+		progressbar "ff0000",3;
+		setnpcdisplay strnpcinfo(3), "Zombie Master", 1298;
+		setd "$@TUMBA"+$@TUMBAi, 5;
+		set $@TUMBAi,$@TUMBAi+1;
+	} else	if ( .@rand < 200 )
+	{
+		//Soldier Skeleton 1562
+		progressbar "ff0000",3;
+		setnpcdisplay strnpcinfo(3), "Soldier Skeleton", 1562;
+		setd "$@TUMBA"+$@TUMBAi, 6;
+		set $@TUMBAi,$@TUMBAi+1;
+	} else	if ( .@rand < 270 )
+	{
+		//Skeleton 1076
+		progressbar "ff0000",3;
+		setnpcdisplay strnpcinfo(3), "Skeleton", 1076;
+		setd "$@TUMBA"+$@TUMBAi, 7;
+		set $@TUMBAi,$@TUMBAi+1;
+	} else	if ( .@rand < 350 )
+	{
+		//Zombie 1394
+		progressbar "ff0000",3;
+		setnpcdisplay strnpcinfo(3), "Zombie", 1394;
+		setd "$@TUMBA"+$@TUMBAi, 8;
+		set $@TUMBAi,$@TUMBAi+1;
+	}
+	 else
+	{
+		//Ghoul 1036
+		progressbar "ff0000",3;
+		setnpcdisplay strnpcinfo(3), "Ghoul", 1036;
+		setd "$@TUMBA"+$@TUMBAi, 9;
+		set $@TUMBAi,$@TUMBAi+1;
+	}
+	if( $@TUMBAi == 3 ) 
+	{
+		setnpctimer 119000,"Lola Ruri";
+	}
+	setd "$@TUMBAid"+$@TUMBAi, getnpcid(0);
+	mes .@name$;
+	mes "Wow ha aparecido un No-Muerto";
+	close;
+}
+
+bomberman,28,40,3	duplicate(Tumba)	Tumba#2	557
+bomberman,30,40,3	duplicate(Tumba)	Tumba#3	557
+bomberman,32,40,3	duplicate(Tumba)	Tumba#4	557
+bomberman,34,40,3	duplicate(Tumba)	Tumba#5	557
+
+bomberman,26,38,3	duplicate(Tumba)	Tumba#6	557
+bomberman,28,38,3	duplicate(Tumba)	Tumba#7	557
+bomberman,30,38,3	duplicate(Tumba)	Tumba#8	557
+bomberman,32,38,3	duplicate(Tumba)	Tumba#9	557
+bomberman,34,38,3	duplicate(Tumba)	Tumba#10	557
+
+bomberman,26,36,3	duplicate(Tumba)	Tumba#11	557
+bomberman,28,36,3	duplicate(Tumba)	Tumba#12	557
+bomberman,30,36,3	duplicate(Tumba)	Tumba#13	557
+bomberman,32,36,3	duplicate(Tumba)	Tumba#14	557
+bomberman,34,36,3	duplicate(Tumba)	Tumba#15	557
+
+bomberman,26,34,3	duplicate(Tumba)	Tumba#16	557
+bomberman,28,34,3	duplicate(Tumba)	Tumba#17	557
+bomberman,30,34,3	duplicate(Tumba)	Tumba#18	557
+bomberman,32,34,3	duplicate(Tumba)	Tumba#19	557
+bomberman,34,34,3	duplicate(Tumba)	Tumba#20	557
+
+bomberman,26,32,3	duplicate(Tumba)	Tumba#21	557
+bomberman,28,32,3	duplicate(Tumba)	Tumba#22	557
+bomberman,30,32,3	duplicate(Tumba)	Tumba#23	557
+bomberman,32,32,3	duplicate(Tumba)	Tumba#24	557
+bomberman,34,32,3	duplicate(Tumba)	Tumba#25	557
+
+bomberman	mapflag	nowarp
+bomberman	mapflag	nowarpto
+bomberman	mapflag	noteleport
+bomberman	mapflag	nosave	SavePoint
+bomberman	mapflag	nomemo
+bomberman	mapflag	nobranch
+bomberman	mapflag	noicewall
+bomberman	mapflag	monster_noteleport

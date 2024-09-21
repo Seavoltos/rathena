@@ -824,6 +824,8 @@ moscovia,220,188,5	duplicate(Warper)	Warper#20	669
 instance,48,46,5	duplicate(Warper)	Warper#21	669
 einbech,195,84,5	duplicate(Warper)	Warper#22	669
 vend_zone,94,101,6	duplicate(Warper)	Warper#23	669
+deadbranch,52,43,4	duplicate(Warper)	Warper#24	669
+bomberman,32,18,4	duplicate(Warper)	Warper#25	669
 
 
 

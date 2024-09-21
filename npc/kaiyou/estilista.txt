@@ -136,9 +136,9 @@ OnInit:
 		"Zeny";	//	Cloth Color - Ex. need Zeny
 		
 	setarray .cost,
-		5000,	//	Hairstyle ( 10,000 Zeny )
-		5000,	//	Hair Color ( 10,000 Zeny )
-		5000;	//	Cloth Color ( 10,000 Zeny )
+		500,	//	Hairstyle ( 10,000 Zeny )
+		500,	//	Hair Color ( 10,000 Zeny )
+		500;	//	Cloth Color ( 10,000 Zeny )
 		
 	// Blacklisted Style for each style and each gender.
 	// --- Female ---

@@ -6447,7 +6447,7 @@ Body:
     Name: C_Angeling_Mini
     Type: Armor
     Locations:
-      Costume_Head_Top: true
+      Costume_Head_Low: true
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 2291
@@ -6456,7 +6456,7 @@ Body:
     Name: C_Seyren_Mini
     Type: Armor
     Locations:
-      Costume_Head_Top: true
+      Costume_Head_Low: true
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 2292
@@ -6465,7 +6465,7 @@ Body:
     Name: C_Gulaling_Mini
     Type: Armor
     Locations:
-      Costume_Head_Top: true
+      Costume_Head_Low: true
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 2293
@@ -29552,3 +29552,337 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 241
+###########################################################################
+#
+# Evento Halloween
+#
+###########################################################################
+  - Id: 44520
+    AegisName: Ev_Invitación
+    Name: Invitacion Oscuridad
+    Type: Usable
+    Buy: 20
+    Weight: 30
+    Script: |
+       .@r = rand(1,15); if(.@r==1){ specialeffect2 EF_DEVIL; warp "deadbranch",52,69; }else if(.@r==2){ heal -500,-1000; sc_start SC_STUN,3000,0; }else{ specialeffect2 EF_DEVIL; warp "niffmap2",0,0; }
+  - Id: 11592
+    AegisName: Trance_Candy_R
+    Name: Trans Candy Red
+    Type: Healing
+    Buy: 20
+    Weight: 30
+    Script: |
+      itemheal 45,0;
+      transform 1507,600000,SC_MTF_MHP,20;
+      specialeffect2 EF_CLOAKING;
+      showscript "Trans-Form-!! Bloody Murderer Fo-rm!!";
+  - Id: 11593
+    AegisName: Trance_Candy_B
+    Name: Trans Candy Blue
+    Type: Healing
+    Buy: 20
+    Weight: 30
+    Script: |
+      itemheal 45,0;
+      transform 1102,600000,SC_MTF_MSP,20;
+      specialeffect2 EF_CLOAKING;
+      showscript "Trans-Form-!!! Bathory Fo-rm!!";
+  - Id: 11594
+    AegisName: Trance_Candy_Y
+    Name: Trans Candy Yellow
+    Type: Healing
+    Buy: 20
+    Weight: 30
+    Script: |
+      itemheal 45,0;
+      transform 1130,600000,SC_MTF_PUMPKIN,2000,100;
+      specialeffect2 EF_CLOAKING;
+      showscript "Trans-Form-!! Jack Fo-rm!!";
+  - Id: 11595
+    AegisName: Trance_Candy_G
+    Name: Trans Candy Green
+    Type: Healing
+    Buy: 20
+    Weight: 30
+    Script: |
+      itemheal 45,0;
+      transform 1508,600000,SC_MTF_HITFLEE,10,20;
+      specialeffect2 EF_CLOAKING;
+      showscript "Trans-Form-!! Cube Fo-rm!!";
+  - Id: 11596
+    AegisName: Blood_In_Skull
+    Name: Blood In Skull
+    Type: Healing
+    Buy: 20
+    Weight: 50
+    Script: |
+      itemheal rand(600,800),0;
+  - Id: 12658
+    AegisName: Trans_Scroll_Devi
+    Name: Transformation Scroll(Deviruchi)
+    Type: Usable
+    Buy: 20
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Mtf
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      transform 1109,1200000,SC_MTF_ASPD,10,5;
+      showscript "Traaaansformation-!! Deviruchi form!!";
+  - Id: 12659
+    AegisName: Trans_Scroll_Ray_Arch
+    Name: Transformation Scroll(Raydric)
+    Type: Usable
+    Buy: 20
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Mtf
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      transform 1276,1200000,SC_MTF_RANGEATK,25;
+      showscript "Traaaansformation-!! Raydric form!!";
+  - Id: 12660
+    AegisName: Trans_Scroll_Mavka
+    Name: Transformation Scroll(Mavka)
+    Type: Usable
+    Buy: 20
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Mtf
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      transform 1884,1200000,SC_MTF_RANGEATK,25;
+      showscript "Traaaansformation-!! Mavka form!!";
+  - Id: 12661
+    AegisName: Trans_Scroll_Marduk
+    Name: Transformation Scroll(Marduk)
+    Type: Usable
+    Buy: 20
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Mtf
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      transform 1140,1200000,SC_MTF_MATK,25;
+      showscript "Traaaansformation-!! Marduk form!!";
+  - Id: 12662
+    AegisName: Trans_Scroll_Banshee
+    Name: Transformation Scroll(Banshee)
+    Type: Usable
+    Buy: 20
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Mtf
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      transform 1867,1200000,SC_MTF_MATK,25;
+      showscript "Traaaansformation-!! Banshee form!!";
+  - Id: 12663
+    AegisName: Trans_Scroll_Poring
+    Name: Transformation Scroll(Poring)
+    Type: Usable
+    Buy: 20
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Mtf
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      transform 1002,1200000,SC_MTF_CRIDAMAGE,5;
+      showscript "Traaaansformation-!! Poring form!!";
+  - Id: 12664
+    AegisName: Trans_Scroll_Golem
+    Name: Transformation Scroll(Golem)
+    Type: Usable
+    Buy: 20
+    Weight: 10
+    Delay:
+      Duration: 10000
+      Status: Reuse_Limit_Mtf
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      transform 1040,1200000,SC_MTF_MLEATKED,5,20,2;
+      showscript "Traaaansformation-!! Golem form!!";
+  - Id: 44521
+    AegisName: PumpkinMojo1
+    Name: Pumpkin Mojo 1
+    Type: Card
+    SubType: Enchant
+    Buy: 20
+    Script: |
+      bonus bLongAtkDef,5; bonus2 bSubEle,Ele_Neutral,5; if(getrefine()>4) bonus2 bSubEle,Ele_Neutral,getrefine()-4; 
+  - Id: 44522
+    AegisName: Skull1
+    Name: Skull 1
+    Type: Card
+    SubType: Enchant
+    Buy: 20
+    Script: |
+      bonus2 bSubEle,Ele_Neutral,10; if(getrefine()>4) bonus2 bSubEle,Ele_Neutral,getrefine()-4;
+  - Id: 44523
+    AegisName: Skull2
+    Name: Skull 2
+    Type: Card
+    SubType: Enchant
+    Buy: 20
+    Script: |
+      bonus2 bSubEle,Ele_Neutral,3; bonus2 bSubEle,Ele_Water,3; bonus2 bSubEle,Ele_Earth,3; bonus2 bSubEle,Ele_Fire,3; bonus2 bSubEle,Ele_Wind,3; bonus2 bSubEle,Ele_Poison,3; bonus2 bSubEle,Ele_Holy,3; bonus2 bSubEle,Ele_Dark,3; bonus2 bSubEle,Ele_Ghost,3; bonus2 bSubEle,Ele_Undead,3; if(getrefine()>4) bonus bMaxSP,(getrefine()-4)*20;
+  - Id: 44524
+    AegisName: RedTail1
+    Name: Red Tail 1
+    Type: Card
+    SubType: Enchant
+    Buy: 20
+    Script: |
+      bonus bMaxHP,666; if(getrefine()>4) bonus bDelayRate,-(getrefine()-4); 
+  - Id: 44525
+    AegisName: PumpkinMojo2
+    Name: Pumpkin Mojo 2
+    Type: Card
+    SubType: Enchant
+    Buy: 20
+    Script: |
+      bonus2 bAddClass,Class_All,3; bonus bMatkRate,3; if(getrefine()>4){ bonus bBaseAtk,2*(getrefine()-4); bonus bMatk,4*(getrefine()-4); }
+  - Id: 44526
+    AegisName: Skull3
+    Name: Skull 3
+    Type: Card
+    SubType: Enchant
+    Buy: 20
+    Script: |
+      bonus bCritical,6; bonus bDelayRate,-10; if(getrefine()>6) bonus bAspd,1;
+  - Id: 44527
+    AegisName: Skull4
+    Name: Skull 4
+    Type: Card
+    SubType: Enchant
+    Buy: 20
+    Script: |
+      bonus2 bIgnoreMdefClassRate,Class_Normal,2; bonus2 bIgnoreDefRaceRate,RC_DemiHuman,5; if(getrefine()>6){ bonus bInt,(getrefine()-4); bonus bStr,(getrefine()-4); }
+  - Id: 44528
+    AegisName: RedTail2
+    Name: Red Tail 2
+    Type: Card
+    SubType: Enchant
+    Buy: 20
+    Script: |
+      bonus bBaseAtk,10; bonus bMatk,20; if(getrefine()>6){ bonus2 bAddClass,Class_All,1; bonus bMatkRate,1; }
+  - Id: 44529
+    AegisName: GarmentHalloween
+    Name: Halloween Poring Bag
+    Type: Armor
+    Buy: 1000
+    Weight: 200
+    Defense: 1
+    Locations:
+      Garment: true
+    ArmorLevel: 1
+    Refineable: true
+    View: 44
+  - Id: 44530
+    AegisName: Event_Pumpkin1
+    Name: Event Pumpkin 1
+    Type: Usable
+    Buy: 20
+    Weight: 50
+    Script: |
+      .@r = rand(1,4); if(.@r==1) getitem 11592,1; else if(.@r==2) getitem 11593,1; else if(.@r==3) getitem 11594,1; else if(.@r==4) getitem 11595,1;
+  - Id: 44531
+    AegisName: Event_Pumpkin2
+    Name: Event Pumpkin 2
+    Type: Usable
+    Buy: 20
+    Weight: 50
+    Script: |
+      .@r = rand(1,7); if(.@r==1) getitem 12658,1; else if(.@r==2) getitem 12659,1; else if(.@r==3) getitem 12660,1; else if(.@r==4) getitem 12661,1; else if(.@r==5) getitem 12662,1; else if(.@r==6) getitem 12663,1; else if(.@r==7) getitem 12664,1;
+  - Id: 44532
+    AegisName: Event_Pumpkin3
+    Name: Event Pumpkin 3
+    Type: Usable
+    Buy: 20
+    Weight: 50
+    Script: |
+      getitem 11596,1;
+  - Id: 44533
+    AegisName: Encantamiento_Halloween_Box
+    Name: Encantamiento Halloween Box
+    Type: Usable
+    Buy: 20
+    Weight: 50
+    Script: |
+      .@r = rand(0,7); getitem 44521+.@r,1;
+  - Id: 44534
+    AegisName: Jakk_Detector1
+    Name: Jakk Detector
+    Type: Usable
+    Buy: 20
+    Weight: 50
+    Script: |
+      dispbottom "El Jakk apunta hacia el mapa "+$@mapjakk1$+"";
+  - Id: 44535
+    AegisName: Jakk_Detector2
+    Name: Jakk Detector
+    Type: Usable
+    Buy: 20
+    Weight: 50
+    Script: |
+      dispbottom "El Jakk apunta hacia el mapa "+$@mapjakk2$+"";
+  - Id: 44536
+    AegisName: Halloween_Coin
+    Name: Halloween Coin
+    Type: Etc
+    Buy: 20
