@@ -699,6 +699,7 @@ int clif_send(const void* buf, int len, struct block_list* bl, enum send_target 
 	case PARTY_WOS:
 	case PARTY_SAMEMAP:
 	case PARTY_SAMEMAP_WOS:
+	case PARTY_BUFF_INFO:
 		if (sd && sd->status.party_id)
 			p = party_search(sd->status.party_id);
 
@@ -713,10 +714,13 @@ int clif_send(const void* buf, int len, struct block_list* bl, enum send_target 
 				if( sd->bl.id == bl->id && (type == PARTY_WOS || type == PARTY_SAMEMAP_WOS || type == PARTY_AREA_WOS) )
 					continue;
 
-				if( type != PARTY && type != PARTY_WOS && bl->m != sd->bl.m )
+				if( type != PARTY_BUFF_INFO && type != PARTY && type != PARTY_WOS && bl->m != sd->bl.m )
 					continue;
 
 				if( (type == PARTY_AREA || type == PARTY_AREA_WOS) && (sd->bl.x < x0 || sd->bl.y < y0 || sd->bl.x > x1 || sd->bl.y > y1) )
+					continue;
+
+				if( type == PARTY_BUFF_INFO && !sd->state.spb )
 					continue;
 
 				WFIFOHEAD(fd, len);
@@ -7994,6 +7998,8 @@ void clif_party_member_info( struct party_data& party, map_session_data& sd ){
 /// 0a44 <packet len>.W <party name>.24B { <account id>.L <nick>.24B <map name>.16B <role>.B <state>.B <class>.W <base level>.W }* <item pickup rule>.B <item share rule>.B <unknown>.L
 void clif_party_info( struct party_data& party, map_session_data* sd ){
 	send_target target;
+	map_session_data* target_sd = nullptr;
+	char output[NAME_LENGTH+10];
 
 	if( sd == nullptr ){
 		sd = party_getavailablesd( &party );
@@ -8043,6 +8049,40 @@ void clif_party_info( struct party_data& party, map_session_data* sd ){
 	}
 
 	clif_send( p, p->packetLen, &sd->bl, target );
+
+	for( int i = 0, c = 0; i < MAX_PARTY; i++ ){
+		struct party_member& m = party.party.member[i];
+		if( m.account_id == 0 ){
+			continue;
+		}
+
+		struct PACKET_ZC_GROUP_LIST_SUB& member = p->members[c];
+
+		if( (target_sd = map_id2sd(m.account_id)) )
+		{
+			strcpy(output, "(");
+			if( target_sd->sc.getSCE(SC_BLESSING) ) strcat(output,"B");
+				else strcat(output,"_");
+			if( target_sd->sc.getSCE(SC_INCREASEAGI) ) strcat(output,"A");
+				else strcat(output,"_");
+			if( target_sd->sc.getSCE(SC_CP_WEAPON) && target_sd->sc.getSCE(SC_CP_SHIELD) &&
+				target_sd->sc.getSCE(SC_CP_ARMOR) && target_sd->sc.getSCE(SC_CP_HELM) ) strcat(output,"F");
+				else strcat(output,"_");
+			if( target_sd->sc.getSCE(SC_SPIRIT) ) strcat(output,"S");
+				else strcat(output,"_");
+			if( target_sd->sc.getSCE(SC_DEVOTION) ) strcat(output,"+");
+				else strcat(output,"_");
+			strcat(output, ")");
+			strncat(output, m.name, NAME_LENGTH);
+			safestrncpy(member.playerName, output, NAME_LENGTH);
+		}
+		c++;
+	}
+
+	if(target == SELF && sd->state.spb)
+		clif_send( p, p->packetLen, &sd->bl, target );
+	else if(target == PARTY)
+		clif_send( p, p->packetLen, &sd->bl, PARTY_BUFF_INFO );
 }
 
 

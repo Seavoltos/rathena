@@ -357,7 +357,7 @@ deadbranch,49,43,4	script	Kafra Employee::kaf_25	115,{
 	callfunc "F_KafEnd",0,1,"en el evento de Halloween";
 }
 
-bomberman,29,18,4	script	Kafra Employee::kaf_25	115,{
+bomberman,29,18,4	script	Kafra Employee::kaf_26	115,{
 	cutin "kafra_03",2;
 	callfunc "F_KafSet";
 	mes "[Kafra Employee]";

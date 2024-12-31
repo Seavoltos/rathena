@@ -403,6 +403,7 @@ public:
 		unsigned int showdelay :1;
 		unsigned int showexp :1;
 		unsigned int showzeny :1;
+		unsigned int spb : 1; // partybuff
 		unsigned int killcounter :1; // killcounter [Shakto]
 		unsigned int noask :1; // [LuzZza]
 		unsigned int trading :1; //[Skotlex] is 1 only after a trade has started.

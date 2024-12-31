@@ -6893,6 +6893,33 @@ ACMD_FUNC(changeleader)
 }
 
 /*==========================================
+* @showbuff - show buff in party windows
+* Upgraded by Shakto
+*------------------------------------------*/
+ACMD_FUNC(partybuff) {
+		struct party_data* p = NULL;
+		nullpo_retr(-1, sd);
+		
+		if( !sd->status.party_id ) {
+			clif_displaymessage(fd, "You don't have a Party"); // You're not in a party.
+			return -1;
+		}
+		
+        p = party_search(sd->status.party_id);
+
+		if( sd->state.spb ) {
+			sd->state.spb = 0;
+			clif_displaymessage(fd, "@partybuff is now OFF"); // Displaying party member's buffs disabled.
+		} else {
+			sd->state.spb = 1;
+			clif_displaymessage(fd, "@partybuff is now ON"); // Displaying party member's buffs enabled.
+		}
+		
+		clif_party_info(*p,sd);
+		return 0;
+}
+
+/*==========================================
  * @partyoption by Skotlex
  * Used to change the item share setting of a party.
  *------------------------------------------*/
@@ -11876,6 +11903,7 @@ void atcommand_basecommands(void) {
 		ACMD_DEF(autotrade),
 		ACMD_DEF(changegm),
 		ACMD_DEF(changeleader),
+		ACMD_DEF(partybuff),
 		ACMD_DEF(partyoption),
 		ACMD_DEF(invite),
 		ACMD_DEF(duel),

@@ -721,7 +721,22 @@ bool party_removemember( map_session_data& sd, uint32 account_id, const char* na
 	if( !p->party.member[i].leader )
 		return false; // only party leader may remove members
 
-	ARR_FIND( 0, MAX_PARTY, i, p->party.member[i].account_id == account_id && strncmp(p->party.member[i].name,name,NAME_LENGTH) == 0 );
+	// Allocate temporary buffer for extracted name (consider buffer size based on NAME_LENGTH)
+	char extracted_name[NAME_LENGTH + 1];
+	if (name[0] == '(') {
+		strncpy(extracted_name, name + 7, NAME_LENGTH - 7);
+
+		for (i = 0; i < MAX_PARTY; i++) {
+			if (p->party.member[i].account_id != account_id)
+				continue;
+			std::string str(p->party.member[i].name);
+
+			if (str.find(extracted_name) != std::string::npos)
+				break;
+		}
+	} 
+	else
+		ARR_FIND( 0, MAX_PARTY, i, p->party.member[i].account_id == account_id && strncmp(p->party.member[i].name,name,NAME_LENGTH) == 0 );
 	if( i == MAX_PARTY )
 		return false; // no such char in party
 
@@ -845,6 +860,7 @@ int party_member_withdraw(int party_id, uint32 account_id, uint32 char_id, char 
 		}
 	}
 
+	clif_party_info(*p, NULL);
 	return 0;
 }
 
