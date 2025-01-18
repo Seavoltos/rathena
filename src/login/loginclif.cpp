@@ -31,7 +31,7 @@
  *  8 : already online
  * <result>.B (SC_NOTIFY_BAN)
  */
-static void logclif_sent_auth_result(int fd,char result){
+static void logclif_sent_auth_result(int32 fd,char result){
 	PACKET_SC_NOTIFY_BAN p = {};
 
 	p.packetType = HEADER_SC_NOTIFY_BAN;
@@ -45,12 +45,12 @@ static void logclif_sent_auth_result(int fd,char result){
  * @param sd: player session
  */
 static void logclif_auth_ok(struct login_session_data* sd) {
-	int fd = sd->fd;
+	int32 fd = sd->fd;
 	uint32 ip = session[fd]->client_addr;
 
 	uint8 server_num, n;
 	uint32 subnet_char_ip;
-	int i;
+	int32 i;
 
 	if( !global_core->is_running() ){
 		// players can only login while running
@@ -181,7 +181,7 @@ static void logclif_auth_ok(struct login_session_data* sd) {
 	data->waiting_disconnect = add_timer(gettick()+AUTH_TIMEOUT, login_waiting_disconnect_timer, sd->account_id, 0);
 }
 
-static void logclif_auth_failed( int fd, int result, const char* unblock_time = "" ){
+static void logclif_auth_failed( int32 fd, int32 result, const char* unblock_time = "" ){
 	PACKET_AC_REFUSE_LOGIN p = {};
 
 	p.packetType = HEADER_AC_REFUSE_LOGIN;
@@ -219,8 +219,8 @@ static void logclif_auth_failed( int fd, int result, const char* unblock_time = 
     104 = This character is being deleted. Login is temporarily unavailable for the time being
      default = Unknown Error.
  */
-static void logclif_auth_failed(struct login_session_data* sd, int result) {
-	int fd = sd->fd;
+static void logclif_auth_failed(struct login_session_data* sd, int32 result) {
+	int32 fd = sd->fd;
 	uint32 ip = session[fd]->client_addr;
 
 	if (login_config.log_login)
@@ -275,7 +275,7 @@ static void logclif_auth_failed(struct login_session_data* sd, int result) {
  * @param fd: fd to parse from (client fd)
  * @return 0 not enough info transmitted, 1 success
  */
-static bool logclif_parse_keepalive( int fd, struct login_session_data& ){
+static bool logclif_parse_keepalive( int32 fd, struct login_session_data& ){
 	// Do nothing
 	return true;
 }
@@ -286,7 +286,7 @@ static bool logclif_parse_keepalive( int fd, struct login_session_data& ){
  * @param fd: fd to parse from (client fd)
  * @return 0 not enough info transmitted, 1 success
  */
-static bool logclif_parse_updclhash( int fd, struct login_session_data& sd ){
+static bool logclif_parse_updclhash( int32 fd, struct login_session_data& sd ){
 	PACKET_CA_EXE_HASHCHECK* p = (PACKET_CA_EXE_HASHCHECK*)RFIFOP( fd, 0 );
 
 	sd.has_client_hash = 1;
@@ -296,7 +296,7 @@ static bool logclif_parse_updclhash( int fd, struct login_session_data& sd ){
 }
 
 template <typename P>
-static bool logclif_parse_reqauth_raw( int fd, login_session_data& sd ){
+static bool logclif_parse_reqauth_raw( int32 fd, login_session_data& sd ){
 	P* p = (P*)RFIFOP( fd, 0 );
 
 	char ip[16];
@@ -315,7 +315,7 @@ static bool logclif_parse_reqauth_raw( int fd, login_session_data& sd ){
 
 	sd.passwdenc = 0;
 
-	int result = login_mmo_auth( &sd, false );
+	int32 result = login_mmo_auth( &sd, false );
 	
 
 // (^~_~^) Gepard Shield Start
@@ -337,7 +337,7 @@ static bool logclif_parse_reqauth_raw( int fd, login_session_data& sd ){
 }
 
 template <typename P>
-static bool logclif_parse_reqauth_md5( int fd, login_session_data& sd ){
+static bool logclif_parse_reqauth_md5( int32 fd, login_session_data& sd ){
 	P* p = (P*)RFIFOP( fd, 0 );
 
 	char ip[16];
@@ -357,7 +357,7 @@ static bool logclif_parse_reqauth_md5( int fd, login_session_data& sd ){
 		return false;
 	}
 
-	int result = login_mmo_auth( &sd, false );
+	int32 result = login_mmo_auth( &sd, false );
 
 // (^~_~^) Gepard Shield Start
 
@@ -378,7 +378,7 @@ static bool logclif_parse_reqauth_md5( int fd, login_session_data& sd ){
 }
 
 template <typename P>
-static bool logclif_parse_reqauth_sso( int fd, login_session_data& sd ){
+static bool logclif_parse_reqauth_sso( int32 fd, login_session_data& sd ){
 	P* p = (P*)RFIFOP( fd, 0 );
 
 	char ip[16];
@@ -400,7 +400,7 @@ static bool logclif_parse_reqauth_sso( int fd, login_session_data& sd ){
 
 	sd.passwdenc = 0;
 
-	int result = login_mmo_auth( &sd, false );
+	int32 result = login_mmo_auth( &sd, false );
 
 // (^~_~^) Gepard Shield Start
 
@@ -420,7 +420,7 @@ static bool logclif_parse_reqauth_sso( int fd, login_session_data& sd ){
 	return true;
 }
 
-static void logclif_reqkey_result( int fd, struct login_session_data& sd ){
+static void logclif_reqkey_result( int32 fd, struct login_session_data& sd ){
 	PACKET_AC_ACK_HASH* p = (PACKET_AC_ACK_HASH*)packet_buffer;
 
 	p->packetType = HEADER_AC_ACK_HASH;
@@ -436,7 +436,7 @@ static void logclif_reqkey_result( int fd, struct login_session_data& sd ){
  * @param sd: client session
  * @return 1 success
  */
-static bool logclif_parse_reqkey( int fd, struct login_session_data& sd ){
+static bool logclif_parse_reqkey( int32 fd, struct login_session_data& sd ){
 	PACKET_CA_REQ_HASH* p_in = (PACKET_CA_REQ_HASH*)RFIFOP( fd, 0 );
 
 	sd.md5keylen = sizeof( sd.md5key );
@@ -455,11 +455,11 @@ static bool logclif_parse_reqkey( int fd, struct login_session_data& sd ){
  * @param ip: ipv4 address (client)
  * @return 0 packet received too shirt, 1 success
  */
-static int logclif_parse_reqcharconnec(int fd, struct login_session_data *sd, char* ip){
+static int32 logclif_parse_reqcharconnec(int32 fd, struct login_session_data *sd, char* ip){
 	if (RFIFOREST(fd) < 86)
 		return 0;
 	else {
-		int result;
+		int32 result;
 		char server_name[20];
 		char message[256];
 		uint32 server_ip;
@@ -534,7 +534,7 @@ static int logclif_parse_reqcharconnec(int fd, struct login_session_data *sd, ch
 	return 1;
 }
 
-static void logclif_otp_result( int fd ){
+static void logclif_otp_result( int32 fd ){
 	PACKET_TC_RESULT p = {};
 
 	p.packetType = HEADER_TC_RESULT;
@@ -546,7 +546,7 @@ static void logclif_otp_result( int fd ){
 	socket_send( fd, p );
 }
 
-static bool logclif_parse_otp_login( int fd, struct login_session_data& ){
+static bool logclif_parse_otp_login( int32 fd, struct login_session_data& ){
 	PACKET_CT_AUTH* p = (PACKET_CT_AUTH*)RFIFOP( fd, 0 );
 
 	logclif_otp_result( fd );
@@ -577,7 +577,7 @@ public:
  * @param fd: file descriptor to parse, (link to client)
  * @return 0=invalid session,marked for disconnection,unknow packet, banned..; 1=success
  */
-int logclif_parse(int fd) {
+int32 logclif_parse(int32 fd) {
 	struct login_session_data* sd = (struct login_session_data*)session[fd]->session_data;
 
 	char ip[16];

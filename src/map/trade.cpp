@@ -81,7 +81,7 @@ void trade_traderequest(map_session_data *sd, map_session_data *target_sd)
 	}
 
 	if (!pc_can_give_items(sd) || !pc_can_give_items(target_sd)) { // check if both GMs are allowed to trade
-		clif_displaymessage(sd->fd, msg_txt(sd,246));
+		clif_displaymessage( sd->fd, msg_txt( sd, 246 ) ); // Your GM level doesn't authorize you to perform this action.
 		clif_traderesponse(*sd, TRADE_ACK_FAILED); // GM is not allowed to trade
 		return;
 	}
@@ -115,7 +115,7 @@ void trade_traderequest(map_session_data *sd, map_session_data *target_sd)
  * Weird enough, the client should only send 3/4
  * and the server is the one that can reply 0~2
  */
-void trade_tradeack(map_session_data *sd, int type)
+void trade_tradeack(map_session_data *sd, int32 type)
 {
 	map_session_data *tsd;
 
@@ -188,11 +188,11 @@ void trade_tradeack(map_session_data *sd, int type)
  * @param sd : player to check
  * @return -1:zeny hack, 0:all fine, 1:item hack
  */
-int impossible_trade_check(map_session_data *sd)
+int32 impossible_trade_check(map_session_data *sd)
 {
 	struct item inventory[MAX_INVENTORY];
 	char message_to_gm[200];
-	int i, index;
+	int32 i, index;
 
 	nullpo_retr(1, sd);
 
@@ -254,12 +254,12 @@ int impossible_trade_check(map_session_data *sd)
  * @param tsd : player 2 trading
  * @return 0:error, 1:success
  */
-int trade_check(map_session_data *sd, map_session_data *tsd)
+int32 trade_check(map_session_data *sd, map_session_data *tsd)
 {
 	struct item inventory[MAX_INVENTORY];
 	struct item inventory2[MAX_INVENTORY];
 	struct item_data *data;
-	int trade_i, i, n;
+	int32 trade_i, i, n;
 
 	// check zeny value against hackers (Zeny was already checked on time of adding, but you never know when you lost some zeny since then.
 	if(sd->deal.zeny > sd->status.zeny || (tsd->status.zeny > MAX_ZENY - sd->deal.zeny))
@@ -362,8 +362,8 @@ void trade_tradeadditem(map_session_data *sd, short index, short amount)
 {
 	map_session_data *target_sd;
 	struct item *item;
-	int trade_i, trade_weight;
-	int src_lv, dst_lv;
+	int32 trade_i, trade_weight;
+	int32 src_lv, dst_lv;
 
 	nullpo_retv(sd);
 
@@ -458,7 +458,7 @@ void trade_tradeadditem(map_session_data *sd, short index, short amount)
  * @param sd : Player who's adding zeny
  * @param amount : zeny amount
  */
-void trade_tradeaddzeny(map_session_data* sd, int amount)
+void trade_tradeaddzeny(map_session_data* sd, int32 amount)
 {
 	map_session_data* target_sd;
 
@@ -510,7 +510,7 @@ void trade_tradeok(map_session_data *sd)
 void trade_tradecancel(map_session_data *sd)
 {
 	map_session_data *target_sd;
-	int trade_i;
+	int32 trade_i;
 
 	nullpo_retv(sd);
 
@@ -576,7 +576,7 @@ void trade_tradecancel(map_session_data *sd)
 void trade_tradecommit(map_session_data *sd)
 {
 	map_session_data *tsd;
-	int trade_i;
+	int32 trade_i;
 
 	nullpo_retv(sd);
 
@@ -614,7 +614,7 @@ void trade_tradecommit(map_session_data *sd)
 
 	// trade is accepted and correct.
 	for( trade_i = 0; trade_i < 10; trade_i++ ) {
-		int n;
+		int32 n;
 		unsigned char flag = 0;
 
 		if (sd->deal.item[trade_i].amount) {
