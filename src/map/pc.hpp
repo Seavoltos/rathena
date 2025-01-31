@@ -389,9 +389,9 @@ public:
 	//status_calc_pc, while special_state is recalculated in each call. [Skotlex]
 	struct s_state {
 		uint32 active : 1; //Marks active player (not active is logging in/out, or changing map servers)
-		uint32t menu_or_input : 1;// if a script is waiting for feedback from the player
+		uint32 menu_or_input : 1;// if a script is waiting for feedback from the player
 		uint32 dead_sit : 2;
-		e_lr_flag lr_flag : 3;//1: left h. weapon; 2: arrow; 3: shield
+		e_lr_flag lr_flag;
 		uint32 connect_new : 1;
 		uint32 arrow_atk : 1;
 		uint32 gangsterparadise : 1;

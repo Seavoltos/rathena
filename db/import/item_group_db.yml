@@ -45,7 +45,7 @@
 
 Header:
   Type: ITEM_GROUP_DB
-  Version: 3
+  Version: 4
 Body:
   - Group: PRIVATE_AIRSHIP
     SubGroups:
@@ -64,15 +64,19 @@ Body:
           - Index: 1
             Item: Orange_Potion
             Amount: 3
+            Rate: 1
           - Index: 2
             Item: N_Fly_Wing
             Amount: 3
+            Rate: 1
           - Index: 3
             Item: Candy_Striper
             Amount: 5
+            Rate: 1
           - Index: 4
             Item: Candy
             Amount: 5
+            Rate: 1
   - Group: EVENT_BOX
     SubGroups:
       - SubGroup: 1

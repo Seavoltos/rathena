@@ -10780,7 +10780,7 @@ int32 skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, 
 				md->deletetimer = add_timer(gettick() + skill_get_time(GD_CHARGESHOUT_FLAG, skill_lv), mob_timer_delete, md->bl.id, 0);
 				mob_spawn(md);
 				if (sd)
-					skill_blockpc_start(sd, skill_id, skill_get_cooldown(skill_id, skill_lv));
+					skill_blockpc_start(*sd, skill_id, skill_get_cooldown(skill_id, skill_lv));
 			}
 		}
 		break;
@@ -10794,7 +10794,7 @@ int32 skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, 
 			{
 				clif_skill_nodamage(src, *bl, skill_id, skill_lv, 1);
 				if (sd)
-					skill_blockpc_start(sd, skill_id, skill_get_cooldown(skill_id, skill_lv));
+					skill_blockpc_start(*sd, skill_id, skill_get_cooldown(skill_id, skill_lv));
 			}
 		} else if (sd)
 			clif_skill_fail( *sd, skill_id, USESKILL_FAIL_LEVEL, 0);
