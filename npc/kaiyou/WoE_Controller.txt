@@ -1,0 +1,343 @@
+//===== rAthena Script =======================================
+//= War of Emperium - Auto-Start
+//===== By: ==================================================
+//= Angeluz (1.0)
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Auto-start for War of Emperium
+//===== Additional Comments: =================================
+//= 1.1
+//============================================================
+
+-	script	Agit_WoE_ALL	-1,{
+	function F_WoE_TIME;
+	end;
+
+OnInit:
+	set .WoE_Empe,5;
+	set .WoE_Guard,1;
+	set .WoE_Crist,2;
+	set .WoE_Barri,1;
+	set .WoD_Zone,1;
+	set .WoE_time_sup,2;
+	set .WoE_time_atk,1;
+	set .WoE_owner_sup,3;
+	set .WoE_owner_atk,2;
+	set .WoE_kill_sup,1;
+	set .WoE_kill_atk,3;
+	set .WoE_die_sup,-3;
+	set .WoE_die_atk,-2;
+	set .WoE_VIP,1;
+	end;
+
+OnTimer60000:
+	switch ( $Tipo_WoE )
+	{
+		case 0: //No hay WoE
+			end;
+		case 1:	//WoE 1.0
+			set .@castle$,"prtg_cas02";
+			break;
+		case 2:	//WoD
+			set .@castle$,"rwc02";
+			break;
+		case 3:	//WoE 2.0
+			set .@castle$,"schg_cas01";
+			break;
+		case 4: //WoE Baby
+			set .@castle$,"nguild_pay";
+			break;
+	}
+	initnpctimer;
+	addrid(5,0,.@castle$);
+	F_WoE_TIME(.@castle$);
+	end;
+
+	function	F_WoE_TIME	{
+		if ( checkvending() || checkchatting() || checkidle() > 30 || getcharid(2) == 0 )
+			end;
+
+		set .@puntos,0;
+		set .@cas$,getarg(0);
+		if( WoE_Rol == 1)
+			set .@rol$,"atk";
+		else
+			set .@rol$,"sup";
+
+		set .@puntos,getd(".WoE_time_"+.@rol$);
+
+		// Own castle
+		if( getcastledata(.@cas$,1) == getcharid(2) )
+			set .@puntos, .@puntos + getd(".WoE_owner_"+.@rol$);
+
+		// Bono VIP
+		if (VIP_SCRIPT && vip_status(VIP_STATUS_ACTIVE))
+			set .@puntos, .@puntos + .WoE_VIP;
+
+		// Reputation
+		add_reputation_points(5,.@puntos);
+		return;
+	}
+
+OnPCDieEvent:
+	set .@die,1;
+OnPCKillEvent:
+	if ((agitcheck() || agitcheck2() || agitcheck3()) && getmapflag(strcharinfo(3),MF_GVG)){
+		if( WoE_Rol == 1)
+			set .@rol$,"atk";
+		else
+			set .@rol$,"sup";
+
+		// Reputation
+		if (.@die)
+			add_reputation_points(5,getd(".WoE_die_"+.@rol$));
+		else
+			add_reputation_points(5,getd(".WoE_kill_"+.@rol$));
+	}
+	end;
+}
+
+-	script	Agit_Control_WoE	-1,{
+	end;
+
+OnClock1600:	//start time for TUESDAY
+OnAgitInit:
+OnAgitInit2:
+	if((gettime(DT_DAYOFWEEK)==TUESDAY) && gettime(DT_HOUR)==16 )
+	{
+		switch ( $Tipo_WoE )
+		{
+			case 0: //No hay WoE
+				break;
+			case 1:	//WoE 1.0
+				if (!agitcheck()) {
+					AgitStart;
+					initnpctimer "Agit_WoE_ALL";
+					callsub S_DisplayOwners;
+				}
+				break;
+			case 2:	//WoD
+				if (!agitcheck3()) {
+					AgitStart3;
+					initnpctimer "Agit_WoE_ALL";
+					callsub S_DisplayOwners;
+				}
+				break;
+			case 3:	//WoE 2.0
+				if (!agitcheck2()) {
+					AgitStart2;
+					initnpctimer "Agit_WoE_ALL";
+					callsub S_DisplayOwners;
+				}
+				break;
+			case 4: //WoE Baby
+				if (!agitcheck()) {
+					AgitStart;
+					initnpctimer "Agit_WoE_ALL";
+					callsub S_DisplayOwners;
+				}
+				break;
+		}
+	}
+	end;
+
+OnClock1700:	//end time for 1.0, WoD and baby
+	if((gettime(DT_DAYOFWEEK)==TUESDAY) && gettime(DT_HOUR)>=17 )
+	{
+		switch ( $Tipo_WoE )
+		{
+			case 0: //No hay WoE || WoE 2.0
+			case 3:
+				break;
+			case 1:	//WoE 1.0
+				if (agitcheck()) {
+					//Borrar SQL
+					query_sql("delete from wod where guild_id>0");
+					AgitEnd;
+					stopnpctimer "Agit_WoE_ALL";
+					callsub S_DisplayOwners;
+					callsub S_ChangeWoE;
+				}
+				break;
+			case 2:	//WoD
+				if (agitcheck3()) {
+					AgitEnd3;
+					stopnpctimer "Agit_WoE_ALL";
+					callsub S_DisplayOwners;
+					callsub S_ChangeWoE;
+				}
+				break;
+			case 4: //WoE Baby
+				if (agitcheck()) {
+					AgitEnd;
+					stopnpctimer "Agit_WoE_ALL";
+					callsub S_DisplayOwners;
+					callsub S_ChangeWoE;
+				}
+				break;
+		}
+	}
+	end;
+OnClock1800:	//end time for 2.0
+	if((gettime(DT_DAYOFWEEK)==TUESDAY) && gettime(DT_HOUR)>=18 )
+	{
+		switch ( $Tipo_WoE )
+		{
+			case 0: //No hay WoE || WoE 1.0 || WoD || WoE Baby
+			case 1:
+			case 2:
+			case 4:
+				break;
+			case 3: //WoE 2.0
+				if (agitcheck2()) {
+					AgitEnd2;
+					stopnpctimer "Agit_WoE_ALL";
+					callsub S_DisplayOwners;
+					callsub S_ChangeWoE;
+				}
+				break;
+		}
+	}
+	end;
+
+S_DisplayOwners:
+	switch ( $Tipo_WoE )
+	{
+		case 0: //No hay WoE
+			end;
+		case 1:	//WoE 1.0
+			set .@cas$, "prtg_cas02";
+			set .@name$, "WoE";
+			break;
+		case 2:	//WoD
+			set .@cas$, "rwc02";
+			set .@name$, "War of Dominion";
+			break;
+		case 3:	//WoE 2.0
+			set .@cas$, "schg_cas01";
+			set .@name$, "WoE 2.0";
+			break;
+		case 4:	//WoE Baby
+			set .@cas$, "nguild_pay";
+			set .@name$, "WoE Baby";
+			break;
+	}
+	if (GetCastleData(.@cas$,1)) {
+		Announce "La " + .@name$ + " ha finalizado. El Castillo de [" + GetCastleName(.@cas$) + "] ha sido conquistado por la guild [" + GetGuildName(GetCastleData(.@cas$,1)) + "].",bc_all|bc_woe;
+	}
+	else {
+		Announce "La " + .@name$ + " ha finalizado. El Castillo [" + GetCastleName(.@cas$) + "] se encuentra desocupado.",bc_all|bc_woe;
+	}
+	end;
+
+S_ChangeWoE:
+	switch ( $Tipo_WoE )
+	{
+		case 0:
+			end;
+		case 1:
+			set $Tipo_WoE, 2;
+			donpcevent "::OnFlagWoDrwc02";// Guild emblem on flags.
+			setnpcdisplay "BattleFlag1","Zone of Lava";
+			setnpcdisplay "BattleFlag2","Zone of Lava";
+			break;
+		case 2:
+			set $Tipo_WoE, 3;
+			donpcevent "::OnRecvCastleSc01";// Guild emblem on flags.
+			setnpcdisplay "BattleFlag1","Himmin";
+			setnpcdisplay "BattleFlag2","Himmin";
+			break;
+		case 3:
+			set $Tipo_WoE, 4;
+			donpcevent "::OnRecvCastleN03";// Guild emblem on flags.
+			setnpcdisplay "BattleFlag1","Bright Arbor";
+			setnpcdisplay "BattleFlag2","Bright Arbor";
+			break;
+		case 4:
+			set $Tipo_WoE, 1;
+			donpcevent "::OnRecvCastlePt02";// Guild emblem on flags.
+			setnpcdisplay "BattleFlag1","Swanhill";
+			setnpcdisplay "BattleFlag2","Swanhill";
+			break;
+	}
+	end;
+}
+
+batt_off,94,73,4	script	WoE Status	857,{
+	mes "[^ff0000 ** Próxima WoE ** ^000000]";
+	if ( getgmlevel() > 60)
+	{
+		mes "GM:";
+		mes "Deseas cambiar la próxima WoE?";
+		next;
+		switch(select("Mantener:Elegir"))
+		{
+			case 1:
+				next;
+				mes "[^ff0000 ** Próxima WoE ** ^000000]";
+				break;
+			case 2:
+				mes "GM:";
+				mes "0: Cancelar";
+				mes "1: WoE 1.0";
+				mes "2: WoD";
+				mes "3: WoE 2.0";
+				mes "4: WoE Baby";
+				next;
+				input .@i;
+				if (.@i < 0 || .@i > 4)
+				{
+					mes "Error";
+					close;
+				}
+				mes "WoE Cambiada";
+				set $Tipo_WoE, .@i;
+				close;
+		}
+	}
+	switch ( $Tipo_WoE )
+	{
+		case 0:
+			mes "No hay WoE programada";
+			close;
+		case 1:
+			mes "\n ** Domingo 16:00 - 17:00 ** \n";
+			mes " WoE 1.0\n";
+			mes " Castillo:^0000ff Swanhill (Prontera)^000000\n";
+			if (GetCastleData("prtg_cas02",1))
+				mes " Guild:^0000ff " + GetGuildName(GetCastleData("prtg_cas02",1));
+			else
+				mes " Guild:^0000ff Desocupado";
+			close;
+		case 2:
+			mes "\n ** Domingo 16:00 - 17:00 **\n";
+			mes " WoD\n";
+			mes " Castillo:^0000ff Zone of Lava^000000\n";
+			if (GetCastleData("rwc02",1))
+				mes " Guild:^0000ff " + GetGuildName(GetCastleData("rwc02",1));
+			else
+				mes " Guild:^0000ff Desocupado";
+			close;
+		case 3:
+			mes "\n ** Domingo 16:00 - 18:00 **\n";
+			mes " WoE 2.0\n";
+			mes " Castillo:^0000ff Himmin (Yuno)^000000\n";
+			if (GetCastleData("schg_cas01",1))
+				mes " Guild:^0000ff " + GetGuildName(GetCastleData("schg_cas01",1));
+			else
+				mes " Guild:^0000ff Desocupado";
+			close;
+		case 4:
+			mes "\n ** Domingo 16:00 - 17:00 **\n";
+			mes " WoE Baby\n";
+			mes " Castillo:^0000ff Bright Arbor (Payon)^000000\n";
+			if (GetCastleData("nguild_pay",1))
+				mes " Guild:^0000ff " + GetGuildName(GetCastleData("nguild_pay",1));
+			else
+				mes " Guild:^0000ff Desocupado";
+			close;
+	}
+}

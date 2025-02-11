@@ -38,3 +38,8 @@ Body:
     Map: batt_off
     Name: Ranking MvP
     Npc: MvP Ranking#batt_off
+  - Id: 35
+    Map: rwc02
+    Name: War of Dominion
+    Npc: Manager_WoD#rwc02
+    Type: Third_Edition

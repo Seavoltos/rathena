@@ -235,7 +235,6 @@ function calcjobexp;
 			mes .@npcname$;
 			mes "No es nada difícil.";
 			mes "Doy una recompensa ^4d4dff dependiendo de cuantos Castillos hayas conquistado.^000000";
-			mes "^4d4dffEl tipo y la calidad de la recompensa dependen del número de Castillos conquistados en el momento en que reviso.^000000";
 			next;
 			mes .@npcname$;
 			mes "Y, por supuesto, solo reviso durante las horas de WoE.";
@@ -422,11 +421,14 @@ OnInit:
 		return 0;
 	}
 }
-
+/*
 alde_gld,176,163,5	duplicate(gld_mission#core)	Luina Training Instructor#gqaldeg	4_M_HUMAN_02
 gef_fild13,197,242,3	duplicate(gld_mission#core)	Britoria Training Instructor#gqgefg	4_M_HUMAN_02
 pay_gld,198,178,5	duplicate(gld_mission#core)	Greenwood Lake Training Instructor#gqpayg	4_M_HUMAN_02
-prt_gld,125,149,3	duplicate(gld_mission#core)	Valkyrie Realm Training Instructor#gqprtg	4_M_HUMAN_02
+prt_gld,156,99,3	duplicate(gld_mission#core)	Valkyrie Realm Training Instructor#gqprtg	4_M_HUMAN_02
 
 aru_gld,96,203,3	duplicate(gld_mission#core)	Valfreyja Training Instructor#gqaru	4_M_HUMAN_02
 sch_gld,270,117,3	duplicate(gld_mission#core)	Nidhoggur Training Instructor#gqsch	4_M_HUMAN_02
+*/
+
+batt_off,97,73,3	duplicate(gld_mission#core)	Valkyrie Realm Training Instructor#gqprtg	4_M_HUMAN_02

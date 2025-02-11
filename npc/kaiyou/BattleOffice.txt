@@ -63,7 +63,11 @@ OnInit:
 }
 
 -	script	Guardia#BO	-1,{
-	if ( ( getcharid(2) != GetCastleData("prtg_cas02",1) || getcharid(2) == 0 ) && getgmlevel() < 60 )
+	if (( ( getcharid(2) != GetCastleData("prtg_cas02",1) || getcharid(2) == 0 ) && getgmlevel() < 60 ) && $Tipo_WoE == 1 ||
+		( ( getcharid(2) != GetCastleData("rwc02",1) || getcharid(2) == 0 ) && getgmlevel() < 60 ) && $Tipo_WoE == 2 ||
+		( ( getcharid(2) != GetCastleData("schg_cas01",1) || getcharid(2) == 0 ) && getgmlevel() < 60 ) && $Tipo_WoE == 3 ||
+		( ( getcharid(2) != GetCastleData("nguild_pay",1) || getcharid(2) == 0 ) && getgmlevel() < 60 ) && $Tipo_WoE == 4
+	)
 	{
 		set @alert,@alert+1;
 		sleep2 500;
@@ -84,7 +88,11 @@ batt_off,80,80,6	duplicate(Guardia#BO)	Guardia#BO01	852,6,5
 batt_off,81,93,6	duplicate(Guardia#BO)	Guardia#BO02	852,7,7
 
 -	script	Guardia#BO1	-1,{
-	if ( ( getcharid(2) != GetCastleData("prtg_cas02",1) || getcharid(2) == 0 ) && getgmlevel() < 60 )
+	if (( ( getcharid(2) != GetCastleData("prtg_cas02",1) || getcharid(2) == 0 ) && getgmlevel() < 60 ) && $Tipo_WoE == 1 ||
+		( ( getcharid(2) != GetCastleData("rwc02",1) || getcharid(2) == 0 ) && getgmlevel() < 60 ) && $Tipo_WoE == 2 ||
+		( ( getcharid(2) != GetCastleData("schg_cas01",1) || getcharid(2) == 0 ) && getgmlevel() < 60 ) && $Tipo_WoE == 3 ||
+		( ( getcharid(2) != GetCastleData("nguild_pay",1) || getcharid(2) == 0 ) && getgmlevel() < 60 ) && $Tipo_WoE == 4
+	)
 	{
 		set @alert,@alert+1;
 		sleep2 500;
@@ -107,20 +115,65 @@ batt_off,102,93,3	duplicate(Guardia#BO1)	Guardia#BO12	852,7,7
 -	script	InsideFlagsBO	722,{
 	end;
 
+OnInit:
+	switch ( $Tipo_WoE )
+	{
+		case 0:
+			end;
+		case 1:
+			donpcevent "::OnRecvCastlePt02";// Guild emblem on flags.
+			setnpcdisplay strnpcinfo(0),"Swanhill";
+			break;
+		case 2:
+			donpcevent "::OnFlagWoDrwc02";// Guild emblem on flags.
+			setnpcdisplay strnpcinfo(0),"Zone of Lava";
+			break;
+		case 3:
+			donpcevent "::OnRecvCastleSc01";// Guild emblem on flags.
+			setnpcdisplay strnpcinfo(0),"Himmin";
+			break;
+		case 4:
+			donpcevent "::OnRecvCastleN03";// Guild emblem on flags.
+			setnpcdisplay strnpcinfo(0),"Bright Arbor";
+			break;
+	}
+	end;
+
 OnRecvCastlePt02:
-	FlagEmblem GetCastleData("prtg_cas02",1);
+	if($Tipo_WoE == 1){
+		FlagEmblem GetCastleData("prtg_cas02",1);
+		setnpcdisplay strnpcinfo(0),"Swanhill";
+	}
+	end;
+OnFlagWoDrwc02:
+	if($Tipo_WoE == 2){
+		FlagEmblem GetCastleData("rwc02",1);
+		setnpcdisplay strnpcinfo(0),"Zone of Lava";
+	}
+	end;
+OnRecvCastleSc01:
+	if($Tipo_WoE == 3){
+		FlagEmblem GetCastleData("schg_cas01",1);
+		setnpcdisplay strnpcinfo(0),"Himmin";
+	}
+	end;
+OnRecvCastleN03:
+	if($Tipo_WoE == 4){
+		FlagEmblem GetCastleData("nguild_pay",1);
+		setnpcdisplay strnpcinfo(0),"Bright Arbor";
+	}
 	end;
 }
 
-batt_off,87,77,4	duplicate(InsideFlagsBO)	Swanhild#40	722
-batt_off,96,77,4	duplicate(InsideFlagsBO)	Swanhild#41	722
+batt_off,87,77,4	duplicate(InsideFlagsBO)	BattleFlag1	722
+batt_off,96,77,4	duplicate(InsideFlagsBO)	BattleFlag2	722
 
 batt_off,54,90,3	script	Entrenamiento	10180,{
 	mes "[Entrenamiento]";
-	mes "Los huevos son tipo:";
-	mes " - Demi-human";
-	mes " - Medium";
-	mes " - MvP";
+	mes "Los huevos son tipo:\n";
+	mes " - Demi-human\n";
+	mes " - Medium\n";
+	mes " - MvP\n";
 	mes " - Neutral";
 	close;
 }
@@ -155,6 +208,39 @@ OnTimer5000:
 
 batt_off,49,86,0	duplicate(PunchingBag#0)	PunchingBag#1	844
 batt_off,59,86,0	duplicate(PunchingBag#0)	PunchingBag#2	844
+
+// Guild Flag (Town)
+//============================================================
+prontera,155,193,4	duplicate(InsideFlagsBO)	Kriemhild#15	722
+prontera,146,194,3	duplicate(InsideFlagsBO)	Swanhild#17	722
+prontera,143,203,2	duplicate(InsideFlagsBO)	Fadhgridh#15	722
+prontera,167,203,6	duplicate(InsideFlagsBO)	Skoegul#15	722
+prontera,165,194,5	duplicate(InsideFlagsBO)	Gondul#13	722
+
+aldebaran,152,97,4	duplicate(InsideFlagsBO)	Neuschwanstein#23	722
+aldebaran,149,97,4	duplicate(InsideFlagsBO)	Hohenschwangau#17	722
+aldebaran,134,97,4	duplicate(InsideFlagsBO)	Nuernberg#20	722
+aldebaran,131,97,4	duplicate(InsideFlagsBO)	Wuerzburg#20	722
+aldebaran,128,97,4	duplicate(InsideFlagsBO)	Rothenburg#19	722
+
+geffen,109,123,2	duplicate(InsideFlagsBO)	Repherion#11	722
+geffen,112,129,1	duplicate(InsideFlagsBO)	Eeyorbriggar#12	722
+geffen,120,132,8	duplicate(InsideFlagsBO)	Yesnelph#15	722
+geffen,127,130,7	duplicate(InsideFlagsBO)	Bergel#11	722
+geffen,131,123,6	duplicate(InsideFlagsBO)	Mersetzdeitz#11	722
+
+payon,90,322,4	duplicate(InsideFlagsBO)	Bright Arbor#11	722
+payon,166,177,3	duplicate(InsideFlagsBO)	Bright Arbor#12	722
+payon,97,322,4	duplicate(InsideFlagsBO)	Scarlet Palace#11	722
+payon,166,173,3	duplicate(InsideFlagsBO)	Scarlet Palace#12	722
+payon,113,322,4	duplicate(InsideFlagsBO)	Holy Shadow#11	722
+payon,166,169,3	duplicate(InsideFlagsBO)	Holy Shadow#12	722
+payon,118,322,4	duplicate(InsideFlagsBO)	Sacred Altar#11	722
+payon,166,165,3	duplicate(InsideFlagsBO)	Sacred Altar#12	722
+payon,123,322,4	duplicate(InsideFlagsBO)	Bamboo Grove Hill#11	722
+payon,166,161,3	duplicate(InsideFlagsBO)	Bamboo Grove Hill#12	722
+
+
 
 batt_off	mapflag	bg_join
 batt_off	mapflag	noteleport

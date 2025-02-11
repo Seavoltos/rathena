@@ -16194,14 +16194,12 @@ Body:
         Rate: 3000
       - Item: Yggdrasilberry
         Rate: 2500
-      - Item: Muffler_
-        Rate: 800
-      - Item: Shoes_
-        Rate: 800
-      - Item: Chain_Mail_
-        Rate: 800
-      - Item: Buckler_
-        Rate: 800
+      - Item: Frost_Giant_Blood
+        Rate: 200
+      - Item: Golem_Stone
+        Rate: 200
+      - Item: Feather_Beret_
+        Rate: 5
       - Item: Old_Card_Album
         Rate: 1000
         StealProtected: true

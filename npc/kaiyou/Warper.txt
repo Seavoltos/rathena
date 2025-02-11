@@ -16,7 +16,7 @@ prontera,159,188,4	script	Warper::Warper	669,{
 	mes "Buen día ^7900f9"+ strcharinfo(0) +"^000000.";
 	mes "Entonces, hacia donde deseas ir?";
 	
-	menu	( lastmap$ == "" )?"":"[ > ] Último Warp",warptolast,"[ > ] Ciudades",city,"[ > ] Dungeon",dungeon,"[ > ] Battle Office",wbattleground,( BaseLevel < 50 )?"":"[ > ] PvP",wpvp,"[ > ] Mercado",mercado;
+	menu	( lastmap$ == "" )?"":"[ > ] Último Warp",warptolast,"[ > ] Ciudades",city,"[ > ] Dungeon",dungeon,"[ > ] Battle Office",wbattleground,( getcharid(2) == 0 )?"":"[ > ] WoE",wwoe,( BaseLevel < 50 )?"":"[ > ] PvP",wpvp,"[ > ] Mercado",mercado;
 	
 tienda:
 menu
@@ -123,8 +123,8 @@ buyDungeon:
 
 //City
 walberta:
-	set .@lastmap$,"alberta"; 
-	set .@lastx,49; 
+	set .@lastmap$,"alberta";
+	set .@lastx,49;
 	set .@lasty,242;
 	goto warpto;
 	end;
@@ -134,8 +134,8 @@ waldebaranzeny:
 waldebaran:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"aldebaran"; 
-	set .@lastx,140; 
+	set .@lastmap$,"aldebaran";
+	set .@lastx,140;
 	set .@lasty,116;
 	goto warpto;
 	end;
@@ -145,8 +145,8 @@ wamatsuzeny:
 wamatsu:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"amatsu"; 
-	set .@lastx,114; 
+	set .@lastmap$,"amatsu";
+	set .@lastx,114;
 	set .@lasty,105;
 	goto warpto;
 	end;
@@ -156,8 +156,8 @@ wayotzeny:
 wayot:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"ayothaya"; 
-	set .@lastx,149; 
+	set .@lastmap$,"ayothaya";
+	set .@lastx,149;
 	set .@lasty,108;
 	goto warpto;
 	end;
@@ -167,8 +167,8 @@ wcomodozeny:
 wcomodo:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"comodo"; 
-	set .@lastx,258; 
+	set .@lastmap$,"comodo";
+	set .@lastx,258;
 	set .@lasty,177;
 	goto warpto;
 	end;
@@ -178,8 +178,8 @@ weinbechzeny:
 weinbech:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"einbech"; 
-	set .@lastx,186; 
+	set .@lastmap$,"einbech";
+	set .@lastx,186;
 	set .@lasty,74;
 	goto warpto;
 	end;
@@ -189,14 +189,14 @@ weinbrochzeny:
 weinbroch:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"einbroch"; 
-	set .@lastx,173; 
+	set .@lastmap$,"einbroch";
+	set .@lastx,173;
 	set .@lasty,161;
 	goto warpto;
 	end;
 wgeffen:
-	set .@lastmap$,"geffen"; 
-	set .@lastx,120; 
+	set .@lastmap$,"geffen";
+	set .@lastx,120;
 	set .@lasty,73;
 	goto warpto;
 	end;
@@ -206,8 +206,8 @@ wgonryunzeny:
 wgonryun:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"gonryun"; 
-	set .@lastx,159; 
+	set .@lastmap$,"gonryun";
+	set .@lastx,159;
 	set .@lasty,118;
 	goto warpto;
 	end;
@@ -217,14 +217,14 @@ whugelzeny:
 whugel:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"hugel"; 
-	set .@lastx,96; 
+	set .@lastmap$,"hugel";
+	set .@lastx,96;
 	set .@lasty,149;
 	goto warpto;
 	end;
 wizlude:
-	set .@lastmap$,"izlude"; 
-	set .@lastx,128; 
+	set .@lastmap$,"izlude";
+	set .@lastx,128;
 	set .@lasty,113;
 	goto warpto;
 	end;
@@ -234,8 +234,8 @@ wjawaiizeny:
 wjawaii:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"jawaii"; 
-	set .@lastx,190; 
+	set .@lastmap$,"jawaii";
+	set .@lastx,190;
 	set .@lasty,239;
 	goto warpto;
 	end;
@@ -245,8 +245,8 @@ wlighthalzenzeny:
 wlighthalzen:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"lighthalzen"; 
-	set .@lastx,159; 
+	set .@lastmap$,"lighthalzen";
+	set .@lastx,159;
 	set .@lasty,90;
 	goto warpto;
 	end;
@@ -256,8 +256,8 @@ wlouyangzeny:
 wlouyang:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"louyang"; 
-	set .@lastx,217; 
+	set .@lastmap$,"louyang";
+	set .@lastx,217;
 	set .@lasty,112;
 	goto warpto;
 	end;
@@ -267,14 +267,14 @@ wxmaszeny:
 wxmas:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"xmas"; 
-	set .@lastx,148; 
+	set .@lastmap$,"xmas";
+	set .@lastx,148;
 	set .@lasty,126;
 	goto warpto;
 	end;
 wmorroc:
-	set .@lastmap$,"morocc"; 
-	set .@lastx,157; 
+	set .@lastmap$,"morocc";
+	set .@lastx,157;
 	set .@lasty,97;
 	goto warpto;
 	end;
@@ -284,8 +284,8 @@ wmoscoviazeny:
 wmoscovia:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"moscovia"; 
-	set .@lastx,223; 
+	set .@lastmap$,"moscovia";
+	set .@lastx,223;
 	set .@lasty,181;
 	goto warpto;
 	end;
@@ -295,20 +295,20 @@ wniflheimzeny:
 wniflheim:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"niflheim"; 
-	set .@lastx,21; 
+	set .@lastmap$,"niflheim";
+	set .@lastx,21;
 	set .@lasty,152;
 	goto warpto;
 	end;
 wpayon:
-	set .@lastmap$,"payon"; 
-	set .@lastx,156; 
+	set .@lastmap$,"payon";
+	set .@lastx,156;
 	set .@lasty,230;
 	goto warpto;
 	end;
 wprontera:
-	set .@lastmap$,"prontera"; 
-	set .@lastx,155; 
+	set .@lastmap$,"prontera";
+	set .@lastx,155;
 	set .@lasty,181;
 	goto warpto;
 	end;
@@ -318,8 +318,8 @@ wafeltzzeny:
 wafeltz:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"rachel"; 
-	set .@lastx,129; 
+	set .@lastmap$,"rachel";
+	set .@lastx,129;
 	set .@lasty,110;
 	goto warpto;
 	end;
@@ -329,8 +329,8 @@ wveinszeny:
 wveins:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"veins"; 
-	set .@lastx,216; 
+	set .@lastmap$,"veins";
+	set .@lastx,216;
 	set .@lasty,103;
 	goto warpto;
 	end;
@@ -340,8 +340,8 @@ wyunozeny:
 wyuno:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"yuno"; 
-	set .@lastx,157; 
+	set .@lastmap$,"yuno";
+	set .@lastx,157;
 	set .@lasty,166;
 	goto warpto;
 	end;
@@ -351,8 +351,8 @@ wumbalazeny:
 wumbala:
 	if ( !.@a )
 		set .@precio_w,600;
-	set .@lastmap$,"umbala"; 
-	set .@lastx,130; 
+	set .@lastmap$,"umbala";
+	set .@lastx,130;
 	set .@lasty,82;
 	goto warpto;
 	end;
@@ -360,131 +360,131 @@ wumbala:
 //Mercado
 mercado:
 	set .@precio_w,0;
-	set .@lastmap$,"vend_zone"; 
-	set .@lastx,99; 
+	set .@lastmap$,"vend_zone";
+	set .@lastx,99;
 	set .@lasty,99;
 	goto warpto;
 	end;
 //Dungeon
 abbey:
-	set .@lastmap$,"abbey01"; 
-	set .@lastx,51; 
+	set .@lastmap$,"abbey01";
+	set .@lastx,51;
 	set .@lasty,14;
 	goto warpto;
 	end;
 abyss:
-	set .@lastmap$,"abyss_01"; 
-	set .@lastx,263; 
-	set .@lasty,270; 
+	set .@lastmap$,"abyss_01";
+	set .@lastx,263;
+	set .@lasty,270;
 	goto warpto;
 	end;
 ama:
-	set .@lastmap$,"ama_dun01"; 
-	set .@lastx,228; 
-	set .@lasty,11; 
+	set .@lastmap$,"ama_dun01";
+	set .@lastx,228;
+	set .@lasty,11;
 	goto warpto;
 	end;
 ant:
-	set .@lastmap$,"anthell01"; 
-	set .@lastx,35; 
-	set .@lasty,262; 
+	set .@lastmap$,"anthell01";
+	set .@lastx,35;
+	set .@lasty,262;
 	goto warpto;
 	end;
 ayodun:
-	set .@lastmap$,"ayo_dun01"; 
-	set .@lastx,275; 
-	set .@lasty,19; 
+	set .@lastmap$,"ayo_dun01";
+	set .@lastx,275;
+	set .@lasty,19;
 	goto warpto;
 	end;
 byalan:
-	set .@lastmap$,"iz_dun00"; 
-	set .@lastx,168; 
-	set .@lasty,168; 
+	set .@lastmap$,"iz_dun00";
+	set .@lastx,168;
+	set .@lasty,168;
 	goto warpto;
 	end;
 clock:
-	set .@lastmap$,"c_tower1"; 
-	set .@lastx,199; 
-	set .@lasty,159; 
+	set .@lastmap$,"c_tower1";
+	set .@lastx,199;
+	set .@lasty,159;
 	goto warpto;
 	end;
 coal:
-	set .@lastmap$,"mjo_dun01"; 
-	set .@lastx,52; 
+	set .@lastmap$,"mjo_dun01";
+	set .@lastx,52;
 	set .@lasty,17;
 	goto warpto;
 	end;
 eindun:
-	set .@lastmap$,"ein_dun01"; 
-	set .@lastx,22; 
+	set .@lastmap$,"ein_dun01";
+	set .@lastx,22;
 	set .@lasty,14;
 	goto warpto;
 	end;
 geffen:
-	set .@lastmap$,"gef_dun00"; 
-	set .@lastx,104; 
+	set .@lastmap$,"gef_dun00";
+	set .@lastx,104;
 	set .@lasty,99;
 	goto warpto;
 	end;
 glast:
-	set .@lastmap$,"glast_01"; 
-	set .@lastx,372; 
+	set .@lastmap$,"glast_01";
+	set .@lastx,372;
 	set .@lasty,304;
 	goto warpto;
 	end;
 gon:
-	set .@lastmap$,"gon_dun01"; 
-	set .@lastx,153; 
+	set .@lastmap$,"gon_dun01";
+	set .@lastx,153;
 	set .@lasty,53;
 	goto warpto;
 	end;
 iced:
-	set .@lastmap$,"ice_dun01"; 
-	set .@lastx,157; 
+	set .@lastmap$,"ice_dun01";
+	set .@lastx,157;
 	set .@lasty,14;
 	goto warpto;
 	end;
 hidden:
-	set .@lastmap$,"prt_maze01"; 
-	set .@lastx,176; 
+	set .@lastmap$,"prt_maze01";
+	set .@lastx,176;
 	set .@lasty,7;
 	goto warpto;
 	end;
 loudun:
-	set .@lastmap$,"lou_dun01"; 
-	set .@lastx,218; 
+	set .@lastmap$,"lou_dun01";
+	set .@lastx,218;
 	set .@lasty,196;
 	goto warpto;
 	end;
 mosk:
-	set .@lastmap$,"mosk_dun01"; 
-	set .@lastx,189; 
+	set .@lastmap$,"mosk_dun01";
+	set .@lastx,189;
 	set .@lasty,46;
 	goto warpto;
 	end;
 magma:
-	set .@lastmap$,"mag_dun01"; 
-	set .@lastx,126; 
+	set .@lastmap$,"mag_dun01";
+	set .@lastx,126;
 	set .@lasty,68;
 	goto warpto;
 	end;
 orc:
-	set .@lastmap$,"orcsdun01"; 
-	set .@lastx,32; 
+	set .@lastmap$,"orcsdun01";
+	set .@lastx,32;
 	set .@lasty,170;
 	goto warpto;
 	end;
 odint:
-	set .@lastmap$,"odin_tem01"; 
-	set .@lastx,298; 
+	set .@lastmap$,"odin_tem01";
+	set .@lastx,298;
 	set .@lasty,167;
 	goto warpto;
 	end;
 payon:
 	if(#payond)
 	{
-		set .@lastmap$,"pay_dun00"; 
-		set .@lastx,21; 
+		set .@lastmap$,"pay_dun00";
+		set .@lastx,21;
 		set .@lasty,183;
 		goto warpto;
 		end;
@@ -540,74 +540,74 @@ PrimerWarp:
 	close;
 	end;
 culvert:
-	set .@lastmap$,"prt_sewb1"; 
-	set .@lastx,131; 
+	set .@lastmap$,"prt_sewb1";
+	set .@lastx,131;
 	set .@lasty,247;
 	goto warpto;
 	end;
 pyramids:
-	set .@lastmap$,"moc_pryd01"; 
-	set .@lastx,192; 
+	set .@lastmap$,"moc_pryd01";
+	set .@lastx,192;
 	set .@lasty,9;
 	goto warpto;
 	end;
 rachels:
-	set .@lastmap$,"ra_san01"; 
-	set .@lastx,140; 
+	set .@lastmap$,"ra_san01";
+	set .@lastx,140;
 	set .@lasty,11;
 	goto warpto;
 	end;
 kieldun:
-	set .@lastmap$,"kh_dun01"; 
-	set .@lastx,28; 
+	set .@lastmap$,"kh_dun01";
+	set .@lastx,28;
 	set .@lasty,226;
 	goto warpto;
 	end;
 lhzdun:
-	set .@lastmap$,"lhz_dun01"; 
-	set .@lastx,150; 
+	set .@lastmap$,"lhz_dun01";
+	set .@lastx,150;
 	set .@lasty,228;
 	goto warpto;
 	end;
 sphinx:
-	set .@lastmap$,"in_sphinx1"; 
-	set .@lastx,288; 
+	set .@lastmap$,"in_sphinx1";
+	set .@lastx,288;
 	set .@lasty,9;
 	goto warpto;
 	end;
 sunken:
-	set .@lastmap$,"treasure01"; 
-	set .@lastx,69; 
+	set .@lastmap$,"treasure01";
+	set .@lastx,69;
 	set .@lasty,24;
 	goto warpto;
 	end;
 that:
-	set .@lastmap$,"tha_t01"; 
-	set .@lastx,150; 
+	set .@lastmap$,"tha_t01";
+	set .@lastx,150;
 	set .@lasty,39;
 	goto warpto;
 	end;
 thor:
-	set .@lastmap$,"thor_v01"; 
-	set .@lastx,21; 
+	set .@lastmap$,"thor_v01";
+	set .@lastx,21;
 	set .@lasty,228;
 	goto warpto;
 	end;
 toy:
-	set .@lastmap$,"xmas_dun01"; 
-	set .@lastx,205; 
+	set .@lastmap$,"xmas_dun01";
+	set .@lastx,205;
 	set .@lasty,15;
 	goto warpto;
 	end;
 turtle:
-	set .@lastmap$,"tur_dun01"; 
-	set .@lastx,154; 
+	set .@lastmap$,"tur_dun01";
+	set .@lastx,154;
 	set .@lasty,49;
 	goto warpto;
 	end;
 umdun:
-	set .@lastmap$,"um_dun01"; 
-	set .@lastx,42; 
+	set .@lastmap$,"um_dun01";
+	set .@lastx,42;
 	set .@lasty,31;
 	goto warpto;
 	end;
@@ -616,18 +616,108 @@ umdun:
 //Battleground
 wbattleground:
 	set .@precio_w,0;
-	set .@lastmap$,"batt_off"; 
-	set .@lastx,91; 
-	set .@lasty,39; 
+	set .@lastmap$,"batt_off";
+	set .@lastx,91;
+	set .@lasty,39;
 	goto warpto;
+	end;
+
+//WoE
+wwoe:
+	set .@precio_w,500;
+	switch ( $Tipo_WoE )
+	{
+		case 0:
+			set .@lastmap$,"batt_off";
+			set .@lastx,91;
+			set .@lasty,39;
+			goto warpto;
+			break;
+		case 1:
+			set .@lastmap$,"prt_gld";
+			set .@lastx,240;
+			set .@lasty,127;
+			goto warpto;
+			break;
+		case 2:
+			mes "Elegir zona";
+			next;
+			switch(select("[ > ] Zona 1:[ > ] Zona 2:[ > ] Zona 3:[ > ] Zona 4"))
+			{
+				case 1:
+					set .@lastmap$,"rwc02";
+					set .@lastx,14;
+					set .@lasty,47;
+					mes .@name$;
+					goto warpto;
+					break;
+				case 2:
+					set .@lastmap$,"rwc02";
+					set .@lastx,48;
+					set .@lasty,83;
+					mes .@name$;
+					goto warpto;
+					break;
+				case 3:
+					set .@lastmap$,"rwc02";
+					set .@lastx,89;
+					set .@lasty,56;
+					mes .@name$;
+					goto warpto;
+					break;
+				case 4:
+					set .@lastmap$,"rwc02";
+					set .@lastx,55;
+					set .@lasty,18;
+					mes .@name$;
+					goto warpto;
+					break;
+			}
+			break;
+		case 3:
+			set .@lastmap$,"sch_gld";
+			set .@lastx,293;
+			set .@lasty,100;
+			goto warpto;
+			break;
+		case 4:
+			set @eac, eaclass();
+			if (@eac&EAJL_BABY) {
+				sc_end SC_ASSUMPTIO;
+				sc_end SC_IMPOSITIO;
+				sc_end SC_SUFFRAGIUM;
+				sc_end SC_MAGNIFICAT;
+				sc_end SC_WEAPONPERFECTION;
+				sc_end SC_GOSPEL;
+				sc_end SC_BASILICA;
+				sc_end SC_MAGICPOWER;
+				sc_end SC_MARIONETTE;
+				sc_end SC_MARIONETTE2;
+				sc_end SC_DEVOTION;
+				sc_end SC_SACRIFICE;
+				sc_end SC_MAXOVERTHRUST;
+				sc_end SC_SPIRIT;
+				set .@lastmap$,"n_castle";
+				set .@lastx,102;
+				set .@lasty,100;
+				goto warpto;
+			}
+			else
+			{
+				mes "No puedes entrar";
+				mes "Sólo se admiten Job Baby";
+				emotion ET_SORRY;
+			}
+			break;
+	}
 	end;
 
 //PvP
 wpvp:
 	set .@precio_w,0;
-	set .@lastmap$,"guild_vs3"; 
-	set .@lastx,0; 
-	set .@lasty,0; 
+	set .@lastmap$,"guild_vs3";
+	set .@lastx,0;
+	set .@lasty,0;
 	goto warpto;
 	end;
 
@@ -826,6 +916,7 @@ einbech,195,84,5	duplicate(Warper)	Warper#22	669
 vend_zone,94,101,6	duplicate(Warper)	Warper#23	669
 deadbranch,52,43,4	duplicate(Warper)	Warper#24	669
 bomberman,32,18,4	duplicate(Warper)	Warper#25	669
+batt_off,119,89,5	duplicate(Warper)	Warper#26	669
 
 
 

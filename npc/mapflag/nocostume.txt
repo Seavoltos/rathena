@@ -72,7 +72,7 @@ te_aldecas5	mapflag	nocostume
 //============================================================
 // WoE:Novice Castles
 //============================================================
-//n_castle	mapflag	nocostume
+n_castle	mapflag	nocostume
 nguild_alde	mapflag	nocostume
 nguild_gef	mapflag	nocostume
 nguild_pay	mapflag	nocostume

@@ -1,0 +1,204 @@
+//===== rAthena Script =======================================
+//= War of Dominion
+//===== By: ==================================================
+//= Angeluz (1.0)
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= WoE with dominion area
+//===== Additional Comments: =================================
+//= 1.1
+//============================================================
+
+-	script	Manager_TE	-1,{
+OnAgitInit3:
+	.@map$ = strnpcinfo(4);
+	if (.@map$ == "") end;
+	.@npc_name$ = strnpcinfo(0);
+	.@guild_id = getcastledata(.@map$,CD_GUILD_ID);
+	if (.@guild_id != 0) {
+		requestguildinfo .@guild_id;
+		donpcevent "::OnFlagWoD" + strnpcinfo(2);// Guild emblem on flags.
+	}
+	end;
+
+OnFlagStart:
+	.@map$ = strnpcinfo(4);
+	if( .@map$ == "rwc02" )
+	{
+		enablenpc "War Zone#rwc02";
+		setarray .WoDFlagx[0],55,50,50,53,48,48,62,82,75,83,77,63,81,81,72,42,20,30,20,18,25,38,25,14,24,34,48,51;
+		setarray .WoDFlagy[0],23,49,57,35,68,79,81,87,79,67,57,57,35,17,19,20,14,21,24,36,47,47,63,83,83,80,51,51;
+		initnpctimer "War Zone#"+.@map$;
+	}
+	donpcevent "::OnMoveFlagWoD";// Move Zone
+	end;
+
+OnFlagEnd:
+	.@map$ = strnpcinfo(4);
+	if( .@map$ == "rwc02" )
+	{
+		disablenpc "War Zone#rwc02";
+		stopnpctimer;
+		stopnpctimer "War Zone#rwc02";
+	}
+	end;
+
+OnMoveFlagWoD:
+	initnpctimer;
+	.@map$ = strnpcinfo(4);
+	set .@i, rand(0, getarraysize(.WoDFlagx)-1);
+	if( .@map$ == "rwc02" )
+	{
+		set .WoDFlagposx,.WoDFlagx[.@i];
+		set .WoDFlagposy,.WoDFlagy[.@i];
+		movenpc "War Zone#rwc02",.WoDFlagposx,.WoDFlagposy;
+	}
+	end;
+
+OnTimer300000:
+	stopnpctimer;
+	donpcevent "::OnMoveFlagWoD";// Move Zone
+	end;
+
+OnAgitStart3:
+	.@map$ = strnpcinfo(4);
+	if (.@map$ == "") end;
+	if (agitcheck3()) {
+		gvgon3 .@map$;
+		donpcevent strnpcinfo(0)+"::OnFlagStart";
+		callsub S_Message,"OnCommandOn";
+	}
+	end;
+
+OnAgitEnd3:
+	.@map$ = strnpcinfo(4);
+	if (.@map$ == "") end;
+	gvgoff3 .@map$;
+	donpcevent strnpcinfo(0)+"::OnFlagEnd";
+	callsub S_Message,"OnReset";
+	end;
+
+OnGuildBreak:
+	.@map$ = strnpcinfo(4);
+	if (.@map$ == "") end;
+	setcastledata .@map$,CD_GUILD_ID,0;
+	sleep 7000;
+	donpcevent strnpcinfo(0) +"::OnAgitInit3";
+	end;
+
+S_Message:
+	.@map$ = strnpcinfo(4);
+	.@guild_id = getcastledata(.@map$,CD_GUILD_ID);
+	
+	set .@nb, query_sql("select guild_id from wod where points >= 0 order by points desc limit 10",.@guild_id);
+	if ( .@nb != 0 ) {
+		setcastledata .@map$,CD_GUILD_ID,.@guild_id[0];
+	}
+	return;
+
+}
+
+// Manager woe
+//============================================================
+rwc02,1,1,0	duplicate(Manager_TE)	Manager_TE#rwc02	-1
+
+rwc02,55,23,0	script	War Zone#rwc02	20269,{
+	function F_WoD_PTS;
+	function F_WoD_MAP;
+	end;
+
+OnInit:
+	disablenpc;
+	end;
+
+OnEnable:
+	initnpctimer;
+	end;
+
+OnDisable:
+	stopnpctimer;
+	end;
+OnTimer1000:
+	set .@nb, query_sql("select guild_id from wod where points >= 0 order by points desc limit 10",.@guild_id);
+	if ( .@nb != 0 )
+		setcastledata .@map$,CD_GUILD_ID,.@guild_id[0];
+	addrid(1,0);
+	F_WoD_MAP();
+	end;
+
+OnTimer5000:
+	stopnpctimer;
+	specialeffect 236;
+	initnpctimer;
+	set .posx,getvariableofnpc(.WoDFlagposx,"Manager_TE#rwc02");
+	set .posy,getvariableofnpc(.WoDFlagposy,"Manager_TE#rwc02");
+	addrid(4,0,.posx-4,.posy-4,.posx+4,.posy+4);
+	F_WoD_PTS();
+	end;
+
+	function	F_WoD_PTS	{
+		if ( checkvending() || checkchatting() || checkidle() > 30 || getcharid(2) == 0 )
+			end;
+		set .@puntos[0],0;
+		query_sql "select points from wod where guild_id = "+ getcharid(2), .@puntos;
+		set .@puntos[0], .@puntos[0] + 1;
+		query_sql "replace into wod values ( "+ getcharid(2) +", "+.@puntos[0] +")";
+		// Reputation
+		add_reputation_points(5,getvariableofnpc(.WoD_Zone,"Agit_WoE_ALL"));
+		return;
+	}
+
+	function	F_WoD_MAP	{
+		if ( checkvending() || checkchatting() || checkidle() > 120 || getcharid(2) == 0 )
+			end;
+		set .posx,getvariableofnpc(.WoDFlagposx,"Manager_TE#rwc02");
+		set .posy,getvariableofnpc(.WoDFlagposy,"Manager_TE#rwc02");
+		viewpointmap "rwc02", 1,.posx,.posy, 1, 0xFFFFFF;
+		return;
+	}
+	
+
+OnPCLoadMapEvent:
+	set .posx,getvariableofnpc(.WoDFlagposx,"Manager_TE#rwc02");
+	set .posy,getvariableofnpc(.WoDFlagposy,"Manager_TE#rwc02");
+	viewpointmap "rwc02", 1,.posx,.posy, 1, 0xFFFFFF;
+	end;
+
+}
+
+rwc02,71,41,4	script	Ranking WoD	722,{
+	set .@nb, query_sql("select guild_id, points from wod where points >= 0 order by points desc limit 10",.@guild_id, .@points);
+	if ( .@nb == 0 ) {
+		mes "[ War of Dominion ]";
+		mes "El actual ranking se encuentra vacío.";
+		close;
+	}
+	for ( set .@j,0; .@j < .@nb; set .@j, .@j + 10 ) {
+		mes "[ War of Dominion ]";
+		for ( set .@i, .@j; .@i < (10 + .@j) && .@i < .@nb; set .@i, .@i + 1 ) {
+			if(.@i == 0) mes "^EFB810"+ (.@i+1) +": "+ getguildname(.@guild_id[.@i]) +" - ["+ .@points[.@i] +"]^000000";
+			else if(.@i == 1) mes "^555555"+ (.@i+1) +": "+ getguildname(.@guild_id[.@i]) +" - ["+ .@points[.@i] +"]^000000";
+			else if(.@i == 2) mes "^813e24"+ (.@i+1) +": "+ getguildname(.@guild_id[.@i]) +" - ["+ .@points[.@i] +"]^000000";
+			else mes ""+ (.@i+1) +": "+ getguildname(.@guild_id[.@i]) +" - ["+ .@points[.@i] +"]^000000";
+		}
+	}
+	close;
+
+OnFlagWoDrwc02:
+	flagemblem getcastledata( "rwc02",1 );
+	end;
+
+}
+
+// Manager woe
+//============================================================
+rwc02,62,69,4	duplicate(Ranking WoD)	Ranking WoD#02	722
+rwc02,35,61,4	duplicate(Ranking WoD)	Ranking WoD#03	722
+rwc02,37,35,4	duplicate(Ranking WoD)	Ranking WoD#04	722
+
+
+rwc02	mapflag	loadevent
+rwc02	mapflag	gvg_te_castle

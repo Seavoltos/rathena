@@ -28,8 +28,8 @@ OnAgitInit:
 	end;
 
 OnGuardianDied:
-	// Event when Guardian dies
-	MapAnnounce "nguild_alde","A Guardian Has Fallen",17;
+	// Reputation
+	add_reputation_points(5,getvariableofnpc(.WoE_Guard,"Agit_WoE_ALL"));
 	end;
 }
 
@@ -47,8 +47,8 @@ OnAgitInit:
 	end;
 
 OnGuardianDied:
-	// Event when Guardian dies
-	MapAnnounce "nguild_gef","A Guardian Has Fallen",17;
+	// Reputation
+	add_reputation_points(5,getvariableofnpc(.WoE_Guard,"Agit_WoE_ALL"));
 	end;
 }
 //------------------------------------------------------------------------------
@@ -65,8 +65,8 @@ OnAgitInit:
 	end;
 
 OnGuardianDied:
-	// Event when Guardian dies
-	MapAnnounce "nguild_pay","A Guardian Has Fallen",17;
+	// Reputation
+	add_reputation_points(5,getvariableofnpc(.WoE_Guard,"Agit_WoE_ALL"));
 	end;
 }
 //------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ OnAgitInit:
 	end;
 
 OnGuardianDied:
-	// Event when Guardian dies
-	MapAnnounce "nguild_prt","A Guardian Has Fallen",17;
+	// Reputation
+	add_reputation_points(5,getvariableofnpc(.WoE_Guard,"Agit_WoE_ALL"));
 	end;
 }

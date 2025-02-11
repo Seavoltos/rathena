@@ -11,7 +11,7 @@
 }
 
 prtg_cas01,98,32,4	duplicate(Guardia#woe)	Guardia#prtcas01	56,15,15
-prtg_cas02,43,227,4	duplicate(Guardia#woe)	Guardia#prtcas02	56,15,15
+//prtg_cas02,43,227,4	duplicate(Guardia#woe)	Guardia#prtcas02	56,15,15
 prtg_cas03,168,16,4	duplicate(Guardia#woe)	Guardia#prtcas03	56,15,15
 prtg_cas04,86,19,4	duplicate(Guardia#woe)	Guardia#prtcas04	56,15,15
 prtg_cas05,17,238,4	duplicate(Guardia#woe)	Guardia#prtcas05	56,15,15
@@ -51,12 +51,18 @@ arug_cas04,141,50,4	duplicate(Guardia#woe)	Guardia#arucas04	56,15,15
 arug_cas05,141,50,4	duplicate(Guardia#woe)	Guardia#arucas05	56,15,15
 
 
-schg_cas01,119,12,4	duplicate(Guardia#woe)	Guardia#schcas01	56,15,15
+//schg_cas01,119,12,4	duplicate(Guardia#woe)	Guardia#schcas01	56,15,15
 schg_cas02,339,81,4	duplicate(Guardia#woe)	Guardia#schcas02	56,15,15
 schg_cas03,337,327,4	duplicate(Guardia#woe)	Guardia#schcas03	56,15,15
 schg_cas04,119,12,4	duplicate(Guardia#woe)	Guardia#schcas04	56,15,15
 schg_cas05,119,12,4	duplicate(Guardia#woe)	Guardia#schcas05	56,15,15
 
+//WOE Baby
+nguild_alde,34,244,4	duplicate(Guardia#woe)	Guardia#ncas01	56,15,15
+nguild_gef,34,145,4	duplicate(Guardia#woe)	Guardia#ncas021	56,15,15
+nguild_gef,92,178,4	duplicate(Guardia#woe)	Guardia#ncas022	56,15,15
+//nguild_pay,214,52,4	duplicate(Guardia#woe)	Guardia#ncas03	56,15,15
+nguild_prt,98,32,4	duplicate(Guardia#woe)	Guardia#ncas04	56,15,15
 
 prtg_cas01	mapflag	norodex
 prtg_cas02	mapflag	norodex
@@ -94,6 +100,13 @@ schg_cas03	mapflag	norodex
 schg_cas04	mapflag	norodex
 schg_cas05	mapflag	norodex
 
+nguild_alde	mapflag	norodex
+nguild_gef	mapflag	norodex
+nguild_pay	mapflag	norodex
+nguild_prt	mapflag	norodex
+
+rwc02	mapflag	norodex
+
 prtg_cas01	mapflag	woe_consume
 prtg_cas02	mapflag	woe_consume
 prtg_cas03	mapflag	woe_consume
@@ -129,3 +142,10 @@ schg_cas02	mapflag	woe_consume
 schg_cas03	mapflag	woe_consume
 schg_cas04	mapflag	woe_consume
 schg_cas05	mapflag	woe_consume
+
+nguild_alde	mapflag	woe_consume
+nguild_gef	mapflag	woe_consume
+nguild_pay	mapflag	woe_consume
+nguild_prt	mapflag	woe_consume
+
+rwc02	mapflag	woe_consume

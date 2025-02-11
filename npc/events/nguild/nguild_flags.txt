@@ -63,6 +63,7 @@ function	script	F_Flags	{
 //============================================================================//
 // 			Castle 1
 //============================================================================//
+/*
 n_castle,110,96,1	script	NGuild Aldebaran#a1-1	722,{
 	callfunc "F_Flags","Al De Baran","nguild_alde",218,170,1,1;
 	close;
@@ -96,12 +97,13 @@ nguild_alde,74,64,2	duplicate(NGuildAlde)	NGuild Aldebaran#a1-18	722
 nguild_alde,203,150,4	duplicate(NGuildAlde)	NGuild Aldebaran#a1-19	722
 nguild_alde,210,150,4	duplicate(NGuildAlde)	NGuild Aldebaran#a1-20	722
 
-
+*/
 
 
 //============================================================================//
 // 			Castle 2
 //============================================================================//
+/*
 n_castle,110,109,3	script	NGuild Geffen#g1-1	722,{
 	callfunc "F_Flags","Geffen","nguild_gef",83,47,1,1;
 	close;
@@ -126,7 +128,7 @@ nguild_gef,68,185,3	duplicate(NGuildGef)	NGuild Geffen#g1-9	722
 nguild_gef,17,171,5	duplicate(NGuildGef)	NGuild Geffen#g1-10	722
 nguild_gef,59,16,4	duplicate(NGuildGef)	NGuild Geffen#g1-11	722
 nguild_gef,64,16,4	duplicate(NGuildGef)	NGuild Geffen#g1-12	722
-
+*/
 
 
 //============================================================================//
@@ -163,6 +165,7 @@ nguild_pay,212,108,4	duplicate(NGuildPay)	NGuild Payon#f1-11	722
 //=============================================================================//
 // 			Castle 4
 //=============================================================================//
+/*
 n_castle,94,96,7	script	NGuild Prontera#p1-1	722,{
 	callfunc "F_Flags","Prontera","nguild_prt",97,174,1,1;
 	close;
@@ -190,3 +193,4 @@ nguild_prt,73,14,4	duplicate(NGuildPrt)	NGuild Prontera#p1-13	722
 nguild_prt,73,6,4	duplicate(NGuildPrt)	NGuild Prontera#p1-14	722
 nguild_prt,55,46,4	duplicate(NGuildPrt)	NGuild Prontera#p1-15	722
 nguild_prt,45,46,4	duplicate(NGuildPrt)	NGuild Prontera#p1-16	722
+*/

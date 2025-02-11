@@ -151,3 +151,4 @@ Thumbs.db
 # generated files
 generated
 db/import/map_cache.dat
+db/map_cache.dat

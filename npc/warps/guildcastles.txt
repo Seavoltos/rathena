@@ -443,6 +443,7 @@ arug_cas05,321,52,0	warp	arug503	1,1,arug_cas05,141,45
 
 //==================  4 Novices Guild Castles =============================
 //Novices Guild: Al de Baran Guild Castles Map
+/*
 n_castle,184,16,0	warp	naldg01	1,1,nguild_alde,34,248
 nguild_alde,34,252,0	warp	naldg01-1	1,1,n_castle,187,16
 
@@ -483,7 +484,7 @@ nguild_gef,58,185,0	warp	ngefg102	1,1,nguild_gef,90,47
 nguild_gef,59,170,0	warp	ngefg103	1,1,nguild_gef,205,34
 nguild_gef,62,9,0	warp	ngefg101-1	1,1,nguild_gef,39,192
 nguild_gef,90,51,0	warp	ngefg102-1	1,1,nguild_gef,54,185
-
+*/
 //Novices Guild: Payon Guild Castles Map
 n_castle,18,181,0	warp	npayg01	1,1,nguild_pay,214,48
 nguild_pay,214,44,0	warp	npayg01-1	1,1,n_castle,18,178
@@ -502,6 +503,7 @@ nguild_pay,53,111,0	warp	npayg106	1,1,nguild_pay,115,147
 nguild_pay,115,151,0	warp	npayg106-1	1,1,nguild_pay,53,115
 
 //Novices Guild: Prontera Castles Map
+/*
 n_castle,16,14,0	warp	nprtg01	1,1,nguild_prt,99,32
 nguild_prt,103,32,0	warp	nprtg01-1	1,1,n_castle,19,14
 
@@ -521,6 +523,7 @@ nguild_prt,71,54,0	warp	nprtg104	1,1,nguild_prt,192,65
 nguild_prt,75,183,0	warp	nprtg106-1	1,1,nguild_prt,147,116
 nguild_prt,84,19,0	warp	nprtg109	1,1,nguild_prt,192,65
 nguild_prt,84,49,0	warp	nprtg101-1	1,1,nguild_prt,61,19
+*/
 
 //Guild Dungeons
 gld_dun01,119,14,0	warp	gdun01_payg	1,1,pay_gld,53,141
