@@ -486,7 +486,7 @@ OnClock0205:
 //OnClock0505:
 //OnClock0605:
 //OnClock0705:
-	if( agitcheck() || agitcheck2() )	end;
+	if( agitcheck() || agitcheck2() || agitcheck3() )	end;
 
 	set .@rand, rand(1,15);
 

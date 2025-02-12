@@ -103,10 +103,11 @@ OnPCKillEvent:
 -	script	Agit_Control_WoE	-1,{
 	end;
 
-OnClock1600:	//start time for TUESDAY
+OnClock1600:	//start time for SUNDAY
 OnAgitInit:
 OnAgitInit2:
-	if((gettime(DT_DAYOFWEEK)==TUESDAY) && gettime(DT_HOUR)==16 )
+OnAgitInit3:
+	if((gettime(DT_DAYOFWEEK)==SUNDAY) && gettime(DT_HOUR)==16 )
 	{
 		switch ( $Tipo_WoE )
 		{
@@ -116,28 +117,28 @@ OnAgitInit2:
 				if (!agitcheck()) {
 					AgitStart;
 					initnpctimer "Agit_WoE_ALL";
-					callsub S_DisplayOwners;
+					callsub S_DisplayOwners_Inicio;
 				}
 				break;
 			case 2:	//WoD
 				if (!agitcheck3()) {
 					AgitStart3;
 					initnpctimer "Agit_WoE_ALL";
-					callsub S_DisplayOwners;
+					callsub S_DisplayOwners_Inicio;
 				}
 				break;
 			case 3:	//WoE 2.0
 				if (!agitcheck2()) {
 					AgitStart2;
 					initnpctimer "Agit_WoE_ALL";
-					callsub S_DisplayOwners;
+					callsub S_DisplayOwners_Inicio;
 				}
 				break;
 			case 4: //WoE Baby
 				if (!agitcheck()) {
 					AgitStart;
 					initnpctimer "Agit_WoE_ALL";
-					callsub S_DisplayOwners;
+					callsub S_DisplayOwners_Inicio;
 				}
 				break;
 		}
@@ -145,7 +146,7 @@ OnAgitInit2:
 	end;
 
 OnClock1700:	//end time for 1.0, WoD and baby
-	if((gettime(DT_DAYOFWEEK)==TUESDAY) && gettime(DT_HOUR)>=17 )
+	if((gettime(DT_DAYOFWEEK)==SUNDAY) && gettime(DT_HOUR)>=17 )
 	{
 		switch ( $Tipo_WoE )
 		{
@@ -159,7 +160,6 @@ OnClock1700:	//end time for 1.0, WoD and baby
 					AgitEnd;
 					stopnpctimer "Agit_WoE_ALL";
 					callsub S_DisplayOwners;
-					callsub S_ChangeWoE;
 				}
 				break;
 			case 2:	//WoD
@@ -167,7 +167,6 @@ OnClock1700:	//end time for 1.0, WoD and baby
 					AgitEnd3;
 					stopnpctimer "Agit_WoE_ALL";
 					callsub S_DisplayOwners;
-					callsub S_ChangeWoE;
 				}
 				break;
 			case 4: //WoE Baby
@@ -175,14 +174,13 @@ OnClock1700:	//end time for 1.0, WoD and baby
 					AgitEnd;
 					stopnpctimer "Agit_WoE_ALL";
 					callsub S_DisplayOwners;
-					callsub S_ChangeWoE;
 				}
 				break;
 		}
 	}
 	end;
 OnClock1800:	//end time for 2.0
-	if((gettime(DT_DAYOFWEEK)==TUESDAY) && gettime(DT_HOUR)>=18 )
+	if((gettime(DT_DAYOFWEEK)==SUNDAY) && gettime(DT_HOUR)>=18 )
 	{
 		switch ( $Tipo_WoE )
 		{
@@ -196,13 +194,13 @@ OnClock1800:	//end time for 2.0
 					AgitEnd2;
 					stopnpctimer "Agit_WoE_ALL";
 					callsub S_DisplayOwners;
-					callsub S_ChangeWoE;
 				}
 				break;
 		}
 	}
 	end;
-
+S_DisplayOwners_Inicio:
+	set .@i,1;
 S_DisplayOwners:
 	switch ( $Tipo_WoE )
 	{
@@ -225,11 +223,24 @@ S_DisplayOwners:
 			set .@name$, "WoE Baby";
 			break;
 	}
-	if (GetCastleData(.@cas$,1)) {
-		Announce "La " + .@name$ + " ha finalizado. El Castillo de [" + GetCastleName(.@cas$) + "] ha sido conquistado por la guild [" + GetGuildName(GetCastleData(.@cas$,1)) + "].",bc_all|bc_woe;
+	if (.@i == 1)
+	{
+		if (GetCastleData(.@cas$,1)) {
+			Announce "La " + .@name$ + " ha iniciado. El Castillo [" + GetCastleName(.@cas$) + "] se encuentra conquistado por la guild [" + GetGuildName(GetCastleData(.@cas$,1)) + "].",bc_all|bc_woe;
+		}
+		else {
+			Announce "La " + .@name$ + " ha iniciado. El Castillo [" + GetCastleName(.@cas$) + "] se encuentra desocupado.",bc_all|bc_woe;
+		}
 	}
-	else {
-		Announce "La " + .@name$ + " ha finalizado. El Castillo [" + GetCastleName(.@cas$) + "] se encuentra desocupado.",bc_all|bc_woe;
+	else
+	{
+		if (GetCastleData(.@cas$,1)) {
+			Announce "La " + .@name$ + " ha finalizado. El Castillo [" + GetCastleName(.@cas$) + "] ha sido conquistado por la guild [" + GetGuildName(GetCastleData(.@cas$,1)) + "].",bc_all|bc_woe;
+		}
+		else {
+			Announce "La " + .@name$ + " ha finalizado. El Castillo [" + GetCastleName(.@cas$) + "] se encuentra desocupado.",bc_all|bc_woe;
+		}
+		callsub S_ChangeWoE;
 	}
 	end;
 
