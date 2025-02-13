@@ -4576,9 +4576,9 @@ ACMD_FUNC(reloadscript){
 
 	for (auto &bg : bg_queues) {
 		for (auto &bg_sd : bg->teama_members)
-			bg_team_leave(bg_sd, false, false); // Kick Team A from battlegrounds
+			bg_team_leave(bg_sd, false, false,0); // Kick Team A from battlegrounds
 		for (auto &bg_sd : bg->teamb_members)
-			bg_team_leave(bg_sd, false, false); // Kick Team B from battlegrounds
+			bg_team_leave(bg_sd, false, false,0); // Kick Team B from battlegrounds
 		bg_queue_clear(bg, true);
 	}
 
@@ -12262,7 +12262,6 @@ void atcommand_basecommands(void) {
 		ACMD_DEF2("evilclone", clone),
 		ACMD_DEF(tonpc),
 		ACMD_DEF(commands),
-		ACMD_DEF2("reloaddiscordconf", reload),
 		ACMD_DEF(disablediscord),
 		ACMD_DEF(noask),
 		ACMD_DEF(request),

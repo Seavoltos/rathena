@@ -20244,7 +20244,7 @@ void clif_parse_SkillSelectMenu(int32 fd, map_session_data *sd) {
 				if( tsd->status.show_equip || pc_has_permission(sd, PC_PERM_VIEW_EQUIPMENT) )
 					clif_viewequip_ack(*sd, *tsd);
 				else
-					clif_msg(sd, MSI_OPEN_EQUIPEDITEM_REFUSED);
+					clif_msg( *sd, MSI_OPEN_EQUIPEDITEM_REFUSED );
 				break;
 			case CS_BG:
 				pc_battle_stats(sd,tsd,1);
