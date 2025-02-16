@@ -1,0 +1,113 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Bombring
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+-	script	BombRing#Funcion	-1,{
+
+OnWatingRoom:
+	set $@BombRing,1;
+	setmapflag "1@ba_go",mf_noskill;
+	channel_chat("#evento","Elizabeth: El evento de escapa del poring está por comenzar!");
+	sleep 5000;
+	
+	channel_chat("#evento","Elizabeth: Usa @joinevent para poder ingresar al evento! Tienes 1 minuto!");
+	sleep 60000;
+	
+	channel_chat("#evento","Elizabeth: Tiempo!");
+	set $@BombRing,2;
+	delwaitingroom "Elizabeth";
+	initnpctimer;
+	end;
+	
+OnTimer5000:
+	mapannounce "1@ba_go","Elizabeth: El evento escapa del poring comenzará pronto.",1,$ColorEventos;
+	sleep 5000;
+	mapannounce "1@ba_go","Elizabeth: Pero antes recuerda que..",1,$ColorEventos;
+	sleep 5000;
+	mapannounce "1@ba_go","Elizabeth: El mapa se llenará de Bombrings...",1,$ColorEventos;
+	sleep 5000;
+	mapannounce "1@ba_go","Elizabeth: y todos ellos harán booooooom!",1,$ColorEventos;
+	sleep 5000;
+	mapannounce "1@ba_go","Elizabeth: Lo único que tienes que hacer es esquivarlos",1,$ColorEventos;
+	sleep 5000;
+	mapannounce "1@ba_go","Elizabeth: Todos los que sobrevivan las 5 rondas ganarán!",1,$ColorEventos;
+	sleep 5000;
+	mapannounce "1@ba_go","Elizabeth: Que estamos esperando?..Let's Get Ready to Rumble!!...",1,$ColorEventos;
+	sleep 10000;
+	if(!getmapusers("1@ba_go"))
+		.@wave += 50;
+	for(.@wave = 1; .@wave <= 5; .@wave++){
+		if(.@wave < 5)
+			mapannounce "1@ba_go","Ronda "+.@wave+"!",1,$ColorEventos;
+		else
+			mapannounce "1@ba_go","Última ronda!",1,$ColorEventos;
+		
+		areamonster "1@ba_go",333,30,371,68,"Corre por tu vida!",1904,60,"";
+		
+		if(!getmapusers("1@ba_go"))
+			.@wave += 5;
+		else
+			sleep 6000 * 5 / .@wave;
+	}
+	sleep 10000;
+	set $@BombRing,3;
+	if(getmapusers("1@ba_go")){
+		mapannounce "1@ba_go","Elizabeth: Felicitaciones!!...",1,$ColorEventos;
+		enablenpc "Elizabeth#BombRing";
+		sleep 300;
+		mapwarp "1@ba_go","1@ba_go",353,47;
+		sleep 600;
+		disablenpc "Elizabeth#BombRing";
+		sleep 300;
+	}
+	set $@BombRing,0;
+	removemapflag "1@ba_go",mf_noskill;
+	end;
+
+OnPCDieEvent:
+
+	getmapxy .@mapnvz$,.@xnvz,.@ynvz,BL_PC;
+
+	if ( .@mapnvz$ == "1@ba_go" && $@BombRing == 2 ) {
+		sleep2 1;
+		warp @mapname$,@mapx,@mapy;
+		percentheal 100,100;
+		sc_start 32, 600000, 10;  // Increase Agi
+		sc_start 30, 600000, 10; // Blessing
+		dispbottom "Elizabeth: Perdistes...";
+	}
+	end;
+}
+
+1@ba_go,353,49,4	script	Elizabeth#BombRing	10054,3,3,{
+	if ( $@BombRing == 3 )
+	{
+		getitem $Premioeventos,$Premiomuchos;
+		set #EVENTOMUCHOS,#EVENTOMUCHOS+1;
+	}
+	sc_start 32, 600000, 10;  // Increase Agi
+	sc_start 30, 600000, 10; // Blessing
+	warp @mapname$,@mapx,@mapy;
+	end;
+
+OnInit:
+	disablenpc "Elizabeth#BombRing";
+	end;
+}

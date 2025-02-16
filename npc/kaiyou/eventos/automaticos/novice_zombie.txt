@@ -1,0 +1,118 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Novice vs Zombie
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+-	script	announce_nvz	-1,{
+
+OnWatingRoom:
+channel_chat("#evento","Elizabeth: Escapa del Zombie comenzara en 2 minutos");
+killmonsterall "1@4inq";
+set .numzom, 0;
+sleep 5000; //5 s
+
+channel_chat("#evento","Elizabeth: Con un novice nivel 1 utiliza @joinevent para enviarte a 'Escapa del Zombie'!");
+set $@Zombie,1;
+sleep 55000; //55 s
+mapannounce "1@4inq","'Escapa del Zombie' comenzara en 1 minuto!",1,$ColorEventos;
+sleep 30000; //30 s
+mapannounce "1@4inq","'Escapa del Zombie' comenzara en 30 segundos!",1,$ColorEventos;
+sleep 30000; //25 s
+channel_chat("#evento","Elizabeth: 'Escapa del Zombie' ya comenzó!!");
+set $@Zombie,0;
+delwaitingroom "Elizabeth";
+sleep 3000;
+initnpctimer;
+end;
+
+OnTimer5000:
+	mapannounce "1@4inq","Elizabeth: El posible ganador se verá en 5 segundos!.",1,$ColorEventos;
+	end;
+OnTimer10000:
+if ( getmapusers("1@4inq") == 0 ) {
+
+	killmonsterall "1@4inq";
+	mapannounce "1@4inq","Elizabeth: 'Escapa del Zombie' a terminado, todos los Novice murieron",1,$ColorEventos;
+	disablenpc "Prize";
+	stopnpctimer;
+	end;
+
+} else if ( getmapusers("1@4inq") > 1 ) {
+	mapannounce "1@4inq","Elizabeth: Aun hay "+getmapusers("1@4inq") +" jugadores en el evento.",1,$ColorEventos;
+	set .numzom, .numzom +3;
+	if( .numzom % 5 == 0 )
+		areamonster "1@4inq",58,44,101,87,"Zombie",1480,1;
+	else
+		areamonster "1@4inq",58,44,101,87,"Zombie",1394,.numzom;
+	initnpctimer;
+	end;
+} else if (getmapusers("1@4inq") == 1) {
+	killmonsterall "1@4inq";
+	mapannounce "1@4inq","Elizabeth: Ganastes! Felicitaciones!",1,$ColorEventos;
+	stopnpctimer;
+	sleep 1000;
+	addrid(5,0,"1@4inq");
+	channel_chat("#evento","Elizabeth: Tenemos un ganador, "+strcharinfo(0)+"!");
+	getitem $Premioeventos,$Premiounico;
+	set #EVENTOUNICO,#EVENTOUNICO+1;
+
+	if( @mapname$ != ""){
+		sc_start 32, 600000, 10;  // Increase Agi
+		sc_start 30, 600000, 10; // Blessing
+		warp @mapname$,@mapx,@mapy;
+	}
+	else
+		warp "SavePoint",0,0;
+	end;
+}
+
+initnpctimer;
+end;
+
+OnPCDieEvent:
+
+	getmapxy .@mapnvz$,.@xnvz,.@ynvz,BL_PC;
+
+	if ( .@mapnvz$ == "1@4inq") {
+		sleep2 1;
+		warp @mapname$,@mapx,@mapy;
+		dispbottom "Elizabeth: Perdistes...";
+		if( getmapusers("1@4inq") == 1 )
+		{
+			killmonsterall "1@4inq";
+			mapannounce "1@4inq","Elizabeth: Ganastes! Felicitaciones!",1,$ColorEventos;
+			stopnpctimer;
+			sleep 1000;
+			addrid(5,0,"1@4inq");
+			channel_chat("#evento","Elizabeth: Tenemos un ganador, "+strcharinfo(0)+" ha logrado escapar del Zombie!");
+			getitem $Premioeventos,$Premiounico;
+			set #EVENTOUNICO,#EVENTOUNICO+1;
+
+			if( @mapname$ != ""){
+				sc_start 32, 600000, 10;  // Increase Agi
+				sc_start 30, 600000, 10; // Blessing
+				warp @mapname$,@mapx,@mapy;
+			}
+			else
+				warp "SavePoint",0,0;
+			end;
+		}
+	}
+	end;
+}

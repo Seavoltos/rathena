@@ -1,0 +1,121 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Find Mushroom
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+-	script	Find the Mushroom	-1,{
+OnWatingRoom:
+   channel_chat("#evento","Elizabeth: Es hora de encontrar hongos!");
+   sleep 1000;
+   switch( rand(1,3) )
+   {
+		case 1:
+			set $@HongoMap$,"prontera";
+			break;
+		case 2:
+			set $@HongoMap$,"alberta";
+			break;
+		case 3:
+			set $@HongoMap$,"aldebaran";
+			break;
+		case 4:
+			set $@HongoMap$,"amatsu";
+			break;
+		case 5:
+			set $@HongoMap$,"ayothaya";
+			break;
+		case 6:
+			set $@HongoMap$,"comodo";
+			break;
+		case 7:
+			set $@HongoMap$,"geffen";
+			break;
+		case 8:
+			set $@HongoMap$,"gonryun";
+			break;
+		case 9:
+			set $@HongoMap$,"hugel";
+			break;
+		case 10:
+			set $@HongoMap$,"izlude";
+			break;
+		case 11:
+			set $@HongoMap$,"jawaii";
+			break;
+		case 12:
+			set $@HongoMap$,"louyang";
+			break;
+		case 13:
+			set $@HongoMap$,"morocc";
+			break;
+		case 14:
+			set $@HongoMap$,"moscovia";
+			break;
+		case 15:
+			set $@HongoMap$,"payon";
+			break;
+		case 16:
+			set $@HongoMap$,"rachel";
+			break;
+		case 17:
+			set $@HongoMap$,"veins";
+			break;
+		case 18:
+			set $@HongoMap$,"yuno";
+			break;
+		case 19:
+			set $@HongoMap$,"umbala";
+			break;
+		case 20:
+			set $@HongoMap$,"lighthalzen";
+			break;
+   }
+   sleep 1000;
+   set $@Hongo,rand(3,5);
+   sleep 10000;
+   channel_chat("#evento","Elizabeth: " + $@Hongo + " hongo(s) han aparecido en "+ $@HongoMap$ +"!");
+   sleep 10000;
+   monster $@HongoMap$,0,0,"Trufa",3970,$@Hongo,"Find the Mushroom::OnMobKilled";
+   initnpctimer;
+   end;
+OnTimer900000:
+	if($@Hongo > 0)
+	{
+	mapannounce $@HongoMap$,"Elizabeth: Los hongos se han secado!",1,$ColorEventos;
+	killmonster  $@HongoMap$,"Find the Mushroom::OnMobKilled";
+	set $@Hongo,0;
+	delwaitingroom "Elizabeth";
+	}
+	end;
+OnMobKilled:
+	getitem $Premioeventos,$Premiomuchos;
+	set #EVENTOMUCHOS,#EVENTOMUCHOS+1;
+	if($@Hongo > 1)
+	{
+		set $@Hongo,$@Hongo - 1;
+		mapannounce $@HongoMap$,"Tenemos un ganador!: " + strcharinfo(0) + " Felicidades!",1,$ColorEventos;
+	}
+	else
+	{
+		mapannounce $@HongoMap$,"Tenemos el último ganador!: " + strcharinfo(0) + " Felicidades!",1,$ColorEventos;
+		set $@Hongo,0;
+		delwaitingroom "Elizabeth";
+	}
+	end;
+}

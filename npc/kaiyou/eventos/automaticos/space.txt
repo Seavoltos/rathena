@@ -1,0 +1,120 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Space
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+-	script	Espacio	-1,{
+	mes "Eventos de espacios!";
+	close;
+	end;
+	
+
+OnSpaceStart:
+	killmonsterall "space";
+	query_sql("DELETE FROM `char_reg_num` WHERE `key` = 'fabre'");
+	mapwarp "space","prontera",155,181;
+	set $@EVENTOESPACIO,1;
+	channel_chat("#evento","Elizabeth: Vamos a comenzar el evento de Espacio.");
+	sleep 10000;
+	channel_chat("#evento","Elizabeth: Para quienes deseen participar, por favor usa @joinevent.");
+	sleep 10000;
+	channel_chat("#evento","Elizabeth: Dejaré ingresar personas por un minuto.");
+	sleep 60000;
+	channel_chat("#evento","Elizabeth: Tiempo.");
+	set $@EVENTOESPACIO,0;
+	delwaitingroom "Elizabeth";
+	
+	if(getmapusers("space") < 2){
+		mapannounce "space","Elizabeth: El evento ha finalizado! No hay suficientes usuarios!",1,$ColorEventos;
+	} else {
+		mapannounce "space","Elizabeth: Las reglas son simples",1,$ColorEventos;
+		sleep 5000;
+		mapannounce "space","Elizabeth: Mata mobs para recibir puntos.",1,$ColorEventos;
+		sleep 5000;
+		mapannounce "space","Elizabeth: El usuario con mayor puntaje gana.",1,$ColorEventos;
+		sleep 5000;
+		mapannounce "space","Elizabeth: Comienza el evento~",1,$ColorEventos;
+		monster "space",0,0,"1 Punto",2142,100,strnpcinfo(3)+"::OnKill_1";
+		monster "space",0,0,"5 Puntos",2142,40,strnpcinfo(3)+"::OnKill_2";
+		monster "space",0,0,"-10 Puntos",2142,50,strnpcinfo(3)+"::OnKill_3";
+		monster "space",0,0,"20 Puntos",2142,3,strnpcinfo(3)+"::OnKill_4";
+		monster "space",0,0,"1 Punto",2143,100,strnpcinfo(3)+"::OnKill_1";
+		monster "space",0,0,"5 Puntos",2143,40,strnpcinfo(3)+"::OnKill_2";
+		monster "space",0,0,"-10 Puntos",2143,50,strnpcinfo(3)+"::OnKill_3";
+		monster "space",0,0,"20 Puntos",2143,3,strnpcinfo(3)+"::OnKill_4";
+		//Tiempo
+		mapannounce "space","Elizabeth: Tendrán 1 minutos.",1,$ColorEventos;
+		sleep 30000;
+		mapannounce "space","Elizabeth: Queda 30 segundos!.",1,$ColorEventos;
+		sleep 30000;
+		killmonsterall "space";
+		mapannounce "space","Elizabeth: El evento ha finalizado!",1,$ColorEventos;
+		sleep 10000;
+		query_sql("SELECT `char_reg_num`.`value`,`char`.`name`,`char`.`char_id` FROM `char` INNER JOIN `char_reg_num` ON `char_reg_num`.`char_id`=`char`.`char_id` WHERE `char_reg_num`.`key`='fabre' ORDER BY `char_reg_num`.`value` DESC LIMIT 50",.@value,.@name$,.@cid);
+		.@size = getarraysize( .@cid );
+		for ( .@i = 0; .@i < .@size; .@i++ ){
+			if(.@value == .@value[.@i])
+			{
+				mapannounce "space","Elizabeth: Felicitaciones "+strcharinfo(0,.@cid[.@i])+", ha ganado el evento con "+ fabre +" puntos.",0,$ColorEventos;
+				.@charid = getcharid(0,strcharinfo(0,.@cid[.@i]));
+				.@sender$ = "Elizabeth";
+				.@title$ = "Premio evento!";
+				.@body$ = "Hola! Ten aquí tu premio por el evento del Espacio!";
+				.@zeny = 0;
+				setarray .@mailitem[0], $Premioeventos; // Hat
+				setarray .@mailamount[0], $Premiounico; // 1 Hat
+				setarray .@mailcard0[0], 0; //
+				setarray .@mailcard1$[0], 0; //
+				setarray .@mailcard2$[0], 0; //
+				mail .@charid, .@sender$, .@title$, .@body$, .@zeny, .@mailitem, .@mailamount, .@mailcard0,.@mailcard1,.@mailcard2;
+			}
+			else	break;
+		}
+		//mapannounce "space","El evento ha finalizado con un total de "+(.@i+1)+" ganadores.",bc_all;
+	}
+	sleep 5000;
+	addrid(5,0,"space");
+	if( @mapname$ != ""){
+		sc_start 32, 600000, 10;  // Increase Agi
+		sc_start 30, 600000, 10; // Blessing
+		warp @mapname$,@mapx,@mapy;
+	}
+	else
+		warp "SavePoint",0,0;
+	end;
+		
+OnKill_1:
+	monster "space",0,0,"1 Punto",2142,1,strnpcinfo(3)+"::OnKill_1";
+	fabre += 1;
+	end;
+		
+OnKill_2:
+	monster "space",0,0,"5 Puntos",2142,1,strnpcinfo(3)+"::OnKill_2";
+	fabre += 5;
+	end;
+		
+OnKill_3:
+	monster "space",0,0,"-10 Puntos",2142,1,strnpcinfo(3)+"::OnKill_3";
+	fabre -= 10;
+	end;
+OnKill_4:
+	monster "space",0,0,"20 Puntos",2142,1,strnpcinfo(3)+"::OnKill_4";
+	fabre += 20;
+	end;
+}

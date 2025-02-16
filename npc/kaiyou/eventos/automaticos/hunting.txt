@@ -1,0 +1,158 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Hunting
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+prt_in,94,66,4	script	Issac::HuntingEvent	732,{
+	set .@name$,"[^004000Issac^000000]";
+	mes .@name$;
+	switch($@HuntingEvent)
+	{
+		case 0:
+			mes "Buenas, soy amigo de Elizabeth y hermano gemelo de Issan";
+			next;
+			mes .@name$;
+			mes "Cuando Elizabeth me lo pida, puedo ofrecerles misiones de ^0000ffCacería^000000 o misiones de ^0000ffRecolección^000000.";
+			next;
+			mes .@name$;
+			mes "Espera su llamado, puede ser en cualquier momento.";
+			close;
+		case 1:
+			if( #HuntingEventDelay < gettimetick(2) && #HuntingEventDelay != 0)
+			{
+				set #HuntingEventCaceria,0;
+				set #HuntingEventDelay,0;
+			}
+			mes "Elizabeth me ha solicitado que cacemos algunos Mob, los mob son "+$@HuntingEventAmount+" x ^0000ff"+strmobinfo(2,$@HuntingEventID)+"^000000 (#"+$@HuntingEventID+").";
+			next;
+			if( select("Iré por ellos!:Ya estoy listo") == 1 )
+			{
+				mes .@name$;
+				mes "Yo te estaré esperando.";
+				close;
+			}
+			if( #HuntingEventDelay > gettimetick(2) )
+			{
+				mes .@name$;
+				mes "Muchas gracias por pegarte la misión.";
+				close;
+			}
+			if( $@HuntingEventAmount > #HuntingEventCaceria )
+			{
+				mes .@name$;
+				mes "Aún te faltan, busca más en sus mapas.";
+				close;
+			}
+			getitem $Premioeventos,$Premiomuchos;
+			set #EVENTOMUCHOS,#EVENTOMUCHOS+1;
+			mes .@name$;
+			mes "Felicitaciones! Cumpliste con el objetivo!";
+			set #HuntingEventDelay,gettimetick(2) + 1500;
+			set #HuntingEventCaceria,0;
+			close;
+			end;
+		case 2:
+			mes "Elizabeth me ha solicitado que recolectemos algunos items, ahora me ha pedido "+$@HuntingEventAmount+" x ^0000ff"+getitemname($@HuntingEventID)+"^000000 (#"+$@HuntingEventID+").";
+			next;
+			if( select("Iré por ellos!:Ya estoy listo") == 1 )
+			{
+				mes .@name$;
+				mes "Yo te estaré esperando.";
+				close;
+			}
+			if( #HuntingEventDelay > gettimetick(2) )
+			{
+				mes .@name$;
+				mes "Muchas gracias por pegarte la misión.";
+				close;
+			}
+			if( countitem($@HuntingEventID) < $@HuntingEventAmount )
+			{
+				mes .@name$;
+				mes "Lo siento, pero aún te faltan.";
+				close;
+			}
+			delitem $@HuntingEventID,$@HuntingEventAmount;
+			getitem $Premioeventos,$Premiomuchos;
+			set #EVENTOMUCHOS,#EVENTOMUCHOS+1;
+			mes .@name$;
+			mes "Felicitaciones! Cumpliste con el objetivo!";
+			set #HuntingEventDelay,gettimetick(2) + 1500;
+			close;
+	}
+	end;
+OnNPCKillEvent:
+	if( $@HuntingEvent != 1) end;
+	if( killedrid == $@HuntingEventID && #HuntingEventDelay == 0 )
+	{
+		set #HuntingEventCaceria, #HuntingEventCaceria +1;
+		dispbottom "Issan: Llevas "+ #HuntingEventCaceria + " x "+strmobinfo(2,$@HuntingEventID) + "/" + $@HuntingEventAmount + "^000000 (ID : " + $@HuntingEventID + ")";
+	}
+	end;
+OnTimer600000:
+	channel_chat("#evento","Elizabeth: Tiempo! Espero hayan logrado cumplir con la misión.");
+	delwaitingroom "Elizabeth";
+	stopnpctimer;
+OnInit:
+	set $@HuntingEvent,0;
+	set $@HuntingEventAmount,0;
+	set $@HuntingEventID,0;
+	end;
+
+OnHuntingStart:
+	set $@HuntingEvent,rand(1,2);
+	switch($@HuntingEvent){
+		case 1:
+			switch(rand(1,2))
+			{
+				case 1:
+					setarray .@Misiones[0],1713,1716,1769,1193,1275,1735,1736,1737,1271,1110,1094,1030,1297,1095,1206,1627,1097,1403,1098,1365,2016,1668,1016,1194,1099,1100,1654,1315,1372,1882,1415,1415,1867,1101,1102,1494,1633,1060,1084,1367,1408,1507,1079,1188,1830,2024,1692,1211,1103,1267,1987,1999,1214,1011,1246,1631,1513,1269,1104,1009,1265,1992,1067,1073,1209,1018,1293,1248,2074,1514,1260,2015,1698,1385,1384,1378,1105,1106,1107,1108,1109,1382,1670,1673,1671,1672,1506,1110,2092,2013,2014,1721,1321,1111,1380,1113,1781,1493,1504,1114,1770,1116,1377,1033,1635,1655,1412,1117,1383,1007,1371,1005,1714,1717,1869,1118,1319,1119,1762,1753,1317,1309,1391,1783,1253,1778,1681,1368,1036,1503,1121,1387,1372,1124,1122,1125,1123,1258,1040,1369,1277,1687,1080,1632,1381,1376,1636,2071,1318,1866,1213,1680,1989,1127,1773,1128,1004,1129,1035,1068,1512,1510,2069,1777,1789,1837,1919,1920,1918,1921,1516,1374,1257,1772,1029,2072,1130,1131,1072,1406,1400,1833,1639,1656,1132,1219,1838,1134,1135,1133,1282,1587,1070,1366,1586,1881,1517,1410,1505,1994,1509,1063,1637,1836,1138,1020,1139;
+					break;
+				case 2:
+					setarray .@Misiones[0],1045,1140,1242,1141,1142,1143,1144,1145,1146,1884,1148,1274,1064,1264,1613,1058,1191,1614,1292,1149,1404,1628,1055,1041,1026,1780,1151,1249,1993,1870,1988,1255,1061,1379,1180,1715,1718,1620,1044,1700,1615,1189,1686,1273,1152,1023,1153,1295,1320,1500,1154,1019,1047,1216,1314,1256,1155,1156,1158,1202,1050,1049,1160,1995,2070,1071,1616,1161,1694,1697,1695,1693,1696,1077,1402,1031,1619,1002,1199,1008,1508,1162,1865,1254,1657,1163,1276,1085,1078,1682,1164,1702,1409,1195,1052,1012,1392,1782,1201,1281,1831,1165,1243,1166,1167,1001,1323,1774,1638,1074,1701,1083,1401,1037,1776,1754,1755,1076,1196,1169,1752,1386,1056,1025,1775,1170,1703,1028,1316,1014,1322,1174,1278,1784,1280,1042,1215,1207,1495,1065,1370,1829,1069,1584,1175,1986,1622,1405,1034,1375,1051,1048,1053,1054,2073,1279,1883,1066,1771,1677,1678,1676,1679,1621,1032,1390,1176,1208,1617,1653,1179,1082,1416,1413,1261,1010,1263,1013,1880,1497,1499,1498,1024,1192,1081,1652,1057,1177,1178,1417,1015,1197,1864;
+					break;
+			}
+			set .@rand,rand(0,getarraysize(.@Misiones));
+			set $@HuntingEventID,.@Misiones[.@rand];
+			set $@HuntingEventAmount,rand(30,45);
+			break;
+		case 2:
+			switch(rand(1,3))
+			{
+				case 1:
+					setarray .@Misiones[0],7206,904,7561,7122,909,1023,7151,553,949,916,7563,7511,7119,1068,1066,1067,7186,1019,914,511,7446,510,40119,40118,507,509,508,7030,920,938,955,713,7005,1034,999,757,756,1022,604,746,7323,948,939,7161,1020,737,7015,40113,7054,7158,7215,7070,7156,7110,7188,1042,7097,7512,7068,7182,952,7263,915,7752,7007,7162,705,1003,7093,7013,733,991,747,7799,1045,7053,957,7069,971,1035,7265,1036,7123,1037,7264,1055,7220,7200,1040,923,1059,1063,7298,951,7041,7043,7325,712,7326,7798,1012,6020,956,7009,7152,1060,940,997,993;
+					break;
+				case 2:
+					setarray .@Misiones[0],1056,7345,7163,7115,7116,950,7209,703,7121,947,1048,958,944,7198,7212,7066,710,929,928,998,1002,972,7026,7027,7171,7172,1038,1039,7098,7201,1098,1028,1033,1031,934,708,1018,1017,1057,1058,7001,7004,921,995,6023,1095,7213,960,7031,1006,7072,7751,727,1043,922,931,722,7101,7226,7150,7205,7032,906,7155,924,7225,740,945,1013,1016,990,7216,903,907,930,996,1096,7317,936,7125,904,7065,7100,954,711,707,40113,40119,40118;
+					break;
+				case 3:
+					setarray .@Misiones[0],1052,932,1049,7190,7164,943,908,7016,1024,1000,7565,959,953,7203,7567,917,7010,7301,7071,7159,962,7267,913,7118,7012,7197,902,967,7319,937,7568,992,7064,7006,748,6086,7222,7189,1099,7762,7448,7038,942,1044,40113,40119,40118;
+					break;
+			}
+			set .@rand,rand(0,getarraysize(.@Misiones));
+			set $@HuntingEventID,.@Misiones[.@rand];
+			set $@HuntingEventAmount,rand(30,45);
+			break;
+	}
+	channel_chat("#evento","Elizabeth: Vamos a iniciar el evento de cacería, ve a hablar con Issac para que te diga cuál es la misión de ahora.");
+	sleep 10000;
+	channel_chat("#evento","Elizabeth: Lo puedes encontrar al costado del refine de Prontera.");
+	initnpctimer;
+	end;
+}

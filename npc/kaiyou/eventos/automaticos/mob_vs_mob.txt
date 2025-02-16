@@ -1,0 +1,159 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: MvP vs MvP
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+-	script	MobVsMob	FAKE_NPC,{
+end;
+
+OnInit:
+	setarray .MonsterAvailable,1511,1647,1785,1630,1399,1039,1874,2068,1272,1719,1046,1389,1112,1115,1418,1871,1252,1768,1086,1885,1649,1651,1832,1492,1734,1251,1779,1688,1646,1373,1147,1059,1150,2022,1087,1190,1038,1157,1159,1623,1650,1583,1708,1312,1751,1685,1648,1917,1658;
+	set $@mobvsmob, 0;
+	set $@RondaMvP, 0;
+	set $@GanadorMvM, 0;
+	query_sql("DELETE FROM `char_reg_num` WHERE `key` = 'OPT_mvpvsmvp'");
+	end;
+	
+OnEventReload:
+	$@RondaMvP++;
+	sleep 5000;
+	if ($@RondaMvP >= 3)
+	{
+		set $@RondaMvP, 0;
+		set $@mobvsmob, 0;
+		set $@GanadorMvM, 0;
+		channel_chat("#evento","Elizabeth: El evento ha terminado! gracias por participar.");
+		killmonsterall "pvp_2v2",2;
+		end;
+	}
+
+OnWatingRoom:
+	
+	killmonsterall "pvp_2v2",2;
+	query_sql("DELETE FROM `char_reg_num` WHERE `key` = 'OPT_mvpvsmvp'");
+	
+	do 
+	{
+		set .MobID1, .MonsterAvailable[rand(0,getarraysize(.MonsterAvailable))];
+		set .MobID2, .MonsterAvailable[rand(0,getarraysize(.MonsterAvailable))];
+		
+		set .MobName1$, getmonsterinfo(.MobID1, MOB_NAME );
+		set .MobName2$, getmonsterinfo(.MobID2, MOB_NAME );
+		set .MobMaxHp1, getmonsterinfo(.MobID1, MOB_MAXHP);
+		set .MobMobLv1, getmonsterinfo(.MobID1, MOB_LV);
+		set .MobMaxHp2, getmonsterinfo(.MobID2, MOB_MAXHP);
+		set .MobMobLv2, getmonsterinfo(.MobID2, MOB_LV);
+		
+		if (
+			(.MobMobLv1 > .MobMobLv2 && (.MobMobLv1 - .MobMobLv2) > 10) ||
+			(.MobMobLv2 > .MobMobLv1 && (.MobMobLv2 - .MobMobLv1) > 10)
+		)
+			.Error = 1;
+		else
+			.Error = 0;
+
+	} while ( 
+			.MobName1$ == "null" ||
+			.MobName2$ == "null" ||
+			.MobMaxHp1 == 0 ||
+			.MobMaxHp2 == 0 ||
+			.MobName1$ == .MobName2$ ||
+			.Error == 1			
+	);
+	
+	if ( $@RondaMvP == 0 )
+		channel_chat("#evento","Elizabeth: El evento Mob Vs Mob comenzará pronto! ["+.MobName1$+"] vs ["+.MobName2$+"]");
+	else
+		channel_chat("#evento","Elizabeth: El Round "+($@RondaMvP+1)+" está por comenzar ["+.MobName1$+"] vs ["+.MobName2$+"]");
+	set $@mobvsmob,1;
+	delwaitingroom;
+	waitingroom "[Evento]: Torneo MvP ["+.MobName1$+"] vs ["+.MobName2$+"]",0;
+	set $@GanadorMvM, 0;
+	sleep 60000;
+	channel_chat("#evento","Elizabeth: En 1 minuto se deshabilitaran las apuestas acercate o usa @joinevent...");
+	sleep 60000;
+	donpcevent "MobVsMob::OnStart";
+	end;
+
+OnStart:
+	delwaitingroom "Elizabeth";
+	channel_chat("#evento","Elizabeth: Se cerraron las puertas.");
+	set $@mobvsmob,2;
+	monster "pvp_2v2",47,46,"[1] "+ .MobName1$,.MobID1,1,"MobVsMob::OnEquip2Win",0,0;
+	.GID[0] = $@mobid[0];
+	setunitdata .GID[0], UMOB_HP, 200000;
+	setunitdata .GID[0], UMOB_MAXHP, 200000;
+	sleep 500;
+	monster "pvp_2v2",56,46,"[2] "+ .MobName2$,.MobID2,1,"MobVsMob::OnEquip1Win",0,1;
+	.GID[1] = $@mobid[0];
+	setunitdata .GID[1], UMOB_HP, 200000;
+	setunitdata .GID[1], UMOB_MAXHP, 200000;
+	end;
+	
+OnEquip2Win:
+	mapannounce "pvp_2v2","Elizabeth: "+.MobName2$+" Ganó, Felicidades a los ganadores",1,$ColorEventos;
+	//Recompensas Team 2
+	set $@GanadorMvM,2;
+	if($@mobvsmob != 0)
+		donpcevent "MobVsMob::OnEventReload";
+	sleep 1000;
+	addrid(5,0,"pvp_2v2");
+	channel_chat("#evento","Elizabeth: Tenemos un ganador, "+strcharinfo(0)+".");
+	if(OPT_mvpvsmvp == $@GanadorMvM){
+		getitem $Premioeventos,$Premiomuchos;
+		set #EVENTOMUCHOS,#EVENTOMUCHOS+1;
+	}
+
+	set OPT_mvpvsmvp,0;
+
+	if( @mapname$ != ""){
+		sc_start 32, 600000, 10;  // Increase Agi
+		sc_start 30, 600000, 10; // Blessing
+		warp @mapname$,@mapx,@mapy;
+	}
+	else
+		warp "SavePoint",0,0;
+	end;
+
+OnEquip1Win:
+
+	mapannounce "pvp_2v2","Elizabeth: "+.MobName1$+" Ganó, Felicidades a los ganadores",1,$ColorEventos;
+	//Recompensas Team 1
+	set $@GanadorMvM,1;
+	if($@mobvsmob != 0)
+		donpcevent "MobVsMob::OnEventReload";
+	sleep 1000;
+	addrid(5,0,"pvp_2v2");
+	channel_chat("#evento","Elizabeth: Tenemos un ganador, "+strcharinfo(0)+".");
+	if(OPT_mvpvsmvp == $@GanadorMvM){
+		getitem $Premioeventos,$Premiomuchos;
+		set #EVENTOMUCHOS,#EVENTOMUCHOS+1;
+	}
+
+	set OPT_mvpvsmvp,0;
+
+	if( @mapname$ != ""){
+		sc_start 32, 600000, 10;  // Increase Agi
+		sc_start 30, 600000, 10; // Blessing
+		warp @mapname$,@mapx,@mapy;
+	}
+	else
+		warp "SavePoint",0,0;
+	end;
+}

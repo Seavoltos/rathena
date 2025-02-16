@@ -1,0 +1,71 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Catch Poring
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+-	script	AtrapaPoring#Funcion	-1,{
+OnWatingRoom:
+	set $@AtrapaPoring,1;
+	killmonsterall "1@exds";
+	channel_chat("#evento","Elizabeth: El evento Atrapa al poring ha iniciado, usa @joinevent para poder enviarte!");
+	sleep 10000;
+	channel_chat("#evento","Elizabeth: Dejaré ingresar por 1 minuto al evento!");
+	sleep 60000;
+	channel_chat("#evento","Elizabeth: Tiempo!");
+	set $@AtrapaPoring,0;
+	delwaitingroom "Elizabeth";
+	areamonster "1@exds",116,138,142,163,"Porings",1725,15,"AtrapaPoring#Funcion::OnFakePoringDeath";
+	areamonster "1@exds",116,138,142,163,"Puring",1725,15,"AtrapaPoring#Funcion::OnFakePoringDeath";
+	areamonster "1@exds",116,138,142,163,"Poringd",1725,15,"AtrapaPoring#Funcion::OnFakePoringDeath";
+	areamonster "1@exds",116,138,142,163,"Pouring",1725,15,"AtrapaPoring#Funcion::OnFakePoringDeath";
+	areamonster "1@exds",116,138,142,163,"Paring",1725,15,"AtrapaPoring#Funcion::OnFakePoringDeath";
+	areamonster "1@exds",116,138,142,163,"Poryng",1725,15,"AtrapaPoring#Funcion::OnFakePoringDeath";
+	areamonster "1@exds",116,138,142,163,"Poring",1725,2,"AtrapaPoring#Funcion::OnRealPoringDeath";
+	initnpctimer;
+	end;
+
+OnTimer1800000:
+	if($@AtrapaPoring!=0)
+	{
+		set $@AtrapaPoring,0;
+		mapannounce "1@exds","Elizabeth: Creo que el verdadero se escapó, será para la próxima.",1,$ColorEventos;
+	}
+	killmonsterall "1@exds";
+	stopnpctimer;
+	addrid(5,0,"1@exds");
+	warp @mapname$,@mapx,@mapy;
+	end;
+OnFakePoringDeath:
+	dispbottom "Fallaste!";
+	warp @mapname$,@mapx,@mapy;
+	sc_start 32, 600000, 10;  // Increase Agi
+	sc_start 30, 600000, 10; // Blessing
+	end;
+
+OnRealPoringDeath:
+	getitem $Premioeventos,$Premiounico;
+	set #EVENTOUNICO,#EVENTOUNICO+1;
+	channel_chat("#evento","Elizabeth:Felicitaciones "+strcharinfo(0)+"! Encontraste al verdadero.");
+	killmonsterall "1@exds";
+	addrid(5,0,"1@exds");
+	sc_start 32, 600000, 10;  // Increase Agi
+	sc_start 30, 600000, 10; // Blessing
+	warp @mapname$,@mapx,@mapy;
+	end;
+}

@@ -1,0 +1,132 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Crazy Chicken
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+prontera,155,156,4	script	Cluckers	10285,{
+
+if ($@startcluck == 1) goto L_playcluck;
+
+cluckcluck:
+	mes "[Cluckers]";
+	mes "Cluck cluck! Cluuuuuck?";
+	mes "Cluck....";
+	close;
+OnWatingRoom:
+		enablenpc "Cluckers";
+		channel_chat("#evento","Elizabeth: Cluck! Cluck! Boom! Esta a punto de iniciar en Prontera!");
+		initnpctimer;
+		end;
+OnTimer20000:
+		channel_chat("#evento","Elizabeth: Cluckers se ha comido uno de mis item! Estoy muy asustada para quitarselo!");
+		end;
+OnTimer30000:
+		channel_chat("#evento","Elizabeth: Clickea la gallina loca, y trata de quitarle mi item, si tienes suerte quizas ganes! Estas listo?");
+		end;
+OnTimer40000:
+		channel_chat("#evento","Elizabeth: VAMOS! Dale click a la gallina para obtener el premio!");
+		set $@startcluck,1;
+		end;
+OnTimer600000:
+		if($@startcluck == 1)
+		{
+			mapannounce "prontera","Elizabeth: Creo que mejor doy por perdido mis monedas.",1,$ColorEventos;
+			set $@startcluck,0;
+			delwaitingroom "Elizabeth";
+			disablenpc "Cluckers";
+		}
+		end;
+L_playcluck:
+	specialeffect2 2;
+	switch( rand(15) ) {
+		case 0:
+				npctalk "CLUUUUUUCK!!!";
+				emotion 23;
+				atcommand "@nuke "+strcharinfo(0);
+				break;
+		case 1:
+				npctalk "Cluuuuuck!~";
+				break;
+		case 2:
+				atcommand "@nuke "+strcharinfo(0);
+				break;
+		case 3:
+				sc_start SC_Freeze,10000,0;
+				break;
+		case 4:
+				npctalk "CLUUUUUUUUUCK!!!";
+				emotion 23;
+				atcommand "@nuke "+strcharinfo(0);
+				break;
+		case 5:
+				sc_start SC_Sleep,10000,0;
+				break;
+		case 6:
+				emotion 29;
+				sc_start SC_Stone,10000,0;
+				break;
+		case 7:
+				npctalk "CLUUUUUUCK!!!";
+				emotion 23;
+				atcommand "@nuke "+strcharinfo(0);
+				break;
+		case 8:
+				npctalk "Cluck! CLUUUCK!!";
+				emotion 23;
+				atcommand "@nuke "+strcharinfo(0);
+				break;
+		case 9:
+				sc_start SC_Stun,10000,0;
+				break;
+		case 10:
+				emotion 29;
+				sc_start SC_Sleep,10000,0;
+				break;
+		case 11:
+				npctalk "Cluck! Cluck!";
+				break;
+		case 12:
+				sc_start SC_Stun,10000,0;
+				break;
+		case 13:
+				atcommand "@nuke "+strcharinfo(0);
+				break;
+		default:
+			if( rand(50) < 15 ) {
+				npctalk "WOOF!...........";
+				specialeffect2 72;
+				channel_chat("#evento","Elizabeth: " + strcharinfo(0) + " obtuvo el premio! Bien hecho!");
+				getitem $Premioeventos,$Premiounico;
+				set #EVENTOUNICO,#EVENTOUNICO+1;
+				set $@startcluck,0;
+				delwaitingroom "Elizabeth";
+				disablenpc "Cluckers";
+			} else {
+				npctalk "Cluck! CLUUUCK!!";
+				atcommand "@nuke "+strcharinfo(0);
+			}
+			break;
+	}
+	end;
+	
+OnInit:
+	disablenpc "Cluckers";
+	end;
+	
+}

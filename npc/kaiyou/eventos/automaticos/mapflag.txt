@@ -1,0 +1,133 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+//Last Man Standing
+cell_game	mapflag	nowarp
+cell_game	mapflag	nowarpto
+cell_game	mapflag	noteleport
+cell_game	mapflag	nosave
+cell_game	mapflag	nomemo
+cell_game	mapflag	nobranch
+cell_game	mapflag	pvp_noparty
+cell_game	mapflag	bg_consume
+cell_game	mapflag	pvp_noguild
+//MvPvsMvP
+pvp_2v2	mapflag	monster_noteleport
+pvp_2v2	mapflag	noteleport
+pvp_2v2	mapflag	nobranch
+pvp_2v2	mapflag	nosave
+pvp_2v2	mapflag	noloot
+pvp_2v2	mapflag	novending
+pvp_2v2	mapflag	nowarp
+pvp_2v2	mapflag	nomemo
+pvp_2v2	mapflag	noslave
+//NovicevsZombie
+1@4inq	mapflag	restricted	5
+1@4inq	mapflag	noequip
+1@4inq	mapflag	nocommand	99
+1@4inq	mapflag	nobranch
+1@4inq	mapflag	nomemo
+1@4inq	mapflag	nopenalty
+1@4inq	mapflag	nosave	SavePoint
+1@4inq	mapflag	noskill
+1@4inq	mapflag	noteleport
+1@4inq	mapflag	nowarpto
+1@4inq	mapflag	noitemconsumption
+//PoringRace
+p_track01	mapflag	nobranch
+p_track01	mapflag	noicewall
+p_track01	mapflag	nomemo
+p_track01	mapflag	noreturn
+p_track01	mapflag	noteleport
+p_track01	mapflag	nowarpto
+p_track01	mapflag	nowarp
+p_track01	mapflag	pvp	off
+p_track01	mapflag	nosave
+//AtrapaPoring
+1@exds	mapflag	nobranch
+1@exds	mapflag	nomemo
+1@exds	mapflag	nopenalty
+1@exds	mapflag	nosave	SavePoint
+1@exds	mapflag	noskill
+1@exds	mapflag	noteleport
+1@exds	mapflag	nowarpto
+//Space
+space	mapflag	nobranch
+space	mapflag	nomemo
+space	mapflag	nopenalty
+space	mapflag	nosave	SavePoint
+space	mapflag	noskill
+space	mapflag	noteleport
+space	mapflag	nowarpto
+//Adivina el Mob
+2@exds	mapflag	nowarpto
+2@exds	mapflag	restricted	5
+2@exds	mapflag	nobranch
+2@exds	mapflag	noskill
+2@exds	mapflag	nomemo
+2@exds	mapflag	nosave	SavePoint
+//Carrera maluka
+evt_isld01	mapflag	restricted	5
+evt_isld01	mapflag	nobranch
+evt_isld01	mapflag	nomemo
+evt_isld01	mapflag	nopenalty
+evt_isld01	mapflag	nosave	SavePoint
+evt_isld01	mapflag	noskill
+evt_isld01	mapflag	noteleport
+evt_isld01	mapflag	nowarpto
+evt_isld01	mapflag	noitemconsumption
+//Dice
+dice01	mapflag	restricted	5
+dice01	mapflag	nobranch
+dice01	mapflag	nomemo
+dice01	mapflag	nopenalty
+dice01	mapflag	nosave	SavePoint
+dice01	mapflag	noskill
+dice01	mapflag	noteleport
+dice01	mapflag	nowarpto
+dice01	mapflag	noitemconsumption
+//DobleDice
+dice02	mapflag	restricted	5
+dice02	mapflag	nobranch
+dice02	mapflag	nomemo
+dice02	mapflag	nopenalty
+dice02	mapflag	nosave	SavePoint
+dice02	mapflag	noskill
+dice02	mapflag	noteleport
+dice02	mapflag	nowarpto
+dice02	mapflag	noitemconsumption
+//DobleDice
+dice03	mapflag	restricted	5
+dice03	mapflag	nobranch
+dice03	mapflag	nomemo
+dice03	mapflag	nopenalty
+dice03	mapflag	nosave	SavePoint
+dice03	mapflag	noskill
+dice03	mapflag	noteleport
+dice03	mapflag	nowarpto
+dice03	mapflag	noitemconsumption
+//Bombporing
+1@ba_go	mapflag	nowarp
+1@ba_go	mapflag	nowarpto
+1@ba_go	mapflag	noteleport
+1@ba_go	mapflag	nosave
+1@ba_go	mapflag	nomemo
+1@ba_go	mapflag	nobranch

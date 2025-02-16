@@ -1,0 +1,241 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Poring Race
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+-	script	Poring Race	-1,{
+OnWatingRoom:
+	channel_chat("#evento","Elizabeth: La 'Carrera de Poring' iniciará en 2 minutos");
+	sleep 5000; //5 s
+	set $@PoringRace,1;
+	channel_chat("#evento","Elizabeth: Usa @joinevent para enviarte a la 'Carrera de Poring'!");
+	sleep 60000; //60 s
+	set .access_Prace, 1;
+//	setnpctimer 100000,"Bidder#prace0";
+	startnpctimer "Bidder#prace0";
+	end;
+OnPraceEnd:
+	set .access_Prace, 0;
+	set $@PoringRace,0;
+	delwaitingroom "Elizabeth";
+	end;
+}
+
+
+p_track01,58,41,3	script	Bidder#prace0	877,{
+function checkevent;
+
+	mes "[Bidder]";
+	if( getstrlen( @prace_winner$ ) ) {
+		mes "Has elegido a ^00bb00"+ @prace_winner$ +"^000000";
+		close;
+	}
+	else if ( checkevent() || .start ) {
+		mes "Hay una carrera en progreso...";
+		close;
+	}
+	else if( !getvariableofnpc( .access_Prace,"Poring Race" ) ) {
+		mes "No hay una carrera en curso.";
+		close;
+	}
+	mes "Elige tu apuesta.";
+
+	.@s = select( .menu_$ );
+	if( .@s == 7 ) {
+		next;
+		mes "[Bidder]";
+		mes "Adios.";
+		close;
+	}
+	.@c$ = .monst_$[ .@s -1 ];
+
+	if ( checkevent() ) {
+		next;
+		mes "[Bidder]";
+		mes "...";
+		mes "...";
+		mes "Tramposo!!~~";
+		close;
+	}
+	@prace_winner$ = .@c$;
+	.prace_bidders[ .prace_bets ] = getcharid(3);
+	.prace_bets++;
+
+	next;
+	mes "[Bidder]";
+	mes "Hay  "+ .prace_bets +" apuestas.";
+	npctalk "El jugador "+ strcharinfo(0) +" ha apostado!";
+	close;
+OnTimer60000:
+	npctalk "Hay  "+ .prace_bets +" apuestas. Alguien mas?";
+	end;
+OnTimer80000:
+	npctalk "La carrera comenzara en breve, ultimas apuestas.";
+	end;
+OnTimer90000:
+	set $@PoringRace,0;
+	delwaitingroom "Elizabeth";
+	.start = 1;
+	mapannounce "p_track01","Porings, en sus marcas...",1,$ColorEventos;
+	sleep 2500;
+	for( .@i = 3; .@i > 0; .@i-- ) {
+		mapannounce "p_track01","..."+ .@i +"...",1,$ColorEventos;
+		sleep 1000;
+	}
+	donpcevent strnpcinfo(0) +"::OnStartRace";
+	donpcevent "Poring Race::OnPraceEnd";
+	sleep 1000;
+	mapannounce "p_track01","Adelanteeee!!!",1,$ColorEventos;
+	end;
+OnTimer320000:
+	stopnpctimer;
+	.prace_winner$ = "";
+	.start = .prace_bets = 0;
+	donpcevent strnpcinfo(0) +"::OnReturnRace";
+	mapannounce "p_track01","Elizabeth: Parece que será para la próxima.",1,$ColorEventos;
+	set $@PoringRace,0;
+	end;
+
+OnStartRace:
+	callsub L_label, "OnRace";
+OnStopRace:
+	callsub L_label, "OnStop";
+OnReturnRace:
+	callsub L_label, "OnReturn";
+L_label:
+	donpcevent "Metaling#prace3::"+ getarg(0);
+	donpcevent "Poring#prace1::"+ getarg(0);
+	donpcevent "Poporing#prace6::"+ getarg(0);
+	donpcevent "Angeling#prace2::"+ getarg(0);
+	donpcevent "Santa Poring#prace5::"+ getarg(0);
+	donpcevent "Deviling#prace4::"+ getarg(0);
+	if( getarg(0) == "OnStop" && .prace_winner$ != "" )
+		callsub L_WinRace;
+	end;
+L_WinRace:
+	mapannounce "p_track01", "Gana "+ .prace_winner$,1,$ColorEventos;
+	donpcevent strnpcinfo(0) +"::OnChequeo";
+	sleep 3000;
+	donpcevent strnpcinfo(0) +"::OnReturnRace";
+	sleep 10000;
+	donpcevent "Poring Race::OnPraceEnd";
+	.prace_winner$ = "";
+	.start = .prace_bets = 0;
+	end;
+OnChequeo:
+	for( .@i = 0 ; .@i < getarraysize( .prace_bidders ); .@i++ ) {
+		if( attachrid( .prace_bidders[.@i] ) && getstrlen( @prace_winner$ ) ) {
+			dispbottom "El ganador es "+ .prace_winner$ +" y tu apostaste por "+ @prace_winner$ +".";
+			if( @prace_winner$ == .prace_winner$ ) {
+				dispbottom "Has ganado!";
+				mapannounce "p_track01"," Enhorabuena! "+ strcharinfo(0) +" ha ganado!",1,$ColorEventos;
+				getitem $Premioeventos,$Premiomuchos;
+				emotion 21;
+				set #EVENTOMUCHOS,#EVENTOMUCHOS+1;
+			}
+			else {
+				dispbottom "Has perdido.";
+				emotion 28;
+			}
+			sc_start 32, 600000, 10;  // Increase Agi
+			sc_start 30, 600000, 10; // Blessing
+			warp @mapname$,@mapx,@mapy;
+			@prace_winner$ = "";
+		}
+	}
+	deletearray .prace_bidders;
+	addrid(5,0,"p_track01");
+	sc_start 32, 600000, 10;  // Increase Agi
+	sc_start 30, 600000, 10; // Blessing
+	if( @mapname$ != "")
+		warp @mapname$,@mapx,@mapy;
+	else
+		warp "SavePoint",0,0;
+	end;
+OnInit:
+	setarray .monst_$,"Poring","Angeling","Metaling","Deviling","Santa Poring","Poporing","Ninguno";
+	.menu_$ = implode( .monst_$, ":" );
+	end;
+
+function checkevent {
+	getmapxy .@mapname$, .@x1, .@y, BL_NPC, "Poring#prace1";
+	getmapxy .@mapname$, .@x2, .@y, BL_NPC, "Angeling#prace2";
+	getmapxy .@mapname$, .@x3, .@y, BL_NPC, "Metaling#prace3";
+	getmapxy .@mapname$, .@x4, .@y, BL_NPC, "Deviling#prace4";
+	getmapxy .@mapname$, .@x5, .@y, BL_NPC, "Santa Poring#prace5";
+	getmapxy .@mapname$, .@x6, .@y, BL_NPC, "Poporing#prace6";
+	.@t = ( .@x1 + .@x2 + .@x3 + .@x4 + .@x5 + .@x6 ) != 58 * 6;
+	return .@t;
+}
+}
+//-----------------------------------
+// Racer NPC's
+//-----------------------------------
+
+-	script	pori_race	-1,{
+	end;
+OnRace:
+	initnpctimer;
+	end;
+OnStop:
+	stopnpctimer;
+	end;
+OnReturn:
+	sleep 1000;
+	while( strnpcinfo(1) != .monst$[ .@i ] ) .@i++;
+	movenpc strnpcinfo(3), 58, .walk_t[.@i];
+	end;
+OnTimer1100:
+	getmapxy .@mapname$,.@x,.@y,BL_NPC, strnpcinfo(3);
+	if( rand(100) < .prace_random )
+		npcwalkto .@x-1, .@y;
+	.@r = rand( .prace_random2 );
+	if ( .@x -1 == 29 ) {
+		while( strnpcinfo(1) != .monst$[ .@i ] ) .@i++;
+		set getvariableofnpc( .prace_winner$, "Bidder#prace0" ), .monst$[ .@i ];
+		emotion 29;
+		donpcevent "Bidder#prace0::OnStopRace";
+		end;
+	}
+	stopnpctimer;
+	setnpctimer .@r;
+	startnpctimer;
+	end;
+OnInit:
+	deletearray .walk_t;
+	deletearray .monst$;
+	setarray .walk_t, 38, 36, 34, 32, 30, 28;
+	setarray .monst$, "Poring", "Angeling", "Metaling", "Deviling", "Santa Poring", "Poporing";
+	.prace_random = 70;
+	.prace_random2 = 600;
+	end;
+}
+
+p_track01,58,38,2	duplicate(pori_race)	Poring#prace1	1002
+p_track01,58,36,2	duplicate(pori_race)	Angeling#prace2	1096
+p_track01,58,34,2	duplicate(pori_race)	Metaling#prace3	1613
+p_track01,58,32,2	duplicate(pori_race)	Deviling#prace4	1582
+p_track01,58,30,2	duplicate(pori_race)	Santa Poring#prace5	1062
+p_track01,58,28,2	duplicate(pori_race)	Poporing#prace6	1031
+
+p_track01,78,42,0	script	#warpprace	45,2,2,{
+	end;
+OnTouch:
+	warp @mapname$,@mapx,@mapy;
+}

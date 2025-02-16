@@ -1,0 +1,124 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Carrera Maluka
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+-	script	wall_maluka	-1,{
+	end;
+OnInit:
+	disablenpc strnpcinfo(0);
+	end;
+}
+
+// First wall
+evt_isld01,161,80,6	duplicate(wall_maluka)	#wall_maluka1	4_ROPEPILE,1,0
+evt_isld01,161,77,6	duplicate(wall_maluka)	#wall_maluka2	4_ROPEPILE,1,0
+evt_isld01,161,74,6	duplicate(wall_maluka)	#wall_maluka3	4_ROPEPILE,1,0
+
+evt_isld01,180,22,6	script	Carrera Maluka	874,{
+	getmapxy(.@map$, .@x, .@y, BL_PC);
+	if( .@x < 172 || $@EVENTOCARRERAMALUKA != 2 ){
+		mes "[Carrera Maluka]";
+		mes "Debes estar más cerca.";
+		close;
+	}
+	mes "[Carrera Maluka]";
+	mes "Felicitaciones! Alcanzaste a llegar a la meta!.";
+	close2;
+	mapannounce "evt_isld01","Elizabeth: Tenemos un ganador, "+strcharinfo(0)+".",1,$ColorEventos;
+	getitem $Premioeventos,$Premiomuchos;
+	set #EVENTOMUCHOS,#EVENTOMUCHOS+1;
+	sc_end SC_CONFUSION;
+	if( @mapname$ != ""){
+		sc_start 32, 600000, 10;  // Increase Agi
+		sc_start 30, 600000, 10; // Blessing
+		warp @mapname$,@mapx,@mapy;
+	}
+	else
+		warp "SavePoint",0,0;
+	end;
+
+OnStart:
+	if(getmapusers("evt_isld01") < 1) end;
+	mapannounce "evt_isld01","Elizabeth: Vamos a iniciar el evento Carrera Maluka.",1,$ColorEventos;
+	sleep 7000;
+	mapannounce "evt_isld01","Elizabeth: Las reglas son muy simples, sólamente deberás hablar conmigo al final de la pista. . .",1,$ColorEventos;
+	sleep 7000;
+	mapannounce "evt_isld01","Elizabeth: Eso si debes acercarte lo suficiente para poder conversar.",1,$ColorEventos;
+	sleep 8000;
+	mapannounce "evt_isld01","Elizabeth: Todos los que lleguen en menos de 5 minutos ganarán.",1,$ColorEventos;
+	sleep 8000;
+	mapannounce "evt_isld01","Elizabeth: Ah, lo olvidaba, todos iniciarán un poco ebrios! EMPEZAMOS!!!!!.",1,$ColorEventos;
+	initnpctimer;
+	disablenpc "#wall_maluka1";
+	disablenpc "#wall_maluka2";
+	disablenpc "#wall_maluka3";
+	setcell "evt_isld01",161,74,161,80,cell_walkable,1;
+	addrid(5,0,"evt_isld01");
+	sc_start SC_CONFUSION,300000,0;
+	end;
+
+OnTimer240000:
+	mapannounce "evt_isld01","Elizabeth: Un minuto!",1,$ColorEventos;
+	end;
+	
+OnTimer300000:
+	mapannounce "evt_isld01","Elizabeth: Lo siento! Se acabó el tiempo!",1,$ColorEventos;
+	set $@EVENTOCARRERAMALUKA,0;
+	sleep 1000;
+	addrid(5,0,"evt_isld01");
+	if( @mapname$ != ""){
+		sc_start 32, 600000, 10;  // Increase Agi
+		sc_start 30, 600000, 10; // Blessing
+		warp @mapname$,@mapx,@mapy;
+	}
+	else
+		warp "SavePoint",0,0;
+	end;
+
+}
+
+-	script	CMannouncer	-1,{
+
+OnCarreraMalukaStart:
+	channel_chat("#evento","Elizabeth: Vamos a comenzar el evento de Carrera Maluka.");
+	sleep 10000;
+	enablenpc "#wall_maluka1";
+	enablenpc "#wall_maluka2";
+	enablenpc "#wall_maluka3";
+	setcell "evt_isld01",161,74,161,80,cell_walkable,0;
+	set $@EVENTOCARRERAMALUKA,1;
+	channel_chat("#evento","Elizabeth: Para quienes deseen participar, por favor usa @joinevent.");
+	sleep 10000;
+	channel_chat("#evento","Elizabeth: Por un minuto dejaré ingresar personas.");
+	initnpctimer;
+	sleep 10000;
+	channel_chat("#evento","Elizabeth: Por favor, si deseas participar usa @joinevent.");
+	end;
+
+OnTimer60000:
+	channel_chat("#evento","Elizabeth: Tiempo.");
+	set $@EVENTOCARRERAMALUKA,2;
+	delwaitingroom "Elizabeth";
+	end;
+
+OnTimer61000:
+	donpcevent "Carrera Maluka::OnStart";
+	stopnpctimer;
+	end;
+}

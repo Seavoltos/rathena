@@ -1,0 +1,141 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Last man
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+-	script	LMS	-1,{
+	end;
+
+OnLastTime:
+	goto startlmsevent;
+
+startlmsevent:
+	channel_chat("#evento","Elizabeth: El evento Last Man Standing comenzará pronto.");
+	sleep 8000;
+	channel_chat("#evento","Elizabeth: Por favor, usa @joinevent para registrarse si deseas participar. Tienen 1 minuto!");
+	set $@EVENTOLASTMAN,1;
+	pvpoff "cell_game";
+	initnpctimer;
+	end;
+OnTimer60000:
+	channel_chat("#evento","Elizabeth: Tiempo!.");
+	set $@EVENTOLASTMAN,2;
+	delwaitingroom "Elizabeth";
+	end;
+
+OnTimer61000:
+	donpcevent "Dario::OnEnable";
+	stopnpctimer;
+	end;
+}
+
+//--------------------------
+cell_game,150,143,4	script	Dario	56,{
+
+	mes "[Premiador]";
+	mes "Felicidades. Tenemos un ganador.";
+	next;
+	channel_chat("#evento","Elizabeth: Tenemos un ganador! Bien hecho "+strcharinfo(0)+"!.");
+	getitem $Premioeventos,$Premiounico;
+	set #EVENTOUNICO,#EVENTOUNICO+1;
+	warp "prontera",155,181;
+	disablenpc "Dario";
+	close;
+	end;
+OnEnable:
+	pvpoff "cell_game";
+	mapannounce "cell_game","Elizabeth: El evento Last Man Standing comenzará pronto.",1,$ColorEventos;
+	sleep 5000;
+	mapannounce "cell_game","Elizabeth: Pero antes recuerda que..",1,$ColorEventos;
+	sleep 5000;
+	mapannounce "cell_game","Elizabeth: Sólo el ultimo en pie ganará el evento!!",1,$ColorEventos;
+	sleep 5000;
+	mapannounce "cell_game","Elizabeth: Que estamos esperando?..Let's Get Ready to Rumble!!...",1,$ColorEventos;
+	sleep 5000;
+	goto L_Start;
+	end;
+L_Start:
+	if(getmapusers("cell_game") == 1) goto L_Champ;
+	if(getmapusers("cell_game") == 0) goto L_None;
+	if(getmapusers("cell_game") > 1) {
+	mapannounce "cell_game","Elizabeth: Comenzaremos con una cuenta regresiva de 5!....",1,$ColorEventos;
+	sleep 7000;
+	mapannounce "cell_game","Elizabeth: 5",1,$ColorEventos;
+	sleep 5000;
+	mapannounce "cell_game","Elizabeth: 4",1,$ColorEventos;
+	sleep 4000;
+	mapannounce "cell_game","Elizabeth: 3",1,$ColorEventos;
+	sleep 3000;
+	mapannounce "cell_game","Elizabeth: 2",1,$ColorEventos;
+	sleep 2000;
+	mapannounce "cell_game","Elizabeth: 1",1,$ColorEventos;
+	sleep 1000;
+	pvpon "cell_game";
+	goto timer;
+	end;
+}
+timer:
+	initnpctimer;
+	end;
+
+OnTimer10000:
+	if(getmapusers("cell_game") == 1) goto L_Champ;
+	if(getmapusers("cell_game") > 2) goto timer;
+	if(getmapusers("cell_game") == 2) goto champ;
+	stopnpctimer;
+	set $@EVENTOLASTMAN,0;
+	end;
+
+champ:
+	mapannounce "cell_game","Elizabeth: Quedan sólo dos personas vivas!",1,$ColorEventos;
+	goto timer;
+	end;
+
+L_Champ:
+	mapannounce "cell_game","Elizabeth: Felicidades! Acercate para recibir tu premio.",1,$ColorEventos;
+	pvpoff "cell_game";
+	enablenpc "Dario";
+	set $@EVENTOLASTMAN,0;
+	stopnpctimer;
+	end;
+
+L_None:
+	pvpoff "cell_game";
+	end;
+OnInit:
+	disablenpc "Dario";
+	end;
+
+}
+//----- Die = warp prt -----
+-	script	Killa_warp	-1,{
+end;
+OnPCDieEvent:
+	if($@EVENTOLASTMAN == 2 || $@BombRing == 2)
+	{
+		getmapxy(.@map$,.@x,.@y,BL_PC);
+		if(.@map$=="cell_game")
+		{
+			mapannounce "cell_game","Elizabeth: "+strcharinfo(0)+" ha muerto, queda fuera del juego!.",1,$ColorEventos;
+			warp "prontera",155,181;
+			end;
+		}
+	}
+	end;
+}

@@ -1,0 +1,239 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Doble dice
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+dice02,118,111,6	script	Mr Dice Dice	874,{
+	end;
+
+OnStart:
+	if(getmapusers("dice02") < 1) goto L_None;
+	mapannounce "dice02","Elizabeth: Vamos a iniciar el evento Doble Dice.",1,$ColorEventos;
+	sleep 8000;
+	mapannounce "dice02","Elizabeth: Pero antes, vamos a indicar como jugar. . .",1,$ColorEventos;
+	sleep 8000;
+	mapannounce "dice02","Elizabeth: Voy a decir esto sólo una vez, por lo que lee atentamente las reglas.",1,$ColorEventos;
+	sleep 8000;
+	mapannounce "dice02","Elizabeth: Yo voy a elegir un número entre 1 y 6, luego haré una cuenta regresiva desde 5 al 0.",1,$ColorEventos;
+	sleep 8000;
+	mapannounce "dice02","Elizabeth: Todo lo que tú tienes que hacer es elegir una de los espacios con el número que tu deseas.",1,$ColorEventos;
+	sleep 8000;
+	mapannounce "dice02","Elizabeth: Por ejemplo, si yo tengo el número 6, todos los jugadores que esten en las casillas del 1 al 5 serán descalificados.",1,$ColorEventos;
+	sleep 8000;
+	mapannounce "dice02","Elizabeth: Haremos esto dos veces, y todos los que queden en el mapa ganaran.",1,$ColorEventos;
+	sleep 8000;
+	mapannounce "dice02","Elizabeth: Bueno adelante! Recuerda que debes estar DENTRO DE UNA ISLA, porque si estas fuera quedaras automaticamente descalificado.",1,$ColorEventos;
+	sleep 8000;
+	mapannounce "dice02","Elizabeth: Eso es todo... Ahora juguemos...",1,$ColorEventos;
+	sleep 8000;
+	goto L_Start;
+	end;
+	
+L_Start:
+	mapannounce "dice02","Elizabeth: . . . . .",1,$ColorEventos;
+	set $@number, rand(1,6);
+	sleep 10000;
+	mapannounce "dice02","Elizabeth: Ya he elegido mi número. Por favor entra en una casilla.... ADELANTE!",1,$ColorEventos;
+	sleep 10000;
+	mapannounce "dice02","Elizabeth: 5",1,$ColorEventos;
+	sleep 5000;
+	mapannounce "dice02","Elizabeth: 4",1,$ColorEventos;
+	sleep 4000;
+	mapannounce "dice02","Elizabeth: 3",1,$ColorEventos;
+	sleep 3000;
+	mapannounce "dice02","Elizabeth: 2",1,$ColorEventos;
+	sleep 2000;
+	mapannounce "dice02","Elizabeth: 1",1,$ColorEventos;
+	sleep 1000;
+	mapannounce "dice02","Elizabeth: TIEMPO!.",1,$ColorEventos;
+	
+	mapannounce "dice02","Elizabeth: Yo he elegido el número "+$@number+".",1,$ColorEventos;
+	switch($@number)
+	{
+		case 1:
+			areawarp "dice02",131,125,166,159,"dice02",71,108;
+			areawarp "dice02",131,125,167,158,"dice02",71,108;
+			areawarp "dice02",131,125,168,157,"dice02",71,108;
+			areawarp "dice02",131,125,180,152,"dice02",71,108;
+			areawarp "dice02",131,125,164,181,"dice02",71,108;
+			break;
+		case 2:
+			areawarp "dice02",131,125,164,145,"dice02",71,108;
+			areawarp "dice02",131,146,165,146,"dice02",71,108;
+			areawarp "dice02",131,147,167,181,"dice02",71,108;
+			areawarp "dice02",131,148,168,181,"dice02",71,108;
+			areawarp "dice02",131,149,169,181,"dice02",71,108;
+			areawarp "dice02",131,150,170,181,"dice02",71,108;
+			areawarp "dice02",131,151,180,181,"dice02",71,108;
+			break;
+		case 3:
+			areawarp "dice02",131,125,147,181,"dice02",71,108;
+			areawarp "dice02",131,141,180,181,"dice02",71,108;
+			areawarp "dice02",164,125,180,181,"dice02",71,108;
+			break;
+		case 4:
+			areawarp "dice02",146,146,180,181,"dice02",71,108;
+			areawarp "dice02",147,145,180,181,"dice02",71,108;
+			areawarp "dice02",148,125,180,181,"dice02",71,108;
+			areawarp "dice02",131,151,180,181,"dice02",71,108;
+			break;
+		case 5:
+			areawarp "dice02",131,125,180,155,"dice02",71,108;
+			areawarp "dice02",144,125,180,157,"dice02",71,108;
+			areawarp "dice02",145,125,180,158,"dice02",71,108;
+			areawarp "dice02",146,125,180,159,"dice02",71,108;
+			areawarp "dice02",147,125,180,181,"dice02",71,108;
+			break;
+		case 6:
+			areawarp "dice02",131,125,180,165,"dice02",71,108;
+			areawarp "dice02",131,125,147,181,"dice02",71,108;
+			areawarp "dice02",164,125,180,181,"dice02",71,108;
+			break;
+		default:
+			break;
+	}
+
+	if(getmapusers("dice02") == 0) goto L_None;
+
+	set $@number, rand(1,6);
+	sleep 10000;
+	mapannounce "dice02","Elizabeth: Ya he elegido el otro número. Por favor vuelve a elegir una casilla.... ADELANTE!",1,$ColorEventos;
+	sleep 10000;
+	mapannounce "dice02","Elizabeth: 5",1,$ColorEventos;
+	sleep 5000;
+	mapannounce "dice02","Elizabeth: 4",1,$ColorEventos;
+	sleep 4000;
+	mapannounce "dice02","Elizabeth: 3",1,$ColorEventos;
+	sleep 3000;
+	mapannounce "dice02","Elizabeth: 2",1,$ColorEventos;
+	sleep 2000;
+	mapannounce "dice02","Elizabeth: 1",1,$ColorEventos;
+	sleep 1000;
+	mapannounce "dice02","Elizabeth: TIEMPO!.",1,$ColorEventos;
+	
+	mapannounce "dice02","Elizabeth: Yo he elegido el número "+$@number+".",1,$ColorEventos;
+	switch($@number)
+	{
+		case 1:
+			areawarp "dice02",131,125,166,159,"dice02",71,108;
+			areawarp "dice02",131,125,167,158,"dice02",71,108;
+			areawarp "dice02",131,125,168,157,"dice02",71,108;
+			areawarp "dice02",131,125,180,152,"dice02",71,108;
+			areawarp "dice02",131,125,164,181,"dice02",71,108;
+			break;
+		case 2:
+			areawarp "dice02",131,125,164,145,"dice02",71,108;
+			areawarp "dice02",131,146,165,146,"dice02",71,108;
+			areawarp "dice02",131,147,167,181,"dice02",71,108;
+			areawarp "dice02",131,148,168,181,"dice02",71,108;
+			areawarp "dice02",131,149,169,181,"dice02",71,108;
+			areawarp "dice02",131,150,170,181,"dice02",71,108;
+			areawarp "dice02",131,151,180,181,"dice02",71,108;
+			break;
+		case 3:
+			areawarp "dice02",131,125,147,181,"dice02",71,108;
+			areawarp "dice02",131,141,180,181,"dice02",71,108;
+			areawarp "dice02",164,125,180,181,"dice02",71,108;
+			break;
+		case 4:
+			areawarp "dice02",146,146,180,181,"dice02",71,108;
+			areawarp "dice02",147,145,180,181,"dice02",71,108;
+			areawarp "dice02",148,125,180,181,"dice02",71,108;
+			areawarp "dice02",131,151,180,181,"dice02",71,108;
+			break;
+		case 5:
+			areawarp "dice02",131,125,180,155,"dice02",71,108;
+			areawarp "dice02",144,125,180,157,"dice02",71,108;
+			areawarp "dice02",145,125,180,158,"dice02",71,108;
+			areawarp "dice02",146,125,180,159,"dice02",71,108;
+			areawarp "dice02",147,125,180,181,"dice02",71,108;
+			break;
+		case 6:
+			areawarp "dice02",131,125,180,165,"dice02",71,108;
+			areawarp "dice02",131,125,147,181,"dice02",71,108;
+			areawarp "dice02",164,125,180,181,"dice02",71,108;
+			break;
+		default:
+			break;
+	}
+
+	set $@EVENTODOBLEDICE,0;
+	if(getmapusers("dice02") == 0) goto L_None;
+	sleep 1000;
+	addrid(5,0,"dice02");
+	channel_chat("#evento","Elizabeth: Tenemos un ganador, "+strcharinfo(0)+".");
+	getitem $Premioeventos,$Premiomuchos;
+	set #EVENTOMUCHOS,#EVENTOMUCHOS+1;
+	if( @mapname$ != ""){
+		sc_start 32, 600000, 10;  // Increase Agi
+		sc_start 30, 600000, 10; // Blessing
+		warp @mapname$,@mapx,@mapy;
+	}
+	else
+		warp "SavePoint",0,0;
+
+L_None:
+	disablenpc "Mr Dice Dice";
+	end;
+}
+
+dice02,71,110,4	script	Doble Dice	10179,3,3,{
+	if ( $@EVENTODOBLEDICE == 2 )
+	{
+		sc_start 32, 600000, 10;  // Increase Agi
+		sc_start 30, 600000, 10; // Blessing
+		warp @mapname$,@mapx,@mapy;
+		end;
+	}
+	end;
+}
+
+-	script	DDannouncer	-1,{
+
+OnInit:
+	disablenpc "Mr Dice Dice";
+	end;
+	
+OnWhisperGlobal:
+	if(getgmlevel()<60) end;
+OnDiceStart:
+	disablenpc "Mr Dice Dice";
+	channel_chat("#evento","Elizabeth: Vamos a comenzar el evento de Doble Dice.");
+	sleep 10000;
+	set $@EVENTODOBLEDICE,1;
+	channel_chat("#evento","Elizabeth: Para quienes deseen participar, por favor usa @joinevent.");
+	sleep 10000;
+	channel_chat("#evento","Elizabeth: Por un minuto dejaré ingresar personas.");
+	sleep 10000;
+	channel_chat("#evento","Elizabeth: Por favor, si deseas participar usa @joinevent.");
+	initnpctimer;
+	end;
+
+OnTimer60000:
+	channel_chat("#evento","Elizabeth: Tiempo.");
+	set $@EVENTODOBLEDICE,2;
+	delwaitingroom "Elizabeth";
+	end;
+	
+OnTimer61000:
+	donpcevent "Mr Dice Dice::OnStart";
+	stopnpctimer;
+	end;
+
+}

@@ -1414,6 +1414,9 @@ startermap2
 startermap3
 batt_off
 instance
+dice01
+dice02
+dice03
 
 farm
 farm_in

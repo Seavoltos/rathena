@@ -1,0 +1,586 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+function	script	AntiDobleLoginEVENTO	{
+
+	query_sql("SELECT last_unique_id FROM login WHERE account_id = '"+getcharid(3)+"'", .@mylasip$);
+	set .@size, query_sql("SELECT account_id FROM login WHERE last_unique_id = '"+.@mylasip$+"'", .@account_id);
+	set .@result,0;
+	if(!.@size)	end;
+	for(set .@i, 0; .@i < .@size; set .@i, .@i + 1) {
+		query_sql("SELECT name FROM `char` WHERE `char`.account_id = "+.@account_id[.@i]+" AND `char`.`online` = 1", .@name$ );
+		if(.@name2$ != .@name$)
+		{
+			getmapxy(@mapname$, @mapx, @mapy, BL_PC,""+.@name$+"");
+			
+			if(@mapname$ == "p_track01" || @mapname$ == "gare" || @mapname$ == "quiz_map"
+			|| @mapname$ == "dice01" || @mapname$ == "dice02" || @mapname$ == "dice03"
+			|| @mapname$ == "space" || @mapname$ == "cell_game"
+			|| @mapname$ == "map_event03" || @mapname$ == "pvp_2v2" || @mapname$ == "evt_isld01"
+			)
+			{
+				set .@result, .@result + 1;
+				set .@name2$,.@name$;
+			}
+		}
+	}
+	return .@result;
+}
+
+-	script	Elizabeth#whisp	-,{
+
+OnJoinEvent:
+	if(getmapflag(strcharinfo(3),MF_NOWARP) || getmapflag(strcharinfo(3),MF_NOTELEPORT) || getmapflag(strcharinfo(3),MF_NORETURN) || getmapflag(strcharinfo(3),MF_NOSAVE) || getmapflag(strcharinfo(3),MF_NOMEMO)){
+		message strcharinfo(0),"Elizabeth: No te puedo ayudar desde ese mapa.";
+		end;
+	}
+	set .@name$,"[^0000A0Elizabeth^000000]";
+	cutin "bu_maggi1",2;
+	mes .@name$;
+	mes "Hola "+strcharinfo(0)+"";
+	if( $@Hongo > 0)//Buscar Hongo
+	{
+		mes "El evento de ^707070Encontrar el Hongo^000000 se está realizando.";
+		mes "Localización: ^0000ff"+ $@HongoMap$ + "^000000";
+		mes "Número de hongos: ^0000ff" + $@Hongo + "^000000";
+		close3;
+	}// Fin Buscar Hongo
+
+	if($@PoringRace == 1)//Poring Race
+	{
+		mes "Se está llevando a cabo el evento de ^8F2988Carrera de Poring^000000.";
+		if( callfunc("AntiDobleLoginEVENTO") )
+		{
+			mes "Pero veo que ya estás participando";
+			close3;
+		}
+		mes "Deseas participar?";
+		next;
+		switch(select("Si:No, gracias")){
+			case 1:
+				mes .@name$;
+				mes "Allá vamos!";
+				close2;
+				if( callfunc("AntiDobleLoginEVENTO") )
+				{
+					mes "Pero veo que ya estás participando.";
+					close3;
+				}
+				@prace_winner$ = "";
+				getmapxy(@mapname$, @mapx, @mapy, BL_PC);
+				warp "p_track01",52,41;
+				end;
+			case 2:
+				mes .@name$;
+				mes "Cuando estes listo";
+				close3;
+		}
+	}//Fin Poring Race
+	
+	if( $@Zombie == 1) //Novice vs Zombie
+	{
+		mes "Se está llevando a cabo el evento de ^44287DNovice vs Zombie^000000.";
+		if( callfunc("AntiDobleLoginEVENTO") )
+		{
+			mes "Pero veo que ya estás participando";
+			close3;
+		}
+		if(BaseLevel>1 || class > 0){
+			mes "Lo siento, pero debes ser novice de lvl 1 para poder participar";
+			close3;
+		}
+		mes "Deseas participar?";
+		next;
+		switch(select("Si:No, gracias")){
+			case 1:
+				mes .@name$;
+				mes "Allá vamos!";
+				close2;
+				if( callfunc("AntiDobleLoginEVENTO") )
+				{
+					mes "Pero veo que ya estás participando.";
+					close3;
+				}
+				@prace_winner$ = "";
+				getmapxy(@mapname$, @mapx, @mapy, BL_PC);
+				sc_end SC_ALL;
+				atcommand "@storeall";
+				percentheal 100,100;
+				warp "1@4inq",79,65;
+				end;
+			case 2:
+				mes .@name$;
+				mes "Cuando estes listo";
+				close3;
+		}
+	}//Fin Poring Race
+	
+	if($@AtrapaPoring==1)//AtrapaPoring
+	{
+		mes "Se está llevando a cabo el evento de ^FF2DFFAtrapar el Poring^000000.";
+		if( callfunc("AntiDobleLoginEVENTO") )
+		{
+			mes "Pero veo que ya estás participando";
+			close3;
+		}
+		mes "Deseas participar?";
+		next;
+		switch(select("Si:No, gracias")){
+			case 1:
+				mes .@name$;
+				mes "Allá vamos!";
+				close2;
+				if( callfunc("AntiDobleLoginEVENTO") )
+				{
+					mes "Pero veo que ya estás participando.";
+					close3;
+				}
+				getmapxy(@mapname$, @mapx, @mapy, BL_PC);
+				warp "1@exds",133,153;
+				end;
+			case 2:
+				mes .@name$;
+				mes "Cuando estes listo";
+				close3;
+		}
+	}//Fin AtrapaPoring
+
+	if($@startcluck==1)//Gallina Loca
+	{
+		mes "Se está llevando a cabo el evento de ^453359Cluckers^000000.";
+		mes "Localización: ^0000ffProntera^000000";
+		close3;
+	}//Fin Gallina Loca
+
+	if($@Disguise==1)//Disguise
+	{
+		mes "Se está llevando a cabo el evento de ^CE09BFAdivina el Mob^000000.";
+		if( callfunc("AntiDobleLoginEVENTO") )
+		{
+			mes "Pero veo que ya estás participando";
+			close3;
+		}
+		mes "Deseas participar?";
+		next;
+		switch(select("Si:No, gracias")){
+			case 1:
+				mes .@name$;
+				mes "Allá vamos!";
+				close2;
+				if( callfunc("AntiDobleLoginEVENTO") )
+				{
+					mes "Pero veo que ya estás participando.";
+					close3;
+				}
+				getmapxy(@mapname$, @mapx, @mapy, BL_PC);
+				warp "2@exds",97,93;
+				end;
+			case 2:
+				mes .@name$;
+				mes "Cuando estes listo";
+				close3;
+		}
+	}//Fin Disguise
+
+	if($@EVENTODICE==1)//Dice
+	{
+		mes "Se está llevando a cabo el evento de ^FF0020Dice^000000.";
+		if( callfunc("AntiDobleLoginEVENTO") )
+		{
+			mes "Pero veo que ya estás participando";
+			close3;
+		}
+		mes "Deseas participar?";
+		next;
+		switch(select("Si:No, gracias")){
+			case 1:
+				mes .@name$;
+				mes "Allá vamos!";
+				close2;
+				if( callfunc("AntiDobleLoginEVENTO") )
+				{
+					mes "Pero veo que ya estás participando.";
+					close3;
+				}
+				getmapxy(@mapname$, @mapx, @mapy, BL_PC);
+				warp "dice01",156,152;
+				end;
+			case 2:
+				mes .@name$;
+				mes "Cuando estes listo";
+				close3;
+		}
+	}//Fin Dice
+	
+	if($@EVENTOESPACIO==1)//Space
+	{
+		mes "Se está llevando a cabo el evento de ^0000FFSpace^000000.";
+		if( callfunc("AntiDobleLoginEVENTO") )
+		{
+			mes "Pero veo que ya estás participando";
+			close3;
+		}
+		mes "Deseas participar?";
+		next;
+		switch(select("Si:No, gracias")){
+			case 1:
+				mes .@name$;
+				mes "Allá vamos!";
+				close2;
+				if( callfunc("AntiDobleLoginEVENTO") )
+				{
+					mes "Pero veo que ya estás participando.";
+					close3;
+				}
+				getmapxy(@mapname$, @mapx, @mapy, BL_PC);
+				warp "space",0,0;
+				end;
+			case 2:
+				mes .@name$;
+				mes "Cuando estes listo";
+				close3;
+		}
+	}//Fin Space
+
+	if($@EVENTOLASTMAN==1)//Last Man Standing
+	{
+		mes "Se está llevando a cabo el evento de ^519A38Last Man Standing^000000.";
+		if( callfunc("AntiDobleLoginEVENTO") )
+		{
+			mes "Pero veo que ya estás participando.";
+			close3;
+		}
+		mes "Deseas participar?";
+		next;
+		switch(select("Si:No, gracias")){
+			case 1:
+				mes .@name$;
+				mes "Allá vamos!";
+				close2;
+				if( callfunc("AntiDobleLoginEVENTO") )
+				{
+					mes "Pero veo que ya estás participando.";
+					close3;
+				}
+				getmapxy(@mapname$, @mapx, @mapy, BL_PC);
+				warp "cell_game",0,0;
+				end;
+			case 2:
+				mes .@name$;
+				mes "Cuando estes listo";
+				close3;
+		}
+	}//Fin Last Man Standing
+
+	if($@starttarot==1)//Tarot
+	{
+		mes "Se está llevando a cabo el evento de ^FF00FFLydia Clar^000000.";
+		mes "Localización: ^0000ffProntera^000000";
+		close3;
+	}//Fin Tarot
+	
+	if($@mobvsmob==1)//Mob vs Mob
+	{
+		mes "Se está llevando a cabo el evento de ^863cc5Mob Vs Mob^000000.";
+		if( callfunc("AntiDobleLoginEVENTO") )
+		{
+			mes "Pero veo que ya estás participando";
+			close3;
+		}		
+		set .MobName1$,getvariableofnpc( .MobName1$,"MobVsMob" );
+		set .MobName2$,getvariableofnpc( .MobName2$,"MobVsMob" );
+		mes " "; 
+		mes "A que mvp queres apostar";
+		set OPT_mvpvsmvp, select("^10B2D2 [ > ] ^000000 " + .MobName1$ + ":^10B2D2 [ > ] ^000000 " + .MobName2$);
+		close2;
+		if( callfunc("AntiDobleLoginEVENTO") )
+		{
+			mes "Pero veo que ya estás participando";
+			close3;
+		}
+		dispbottom "Has apostado por : " + ( OPT_mvpvsmvp == 1 ? .MobName1$ : .MobName2$) + ", Opción: " + OPT_mvpvsmvp; 
+		getmapxy(@mapname$, @mapx, @mapy, BL_PC);
+		warp "pvp_2v2",52,64;
+		end;
+	}//Fin Mob vs Mob
+
+	if($@BombRing==1)//BombRing
+	{
+		mes "Se está llevando a cabo el evento de ^8900ffEscapa del Poring^000000.";
+		if( callfunc("AntiDobleLoginEVENTO") )
+		{
+			mes "Pero veo que ya estás participando";
+			close3;
+		}
+		mes "Deseas participar?";
+		next;
+		switch(select("Si:No, gracias")){
+			case 1:
+				mes .@name$;
+				mes "Allá vamos!";
+				close2;
+				if( callfunc("AntiDobleLoginEVENTO") )
+				{
+					mes "Pero veo que ya estás participando.";
+					close3;
+				}
+				getmapxy(@mapname$, @mapx, @mapy, BL_PC);
+				warp "1@ba_go",353,47;
+				end;
+			case 2:
+				mes .@name$;
+				mes "Cuando estes listo";
+				close3;
+		}
+	}//Fin BombRing
+
+	if($@EVENTODOBLEDICE==1)//Doble Dice
+	{
+		mes "Se está llevando a cabo el evento de ^015d52Doble Dice^000000.";
+		if( callfunc("AntiDobleLoginEVENTO") )
+		{
+			mes "Pero veo que ya estás participando";
+			close3;
+		}
+		mes "Deseas participar?";
+		next;
+		switch(select("Si:No, gracias")){
+			case 1:
+				mes .@name$;
+				mes "Allá vamos!";
+				close2;
+				if( callfunc("AntiDobleLoginEVENTO") )
+				{
+					mes "Pero veo que ya estás participando.";
+					close3;
+				}
+				getmapxy(@mapname$, @mapx, @mapy, BL_PC);
+				warp "dice02",156,152;
+				end;
+			case 2:
+				mes .@name$;
+				mes "Cuando estes listo";
+				close3;
+		}
+	}//Fin Doble Dice
+
+	if($@HuntingEvent != 0)//Cacería
+	{
+		mes "Se está llevando a cabo el evento de ^004000Cacería^000000.";
+		mes "Localización: ^0000ffProntera^000000, costado refine.";
+		close3;
+	}//Fin Cacería
+
+	if($@EVENTOCARRERAMALUKA==1)//Carrera Maluka
+	{
+		mes "Se está llevando a cabo el evento de ^015d52Carrera Maluka^000000.";
+		if( callfunc("AntiDobleLoginEVENTO") )
+		{
+			mes "Pero veo que ya estás participando";
+			close3;
+		}
+		mes "Deseas participar?";
+		next;
+		switch(select("Si:No, gracias")){
+			case 1:
+				mes .@name$;
+				mes "Allá vamos!";
+				close2;
+				if( callfunc("AntiDobleLoginEVENTO") )
+				{
+					mes "Pero veo que ya estás participando.";
+					close3;
+				}
+				getmapxy(@mapname$, @mapx, @mapy, BL_PC);
+				warp "evt_isld01",177,77;
+				end;
+			case 2:
+				mes .@name$;
+				mes "Cuando estes listo";
+				close3;
+		}
+	}//Fin Doble Dice
+
+	mes "Ahora no te puedo llevar a ningun evento";
+	close3;
+
+OnInit:
+	bindatcmd "joinevent","Elizabeth#whisp::OnJoinEvent",0,99;
+	end;
+}
+
+prontera,160,193,3	script	Elizabeth	612,{
+	set .@name$,"[^0000A0Elizabeth^000000]";
+	cutin "bu_maggi1",2;
+	mes .@name$;
+	mes "Hola "+strcharinfo(0)+"";
+	mes "Yo soy la encargada de administrar los ^4093BBEventos^000000 automáticos en KaiyouRO";
+	mes "Que deseas hacer?";
+	next;
+	switch(select("Quiero participar:Horarios:Salir")){
+		case 1:
+			mes .@name$;
+			mes "Para participar en cualquier evento, debes hacerlo utilizando el comando @joinevent cuando se activen.";
+			close3;
+		case 2:
+			mes .@name$;
+			mes "Los eventos son cada 2 hora, iniciando a las 10 am y terminando a las 02 am";
+			next;
+			mes .@name$;
+			mes "Actualmente existen 15 diferentes eventos y son elegidos aleatoreamente.";
+			next;
+			mes .@name$;
+			mes "Los eventos que existen son:";
+			mes "- ^707070Busca Hongos^000000";
+			mes "- ^44287DEscapa del Zombie^000000";
+			mes "- ^CE09BFAdivina el mob^000000";
+			mes "- ^453359Cluckers^000000";
+			mes "- ^8F2988Carrera de Poring^000000";
+			mes "- ^FF2DFFAtrapa el Poring^000000";
+			mes "- ^FF0020Dice^000000";
+			mes "- ^0000FFEspacio^000000";
+			mes "- ^519A38Último en pie^000000";
+			mes "- ^453359Carrera Maluca^000000";
+			mes "- ^FF0060Lydia Clar^000000";
+			mes "- ^863cc5Torneo MvP^000000";
+			mes "- ^8900ffEscapa del Poring^000000";
+			mes "- ^015d52Doble Dice^000000";
+			mes "- ^004000Cacería^000000";
+			mes "- ^0000FFCarrera Maluka^000000";
+			close3;
+		
+		case 3:
+			mes .@name$;
+			mes "Ok, nos estamos viendo";
+			close3;
+		
+	}
+OnWhisperGlobal:
+	if ( getgmlevel() < 60) 
+		end;
+	set .@i,1;
+OnClock1005:
+OnClock1205:
+OnClock1405:
+OnClock1605:
+OnClock1805:
+OnClock2005:
+OnClock2205:
+OnClock0005:
+OnClock0205:
+	if( agitcheck() || agitcheck2() || agitcheck3() )	end;
+
+	set .@rand, rand(1,15);
+
+	if(.@i)
+		input .@rand;
+
+	switch(.@rand)
+	{
+		case 1:
+			delwaitingroom;
+			waitingroom "[Evento]: Busca Hongos",0;
+			donpcevent "Find the Mushroom::OnWatingRoom";
+			end;
+		case 2:
+			delwaitingroom;
+			waitingroom "[Evento]: Escapa del Zombie",0;
+			donpcevent "announce_nvz::OnWatingRoom";
+			end;
+		case 3:
+			delwaitingroom;
+			waitingroom "[Evento]: Advinia el Mob",0;
+			donpcevent "guessAnnouncer::OnWatingRoom";
+			end;
+		case 4:
+			delwaitingroom;
+			waitingroom "[Evento]: Cluckers",0;
+			donpcevent "Cluckers::OnWatingRoom";
+			end;
+		case 5:
+			delwaitingroom;
+			waitingroom "[Evento]: Carrera de Poring",0;
+			donpcevent "Poring Race::OnWatingRoom";
+			end;
+		case 6:
+			delwaitingroom;
+			waitingroom "[Evento]: Atrapa el Poring",0;
+			donpcevent "AtrapaPoring#Funcion::OnWatingRoom";
+			end;
+		case 7:
+			delwaitingroom;
+			waitingroom "[Evento]: Dice",0;
+			donpcevent "Dannouncer::OnDiceStart";
+			end;
+		case 8:
+			delwaitingroom;
+			waitingroom "[Evento]: Espacio",0;
+			donpcevent "Espacio::OnSpaceStart";
+			end;
+		case 9:
+			delwaitingroom;
+			waitingroom "[Evento]: Último en pie",0;
+			donpcevent "LMS::OnLastTime";
+			end;
+		case 10:
+			delwaitingroom;
+			waitingroom "[Evento]: Carrera Maluka",0;
+			donpcevent "CMannouncer::OnCarreraMalukaStart";
+			end;
+		case 11:
+			delwaitingroom;
+			waitingroom "[Evento]: Lydia Clar",0;
+			donpcevent "Lydia Clar::OnWatingRoom";
+			end;
+		case 12:
+			delwaitingroom;
+			waitingroom "[Evento]: Torneo MvP",0;
+			donpcevent "MobVsMob::OnWatingRoom";
+			end;
+		case 13:
+			delwaitingroom;
+			waitingroom "[Evento]: Escapa del Poring",0;
+			donpcevent "BombRing#Funcion::OnWatingRoom";
+			end;
+		case 14:
+			delwaitingroom;
+			waitingroom "[Evento]: Doble Dice",0;
+			donpcevent "DDannouncer::OnDiceStart";
+			end;
+		case 15:
+			delwaitingroom;
+			waitingroom "[Evento]: Cacería",0;
+			donpcevent "HuntingEvent::OnHuntingStart";
+			end;
+		default:
+			delwaitingroom;
+			waitingroom "[Evento]: Carrera de Poring",0;
+			donpcevent "Poring Race::OnWatingRoom";
+			end;
+	}
+
+OnInit:
+	set $Premioeventos, 41020;
+	set $Premiounico, 4;
+	set $Premiomuchos, 2;
+	set $ColorEventos, 0x00c5ff;
+	end;
+
+}

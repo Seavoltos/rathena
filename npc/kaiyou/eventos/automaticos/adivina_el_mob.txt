@@ -1,0 +1,237 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Adivina el mob
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+2@exds,97,97,4	script	Disguise NPC	10509,{
+	if (!$@guessbegin)
+	{
+		mes "^3399FF[Disguise NPC]^000000";
+		mes "El evento iniciará dentro de poco!";
+		close;
+	}
+	end;
+
+OnStart:
+	set $@guessbegin, 1;
+	set .DisguiseWon, 0;
+	if (!$@DisguiseRound)
+	{
+		npctalk "Bueno, comencemos este juego!";
+		sleep 2000;
+		npctalk "Pero primero expliquemos las reglas.";
+		sleep 2000;
+		npctalk "Yo me voy a transformar en un mounstro al azar.";
+		sleep 2000;
+		npctalk "Sólo debes saberlo y escribirlo.";
+		sleep 2000;
+		npctalk "No te preocupes por el uso de mayusculas y minusculas.";
+		sleep 5000;
+		npctalk "Ahora empecemos!";
+		sleep 5000;
+	}
+	else if ($@DisguiseRound < $@guessrounds-1)
+	{
+		npctalk "Listo para la siguiente ronda.";
+		setnpctimer 0;
+		sleep 8000;
+        }
+	else
+	{       
+		npctalk "Última ronda!";
+		sleep 2000;
+		npctalk "Listos!";
+		sleep 6000;
+	}
+
+	do
+	{
+		set .@guessrepeat, 0;
+		set $@monster, 1000 + rand(1,950);
+		for (set .@k, 0; .@k <getarraysize($@Forbidden); set .@k, .@k+1)
+		{
+			if ($@monster == $@Forbidden[.@k]) 
+			{
+				set .@guessrepeat, 1;
+				break;
+			}
+		}
+	}
+	while (.@guessrepeat);
+	setnpctimer 0;
+	initnpctimer;
+	setnpcdisplay "Disguise NPC",$@monster;
+	set $@MonsterName$, strmobinfo(1,$@monster);
+	defpattern 1, "([^:]+):.*\\s"+$@MonsterName$+"(.*)", "winround";
+	activatepset 1;
+	npctalk "Cuál es mi nombre?";
+	sleep 3000;
+	npcwalkto 95,97;
+	sleep 2000;
+	npcwalkto 99,97;
+	end;
+
+OnTimer5000:
+	if (!.DisguiseWon)
+	{
+		sleep 3000;
+		npcwalkto 95,97;
+		sleep 2000;
+		npcwalkto 99,97;
+		if (!$@guessactive)  {disablenpc "Disguise NPC"; end;}
+	}
+	end;
+
+OnTimer15000:
+	if (!.DisguiseWon) 
+	{
+		sleep 3000;
+		npcwalkto 97,95;
+		sleep 2000;
+		npcwalkto 97,99;
+	}
+	end;
+
+OnTimer25000:
+	if (!.DisguiseWon) 
+	{
+		npctalk "Vamos! sólo quedan 10 segundos!.";
+		sleep 3000;
+		npcwalkto 97,95;
+		sleep 2000;
+		npcwalkto 97,99;
+	}
+	end;
+
+OnTimer35000:
+	if (!.DisguiseWon)
+	{ 
+		npctalk "Tiempo!.";
+		if (!$@guessactive)  {disablenpc "Disguise NPC"; end;}
+		set $@DisguiseRound, $@DisguiseRound + 1;
+		deletepset 1;
+		sleep 3000;
+		npctalk $@MonsterName$ + " era la respuesta.";
+		sleep 5000;
+		if ($@DisguiseRound >= $@guessrounds)
+		{
+			set $@DisguiseRound, 0;
+			sleep 3000;
+			npctalk "El evento ha terminado!";
+			sleep 3500;
+			npctalk "nos vemos!";
+			sleep 2000;
+			emotion 12;
+			sleep 1000;
+			set $@guessactive, 0;
+			setnpcdisplay "Disguise NPC",10509;
+			disablenpc "Disguise NPC";
+			addrid(5,0,"2@exds");
+			if( @mapname$ != ""){
+				sc_start 32, 600000, 10;  // Increase Agi
+				sc_start 30, 600000, 10; // Blessing
+				warp @mapname$,@mapx,@mapy;
+			}
+			else
+				warp "SavePoint",0,0;
+			end;
+		}
+		goto OnStart;
+
+	}
+	end;
+	
+winround:
+	setnpctimer 0;
+	deletepset 1;
+	set .DisguiseWon, 1;
+	set $@DisguiseRound, $@DisguiseRound + 1;
+	npctalk strcharinfo(0) + " escribió bien mi nombre!";
+	getitem $Premioeventos,$Premiomuchos;
+	set #EVENTOMUCHOS,#EVENTOMUCHOS+1;
+	sleep2 3000;
+	npctalk $@MonsterName$ + " es la respuesta correcta.";
+	if (!$@guessactive)  {set $@Disguise,0; disablenpc "Disguise NPC"; end;}
+	if ($@DisguiseRound >= $@guessrounds)
+	{
+		set $@DisguiseRound, 0;
+		set $@guessactive, 0;
+		sleep 3000;
+		npctalk "El evento ha terminado!";
+		sleep 3500;
+		npctalk "Nos vemos!";
+		sleep 2000;
+		emotion 12;
+		sleep 1000;
+		setnpcdisplay "Disguise NPC",10509;
+		disablenpc "Disguise NPC";
+		addrid(5,0,"2@exds");
+		if( @mapname$ != ""){
+			sc_start 32, 600000, 10;  // Increase Agi
+			sc_start 30, 600000, 10; // Blessing
+			warp @mapname$,@mapx,@mapy;
+		}
+		else
+			warp "SavePoint",0,0;
+		end;
+	}
+	sleep 5000;
+	goto OnStart;
+	end;
+}
+
+ 
+//-----------------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------------
+
+ 
+-	script	guessAnnouncer	-1,{
+	end;
+
+OnWatingRoom:
+	if ($@guessactive) end;
+	set $@guessactive, 1;
+	channel_chat("#evento","Elizabeth: Se está dando inicio al evento de Disguise! Si te deseas unir usa @joinevent.");
+	set $@guessbegin, 0;
+	set $@Disguise,1;
+	enablenpc "Disguise NPC";
+	sleep 5000;
+	channel_chat("#evento","Elizabeth: Dejaré entrar gente por un minuto más.");
+	sleep 60000;
+	set $@Disguise,0;
+	delwaitingroom "Elizabeth";
+	sleep 5000;
+	set $@DisguiseRound, 0;
+	if(getmapusers("2@exds") == 0) 
+	{
+		disablenpc "Disguise NPC";
+		set $@guessactive, 0;
+		end;
+	}
+	donpcevent "Disguise NPC::OnStart";
+	end;
+
+OnInit:
+	disablenpc "Disguise NPC";
+	set $@Disguise,0;
+	set $@guessactive, 0;
+	set $@guessrounds,10;
+	setarray $@Forbidden[0],1217,1218,1325,1326,1327,1328,1329,1330,1331,1332,1333,1334,1335,1336,1337,1338,1339,1340,1341,1342,1343,1344,1345,1346,1347,1348,1349,1350,1351,1352,1353,1354,1355,1356,1357,1358,1359,1360,1361,1362,1363,1948,1892,1949,1950,1983,1984,2010,1003,1006,1017,1021,1022,1027,1043,1075,1136,1137,1168,1171,1172,1173,1181,1210,1222,1223,1224,1225,1226,1227,1228,1233,1284,1407,1411,1414,1496,1501,1996,2002,2003,2004,2005,2006,2007,2011,2012,2025,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050,2051,2052,2053,2054,2055,2056,2057,2058,2059,2060,2061,2062,2063,2064,2065,2066,2067,2075,2076,2077,2078,2079,2080,2081,2084,2093,2094,2095,2096,2097,2098,2099,2100,2101,2102,2103,2104,2105,2106,2107,2108,2109,2110,2111,2112,2113,2116,2121,2122,2123,2124,2125,1900,1901,1902,1903,1237,1239,1145,1175,1209,1841,1842,1843,1844,3014,3001,3002,2114,2115,2117,2118,2119,2120,6049,6050,6051,6052,2200,2205,2207;
+}

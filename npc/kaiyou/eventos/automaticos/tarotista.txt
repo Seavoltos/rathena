@@ -1,0 +1,389 @@
+//===== KaiyouRO Scripts ==================================
+//= Auto Event
+//===== By: ==================================================
+//= Seavoltos
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena SVN
+//===== Description: =========================================
+//= Auto Event: Tarotista
+//===== Comments: ============================================
+//
+//===== To Do: ===============================================
+//= 
+//===== Additional Comments: =================================
+//= 
+//===== Contact Ifo: =========================================
+//= [Seavoltos] 
+//= Email: sgotschlich@gmail.com
+//============================================================
+
+//============================================================ 
+//= Calculate the following point X and Y
+//= (Present Position XoY)
+//============================================================ 
+
+function	script	move_XY	{
+	set .@CP, getarg(0); // Present position XoY
+	set .@DST, rand(1,5); // Distance to cross
+	if (rand(2)) // Direccion a tomar (izq der arr abj)
+		set .@CP, .@CP + .@DST;
+	else
+		set .@CP, .@CP - .@DST;
+	if (.@CP < getarg(1))
+		set .@CP, .@CP + .@DST; // If the new point is smaller, thats the minimum
+	if (.@CP > getarg(2))
+		set .@CP, .@CP - .@DST; // If the new point is greater, thats the maximum
+	return .@CP;
+}
+
+-	script	Lydia Clar	FAKE_NPC,{
+	end;
+OnWatingRoom:
+		enablenpc "Lydia Clar#2";
+		channel_chat("#evento","Elizabeth: La gran Tarotista Lydia Clar ha llegado a prontera!");
+		initnpctimer;
+		initnpctimer "Lydia Clar#2";
+		end;
+OnTimer20000:
+		channel_chat("#evento","Elizabeth: ¿Que estás esperando para ver tu suerte el día de hoy?");
+		end;
+OnTimer30000:
+		channel_chat("#evento","Elizabeth: Dale 10z a la tarotista para que lea tu carta del día!");
+		end;
+OnTimer40000:
+		channel_chat("#evento","Elizabeth: ANDA! ¿Serás la próxima afortunada o afortunado?");
+		set $@starttarot,1;
+		end;
+OnTimer600000:
+		if($@starttarot == 1)
+		{
+			mapannounce "prontera","Elizabeth: Creo que la tarotista ya esta exausta, será para la próxima.",1,$ColorEventos;
+			set $@starttarot,0;
+			delwaitingroom "Elizabeth";
+			npctalk "Lydia Clar: Adios! ~~~","Lydia Clar#2";
+			disablenpc "Lydia Clar#2";
+		}
+		end;
+}
+prontera,155,156,4	script	Lydia Clar#2	2241,{
+if ($@starttarot == 1) goto L_playtarot;
+
+	mes "[Lydia Clar]";
+	mes "Dejame observar un poco el ambiente";
+	close;
+
+L_playtarot:
+	if( Zeny < 10)
+	{
+		dispbottom "No tengo el dinero para pagarle";
+		end;
+	}
+	set Zeny,Zeny-10;
+	specialeffect2 521;
+	switch( rand(0,13) ) {
+		case 0:
+				specialeffect2 523;
+				switch(rand(0,2))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", Amiga date cuenta!!!";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", Mira una foto tuya!!!";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", ¿Eres comunistas?";
+						break;
+				}
+				emotion ET_SWEAT;
+				sc_start SC_Stone,10000,0;
+				break;
+		case 1:
+				specialeffect2 524;
+				switch(rand(0,3))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", Veo mucho poder en tu futuro.";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", Te enfrentarás a grandes elecciones.";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", Subirás a otro personaje a 99/70.";
+						break;
+					case 3:
+						npctalk strcharinfo(0)+", te pegai la mision o no?";
+						break;
+				}
+				emotion ET_SORRY;
+				sc_start SC_Freeze,10000,0;
+				break;
+		case 2:
+				specialeffect2 525;
+				switch(rand(0,3))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", ¿Todo bien con tu madre?.";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", Guardar secretos es negativo para tu alma.";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", Pasa a la acción, cuidado con el miss click.";
+						break;
+					case 3:
+						npctalk strcharinfo(0)+", Gordito chupeton.";
+						break;
+				}
+				emotion ET_SCRATCH;
+				sc_start SC_Sleep,10000,0;
+				break;
+		case 3:
+				specialeffect2 526;
+				switch(rand(0,3))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", Cuidado donde pisas.";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", Es hora de tu viaje.";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", A Coquimbo!.";
+						break;
+					case 3:
+						npctalk strcharinfo(0)+", Te vay a poner la capa?.";
+						break;
+				}
+				emotion ET_SCRATCH;
+				warp "prontera",0,0;
+				break;
+		case 4:
+				specialeffect2 527;
+				switch(rand(0,3))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", ¿Todo bien con tu pareja?.";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", Te van a funar.";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", ¿Ya compraste el Ticket a Coquimbo?.";
+						break;
+					case 3:
+						npctalk strcharinfo(0)+", Hoy compartiras tus privilegios.";
+						break;
+				}
+				emotion ET_SCRATCH;
+				percentheal -100,0;
+				break;
+		case 5:
+				specialeffect2 528;
+				switch(rand(0,3))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", Veo una bendición en tu vientre.";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", Pronto enfrentarás una elección dificil.";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", Escucho campanas de boda en tu futuro.";
+						break;
+					case 3:
+						npctalk strcharinfo(0)+", Hoy te ponen el cara pato luca.";
+						break;
+				}
+				emotion ET_SCRATCH;
+				sc_start SC_Stun,10000,0;
+				break;
+		case 6:
+				specialeffect2 530;
+				switch(rand(0,3))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", Amiga no estay haciendo na, aburrete.";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", Es momento de actuar.";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", Tu finanzas no van bien, debes invertir en CashPoint.";
+						break;
+					case 3:
+						npctalk strcharinfo(0)+", Veo un chaleco amarillo en tu futuro.";
+						break;
+				}
+				emotion ET_SCRATCH;
+				sc_start SC_Stone,10000,0;
+				break;
+		case 7:
+				specialeffect2 531;
+				switch(rand(0,3))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", El próximo BG lo perderás.";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", Se te escapará un MvP.";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", Perderás un item importante.";
+						break;
+					case 3:
+						npctalk strcharinfo(0)+", Eres aliado?";
+						break;
+				}
+				emotion ET_SCRATCH;
+				percentheal -100,0;
+				break;
+		case 8:
+				specialeffect2 532;
+				switch(rand(0,3))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", Las cosas saldrán bien con tu Guild.";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", Encontrarás nuevos amigos.";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", No alcanzarás a romper el Emperium.";
+						break;
+					case 3:
+						npctalk strcharinfo(0)+", Y la novia? o me salio wekereke?";
+						break;
+				}
+				emotion ET_SCRATCH;
+				sc_start SC_Sleep,10000,0;
+				break;
+		case 9:
+				specialeffect2 533;
+				switch(rand(0,3))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", Diaulo lleame.";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", Oie engancha el wasap.";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", Te enfrentarás a un PvP que no podrás ganar.";
+						break;
+					case 3:
+						npctalk strcharinfo(0)+", Amiga quierete un poco.";
+						break;
+				}
+				emotion ET_SCRATCH;
+				sc_start SC_Stun,10000,0;
+				break;
+		case 10:
+				specialeffect2 534;
+				switch(rand(0,3))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", Tu Guild se desarmará.";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", Te dejarán sólo en la party.";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", Es momento de cambiar.";
+						break;
+					case 3:
+						npctalk strcharinfo(0)+", Y la zorra seguía y seguía.";
+						break;
+				}
+				emotion ET_SCRATCH;
+				percentheal -100,0;
+				break;
+		case 11:
+				specialeffect2 535;
+				switch(rand(0,3))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", No fallarás tus objetivos.";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", Te saldrá la carta que tanto buscabas.";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", Podrás limpiar los MvP sin problemas.";
+						break;
+					case 3:
+						npctalk strcharinfo(0)+", Ni la Naya Facil es como tu.";
+						break;
+				}
+				emotion rand(30);
+				sc_start SC_Stun,10000,0;
+				break;
+		case 12:
+				specialeffect2 536;
+				switch(rand(0,3))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", Es momento que te limpies otako.";
+						break;
+					case 1:
+						npctalk strcharinfo(0)+", tres mil trecientos treinta y tres. ¿Te dice algo ese número?";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", Vuelve a hablarle a tu viejo amigo.";
+						break;
+					case 3:
+						npctalk strcharinfo(0)+", No somos enemis";
+						break;
+				}
+				emotion ET_SCRATCH;
+				sc_start SC_Stun,10000,0;
+				break;
+		case 13:
+		default:
+				specialeffect2 529;
+				switch(rand(0,2))
+				{
+					case 0:
+						npctalk strcharinfo(0)+", Buena suerte en el juego, mala suerte en el amor.";
+						if ( gettime(6) == 6 && gettime(5) >= 19)	set #WETRIPANTU3,#WETRIPANTU3+1;
+						channel_chat("#evento","Elizabeth: " + strcharinfo(0) + " obtuvo el premio! Buena suerte en el juego, mala suerte en el amor!");
+						if( getequipid(EQI_HEAD_LOW) == 40142 )
+							getitem $Premioeventos,$Premiounico+5*$Premiounico/10;
+						else
+							getitem $Premioeventos,$Premiounico;
+						set #EVENTOUNICO,#EVENTOUNICO+1;
+						set $@starttarot,0;
+						sleep 1000;
+						npctalk "Lydia Clar: Adios! ~~~";
+						disablenpc "Lydia Clar#2";
+						delwaitingroom "Elizabeth";
+						end;
+					case 1:
+						npctalk strcharinfo(0)+", Salió alreves que mala suerte.";
+						break;
+					case 2:
+						npctalk strcharinfo(0)+", Error 404, Ganador no encontrado.";
+						break;
+				}
+				emotion ET_SCRATCH;
+				sc_start SC_Stun,10000,0;
+				break;
+	}
+	end;
+
+OnInit:
+	npcspeed 100;
+	disablenpc "Lydia Clar#2";
+	end;
+
+OnTimer4000:
+	getmapxy .@map$, .@x, .@y, BL_NPC;
+	set .@curX, callfunc("move_XY",.@x,148,163);
+	set .@curY, callfunc("move_XY",.@y,152,175);
+	npcwalkto .@curX, .@curY;
+	initnpctimer;
+	end;	
+
+}
