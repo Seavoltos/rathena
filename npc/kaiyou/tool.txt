@@ -39,6 +39,8 @@ rachel,135,109,3	duplicate(Gremio Mercader)	Gremio Mercader#18	776
 veins,222,109,3	duplicate(Gremio Mercader)	Gremio Mercader#19	776
 moscovia,230,184,3	duplicate(Gremio Mercader)	Gremio Mercader#20	776
 einbech,193,81,5	duplicate(Gremio Mercader)	Gremio Mercader#21	776
+umbala,132,214,5	duplicate(Gremio Mercader)	Gremio Mercader#22	776
+einbroch,177,164,3	duplicate(Gremio Mercader)	Gremio Mercader#23	776
 
 
 batt_off,150,96,3	duplicate(Gremio Mercader)	Gremio Mercader#BG	548

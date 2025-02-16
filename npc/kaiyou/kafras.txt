@@ -368,6 +368,33 @@ bomberman,29,18,4	script	Kafra Employee::kaf_26	115,{
 	callfunc "F_Kafra",5,2,0,30,750;
 	callfunc "F_KafEnd",0,1,"en el cementerio";
 }
+
+umbala,144,214,3	script	Kafra Employee::kaf_27	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "umbala",138,200,1,1;
+	callfunc "F_KafEnd",0,1,"en Umbala";
+}
+
+einbroch,175,168,3	script	Kafra Employee::kaf_28	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,0,0,30,750;
+	savepoint "einbroch",173,161,1,1;
+	callfunc "F_KafEnd",0,1,"en la ciudad de Einbroch";
+}
+
 /*
 // Fogatas
 //============================================================

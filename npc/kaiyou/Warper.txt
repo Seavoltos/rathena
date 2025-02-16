@@ -179,8 +179,8 @@ weinbech:
 	if ( !.@a )
 		set .@precio_w,600;
 	set .@lastmap$,"einbech";
-	set .@lastx,186;
-	set .@lasty,74;
+	set .@lastx,198;
+	set .@lasty,81;
 	goto warpto;
 	end;
 weinbrochzeny:
@@ -352,8 +352,8 @@ wumbala:
 	if ( !.@a )
 		set .@precio_w,600;
 	set .@lastmap$,"umbala";
-	set .@lastx,130;
-	set .@lasty,82;
+	set .@lastx,138;
+	set .@lasty,200;
 	goto warpto;
 	end;
 
@@ -917,6 +917,8 @@ vend_zone,94,101,6	duplicate(Warper)	Warper#23	669
 deadbranch,52,43,4	duplicate(Warper)	Warper#24	669
 bomberman,32,18,4	duplicate(Warper)	Warper#25	669
 batt_off,119,89,5	duplicate(Warper)	Warper#26	669
+umbala,132,202,3	duplicate(Warper)	Warper#27	669
+einbroch,170,168,5	duplicate(Warper)	Warper#28	669
 
 
 

@@ -154,3 +154,5 @@ rachel,124,109,5	duplicate(Healer)	Healer#18	677
 veins,209,109,5	duplicate(Healer)	Healer#19	677
 moscovia,217,184,5	duplicate(Healer)	Healer#20	677
 einbech,202,81,3	duplicate(Healer)	Healer#21	677
+umbala,144,202,5	duplicate(Healer)	Healer#22	677
+einbroch,168,164,5	duplicate(Healer)	Healer#23	677

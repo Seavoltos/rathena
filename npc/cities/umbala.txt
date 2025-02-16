@@ -875,7 +875,7 @@ umbala,193,208,6	script	Utan Man#3	789,{
 	}
 }
 
-umbala,139,205,4	script	Utan Man#5	785,{
+umbala,138,220,4	script	Utan Man#5	785,{
 	if (event_umbala >= 3) {
 		mes "[Jooltan]";
 		mes "It's been a long time since I last";

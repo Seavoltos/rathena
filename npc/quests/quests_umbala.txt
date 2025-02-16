@@ -1204,7 +1204,7 @@ um_in,94,123,5	script	Bertztan	783,{
 	}
 }
 
-umbala,145,217,3	script	Chabimatan	783,{
+umbala,144,224,3	script	Chabimatan	783,{
 	if (event_umbala >= 3) {
 		mes "[Chabimatan]";
 		mes "...*Sigh* Umpokoriohtan seems";
