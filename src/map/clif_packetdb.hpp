@@ -1696,13 +1696,19 @@
 	// Clan System
 	parseable_packet(0x098D,-1,clif_parse_clan_chat,2,4);
 	// Sale
+#if PACKETVER >= 20190724
+	parseable_packet( HEADER_CZ_REQ_CASH_BARGAIN_SALE_ITEM_INFO, sizeof( PACKET_CZ_REQ_CASH_BARGAIN_SALE_ITEM_INFO ), clif_parse_sale_search, 0 );
+#else
 	parseable_packet( HEADER_CZ_REQ_CASH_BARGAIN_SALE_ITEM_INFO, -1, clif_parse_sale_search, 0 );
+#endif
 	parseable_packet( HEADER_CZ_REQ_APPLY_BARGAIN_SALE_ITEM, sizeof( PACKET_CZ_REQ_APPLY_BARGAIN_SALE_ITEM ), clif_parse_sale_add, 0 );
-	packet(0x09AF,4);
+	packet( HEADER_ZC_ACK_APPLY_BARGAIN_SALE_ITEM, sizeof( PACKET_ZC_ACK_APPLY_BARGAIN_SALE_ITEM ) );
 	parseable_packet( HEADER_CZ_REQ_REMOVE_BARGAIN_SALE_ITEM, sizeof( PACKET_CZ_REQ_REMOVE_BARGAIN_SALE_ITEM ), clif_parse_sale_remove, 0 );
-	packet(0x09B1,4);
-	parseable_packet(0x09B4,6,clif_parse_sale_open,2);
-	parseable_packet(0x09BC,6,clif_parse_sale_close,2);
+	packet( HEADER_ZC_ACK_REMOVE_BARGAIN_SALE_ITEM, sizeof( PACKET_ZC_ACK_REMOVE_BARGAIN_SALE_ITEM ) );
+	parseable_packet( HEADER_CZ_OPEN_BARGAIN_SALE_TOOL , sizeof(PACKET_CZ_OPEN_BARGAIN_SALE_TOOL), clif_parse_sale_open,0);
+	packet (HEADER_ZC_OPEN_BARGAIN_SALE_TOOL, sizeof(PACKET_ZC_OPEN_BARGAIN_SALE_TOOL));
+	parseable_packet( HEADER_CZ_CLOSE_BARGAIN_SALE_TOOL , sizeof(PACKET_CZ_CLOSE_BARGAIN_SALE_TOOL), clif_parse_sale_close,0);
+	packet (HEADER_ZC_CLOSE_BARGAIN_SALE_TOOL, sizeof(PACKET_ZC_CLOSE_BARGAIN_SALE_TOOL));
 	parseable_packet(0x09C3,8,clif_parse_sale_refresh,2,6);
 	// New Packet
 	packet(0x097A,-1); // ZC_ALL_QUEST_LIST2
@@ -1979,7 +1985,8 @@
 #endif
 
 #if PACKETVER >= 20190724
-	parseable_packet( 0x0b4c, 2, clif_parse_dull, 0 );
+	parseable_packet( HEADER_CZ_SE_CASHSHOP_LIMITED_REQ, sizeof( PACKET_CZ_SE_CASHSHOP_LIMITED_REQ ), clif_parse_CashShopLimited, 0 );
+	packet (HEADER_ZC_SE_CASHSHOP_LIMITED_REQ, sizeof(PACKET_ZC_SE_CASHSHOP_LIMITED_REQ));
 #endif
 
 #if PACKETVER_MAIN_NUM >= 20191120 || PACKETVER_RE_NUM >= 20191106 || PACKETVER_ZERO_NUM >= 20191127

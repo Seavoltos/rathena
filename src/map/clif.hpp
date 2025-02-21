@@ -1459,6 +1459,10 @@ int clif_vend(struct map_session_data *sd, int skill_lv);
 
 void clif_inventory_expansion_info( map_session_data* sd );
 
+/// Limited cash shop
+int clif_CashShopLimited_sub(map_session_data *sd,va_list ap);
+void clif_CashShopLimited( map_session_data* sd );
+
 // Barter System
 void clif_barter_open( map_session_data& sd, struct npc_data& nd );
 void clif_barter_extended_open( map_session_data& sd, struct npc_data& nd );
