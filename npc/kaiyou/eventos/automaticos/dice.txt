@@ -162,7 +162,7 @@ L_Champ:
 	set $@EVENTODICE,0;
 	sleep 1000;
 	addrid(5,0,"dice01");
-	channel_chat("#evento","Elizabeth: Tenemos un ganador, "+strcharinfo(0)+" ha triunfado!");
+	channel_chat("#evento","Elizabeth: Tenemos un ganador, "+strcharinfo(0)+".");
 	getitem $Premioeventos,$Premiounico;
 	set #EVENTOUNICO,#EVENTOUNICO+1;
 	if( @mapname$ != ""){
@@ -179,7 +179,7 @@ L_None:
 
 }
 
-dice01,71,110,4	script	Doble Dice	10179,3,3,{
+dice01,71,110,4	script	Dice#Perdiste	10179,3,3,{
 	if ( $@EVENTODICE == 2 )
 	{
 		sc_start 32, 600000, 10;  // Increase Agi
