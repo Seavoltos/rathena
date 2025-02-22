@@ -8966,7 +8966,33 @@ Body:
     EquipLevelMin: 1
     ArmorLevel: 1
     View: 2569
-
+  - Id: 84000
+    AegisName: C_Costume_4000
+    Name: C_Funao
+    Type: Armor
+    Locations:
+      Costume_Head_Top: true
+    EquipLevelMin: 1
+    ArmorLevel: 1
+    View: 4000
+#   Consumibles custome
+  - Id: 80000
+    AegisName: Ahorradora_Box
+    Name: Ahorradora Box
+    Type: Cash
+    Buy: 10
+    Weight: 100
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      rentitem 84000,604800;
   - Id: 100000
     AegisName: Instance_Airship
     Name: Airship Equipement

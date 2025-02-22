@@ -200,6 +200,8 @@ function	script	F_KafStor	{
 	// Accessing Normal Storage (Skipped if accessing Storage from Guild castle)
 	if (.@type != 2) {
 		// Consume "Free Ticket for Kafra Storage" if available.
+		if (isequipped(84000))
+			set .@fee,0;
 		if (countitem(7059))
 			delitem 7059,1;
 		else {

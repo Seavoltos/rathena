@@ -109,8 +109,8 @@ Body:
         Price: 600
       - Item: Gold_Key_MvP
         Price: 90
-      - Item: New_Insurance
-        Price: 300
+      - Item: Ahorradora_Box
+        Price: 200
       - Item: Fish_Shoes
         Price: 500
       - Item: L_Fishing_Rod
@@ -699,6 +699,8 @@ Body:
         Price: 10
   - Tab: Other          #Otros
     Items:
+      - Item: Ahorradora_Box
+        Price: 200
       - Item: Fish_Shoes
         Price: 500
       - Item: Fisher's_Muffler
