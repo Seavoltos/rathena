@@ -1513,16 +1513,16 @@ int32 pc_equippoint(map_session_data *sd,int32 n){
 /**
  * Fill inventory_data with struct *item_data through inventory (fill with struct *item)
  * @param sd : player session
- * @return 0 sucess, 1:invalid sd
  */
-void pc_setinventorydata(map_session_data *sd)
-{
-	uint8 i;
-	nullpo_retv(sd);
+void pc_setinventorydata( map_session_data& sd ){
+	for( size_t i = 0; i < MAX_INVENTORY; i++ ){
+		t_itemid id = sd.inventory.u.items_inventory[i].nameid;
 
-	for(i = 0; i < MAX_INVENTORY; i++) {
-		t_itemid id = sd->inventory.u.items_inventory[i].nameid;
-		sd->inventory_data[i] = id?itemdb_search(id):nullptr;
+		if( id != 0 ){
+			sd.inventory_data[i] = itemdb_search( id );
+		}else{
+			sd.inventory_data[i] = nullptr;
+		}
 	}
 }
 
@@ -4428,6 +4428,10 @@ void pc_bonus(map_session_data *sd,int32 type,int32 val)
 			if (sd->state.lr_flag != LR_FLAG_ARROW)
 				sd->bonus.ematk += val;
 			break;
+		case SP_EMATK_HIDDEN:
+			if (sd->state.lr_flag != LR_FLAG_ARROW)
+				sd->bonus.ematk_hidden += val;
+			break;
 		case SP_ADD_VARIABLECAST:
 			if (sd->state.lr_flag != LR_FLAG_ARROW)
 				sd->bonus.add_varcast += val;
@@ -6820,7 +6824,6 @@ int32 pc_show_steal(struct block_list *bl,va_list ap)
  */
 bool pc_steal_item(map_session_data *sd,struct block_list *bl, uint16 skill_lv)
 {
-	int32 i;
 	t_itemid itemid;
 	double rate;
 	unsigned char flag = 0;
@@ -6857,25 +6860,43 @@ bool pc_steal_item(map_session_data *sd,struct block_list *bl, uint16 skill_lv)
 	)
 		return false;
 
-	// Try dropping one item, in the order from first to last possible slot.
-	// Droprate is affected by the skill success rate.
-	for( i = 0; i < MAX_MOB_DROP; i++ )
-		if( item_db.exists(md->db->dropitem[i].nameid) && !md->db->dropitem[i].steal_protected && rnd() % 10000 < md->db->dropitem[i].rate
-#ifndef RENEWAL
-		* rate/100.
-#endif
-		)
-			break;
-	if( i == MAX_MOB_DROP )
-		return false;
+	std::shared_ptr<s_mob_drop> drop = nullptr;
 
-	itemid = md->db->dropitem[i].nameid;
+	// Try dropping one item.
+	for( std::shared_ptr<s_mob_drop>& entry : md->db->dropitem ){
+		if( entry->steal_protected ){
+			continue;
+		}
+
+		if( !item_db.exists( entry->nameid ) ){
+			continue;
+		}
+
+#ifdef RENEWAL
+		if( rnd() % 10000 < entry->rate ){
+			drop = entry;
+			break;
+		}
+#else
+		// Droprate is affected by the skill success rate.
+		if( rnd() % 10000 < entry->rate * rate / 100. ){
+			drop = entry;
+			break;
+		}
+#endif
+	}
+
+	if( drop == nullptr ){
+		return false;
+	}
+
+	itemid = drop->nameid;
 	struct item tmp_item = {};
 	tmp_item.nameid = itemid;
 	tmp_item.amount = 1;
 	tmp_item.identify = itemdb_isidentified(itemid);
 	if( battle_config.skill_steal_random_options ){
-		mob_setdropitem_option( tmp_item, md->db->dropitem[i] );
+		mob_setdropitem_option( tmp_item, drop );
 	}
 	flag = pc_additem(sd,&tmp_item,1,LOG_TYPE_PICKDROP_PLAYER);
 
@@ -6894,11 +6915,11 @@ bool pc_steal_item(map_session_data *sd,struct block_list *bl, uint16 skill_lv)
 	log_pick_mob(md, LOG_TYPE_STEAL, -1, &tmp_item);
 
 	//A Rare Steal Global Announce by Lupus
-	if(md->db->dropitem[i].rate <= battle_config.rare_drop_announce) {
+	if(drop->rate <= battle_config.rare_drop_announce) {
 		struct item_data *i_data;
 		char message[128];
 		i_data = itemdb_search(itemid);
-		sprintf (message, msg_txt(sd,542), (sd->status.name[0])?sd->status.name :"GM", md->db->jname.c_str(), i_data->ename.c_str(), (float)md->db->dropitem[i].rate / 100);
+		sprintf (message, msg_txt(sd,542), (sd->status.name[0])?sd->status.name :"GM", md->db->jname.c_str(), i_data->ename.c_str(), (float)drop->rate / 100);
 		//MSG: "'%s' stole %s's %s (chance: %0.02f%%)"
 		intif_broadcast(message, strlen(message) + 1, BC_DEFAULT);
 	}
@@ -10432,6 +10453,7 @@ int64 pc_readparam(map_session_data* sd,int64 type)
 		case SP_ADD_HEAL2_RATE:  val = sd->bonus.add_heal2_rate; break;
 		case SP_ADD_ITEM_HEAL_RATE: val = sd->bonus.itemhealrate2; break;
 		case SP_EMATK:           val = sd->bonus.ematk; break;
+		case SP_EMATK_HIDDEN:    val = sd->bonus.ematk_hidden; break;
 		case SP_FIXCASTRATE:     val = sd->bonus.fixcastrate; break;
 		case SP_ADD_FIXEDCAST:   val = sd->bonus.add_fixcast; break;
 		case SP_ADD_VARIABLECAST:  val = sd->bonus.add_varcast; break;
@@ -11680,19 +11702,19 @@ bool pc_setreg2(map_session_data *sd, const char *reg, int64 val) {
 
 	nullpo_retr(false, sd);
 
-	if (reg[strlen(reg)-1] == '$') {
-		ShowError("pc_setreg2: Invalid variable scope '%s'\n", reg);
+	if( is_string_variable( reg ) ){
+		ShowError( "pc_setreg2: Invalid variable '%s'. String type variables are not supported.\n", reg );
+		return false;
+	}
+
+	if( !not_server_variable( prefix ) ){
+		ShowError( "pc_setreg2: Invalid variable scope '%s'.\n", reg );
 		return false;
 	}
 
 	val = cap_value(val, INT_MIN, INT_MAX);
 
 	switch (prefix) {
-		case '.':
-		case '\'':
-		case '$':
-			ShowError("pc_setreg2: Invalid variable scope '%s'\n", reg);
-			return false;
 		case '@':
 			return pc_setreg(sd, add_str(reg), val);
 		case '#':
@@ -11700,8 +11722,6 @@ bool pc_setreg2(map_session_data *sd, const char *reg, int64 val) {
 		default:
 			return pc_setglobalreg(sd, add_str(reg), val);
 	}
-
-	return false;
 }
 
 /**
@@ -11715,17 +11735,17 @@ int64 pc_readreg2(map_session_data *sd, const char *reg) {
 
 	nullpo_ret(sd);
 
-	if (reg[strlen(reg)-1] == '$') {
-		ShowError("pc_readreg2: Invalid variable scope '%s'\n", reg);
+	if( is_string_variable( reg ) ){
+		ShowError( "pc_readreg2: Invalid variable '%s'. String type variables are not supported.\n", reg );
+		return 0;
+	}
+
+	if( !not_server_variable( prefix ) ){
+		ShowError( "pc_readreg2: Invalid variable scope '%s'.\n", reg );
 		return 0;
 	}
 
 	switch (prefix) {
-		case '.':
-		case '\'':
-		case '$':
-			ShowError("pc_readreg2: Invalid variable scope '%s'\n", reg);
-			return 0;
 		case '@':
 			return pc_readreg(sd, add_str(reg));
 		case '#':
@@ -11733,8 +11753,6 @@ int64 pc_readreg2(map_session_data *sd, const char *reg) {
 		default:
 			return pc_readglobalreg(sd, add_str(reg));
 	}
-
-	return 0;
 }
 
 /*==========================================
