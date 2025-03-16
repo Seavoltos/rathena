@@ -2012,7 +2012,7 @@ batt_off,161,83,4	script	Thanks Ticket Machine	564,{
 	mes "4. Espero que disfrutes~^000000";
 	mes "- Mr. Cat, el dueño de la máquina -";
 	next;
-	switch(select("Cerrar:Comprar:Red Paw Jelly Bag (5 Tickets):Black Paw Jelly Bag (50 Tickets)")) {
+	switch(select("Cerrar:Comprar:Red Paw Jelly Bag (5 Tickets):Black Paw Jelly Bag (50 Tickets):Mérito (500 Tickets)")) {
 	case 1:
 		close;
 	case 2:
@@ -2151,6 +2151,28 @@ batt_off,161,83,4	script	Thanks Ticket Machine	564,{
 		else if (.@i <= 7640) callsub L_Bag,15047,1; //Siege_Suits
 		else callsub L_Bag,15048,1; //Siege_Robe
 		end;
+	case 5:
+		mes "Elegiste obtener un mérito, estos son necesarios para la ^0000FFGuild House^000000. Necesitas insertar 500 ^FF0000Invest Thanks Ticket^000000 y obtendrás el ticket para tu guild.";
+		next;
+		if (countitem(6488) < 500 || !getcharid(2)) {
+			mes "No tienes los suficientes ^FF0000Invest Thanks Ticket^000000 para continuar, o estás sin guild.";
+			close;
+		}
+		if (getd("$house_guild_merito" + getcharid(2) + "_10"))
+		{
+			mes "Ya tienes este ticket.";
+			for (set .@i, 1; .@i <= 20; set .@i, .@i + 1)
+				set .@mer, .@mer+getd("$house_guild_merito" + getcharid(2) + "_" + .@i);
+			cutin "21st_bal"+.@mer,4;
+			close3;
+		}
+		delitem 6488,500; //Thanks_Invest_Ticket
+		setd("$house_guild_merito" + getcharid(2) + "_10"),1;
+		for (set .@i, 1; .@i <= 20; set .@i, .@i + 1)
+			set .@mer, .@mer+getd("$house_guild_merito" + getcharid(2) + "_" + .@i);
+		mes "Felicitaciones! Obtuviste un nuevo ticket!";
+		cutin "21st_bal"+.@mer,4;
+		close3;
 	}
 	end;
 

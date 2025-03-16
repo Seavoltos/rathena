@@ -434,7 +434,7 @@ prontera,160,193,3	script	Elizabeth	612,{
 	mes "Yo soy la encargada de administrar los ^4093BBEventos^000000 automáticos en KaiyouRO";
 	mes "Que deseas hacer?";
 	next;
-	switch(select("Quiero participar:Horarios:Salir")){
+	switch(select("Quiero participar:Horarios:Merito:Salir")){
 		case 1:
 			mes .@name$;
 			mes "Para participar en cualquier evento, debes hacerlo utilizando el comando @joinevent cuando se activen.";
@@ -465,12 +465,34 @@ prontera,160,193,3	script	Elizabeth	612,{
 			mes "- ^004000Cacería^000000";
 			mes "- ^0000FFCarrera Maluka^000000";
 			close3;
-		
 		case 3:
+			mes .@name$;
+			if(!getcharid(2)){
+				mes "Debes tener Guild para poder cobrar tu mérito";
+				close3;
+			}
+			set .@total, #EVENTOMUCHOS + #EVENTOUNICO;
+			if( .@total < 300 )
+			{
+				mes "Aún no tienes el total de eventos necesarios para obtener un Ticket";
+				close3;
+			}
+			if( #MeritoGremio == 1 )
+			{
+				mes "Ya cobraste tu Ticket";
+				close3;
+			}
+			setd("$house_guild_merito" + getcharid(2) + "_6"),1;
+			set #MeritoGremio,1;
+			mes "Felicitaciones! Lograste obtener un Ticket para tu Guild!";
+			for (set .@i, 1; .@i <= 20; set .@i, .@i + 1)
+				set .@mer, .@mer+getd("$house_guild_merito" + getcharid(2) + "_" + .@i);
+			cutin "21st_bal"+.@mer,4;
+			close3;
+		case 4:
 			mes .@name$;
 			mes "Ok, nos estamos viendo";
 			close3;
-		
 	}
 OnWhisperGlobal:
 	if ( getgmlevel() < 60) 

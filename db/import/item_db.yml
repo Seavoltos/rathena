@@ -8993,6 +8993,25 @@ Body:
       NoAuction: true
     Script: |
       rentitem 84000,604800;
+  - Id: 80001
+    AegisName: Merito_GM
+    Name: Merito GM
+    Type: Cash
+    Buy: 10
+    Weight: 0
+    Trade:
+      Override: 99
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoStorage: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      if(getcharid(2))
+        setd("$house_guild_merito" + getcharid(2) + "_6"),1;
   - Id: 100000
     AegisName: Instance_Airship
     Name: Airship Equipement

@@ -1,0 +1,531 @@
+//===== rAthena Script =======================================
+//= Sunken Tower
+//===== Description: =========================================
+//= Sunken Tower Instance
+//===== Changelogs: ==========================================
+//= 1.0 First version. [Seavoltos]
+//============================================================
+//============================================================
+
+instance,62,56,3	script	Old Sign#ST	4_BOARD3,{
+	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
+		mes "-- Sunken Tower Records --";
+		.@SunkenTower_name$ = getd("$12_str_SunkenTower"+.@i+"$");
+		.@SunkenTower_piso  = getd("$12_num_SunkenTower"+.@i);
+		.@SunkenTower_member = getd("$12_mem_SunkenTower"+.@i);
+		
+		if (.@SunkenTower_name$ == "") {
+			mes "Aún no hay registros de esta instancia.";
+		}
+		else {
+			mes "La Guild que posee el record es ["+ .@SunkenTower_name$+"]\n";
+			mes "Llegaron hasta el piso "+ .@SunkenTower_piso + " con "+ .@SunkenTower_member+ " miembros.";
+		}
+		mes "Dificultad " + .dificultad$[.@i];
+		if( .@i == 4 )
+			close;
+		else
+			next;
+	}
+	close;
+
+OnInit:
+	for (set .@i, 1; .@i <= 4; set .@i, .@i + 1) {
+		if (!getd("$12_num_SunkenTower"+.@i))
+			setd "$12_num_SunkenTower"+.@i,0;
+		
+		//setd "$230225_num_SunkenTower"+.@i , 14400;
+		//setd "$230225_str_SunkenTower"+.@i+"$" , "";
+	}
+	setarray .dificultad$,"","^008000Easy^000000","Normal","^BA7100Hard^000000","^ff0000Insane^000000";
+	end;
+}
+
+instance,66,58,3	script	Haetae#s_instance	4_M_SE_STAR,{
+	if (BaseLevel < 50) {
+		mes "["+strnpcinfo(1)+"]", "Eres demasiado debil, vuelve cuando seas más fuerte.";
+		close;
+	}
+
+	.@cooldown = 12330;
+
+	if(checkquest(.@cooldown,PLAYTIME) == 2){
+		erasequest .@cooldown;
+	}
+	else if (checkquest(.@cooldown,PLAYTIME) != -1){
+		mes "["+strnpcinfo(1)+"]", "Aun te afectan los efectos de la Sunken Tower's.", "Vuelve cuando estos se hayan ido.";
+		close;
+	}
+
+	.@guild_id = getcharid(2);
+	.@instance$ = "Sunken Tower";
+
+	if (!.@guild_id) {
+		mes "["+strnpcinfo(1)+"]", "Hmm? Aún no tienes Guild? Debes estar en una para poder entrar.";
+		close;
+	}
+
+	mes "["+strnpcinfo(1)+"]", "¿Quieres ayudar a limpiar la Sunken Tower?";
+	next;
+	switch(select("Generar dungeon " + .@instance$ + "","Cancelar")){
+		case 1:
+			if(strcharinfo(0) != getguildmaster(.@guild_id)){
+				mes "Tú no eres el lider de tu Guild.";
+				close;
+			}
+            if(!instance_check_guild(.@guild_id, 1, 50, 99)) {
+                mes "["+strnpcinfo(1)+"]", "Se ve como que no todos los miembros de la guild se encuentran listos para esta instancia.";
+                close;
+            }
+			switch(select("^3CB371[»]^000000 ^008000Modo Easy^000000","^3CB371[»]^000000 Modo Normal","^3CB371[»]^000000 ^BA7100Modo Hard^000000","^3CB371[»]^000000 ^ff0000Modo Insane^000000")){
+				case 1:
+					set .@level$,ID_EASY;
+					break;
+				case 2:
+					set .@level$,ID_NORMAL;
+					break;
+				case 3:
+					set .@level$,ID_HARD;
+					break;
+				case 4:
+					set .@level$,ID_INSANE;
+					break;
+			}
+			
+			if (instance_create(.@instance$,IM_GUILD,.@guild_id,.@level$) < 0) {
+				mes "Nombre de la Guild: " + getguildname(.@guild_id);
+				mes "Lider de la Guild: " + strcharinfo(0);
+				mes "^0000ff"+.@instance$+" ^000000- La reserva ha fallado!";
+				close;
+			}
+			set .@instanceid,instance_id(IM_GUILD);
+
+			if ( instance_getdifficulty(.@instanceid) == 4 ){
+				instance_setpenalty(.@instanceid,SC_ID_ATK,20);
+				instance_setpenalty(.@instanceid,SC_ID_MAXHP,20);
+				instance_setpenalty(.@instanceid,SC_ID_SPEED,20);
+				instance_setpenalty(.@instanceid,SC_ID_MATK,20);
+				instance_setpenalty(.@instanceid,SC_ID_CAST,20);
+				instance_setpenalty(.@instanceid,SC_ID_ASPD,20);
+				instance_setpenalty(.@instanceid,SC_ID_MAXSP,20);
+				instance_setpenalty(.@instanceid,SC_ID_ALLSTATS,20);
+				setinstancevar('difficulty,4,.@instanceid);
+			}
+			if ( instance_getdifficulty(.@instanceid) == 3 ){
+				instance_setpenalty(.@instanceid,SC_ID_ATK,10);
+				instance_setpenalty(.@instanceid,SC_ID_MAXHP,10);
+				instance_setpenalty(.@instanceid,SC_ID_SPEED,10);
+				instance_setpenalty(.@instanceid,SC_ID_MATK,10);
+				instance_setpenalty(.@instanceid,SC_ID_CAST,10);
+				setinstancevar('difficulty,3,.@instanceid);
+			}
+			if ( instance_getdifficulty(.@instanceid) == 2 ){
+				setinstancevar('difficulty,2,.@instanceid);
+			}
+			if ( instance_getdifficulty(.@instanceid) == 1 ){
+				instance_setbuff(.@instanceid,SC_II_MAXHP,5);
+				instance_setbuff(.@instanceid,SC_II_MAXSP,5);
+				instance_setbuff(.@instanceid,SC_II_ALLSTATS,5);
+				setinstancevar('difficulty,1,.@instanceid);
+			}
+			close;
+        case 2:
+            close;
+	}
+    close;
+}
+
+instance,71,64,4	script	Sunken Tower Device	PORTAL,{
+function F_ForceEnter;
+	if (BaseLevel < 50) {
+		mes "["+strnpcinfo(1)+"]","Tu nivel de poder no es el suficientemente alto para poder viajar. Vuelve cuando seas al menos nivel 50.";
+		close;
+	}
+	.@guild_id = getcharid(2);
+	.@instanceid = instance_id(IM_GUILD);
+	.@instance$ = "Sunken Tower";
+    .@quest_id = 12330;
+
+	if ( !.@guild_id ) {
+		mes "["+strnpcinfo(1)+"]","Recorrer la torre sin guild? Vuelve cuando hayas creado una, ni pensarlo en hacerlo solo.";
+		close;
+	}
+	if(strcharinfo(0) != getguildmaster(.@guild_id)){
+		mes "["+strnpcinfo(1)+"]","Tú no eres el lider de tu Guild.";
+		close;
+	}
+	mes "["+strnpcinfo(1)+"]", "Asegúrate de que ^ff0000todos^000000 esten listos, ya que llevaré a toda tu guild y sólo podrán ingresar una vez. Iniciada la instancia ^ff0000no hay otra forma de entrar^000000.";
+	next;
+	if (select("Estoy listo, llévame","Cancelar") == 2)
+		close;
+
+	if(!instance_check_guild(.@guild_id, 1, 50, 99)) {
+		mes "Se ve como que no todos los miembros de la guild se encuentran listos para esta instancia.";
+		close;
+	}
+	switch( checkquest(.@quest_id,PLAYTIME) ) {
+	case -1:
+		switch( instance_enter(.@instance$,13,60,getcharid(0),.@instanceid) ) {
+		case IE_OTHER:
+			mes "["+strnpcinfo(1)+"]","Un error desconocido ha ocurrido.";
+			close;
+		case IE_NOINSTANCE:
+			mes "["+strnpcinfo(1)+"]","El pasaje para viajar entre dimensiones aún no se ha activado.";
+			close;
+		case IE_NOMEMBER:
+			mes "["+strnpcinfo(1)+"]","No tienes permitido acceder a este dispositivo.";
+			close;
+		case IE_OK:
+			addrid(3,0,.@guild_id);
+			F_ForceEnter();
+			end;
+		}
+	case 0:
+	case 1:
+		mes "["+strnpcinfo(1)+"]","Aún quedan restos de tu último viaje. Acceso denegado.";
+		close;
+	case 2:
+		mes "["+strnpcinfo(1)+"]","^0000ffLos restos de tu último viaje han desaparecido. Ahora puedes volver a moverte entre dimensiones.^000000";
+		erasequest .@quest_id;
+		close;
+	}
+
+	function	F_ForceEnter	{
+		.@guild_id = getcharid(2);
+		.@instanceid = instance_id(IM_GUILD);
+		.@instance$ = "Sunken Tower";
+		.@quest_id = 12330;
+
+		if(strcharinfo(0) == getguildmaster(.@guild_id)){
+			mapannounce "instance", "[" + getguildname(.@guild_id) + "] " + strcharinfo(0) + " ha entrado con su Guild a " + .@instance$ + ".",bc_map,"0x00ff99";
+			setquest .@quest_id;
+			return;
+		}
+		switch( checkquest(.@quest_id,PLAYTIME) ) {
+		case -1:
+			switch( instance_enter(.@instance$,13,60,getcharid(0),.@instanceid) ) {
+			case IE_OTHER:
+				mes "["+strnpcinfo(1)+"]","Un error desconocido ha ocurrido.";
+				close;
+			case IE_NOINSTANCE:
+				mes "["+strnpcinfo(1)+"]","El pasaje para viajar entre dimensiones aún no se ha activado.";
+				close;
+			case IE_NOMEMBER:
+				mes "["+strnpcinfo(1)+"]","No tienes permitido acceder a este dispositivo.";
+				close;
+			case IE_OK:
+				mapannounce "instance", "[" + getguildname(.@guild_id) + "] " + strcharinfo(0) + " ha entrado con su Guild a " + .@instance$ + ".",bc_map,"0x00ff99";
+				setquest .@quest_id;
+				end;
+			}
+		case 0:
+		case 1:
+			mes "["+strnpcinfo(1)+"]","Aún quedan restos de tu último viaje. Acceso denegado.";
+			close;
+		case 2:
+			erasequest .@quest_id;
+			switch( instance_enter(.@instance$,13,60,getcharid(0),.@instanceid) ) {
+			case IE_OTHER:
+				mes "["+strnpcinfo(1)+"]","Un error desconocido ha ocurrido.";
+				close;
+			case IE_NOINSTANCE:
+				mes "["+strnpcinfo(1)+"]","El pasaje para viajar entre dimensiones aún no se ha activado.";
+				close;
+			case IE_NOMEMBER:
+				mes "["+strnpcinfo(1)+"]","No tienes permitido acceder a este dispositivo.";
+				close;
+			case IE_OK:
+				mapannounce "instance", "[" + getguildname(.@guild_id) + "] " + strcharinfo(0) + " ha entrado con su Guild a " + .@instance$ + ".",bc_map,"0x00ff99";
+				setquest .@quest_id;
+				end;
+			}
+			close;
+		}
+	}
+}
+
+// Instancia
+1@ch_u,1,1,5	script	#s_tower_controller	-1,{
+	end;
+	OnInstanceInit:
+		setarray .monsterType1[0],1716,1713,1769,1193,1735,1736,1699,1297,1206,1403,1098,1668,1016,1194,1099,1100,1654,1315,1882,1415,1867,1101,1102,1367,1408,1268,1507,1188,1830,1692,1211,1267,1300,1631,1519,1513,1209,1248,1260,1698,1384,1385,1378,1106,1109,1382,1672,1670,1673,1671,1506,1321,1111,1380,1781,1493,1504,1770,1377,1033,1635,1655,1412,1117,1383,1371,1005,1714,1717,1869,1118,1319,1119,1753,1317,1253,1778,1368,1036,1303,1503,1387,1125,1123,1126,1124,1122,1258,1277,1381,1376,1318,1866,1213,1680,1773,1129,1035,1068,1512,1510,1777,1789,1837,1374,1257,1212,1772,1029,1130,1131,1072,1406,1833,1639,1656,1132,1219,1135,1133,1134,1282,1587,1366;
+		setarray .monsterType2[0],1306,1517,1410,1505,1509,1637,1020,1139,1045,1140,1143,1146,1884,1148,1274,1264,1191,1149,1313,1041,1026,1780,1151,1255,1061,1379,1180,1715,1718,1620,1044,1700,1615,1189,1686,1273,1152,1023,1153,1308,1500,1154,1216,1256,1155,1156,1202,1071,1697,1695,1693,1696,1694,1077,1199,1508,1162,1865,1254,1657,1163,1276,1682,1164,1702,1195,1392,1201,1831,1165,1243,1001,1323,1774,1638,1701,1401,1037,1754,1755,1196,1169,1752,1386,1775,1703,1028,1215,1207,1495,1065,1370,1829,1069,1584,1622,1405,1375,1054,1279,1883,1771,1679,1677,1678,1676,1621,1390,1208,1617,1653,1179,1416,1263,1497,1499,1498,1192,1291,1652,1178,1015,1197,1864;
+		setarray .monsterMvP[0],1719,1389,1115,1252,1768,1885,1734,1251,1779,1688,1373,1623,1583,1708,1685;
+
+		setarray .warpPoint[0],13,60, 97,60, 185,60, 271,60, 355,60;
+		setarray .elements$[0],"Neutral", "Water", "Earth", "Fire", "Wind", "Poison", "Holy", "Dark", "Ghost", "Undead";
+
+		setarray 'GuildMembers[0],0;
+		'GuildMembersClaimed = 0;
+
+		.monsterArraySize1 = getarraysize(.monsterType1);
+		.monsterArraySize2 = getarraysize(.monsterType2);
+		.monsterArraySizeMvP = getarraysize(.monsterMvP);
+
+		.@instanceName$ = instance_live_info(ILI_NAME);
+		.@instance_db_id =  instance_info(.@instanceName$, IIT_ID);
+
+		'floor = 0;
+		'map$ = instance_mapname("1@ch_u");
+		'preferredElement = rand(0,9);
+		'GuildCount = 0;
+
+		initnpctimer;
+		end;
+
+	OnWarpParty:
+		.@index = 'floor % 5;
+		.@x_i = .warpPoint[.@index*2];
+		.@y_i = .warpPoint[.@index*2 + 1];
+		'floor++;
+		mapannounce 'map$, "[ Comienza el piso " + ('floor + 1) + " ]", bc_map,0x00FFFF,FW_NORMAL,14;
+		.@index = 'floor % 5;
+		.@x_start = .warpPoint[.@index*2];
+		.@y_start = .warpPoint[.@index*2 + 1];
+		areawarp 'map$, .@x_i-9, .@y_i-46, .@x_i+38, .@y_i+3,'map$,.@x_start,.@y_start;
+	OnFloorStart:
+        .@index = 'floor % 5;
+        .@x_start = .warpPoint[.@index*2];
+        .@y_start = .warpPoint[.@index*2 + 1];
+        .@mobName$ = "Sunken Floor " + ('floor + 1) + " Variant";
+        .@label$ = instance_npcname(strnpcinfo(0))+"::OnMobKill";
+        sleep 1000;
+		if ( instance_getdifficulty('instanceid) == 4 ){
+			instance_setpenalty('instanceid,SC_ID_ATK,20+'floor);
+			instance_setpenalty('instanceid,SC_ID_MAXHP,20+'floor);
+			instance_setpenalty('instanceid,SC_ID_SPEED,20+'floor);
+			instance_setpenalty('instanceid,SC_ID_MATK,20+'floor);
+			instance_setpenalty('instanceid,SC_ID_CAST,20+'floor);
+			instance_setpenalty('instanceid,SC_ID_ASPD,20+'floor);
+			instance_setpenalty('instanceid,SC_ID_MAXSP,20+'floor);
+			instance_setpenalty('instanceid,SC_ID_ALLSTATS,20+'floor);
+		}
+		if (instance_getdifficulty('instanceid) == 3 ){
+			instance_setpenalty('instanceid,SC_ID_ATK,10+'floor);
+			instance_setpenalty('instanceid,SC_ID_MAXHP,10+'floor);
+			instance_setpenalty('instanceid,SC_ID_SPEED,10+'floor);
+			instance_setpenalty('instanceid,SC_ID_MATK,10+'floor);
+			instance_setpenalty('instanceid,SC_ID_CAST,10+'floor);
+			instance_setpenalty('instanceid,SC_ID_ASPD,'floor);
+			instance_setpenalty('instanceid,SC_ID_MAXSP,'floor);
+			instance_setpenalty('instanceid,SC_ID_ALLSTATS,'floor);
+		}
+		if ( instance_getdifficulty('instanceid) == 1 || instance_getdifficulty('instanceid) == 2 ){
+			instance_setpenalty('instanceid,SC_ID_ATK,'floor);
+			instance_setpenalty('instanceid,SC_ID_MAXHP,'floor);
+			instance_setpenalty('instanceid,SC_ID_SPEED,'floor);
+			instance_setpenalty('instanceid,SC_ID_MATK,'floor);
+			instance_setpenalty('instanceid,SC_ID_CAST,'floor);
+			instance_setpenalty('instanceid,SC_ID_ASPD,'floor);
+			instance_setpenalty('instanceid,SC_ID_MAXSP,'floor);
+			instance_setpenalty('instanceid,SC_ID_ALLSTATS,'floor);
+		}
+		
+		if(('floor % 5) == 4){
+			.@mob = .monsterMvP[rand(.monsterArraySizeMvP)];
+            areamonster 'map$, .@x_start-6, .@y_start-40, .@x_start+37, .@y_start-6, .@mobName$, .@mob, 1, .@label$;
+            .@gid = $@mobid[0];
+			getunitdata .@gid, .@arr;
+            setunitdata .@gid, UMOB_SIZE, rand(3);
+            setunitdata .@gid, UMOB_RACE, rand(0,9);
+			setunitdata .@gid, UMOB_MAXHP, .@arr[UMOB_MAXHP] + 'floor * 5000;
+			setunitdata .@gid, UMOB_HP, .@arr[UMOB_HP] + 'floor * 5000;
+            if (rand(100) < 50) {
+                setunitdata .@gid, UMOB_ELETYPE, 'preferredElement;
+            } else {
+                setunitdata .@gid, UMOB_ELETYPE, rand(0,9);
+            }
+            setunitdata .@gid, UMOB_ELELEVEL, rand(1,4);
+            unitskilluseid .@gid,"NPC_RELIEVE_ON",'difficulty;
+            sleep 20;
+		}
+        for (.@i = 0; .@i < (20 + 'difficulty * 5); .@i++) {
+			switch( rand(1,2) ){
+				case 1:
+					.@mob = .monsterType1[rand(.monsterArraySize1)];
+					break;
+				case 2:
+					.@mob = .monsterType2[rand(.monsterArraySize2)];
+					break;
+			}
+            areamonster 'map$, .@x_start-6, .@y_start-40, .@x_start+37, .@y_start-6, .@mobName$, .@mob, 1, .@label$;
+            .@gid = $@mobid[0];
+			getunitdata .@gid, .@arr;
+            setunitdata .@gid, UMOB_SIZE, rand(3);
+            setunitdata .@gid, UMOB_RACE, rand(0,9);
+			setunitdata .@gid, UMOB_MAXHP, .@arr[UMOB_MAXHP] + 'floor * 5000;
+			setunitdata .@gid, UMOB_HP, .@arr[UMOB_HP] + 'floor * 5000;
+            if (rand(100) < 50) {
+                setunitdata .@gid, UMOB_ELETYPE, 'preferredElement;
+            } else {
+                setunitdata .@gid, UMOB_ELETYPE, rand(0,9);
+            }
+            setunitdata .@gid, UMOB_ELELEVEL, rand(1,4);
+            unitskilluseid .@gid,"NPC_RELIEVE_ON",'difficulty;
+            sleep 20;
+        }
+        end;
+
+    OnFirstStart:
+        donpcevent instance_npcname("#s_tower_controller")+"::OnFloorStart";
+        mapannounce 'map$, "Haetae: Estamos bajo la Endless Tower, en las profundidades las cosas se comienzan a distorsionar.", bc_map,0xCC6666,FW_NORMAL,14;
+        sleep 5000;
+        mapannounce 'map$, "Haetae: Al parecer la mayor cantidad de energía proviene del elemento " +  .elements$['preferredElement] + ".", bc_map,0xCC6666,FW_NORMAL,14;
+        end;
+
+	OnTimer1500000:
+		mapannounce 'map$, "Haetae: Sólo quedan 5 minutos antes que el lugar quede totalmente inundado, apúrate!.", bc_map,0xCC6666,FW_NORMAL,14;
+		end;
+	OnTimer1560000:
+		mapannounce 'map$, "Haetae: quedan 4 minutos.", bc_map,0xCC6666,FW_NORMAL,14;
+		end;
+	OnTimer1620000:
+		mapannounce 'map$, "Haetae: quedan 3 minutos.", bc_map,0xCC6666,FW_NORMAL,14;
+		end;
+	OnTimer1680000:
+		mapannounce 'map$, "Haetae: quedan 2 minutos.", bc_map,0xCC6666,FW_NORMAL,14;
+		end;
+	OnTimer1740000:
+		mapannounce 'map$, "Haetae: queda 1 minuto...", bc_map,0xCC6666,FW_NORMAL,14;
+		end;
+	OnTimer1770000:
+		mapannounce 'map$, "Haetae: 30 segundos...", bc_map,0xCC6666,FW_NORMAL,14;
+		end;
+	OnInstanceDestroy:
+		//'SunkenTower_member
+		//'floor
+		//'difficulty
+		//'guild_id
+		//'SunkenTower_member
+		//.@SunkenTower_name$ = getd("$12_str_SunkenTower"+.@i+"$");
+		//.@SunkenTower_piso  = getd("$12_num_SunkenTower"+.@i);
+		//.@SunkenTower_member = getd("$12_mem_SunkenTower"+.@i);
+
+		//Merito
+		if( 'floor > 10 )
+			setd("$house_guild_merito" + 'guild_id + "_8"),1;
+
+		.@GlobalSunked = getd("$12_num_SunkenTower"+'difficulty);
+		.@SunkenTower_member = getd("$12_mem_SunkenTower"+'difficulty);
+
+		if( 'floor < .@GlobalSunked )
+			mapannounce 'map$, "El número de rondas [" + 'floor + "] ha sido guardado. Pero no ha roto la marca.",bc_map,"0xffff33";
+		else
+		{
+			if('floor == .@GlobalSunked)
+			{
+				if (.@SunkenTower_member >= 'SunkenTower_member)
+					mapannounce 'map_name$, "El número de rondas [" + 'floor + "] ha sido guardado. Pero no ha roto la marca.",bc_map,"0xffff33";
+				else {
+					announce "La Guild "+ getguildname('guild_id) + " con " + 'SunkenTower_member + " miembro(s) ha(n) superado el record con (" + 'floor + ") pisos.",bc_all,"0xffff33",FW_NORMAL,15;
+					setd "$12_str_SunkenTower"+'difficulty+"$" , getguildname('guild_id);
+					setd "$12_num_SunkenTower"+'difficulty , 'floor;
+					setd "$12_mem_SunkenTower"+'difficulty , 'SunkenTower_member;
+				}
+			}
+			else
+			{
+				announce "La Guild "+ getguildname('guild_id) + " con " + 'SunkenTower_member + " miembro(s) ha(n) superado el record con (" + 'floor + ") pisos.",bc_all,"0xffff33",FW_NORMAL,15;
+				setd "$12_str_SunkenTower"+'difficulty+"$" , getguildname('guild_id);
+				setd "$12_num_SunkenTower"+'difficulty , 'floor;
+				setd "$12_mem_SunkenTower"+'difficulty , 'SunkenTower_member;
+			}	
+		}
+		end;
+	OnMobKill:
+		end;
+}
+
+1@ch_u,8,55,5	script	Haetae#s_tower	4_M_SE_STAR,{
+	.@guild_id = getcharid(2);
+    if (strcharinfo(0) != getguildmaster(.@guild_id)) {
+        mes "["+strnpcinfo(1)+"]", "¿Quién eres? No me hables a menos que seas el lider.";
+        close;
+    }
+	'guild_id = getcharid(2);
+	'instanceid = instance_id(IM_GUILD);
+
+    L_MainMenu:
+        if (!'hasTalked) {
+            mes "["+strnpcinfo(1)+"]", "Al parecer el agua sigue subiendo.", "Nos quedan menos de 30 minutos hasta que no se pueda salir.", "Apúrate!";
+        } else {
+            mes "["+strnpcinfo(1)+"]", "Se nos va el tiempo! ¿Qué deseas hacer?";
+        }
+        'hasTalked = 1;
+        next;
+        switch(select("Espera un momento!", "Vamos!.")) {
+            case 1:
+                close;
+            case 2:
+				'SunkenTower_member = getmapusers('map$);
+                donpcevent instance_npcname("#s_tower_controller")+"::OnFirstStart";
+                hideonnpc instance_npcname(strnpcinfo(0));
+                close;
+		}
+    close;
+    end;
+}
+
+1@ch_u,47,28,5	script	Dimensional Portal#s_tower1	PORTAL,{
+function F_Debuff;
+	if (mobcount('map$,instance_npcname("#s_tower_controller")+"::OnMobKill") < 1) {
+		.@guild_id = getcharid(2);
+		if(strcharinfo(0) == getguildmaster(.@guild_id)) {
+			mes "----------------", "Si continúas no podrán volver, deseas continuar?";
+			if (select("Esperar","Continuar") == 1)
+				close;
+			donpcevent instance_npcname("#s_tower_controller")+"::OnWarpParty";
+			addrid(1);
+			F_Debuff();
+			end;
+		}
+    }
+    end;
+
+	function	F_Debuff	{
+		if ( instance_getdifficulty('instanceid) == 4 ){
+			sc_start(SC_ID_ATK,-1,20+'floor);
+			sc_start(SC_ID_MAXHP,-1,20+'floor);
+			sc_start(SC_ID_SPEED,-1,20+'floor);
+			sc_start(SC_ID_MATK,-1,20+'floor);
+			sc_start(SC_ID_CAST,-1,20+'floor);
+			sc_start(SC_ID_ASPD,-1,20+'floor);
+			sc_start(SC_ID_MAXSP,-1,20+'floor);
+			sc_start(SC_ID_ALLSTATS,-1,20+'floor);
+		}
+		if (instance_getdifficulty('instanceid) == 3 ){
+			sc_start(SC_ID_ATK,-1,10+'floor);
+			sc_start(SC_ID_MAXHP,-1,10+'floor);
+			sc_start(SC_ID_SPEED,-1,10+'floor);
+			sc_start(SC_ID_MATK,-1,10+'floor);
+			sc_start(SC_ID_CAST,-1,10+'floor);
+			sc_start(SC_ID_ASPD,-1,'floor);
+			sc_start(SC_ID_MAXSP,-1,'floor);
+			sc_start(SC_ID_ALLSTATS,-1,'floor);
+		}
+		if ( instance_getdifficulty('instanceid) == 1 || instance_getdifficulty('instanceid) == 2 ){
+			sc_start(SC_ID_ATK,-1,'floor);
+			sc_start(SC_ID_MAXHP,-1,'floor);
+			sc_start(SC_ID_SPEED,-1,'floor);
+			sc_start(SC_ID_MATK,-1,'floor);
+			sc_start(SC_ID_CAST,-1,'floor);
+			sc_start(SC_ID_ASPD,-1,'floor);
+			sc_start(SC_ID_MAXSP,-1,'floor);
+			sc_start(SC_ID_ALLSTATS,-1,'floor);
+		}
+		return;
+	}
+}
+
+1@ch_u,130,28,5	duplicate(Dimensional Portal#s_tower1)	Dimensional Portal#s_tower2	PORTAL
+1@ch_u,219,28,5	duplicate(Dimensional Portal#s_tower1)	Dimensional Portal#s_tower3	PORTAL
+1@ch_u,306,28,5	duplicate(Dimensional Portal#s_tower1)	Dimensional Portal#s_tower4	PORTAL
+1@ch_u,389,28,5	duplicate(Dimensional Portal#s_tower1)	Dimensional Portal#s_tower5	PORTAL
+
+1@ch_u	mapflag	restricted	6
+1@ch_u	mapflag	noteleport
+1@ch_u	mapflag	monster_noteleport
+1@ch_u	mapflag	nowarpto
+1@ch_u	mapflag	nomemo
+1@ch_u	mapflag	nodynamicnpc
+1@ch_u	mapflag	nobranch

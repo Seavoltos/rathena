@@ -211,6 +211,11 @@ arug_cas04	mapflag	nosave	SavePoint
 arug_cas05	mapflag	nosave	SavePoint
 
 //============================================================
+// WoD
+//============================================================
+rwc02	mapflag	nosave	SavePoint
+
+//============================================================
 // WoE:Novice Castles
 //============================================================
 nguild_alde	mapflag	nosave	SavePoint

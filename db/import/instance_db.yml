@@ -99,3 +99,10 @@ Body:
       Y: 196
     AdditionalMaps:
       kamizama: true
+  - Id: 12
+    Name: Sunken Tower
+    TimeLimit: 1800
+    Enter:
+      Map: 1@ch_u
+      X: 13
+      Y: 60

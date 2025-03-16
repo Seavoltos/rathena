@@ -489,6 +489,9 @@ Body:
   - Id: 12329
     Title: Kami's Lookout after-effects
     TimeLimit: +23h
+  - Id: 12330
+    Title: Sunken Tower after-effects
+    TimeLimit: +23h
   - Id: 12416
     Title: Contract with Emily
   - Id: 12417

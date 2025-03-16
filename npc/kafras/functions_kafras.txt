@@ -68,28 +68,28 @@ function	script	F_Kafra	{
 	}
 	next;
 	if (.@welcome == 2)// Guild Kafra Menu override (free Teleport, free Storage, Free Cart)
-		setarray .@K_Menu0$[0], "Abrir Storage", "Abrir Guild Storage", "Rentar un carro", "Servicios teletransporte", "Cancelar";
+		setarray .@K_Menu0$[0], "Abrir Storage","Abrir Storage VIP", "Abrir Guild Storage", "Rentar un carro", "Servicios teletransporte", "Cancelar";
 	else {
 		switch(.@menu_num) {
 			// Save and Storage only
-			case 1:	setarray .@K_Menu0$[0],"Guardar","Abrir Storage","Cancelar"; break;
+			case 1:	setarray .@K_Menu0$[0],"Guardar","Abrir Storage","Abrir Storage VIP","Cancelar"; break;
 			// Storage only
-			case 2:	setarray .@K_Menu0$[0],"Abrir Storage","Cancelar"; break;
+			case 2:	setarray .@K_Menu0$[0],"Abrir Storage","Abrir Storage VIP","Cancelar"; break;
 			// No Teleport (Common)
-			case 3: setarray .@K_Menu0$[0],"Guardar","Abrir Storage","Rentar un carro","Otras informaciones","Cancelar"; break;
+			case 3: setarray .@K_Menu0$[0],"Guardar","Abrir Storage","Abrir Storage VIP","Rentar un carro","Otras informaciones","Cancelar"; break;
 			// Case 4 is Einbroch no tele message.
 			// No save, or teleport. (Common)
-			case 5:	setarray .@K_Menu0$[0],"Abrir Storage","Rentar un carro","Otras informaciones","Cancelar"; break;
+			case 5:	setarray .@K_Menu0$[0],"Abrir Storage","Abrir Storage VIP","Rentar un carro","Otras informaciones","Cancelar"; break;
 			// Storage and Check Other Information only.
-			case 6:	setarray .@K_Menu0$[0],"Abrir Storage","Otras informaciones","Cancelar"; break;
+			case 6:	setarray .@K_Menu0$[0],"Abrir Storage","Abrir Storage VIP","Otras informaciones","Cancelar"; break;
 			// Save, Storage, and Pushcart only (Kafra Warehouse)
-			case 7:	setarray .@K_Menu0$[0],"Guardar","Abrir Storage","Rentar un carro","Cancelar"; break;
+			case 7:	setarray .@K_Menu0$[0],"Guardar","Abrir Storage","Abrir Storage VIP","Rentar un carro","Cancelar"; break;
 			// Save, Storage, Other Check information. (Turbo track)
-			case 8: setarray .@K_Menu0$[0],"Guardar","Abrir Storage","Otras informaciones","Cancelar"; break;
+			case 8: setarray .@K_Menu0$[0],"Guardar","Abrir Storage","Abrir Storage VIP","Otras informaciones","Cancelar"; break;
 			// No Save (Rune Knight)
-			case 9: setarray .@K_Menu0$[0],"Abrir Storage","Rentar un carro","Servicios teletransporte","Otras informaciones","Cancelar"; break;
+			case 9: setarray .@K_Menu0$[0],"Abrir Storage","Abrir Storage VIP","Rentar un carro","Servicios teletransporte","Otras informaciones","Cancelar"; break;
 			// Storage, Save, and Pushcart (Dewata, reorder of case 7)
-			case 10: setarray .@K_Menu0$[0],"Abrir Storage","Guardar","Rentar un carro","Cancelar"; break;
+			case 10: setarray .@K_Menu0$[0],"Abrir Storage","Abrir Storage VIP","Guardar","Rentar un carro","Cancelar"; break;
 			// Default message (obsolete)
 			default: setarray .@K_Menu0$[0],"Guardar","Abrir Storage","Abrir Storage VIP","Servicios teletransporte","Rentar un carro","Otras informaciones","Abrir Guild Storage","Cancelar"; break;
 		}

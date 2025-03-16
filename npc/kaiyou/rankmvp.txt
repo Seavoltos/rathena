@@ -318,6 +318,9 @@ OnClock2359:
 		
 		SetCastleData "batt_off",CD_GUILD_ID, $mvpladderguild_id[0];
 		
+		//Merito
+		setd("$house_guild_merito" + $mvpladderguild_id[0] + "_5"),1;
+		
 		donpcevent "Lider Guild MvP::OnRecvRankMvP";
 		//Borrar SQL
 		query_sql("delete from mvpladderguild where guild_id>0");

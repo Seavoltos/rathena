@@ -6,22 +6,31 @@
 //= This is a warper. I am sure that is self explanatory.
 //============================================================
 
--	shop	WarperCiudad	776,30000:10000,30001:10000,30002:10000,30003:10000,30004:10000,30005:10000,30006:10000,30007:10000,30008:10000,30009:10000,30010:10000,30011:10000,30012:10000,30013:10000,30014:10000,30015:10000,30016:10000,30017:10000
-
--	shop	WarperDungeon	776,30030:10000000,30031:100000,30032:3000000,30033:100000,30034:3000000,30035:100000,30036:100000,30037:100000,30038:100000,30039:100000,30040:1000000,30041:100000,30042:100000,30043:100000,30044:100000,30045:3000000,30046:100000,30047:100000,30048:100000,30049:10000,30050:100000,30051:100000,30052:10000000,30053:1000000,30054:10000000,30055:100000,30056:100000,30057:100000,30058:100000,30059:100000,30060:1000000,30061:100000
-
 prontera,159,188,4	script	Warper::Warper	669,{
 	set .@name$, "[^008ef9Warper^000000]";
 	mes .@name$;
 	mes "Buen día ^7900f9"+ strcharinfo(0) +"^000000.";
 	mes "Entonces, hacia donde deseas ir?";
 	
-	menu	( lastmap$ == "" )?"":"[ > ] Último Warp",warptolast,"[ > ] Ciudades",city,"[ > ] Dungeon",dungeon,"[ > ] Battle Office",wbattleground,( getcharid(2) == 0 )?"":"[ > ] WoE",wwoe,( BaseLevel < 50 )?"":"[ > ] PvP",wpvp,"[ > ] Mercado",mercado;
+	menu	( lastmap$ == "" )?"":"[ > ] Último Warp",warptolast,"[ > ] Ciudades",city,"[ > ] Dungeon",dungeon,"[ > ] Battle Office",wbattleground,( getcharid(2) == 0 )?"":"[ > ] WoE",wwoe,( BaseLevel < 50 )?"":"[ > ] PvP",wpvp,"[ > ] Mercado",mercado,"[ > ] Casa Guild",guildhouse;
+
+guildhouse:
+	if( strcharinfo(2) == "")
+	{
+		mes "Lo siento, pero no tienes Guild";
+		close;
+	}
 	
-tienda:
-menu
-	//"[ > ] Mapas Ciudades",buyCiudades,
-	"[ > ] Mapas Dungeon",buyDungeon;
+	for (set .@c, 1; .@c <= 20; set .@c, .@c + 1) {
+		if (getd("$house_guild" + .@c + "_guild$") == strcharinfo(2))
+		{
+			setd "$house_guild" + .@c + "_accesos",getd("$house_guild" + .@c + "_accesos") + 1;
+			warp "home"+.@c,97,91;
+			end;
+		}
+	}
+	mes "Lo siento, tu Guild aún no es capaz de rentar una casa de Guild.";
+	close;
 
 city:
 menu 
@@ -68,7 +77,6 @@ menu
 	( !#umbala )?"":"[ > ] Umbala",wumbala,
 	( #umbala )?"":"[ > ] (10,000z) Umbala",wumbalazeny;
 
-
 dungeon:
 menu 
 	( (!#abbey && $WarperFree != 26) )?"":"[ > ] Abbey, Cursed Monastery",abbey,
@@ -103,23 +111,6 @@ menu
 	( (!#toyfact && $WarperFree != 10) )?"":"[ > ] Toy Factory",toy,
 	( (!#turtleisland && $WarperFree != 34) )?"":"[ > ] Turtle Dungeon",turtle,
 	( (!#umbalad && $WarperFree != 18) )?"":"[ > ] Umbala Dungeons",umdun;
-
-//Tienda
-buyCiudades:
-	next;
-	mes .@name$;
-	mes "Cierra esta ventana para abrir la tienda";
-	close2;
-	callshop "WarperCiudad",1;
-	end;
-
-buyDungeon:
-	next;
-	mes .@name$;
-	mes "Cierra esta ventana para abrir la tienda";
-	close2;
-	callshop "WarperDungeon",1;
-	end;
 
 //City
 walberta:

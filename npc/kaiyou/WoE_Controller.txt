@@ -209,24 +209,29 @@ S_DisplayOwners:
 		case 1:	//WoE 1.0
 			set .@cas$, "prtg_cas02";
 			set .@name$, "WoE";
+			set .@merito, 1;
 			break;
 		case 2:	//WoD
 			set .@cas$, "rwc02";
 			set .@name$, "War of Dominion";
+			set .@merito, 2;
 			break;
 		case 3:	//WoE 2.0
 			set .@cas$, "schg_cas01";
 			set .@name$, "WoE 2.0";
+			set .@merito, 3;
 			break;
 		case 4:	//WoE Baby
 			set .@cas$, "nguild_pay";
 			set .@name$, "WoE Baby";
+			set .@merito, 4;
 			break;
 	}
 	if (.@i == 1)
 	{
 		if (GetCastleData(.@cas$,1)) {
 			Announce "La " + .@name$ + " ha iniciado. El Castillo [" + GetCastleName(.@cas$) + "] se encuentra conquistado por la guild [" + GetGuildName(GetCastleData(.@cas$,1)) + "].",bc_all|bc_woe;
+			setd("$house_guild_merito" + getcharid(2) + "_" + .@merito),1;
 		}
 		else {
 			Announce "La " + .@name$ + " ha iniciado. El Castillo [" + GetCastleName(.@cas$) + "] se encuentra desocupado.",bc_all|bc_woe;

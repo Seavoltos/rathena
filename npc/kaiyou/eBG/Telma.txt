@@ -2,6 +2,9 @@
 batt_off,119,94,5	script	Telma#2	701,{
 	if( RepPointsBG > 10 )
 	{
+		//Merito
+		if ( RepPointsBG > 5000 && getcharid(2) != 0 )
+			setd("$house_guild_merito" + getcharid(2) + "_9"),1;
 		set .@aux, RepPointsBG/10;
 		getitem 43000,.@aux;
 		set RepPointsBG, RepPointsBG - .@aux*10;

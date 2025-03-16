@@ -1,0 +1,1770 @@
+//===== eAthena Script ======================================= 
+//= Guild House - Rent System
+//===== By: ================================================== 
+//= Seavoltos
+//===== Current Version: ===================================== 
+//= 1.0 10399
+//===== Compatible With: ===================================== 
+//= eAthena SVN Stable 
+//===== Description: ========================================= 
+//= 
+//===== Additional Comments: ================================= 
+//= 1.0 Initial Version
+//============================================================ 
+
+prontera,164,160,3	script	Propietario#GuildHouse	10085,{
+	cutin "ep15_rekenber01",2;
+	mes "^0000FF[Propietario]^000000";
+	mes "Hola! Bienvenido a la corredora de propiedades de KaiyouRO!";
+	mes "Ofrecemos el servicio de arrendar casas para ^0000ffGuild^000000!";
+	mes "Estas interesado?";
+	next;
+	switch(select("Si:Información de la renta"))
+	{
+		case 1:
+			mes "^0000FF[Propietario]^000000";
+			mes "Revisemos el contrato...";
+			mes "Tu buscas rentar una casa para ti y tu Guild?";
+			next;
+			if(!getcharid(2))
+			{
+				mes "^0000FF[Propietario]^000000";
+				mes "Lo siento, debes tener una guild para poder seguir.";
+				close3;
+			}
+			for (set .@c, 1; .@c <= 20; set .@c, .@c + 1)
+			{
+				if (getd("$house_guild" + .@c + "_rent") != 1)
+				{	
+					set .@aux,1;
+					break;
+				}
+				if (getd("$house_guild" + .@c + "_guild$") == strcharinfo(2) )
+				{
+					mes "^0000FF[Propietario]^000000";
+					mes "Disfruten de su casa!.";
+					close3;
+				}
+			}
+			if(.@aux == 0)
+			{
+				mes "^0000FF[Propietario]^000000";
+				mes "Soy terrible, lo siento, no tengo ninguna casa para rentar.";
+				mes "Estas tienen que ser rentadas cuando nadie se encuentre. Por favor vuelve otro día.";
+				close3;
+			}
+			if(select("Donde firmo?:Méritos")==2)
+			{
+				mes "^0000FF[Propietario]^000000";
+				if ( getd("$house_guild_merito" + getcharid(2) + "_done") == 1 )
+				{
+					mes "Felicitaciones por cumplir con todos los Tickets!";
+					cutin "21st_bal10",4;
+					close3;
+				}
+				for (set .@i, 1; .@i <= 10; set .@i, .@i + 1)
+					set .@mer, .@mer+getd("$house_guild_merito" + getcharid(2) + "_" + .@i);
+
+				mes "Veo que tu Guild tiene "+ .@mer + " tickets.";
+				cutin "21st_bal"+.@mer,4;
+				next;
+				mes "^0000FF[Propietario]^000000";
+				if( .@mer < 10 )
+				{
+					mes "Consigue los 10 tickets para poder obtener una casa gratis.";
+				}
+				else
+				{
+					mes "Felicitaciones!";
+					mes "Lograron cumplir con los 10 objetivos, ahora tendrán su casa gratis.";
+					setd("$house_guild" + getcharid(2) + "_donative"),5000;
+					setd("$house_guild_merito" + getcharid(2) + "_done"),1;
+				}
+				close3;
+			}
+			if ( getd("$house_guild" + get_unique_id() + "") <= 1000)
+			{
+				mes "^0000FF[Propietario]^000000";
+				mes "Antes de eso debo informarte un par de cosas";
+				next;
+				if( select("Más información:Ya estoy listo con mi donativo") == 1 )
+				{
+					mes "^0000FF[Propietario]^000000";
+					mes "Antes de poder rentarla, deben cumplir con el donativo.";
+					mes "Deseas hacer un donativo para tu guild?.";
+					next;
+					if(select("Hacer donativo:No, gracias")==2)
+					{
+						mes "^0000FF[Propietario]^000000";
+						mes "No te preocupes quizas no duren tanto.";
+						close3;
+					}
+					set .@aux,(1000 - getd("$house_guild" + get_unique_id() + ""));
+					mes "^0000FF[Propietario]^000000";
+					mes "¿Cuánto deseas donar? (Máximo "+ .@aux + ")";
+					next;
+					input .@monto;
+					if(.@monto < 1 || .@monto > .@aux)
+					{
+						mes "^0000FF[Propietario]^000000";
+						mes "No puedes ingresar ese monto.";
+						close3;
+					}
+					if( #CASHPOINTS < .@monto)
+					{
+						mes "^0000FF[Propietario]^000000";
+						mes "No tienes para pagar.";
+						close3;
+					}
+					setd "$house_guild" + get_unique_id() + "",getd("$house_guild" + get_unique_id() + "") + .@monto;
+					set #CASHPOINTS, #CASHPOINTS - .@monto;
+					setd "$house_guild" + getcharid(2) + "_donative",getd("$house_guild" + getcharid(2) + "_donative") + .@monto;
+					mes "^0000FF[Propietario]^000000";
+					mes "He anotado tu aporte a la guild.";
+					next;
+				}
+			}
+			if(strcharinfo(0) != getguildmaster(getcharid(2)))
+			{
+				mes "^0000FF[Propietario]^000000";
+				mes "^000000Cuando el donativo de tu guild alcance la meta, podré rentarles una casa.";
+				mes "^000000Actualmente llevan: ";
+				mes "^ff0000"+getd("$house_guild" + getcharid(2) + "_donative")+" CashPoint^000000.";
+				close3;
+			}
+			if ( getd("$house_guild" + getcharid(2) + "_donative") < 5000 )
+			{
+				mes "^0000FF[Propietario]^000000";
+				mes "^000000Hm? Lo siento tu no puedes rentar esta casa, aún no juntan los donativos.";
+				mes "^000000Por favor regresa cuando los tengan.";
+				mes "^000000Actualmente llevan: ";
+				mes "^ff0000"+getd("$house_guild" + getcharid(2) + "_donative")+" CashPoint^000000.";
+				close3;
+			}
+			mes "^0000FF[Propietario]^000000";
+			mes "Si firma en la línea estaríamos listos";
+			next;
+			if(select("Firmar:No, gracias") == 2 )
+			{
+				mes "^0000FF[Propietario]^000000";
+				mes "Esto es sin reembolso.";
+				close3;
+			}
+			if (getd("$house_guild" + .@c + "_rent") == 1)
+			{	
+				mes "^0000FF[Propietario]^000000";
+				mes "Creo que alguien se te adelantó!";
+				mes "Revisemos si tenemos otra casa";
+				close3;
+			}
+			setd "$house_guild" + .@c + "_rent", 1;
+			setd "$house_guild" + .@c + "_guild$",strcharinfo(2);
+			setd "$house_guild" + .@c + "_accesos",0;
+			setd "$house_guild" + getcharid(2) + "_donative",0;
+			setd "$house_guild" + .@c + "_misiones",0;
+			setd "$house_guild" + .@c + "_misionesMensuales",0;
+			mes "^0000FF[Propietario]^000000";
+			mes "Felicitaciones " + strcharinfo(0)+"!";
+			mes "Has logrado rentar una casa para tu Guild!";
+			mes "Disfrútenla!";
+			close3;
+		case 2:	
+			mes "^0000FF[Propietario]^000000";
+			mes "Todas las casas vienen full equipadas y con un enorme patio.";
+			next;
+			mes "^0000FF[Propietario]^000000";
+			mes "Para poder rentarlas como Guild deberán juntar 5.000 CashPoint, pero cada persona no puede donar más de 1.000 CashPoint.";
+			next;
+			mes "^0000FF[Propietario]^000000";
+			mes "Como te decía este es un pago único, con ese pago podrás mantener tu casa por siempre, a menos que no la uses en 1 mes o no cumplas con al menos 10 misiones de Guild cada mes.";
+			next;
+			mes "^0000FF[Propietario]^000000";
+			mes "En el caso que no deseen pagar, también se les puede entregar una casa por méritos, es decir, cumplir 10 diferentes objetivos, donde deberán participar desde eventos hasta instancias.";
+			next;
+			mes "^0000FF[Propietario]^000000";
+			mes "Las Misiones de Guild se encuentran disponibles en las casas de Guild y pueden ser la recolección de items o la caza de algún mobs que esté dando problemas.";
+			next;
+			mes "^0000FF[Propietario]^000000";
+			mes "Si estás interesado y ya cumplieron con el CashPoint, dile a tu Guild Leader que se acerque a firmar el contrato.";
+			close3;
+	}
+	end;
+
+OnClock0001:
+	if( gettime(DT_DAYOFMONTH) == 1 ) {
+		for (set .@c, 1; .@c <= 20; set .@c, .@c + 1) {
+			if ( (getd("$house_guild" + .@c + "_accesos") == 0) || ( getd("$house_guild" + .@c + "_misionesMensuales") < 10 ))
+			{
+				//Borrar registro de la casa
+				setd "$house_guild" + .@c + "_rent",0;
+				setd "$house_guild" + .@c + "_guild$","";
+				setd "$house_guild" + .@c + "_accesos",0;
+				setd "$house_guild" + .@c + "_misiones",0;
+				setd "$house_guild" + .@c + "_MISSIONRC",0;
+				setd "$house_guild" + .@c + "_MISSIONRID",0;
+				setd "$house_guild" + .@c + "_MISSIONRT",0;
+				setd "$house_guild" + .@c + "_MISSIONCC",0;
+				setd "$house_guild" + .@c + "_MISSIONCID",0;
+				setd "$house_guild" + .@c + "_MISSIONCT",0;
+				setd "$house_guild" + .@c + "_MISSIONRCC",0;
+				setd "$house_guild" + .@c + "_MISSIONCCC",0;
+				setd "$house_guild" + .@c + "_BLINDEADOR",0;
+			}
+			setd "$house_guild" + .@c + "_misionesMensuales",0;
+		}
+	}
+	end;
+}
+
+prontera,164,155,3	script	Tablero#GH0	857,{
+	set .@name$,"[Tablero]";
+	mes .@name$;
+	mes "Aquí puedes ver toda la información de las casas de guild.";
+	mes "¿Qué deseas ver?";
+	next;
+	switch(select("^10B2D2 [ > ] ^000000 Ranking misiones:^10B2D2 [ > ] ^000000 Misiones"))
+	{
+		case 1:
+			for (set .@c, 1; .@c <= 20; set .@c, .@c + 1) {
+				if( getd("$house_guild" + .@c + "_rent") == 1 )
+				{
+					set .@aux,1;
+					mes .@name$;
+					mes "Guild: "+getd("$house_guild" + .@c + "_guild$");
+					mes "Misiones Totales:"+getd("$house_guild" + .@c + "_misiones");
+					mes "Misiones Mensuales:"+getd("$house_guild" + .@c + "_misionesMensuales");
+					next;
+				}
+			}
+			if ( .@aux == 1 )
+			{
+				mes .@name$;
+				mes "Esas son todas las Guild";
+				close;
+			} else {
+				mes .@name$;
+				mes "Aún ninguna Guild ha logrado rentar una casa, vamos pueden ser los primeros.";
+				close;
+			}
+		case 2:
+			for (set .@c, 1; .@c <= 20; set .@c, .@c + 1) {
+				if( getd("$house_guild" + .@c + "_guild$") != "")
+				{
+					set .@aux,1;
+					mes .@name$;
+					mes "Guild: "+getd("$house_guild" + .@c + "_guild$");
+					if( getd("$house_guild"+ .@c + "_MISSIONCID") != 0)
+						mes "Deben cazar ^0000ff" + getd("$house_guild"+ .@c + "_MISSIONCT") + " x " + getmonsterinfo(getd("$house_guild"+ .@c + "_MISSIONCID"),0) + "^000000.";
+					if( getd("$house_guild"+ .@c + "_MISSIONRID") != 0)
+						mes "Deben juntar ^0000ff" + getd("$house_guild"+ .@c + "_MISSIONRT") + " x " + getitemname(getd("$house_guild"+ .@c + "_MISSIONRID")) + "^000000.";
+					if( getd("$house_guild"+ .@c + "_MISSIONRCC") != 0)
+						mes "Necesitan 1 x " + getitemname(getd("$house_guild"+ .@c + "_MISSIONRCC")) + "^000000.";
+					if( getd("$house_guild"+ .@c + "_MISSIONCCC") != 0)
+						mes "Necesitan 1 x " + getitemname(getd("$house_guild"+ .@c + "_MISSIONCCC")) + "^000000.";
+					next;
+				}
+			}
+			if ( .@aux == 1 )
+			{
+				mes .@name$;
+				mes "Esas son todas las Guild";
+				close;
+			} else {
+				mes .@name$;
+				mes "Aún ninguna Guild ha logrado rentar una casa, vamos pueden ser los primeros.";
+				close;
+			}
+	}
+}
+
+home,94,113,3	script	Cofre#GH0	844,{
+	set .@c, substr(strnpcinfo(2),2,3);
+	if( .@c == 0 )	set .@c, substr(strnpcinfo(2),2,2);
+	if( .@c == 0 )	end;
+
+	set .@name$,"[Cofre Recolección]";
+	mes "Puedes leer un letrero afuera del cofre:";
+	mes "Misiones Totales:^0000ff" + getd("$house_guild" + .@c + "_misiones") + "^000000";
+	mes "Misiones Mensuales:^0000ff" + getd("$house_guild" + .@c + "_misionesMensuales") + "^000000";
+	next;
+	if( (getd("$house_guild" + .@c + "_MISSIONRID") == 0) && (strcharinfo(0) != getguildmaster(getcharid(2))) )
+	{
+		mes .@name$;
+		mes "Deberías hablar con tu Guild Leader para ver si quedan misiones.";
+		close;
+	}
+	if( getd("$house_guild" + .@c + "_MISSIONRID") == 0 && strcharinfo(0) == getguildmaster(getcharid(2)) )
+	{
+		mes .@name$;
+		mes "Deja buscar si quedan misiones.";
+		next;
+		mes .@name$;
+		mes "...";
+		mes "...";
+		next;
+		switch(rand(1,3))
+		{
+			case 1:
+				setarray .Misiones[0],7206,904,7561,7122,909,1023,7151,553,949,916,7563,7511,7119,1068,1066,1067,7186,1019,914,511,7446,510,507,509,508,7030,920,938,955,713,7005,1034,999,757,756,1022,604,746,7323,948,939,7161,1020,737,7015,7054,7158,7215,7070,7156,7110,7188,1042,7097,7512,7068,7182,952,7263,915,7752,7007,7162,705,1003,7093,7013,733,991,747,1045,7053,957,7069,971,1035,7265,1036,7123,1037,7264,1055,7220,7200,1040,923,1059,1063,7298,951,7041,7043,7325,712,7326,1012,956,7009,7152,1060,940,997,993;
+				break;
+			case 2:
+				setarray .Misiones[0],1056,7345,7163,7115,7116,950,7209,703,7121,947,1048,958,944,7198,7212,7066,929,928,998,1002,972,7026,7027,7171,7172,1038,1039,7098,7201,1098,1028,1033,1031,934,708,1018,1017,1057,1058,7001,7004,921,995,1095,7213,960,7031,1006,7072,7751,727,1043,922,931,722,7101,7226,7150,7205,7032,906,7155,924,7225,740,945,1013,1016,990,7216,903,907,930,996,1096,7317,936,7125,904,7065,7100,954,711,707;
+				break;
+			case 3:
+				setarray .Misiones[0],1052,932,1049,7190,7164,943,908,7016,1024,1000,7565,959,953,7203,7567,917,7010,7301,7071,7159,962,7267,913,7118,7012,7197,902,967,7319,937,7568,992,7064,7006,748,7222,7189,1099,7762,7448,7038,942,1044;
+				break;
+		}
+		set .@rand,rand(0,getarraysize(.Misiones)-1);
+		setd("$house_guild"+ .@c + "_MISSIONRC")	,0;
+		setd("$house_guild"+ .@c + "_MISSIONRID")	,.Misiones[.@rand];
+		setd("$house_guild"+ .@c + "_MISSIONRT")	,rand(600,850);
+		deletearray .Misiones[0],getarraysize(.Misiones);
+		mes .@name$;
+		mes "Deben juntar ^0000ff" + getd("$house_guild"+ .@c + "_MISSIONRT") + " x " + getitemname(getd("$house_guild"+ .@c + "_MISSIONRID")) + "^000000.";
+		close;
+	}
+	if( getd("$house_guild" + .@c + "_MISSIONRID") != 0 )
+	{
+		mes .@name$;
+		mes "Deja contar para ver cuantos nos faltan.";
+		next;
+		if( getd("$house_guild"+ .@c + "_MISSIONRC") < getd("$house_guild"+ .@c + "_MISSIONRT") )
+		{
+			mes .@name$;
+			mes "Llevamos ^0000ff" + getd("$house_guild"+ .@c + "_MISSIONRC") + "^000000 x " + getitemname(getd("$house_guild"+ .@c + "_MISSIONRID")) + "(#"+getd("$house_guild"+ .@c + "_MISSIONRID")+").";
+			set .@aux,getd("$house_guild"+ .@c + "_MISSIONRT") - getd("$house_guild"+ .@c + "_MISSIONRC");
+			
+			if( strcharinfo(0) == getguildmaster(getcharid(2)) )
+			{
+				next;
+				if( select("Deseo depositar más objetos:Deseo cambiar la misión") == 2 )
+				{
+					if( getd("$house_guild"+ .@c + "_MISSIONRCC") == 0)
+					{
+						setarray .@itemCHANGE[0],7211,7754,7451,1030,7169,7036,7566,7513,7562,7108,7109,7020,7018,6091,968,7114,7113,7300,7450,658;
+						set .@rand,rand(0,getarraysize(.@itemCHANGE)-1);
+						setd("$house_guild"+ .@c + "_MISSIONRCC")	,.@itemCHANGE[.@rand];
+						deletearray .@itemCHANGE[0],getarraysize(.@itemCHANGE);
+					}
+					mes .@name$;
+					mes "Para cambiarte la mision debes darme 1x ^0000ff"+getitemname(getd("$house_guild"+ .@c + "_MISSIONRCC"))+" (#"+getd("$house_guild"+ .@c + "_MISSIONRCC")+")^000000.";
+					next;
+					if(select("Cambiar misión:Deja conseguir el objeto")==2)
+					{
+						mes .@name$;
+						mes "No te preocupes estaré esperando.";
+						close;
+					}
+					
+					if(countitem(  getd("$house_guild"+ .@c + "_MISSIONRCC") ) < 1 )
+					{
+						mes .@name$;
+						mes "Ya sabes, consigueme 1x ^ff0000"+getitemname(getd("$house_guild"+ .@c + "_MISSIONRCC"))+" (#"+getd("$house_guild"+ .@c + "_MISSIONRCC")+")^000000.";
+						close;
+					}
+					
+					delitem getd("$house_guild"+ .@c + "_MISSIONRCC"),1;
+					setd("$house_guild"+ .@c + "_MISSIONRCC"),0;
+					
+					switch(rand(1,3))
+					{
+						case 1:
+							setarray .Misiones[0],7206,904,7561,7122,909,1023,7151,553,949,916,7563,7511,7119,1068,1066,1067,7186,1019,914,511,7446,510,507,509,508,7030,920,938,955,713,7005,1034,999,757,756,1022,604,746,7323,948,939,7161,1020,737,7015,7054,7158,7215,7070,7156,7110,7188,1042,7097,7512,7068,7182,952,7263,915,7752,7007,7162,705,1003,7093,7013,733,991,747,1045,7053,957,7069,971,1035,7265,1036,7123,1037,7264,1055,7220,7200,1040,923,1059,1063,7298,951,7041,7043,7325,712,7326,1012,956,7009,7152,1060,940,997,993;
+							break;
+						case 2:
+							setarray .Misiones[0],1056,7345,7163,7115,7116,950,7209,703,7121,947,1048,958,944,7198,7212,7066,929,928,998,1002,972,7026,7027,7171,7172,1038,1039,7098,7201,1098,1028,1033,1031,934,708,1018,1017,1057,1058,7001,7004,921,995,1095,7213,960,7031,1006,7072,7751,727,1043,922,931,722,7101,7226,7150,7205,7032,906,7155,924,7225,740,945,1013,1016,990,7216,903,907,930,996,1096,7317,936,7125,904,7065,7100,954,711,707;
+							break;
+						case 3:
+							setarray .Misiones[0],1052,932,1049,7190,7164,943,908,7016,1024,1000,7565,959,953,7203,7567,917,7010,7301,7071,7159,962,7267,913,7118,7012,7197,902,967,7319,937,7568,992,7064,7006,748,7222,7189,1099,7762,7448,7038,942,1044;
+							break;
+					}
+					set .@rand,rand(0,getarraysize(.Misiones)-1);
+					setd("$house_guild"+ .@c + "_MISSIONRC"),0;
+					setd("$house_guild"+ .@c + "_MISSIONRID"),.Misiones[.@rand];
+					setd("$house_guild"+ .@c + "_MISSIONRT"),rand(600,850);
+					deletearray .Misiones[0],getarraysize(.Misiones);
+					mes .@name$;
+					mes "Todo en orden, ahora deben juntar ^0000ff" + getd("$house_guild"+ .@c + "_MISSIONRT") + " x " + getitemname(getd("$house_guild"+ .@c + "_MISSIONRID")) + "^000000.";
+					close;
+				}
+			}
+
+			mes "Cuantos deseas depositar? (máximo: ^ff0000"+.@aux+"^000000)";
+			next;
+			input .@cantidad;
+			if( .@cantidad > countitem( getd("$house_guild"+ .@c + "_MISSIONRID") ) )
+			{
+				mes .@name$;
+				mes "No tienes tantos objetos.";
+				close;
+			}
+			if( .@cantidad < 1 || .@cantidad > .@aux )
+			{
+				mes .@name$;
+				mes "Intenta con otra cantidad.";
+				close;
+			}
+			delitem getd("$house_guild"+ .@c + "_MISSIONRID"),.@cantidad;
+			setd ("$house_guild"+ .@c + "_MISSIONRC"),getd("$house_guild"+ .@c + "_MISSIONRC")+.@cantidad;
+			close;
+		}
+		else
+		{
+			if( strcharinfo(0) == getguildmaster(getcharid(2)) )
+			{
+				mes .@name$;
+				mes "Felicitaciones! Aqui tienes tu recompensa.";
+				close2;
+				getitem 6615,10;
+				setd("$house_guild"+ .@c + "_MISSIONRC"),0;
+				setd("$house_guild"+ .@c + "_MISSIONRT"),0;
+				setd("$house_guild"+ .@c + "_MISSIONRID"),0;
+				setd ("$house_guild"+ .@c + "_misiones"),getd("$house_guild"+ .@c + "_misiones")+1;
+				setd ("$house_guild"+ .@c + "_misionesMensuales"),getd("$house_guild"+ .@c + "_misionesMensuales")+1;
+				end;
+			}
+			else
+			{
+				mes .@name$;
+				mes "Ya los tenemos todos, debo decirle al Guild Master que cobre la recompensa.";
+				close;
+			}
+		}
+		close;
+	}
+	
+	close;
+}
+
+home,100,109,3	script	Papeles#GH0	844,{
+	set .@c, substr(strnpcinfo(2),2,3);
+	if( .@c == 0 )	set .@c, substr(strnpcinfo(2),2,2);
+	if( .@c == 0 )	end;
+
+	set .@name$,"[Misiones Cacería]";
+	mes .@name$;
+	mes "Puedes leer una carpeta que afuera dice:";
+	mes "Misiones Totales:^0000ff" + getd("$house_guild" + .@c + "_misiones") + "^000000";
+	mes "Misiones Mensuales:^0000ff" + getd("$house_guild" + .@c + "_misionesMensuales") + "^000000";
+	next;
+	if( (getd("$house_guild" + .@c + "_MISSIONCID") == 0) && (strcharinfo(0) != getguildmaster(getcharid(2))) )
+	{
+		mes .@name$;
+		mes "Deberías hablar con tu Guild Leader para ver si quedan misiones.";
+		close;
+	}
+	if( getd("$house_guild" + .@c + "_MISSIONCID") == 0 && strcharinfo(0) == getguildmaster(getcharid(2)) )
+	{
+		mes .@name$;
+		mes "Deja buscar si quedan misiones.";
+		next;
+		mes .@name$;
+		mes "...";
+		mes "...";
+		next;
+		switch(rand(1,2))
+		{
+			case 1:
+				setarray .Misiones[0],1713,1716,1769,1193,1275,1735,1736,1737,1271,1110,1094,1030,1297,1095,1206,1627,1097,1403,1098,1365,1668,1016,1194,1099,1100,1654,1315,1372,1882,1415,1867,1101,1102,1494,1633,1060,1084,1367,1408,1507,1079,1188,1830,1692,1211,1103,1267,1214,1011,1246,1631,1513,1269,1104,1009,1265,1067,1073,1209,1018,1248,1514,1260,1698,1385,1384,1378,1105,1106,1107,1108,1109,1382,1670,1673,1671,1672,1506,1110,1721,1321,1111,1380,1113,1781,1493,1504,1114,1770,1116,1377,1033,1635,1655,1412,1117,1383,1007,1371,1005,1714,1717,1869,1118,1319,1119,1762,1753,1317,1309,1391,1783,1253,1778,1368,1036,1503,1121,1387,1124,1122,1125,1123,1258,1040,1369,1277,1687,1080,1632,1381,1376,1636,1318,1866,1213,1680,1127,1773,1128,1004,1129,1035,1068,1512,1510,1777,1789,1837,1516,1374,1257,1772,1029,1130,1131,1072,1406,1400,1833,1639,1656,1132,1219,1838,1134,1135,1133,1282,1587,1070,1366,1586,1881,1517,1410,1505,1509,1063,1637,1836,1138,1020,1139;
+				break;
+			case 2:
+				setarray .Misiones[0],1045,1140,1242,1141,1142,1143,1144,1145,1146,1884,1148,1274,1064,1264,1613,1058,1191,1614,1292,1149,1404,1628,1055,1041,1026,1780,1151,1249,1870,1255,1061,1379,1180,1715,1718,1620,1044,1700,1615,1189,1686,1273,1152,1023,1153,1295,1320,1500,1154,1019,1047,1216,1314,1256,1155,1156,1158,1202,1050,1049,1160,1995,1071,1616,1161,1694,1697,1695,1693,1696,1077,1402,1031,1619,1002,1199,1008,1508,1162,1865,1254,1657,1163,1276,1085,1078,1682,1164,1702,1409,1195,1052,1012,1392,1782,1201,1281,1831,1165,1243,1166,1167,1001,1323,1774,1638,1074,1701,1083,1401,1037,1776,1754,1755,1076,1196,1169,1752,1386,1056,1025,1775,1170,1703,1028,1316,1014,1322,1174,1278,1784,1280,1042,1215,1207,1495,1065,1370,1829,1069,1584,1175,1622,1405,1034,1375,1051,1048,1053,1054,1279,1883,1066,1771,1677,1678,1676,1679,1621,1032,1390,1176,1208,1617,1653,1179,1082,1416,1413,1261,1010,1263,1013,1880,1497,1499,1498,1024,1192,1081,1652,1057,1177,1178,1417,1015,1197,1864;
+				break;
+		}
+		set .@rand,rand(0,getarraysize(.Misiones)-1);
+		setd("$house_guild"+ .@c + "_MISSIONCC")	,0;
+		setd("$house_guild"+ .@c + "_MISSIONCID")	,.Misiones[.@rand];
+		setd("$house_guild"+ .@c + "_MISSIONCT")	,rand(700,850);
+		deletearray .Misiones[0],getarraysize(.Misiones);
+		mes .@name$;
+		mes "Deben cazar ^0000ff" + getd("$house_guild"+ .@c + "_MISSIONCT") + " x " + getmonsterinfo(getd("$house_guild"+ .@c + "_MISSIONCID"),0) + "^000000.";
+		close;
+	}
+	if( getd("$house_guild" + .@c + "_MISSIONRID") != 0 )
+	{
+		mes .@name$;
+		mes "Deja contar para ver cuantos nos faltan.";
+		next;
+		if( getd("$house_guild"+ .@c + "_MISSIONCC") < getd("$house_guild"+ .@c + "_MISSIONCT") )
+		{
+			if( strcharinfo(0) == getguildmaster(getcharid(2)) )
+			{
+				if( select("Leer los papeles:Deseo cambiar la misión") == 2 )
+				{
+					if( getd("$house_guild"+ .@c + "_MISSIONCCC") == 0)
+					{
+						setarray .@itemCHANGE[0],7211,7754,7451,1030,7169,7036,7566,7513,7562,7108,7109,7020,7018,6091,968,7114,7113,7300,7450,658;
+						set .@rand,rand(0,getarraysize(.@itemCHANGE)-1);
+						setd("$house_guild"+ .@c + "_MISSIONCCC")	,.@itemCHANGE[.@rand];
+						deletearray .@itemCHANGE[0],getarraysize(.@itemCHANGE);
+					}
+					mes .@name$;
+					mes "Para cambiarte la mision debes darme 1x ^0000ff"+getitemname(getd("$house_guild"+ .@c + "_MISSIONCCC"))+" (#"+getd("$house_guild"+ .@c + "_MISSIONCCC")+")^000000.";
+					next;
+					if(select("Cambiar misión:Deja conseguir el objeto")==2)
+					{
+						mes .@name$;
+						mes "No te preocupes estaré esperando.";
+						close;
+					}
+					
+					if(countitem(  getd("$house_guild"+ .@c + "_MISSIONCCC") ) < 1 )
+					{
+						mes .@name$;
+						mes "Ya sabes, consigueme 1x ^ff0000"+getitemname(getd("$house_guild"+ .@c + "_MISSIONCCC"))+" (#"+getd("$house_guild"+ .@c + "_MISSIONCCC")+")^000000.";
+						close;
+					}
+					
+					delitem getd("$house_guild"+ .@c + "_MISSIONCCC"),1;
+					setd("$house_guild"+ .@c + "_MISSIONCCC"),0;
+					
+					switch(rand(1,2))
+					{
+						case 1:
+							setarray .Misiones[0],1713,1716,1769,1193,1275,1735,1736,1737,1271,1110,1094,1030,1297,1095,1206,1627,1097,1403,1098,1365,1668,1016,1194,1099,1100,1654,1315,1372,1882,1415,1867,1101,1102,1494,1633,1060,1084,1367,1408,1507,1079,1188,1830,1692,1211,1103,1267,1214,1011,1246,1631,1513,1269,1104,1009,1265,1067,1073,1209,1018,1248,1514,1260,1698,1385,1384,1378,1105,1106,1107,1108,1109,1382,1670,1673,1671,1672,1506,1110,1721,1321,1111,1380,1113,1781,1493,1504,1114,1770,1116,1377,1033,1635,1655,1412,1117,1383,1007,1371,1005,1714,1717,1869,1118,1319,1119,1762,1753,1317,1309,1391,1783,1253,1778,1368,1036,1503,1121,1387,1124,1122,1125,1123,1258,1040,1369,1277,1687,1080,1632,1381,1376,1636,1318,1866,1213,1680,1127,1773,1128,1004,1129,1035,1068,1512,1510,1777,1789,1837,1516,1374,1257,1772,1029,1130,1131,1072,1406,1400,1833,1639,1656,1132,1219,1838,1134,1135,1133,1282,1587,1070,1366,1586,1881,1517,1410,1505,1509,1063,1637,1836,1138,1020,1139;
+							break;
+						case 2:
+							setarray .Misiones[0],1045,1140,1242,1141,1142,1143,1144,1145,1146,1884,1148,1274,1064,1264,1613,1058,1191,1614,1292,1149,1404,1628,1055,1041,1026,1780,1151,1249,1870,1255,1061,1379,1180,1715,1718,1620,1044,1700,1615,1189,1686,1273,1152,1023,1153,1295,1320,1500,1154,1019,1047,1216,1314,1256,1155,1156,1158,1202,1050,1049,1160,1995,1071,1616,1161,1694,1697,1695,1693,1696,1077,1402,1031,1619,1002,1199,1008,1508,1162,1865,1254,1657,1163,1276,1085,1078,1682,1164,1702,1409,1195,1052,1012,1392,1782,1201,1281,1831,1165,1243,1166,1167,1001,1323,1774,1638,1074,1701,1083,1401,1037,1776,1754,1755,1076,1196,1169,1752,1386,1056,1025,1775,1170,1703,1028,1316,1014,1322,1174,1278,1784,1280,1042,1215,1207,1495,1065,1370,1829,1069,1584,1175,1622,1405,1034,1375,1051,1048,1053,1054,1279,1883,1066,1771,1677,1678,1676,1679,1621,1032,1390,1176,1208,1617,1653,1179,1082,1416,1413,1261,1010,1263,1013,1880,1497,1499,1498,1024,1192,1081,1652,1057,1177,1178,1417,1015,1197,1864;
+							break;
+							break;
+					}
+					set .@rand,rand(0,getarraysize(.Misiones)-1);
+					setd("$house_guild"+ .@c + "_MISSIONCC")	,0;
+					setd("$house_guild"+ .@c + "_MISSIONCID")	,.Misiones[.@rand];
+					setd("$house_guild"+ .@c + "_MISSIONCT")	,rand(650,850);
+					deletearray .Misiones[0],getarraysize(.Misiones);
+					mes .@name$;
+					mes "Todo en orden, ahora deben cazar ^0000ff" + getd("$house_guild"+ .@c + "_MISSIONCT") + " x " + getmonsterinfo(getd("$house_guild"+ .@c + "_MISSIONCID"),0) + "^000000.";
+					close;
+				}
+			}
+			
+			mes .@name$;
+			mes "Llevamos ^0000ff" + getd("$house_guild"+ .@c + "_MISSIONCC") + "^000000 x " + getmonsterinfo(getd("$house_guild"+ .@c + "_MISSIONCID"),0) + "(#"+getd("$house_guild"+ .@c + "_MISSIONCID")+").";
+			close;
+		}
+		else
+		{
+			if( strcharinfo(0) == getguildmaster(getcharid(2)) )
+			{
+				mes .@name$;
+				mes "Felicitaciones! Aqui tienes tu recompensa.";
+				close2;
+				getitem 6615,10;
+				monster "home"+.@c,121+rand(0,11),89+rand(0,9),""+getguildname(getcharid(2))+"",getd("$house_guild"+ .@c + "_MISSIONCID"),1;
+				setd("$house_guild"+ .@c + "_MISSIONCC"),0;
+				setd("$house_guild"+ .@c + "_MISSIONCT"),0;
+				setd("$house_guild"+ .@c + "_MISSIONCID"),0;
+				setd ("$house_guild"+ .@c + "_misiones"),getd("$house_guild"+ .@c + "_misiones")+1;
+				setd ("$house_guild"+ .@c + "_misionesMensuales"),getd("$house_guild"+ .@c + "_misionesMensuales")+1;
+				end;
+			}
+			else
+			{
+				mes .@name$;
+				mes "Ya los cazamos a todos, debo decirle al Guild Master que cobre la recompensa.";
+				close;
+			}
+		}
+		close;
+	}
+	close;
+
+
+
+OnInit:
+	set .@c, substr(strnpcinfo(2),2,3);
+	if( .@c == 0 )	set .@c, substr(strnpcinfo(2),2,2);
+	if( .@c == 0 )	end;
+
+	setwall "home"+.@c,120,87,14,0,0,"homeN"+.@c;
+	setwall "home"+.@c,132,88,14,2,0,"homeEB"+.@c;
+	setwall "home"+.@c,132,99,14,2,0,"homeET"+.@c;
+	setcell "home"+.@c,119,87,132,100,cell_basilica,1;
+	end;
+}
+
+home,112,77,3	script	#matamobs	844,{
+	end;
+OnNPCKillEvent:
+	for (set .@c, 1; .@c <= 20; set .@c, .@c + 1) // Recorre las 20 casas
+	{
+		if (getd("$house_guild" + .@c + "_guild$") == strcharinfo(2)) // Si la casa es tuya
+		{
+			if( getd("$house_guild"+ .@c + "_MISSIONCID") == killedrid) // Si el mob que mataste es el de la mision
+			{
+				setd ("$house_guild"+ .@c + "_MISSIONCC"),getd("$house_guild"+ .@c + "_MISSIONCC")+1; // Le suma uno
+				dispbottom "["+strcharinfo(2)+"] Acabas de matar un "+ getmonsterinfo(getd("$house_guild"+ .@c + "_MISSIONCID"),0) +" ("+getd("$house_guild"+ .@c + "_MISSIONCC")+"/"+getd("$house_guild"+ .@c + "_MISSIONCT")+")"; // Mensaje abajo
+				set .@c,21;
+				end;	// Finaliza
+			}
+		}
+	}
+	end; //No es de ninguna de las 10 guild finaliza
+
+}
+
+//============================================================ 
+//= Function for the piano
+//= (id of House)
+//============================================================ 
+
+home,81,98,0	script	Piano#GH0	844,{
+	set .@c, substr(strnpcinfo(2),2,3);
+	if( .@c == 0 )	set .@c, substr(strnpcinfo(2),2,2);
+	if( .@c == 0 )	end;
+
+	mes "^0000FF[Reproductor]^000000";
+	mes "Lista de Pistas Musicales:";
+	mes " ";
+	set .@SoundTrack, select("^10B2D2 [ > ] ^000000 Chaos of Eternity:^10B2D2 [ > ] ^000000 Bragis Poem:^10B2D2 [ > ] ^000000 Ring of Nibelungen:^10B2D2 [ > ] ^000000 Dont Forget Me:^10B2D2 [ > ] ^000000 In To The Abyss:^10B2D2 [ > ] ^000000 Assassin of Sunset");
+	if( getd("$@house_guild" + .@c + "_piano") == 1 )
+	{
+		mes "^FF0000- Piano Ocupado... -^000000";
+		close;
+	}
+
+	initnpctimer;
+	getmapxy .@map$, .@x, .@y, 1;
+	switch( .@SoundTrack )
+	{
+		case 1:
+			soundeffectall "chaos_of_eternity.wav",0,.@map$,81,76,132,112;
+			break;
+		case 2:
+			soundeffectall "bragis_poem.wav",0,.@map$,81,76,132,112;
+			break;
+		case 3:
+			soundeffectall "ring_of_nibelungen.wav",0,.@map$,81,76,132,112;
+			break;
+		case 4:
+			soundeffectall "dont_forget_me_not.wav",0,.@map$,81,76,132,112;
+			break;
+		case 5:
+			soundeffectall "in_to_the_abyss.wav",0,.@map$,81,76,132,112;
+			break;
+		case 6:
+			soundeffectall "assassin_of_sunset.wav",0,.@map$,81,76,132,112;
+			break;
+	}
+	mes "^FF0000- Reproduciendo... -^000000";
+	setd("$@house_guild" + .@c + "_piano"),1;
+	close;
+
+OnTimer600000:
+	emotion ET_BEST;
+	setd("$@house_guild" + .@c + "_piano"),0;
+	stopnpctimer;
+	end;
+	
+OnInit:
+	for (set .@c, 1; .@c <= 20; set .@c, .@c + 1) {
+		setd("$@house_guild" + .@c + "_piano"),0;
+	}
+	end;
+}
+
+home,106,112,0	script	#COMIDASGH0	844,{
+	set .@c, substr(strnpcinfo(2),9,10);
+	if( .@c == 0 )	set .@c, substr(strnpcinfo(2),9,9);
+	if( .@c == 0 )	end;
+
+	set .@name$,"[Comiditas]";
+	mes .@name$;
+	if( agitcheck() || agitcheck2() || agitcheck3() )
+	{
+		mes "La mesa no funciona en WoE";
+		close;
+	}
+	mes "La mesa puede tener las siguientes comidas";
+	set .@i, getd("$house_guild"+ .@c + "_misionesMensuales");
+	if ( .@i < 3 )
+		mes "^10B2D2 [ > ] ^000000Todas las comidas +1";
+	else if ( .@i <= 30 )
+		mes "^10B2D2 [ > ] ^000000Todas las comidas +"+.@i/3+"";
+	else
+		mes "^10B2D2 [ > ] ^000000Todas las comidas +10";
+	if ( .@i >= 10 )
+	{
+		mes "^10B2D2 [ > ] ^000000Blessing";
+		mes "^10B2D2 [ > ] ^000000Increase Agility";
+	}
+	else 
+	{
+		mes "^ff1919 [ > ] ^000000Blessing";
+		mes "^ff1919 [ > ] ^000000Increase Agility";
+	}
+	if ( .@i >= 15 )
+		mes "^10B2D2 [ > ] ^000000Impositio Manus";
+	else 
+		mes "^ff1919 [ > ] ^000000Impositio Manus";
+	if ( .@i >= 30 )
+		mes "^10B2D2 [ > ] ^000000Bubble Gum (+20%)";
+	else 
+		mes "^ff1919 [ > ] ^000000Bubble Gum (+20%)";
+	close;
+}
+
+home,110,107,0	script	#COMIDITASGH0	844,{
+	set .@c, substr(strnpcinfo(2),11,12);
+	if( .@c == 0 )	set .@c, substr(strnpcinfo(2),11,11);
+	if( .@c == 0 )	end;
+
+	progressbar "ffffff",5;
+	if( agitcheck() || agitcheck2() || agitcheck3() )
+		end;
+	percentheal 100,100;
+	set .@i, getd("$house_guild"+ .@c + "_misionesMensuales");
+	if ( .@i < 3 )
+	{
+		sc_start SC_STRFOOD,1200000,1;
+		sc_start SC_VITFOOD,1200000,1;
+		sc_start SC_AGIFOOD,1200000,1;
+		sc_start SC_INTFOOD,1200000,1;
+		sc_start SC_DEXFOOD,1200000,1;
+		sc_start SC_LUKFOOD,1200000,1;
+		
+	}
+	else if ( .@i < 30 )
+	{
+		set .@j, .@i/3;
+		sc_start SC_STRFOOD,1200000,.@j;
+		sc_start SC_VITFOOD,1200000,.@j;
+		sc_start SC_AGIFOOD,1200000,.@j;
+		sc_start SC_INTFOOD,1200000,.@j;
+		sc_start SC_DEXFOOD,1200000,.@j;
+		sc_start SC_LUKFOOD,1200000,.@j;
+	}
+	else
+	{
+		sc_start SC_STRFOOD,1200000,10;
+		sc_start SC_VITFOOD,1200000,10;
+		sc_start SC_AGIFOOD,1200000,10;
+		sc_start SC_INTFOOD,1200000,10;
+		sc_start SC_DEXFOOD,1200000,10;
+		sc_start SC_LUKFOOD,1200000,10;
+	}
+	if ( .@i >= 15 )
+	{
+		sc_start 32, 600000, 10;  // Increase Agi
+		sc_start 30, 600000, 10; // Blessing
+	}
+	if ( .@i >= 15 )
+		sc_start SC_IMPOSITIO, 60000, 5;
+	if ( .@i >= 20 )
+		sc_start SC_ITEMBOOST,300000,20;
+	end;
+}
+
+function	script	Guild_PvP	{
+	if (getmapxy(@mapa$,@mapx,@mapy,BL_PC,strcharinfo(0)) != 0) end;
+	menu "Activar PVP",L_PvpOn,"Desactivar PVP",L_PvpOff,"Nada",-;
+	end;
+	
+L_PvpOn:
+	pvpon @mapa$;
+	end;
+
+L_PvpOff:
+	pvpoff @mapa$;
+	end;
+}
+
+home,94,82,5	script	#MATASAPO	844,10,10,{
+	for (set .@c, 1; .@c <= 20; set .@c, .@c + 1) {
+		if (getd("$house_guild" + .@c + "_guild$") == strcharinfo(2))
+		{
+			break;
+		}
+	}
+	if( .@c >= 21 || getcharid(2) == 0 )
+	{
+		dispbottom "[GuildHouse] Esta no es tu casa";
+		savepoint "prontera",155,181;
+		warp "prontera",155,181;
+		end;
+	}
+	end;
+}
+
+//Warper
+home1,81,81,2	duplicate(Warper)	Warper#GH1	690
+home2,81,81,2	duplicate(Warper)	Warper#GH2	690
+home3,81,81,2	duplicate(Warper)	Warper#GH3	690
+home4,81,81,2	duplicate(Warper)	Warper#GH4	690
+home5,81,81,2	duplicate(Warper)	Warper#GH5	690
+home6,81,81,2	duplicate(Warper)	Warper#GH6	690
+home7,81,81,2	duplicate(Warper)	Warper#GH7	690
+home8,81,81,2	duplicate(Warper)	Warper#GH8	690
+home9,81,81,2	duplicate(Warper)	Warper#GH9	690
+home10,81,81,2	duplicate(Warper)	Warper#GH10	690
+home11,81,81,2	duplicate(Warper)	Warper#GH11	690
+home12,81,81,2	duplicate(Warper)	Warper#GH12	690
+home13,81,81,2	duplicate(Warper)	Warper#GH13	690
+home14,81,81,2	duplicate(Warper)	Warper#GH14	690
+home15,81,81,2	duplicate(Warper)	Warper#GH15	690
+home16,81,81,2	duplicate(Warper)	Warper#GH16	690
+home17,81,81,2	duplicate(Warper)	Warper#GH17	690
+home18,81,81,2	duplicate(Warper)	Warper#GH18	690
+home19,81,81,2	duplicate(Warper)	Warper#GH19	690
+home20,81,81,2	duplicate(Warper)	Warper#GH20	690
+//Healer
+home1,81,84,2	duplicate(Healer)	Healer#GH1	882
+home2,81,84,2	duplicate(Healer)	Healer#GH2	882
+home3,81,84,2	duplicate(Healer)	Healer#GH3	882
+home4,81,84,2	duplicate(Healer)	Healer#GH4	882
+home5,81,84,2	duplicate(Healer)	Healer#GH5	882
+home6,81,84,2	duplicate(Healer)	Healer#GH6	882
+home7,81,84,2	duplicate(Healer)	Healer#GH7	882
+home8,81,84,2	duplicate(Healer)	Healer#GH8	882
+home9,81,84,2	duplicate(Healer)	Healer#GH9	882
+home10,81,84,2	duplicate(Healer)	Healer#GH10	882
+home11,81,84,2	duplicate(Healer)	Healer#GH11	882
+home12,81,84,2	duplicate(Healer)	Healer#GH12	882
+home13,81,84,2	duplicate(Healer)	Healer#GH13	882
+home14,81,84,2	duplicate(Healer)	Healer#GH14	882
+home15,81,84,2	duplicate(Healer)	Healer#GH15	882
+home16,81,84,2	duplicate(Healer)	Healer#GH16	882
+home17,81,84,2	duplicate(Healer)	Healer#GH17	882
+home18,81,84,2	duplicate(Healer)	Healer#GH18	882
+home19,81,84,2	duplicate(Healer)	Healer#GH19	882
+home20,81,84,2	duplicate(Healer)	Healer#GH20	882
+//Kafra
+home1,81,87,2	script	Kafra#GH1	10242,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	mes "[Kafra Employee]";
+	mes "Bienvenido~!";
+	mes "Los servicios de Kafra";
+	mes "siempre estarán a tu lado.";
+	mes "¿En que puedo ayudarte hoy?";
+	callfunc "F_Kafra",5,2,0,30,750;
+	callfunc "F_KafEnd",0,1,"en la zona de ventas";
+}
+home2,81,87,2	duplicate(Kafra#GH1)	Kafra#GH2	10242
+home3,81,87,2	duplicate(Kafra#GH1)	Kafra#GH3	10242
+home4,81,87,2	duplicate(Kafra#GH1)	Kafra#GH4	10242
+home5,81,87,2	duplicate(Kafra#GH1)	Kafra#GH5	10242
+home6,81,87,2	duplicate(Kafra#GH1)	Kafra#GH6	10242
+home7,81,87,2	duplicate(Kafra#GH1)	Kafra#GH7	10242
+home8,81,87,2	duplicate(Kafra#GH1)	Kafra#GH8	10242
+home9,81,87,2	duplicate(Kafra#GH1)	Kafra#GH9	10242
+home10,81,87,2	duplicate(Kafra#GH1)	Kafra#GH10	10242
+home11,81,87,2	duplicate(Kafra#GH1)	Kafra#GH11	10242
+home12,81,87,2	duplicate(Kafra#GH1)	Kafra#GH12	10242
+home13,81,87,2	duplicate(Kafra#GH1)	Kafra#GH13	10242
+home14,81,87,2	duplicate(Kafra#GH1)	Kafra#GH14	10242
+home15,81,87,2	duplicate(Kafra#GH1)	Kafra#GH15	10242
+home16,81,87,2	duplicate(Kafra#GH1)	Kafra#GH16	10242
+home17,81,87,2	duplicate(Kafra#GH1)	Kafra#GH17	10242
+home18,81,87,2	duplicate(Kafra#GH1)	Kafra#GH18	10242
+home19,81,87,2	duplicate(Kafra#GH1)	Kafra#GH19	10242
+home20,81,87,2	duplicate(Kafra#GH1)	Kafra#GH20	10242
+//Tool Dealer
+home1,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH1	881
+home2,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH2	881
+home3,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH3	881
+home4,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH4	881
+home5,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH5	881
+home6,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH6	881
+home7,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH7	881
+home8,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH8	881
+home9,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH9	881
+home10,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH10	881
+home11,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH11	881
+home12,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH12	881
+home13,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH13	881
+home14,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH14	881
+home15,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH15	881
+home16,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH16	881
+home17,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH17	881
+home18,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH18	881
+home19,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH19	881
+home20,81,90,2	duplicate(Gremio Mercader)	Gremio Mercader#GH20	881
+//Piano
+home1,81,98,5	duplicate(Piano#GH0)	Piano#GH1	844
+home2,81,98,5	duplicate(Piano#GH0)	Piano#GH2	844
+home3,81,98,5	duplicate(Piano#GH0)	Piano#GH3	844
+home4,81,98,5	duplicate(Piano#GH0)	Piano#GH4	844
+home5,81,98,5	duplicate(Piano#GH0)	Piano#GH5	844
+home6,81,98,5	duplicate(Piano#GH0)	Piano#GH6	844
+home7,81,98,5	duplicate(Piano#GH0)	Piano#GH7	844
+home8,81,98,5	duplicate(Piano#GH0)	Piano#GH8	844
+home9,81,98,5	duplicate(Piano#GH0)	Piano#GH9	844
+home10,81,98,5	duplicate(Piano#GH0)	Piano#GH10	844
+home11,81,98,5	duplicate(Piano#GH0)	Piano#GH11	844
+home12,81,98,5	duplicate(Piano#GH0)	Piano#GH12	844
+home13,81,98,5	duplicate(Piano#GH0)	Piano#GH13	844
+home14,81,98,5	duplicate(Piano#GH0)	Piano#GH14	844
+home15,81,98,5	duplicate(Piano#GH0)	Piano#GH15	844
+home16,81,98,5	duplicate(Piano#GH0)	Piano#GH16	844
+home17,81,98,5	duplicate(Piano#GH0)	Piano#GH17	844
+home18,81,98,5	duplicate(Piano#GH0)	Piano#GH18	844
+home19,81,98,5	duplicate(Piano#GH0)	Piano#GH19	844
+home20,81,98,5	duplicate(Piano#GH0)	Piano#GH20	844
+//Blindeador
+home1,126,78,3	script	Blindeador#GH1	107,{
+	set .@c, substr(strnpcinfo(2),2,3);
+	if( .@c == 0 )	set .@c, substr(strnpcinfo(2),2,2);
+	if( .@c == 0 )	end;
+
+	set .@name$,"[Blindeador]";
+	mes .@name$;
+	mes "Hola, soy el blindeador, si me traes un objeto especial te puedo vincular un objeto a tu guild, el único requisito es que este item se pueda comerciar.";
+	next;
+	mes .@name$;
+	if( getd("$house_guild"+ .@c + "_BLINDEADOR") == 0 )
+	{
+		setarray .@itemCHANGE[0],7211,7754,7451,1030,7169,7036,7566,7513,7562,7108,7109,7020,7018,6091,968,7114,7113,7300,7450,658;
+		set .@rand,rand(0,getarraysize(.@itemCHANGE)-1);
+		setd("$house_guild"+ .@c + "_BLINDEADOR"),.@itemCHANGE[.@rand];
+		deletearray .@itemCHANGE[0],getarraysize(.@itemCHANGE);
+	}
+	mes "Traeme 1x ^ff0000"+getitemname(getd("$house_guild"+ .@c + "_BLINDEADOR"))+" (#"+getd("$house_guild"+ .@c + "_BLINDEADOR")+")^000000 y te puedo vincular cualquier equipo que tengas equipado a la guild.";
+	next;
+	if( countitem( getd("$house_guild"+ .@c + "_BLINDEADOR") ) < 1 )
+	{
+		mes .@name$;
+		mes "Lo siento, traeme 1x ^ff0000"+getitemname(getd("$house_guild"+ .@c + "_BLINDEADOR"))+" (#"+getd("$house_guild"+ .@c + "_BLINDEADOR")+")^000000 y te puedo vincular cualquier equipo que tengas equipado a la guild.";
+		close;
+	}
+	mes .@name$;
+	mes "Que deseas que te vincule?";
+	next;
+	setarray .@indices[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
+	for (set .@i,1; .@i<=10; set .@i,.@i+1) {
+		if (getequipisequiped(.@indices[.@i]))
+			set .@menu$, .@menu$ + F_getpositionname(.@indices[.@i]) +" [^0055FF"+getequipname(.@indices[.@i])+"^000000]";
+		set .@menu$, .@menu$+":";
+	}
+	set .@part, .@indices[ select(.@menu$) ];
+	set .@id, getequipid(.@part);
+	set .@ref, getequiprefinerycnt(.@part);
+	
+	if (!getequipisequiped(.@part)) {
+		mes .@name$;
+		mes "No tienes nada equipado aquí!";
+		emotion ET_KEK;
+		close;
+	}
+	for(set .@i,0; .@i<4; set .@i,.@i+1)
+		set .@slot[.@i], getequipcardid(.@part,.@i);
+	if( getequiptradability(.@part) == 0){
+		mes .@name$;
+		mes "Vaya, parece que un item especial, creo que deberias conservarlo!";
+		close;
+	}
+	if( countitem( getd("$house_guild"+ .@c + "_BLINDEADOR") ) < 1 )
+	{
+		mes .@name$;
+		mes "Lo siento, traeme 1x ^ff0000"+getitemname(getd("$house_guild"+ .@c + "_BLINDEADOR"))+" (#"+getd("$house_guild"+ .@c + "_BLINDEADOR")+")^000000 y te puedo vincular cualquier equipo que tengas equipado a la guild.";
+		close;
+	}
+	delitem2 .@id,1,1,.@ref,0,.@slot[0],.@slot[1],.@slot[2],.@slot[3];
+	mes "Listo!";
+	emotion ET_OK;
+	delitem getd("$house_guild"+ .@c + "_BLINDEADOR"),1;
+	setd("$house_guild"+ .@c + "_BLINDEADOR"),0;
+	getitembound2 .@id,1,1,.@ref,0,.@slot[0],.@slot[1],.@slot[2],.@slot[3],Bound_Guild;
+	close;
+}
+
+home2,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH2	107
+home3,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH3	107
+home4,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH4	107
+home5,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH5	107
+home6,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH6	107
+home7,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH7	107
+home8,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH8	107
+home9,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH9	107
+home10,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH10	107
+home11,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH11	107
+home12,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH12	107
+home13,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH13	107
+home14,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH14	107
+home15,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH15	107
+home16,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH16	107
+home17,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH17	107
+home18,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH18	107
+home19,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH19	107
+home20,126,78,3	duplicate(Blindeador#GH1)	Blindeador#GH20	107
+
+//Canciones
+home1,90,82,5	script	Clown#GH1	479,3,3,{
+	end;
+	
+OnTouch:
+	if( .sbragi < gettimetick(2) ){			// triggered within area 7x7, start bragi if not on delay
+		set .sbragi,gettimetick(2) + 180;	// delay 3 minute for npc to cast song
+		if( agitcheck() || agitcheck2() || agitcheck3() )
+			end;
+		unitskilluseid getnpcid(0),321,10;	// bragi(321) level 10
+	}
+	end;
+	
+OnInit:
+	setunitdata getnpcid(0),UNPC_INT,150;	// set npc INT 150
+	setunitdata getnpcid(0),UNPC_DEX,150;	// set NPC DEX 150
+
+	setunitdata getnpcid(0), UNPC_CLASS, 4020;
+	setunitdata getnpcid(0), UNPC_SEX, 1;
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 7;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 5;
+	setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 85;
+	setunitdata getnpcid(0), UNPC_BODY2, 0;
+	setunitdata getnpcid(0), UNPC_HEADTOP, 301;
+	setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+	setunitdata getnpcid(0), UNPC_HEADBOTTOM, 0;
+	setunitdata getnpcid(0), UNPC_ROBE, 0;
+
+	end;
+}
+
+home2,90,82,5	duplicate(Clown#GH1)	Clown#GH2	479,3,3
+home3,90,82,5	duplicate(Clown#GH1)	Clown#GH3	479,3,3
+home4,90,82,5	duplicate(Clown#GH1)	Clown#GH4	479,3,3
+home5,90,82,5	duplicate(Clown#GH1)	Clown#GH5	479,3,3
+home6,90,82,5	duplicate(Clown#GH1)	Clown#GH6	479,3,3
+home7,90,82,5	duplicate(Clown#GH1)	Clown#GH7	479,3,3
+home8,90,82,5	duplicate(Clown#GH1)	Clown#GH8	479,3,3
+home9,90,82,5	duplicate(Clown#GH1)	Clown#GH9	479,3,3
+home10,90,82,5	duplicate(Clown#GH1)	Clown#GH10	479,3,3
+home11,90,82,5	duplicate(Clown#GH1)	Clown#GH11	479,3,3
+home12,90,82,5	duplicate(Clown#GH1)	Clown#GH12	479,3,3
+home13,90,82,5	duplicate(Clown#GH1)	Clown#GH13	479,3,3
+home14,90,82,5	duplicate(Clown#GH1)	Clown#GH14	479,3,3
+home15,90,82,5	duplicate(Clown#GH1)	Clown#GH15	479,3,3
+home16,90,82,5	duplicate(Clown#GH1)	Clown#GH16	479,3,3
+home17,90,82,5	duplicate(Clown#GH1)	Clown#GH17	479,3,3
+home18,90,82,5	duplicate(Clown#GH1)	Clown#GH18	479,3,3
+home19,90,82,5	duplicate(Clown#GH1)	Clown#GH19	479,3,3
+home20,90,82,5	duplicate(Clown#GH1)	Clown#GH20	479,3,3
+
+home1,90,81,5	script	Gypsy#GH1	485,3,3,{
+	end;
+	
+OnTouch:
+	if( .s4you < gettimetick(2) ){			// triggered within area 7x7, start bragi if not on delay
+		set .s4you,gettimetick(2) + 180;	// delay 3 minute for npc to cast song
+		if( agitcheck() || agitcheck2() || agitcheck3() )
+			end;
+		unitskilluseid getnpcid(0),330,10;	// service(330) level 10
+	}
+	end;
+	
+OnInit:
+	setunitdata getnpcid(0),UNPC_INT,150;	// set npc INT 150
+	setunitdata getnpcid(0),UNPC_DEX,150;	// set NPC DEX 150
+
+	setunitdata getnpcid(0), UNPC_CLASS, 4021;
+	setunitdata getnpcid(0), UNPC_SEX, 2;
+	setunitdata getnpcid(0), UNPC_HAIRSTYLE, 18;
+	setunitdata getnpcid(0), UNPC_HAIRCOLOR, 1;
+	setunitdata getnpcid(0), UNPC_CLOTHCOLOR, 85;
+	setunitdata getnpcid(0), UNPC_BODY2, 0;
+	setunitdata getnpcid(0), UNPC_HEADTOP, 301;
+	setunitdata getnpcid(0), UNPC_HEADMIDDLE, 0;
+	setunitdata getnpcid(0), UNPC_HEADBOTTOM, 0;
+	setunitdata getnpcid(0), UNPC_ROBE, 0;
+
+	end;
+}
+
+home2,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH2	485,3,3
+home3,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH3	485,3,3
+home4,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH4	485,3,3
+home5,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH5	485,3,3
+home6,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH6	485,3,3
+home7,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH7	485,3,3
+home8,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH8	485,3,3
+home9,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH9	485,3,3
+home10,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH10	485,3,3
+home11,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH11	485,3,3
+home12,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH12	485,3,3
+home13,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH13	485,3,3
+home14,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH14	485,3,3
+home15,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH15	485,3,3
+home16,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH16	485,3,3
+home17,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH17	485,3,3
+home18,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH18	485,3,3
+home19,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH19	485,3,3
+home20,90,81,5	duplicate(Gypsy#GH1)	Gypsy#GH20	485,3,3
+
+home1,123,75,8	script	Mercader#GH1	474,{
+	set .@c, substr(strnpcinfo(2),2,3);
+	if( .@c == 0 )	set .@c, substr(strnpcinfo(2),2,2);
+	if( .@c == 0 )	end;
+
+	set .@name$,"[^56aeceMercader^000000]";
+	mes .@name$;
+	mes "Hola, puedo invitar algunos amigos a vivir con ustedes si ya se han hecho lo suficientemente famosos dentro de los gremios.";
+	next;
+	set .@i, getd("$house_guild"+ .@c + "_misiones");
+	
+	switch(select(" [ > ] Llamar invitados: [ > ] ¿A quienes puedes llamar?: [ > ] Sacar a todos"))
+	{
+		case 1:
+			mes .@name$;
+			mes "A quién deseas llamar?";
+			next;
+			switch(select(
+				( .@i > 4 )?"^10B2D2 [ > ] ^000000Kafra":"",
+				( .@i > 9 )?"^10B2D2 [ > ] ^000000Warper":"",
+				( .@i > 14 )?"^10B2D2 [ > ] ^000000Healer":"",
+				( .@i > 29 )?"^10B2D2 [ > ] ^000000Gremio Mercader":"",
+				( .@i > 44 )?"^10B2D2 [ > ] ^000000Piano":"",
+				( .@i > 59 )?"^10B2D2 [ > ] ^000000Blindeador":"",
+				( .@i > 79 )?"^10B2D2 [ > ] ^000000Clown":"",
+				( .@i > 99 )?"^10B2D2 [ > ] ^000000Gypsy":""
+				))
+			{
+				case 1:
+					mes .@name$;
+					enablenpc "Kafra#"+strnpcinfo(2);
+					mes "He llamado a mi amiga.";
+					close;
+				case 2:
+					mes .@name$;
+					enablenpc "Warper#"+strnpcinfo(2);
+					mes "He llamado a mi amigo.";
+					close;
+				case 3:
+					mes .@name$;
+					enablenpc "Healer#"+strnpcinfo(2);
+					mes "He llamado a mi amiga.";
+					close;
+				case 4:
+					mes .@name$;
+					enablenpc "Gremio Mercader#"+strnpcinfo(2);
+					mes "He llamado a mi amigo.";
+					close;
+				case 5:
+					mes .@name$;
+					enablenpc "Piano#"+strnpcinfo(2);
+					mes "Ahí he contratado un piano.";
+					close;
+				case 6:
+					mes .@name$;
+					enablenpc "Blindeador#"+strnpcinfo(2);
+					mes "He llamado a mi amigo.";
+					close;
+				case 7:
+					mes .@name$;
+					enablenpc "Clown#"+strnpcinfo(2);
+					mes "He llamado a mi amigo.";
+					close;
+				case 8:
+					mes .@name$;
+					enablenpc "Gypsy#"+strnpcinfo(2);
+					mes "He llamado a mi amiga.";
+					close;
+			}
+			end;
+		case 2:
+			mes .@name$;
+			mes "Dependiendo de que tan famosa sea tu guild, puedo traer algunos objetos o amigos para que te ayuden.";
+			if(.@i >= 5)
+				mes "^10B2D2 [ - ] ^000000 Kafra";
+			else
+				mes "^ff1919 [ - ] ^000000 Kafra";
+			if(.@i >= 10)
+				mes "^10B2D2 [ - ] ^000000 Warper";
+			else
+				mes "^ff1919 [ - ] ^000000 Warper";
+			if(.@i >= 15)
+				mes "^10B2D2 [ - ] ^000000 Healer";
+			else
+				mes "^ff1919 [ - ] ^000000 Healer";
+			if(.@i >= 30)
+				mes "^10B2D2 [ - ] ^000000 Gremio Mercader";
+			else
+				mes "^ff1919 [ - ] ^000000 Gremio Mercader";
+			if(.@i >= 45)
+				mes "^10B2D2 [ - ] ^000000 Piano";
+			else
+				mes "^ff1919 [ - ] ^000000 Piano";
+			if(.@i >= 60)
+				mes "^10B2D2 [ - ] ^000000 Blindeador";
+			else
+				mes "^ff1919 [ - ] ^000000 Blindeador";
+			if(.@i >= 80)
+				mes "^10B2D2 [ - ] ^000000 Clown";
+			else
+				mes "^ff1919 [ - ] ^000000 Clown";
+			if(.@i >= 100)
+				mes "^10B2D2 [ - ] ^000000 Gypsy";
+			else
+				mes "^ff1919 [ - ] ^000000 Gypsy";
+			close;
+		case 3:
+			disablenpc "Gremio Mercader#"+strnpcinfo(2);
+			disablenpc "Warper#"+strnpcinfo(2);
+			disablenpc "Healer#"+strnpcinfo(2);
+			disablenpc "Kafra#"+strnpcinfo(2);
+			disablenpc "Piano#"+strnpcinfo(2);
+			disablenpc "Blindeador#"+strnpcinfo(2);
+			disablenpc "Clown#"+strnpcinfo(2);
+			disablenpc "Gypsy#"+strnpcinfo(2);
+			mes .@name$;
+			mes "Me he llevado todo.";
+			close;
+	}
+OnInit:
+	disablenpc "Gremio Mercader#"+strnpcinfo(2);
+	disablenpc "Warper#"+strnpcinfo(2);
+	disablenpc "Kafra#"+strnpcinfo(2);
+	disablenpc "Piano#"+strnpcinfo(2);
+	disablenpc "Healer#"+strnpcinfo(2);
+	disablenpc "Blindeador#"+strnpcinfo(2);
+	disablenpc "Clown#"+strnpcinfo(2);
+	disablenpc "Gypsy#"+strnpcinfo(2);
+	end;
+}
+
+home2,123,75,8	duplicate(Mercader#GH1)	Mercader#GH2	474
+home3,123,75,8	duplicate(Mercader#GH1)	Mercader#GH3	474
+home4,123,75,8	duplicate(Mercader#GH1)	Mercader#GH4	474
+home5,123,75,8	duplicate(Mercader#GH1)	Mercader#GH5	474
+home6,123,75,8	duplicate(Mercader#GH1)	Mercader#GH6	474
+home7,123,75,8	duplicate(Mercader#GH1)	Mercader#GH7	474
+home8,123,75,8	duplicate(Mercader#GH1)	Mercader#GH8	474
+home9,123,75,8	duplicate(Mercader#GH1)	Mercader#GH9	474
+home10,123,75,8	duplicate(Mercader#GH1)	Mercader#GH10	474
+home11,123,75,8	duplicate(Mercader#GH1)	Mercader#GH11	474
+home12,123,75,8	duplicate(Mercader#GH1)	Mercader#GH12	474
+home13,123,75,8	duplicate(Mercader#GH1)	Mercader#GH13	474
+home14,123,75,8	duplicate(Mercader#GH1)	Mercader#GH14	474
+home15,123,75,8	duplicate(Mercader#GH1)	Mercader#GH15	474
+home16,123,75,8	duplicate(Mercader#GH1)	Mercader#GH16	474
+home17,123,75,8	duplicate(Mercader#GH1)	Mercader#GH17	474
+home18,123,75,8	duplicate(Mercader#GH1)	Mercader#GH18	474
+home19,123,75,8	duplicate(Mercader#GH1)	Mercader#GH19	474
+home20,123,75,8	duplicate(Mercader#GH1)	Mercader#GH20	474
+
+farmland,30,37,3	script	Flame#GH0	802,{ callfunc "Guild_PvP"; }
+farmland1,30,37,3	script	Flame#GH1	802,{ callfunc "Guild_PvP"; }
+farmland2,30,37,3	script	Flame#GH2	802,{ callfunc "Guild_PvP"; }
+farmland3,30,37,3	script	Flame#GH3	802,{ callfunc "Guild_PvP"; }
+farmland4,30,37,3	script	Flame#GH4	802,{ callfunc "Guild_PvP"; }
+farmland5,30,37,3	script	Flame#GH5	802,{ callfunc "Guild_PvP"; }
+farmland6,30,37,3	script	Flame#GH6	802,{ callfunc "Guild_PvP"; }
+farmland7,30,37,3	script	Flame#GH7	802,{ callfunc "Guild_PvP"; }
+farmland8,30,37,3	script	Flame#GH8	802,{ callfunc "Guild_PvP"; }
+farmland9,30,37,3	script	Flame#GH9	802,{ callfunc "Guild_PvP"; }
+farmland10,30,37,3	script	Flame#GH10	802,{ callfunc "Guild_PvP"; }
+farmland11,30,37,3	script	Flame#GH11	802,{ callfunc "Guild_PvP"; }
+farmland12,30,37,3	script	Flame#GH12	802,{ callfunc "Guild_PvP"; }
+farmland13,30,37,3	script	Flame#GH13	802,{ callfunc "Guild_PvP"; }
+farmland14,30,37,3	script	Flame#GH14	802,{ callfunc "Guild_PvP"; }
+farmland15,30,37,3	script	Flame#GH15	802,{ callfunc "Guild_PvP"; }
+farmland16,30,37,3	script	Flame#GH16	802,{ callfunc "Guild_PvP"; }
+farmland17,30,37,3	script	Flame#GH17	802,{ callfunc "Guild_PvP"; }
+farmland18,30,37,3	script	Flame#GH18	802,{ callfunc "Guild_PvP"; }
+farmland19,30,37,3	script	Flame#GH19	802,{ callfunc "Guild_PvP"; }
+farmland20,30,37,3	script	Flame#GH20	802,{ callfunc "Guild_PvP"; }
+
+//Duplicados casas originales
+//Comidas
+home1,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH01	844
+home2,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH02	844
+home3,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH03	844
+home4,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH04	844
+home5,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH05	844
+home6,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH06	844
+home7,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH07	844
+home8,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH08	844
+home9,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH09	844
+home10,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH10	844
+home11,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH11	844
+home12,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH12	844
+home13,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH13	844
+home14,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH14	844
+home15,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH15	844
+home16,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH16	844
+home17,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH17	844
+home18,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH18	844
+home19,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH19	844
+home20,110,107,5	duplicate(#COMIDITASGH0)	#COMIDITASGH20	844
+//Comidas
+home1,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH01	844
+home2,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH02	844
+home3,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH03	844
+home4,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH04	844
+home5,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH05	844
+home6,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH06	844
+home7,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH07	844
+home8,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH08	844
+home9,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH09	844
+home10,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH10	844
+home11,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH11	844
+home12,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH12	844
+home13,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH13	844
+home14,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH14	844
+home15,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH15	844
+home16,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH16	844
+home17,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH17	844
+home18,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH18	844
+home19,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH19	844
+home20,106,112,5	duplicate(#COMIDASGH0)	#COMIDASGH20	844
+//Cofre Recolección
+home1,94,113,5	duplicate(Cofre#GH0)	Cofre#GH1	844
+home2,94,113,5	duplicate(Cofre#GH0)	Cofre#GH2	844
+home3,94,113,5	duplicate(Cofre#GH0)	Cofre#GH3	844
+home4,94,113,5	duplicate(Cofre#GH0)	Cofre#GH4	844
+home5,94,113,5	duplicate(Cofre#GH0)	Cofre#GH5	844
+home6,94,113,5	duplicate(Cofre#GH0)	Cofre#GH6	844
+home7,94,113,5	duplicate(Cofre#GH0)	Cofre#GH7	844
+home8,94,113,5	duplicate(Cofre#GH0)	Cofre#GH8	844
+home9,94,113,5	duplicate(Cofre#GH0)	Cofre#GH9	844
+home10,94,113,5	duplicate(Cofre#GH0)	Cofre#GH10	844
+home11,94,113,5	duplicate(Cofre#GH0)	Cofre#GH11	844
+home12,94,113,5	duplicate(Cofre#GH0)	Cofre#GH12	844
+home13,94,113,5	duplicate(Cofre#GH0)	Cofre#GH13	844
+home14,94,113,5	duplicate(Cofre#GH0)	Cofre#GH14	844
+home15,94,113,5	duplicate(Cofre#GH0)	Cofre#GH15	844
+home16,94,113,5	duplicate(Cofre#GH0)	Cofre#GH16	844
+home17,94,113,5	duplicate(Cofre#GH0)	Cofre#GH17	844
+home18,94,113,5	duplicate(Cofre#GH0)	Cofre#GH18	844
+home19,94,113,5	duplicate(Cofre#GH0)	Cofre#GH19	844
+home20,94,113,5	duplicate(Cofre#GH0)	Cofre#GH20	844
+//Misiones Cacería
+home1,100,109,5	duplicate(Papeles#GH0)	Papeles#GH1	844
+home2,100,109,5	duplicate(Papeles#GH0)	Papeles#GH2	844
+home3,100,109,5	duplicate(Papeles#GH0)	Papeles#GH3	844
+home4,100,109,5	duplicate(Papeles#GH0)	Papeles#GH4	844
+home5,100,109,5	duplicate(Papeles#GH0)	Papeles#GH5	844
+home6,100,109,5	duplicate(Papeles#GH0)	Papeles#GH6	844
+home7,100,109,5	duplicate(Papeles#GH0)	Papeles#GH7	844
+home8,100,109,5	duplicate(Papeles#GH0)	Papeles#GH8	844
+home9,100,109,5	duplicate(Papeles#GH0)	Papeles#GH9	844
+home10,100,109,5	duplicate(Papeles#GH0)	Papeles#GH10	844
+home11,100,109,5	duplicate(Papeles#GH0)	Papeles#GH11	844
+home12,100,109,5	duplicate(Papeles#GH0)	Papeles#GH12	844
+home13,100,109,5	duplicate(Papeles#GH0)	Papeles#GH13	844
+home14,100,109,5	duplicate(Papeles#GH0)	Papeles#GH14	844
+home15,100,109,5	duplicate(Papeles#GH0)	Papeles#GH15	844
+home16,100,109,5	duplicate(Papeles#GH0)	Papeles#GH16	844
+home17,100,109,5	duplicate(Papeles#GH0)	Papeles#GH17	844
+home18,100,109,5	duplicate(Papeles#GH0)	Papeles#GH18	844
+home19,100,109,5	duplicate(Papeles#GH0)	Papeles#GH19	844
+home20,100,109,5	duplicate(Papeles#GH0)	Papeles#GH20	844
+//Warps
+home1,132,112,0	warp	homepatio#01	1,1,farmland1,66,41
+farmland1,69,42,0	warp	patiohome#01	1,1,home1,130,112
+farmland1,47,18,0	warp	patioprt#01	1,1,prontera,155,181
+home2,132,112,0	warp	homepatio#02	1,1,farmland2,66,41
+farmland2,69,42,0	warp	patiohome#02	1,1,home2,130,112
+farmland2,47,18,0	warp	patioprt#02	1,1,prontera,155,181
+home3,132,112,0	warp	homepatio#03	1,1,farmland3,66,41
+farmland3,69,42,0	warp	patiohome#03	1,1,home3,130,112
+farmland3,47,18,0	warp	patioprt#03	1,1,prontera,155,181
+home4,132,112,0	warp	homepatio#04	1,1,farmland4,66,41
+farmland4,69,42,0	warp	patiohome#04	1,1,home4,130,112
+farmland4,47,18,0	warp	patioprt#04	1,1,prontera,155,181
+home5,132,112,0	warp	homepatio#05	1,1,farmland5,66,41
+farmland5,69,42,0	warp	patiohome#05	1,1,home5,130,112
+farmland5,47,18,0	warp	patioprt#05	1,1,prontera,155,181
+home6,132,112,0	warp	homepatio#06	1,1,farmland6,66,41
+farmland6,69,42,0	warp	patiohome#06	1,1,home6,130,112
+farmland6,47,18,0	warp	patioprt#06	1,1,prontera,155,181
+home7,132,112,0	warp	homepatio#07	1,1,farmland7,66,41
+farmland7,69,42,0	warp	patiohome#07	1,1,home7,130,112
+farmland7,47,18,0	warp	patioprt#07	1,1,prontera,155,181
+home8,132,112,0	warp	homepatio#08	1,1,farmland8,66,41
+farmland8,69,42,0	warp	patiohome#08	1,1,home8,130,112
+farmland8,47,18,0	warp	patioprt#08	1,1,prontera,155,181
+home9,132,112,0	warp	homepatio#09	1,1,farmland9,66,41
+farmland9,69,42,0	warp	patiohome#09	1,1,home9,130,112
+farmland9,47,18,0	warp	patioprt#09	1,1,prontera,155,181
+home10,132,112,0	warp	homepatio#10	1,1,farmland10,66,41
+farmland10,69,42,0	warp	patiohome#10	1,1,home10,130,112
+farmland10,47,18,0	warp	patioprt#10	1,1,prontera,155,181
+
+home11,132,112,0	warp	homepatio#11	1,1,farmland11,66,41
+farmland11,69,42,0	warp	patiohome#11	1,1,home11,130,112
+farmland11,47,18,0	warp	patioprt#11	1,1,prontera,155,181
+home12,132,112,0	warp	homepatio#12	1,1,farmland12,66,41
+farmland12,69,42,0	warp	patiohome#12	1,1,home12,130,112
+farmland12,47,18,0	warp	patioprt#12	1,1,prontera,155,181
+home13,132,112,0	warp	homepatio#13	1,1,farmland13,66,41
+farmland13,69,42,0	warp	patiohome#13	1,1,home13,130,112
+farmland13,47,18,0	warp	patioprt#13	1,1,prontera,155,181
+home14,132,112,0	warp	homepatio#14	1,1,farmland14,66,41
+farmland14,69,42,0	warp	patiohome#14	1,1,home14,130,112
+farmland14,47,18,0	warp	patioprt#14	1,1,prontera,155,181
+home15,132,112,0	warp	homepatio#15	1,1,farmland15,66,41
+farmland15,69,42,0	warp	patiohome#15	1,1,home15,130,112
+farmland15,47,18,0	warp	patioprt#15	1,1,prontera,155,181
+home16,132,112,0	warp	homepatio#16	1,1,farmland16,66,41
+farmland16,69,42,0	warp	patiohome#16	1,1,home16,130,112
+farmland16,47,18,0	warp	patioprt#16	1,1,prontera,155,181
+home17,132,112,0	warp	homepatio#17	1,1,farmland17,66,41
+farmland17,69,42,0	warp	patiohome#17	1,1,home17,130,112
+farmland17,47,18,0	warp	patioprt#17	1,1,prontera,155,181
+home18,132,112,0	warp	homepatio#18	1,1,farmland18,66,41
+farmland18,69,42,0	warp	patiohome#18	1,1,home18,130,112
+farmland18,47,18,0	warp	patioprt#18	1,1,prontera,155,181
+home19,132,112,0	warp	homepatio#19	1,1,farmland19,66,41
+farmland19,69,42,0	warp	patiohome#19	1,1,home19,130,112
+farmland19,47,18,0	warp	patioprt#19	1,1,prontera,155,181
+home20,132,112,0	warp	homepatio#20	1,1,farmland20,66,41
+farmland20,69,42,0	warp	patiohome#20	1,1,home20,130,112
+farmland20,47,18,0	warp	patioprt#20	1,1,prontera,155,181
+//MataSapo
+/*
+home1,94,82,5	duplicate(#MATASAPO)	#MATASAPO01	844,10,10,
+home2,94,82,5	duplicate(#MATASAPO)	#MATASAPO02	844,10,10,
+home3,94,82,5	duplicate(#MATASAPO)	#MATASAPO03	844,10,10,
+home4,94,82,5	duplicate(#MATASAPO)	#MATASAPO04	844,10,10,
+home5,94,82,5	duplicate(#MATASAPO)	#MATASAPO05	844,10,10,
+home6,94,82,5	duplicate(#MATASAPO)	#MATASAPO06	844,10,10,
+home7,94,82,5	duplicate(#MATASAPO)	#MATASAPO07	844,10,10,
+home8,94,82,5	duplicate(#MATASAPO)	#MATASAPO08	844,10,10,
+home9,94,82,5	duplicate(#MATASAPO)	#MATASAPO09	844,10,10,
+home10,94,82,5	duplicate(#MATASAPO)	#MATASAPO010	844,10,10,
+*/
+//Plantas
+/*
+farmland1,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland1,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland1,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland1,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland1,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland2,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland2,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland2,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland2,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland2,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland3,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland3,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland3,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland3,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland3,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland4,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland4,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland4,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland4,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland4,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland5,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland5,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland5,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland5,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland5,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland6,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland6,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland6,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland6,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland6,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland7,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland7,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland7,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland7,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland7,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland8,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland8,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland8,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland8,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland8,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland9,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland9,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland9,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland9,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland9,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland10,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland10,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland10,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland10,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland10,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland11,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland11,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland11,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland11,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland11,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland12,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland12,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland12,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland12,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland12,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland13,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland13,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland13,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland13,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland13,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland14,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland14,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland14,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland14,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland14,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland15,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland15,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland15,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland15,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland15,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland16,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland16,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland16,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland16,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland16,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland17,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland17,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland17,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland17,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland17,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland18,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland18,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland18,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland18,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland18,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland19,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland19,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland19,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland19,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland19,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+
+farmland20,61,28,8,9	monster	Blue Plant	1079,5,3600000,600000,0
+farmland20,61,28,8,9	monster	White Plant	1082,5,3600000,600000,0
+farmland20,61,28,8,9	monster	Yellow Plant	1081,5,3600000,600000,0
+farmland20,61,28,8,9	monster	Green Plant	1080,5,3600000,600000,0
+farmland20,61,28,8,9	monster	Red Plant	1078,5,3600000,600000,0
+*/
+farmland1,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland2,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland3,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland4,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland5,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland6,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland7,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland8,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland9,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland10,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland11,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland12,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland13,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland14,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland15,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland16,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland17,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland18,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland19,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+farmland20,32,27,4,5	monster	Perrito	1728,1,3600000,600000,"Perroql::OnPerrito"
+
+-	script	Perroql	-1,{
+	end;
+
+OnPerrito:
+	if( rand(0,100) < 5 )
+	{
+		sleep 30000;
+		monster "this",0,0,""+strcharinfo(0)+"",-1,1,"";
+	}
+	end;	
+}
+
+
+//Mapflag
+home	mapflag	noteleport
+farmland	mapflag	noteleport
+home	mapflag	nopenalty
+farmland	mapflag	nopenalty
+farmland	mapflag	pvp_noguild
+home	mapflag	nomemo
+farmland	mapflag	nomemo
+home	mapflag	nobranch
+
+home1	mapflag	noteleport
+farmland1	mapflag	noteleport
+home1	mapflag	nopenalty
+farmland1	mapflag	nopenalty
+farmland1	mapflag	pvp_noguild
+home1	mapflag	nomemo
+farmland1	mapflag	nomemo
+home1	mapflag	nobranch
+
+home2	mapflag	noteleport
+farmland2	mapflag	noteleport
+home2	mapflag	nopenalty
+farmland2	mapflag	nopenalty
+farmland2	mapflag	pvp_noguild
+home2	mapflag	nomemo
+farmland2	mapflag	nomemo
+home2	mapflag	nobranch
+
+home3	mapflag	noteleport
+farmland3	mapflag	noteleport
+home3	mapflag	nopenalty
+farmland3	mapflag	nopenalty
+farmland3	mapflag	pvp_noguild
+home3	mapflag	nomemo
+farmland3	mapflag	nomemo
+home3	mapflag	nobranch
+
+home4	mapflag	noteleport
+farmland4	mapflag	noteleport
+home4	mapflag	nopenalty
+farmland4	mapflag	nopenalty
+farmland4	mapflag	pvp_noguild
+home4	mapflag	nomemo
+farmland4	mapflag	nomemo
+home4	mapflag	nobranch
+
+home5	mapflag	noteleport
+farmland5	mapflag	noteleport
+home5	mapflag	nopenalty
+farmland5	mapflag	nopenalty
+farmland5	mapflag	pvp_noguild
+home5	mapflag	nomemo
+farmland5	mapflag	nomemo
+home5	mapflag	nobranch
+
+home6	mapflag	noteleport
+farmland6	mapflag	noteleport
+home6	mapflag	nopenalty
+farmland6	mapflag	nopenalty
+farmland6	mapflag	pvp_noguild
+home6	mapflag	nomemo
+farmland6	mapflag	nomemo
+home6	mapflag	nobranch
+
+home7	mapflag	noteleport
+farmland7	mapflag	noteleport
+home7	mapflag	nopenalty
+farmland7	mapflag	nopenalty
+farmland7	mapflag	pvp_noguild
+home7	mapflag	nomemo
+farmland7	mapflag	nomemo
+home7	mapflag	nobranch
+
+home9	mapflag	noteleport
+farmland9	mapflag	noteleport
+home9	mapflag	nopenalty
+farmland9	mapflag	nopenalty
+farmland9	mapflag	pvp_noguild
+home9	mapflag	nomemo
+farmland9	mapflag	nomemo
+home9	mapflag	nobranch
+
+home8	mapflag	noteleport
+farmland8	mapflag	noteleport
+home8	mapflag	nopenalty
+farmland8	mapflag	nopenalty
+farmland8	mapflag	pvp_noguild
+home8	mapflag	nomemo
+farmland8	mapflag	nomemo
+home8	mapflag	nobranch
+
+home10	mapflag	noteleport
+farmland10	mapflag	noteleport
+home10	mapflag	nopenalty
+farmland10	mapflag	nopenalty
+farmland10	mapflag	pvp_noguild
+home10	mapflag	nomemo
+farmland10	mapflag	nomemo
+home10	mapflag	nobranch
+
+home11	mapflag	noteleport
+farmland11	mapflag	noteleport
+home11	mapflag	nopenalty
+farmland11	mapflag	nopenalty
+farmland11	mapflag	pvp_noguild
+home11	mapflag	nomemo
+farmland11	mapflag	nomemo
+home11	mapflag	nobranch
+
+home12	mapflag	noteleport
+farmland12	mapflag	noteleport
+home12	mapflag	nopenalty
+farmland12	mapflag	nopenalty
+farmland12	mapflag	pvp_noguild
+home12	mapflag	nomemo
+farmland12	mapflag	nomemo
+home12	mapflag	nobranch
+
+home13	mapflag	noteleport
+farmland13	mapflag	noteleport
+home13	mapflag	nopenalty
+farmland13	mapflag	nopenalty
+farmland13	mapflag	pvp_noguild
+home13	mapflag	nomemo
+farmland13	mapflag	nomemo
+home13	mapflag	nobranch
+
+home14	mapflag	noteleport
+farmland14	mapflag	noteleport
+home14	mapflag	nopenalty
+farmland14	mapflag	nopenalty
+farmland14	mapflag	pvp_noguild
+home14	mapflag	nomemo
+farmland14	mapflag	nomemo
+home14	mapflag	nobranch
+
+home15	mapflag	noteleport
+farmland15	mapflag	noteleport
+home15	mapflag	nopenalty
+farmland15	mapflag	nopenalty
+farmland15	mapflag	pvp_noguild
+home15	mapflag	nomemo
+farmland15	mapflag	nomemo
+home15	mapflag	nobranch
+
+home16	mapflag	noteleport
+farmland16	mapflag	noteleport
+home16	mapflag	nopenalty
+farmland16	mapflag	nopenalty
+farmland16	mapflag	pvp_noguild
+home16	mapflag	nomemo
+farmland16	mapflag	nomemo
+home16	mapflag	nobranch
+
+home17	mapflag	noteleport
+farmland17	mapflag	noteleport
+home17	mapflag	nopenalty
+farmland17	mapflag	nopenalty
+farmland17	mapflag	pvp_noguild
+home17	mapflag	nomemo
+farmland17	mapflag	nomemo
+home17	mapflag	nobranch
+
+home19	mapflag	noteleport
+farmland19	mapflag	noteleport
+home19	mapflag	nopenalty
+farmland19	mapflag	nopenalty
+farmland19	mapflag	pvp_noguild
+home19	mapflag	nomemo
+farmland19	mapflag	nomemo
+home19	mapflag	nobranch
+
+home18	mapflag	noteleport
+farmland18	mapflag	noteleport
+home18	mapflag	nopenalty
+farmland18	mapflag	nopenalty
+farmland18	mapflag	pvp_noguild
+home18	mapflag	nomemo
+farmland18	mapflag	nomemo
+home18	mapflag	nobranch
+
+home20	mapflag	noteleport
+farmland20	mapflag	noteleport
+home20	mapflag	nopenalty
+farmland20	mapflag	nopenalty
+farmland20	mapflag	pvp_noguild
+home20	mapflag	nomemo
+farmland20	mapflag	nomemo
+home20	mapflag	nobranch
