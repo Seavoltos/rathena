@@ -288,11 +288,11 @@ function	script	MissionInfo	{
 	for( set .@i, 1; .@i < 6; set .@i, .@i + 1 )
 	{
 		set .@MobID, getd("Mission_ID" + .@i);
-		mes "^0000FF" + getd("Mission_Count" + .@i) + "^000000 x ^2d8bd2" + strmobinfo(2,.@MobID) + "^000000 (ID : " + .@MobID + ")";
+		mes "^0000FF" + getd("Mission_Count" + .@i) + "^000000 x ^2d8bd2" + getmonsterinfo(.@MobID,MOB_NAME) + "^000000 (ID : " + .@MobID + ")";
 
-		set .@Mission_Lvl, .@Mission_Lvl + strmobinfo(3, .@MobID);
-		set .@Mission_Exp, .@Mission_Exp + (strmobinfo(6, .@MobID) * 8);
-		set .@Mission_Job, .@Mission_Job + (strmobinfo(7, .@MobID) * 8);
+		set .@Mission_Lvl, .@Mission_Lvl + getmonsterinfo(.@MobID,MOB_LV);
+		set .@Mission_Exp, .@Mission_Exp + (getmonsterinfo(.@MobID,MOB_BASEEXP) * 8);
+		set .@Mission_Job, .@Mission_Job + (getmonsterinfo(.@MobID,MOB_JOBEXP) * 8);
 	}
 
 	set .@Mission_Zeny, .@Mission_Lvl * 500;
@@ -430,9 +430,9 @@ prt_in,90,72,4	script	Issan::HuntingSystem	732,{
 				for( set .@i, 1; .@i < 6; set .@i, .@i + 1 )
 				{
 					set .@MobID, getd("Mission_ID" + .@i);
-					set .@Mission_Lvl, .@Mission_Lvl + strmobinfo(3, .@MobID);
-					set .@Mission_Exp, .@Mission_Exp + (strmobinfo(6, .@MobID) * 8);
-					set .@Mission_Job, .@Mission_Job + (strmobinfo(7, .@MobID) * 8);
+					set .@Mission_Lvl, .@Mission_Lvl + getmonsterinfo(.@MobID,MOB_LV);
+					set .@Mission_Exp, .@Mission_Exp + (getmonsterinfo(.@MobID,MOB_BASEEXP) * 8);
+					set .@Mission_Job, .@Mission_Job + (getmonsterinfo(.@MobID,MOB_JOBEXP) * 8);
 				}
 				set .@Mission_Zeny, .@Mission_Lvl * 500;
 				if (.@Mission_Zeny > 250000)
@@ -530,9 +530,9 @@ OnNPCKillEvent:
 									set .@amount, .@amount-1;
 									setd "Mission_Count"+.@h, .@amount;
 									if(.@amount > 0)
-										message strcharinfo(0), "Te faltan: "+ .@amount + " x "+strmobinfo(2,.@MobID) + " (ID : " + .@MobID + ")";
+										message strcharinfo(0), "Te faltan: "+ .@amount + " x "+getmonsterinfo(.@MobID,MOB_NAME) + " (ID : " + .@MobID + ")";
 									else
-										message strcharinfo(0), "Terminaste de cazar: "+strmobinfo(2,.@MobID) + " (ID : " + .@MobID + ")";
+										message strcharinfo(0), "Terminaste de cazar: "+getmonsterinfo(.@MobID,MOB_NAME) + " (ID : " + .@MobID + ")";
 								}
 							}
 						}
@@ -554,9 +554,9 @@ OnNPCKillEvent:
 					set .@amount, .@amount-1;
 					setd "Mission_Count"+.@h, .@amount;
 					if(.@amount > 0)
-						message strcharinfo(0), "Te faltan: "+ .@amount + " x "+strmobinfo(2,.@MobID) + " (ID : " + .@MobID + ")";
+						message strcharinfo(0), "Te faltan: "+ .@amount + " x "+getmonsterinfo(.@MobID,MOB_NAME) + " (ID : " + .@MobID + ")";
 					else
-						message strcharinfo(0), "Terminaste de cazar: "+strmobinfo(2,.@MobID) + " (ID : " + .@MobID + ")";
+						message strcharinfo(0), "Terminaste de cazar: "+getmonsterinfo(.@MobID,MOB_NAME) + " (ID : " + .@MobID + ")";
 				}
 			}
 		}
@@ -589,9 +589,9 @@ function	script	caceria	{
 									set .@amount, .@amount-1;
 									setd "Mission_Count"+.@h, .@amount;
 									if(.@amount > 0)
-										message strcharinfo(0), "Te faltan: "+ .@amount + " x "+strmobinfo(2,.@MobID) + " (ID : " + .@MobID + ")";
+										message strcharinfo(0), "Te faltan: "+ .@amount + " x "+getmonsterinfo(.@MobID,MOB_NAME) + " (ID : " + .@MobID + ")";
 									else
-										message strcharinfo(0), "Terminaste de cazar: "+strmobinfo(2,.@MobID) + " (ID : " + .@MobID + ")";
+										message strcharinfo(0), "Terminaste de cazar: "+getmonsterinfo(.@MobID,MOB_NAME) + " (ID : " + .@MobID + ")";
 								}
 							}
 						}
@@ -613,9 +613,9 @@ function	script	caceria	{
 					set .@amount, .@amount-1;
 					setd "Mission_Count"+.@h, .@amount;
 					if(.@amount > 0)
-						message strcharinfo(0), "Te faltan: "+ .@amount + " x "+strmobinfo(2,.@MobID) + " (ID : " + .@MobID + ")";
+						message strcharinfo(0), "Te faltan: "+ .@amount + " x "+getmonsterinfo(.@MobID,MOB_NAME) + " (ID : " + .@MobID + ")";
 					else
-						message strcharinfo(0), "Terminaste de cazar: "+strmobinfo(2,.@MobID) + " (ID : " + .@MobID + ")";
+						message strcharinfo(0), "Terminaste de cazar: "+getmonsterinfo(.@MobID,MOB_NAME) + " (ID : " + .@MobID + ")";
 				}
 			}
 		}
@@ -652,9 +652,9 @@ prt_in,92,73,4	script	Mision del dia	111,{
 	for( set .@i, 1; .@i < 6; set .@i, .@i + 1 )
 	{
 		set .@MobID, getd("$Hunting" + .@i);
-		set .@Mission_Lvl, .@Mission_Lvl + strmobinfo(3, .@MobID);
-		set .@Mission_Exp, .@Mission_Exp + (strmobinfo(6, .@MobID) * (9-.@i));
-		set .@Mission_Job, .@Mission_Job + (strmobinfo(7, .@MobID) * (9-.@i));
+		set .@Mission_Lvl, .@Mission_Lvl + getmonsterinfo(.@MobID,MOB_LV);
+		set .@Mission_Exp, .@Mission_Exp + (getmonsterinfo(.@MobID,MOB_BASEEXP) * 8);
+		set .@Mission_Job, .@Mission_Job + (getmonsterinfo(.@MobID,MOB_JOBEXP) * 8);
 	}
 	
 	set .@Mission_Zeny, .@Mission_Lvl * 500;
@@ -692,7 +692,7 @@ prt_in,92,73,4	script	Mision del dia	111,{
 	for( set .@i, 1; .@i < 6; set .@i, .@i + 1 )
 	{
 		set .@MobID, getd("$Hunting" + .@i);
-		mes "^0000FF" + getd("$HuntingQ" + .@i) + "^000000 x ^2d8bd2" + strmobinfo(2,.@MobID) + "^000000 (ID : " + .@MobID + ")";
+		mes "^0000FF" + getd("$HuntingQ" + .@i) + "^000000 x ^2d8bd2" + getmonsterinfo(.@MobID,MOB_NAME) + "^000000 (ID : " + .@MobID + ")";
 	}
 	next;
 	mes "[^2d8bd2Premio-Misión^000000]";

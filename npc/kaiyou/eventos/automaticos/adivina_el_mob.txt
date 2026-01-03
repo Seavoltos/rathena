@@ -77,7 +77,7 @@ OnStart:
 	setnpctimer 0;
 	initnpctimer;
 	setnpcdisplay "Disguise NPC",$@monster;
-	set $@MonsterName$, strmobinfo(1,$@monster);
+	set $@MonsterName$, getmonsterinfo($@monster,MOB_NAME);
 	defpattern 1, "([^:]+):.*\\s"+$@MonsterName$+"(.*)", "winround";
 	activatepset 1;
 	npctalk "Cuál es mi nombre?";

@@ -361,43 +361,36 @@ OnTouch_:
 	end;
 }
 
--	script	dummy_npc	-1,{
-	end;
-}
-
--	script	dummy_cloaked_npc	-1,{
-	end;
-OnInit:
-	cloakonnpc();
+-	script	dummy_npcPV	-1,{
 	end;
 }
 
 // First wall
-1@begi,146,35,6	duplicate(dummy_npc)	#poring_wl15	4_ROPEPILE,1,0
-1@begi,146,36,6	duplicate(dummy_npc)	#poring_wl16	4_ROPEPILE,1,0
-1@begi,146,37,6	duplicate(dummy_npc)	#poring_wl17	4_ROPEPILE,1,0
-1@begi,146,38,6	duplicate(dummy_npc)	#poring_wl18	4_ROPEPILE,1,0
-1@begi,146,39,6	duplicate(dummy_npc)	#poring_wl19	4_ROPEPILE,1,0
-1@begi,146,40,6	duplicate(dummy_npc)	#poring_wl20	4_ROPEPILE,1,0
-1@begi,146,41,6	duplicate(dummy_npc)	#poring_wl21	4_ROPEPILE,1,0
+1@begi,146,35,6	duplicate(dummy_npcPV)	#poring_wl15	4_ROPEPILE,1,0
+1@begi,146,36,6	duplicate(dummy_npcPV)	#poring_wl16	4_ROPEPILE,1,0
+1@begi,146,37,6	duplicate(dummy_npcPV)	#poring_wl17	4_ROPEPILE,1,0
+1@begi,146,38,6	duplicate(dummy_npcPV)	#poring_wl18	4_ROPEPILE,1,0
+1@begi,146,39,6	duplicate(dummy_npcPV)	#poring_wl19	4_ROPEPILE,1,0
+1@begi,146,40,6	duplicate(dummy_npcPV)	#poring_wl20	4_ROPEPILE,1,0
+1@begi,146,41,6	duplicate(dummy_npcPV)	#poring_wl21	4_ROPEPILE,1,0
 
 // Second wall
-1@begi,59,187,6	duplicate(dummy_npc)	#poring_wl9	4_ROPEPILE,1,0
-1@begi,59,188,6	duplicate(dummy_npc)	#poring_wl10	4_ROPEPILE,1,0
-1@begi,59,189,6	duplicate(dummy_npc)	#poring_wl11	4_ROPEPILE,1,0
-1@begi,59,190,6	duplicate(dummy_npc)	#poring_wl12	4_ROPEPILE,1,0
-1@begi,59,191,6	duplicate(dummy_npc)	#poring_wl13	4_ROPEPILE,1,0
-1@begi,59,192,6	duplicate(dummy_npc)	#poring_wl14	4_ROPEPILE,1,0
+1@begi,59,187,6	duplicate(dummy_npcPV)	#poring_wl9	4_ROPEPILE,1,0
+1@begi,59,188,6	duplicate(dummy_npcPV)	#poring_wl10	4_ROPEPILE,1,0
+1@begi,59,189,6	duplicate(dummy_npcPV)	#poring_wl11	4_ROPEPILE,1,0
+1@begi,59,190,6	duplicate(dummy_npcPV)	#poring_wl12	4_ROPEPILE,1,0
+1@begi,59,191,6	duplicate(dummy_npcPV)	#poring_wl13	4_ROPEPILE,1,0
+1@begi,59,192,6	duplicate(dummy_npcPV)	#poring_wl14	4_ROPEPILE,1,0
 
 // Others
-1@begi,154,100,6	duplicate(dummy_npc)	#poring_wl1	4_ROPEPILE,1,0
-1@begi,154,101,6	duplicate(dummy_npc)	#poring_wl2	4_ROPEPILE,1,0
-1@begi,154,102,6	duplicate(dummy_npc)	#poring_wl3	4_ROPEPILE,1,0
-1@begi,154,103,6	duplicate(dummy_npc)	#poring_wl4	4_ROPEPILE,1,0
-1@begi,154,104,6	duplicate(dummy_npc)	#poring_wl5	4_ROPEPILE,1,0
-1@begi,154,105,6	duplicate(dummy_npc)	#poring_wl6	4_ROPEPILE,1,0
-1@begi,154,106,6	duplicate(dummy_npc)	#poring_wl7	4_ROPEPILE,1,0
-1@begi,154,107,6	duplicate(dummy_npc)	#poring_wl8	4_ROPEPILE,1,0
+1@begi,154,100,6	duplicate(dummy_npcPV)	#poring_wl1	4_ROPEPILE,1,0
+1@begi,154,101,6	duplicate(dummy_npcPV)	#poring_wl2	4_ROPEPILE,1,0
+1@begi,154,102,6	duplicate(dummy_npcPV)	#poring_wl3	4_ROPEPILE,1,0
+1@begi,154,103,6	duplicate(dummy_npcPV)	#poring_wl4	4_ROPEPILE,1,0
+1@begi,154,104,6	duplicate(dummy_npcPV)	#poring_wl5	4_ROPEPILE,1,0
+1@begi,154,105,6	duplicate(dummy_npcPV)	#poring_wl6	4_ROPEPILE,1,0
+1@begi,154,106,6	duplicate(dummy_npcPV)	#poring_wl7	4_ROPEPILE,1,0
+1@begi,154,107,6	duplicate(dummy_npcPV)	#poring_wl8	4_ROPEPILE,1,0
 
 
 1@begi,1,1,5	script	poring_village_1	-1,{

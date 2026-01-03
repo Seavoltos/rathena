@@ -36,16 +36,16 @@ OnNPCKillEvent:
 		if( killedrid == .FERSS_MID[.@i] && getd(".FERSS_ID" + .FERSS_ID[.@i] + "_invocado") == 0 && .@map$ == .FERSS_MAP$[.@i] )
 		{
 			setd ".FERSS_ID" + .FERSS_ID[.@i] + "_invocar",getd(".FERSS_ID" + .FERSS_ID[.@i] + "_invocar") + 1;
-			dispbottom "Han matado "+getd(".FERSS_ID" + .FERSS_ID[.@i] + "_invocar")+"/200 "+strmobinfo(1,killedrid)+".";
+			dispbottom "Han matado "+getd(".FERSS_ID" + .FERSS_ID[.@i] + "_invocar")+"/200 "+getmonsterinfo(killedrid,MOB_NAME)+".";
 			if( getd(".FERSS_ID" + .FERSS_ID[.@i] + "_invocar") == 200 )
 			{
 				//Invocar mob
 				setd ".FERSS_ID" + .FERSS_ID[.@i] + "_invocado",1;
-				monster .@map$,0,0,strmobinfo(1,.FERSS_ID[.@i]),.FERSS_ID[.@i],1,"FERSS::OnFERSSDead";
+				monster .@map$,0,0,"--ja--",.FERSS_ID[.@i],1,"FERSS::OnFERSSDead";
 				//Reset contador
 				setd ".FERSS_ID" + .FERSS_ID[.@i] + "_invocar",0;
 				//Anunciar
-				mapannounce .@map$," - - Apareció un "+strmobinfo(1,.FERSS_ID[.@i])+" - - ",bc_all;
+				mapannounce .@map$," - - Apareció un "+getmonsterinfo(.FERSS_ID[.@i],MOB_NAME)+" - - ",bc_all;
 				addrid(1);
 				F_ShowMob(.@i);
 				//Finalizar

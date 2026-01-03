@@ -39,7 +39,7 @@ prt_in,94,66,4	script	Issac::HuntingEvent	732,{
 				set #HuntingEventCaceria,0;
 				set #HuntingEventDelay,0;
 			}
-			mes "Elizabeth me ha solicitado que cacemos algunos Mob, los mob son "+$@HuntingEventAmount+" x ^0000ff"+strmobinfo(2,$@HuntingEventID)+"^000000 (#"+$@HuntingEventID+").";
+			mes "Elizabeth me ha solicitado que cacemos algunos Mob, los mob son "+$@HuntingEventAmount+" x ^0000ff"+getmonsterinfo($@HuntingEventID,MOB_NAME)+"^000000 (#"+$@HuntingEventID+").";
 			next;
 			if( select("Iré por ellos!:Ya estoy listo") == 1 )
 			{
@@ -102,7 +102,7 @@ OnNPCKillEvent:
 	if( killedrid == $@HuntingEventID && #HuntingEventDelay == 0 )
 	{
 		set #HuntingEventCaceria, #HuntingEventCaceria +1;
-		dispbottom "Issan: Llevas "+ #HuntingEventCaceria + " x "+strmobinfo(2,$@HuntingEventID) + "/" + $@HuntingEventAmount + "^000000 (ID : " + $@HuntingEventID + ")";
+		dispbottom "Issan: Llevas "+ #HuntingEventCaceria + " x "+getmonsterinfo($@HuntingEventID,MOB_NAME) + "/" + $@HuntingEventAmount + "^000000 (ID : " + $@HuntingEventID + ")";
 	}
 	end;
 OnTimer600000:
