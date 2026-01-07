@@ -431,7 +431,7 @@ void sale_load_pc( map_session_data* sd ){
 	char* data;
 	int32 id, amount;
 
-	if( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `sales_id`, `amount` FROM `sales_limited_acc` WHERE `account_id` = '%d'", sd->bl.id) ){
+	if( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `sales_id`, `amount` FROM `sales_limited_acc` WHERE `account_id` = '%d'", sd->id) ){
 		Sql_ShowDebug(mmysql_handle);
 		return;
 	}
@@ -676,7 +676,7 @@ bool cashshop_buylist( map_session_data* sd, uint32 kafrapoints, int32 n, const 
  					}
 				}
  
-				if( SQL_ERROR == Sql_Query( mmysql_handle, "INSERT INTO `sales_limited_acc` (`sales_id`,`account_id`,`amount`) VALUES ('%d', '%d', '%d') ON DUPLICATE KEY UPDATE amount = '%d'", sale->id, sd->bl.id, new_amount, new_amount ) ){
+				if( SQL_ERROR == Sql_Query( mmysql_handle, "INSERT INTO `sales_limited_acc` (`sales_id`,`account_id`,`amount`) VALUES ('%d', '%d', '%d') ON DUPLICATE KEY UPDATE amount = '%d'", sale->id, sd->id, new_amount, new_amount ) ){
 					Sql_ShowDebug(mmysql_handle);
  				}
 

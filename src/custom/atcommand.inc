@@ -47,11 +47,11 @@ ACMD_FUNC(heart)
 	
 	if(atoi(message)==1)
 	{
-		clif_specialeffect(&sd->bl, 364, ALL_CLIENT);
+		clif_specialeffect(sd, 364, ALL_CLIENT);
 	} 
 	else if(atoi(message)==2)
 	{
-		clif_specialeffect(&sd->bl, 509, ALL_CLIENT);
+		clif_specialeffect(sd, 509, ALL_CLIENT);
 	}
 	
 	return 0;
@@ -70,31 +70,31 @@ ACMD_FUNC(dance)
 	switch(atoi(message))
 	{
 		case 1:
-			clif_specialeffect(&sd->bl, 413, ALL_CLIENT);
+			clif_specialeffect(sd, 413, ALL_CLIENT);
 			break;
 		case 2:
-			clif_specialeffect(&sd->bl, 414, ALL_CLIENT);
+			clif_specialeffect(sd, 414, ALL_CLIENT);
 			break;
 		case 3:
-			clif_specialeffect(&sd->bl, 415, ALL_CLIENT);
+			clif_specialeffect(sd, 415, ALL_CLIENT);
 			break;
 		case 4:
-			clif_specialeffect(&sd->bl, 426, ALL_CLIENT);
+			clif_specialeffect(sd, 426, ALL_CLIENT);
 			break;
 		case 5:
-			clif_specialeffect(&sd->bl, 458, ALL_CLIENT);
+			clif_specialeffect(sd, 458, ALL_CLIENT);
 			break;
 		case 6:
-			clif_specialeffect(&sd->bl, 466, ALL_CLIENT);
+			clif_specialeffect(sd, 466, ALL_CLIENT);
 			break;
 		case 7:
-			clif_specialeffect(&sd->bl, 501, ALL_CLIENT);
+			clif_specialeffect(sd, 501, ALL_CLIENT);
 			break;
 		case 8:
-			clif_specialeffect(&sd->bl, 540, ALL_CLIENT);
+			clif_specialeffect(sd, 540, ALL_CLIENT);
 			break;
 		case 9:
-			clif_specialeffect(&sd->bl, 550, ALL_CLIENT);
+			clif_specialeffect(sd, 550, ALL_CLIENT);
 			break;
 	}
 	
@@ -294,7 +294,7 @@ ACMD_FUNC(whosell){
 				,pl_sd->vending[j].value
 				,pl_sd->vending[j].amount
 				,mapindex_id2name(pl_sd->mapindex)
-				,pl_sd->bl.x,pl_sd->bl.y
+				,pl_sd->x,pl_sd->y
 				,pl_sd->message); 
 				if(pl_sd->vending[j].value < MinPrice) MinPrice = pl_sd->vending[j].value;
 				if(pl_sd->vending[j].value > MaxPrice) MaxPrice = pl_sd->vending[j].value;
@@ -303,7 +303,7 @@ ACMD_FUNC(whosell){
 				flag = 1;
 			}
 			if (flag && pl_sd->mapindex == sd->mapindex) {
-				clif_viewpoint( *sd, 1, 1, pl_sd->bl.x, pl_sd->bl.y, ++sat_num, 0xFFFFFF);
+				clif_viewpoint( *sd, 1, 1, pl_sd->x, pl_sd->y, ++sat_num, 0xFFFFFF);
 				flag = 0;
 			}
 		}
@@ -322,19 +322,19 @@ ACMD_FUNC(bgrank)
 {
 	int i;
 
-	clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], "============ BATTLEGROUND RANK ============", false, SELF);
+	clif_messagecolor(sd, color_table[COLOR_LIGHT_GREEN], "============ BATTLEGROUND RANK ============", false, SELF);
 	for( i = 0; i < MAX_FAME_LIST; i++ )
 	{
 		if (!bg_fame_list[i].id)
 			sprintf(atcmd_output,"[ %d ] None        :    0 POINT",i+1);
 		else
 			sprintf(atcmd_output,"[ %d ] %s        :    %d POINT",i+1,bg_fame_list[i].name,bg_fame_list[i].fame);
-		clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], atcmd_output, false, SELF);
+		clif_messagecolor(sd, color_table[COLOR_LIGHT_GREEN], atcmd_output, false, SELF);
 	}
 	sprintf(atcmd_output,"MY POINT    :    %d POINT",sd->status.bgstats.points);
-	clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], "===========================================", false, SELF);
-	clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], atcmd_output, false, SELF);
-	clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], "===========================================", false, SELF);
+	clif_messagecolor(sd, color_table[COLOR_LIGHT_GREEN], "===========================================", false, SELF);
+	clif_messagecolor(sd, color_table[COLOR_LIGHT_GREEN], atcmd_output, false, SELF);
+	clif_messagecolor(sd, color_table[COLOR_LIGHT_GREEN], "===========================================", false, SELF);
 	return 0;
 }
 
@@ -342,19 +342,19 @@ ACMD_FUNC(woerank)
 {
 	int i;
 
-	clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], "============ WAR OF EMPERIUM RANK ============", false, SELF);
+	clif_messagecolor(sd, color_table[COLOR_CYAN], "============ WAR OF EMPERIUM RANK ============", false, SELF);
 	for( i = 0; i < MAX_FAME_LIST; i++ )
 	{
 		if (!woe_fame_list[i].id)
 			sprintf(atcmd_output,"[ %d ] None        :    0 POINT",i+1);
 		else
 			sprintf(atcmd_output,"[ %d ] %s        :    %d POINT",i+1,woe_fame_list[i].name,woe_fame_list[i].fame);
-		clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], atcmd_output, false, SELF);
+		clif_messagecolor(sd, color_table[COLOR_CYAN], atcmd_output, false, SELF);
 	}
 	sprintf(atcmd_output,"MY POINT    :    %d POINT",sd->status.wstats.points);
-	clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], "===========================================", false, SELF);
-	clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], atcmd_output, false, SELF);
-	clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], "===========================================", false, SELF);
+	clif_messagecolor(sd, color_table[COLOR_CYAN], "===========================================", false, SELF);
+	clif_messagecolor(sd, color_table[COLOR_CYAN], atcmd_output, false, SELF);
+	clif_messagecolor(sd, color_table[COLOR_CYAN], "===========================================", false, SELF);
 	return 0;
 }
 
@@ -403,13 +403,13 @@ ACMD_FUNC(gcash)
 	if( (ret=pc_paycash(sd, amount, 0, LOG_TYPE_COMMAND)) >= 0)
 	{
 		sprintf(output, msg_txt(sd,410), ret, sd->cashPoints); // Removed %d cash points. Total %d points.
-		clif_messagecolor(&sd->bl, color_table[COLOR_LIGHT_GREEN], output, false, SELF);
+		clif_messagecolor(sd, color_table[COLOR_LIGHT_GREEN], output, false, SELF);
 	}
 		
 	if( (ret=pc_getcash(tsd, amount, 0, LOG_TYPE_COMMAND)) >= 0)
 	{
 		sprintf(output, msg_txt(sd,505), ret, tsd->cashPoints); // Gained %d cash points. Total %d points.
-		clif_messagecolor(&tsd->bl, color_table[COLOR_LIGHT_GREEN], output, false, SELF);
+		clif_messagecolor(tsd, color_table[COLOR_LIGHT_GREEN], output, false, SELF);
 	}
 
     return 0;

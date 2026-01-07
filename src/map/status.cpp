@@ -2774,7 +2774,7 @@ void status_calc_mob_instance(struct mob_data* md)
 	if (!md)
 		return;
 
-	std::shared_ptr<s_instance_data> idata = util::umap_find(instances, map_getmapdata(md->bl.m)->instance_id);
+	std::shared_ptr<s_instance_data> idata = util::umap_find(instances, map_getmapdata(md->m)->instance_id);
 	if (!idata)
 		return;
 
@@ -2791,8 +2791,8 @@ void status_calc_mob_instance(struct mob_data* md)
 	if (im->hp != 100) {
 		md->base_status->hp = md->base_status->hp * im->hp / 100;
 		md->base_status->max_hp = md->base_status->max_hp * im->hp / 100;
-		status_set_maxhp(&md->bl, md->base_status->max_hp, 0);
-		clif_name_area(&md->bl);
+		status_set_maxhp(md, md->base_status->max_hp, 0);
+		clif_name_area(md);
 	}
 	if (im->speed != 100)
 		md->base_status->speed = md->base_status->speed * im->speed / 100;
@@ -2839,8 +2839,8 @@ void status_calc_mob_instance(struct mob_data* md)
 	if (im->dmotion != 100)
 		md->base_status->dmotion = md->base_status->dmotion * im->dmotion / 100;
 	
-	status_calc_misc(&md->bl, &md->status, md->level);
-	status_calc_bl_(&md->bl, status_db.getSCB_BATTLE());
+	status_calc_misc(md, &md->status, md->level);
+	status_calc_bl_(md, status_db.getSCB_BATTLE());
 }
 
 /**
@@ -10282,6 +10282,7 @@ TIMER_FUNC(status_change_start_timer) {
  */
 bool status_change_start(block_list* src, block_list* bl, sc_type type, int32 rate, int32 val1, int32 val2, int32 val3, int32 val4, t_tick duration, uint8 flag, int32 delay) {
 	std::shared_ptr<s_status_change_db> scdb = status_db.find(type);
+	map_session_data* sd = nullptr;
 
 	nullpo_ret(bl);
 
@@ -10365,10 +10366,11 @@ bool status_change_start(block_list* src, block_list* bl, sc_type type, int32 ra
 	int32 tick = (int32)duration;
 
 // (^~_~^) Auras Start
+	sd = BL_CAST(BL_PC, bl);
 
 	if (sd && sd->aura_data > 0x1000000 && (type == SC_HIDING || type == SC_CLOAKING || type == SC_CHASEWALK))
 	{
-		clif_send_aura(&sd->bl, 0x1000000, AREA);
+		clif_send_aura(sd, 0x1000000, AREA);
 	}
 
 // (^~_~^) Auras End
@@ -10873,14 +10875,6 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 				status_change_end(bl,SC_IMPOSITIO);
 			break;
 		case SC_ENDURE:
-			if (sd) {
-				struct map_session_data *tsd;
-				int i;
-				for (i = 0; i < MAX_DEVOTION; i++) { // See if there are devoted characters, and pass the status to them. [Skotlex]
-					if (sd->devotion[i] && (tsd = map_id2sd(sd->devotion[i])))
-						status_change_start(src,&tsd->bl,type,10000,val1,val2,val3,val4,tick,SCSTART_NOAVOID);
-				}
-			}
 			if (sd && sd->special_state.no_walk_delay)
 				return true;
 			break;
@@ -14250,7 +14244,7 @@ int32 status_change_end( block_list* bl, enum sc_type type, int32 tid ){
 
 	if (sd && sd->aura_data > 0x1000000 && (type == SC_HIDING || type == SC_CLOAKING || type == SC_CHASEWALK))
 	{
-		clif_send_aura(&sd->bl, sd->aura_data, AREA);
+		clif_send_aura(sd, sd->aura_data, AREA);
 	}
 
 // (^~_~^) Auras End

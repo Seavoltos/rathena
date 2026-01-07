@@ -1132,7 +1132,7 @@ void instance_setpenalty(struct map_session_data *sd)
 		return;
 
 	char output[CHAT_SIZE_MAX];
-	std::shared_ptr<s_instance_data> idata = util::umap_find(instances, map_getmapdata(sd->bl.m)->instance_id);
+	std::shared_ptr<s_instance_data> idata = util::umap_find(instances, map_getmapdata(sd->m)->instance_id);
 
 	if (!idata)
 		return;
@@ -1141,7 +1141,7 @@ void instance_setpenalty(struct map_session_data *sd)
 		return;
 
 	for (const auto& it: idata->sc_penalties) {
-		sc_start(NULL, &sd->bl, it.first, 10000, it.second, INFINITE_TICK);
+		sc_start(NULL, sd, it.first, 10000, it.second, INFINITE_TICK);
 		if (battle_config.instance_penalty_show) {
 			switch(it.first) {
 				case SC_ID_CAST:
@@ -1165,7 +1165,7 @@ void instance_setpenalty(struct map_session_data *sd)
 					break;
 			}
 			if (strlen(output))
-				clif_messagecolor(&sd->bl, color_table[COLOR_RED], output, false, SELF);
+				clif_messagecolor(sd, color_table[COLOR_RED], output, false, SELF);
 		}
 	}
 
@@ -1184,7 +1184,7 @@ void instance_setbuff(struct map_session_data *sd)
 		return;
 
 	char output[CHAT_SIZE_MAX];
-	std::shared_ptr<s_instance_data> idata = util::umap_find(instances, map_getmapdata(sd->bl.m)->instance_id);
+	std::shared_ptr<s_instance_data> idata = util::umap_find(instances, map_getmapdata(sd->m)->instance_id);
 
 	if (!idata)
 		return;
@@ -1193,7 +1193,7 @@ void instance_setbuff(struct map_session_data *sd)
 		return;
 
 	for (const auto& it: idata->sc_buff) {
-		sc_start(NULL, &sd->bl, it.first, 10000, it.second, INFINITE_TICK);
+		sc_start(NULL, sd, it.first, 10000, it.second, INFINITE_TICK);
 		if (battle_config.instance_buff_show) {
 			switch(it.first) {
 				case SC_II_CAST:
@@ -1217,7 +1217,7 @@ void instance_setbuff(struct map_session_data *sd)
 					break;
 			}
 			if (strlen(output))
-				clif_messagecolor(&sd->bl, color_table[COLOR_DEFAULT], output, false, SELF);
+				clif_messagecolor(sd, color_table[COLOR_DEFAULT], output, false, SELF);
 		}
 	}
 	

@@ -98,9 +98,9 @@ void vending_vendinglistreq(map_session_data* sd, int32 id)
 		char output[CHAT_SIZE_MAX]; // Extended Vending system
 		sprintf(output, msg_txt(sd, 1595), vsd->status.name, itemdb_ename(vsd->vend_loot));
 		if (battle_config.show_broadcast_info)
-			clif_broadcast(&sd->bl, output, (int)strlen(output) + 1, 0x10, SELF);
+			clif_broadcast(sd, output, (int)strlen(output) + 1, 0x10, SELF);
 		else
-			clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], output, false, SELF);
+			clif_messagecolor(sd, color_table[COLOR_CYAN], output, false, SELF);
 	}
 
 	sd->vended_id = vsd->vender_id;  // register vending uid
@@ -197,7 +197,7 @@ void vending_purchasereq(map_session_data* sd, int32 aid, int32 uid, const uint8
 			}
 			else if (vsd->vend_loot == battle_config.item_cash) {
 				if (z > sd->cashPoints || z < 0. || z >(double)MAX_ZENY) {
-					clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], msg_txt(sd, 1590), false, SELF);
+					clif_messagecolor(sd, color_table[COLOR_CYAN], msg_txt(sd, 1590), false, SELF);
 					return;
 				}
 			}
@@ -217,18 +217,18 @@ void vending_purchasereq(map_session_data* sd, int32 aid, int32 uid, const uint8
  
 				if (z > loot_count || z < 0)
 				{
-					clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], msg_txt(sd, 1591), false, SELF);
+					clif_messagecolor(sd, color_table[COLOR_CYAN], msg_txt(sd, 1591), false, SELF);
 					return;
 				}
 				if (pc_inventoryblank(vsd) <= 0)
 				{
-					clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], msg_txt(sd, 1592), false, SELF);
+					clif_messagecolor(sd, color_table[COLOR_CYAN], msg_txt(sd, 1592), false, SELF);
 					return;
 				}
 				vsd_w += itemdb_weight(vsd->vend_loot) * (int)z;
 				if (vsd_w + vsd->weight > vsd->max_weight)
 				{
-					clif_messagecolor(&sd->bl, color_table[COLOR_CYAN], msg_txt(sd, 1593), false, SELF);
+					clif_messagecolor(sd, color_table[COLOR_CYAN], msg_txt(sd, 1593), false, SELF);
 					return;
 				}
 				for (k = 0; k < MAX_INVENTORY; k++) {

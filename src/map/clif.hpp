@@ -1404,8 +1404,8 @@ void clif_SelectCart( const map_session_data* sd );
 
 // (^~_~^) Auras Start
 
-void clif_send_aura_single(struct block_list * bl, int type, int fd);
-void clif_send_aura(struct block_list * bl, int type, enum send_target target);
+void clif_send_aura_single(const block_list * bl, int type, int fd);
+void clif_send_aura(const block_list * bl, int type, enum send_target target);
 
 // (^~_~^) Auras End
 

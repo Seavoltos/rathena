@@ -154,7 +154,7 @@ void clif_gepard_send_lgp_settings(map_session_data * sd)
 
 // (^~_~^) Auras Start
 
-void clif_send_aura(struct block_list * bl, int type, enum send_target target)
+void clif_send_aura(const block_list * bl, int type, enum send_target target)
 { // Auras by Functor
 	unsigned char buf[0x10];
 
@@ -172,7 +172,7 @@ void clif_send_aura(struct block_list * bl, int type, enum send_target target)
 	clif_send(buf, 0xE, bl, target);
 }
 
-void clif_send_aura_single(struct block_list * bl, int type, int fd)
+void clif_send_aura_single(const block_list * bl, int type, int fd)
 { // Auras by Functor
 	if (type == 0)
 	{
@@ -8104,10 +8104,10 @@ void clif_party_info( const party_data& party, const map_session_data* sd ){
 		c++;
 	}
 
-	clif_send( p, p->packetLen, &sd->bl, target );
+	clif_send( p, p->packetLen, sd, target );
 
 	for( int i = 0, c = 0; i < MAX_PARTY; i++ ){
-		struct party_member& m = party.party.member[i];
+		const party_member& m = party.party.member[i];
 		if( m.account_id == 0 ){
 			continue;
 		}
@@ -10145,7 +10145,7 @@ void clif_refresh(map_session_data *sd)
 
 	if (sd->state.show_auras != 2 && sd->aura_data > 0x1000000)
 	{
-		clif_send_aura_single(&sd->bl, sd->aura_data, sd->fd);
+		clif_send_aura_single(sd, sd->aura_data, sd->fd);
 	}
 
 	// (^~_~^) Auras End
@@ -11365,30 +11365,30 @@ void clif_parse_LoadEndAck(int32 fd,map_session_data *sd)
 			channel_mjoin(sd); //join new map
 
 		//InstanceMode
-		if (map_getmapdata(sd->bl.m)->instance_id)
+		if (map_getmapdata(sd->m)->instance_id)
 		{
 			instance_setpenalty(sd);
 			instance_setbuff(sd);
 		}
-		else if (sd->sc.count) {
+		else if ( &sd->sc != nullptr ) {
 			// Delete penalties
-			status_change_end(&sd->bl, SC_ID_CAST, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_ID_ASPD, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_ID_MAXHP, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_ID_MAXSP, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_ID_ALLSTATS, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_ID_SPEED, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_ID_ATK, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_ID_MATK, INVALID_TIMER);
+			status_change_end(sd, SC_ID_CAST, INVALID_TIMER);
+			status_change_end(sd, SC_ID_ASPD, INVALID_TIMER);
+			status_change_end(sd, SC_ID_MAXHP, INVALID_TIMER);
+			status_change_end(sd, SC_ID_MAXSP, INVALID_TIMER);
+			status_change_end(sd, SC_ID_ALLSTATS, INVALID_TIMER);
+			status_change_end(sd, SC_ID_SPEED, INVALID_TIMER);
+			status_change_end(sd, SC_ID_ATK, INVALID_TIMER);
+			status_change_end(sd, SC_ID_MATK, INVALID_TIMER);
 			// Delete buff
-			status_change_end(&sd->bl, SC_II_CAST, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_II_ASPD, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_II_MAXHP, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_II_MAXSP, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_II_ALLSTATS, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_II_SPEED, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_II_ATK, INVALID_TIMER);
-			status_change_end(&sd->bl, SC_II_MATK, INVALID_TIMER);
+			status_change_end(sd, SC_II_CAST, INVALID_TIMER);
+			status_change_end(sd, SC_II_ASPD, INVALID_TIMER);
+			status_change_end(sd, SC_II_MAXHP, INVALID_TIMER);
+			status_change_end(sd, SC_II_MAXSP, INVALID_TIMER);
+			status_change_end(sd, SC_II_ALLSTATS, INVALID_TIMER);
+			status_change_end(sd, SC_II_SPEED, INVALID_TIMER);
+			status_change_end(sd, SC_II_ATK, INVALID_TIMER);
+			status_change_end(sd, SC_II_MATK, INVALID_TIMER);
 		}
 
 		clif_pk_mode_message(sd);
@@ -21320,9 +21320,9 @@ void clif_parse_roulette_open( int32 fd, map_session_data* sd ){
     nd = npc_name2id("menu_vip");
 
     if (nd)
-        run_script(nd->u.scr.script, 0, sd->bl.id, nd->bl.id);
+        run_script(nd->u.scr.script, 0, sd->id, nd->id);
     else
-        clif_messagecolor( &sd->bl, color_table[COLOR_RED], "Cannot Open VIP System!", false, SELF );
+        clif_messagecolor( sd, color_table[COLOR_RED], "Cannot Open VIP System!", false, SELF );
 }
 
 /// Sends the info about the available roulette rewards to the client
@@ -22079,7 +22079,7 @@ void clif_sale_open( map_session_data* sd ){
 
 	p.packetType = HEADER_ZC_OPEN_BARGAIN_SALE_TOOL;
 
-	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+	clif_send( &p, sizeof( p ), sd, SELF );
 #endif
 }
 
@@ -22122,7 +22122,7 @@ void clif_sale_close(map_session_data* sd) {
 
 	p.packetType = HEADER_ZC_CLOSE_BARGAIN_SALE_TOOL;
 
-	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+	clif_send( &p, sizeof( p ), sd, SELF );
 #endif
 }
 
@@ -22222,7 +22222,7 @@ void clif_sale_add_reply( map_session_data* sd, enum e_sale_add_result result ){
 
 	p.packetType = HEADER_ZC_ACK_APPLY_BARGAIN_SALE_ITEM;
 	p.result = result;
-	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+	clif_send( &p, sizeof( p ), sd, SELF );
 	int fd = sd->fd;
 #endif
 }
@@ -22264,7 +22264,7 @@ void clif_sale_remove_reply( map_session_data* sd, bool failed ){
 
 	p.packetType = HEADER_ZC_ACK_REMOVE_BARGAIN_SALE_ITEM;
 	p.result = failed;
-	clif_send( &p, sizeof( p ), &sd->bl, SELF );
+	clif_send( &p, sizeof( p ), sd, SELF );
 	int fd = sd->fd;
 #endif
 }
@@ -23673,6 +23673,73 @@ void clif_parse_inventory_expansion_reject( int32 fd, map_session_data* sd ){
 #if PACKETVER_MAIN_NUM >= 20181219 || PACKETVER_RE_NUM >= 20181219 || PACKETVER_ZERO_NUM >= 20181212
 	sd->state.inventory_expansion_confirmation = 0;
 	sd->state.inventory_expansion_amount = 0;
+#endif
+}
+
+void clif_parse_CashShopLimited( int fd, map_session_data* sd ){
+#if PACKETVER >= 20190724
+	clif_CashShopLimited(sd);
+#endif
+}
+
+int clif_CashShopLimited_sub(map_session_data *sd,va_list ap)
+{
+	clif_CashShopLimited(sd);
+
+	return 1;
+}
+
+void clif_CashShopLimited( map_session_data* sd ){
+#if PACKETVER >= 20190724
+	int i;
+	std::shared_ptr<s_cash_item> cash_it = nullptr;
+	int fd = sd->fd;
+
+	time_t now = time(NULL);
+	struct sale_item_data* sale_item;
+
+	int len = sizeof( struct PACKET_ZC_SE_CASHSHOP_LIMITED_REQ ) + sale_items.count * sizeof(struct SE_CASHSHOP_LIMITED_REQ_sub);
+
+	WFIFOHEAD( fd, len );
+	struct PACKET_ZC_SE_CASHSHOP_LIMITED_REQ *p = (struct PACKET_ZC_SE_CASHSHOP_LIMITED_REQ *)WFIFOP( fd, 0 );
+
+	p->packetType = HEADER_ZC_SE_CASHSHOP_LIMITED_REQ;
+	p->unknow = 0;
+
+	int count = 0;
+	for( i = 0; i < sale_items.count; i++ ){
+		sale_item = sale_items.item[i];
+		if( sale_item->start <= now && sale_item->end > now ){
+							cash_it = cash_shop_db.findItemInTab( CASHSHOP_TAB_SALE, sale_item->nameid );
+			if( cash_it == nullptr ){
+				ShowWarning( "sale_parse_dbrow: ID %u is not registered in the Sale tab in line '%d', skipping...\n", sale_item->nameid );
+				continue;
+			}
+
+			int sale_amount = 0;
+			for(auto &it : sd->sales){
+				if(it.first == sale_item->id){
+					sale_amount = it.second;
+					break;
+				}
+			}
+
+			if(sale_amount == -1)
+				continue;
+
+			int temp_amount = sale_amount ? sale_amount : sale_item->amount;
+			p->list[count].nameid = sale_item->nameid;
+			p->list[count].amount = sale_item->amount;
+			p->list[count].amountLeft = temp_amount;
+			p->list[count].price = cash_it->price;
+			p->list[count].startTime = static_cast<uint32>(sale_item->start);
+			p->list[count].endTime = static_cast<uint32>(sale_item->end);
+			count++;
+		}
+	}
+	p->packetLength = sizeof(PACKET_ZC_SE_CASHSHOP_LIMITED_REQ) + count * sizeof(struct SE_CASHSHOP_LIMITED_REQ_sub);
+
+	WFIFOSET( fd, p->packetLength );
 #endif
 }
 

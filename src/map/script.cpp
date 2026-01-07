@@ -28138,13 +28138,13 @@ BUILDIN_FUNC(set_aura)
 	{
 		if (sd->aura_data == 0x1000000)
 		{
-			clif_send_aura(&sd->bl, sd->aura_data, AREA);
+			clif_send_aura(sd, sd->aura_data, AREA);
 			sd->aura_data  = 0;
 		}
 		else
 		{
 			sd->aura.option = 1;
-			clif_send_aura(&sd->bl, sd->aura_data, AREA);
+			clif_send_aura(sd, sd->aura_data, AREA);
 		}
 
 		pc_setglobalreg(sd, add_str("AURA_DATA"), sd->aura_data);
@@ -28194,13 +28194,13 @@ BUILDIN_FUNC(set_aura_part)
 	{
 		if (sd->aura_data == 0x1000000)
 		{
-			clif_send_aura(&sd->bl, sd->aura_data, AREA);
+			clif_send_aura(sd, sd->aura_data, AREA);
 			sd->aura_data  = 0;
 		}
 		else
 		{
 			sd->aura.option = 1;
-			clif_send_aura(&sd->bl, sd->aura_data, AREA);
+			clif_send_aura(sd, sd->aura_data, AREA);
 		}
 
 		pc_setglobalreg(sd, add_str("AURA_DATA"), sd->aura_data);

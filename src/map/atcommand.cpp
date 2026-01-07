@@ -1141,7 +1141,7 @@ ACMD_FUNC(hide)
 
 	if (sd->aura_data > 0x1000000)
 	{		
-		clif_send_aura_single(&sd->bl, sd->aura_data, sd->fd);
+		clif_send_aura_single(sd, sd->aura_data, sd->fd);
 	}
 
 // (^~_~^) Auras End
@@ -1157,7 +1157,7 @@ ACMD_FUNC(hide)
 
 	if (sd->aura_data > 0x1000000)
 	{
-		clif_send_aura(&sd->bl, 0x1000000, AREA);
+		clif_send_aura(sd, 0x1000000, AREA);
 	}
 
 // (^~_~^) Auras End
@@ -11957,13 +11957,13 @@ ACMD_FUNC(auras)
 	{
 		if (sd->aura_data == 0x1000000)
 		{
-			clif_send_aura(&sd->bl, sd->aura_data, AREA);
+			clif_send_aura(sd, sd->aura_data, AREA);
 			sd->aura_data  = 0;
 		}
 		else
 		{
 			sd->aura.option = 1;
-			clif_send_aura(&sd->bl, sd->aura_data, AREA);
+			clif_send_aura(sd, sd->aura_data, AREA);
 		}
 
 		pc_setglobalreg(sd, add_str("AURA_DATA"), sd->aura_data);

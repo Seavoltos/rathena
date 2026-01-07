@@ -1006,7 +1006,7 @@ bool bg_queue_check_joinable(std::shared_ptr<s_battleground_type> bg, map_sessio
 	}
 
 	if ( battleground_countlogin(sd, false) > 0 && battle_config.bg_logincount_check ) {
-		clif_messagecolor(&sd->bl, color_table[COLOR_RED], msg_txt(sd, 454), false, SELF);
+		clif_messagecolor(sd, color_table[COLOR_RED], msg_txt(sd, 454), false, SELF);
 		clif_bg_queue_apply_result(BG_DUPLICATE_UNIQUE_ID, name, sd);
 		return false;
 	}
@@ -1057,7 +1057,7 @@ void bg_queue_join_solo(const char *name, map_session_data *sd)
 		return;
 	}
 
-	if (battle_config.bgqueue_nowarp_mapflag && !map_getmapflag(sd->bl.m, MF_BG_JOIN))
+	if (battle_config.bgqueue_nowarp_mapflag && !map_getmapflag(sd->m, MF_BG_JOIN))
 	{
 		clif_displaymessage(sd->fd, "You only can join BG queues from Battle Office.");
 		return;
@@ -1100,7 +1100,7 @@ void bg_queue_join_party(const char *name, map_session_data *sd)
 		return;
 	}
 
-	if (battle_config.bgqueue_nowarp_mapflag && !map_getmapflag(sd->bl.m, MF_BG_JOIN))
+	if (battle_config.bgqueue_nowarp_mapflag && !map_getmapflag(sd->m, MF_BG_JOIN))
 	{
 		clif_displaymessage(sd->fd, "You only can join BG queues from Battle Office.");
 		return;
@@ -1184,7 +1184,7 @@ void bg_queue_join_guild(const char *name, map_session_data *sd)
 		return;
 	}
 
-	if (battle_config.bgqueue_nowarp_mapflag && !map_getmapflag(sd->bl.m, MF_BG_JOIN))
+	if (battle_config.bgqueue_nowarp_mapflag && !map_getmapflag(sd->m, MF_BG_JOIN))
 	{
 		clif_displaymessage(sd->fd, "You only can join BG queues from Battle Office.");
 		return;
@@ -1708,7 +1708,7 @@ int battleground_countlogin(struct map_session_data *sd, bool check_bat_room)
 	iter = mapit_getallusers();
 	for( pl_sd = (TBL_PC*)mapit_first(iter); mapit_exists(iter); pl_sd = (TBL_PC*)mapit_next(iter) )
 	{
-		if( !(pl_sd->bg_queue_id || map_getmapflag(pl_sd->bl.m, MF_BATTLEGROUND) || (check_bat_room && pl_sd->bl.m == m)) )
+		if( !(pl_sd->bg_queue_id || map_getmapflag(pl_sd->m, MF_BATTLEGROUND) || (check_bat_room && pl_sd->m == m)) )
 			continue;
 
 		if( session[sd->fd]->gepard_info.unique_id == session[pl_sd->fd]->gepard_info.unique_id )

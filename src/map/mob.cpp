@@ -1196,7 +1196,7 @@ int32 mob_spawn (mob_data *md)
 
 	memset(&md->state, 0, sizeof(md->state));
 	status_calc_mob(md, SCO_FIRST);
-	if (map_getmapdata(md->bl.m)->instance_id)
+	if (map_getmapdata(md->m)->instance_id)
 		status_calc_mob_instance(md);
 	md->attacked_id = 0;
 	md->norm_attacked_id = 0;
@@ -1250,7 +1250,7 @@ int32 mob_spawn (mob_data *md)
 	mobskill_use(md, tick, MSC_SPAWN);
 	
 	if(md->spawn && md->spawn->state.boss){
-		std::string mapregname = "$" + std::to_string(md->mob_id) + "_" + std::to_string(md->bl.m);
+		std::string mapregname = "$" + std::to_string(md->mob_id) + "_" + std::to_string(md->m);
 		mapreg_setreg(reference_uid( add_str( mapregname.c_str() ), 0 ),2);
 	}
 	
@@ -2830,7 +2830,7 @@ void mob_damage(mob_data *md, block_list *src, int32 damage)
 	}
 
 	if (src != nullptr && damage > 0) { //Store total damage...
-		if ((src != &md->bl) && md->state.aggressive) //No longer aggressive, change to retaliate AI.
+		if ((src != md) && md->state.aggressive) //No longer aggressive, change to retaliate AI.
 			md->state.aggressive = 0;
 		//Log damage
 		mob_log_damage(md, src, static_cast<int64>(damage));
@@ -2910,7 +2910,7 @@ int32 mob_getdroprate(block_list *src, std::shared_ptr<s_mob_db> mob, int32 base
 				drop_rate_bonus += sd->sc.getSCE(SC_PERIOD_RECEIVEITEM_2ND)->val1;
 
 			// Drop Rate by Instance Mode [InstanceMode]
-			if (map_getmapdata(sd->bl.m)->instance_id) {
+			if (map_getmapdata(sd->m)->instance_id) {
 				std::shared_ptr<s_instance_data> idata = util::umap_find(instances, map_getmapdata(src->m)->instance_id);
 				if (idata) {
 					std::shared_ptr<s_instance_mode_db> im = instance_mode_search(idata->difficulty);
@@ -3004,6 +3004,7 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
 	struct status_data *status;
 	map_session_data *sd = nullptr, *tmpsd[DAMAGELOG_SIZE];
 	map_session_data *first_sd = nullptr, *second_sd = nullptr, *third_sd = nullptr;
+	map_session_data* mvp_sd = nullptr;
 
 	struct {
 		struct party_data *p;
@@ -3146,7 +3147,7 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
 	merckillonly = (bool)((dmgbltypes & BL_MER) && !(dmgbltypes & ~BL_MER));
 
 	// Determine MVP (need to do it here so that it's not influenced by first attacker bonus below)
-	map_session_data* mvp_sd = md->get_mvp_player(first_sd);
+	mvp_sd = md->get_mvp_player(first_sd);
 
 	if(battle_config.exp_calc_type == 2 && count > 1) {	//Apply first-attacker 200% exp share bonus
 		s_dmglog& entry = md->dmglog[0];
@@ -3789,11 +3790,11 @@ int32 mob_dead(mob_data *md, block_list *src, int32 type)
 	}
 
 	if(md->spawn->state.boss){
-		std::string mapregname = "$" + std::to_string(md->db->id) + "_" + std::to_string(md->bl.m);
+		std::string mapregname = "$" + std::to_string(md->db->id) + "_" + std::to_string(md->m);
 		std::string mapregnamestr = mapregname + "$";
 		mapreg_setreg(reference_uid( add_str( mapregname.c_str() ), 0 ),1);
-		mapreg_setreg(reference_uid( add_str( mapregname.c_str() ), 1 ),md->bl.x);
-		mapreg_setreg(reference_uid( add_str( mapregname.c_str() ), 2 ),md->bl.y);
+		mapreg_setreg(reference_uid( add_str( mapregname.c_str() ), 1 ),md->x);
+		mapreg_setreg(reference_uid( add_str( mapregname.c_str() ), 2 ),md->y);
 		mapreg_setreg(reference_uid( add_str( mapregname.c_str() ), 3 ),time(NULL));
 		mapreg_setregstr(reference_uid( add_str( mapregnamestr.c_str() ), 4),mvp_sd ? mvp_sd->status.name : NULL);
 	}
